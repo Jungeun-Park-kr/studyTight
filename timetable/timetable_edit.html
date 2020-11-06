@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight</title>
+    <script src="timetable_main.js"></script>
+    <script src="timetable_edit.js"></script>
     <script src="timetable_add.js"></script>
     <style>
         @import url(timetable_main.css);
@@ -12,40 +14,64 @@
 </head>
 <body>
     <div id="warp">
-        <div id="page-menu">
+        <div class="page-menu">
             <div class ="logo_area"> 
-                <img src="/media/logo.png" class= logo>
+                <img src="/media/logo.png" class= logo onclick="btnHome();">
             </div>
             <ul class="left-menus">
-                <li class="active">
-                    <img src="media/home.png">
-                    <a herf="#메인메뉴페이지" title>내 공부방</a>
+                <li class="menu_home" onclick="btnHome();">
+                    <img src="media/home.png" >&nbsp내 공부방</img>
                 </li>
-                <li class>
-                    <img src="media/contact-book.png">
-                    <a herf="#방명록페이지" title>방명록</a>
+                <li class="menu_contact" onclick="btnContact();">
+                    <img src="media/contact-book.png" >&nbsp방명록</img>
                 </li>
-                <li class>
-                    <img src="media/timetable.png">
-                    <a herf="#시간표페이지" title>시간표</a>
+                <li class="menu_timetable" onclick="btnTimetable();">
+                    <img src="media/timetable.png" >&nbsp시간표</img>
                 </li>
-                <li class>
-                    <img src="media/d-day.png">
-                    <a herf="#디데이팝업" title>디데이</a>
+                <li class="menu_dday" onclick="btnDday();">
+                    <img src="media/d-day.png" >&nbsp디데이</img>
                 </li>
             </ul>
         </div>
-        <div id="page-header" role="banner" class>
+        <div class="page-header" role="banner" class>
             <div class="timetable_title">시간표 관리</div>
         </div>
         
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="background-box">
-
+                <div class="timetable_edit_header">
+                    <div class="title_msg">전체 수강중인 과목</div>
+                    <div class="btn_add_course">
+                        <input type ="button" value="+ 과목 추가하기" onclick="showTimetableAddPopup();"></input>
+                        
+                    </div>
+                    
+                </div>
+                <hr id ="timetable-line">
+                <div class="timetable_edit_section">
+                    <!-- 여기에 본격적인 내용 -->
+                    <div class ="course_list">
+                        <table>
+                            <thead><tr><th>과목명</th><th>시간</th><th>강의실</th><th>교수명</th><th class="modi">수정</th><th class="del">삭제</th></tr></tbody>
+                            <tbody>
+                                <tr><td>OS(운영체제)</td><td>목요일 10:30 - 11:45</td><td>온라인 실시간</td><td>김철홍</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c1+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');"/></td>
+                                </tr>
+                                <tr><td>웹프로그래밍기초및실습</td><td>월요일 13:00 - 14:45</td><td>온라인 동영상</td><td>최지웅</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                
             </div>
 
-        </div>
+        </div>    
         <div class="aside">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>

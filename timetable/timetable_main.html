@@ -5,39 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight/timetable</title>
     <script src="timetable_edit.js"></script>
+    <script src="timetable_main.js"></script>
     <style>
         @import url(timetable_main.css);
     </style>
 </head>
 <body>
     <div id="warp">
-        <div id="page-menu">
+        <div class="page-menu">
             <div class ="logo_area"> 
-                <img src="/media/logo.png" class= logo>
+                <img src="/media/logo.png" class= logo onclick="btnHome();">
             </div>
             <ul class="left-menus">
-                <li class="active">
-                    <img src="media/home.png">
-                    <a herf="#메인메뉴페이지" title>내 공부방</a>
+                <li class="menu_home" onclick="btnHome();">
+                    <img src="media/home.png" >&nbsp내 공부방</img>
                 </li>
-                <li class>
-                    <img src="media/contact-book.png">
-                    <a herf="#방명록페이지" title>방명록</a>
+                <li class="menu_contact" onclick="btnContact();">
+                    <img src="media/contact-book.png" >&nbsp방명록</img>
                 </li>
-                <li class>
-                    <img src="media/timetable.png">
-                    <a herf="#시간표페이지" title>시간표</a>
+                <li class="menu_timetable" onclick="btnTimetable();">
+                    <img src="media/timetable.png" >&nbsp시간표</img>
                 </li>
-                <li class>
-                    <img src="media/d-day.png">
-                    <a herf="#디데이팝업" title>디데이</a>
+                <li class="menu_dday" onclick="btnDday();">
+                    <img src="media/d-day.png" >&nbsp디데이</img>
                 </li>
             </ul>
         </div>
-        <div id="page-header" role="banner" class>
+        <div class="page-header" role="banner" class>
             <div class="timetable_title">내 시간표 </div>
             <div class="edit_btn">
-                <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표관리" onclick="location.href='timetable_edit.html'"></button>
+                <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표관리" onclick="location.href='timetable_edit.html'"></input>
             </div>
         </div>
         
