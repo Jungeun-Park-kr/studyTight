@@ -2,14 +2,14 @@ function btnHomeInHome() { //홈에서 누른경우 그냥 새로고침 해주�
     location.reload(); //새로고침
 }
 function btnHome() {
-    location.replace("../mainframe.html"); //홈 주소 //뒤로가기불가
+    location.replace("mainframe.html"); //홈 주소 //뒤로가기불가
     //location.href("#"); //뒤로가기 가능
 }
 function btnContact() {
     location.replace("#"); //방명록 주소
 }
 function btnTimetable() {
-    location.replace("timetable_main.html"); //시간표 주소
+    location.replace("timetable/timetable_main.html"); //시간표 주소
 }
 function btnDday() {
     var popupWidth = 600;

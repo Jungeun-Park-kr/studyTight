@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTight</title>
+    <script src="menu.js"></script>
+    <style>
+        @import url(mainframe.css);
+    </style>
+</head>
+<body>
+    <div id="warp">
+        <div class="page-menu"> 
+        <!-- 여기는 왼쪽 메뉴 (로고, 메뉴버튼들) -->
+            <div class ="logo_area"> 
+                <img src="/media/logo.png" class= logo onclick="btnHomeInHome();">
+            </div>
+            <ul class="left-menus">
+                <li class="menu_home" onclick="btnHomeInHome();">
+                    <img src="media/home.png" >&nbsp내 공부방</img>
+                </li>
+                <li class="menu_contact" onclick="btnContact();">
+                    <img src="media/contact-book.png" >&nbsp방명록</img>
+                </li>
+                <li class="menu_timetable" onclick="btnTimetable();">
+                    <img src="media/timetable.png" >&nbsp시간표</img>
+                </li>
+                <li class="menu_dday" onclick="btnDday();">
+                    <img src="media/d-day.png" >&nbsp디데이</img>
+                </li>
+            </ul>
+        </div>
+        <div class="page-header" role="banner" class>
+            <!-- 여기는 상단에 들어갈 헤더 섹션 -->
+        </div>
+        
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+        </div>
+        <div class="aside">
+            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+        </div>
+    </div>
+</body>
+</html>
