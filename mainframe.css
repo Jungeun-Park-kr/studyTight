@@ -1,0 +1,81 @@
+body {
+    background-color: #e7eff0;
+}
+.page-header {
+    width:70%;
+    height:15%;
+    float:left;
+    margin-top: 50px;
+}
+.page-header > div {
+    display: inline-block;
+}
+.page-header .timetable_title {
+    float:left;
+    text-align: center;
+    margin:0 auto;
+    width: 90%;
+    font-size: 20px;
+}
+.page-header .edit_btn {
+    float:right;
+    width: 10%;
+}
+.page-header .edit_btn > input {
+    width: 130px;
+    height: 40px;
+    background-color: #6ED4D8;
+    border:none;
+    cursor: pointer;
+}
+.page-menu {
+    width : 15%;
+    height : 100%;
+    float : left;
+    margin-right: 10px;
+}
+.page-menu .logo_area .logo {
+    /* background-image: url("media/logo.png");  */
+    width: 150px;
+    height : 150px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor:pointer;
+}
+.page-menu .left-menus > li {
+    /* border-bottom:1px solid #252626; */
+    width:150px;
+    position:relative;
+    list-style-type: none;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    color :black;
+    cursor:pointer;
+}
+.page-menu .left-menus > li > img {
+    width: 24px;
+    height: 24px;
+}
+
+/* .page-menu .left-menus > li.active {
+    //활성화 되어있는 메뉴
+    background-color: #6ED4D8;
+} */
+/* 현재 클릭되어있지 않은 메뉴 고를때 변경할 색 */
+.page-menu .left-menus > li:hover:not(.active) {
+    background-color: #6ED4D8;
+}
+.aside {
+    width: 15%;
+    height : 100%;
+    float : left;
+}
+.section {
+    width:70%;
+    height:85%;
+    float:left;
+    margin-top: 50px;
+}
