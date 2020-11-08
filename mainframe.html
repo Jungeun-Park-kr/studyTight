@@ -8,6 +8,9 @@
     <style>
         @import url(mainframe.css);
     </style>
+    
+
+    </script>
 </head>
 <body>
     <div id="warp">
@@ -40,6 +43,14 @@
         </div>
         <div class="aside">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+            <div class="today">
+                <p>오늘 할 일</p>
+                <div class="todaylist">
+                    <p><input type="checkbox">오늘 할 일1</p>
+                    <p><input type="checkbox">오늘 할 일2</p>
+                </div>
+                <div id="plusbtn" onclick="btnplustodo();">+ 추가하기</div> <!--+부분 이미지로 넣기-->
+            </div>
         </div>
     </div>
 </body>
