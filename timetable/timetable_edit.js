@@ -21,3 +21,8 @@ function deleteCourse(course) {
         ;
     }
 }
+
+function get_courses(value) {
+    //파라미터 : td[번호]
+    
+}
