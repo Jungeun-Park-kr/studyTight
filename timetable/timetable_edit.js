@@ -1,5 +1,5 @@
 function showTimetableAddPopup() {
-    var popupWidth = 600;
+    var popupWidth = 650;
     var popupHeight = 800;
     var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
     var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
@@ -10,6 +10,7 @@ function showTimetableAddPopup() {
 }
 
 function modifyCourse(course) { 
+    //과목 수정 버튼 누를 경우 해당 과목의 정보 수정
     
 }
 

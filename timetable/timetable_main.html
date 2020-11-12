@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight/timetable</title>
-    <style>@import url(timetable_main.css);</style>
-    <style>@import url(../mainframe.css);</style>
+    <style>
+        @import url(timetable_main.css);
+        @import url(../mainframe.css);
+        @import url(timetable_edit.css);
+    </style>
     <script src="timetable_edit.js"></script>
     <script src="timetable_main.js"></script>
 </head>
@@ -40,7 +43,67 @@
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="titetable_section">
-                
+                <div class="background_box">
+                    <div class="timetable_wrap">
+                        <div class="table_head_wrap">
+                            <table class="table_head">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;"></th> 
+                                        <td>월</td>
+                                        <td>화</td>
+                                        <td>수</td>
+                                        <td>목</td>
+                                        <td>금</td>
+                                        <td style="display:none;">토</td>
+                                        <td style="display:none;">일</td>
+                                        <!-- <th  style="padding:0px;"></th> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table_body">
+                            <table class="table_body">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;">
+                                            <div class="hours">
+                                                <!-- width:50 -->
+                                                <div class="hour">1교시(9:00)</div>
+                                                <div class="hour">2교시(10:30)</div>
+                                                <div class="hour">3교시(12:00)</div>
+                                                <div class="hour">4교시(13:30)</div>
+                                                <div class="hour">5교시(15:00)</div>
+                                                <div class="hour">6교시(16:30)</div>
+                                                <div class="hour">7교시(18:00)</div>
+                                                <div class="hour">8교시(19:30)</div>
+                                                <div class="hour">9교시(21:00)</div>
+                                                <div class="hour"></div>
+                                            </div>
+                                        </th>
+                                        <!-- 들어갈 요일별 과목정보 -->
+                                        <td class="mon" style="background-color: lightpink;"> 
+                                            <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
+                                            <div>monday section</div>
+                                        </td>
+                                        <td class="tue" style="background-color: lightsalmon;">
+                                            <div>tuesday section</div>
+                                        </td>
+                                        <td class="wed" style="background-color: lightsteelblue;">
+                                            <div>wednesday section</div>
+                                        </td>
+                                        <td class="thr" style="background-color: lightyellow;">
+                                            <div>thursday section</div>
+                                        </td>
+                                        <td class="fri" style="background-color: lightseagreen;">
+                                            <div>firday section</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="aside">

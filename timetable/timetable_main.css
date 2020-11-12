@@ -1,14 +1,9 @@
-body {
-    background-color: #e7eff0;
+.background_box {
+    background-color: azure;
+    align-content: center;
 }
-.page-header {
-    width:70%;
-    height:15%;
+.timetable_section {
     float:left;
-    margin-top: 50px;
-}
-.page-header > div {
-    display: inline-block;
 }
 .page-header .timetable_title {
     float:left;
@@ -28,4 +23,41 @@ body {
     background-color: #6ED4D8;
     border:none;
     cursor: pointer;
+}
+.table_head_wrap {
+    padding : 0px;
+}
+.table_head {
+    background-color: #e8e8e8;
+    border : none;
+    width:100%;
+}
+.table_head td {
+    width:18%;
+    height:40px;
+    font-weight: bolder;
+    text-align: center;
+}
+.table_head th {
+    width:5%;
+}
+.table_body {
+    width:100%;
+    padding:0px;
+}
+.table_body .hours .hour {
+    height:75px;
+    text-align: center;
+    background-color: #e8e8e8;
+    border-color: #d6d6d6;
+    border-width: 1px;
+    border-style: solid;
+}
+.table_body th {
+    width:5%;
+    padding:0px;
+}
+.table_body td {
+    width:18%;
+    padding : 0px;
 }

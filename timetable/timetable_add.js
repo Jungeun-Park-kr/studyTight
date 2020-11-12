@@ -23,3 +23,7 @@ function showTimetableAddPopup() {
     var option = "width ="+popupWidth+", height ="+popupHeight+", left"+popupX+", top="+popupY+", scrollbars = yes, location = no";
     window.open(url, name, option);
 }
+
+function addCourseTime() {
+    //시간 추가하기 버튼 누를시 추가생성하기
+}
