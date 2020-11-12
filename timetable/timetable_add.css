@@ -1,3 +1,6 @@
+body {
+    background-color: #e7eff0;
+}
 .add_title {
     font-size: 20;
     font-weight: bold;
@@ -37,4 +40,13 @@
 }
 .course_add_list th {
     width:70px;
+}
+
+.course_add_list .btn_add_time {
+    align-content: center;
+    width:32px;
+    height:32px;
+    /* border : none; */
+    background: url("media/plus.png") no-repeat;
+    cursor: pointer;
 }
