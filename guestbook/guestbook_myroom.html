@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTight</title>
+    <script src="guestbook_myroom.js"></script>
+    <style>
+        @import url(guestbook_myroom.css);
+        @import url(../mainframe.css);
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="information-menu">
+            <div class="logo_area">
+                <img src="/media/logo.png" class=l ogo onclick="btnHome();">
+            </div>
+            <ul class="left-menus">
+                <li class="profile" onclick="btnHome();">
+                    <img src="media/person_gray.png"></img>
+                </li>
+                <li class="menu_contact" onclick="btnContact();">
+                    <img src="media/user.png">&nbsp박정은</img>
+                </li>
+                <li class="menu_timetable" onclick="btnTimetable();">
+                    <img src="media/office-building.png">&nbsp숭실대학교</img>
+                </li>
+                <li class="menu_dday" onclick="btnDday();">
+                    <img src="media/mortarboard.png">&nbsp컴퓨터학부</img>
+                </li>
+            </ul>
+
+        </div>
+        <div class="my-room">
+            <!-- 방명록 -->
+            <div class="friends">
+                <div class="friends_add">
+                    <div class="title_msg">Friends</div>
+                    <div class="btn_add_course">
+                        <input type="button" value="+ 친구 추가하기" onclick="showfriendsAddPopup();"></input>
+
+                    </div>
+
+                </div>
+                <div class="friends_list_box">
+                    <table id="course_table">
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>양지영</td>
+                                <td>sidjyoung@naver.com</td>
+                            </tr>
+                            <tr>
+                                <td>최시언</td>
+                                <td>noino08189@naver.com</td>
+                            </tr>
+                            <tr>
+                                <td>김삿갓</td>
+                                <td>kimsatgat@naver.com </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="writing-place">
+                <div class="writing-box">
+                    <table>
+                        <tr>
+                            <!--행(row)선언-->
+                            <th><input type="text" name="writing" value="" placeholder="내용을 입력해주세요" /></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="writing-button-secret">
+                    <div class="writing-button">
+                        <input type="button" value="글쓰기" onclick="showwritingPopup();"></input>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="aside">
+            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+        </div>
+    </div>
+</body>
+
+</html>

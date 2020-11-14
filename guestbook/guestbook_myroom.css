@@ -1,0 +1,121 @@
+.friends_list_box {
+    background-color: #d6d6d6;
+    align-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.profile {
+    width: 64px;
+    height: 64px;
+}
+
+.writing-place>table {
+    background-color: gray;
+    width: 200px;
+    height: 200px;
+}
+
+.brn_add_course>button {
+    float: left;
+}
+
+body {
+    background-color: #e7eff0;
+}
+
+.page-header {
+    width: 70%;
+    height: 15%;
+    margin-top: 50px;
+}
+
+.page-header>div {
+    display: inline-block;
+}
+
+.information-menu {
+    width: 15%;
+    height: 100%;
+    float: left;
+    margin-right: 10px;
+}
+
+.information-menu .logo_area {
+    width: 150px;
+    height: 150px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    float: left;
+}
+
+.information-menu .left-menus>li {
+    /* border-bottom:1px solid #252626; */
+    width: 150px;
+    position: relative;
+    list-style-type: none;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    color: black;
+    cursor: pointer;
+}
+
+.information-menu .left-menus>li>img {
+    width: 24px;
+    height: 24px;
+}
+
+.information-menu .left-menus>li:hover:not(.active) {
+    background-color: #6ED4D8;
+}
+
+.aside {
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+
+.section {
+    width: 70%;
+    height: 85%;
+    float: left;
+    margin-top: 50px;
+}
+
+.aside .today {
+    background-color: white;
+    width: 200px;
+    position: fixed;
+    right: 30px;
+    top: 200px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: large;
+    align-items: center;
+}
+
+.aside .today .todaylist {
+    padding: 10px;
+}
+
+#plusbtn:hover {
+    cursor: pointer;
+}
+
+#plusbtn {
+    border-radius: 2px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    width: 100px;
+    border: 10px;
+}
+
+p {
+    text-align: center;
+}
