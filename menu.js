@@ -6,7 +6,7 @@ function btnHome() {
     //location.href("#"); //뒤로가기 가능
 }
 function btnContact() {
-    location.replace("#"); //방명록 주소
+    location.reload("guestbook/guestbook_myroom.html"); //방명록 주소
 }
 function btnTimetable() {
     location.replace("timetable/timetable_main.html"); //시간표 주소

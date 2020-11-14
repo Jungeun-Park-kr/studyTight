@@ -18,20 +18,30 @@
                 <img src="../media/logo.png" class= logo onclick="btnLoginHome();">
             </div>
         </div>
-        <div class="section" style="background-color: lightsalmon;">
+        <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="login">
                 <div class="login_title">로그인</div>
-
-                <div class="login_label">아이디</div>
-                <div class="login_form">
-                    <input type="text" id="login_id" placeholder="아이디 입력"/>
+                
+                <div class="login_section">
+                    <div class="login_label">아이디</div>
+                    <div class="login_form">
+                        <input type="text" id="login_id" placeholder="이메일 아이디 입력"/>
+                    </div>
+    
+                    <div class="login_label">비밀번호</div>
+                    <div class="login_form">
+                        <input type="password" id="login_password" placeholder="비밀번호 입력"/>
+                    </div>
+                    <div class="login_btn">
+                        <input id="btn_login" type="button" title="로그인" value="로그인" onclick="login();">
+                    </div>
+                    <div class ="register_btn">
+                        <input id="btn_register" type="button" title="회원가입" value="회원가입" onclick="register();">
+                    </div>
+                    
                 </div>
-
-                <div class="login_label">비밀번호</div>
-                <div class="login_form">
-                    <input type="password" id="login_password" placeholder="비밀번호 입력"/>
-                </div>
+                
             </div>
             
         </div>
