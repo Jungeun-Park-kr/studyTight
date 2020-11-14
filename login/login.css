@@ -1,4 +1,4 @@
-.login .login_title {
+.login .login_title, .register .register_title {
     float:left;
     font-weight: bold;
     font-size: 35px;
