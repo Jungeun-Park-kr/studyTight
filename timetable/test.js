@@ -1,3 +1,3 @@
 let year = 2020;
 
-console.log("year:"+year);
+console.log("year:" + year);
