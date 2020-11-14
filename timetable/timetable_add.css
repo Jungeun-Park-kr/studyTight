@@ -16,7 +16,6 @@ body {
     background-color: #6ED4D8;
     border:none;
     cursor: pointer;
-    
     position: absolute; 
     /* 부모의 기준으로 위치를 맞춘다는 뜻 */
     left:50%;
@@ -44,9 +43,10 @@ body {
 
 .course_add_list .btn_add_time {
     align-content: center;
-    width:32px;
-    height:32px;
+    width:24px;
+    height:24px;
     /* border : none; */
-    background: url("media/plus.png") no-repeat;
+    background: url("../media/add_s.png") no-repeat;
+    border: none;
     cursor: pointer;
 }
