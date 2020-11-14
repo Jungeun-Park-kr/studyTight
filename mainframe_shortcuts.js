@@ -1,6 +1,6 @@
 var doc = document;
 
-$(doc).ready(function(){
+window.onload = function(){
     var type = 1;
     var text = doc.getElementById("shortcuts_title"); //바로가기 텍스트
     var link = doc.getElementById("shortcuts_link"); //바로가기 링크 텍스트
@@ -9,14 +9,15 @@ $(doc).ready(function(){
     //in here
     // type 저장
     //
-    
+    doc.getElementById("shortcuts_title").innerHTML="현재 시간표에 등록된 일정이 없습니다";
+
     switch (type) {
         case 1: //온라인 강의인 경우
         link.style.color="mediumblue";
         link.style.textDecoration="underline";
         $("#shortcuts_title").attr("href", "#"); //href로 속성 변경
         onclick="location.href='#'";
-        $('.shortcuts_title').text('10:30 OS(라) 온라인 실시간');
+        $('.shortcuts_title').text('현재 시간표에 등록된 일정이 없습니다');
         break;
 
         case 2: //오프라인 강의인 경우
@@ -33,4 +34,4 @@ $(doc).ready(function(){
         break;
     }
     
-});
+}
