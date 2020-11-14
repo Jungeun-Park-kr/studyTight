@@ -3,9 +3,5 @@ function btnLoginHome() {
 }
 
 function login() {
-    
-}
 
-function register() {
-    location.href='register.html';
 }
