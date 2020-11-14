@@ -1,0 +1,28 @@
+.shortcuts_wrap {
+    width:100%;
+    margin: 0 auto;
+}
+#shortcuts_title {
+    float: left;
+    width:75%;
+    height:50px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #6ED4D8;
+    margin-left: 5%;
+    text-align: center;
+    color: #333333;
+    font-size: 25px;
+}
+#shortcuts_link {
+    float:left;
+    width:15%;
+    margin: 0 auto;
+    height:50px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    color: #333333;
+    font-size: 25px;
+    margin-right: 5%;
+}
