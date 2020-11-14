@@ -10,13 +10,14 @@
         @import url(login.css);
     </style>
     <script src="register.js"></script>
+    <script src="login.js"></script>
 </head>
 <body>
     <div id="warp">
         <div class="page-menu"> 
         <!-- 여기는 왼쪽 메뉴 (로고) -->
             <div class ="logo_area"> 
-                <img src="../media/logo.png" class= logo onclick="btnloginHome();">
+                <img src="../media/logo.png" class= logo onclick="btnLoginHome();">
             </div>
         </div>
         <div class="section">
@@ -27,8 +28,8 @@
                 <div class="register_section">
                     <div class="login_label">아이디</div>
                     <div class="register_form">
-                        <input type="text" id="userId" placeholder="이메일 아이디 입력"/>
-                        <button id="login_id_check" title="중복확인" onclick="id_check()">중복확인</button>
+                        <input type="email" id="userId" placeholder="이메일 아이디 입력" name="userId" check_result="fail" required/>
+                        <button class="login_id_check_btn" title="중복확인" onclick="id_check()">중복확인</button>
                     </div>
 
                     <div class="login_label">비밀번호</div>
@@ -42,6 +43,7 @@
                     <!-- 취소버튼, 회원가입 버튼 -->
                     <div class="signUp_btn_section">
                         <div class="cancel_btn">
+                            <!-- 취소하기 버튼 누르면 로그인 화면으로 이동 -->
                             <input id="signUp_cancel" type="button" title="취소하기" value="취소하기" onclick="location.href='login.html'">
                         </div>
                         <div class ="signup_btn">
