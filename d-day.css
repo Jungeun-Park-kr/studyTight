@@ -1,0 +1,39 @@
+.d-date{
+    width: 100px;
+    height:30px; 
+    padding:5px;
+    margin: 5px;
+    background-color:#e7eff0;
+    border:none;
+    }
+.d-plus{
+    width: 150px;
+    height:30px; 
+    padding:5px;
+    margin: 5px;
+    background-color:#6ed4d8;
+    border:none;
+}
+table{
+    border:none;
+    width: 100%;
+}
+table > th {
+    
+}
+.btn_modify_d-day{
+    align-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: url("media/edit.png") no-repeat;
+    cursor: pointer;
+}
+.btn_delete_d-day{
+    align-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: url("media/delete.png") no-repeat;
+    cursor: pointer;
+}
