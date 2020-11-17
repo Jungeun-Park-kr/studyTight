@@ -1,27 +1,46 @@
-.d-date{
-    width: 100px;
-    height:30px; 
+.d-date{ 
+    /* 날짜 선택하는 부분 */
+    width:130px;
+    height:45px; 
     padding:5px;
     margin: 5px;
     background-color:#e7eff0;
     border:none;
+    font:bold;
     }
+.d-content{
+        width: 220px;
+        height:45px; 
+        padding:5px;
+        margin: 5px;
+        background-color:#e7eff0;
+        border:none;
+        font:bold;
+    }
+h3 {
+    font:bold;
+}
 .d-plus{
-    width: 150px;
-    height:30px; 
+    /* 저장 버튼 */
+    width: 160px;
+    height:45px; 
     padding:5px;
-    margin: 5px;
+    margin-right: 5px;
     background-color:#6ed4d8;
     border:none;
+    font:bold;
 }
 table{
     border:none;
     width: 100%;
 }
 table > th {
-    
+    text-align: center;
 }
-.btn_modify_d-day{
+table > tbody > tr> td{
+    text-align:center;
+}
+.btn_modify_d-day{ 
     align-content: center;
     width: 32px;
     height: 32px;
@@ -37,3 +56,4 @@ table > th {
     background: url("media/delete.png") no-repeat;
     cursor: pointer;
 }
+
