@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>@import url("d-day.css");</style>
+    </head>
+    <body>
+        <h3>디데이 관리</h3>
+        <hr>
+        <div>
+            <!-- 추가할 때의 부분 -->
+            <button class="d-date">날짜</button>
+            <input type="text" class="d-content" value="내용"/>  
+            <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
+            <button class="d-plus" value="디데이 추가">디데이 추가</button>
+        </div>
+        <div>
+            <!-- 테이블 형식으로 수정, 삭제 만들기 -->
+            <table>
+                <thead>
+                    <tr><th>D-day</th><th>내용</th><th>수정 및 삭제</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>D-4</td><td>정보보안 퀴즈</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('+d1+');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('+d1+');"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+    </body>
+</html>
