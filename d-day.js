@@ -25,3 +25,5 @@ function deleteDday(dday){
     //안보이게 만들면 될 듯
     alert("D-day를 삭제하였습니다");
 }
+//디데이 색 관련해서도 함수를 만들어야 할 듯?
+//mainframe에 보이는 디데이 관련해서
