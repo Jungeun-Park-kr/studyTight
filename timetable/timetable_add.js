@@ -24,6 +24,6 @@ function showTimetableAddPopup() {
     window.open(url, name, option);
 }
 
-function addCourseTime() {
+function addCourse() {
     //시간 추가하기 버튼 누를시 추가생성하기
 }
