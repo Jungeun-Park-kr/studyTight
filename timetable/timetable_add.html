@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>과목 추가하기</title>
-    <style>@import url(timetable_add.css);</style>
+    <style>
+        @import url(timetable_add.css);
+    </style>
 </head>
+
 <body>
-    <div class ="add_title">과목 추가하기</div>
+    <div class="add_title">과목 추가하기</div>
     <hr>
     <div class="course_add_list">
-        <table id ="add_table">
+        <table id="add_table">
             <tbody>
                 <tr>
-                    <th>과목이름</th> <td><input type="text" name="course_title" size="20" style="width:100%; border:1;"> </td>
+                    <th>과목이름</th>
+                    <td><input type="text" name="course_title" size="20" style="width:100%; border:1;"> </td>
                 </tr>
                 <tr>
-                    <th>교수명</th> <td><input type="text" name="course_professor" size="20" style="width:100%; border:1;"> </td></td>
+                    <th>교수명</th>
+                    <td><input type="text" name="course_professor" size="20" style="width:100%; border:1;"> </td>
+                    </td>
                 </tr>
                 <tr>
-                    <th>강의시간</th> 
-                    <td><table>
-                        <td>요일선택
-                            <select id="course_day">
+                    <th>강의시간</th>
+                    <td>
+                        <table>
+                            <td>요일선택
+                                <select id="course_day">
                                 <option value="mon">월요일</option>
                                 <option value="tue">화요일</option>
                                 <option value="wed">수요일</option>
@@ -30,17 +38,18 @@
                                 <option value="fri">금요일</option>
                                 <option value="sat">토요일</option>
                             </select>
-                        </td>
-                        <td>시작시간<input type="time" name="course_stime" size="10" value="08:00" style="width:100%; border:1;"></td>
-                        <td>종료시간<input type="time" name="course_etime" size="10" value="09:00" style="width:100%; border:1;"></td>
-                        <td><input type="button" class="btn_add_time" onclick="addCourseTime();"/></td>
-                    </table></td>
-                    
-                    
-                    
+                            </td>
+                            <td>시작시간<input type="time" name="course_stime" size="10" value="08:00" style="width:100%; border:1;"></td>
+                            <td>종료시간<input type="time" name="course_etime" size="10" value="09:00" style="width:100%; border:1;"></td>
+                            <td><input type="button" class="btn_add_time" onclick="addCourseTime();" /></td>
+                        </table>
+                    </td>
+
+
+
                 </tr>
                 <tr>
-                    <th>온/오프라인</th> 
+                    <th>온/오프라인</th>
                     <td>
                         <label><input type="radio" name="course_type" size="20" value="online_realtime">온라인 실시간</label>
                         <label><input type="radio" name="course_type" size="20" value="online_video">온라인 동영상</label>
@@ -48,15 +57,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>강의링크</th><td><input type="url" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="30" hi style="width:100%; border:1;"></td>
-                    <th>강의실</th><td><input type="text" name="course_link" size="20" style="width:100%; border:1;"> </td>
+                    <th>강의링크</th>
+                    <td><input type="url" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="30" hi style="width:100%; border:1;"></td>
+                    <th>강의실</th>
+                    <td><input type="text" name="course_link" size="20" style="width:100%; border:1;"> </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
+
     <div class="add_btn">
-        <input id="btn_add_course" type="button" title="저장하기" value ="저장하기" onclick=""></input>
+        <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick=""></input>
     </div>
 </body>
+
 </html>
