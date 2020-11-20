@@ -75,7 +75,7 @@ body {
 .my-room .friends_add .btn_add_course {
     float: right;
     margin-top: 25px;
-    margin-left: 800px;
+    margin-left: 900px;
 }
 
 .my-room .friends_add .title_msg {
@@ -91,6 +91,33 @@ body {
     height: 30px;
 }
 
+.writing-box {
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.writing-button-secret {
+    float: left;
+}
+
+.my-room .writing-button-secret .writing-button>input {
+    background-color: #6ED4D8;
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 100px;
+    height: 40px;
+}
+
+.my-room .writing-button-secret .secret-checkbox>input {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+git .writing-place {
+    display: inline-block;
+}
+
 .friends_list_box {
     overflow: auto;
     background-color: #d6d6d6;
@@ -99,6 +126,7 @@ body {
     margin-left: 55px;
     margin-right: 55px;
     height: 100px;
+    width: 1120px;
     float: none;
 }
 
