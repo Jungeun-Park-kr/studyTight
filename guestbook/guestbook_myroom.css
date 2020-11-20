@@ -76,6 +76,11 @@ body {
     width: 120px;
     height: 120px;
     list-style-type: none;
+    margin-left: 5px;
+}
+
+.information-menu .left-menus>div {
+    margin-bottom: 100px;
 }
 
 .information-menu .left-menus>div>li {
