@@ -1,0 +1,53 @@
+body {
+    background-color:#e7eff0;
+}
+.folder_todo{
+    background-color: #85888865;
+    border-radius: 5px;
+}
+.folder_todo > p {
+    /* 할 일 목록 부분 */
+    text-align: center;
+    font-weight: bold;
+    padding-top:15px;
+    font-size:1.3em;
+}
+.Todolist > p {
+    margin-left:20px;
+    margin-top:10px;
+}
+.folderTodoBtn{
+    background-color:#6ED4D8;
+    border-radius: 6px;
+    width:100px;
+    height:35px;
+    margin-left:50px;
+    margin-right:30px;
+    margin-bottom: 15px;
+}
+.section > p {
+    font-size:1.5em;
+}
+.postIt_plus{
+    background-color:white;
+    border-radius: 3px;
+   
+}
+.postIt_1, .postIt_2, .postIt_3{
+    background-color:#6ED4D8;
+}
+.postIt_4{
+    background-color:#E3B863;
+}
+.postIt_5{
+    background-color:#E36363;
+}
+.section > div {
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    display:inline-block;
+    margin:20px 7px 20px 7px;
+    width: 28%;
+    height: 15vw;
+    text-align:center;
+}
