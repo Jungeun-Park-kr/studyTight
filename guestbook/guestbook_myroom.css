@@ -114,8 +114,16 @@ body {
     margin-left: 10px;
 }
 
-git .writing-place {
+.writing-place {
     display: inline-block;
+}
+
+#myroom-line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    z-index: 1;
+    width: 1300px;
 }
 
 .friends_list_box {
@@ -132,4 +140,58 @@ git .writing-place {
 
 .friends_list_box #course_table {
     padding: 10px;
+}
+
+.talking-palce {
+    display: inline-block;
+}
+
+.mini-profile {
+    float: left;
+}
+
+.mini-profile>img {
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.user-small-talking {
+    float: left;
+    margin-left: 20px;
+}
+
+.user-small-talking .user-name {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.user-small-talking .user-talking-list {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.user-small-talking .today {
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+}
+
+.user-small-talking .reply-button {
+    margin-left: 120px;
+    margin-top: 10px;
+    float: left;
+}
+
+.my-room .talking-palce {
+    display: inline-block;
+}
+
+.my-room .talking-palce .talking {
+    display: inline-block;
+}
+
+.talking {
+    display: inline-block;
 }
