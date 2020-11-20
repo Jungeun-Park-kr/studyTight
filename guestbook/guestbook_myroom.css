@@ -34,6 +34,10 @@ body {
     display: inline-block;
 }
 
+.left-menus {
+    position: flaot;
+}
+
 .information-menu {
     width: 15%;
     height: 100%;
@@ -41,14 +45,13 @@ body {
     margin-right: 10px;
 }
 
-.information-menu .logo_area {
+.information-menu .logo_area>img {
     width: 150px;
     height: 150px;
-    padding: 10px 10px 10px 10px;
-    margin-top: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-    float: left;
+    padding: 5px 5px 5px 5px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-bottom: 10px;
 }
 
 .information-menu .left-menus>li {
@@ -69,53 +72,16 @@ body {
     height: 24px;
 }
 
+.information-menu .left-menus>div>li>img {
+    width: 120px;
+    height: 120px;
+    list-style-type: none;
+}
+
+.information-menu .left-menus>div>li {
+    list-style-type: none;
+}
+
 .information-menu .left-menus>li:hover:not(.active) {
     background-color: #6ED4D8;
-}
-
-.aside {
-    width: 15%;
-    height: 100%;
-    float: left;
-}
-
-.section {
-    width: 70%;
-    height: 85%;
-    float: left;
-    margin-top: 50px;
-}
-
-.aside .today {
-    background-color: white;
-    width: 200px;
-    position: fixed;
-    right: 30px;
-    top: 200px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: large;
-    align-items: center;
-}
-
-.aside .today .todaylist {
-    padding: 10px;
-}
-
-#plusbtn:hover {
-    cursor: pointer;
-}
-
-#plusbtn {
-    border-radius: 2px;
-    background-color: #6ED4D8;
-    display: table-cell;
-    vertical-align: middle;
-    margin-bottom: 10px;
-    width: 100px;
-    border: 10px;
-}
-
-p {
-    text-align: center;
 }
