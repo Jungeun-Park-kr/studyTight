@@ -148,17 +148,29 @@ body {
     /* 각 폴더에 대해서 */
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
-    background-color:#6ED4D8;
     display:inline-block;
     margin:20px 7px 20px 7px;
-    width: 30%;
-    height: 13vw;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    width: 28%;
+    height: 15vw;
     text-align:center;
 } 
+.section .folder > div > p {
+    display:inline-block;
+}
 .section .folder > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     top:20px;
     right:20px;
     width: 25px;
     height: 25px;
+}
+.folder_1, .folder_5{
+    background-color:#E36363;
+}
+.folder_2, .folder_3{
+    background-color:#E3B863;
+}
+.folder_plus, .folder_4{
+    background-color:#6ED4D8;
 }
