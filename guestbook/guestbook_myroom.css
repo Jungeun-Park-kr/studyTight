@@ -3,12 +3,6 @@
     height: 64px;
 }
 
-.writing-place>table {
-    background-color: gray;
-    width: 200px;
-    height: 200px;
-}
-
 body {
     background-color: #e7eff0;
 }
@@ -92,11 +86,22 @@ body {
     float: left;
 }
 
+.my-room .friends_add .btn_add_course>input {
+    background-color: #6ED4D8;
+    height: 30px;
+}
+
 .friends_list_box {
+    overflow: auto;
     background-color: #d6d6d6;
     align-content: center;
     margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 55px;
+    margin-right: 55px;
+    height: 100px;
     float: none;
+}
+
+.friends_list_box #course_table {
+    padding: 10px;
 }
