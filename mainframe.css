@@ -50,10 +50,33 @@ body {
     background-color: #6ED4D8;
     border-radius:2px;
 }
+
 .aside {
     width: 15%;
     height : 100%;
-    float : left;
+    float : right;
+}
+.login_white_box {
+    background-color:white;
+    top:30px;
+    right:30px;
+    position:fixed;
+    width:10%;
+    height:auto;
+    margin:10px;
+}
+.profile > img {
+    
+    width:50%;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+.username {
+    text-align: center;
+}
+.btn_logout {
+    background-color:#6ED4D8;
 }
 .section {
     width:70%;

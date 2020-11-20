@@ -21,9 +21,9 @@ function plusTodo(){
         }
 }
 function starClicked(){
-    if(document.getElementById("star").src=="/media/empty_star.png")
         document.getElementById("star").src="/media/full_star.png";
-    else
-        document.getElementById("star").src="/media/empty_star.png";
-   
+        //하나만 적용된다 ㄱ-
+}
+function newFolder(){
+        alert("폴더 추가하기 버튼을 눌렀습니다");
 }
