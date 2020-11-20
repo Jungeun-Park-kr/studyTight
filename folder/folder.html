@@ -12,7 +12,7 @@
     <body>
             <div class="page-menu">
                 <div class ="logo_area"> 
-                <img src="/media/logo.png" class= logo onclick="btnHomeInHome();"></div>
+                <img src="/media/logo.png" class= logo onclick="btnHome();"></div>
                 <div class="folder_todo">
                         <p>할 일 목록</p>
                         <hr>
@@ -48,11 +48,11 @@
             <div class="section">
                 <p>OS (운영체제)</p>
                 <hr>
-                <div class="postIt_plus" onclick="newPostIt();">포스트잇 추가하기/></div>
+                <div class="postIt_plus" onclick="newPostIt();">포스트잇 추가하기</div>
                 <div class="postIt_1" onclick="PostItLink('pid');">PID란?</div>
-                <div class="postIt_2" onclick="PostItLink('cs');">CS란?</div>
+                <div class="postIt_2" onclick="PostItLink('shell');">shell이란?</div>
                 <div class="postIt_3" onclick="PostItLink('scheduler');">scheduler란?</div>
-                <div class="postIt_4" onclick="PostItContent();">chapter1 요점 정리</div>
+                <div class="postIt_4" onclick="PostItContent('chapter1');">chapter1 요점 정리</div>
                 <div class="postIt_5" onclick="PostItFile();">ssu_shell.c</div>
             </div>
     </body>
