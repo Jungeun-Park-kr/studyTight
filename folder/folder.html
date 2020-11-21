@@ -49,11 +49,21 @@
                 <p>OS (운영체제)</p>
                 <hr>
                 <div class="postIt_plus" onclick="newPostIt();">포스트잇 추가하기</div>
-                <div class="postIt_1" onclick="PostItLink('pid');">PID란?</div>
-                <div class="postIt_2" onclick="PostItLink('shell');">shell이란?</div>
-                <div class="postIt_3" onclick="PostItLink('scheduler');">scheduler란?</div>
-                <div class="postIt_4" onclick="PostItContent('chapter1');">chapter1 요점 정리</div>
-                <div class="postIt_5" onclick="PostItFile();">ssu_shell.c</div>
+                <div class="postIt_1" onclick="PostItLink('pid');">PID란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_2" onclick="PostItLink('shell');">shell이란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_3" onclick="PostItLink('scheduler');">scheduler란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_4" onclick="PostItContent('chapter1');">chapter1 요점 정리
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_5" onclick="PostItFile();">ssu_shell.c
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
             </div>
     </body>
 </html>
