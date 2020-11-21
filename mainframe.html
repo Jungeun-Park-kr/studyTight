@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight</title>
     <script src="menu.js"></script>
+    <script src="mainframe.js"></script>
+    <script src="mainframe_shortcuts.js"></script>
+    <script src="mainframe_profile.js"></script>
     <style>
         @import url(mainframe.css);
+        @import url(mainframe_shortcuts.css);
+
     </style>
     
 
@@ -35,22 +40,80 @@
             </ul>
         </div>
         <div class="page-header" role="banner" class>
+            
             <!-- 여기는 상단에 들어갈 헤더 섹션 -->
+            <div class="shortcuts_wrap">
+                <div id ="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
+                <div id="shortcuts_link" onclick="openLink();">바로가기</div>
+                <!-- <input id="btn_shortcuts_link" type="button" title="바로가기" value="바로가기"> -->
+            </div>
         </div>
+        <script>
+            var isopen=false;
+            //doc.getElementById("shortcuts_title"); //바로가기 텍스트
+            //doc.getElementById("shortcuts_link"); //바로가기 링크 텍스트
+            // 실시간 일정 있는 경우
+            doc.getElementById("shortcuts_title").innerHTML="10:30 OS(라) 온라인 실시간";
+            doc.getElementById("shortcuts_link").style.color="blue";
+            function openLink() { //바로가기 버튼 누른경우
+                if (isopen) { //실시간 수업 있는경우 링크로 이동
+
+                }
+                else {
+                    alert('현재 등록된 강의 링크가 없습니다.');
+                }
+            }
+        </script>
         
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="D-day"> <!-- 디데이 설정한 부분 -->
+                <div class="d-day1"><span class="d-date1">D-1</span> 정보보안 퀴즈</div>
+                <div class="d-day2"><span class="d-date2">D-3</span> 모바일네트워크 퀴즈</div>
+                <div class="d-day3"><span class="d-date3">D-5</span> DB 과제2</div>
+                <div class="d-day4"><span class="d-date4">D-9</span> 기독교 중간</div>
+                <div class="d-day5"><span class="d-date5">D-15</span> TOPCIT 시험</div>
+                <div class="d-day6"><span class="d-date6">D-28</span> SAP 플젝 마감</div>
+            </div>
+            
+            <div class="folder">
+                <div class="folder_plus" onclick="newFolder()";><p>+ 폴더 추가하기</p></div>
+                <div class="folder_1" onclick="location.href='/folder/folder.html'"><p>OS (운영체제)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
+                <div class="folder_2" onclick="location.href='/folder/folder.html'"><p>웹 프로그래밍 기초 및 실습</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
+                <div class="folder_3" onclick="location.href='/folder/folder.html'"><p>DB (데이터베이스)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
+                <div class="folder_4" onclick="location.href='/folder/folder.html'"><p>SAP (ABAP)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
+                <div class="folder_5" onclick="location.href='/folder/folder.html'"><p>철학으로 만나는 기독교</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
+                
+            </div>
         </div>
+
         <div class="aside">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
-            <div class="today">
-                <p>오늘 할 일</p>
-                <div class="todaylist">
-                    <p><input type="checkbox">오늘 할 일1</p>
-                    <p><input type="checkbox">오늘 할 일2</p>
-                    <p><input type="checkbox"><input type="text"></p>
+            <div class="aside_wrap">
+                <div class="login">
+                    <div class="login_white_box">
+                        <div class="profile_section">
+                            <div class="logout">
+                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();"/>
+                            </div>
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <img src="media/profile.png" onclick="location.href='#프로필수정화면'">
+                                <div class="username">박정은님</div>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-                <div class="btnplusTodo">+ 추가하기</div> <!--+부분 이미지로 넣기-->
+                <div class="today">
+                    <p>오늘 할 일</p>
+                    <div class="todaylist">
+                        <p><input type="checkbox">웹프로그래밍 수업 듣기</p>
+                        <p><input type="checkbox">DB 강의 듣기</p>
+                        <p><input type="checkbox">채플 듣기</p>
+                        <p><input type="checkbox">OS 보고서 쓰기</p>
+                    </div>
+                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                </div>
             </div>
         </div>
     </div>

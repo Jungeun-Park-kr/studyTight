@@ -48,11 +48,35 @@ body {
 /* 현재 클릭되어있지 않은 메뉴 고를때 변경할 색 */
 .page-menu .left-menus > li:hover:not(.active) {
     background-color: #6ED4D8;
+    border-radius:2px;
 }
+
 .aside {
     width: 15%;
     height : 100%;
-    float : left;
+    float : right;
+}
+.login_white_box {
+    background-color:white;
+    top:30px;
+    right:30px;
+    position:fixed;
+    width:10%;
+    height:auto;
+    margin:10px;
+}
+.profile > img {
+    
+    width:50%;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+.username {
+    text-align: center;
+}
+.btn_logout {
+    background-color:#6ED4D8;
 }
 .section {
     width:70%;
@@ -62,7 +86,7 @@ body {
 }
 .aside .today {
     background-color:white;
-    width:200px;
+    width:12%;
     position:fixed;
     right:30px;
     top:200px; 
@@ -74,20 +98,79 @@ body {
 }
 .aside .today .todaylist {
     padding:10px;
+    font-size:small;
 }
-#plusbtn:hover {
-    cursor: pointer;
-}
-#plusbtn {
-    border-radius: 2px; 
+
+.btnplusTodo {
+    border-radius: 3px; 
     background-color:#6ED4D8;
     display:table-cell;
     vertical-align: middle;
     margin-bottom:10px;
-    width:100px;
+    width:140px;
+    height:40px;
     border:10px;
     
 }
-p {
-    text-align: center;
+.section .D-day > div { 
+    /* d-day표시 */
+    display: inline-block;
+    margin: 10px;
+    width: 28%;
+    height: 40px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+   
+
+}
+.section .D-day > div > span {
+    /* 세로 정렬 필요 */
+    display: inline-block;
+    padding-left:20px;
+    margin-top:8px;
+    margin-right: 40px;
+    font-weight:bold;
+    color:red;
+}
+.section .folder {
+    /* 폴더를 감싸는 흰 div */
+    background-color:white;
+    width: 100%;
+    height: 100%
+}
+/* .section .folder > div > span{
+    /* 폴더 추가할 때 플러스 버튼 */
+    /* //font-weight:bold;
+    font-size:1.5em; */
+/* } */
+.section .folder > div {
+    /* 각 폴더에 대해서 */
+    /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
+    /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
+    display:inline-block;
+    margin:20px 7px 20px 7px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    width: 28%;
+    height: 15vw;
+    text-align:center;
+} 
+.section .folder > div > p {
+    display:inline-block;
+}
+.section .folder > div > img {
+    /* 각 폴더에 있는 별 위치와 크기 설정 */
+    top:20px;
+    right:20px;
+    width: 25px;
+    height: 25px;
+}
+.folder_1, .folder_5{
+    background-color:#E36363;
+}
+.folder_2, .folder_3{
+    background-color:#E3B863;
+}
+.folder_plus, .folder_4{
+    background-color:#6ED4D8;
 }

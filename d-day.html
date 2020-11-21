@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>@import url("d-day.css");</style>
+        <script src="d-day.js"></script>
+    </head>
+    <body>
+        <h3>디데이 관리</h3>
+        <hr>
+        <div>
+            <!-- 추가할 때의 부분 -->
+            <input type="button" class="d-date" onclick="selectdate()" value="날짜"></input>
+            <input type="button" class="d-content" value="내용"/>
+            <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
+            <input type="button" class="d-plus" value="디데이 추가" onclick="storeDday('day','content');"
+                value="디데이 추가"></input>
+        </div>
+        <hr>
+        <div>
+            <!-- 테이블 형식으로 수정, 삭제 만들기 -->
+            <table>
+                <thead>
+                    <tr><th>D-day</th><th>내용</th><th>수정</th><th>삭제</th></tr>
+                
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>D-1</td><td>정보보안 퀴즈</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday1');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday1');"/></td>
+                    </tr>
+                    <tr>
+                        <td>D-3</td><td>모바일네트워크 퀴즈</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday2');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday2');"/></td>
+                    </tr>
+                    <tr>
+                        <td>D-5</td><td>DB 과제2</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday3');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday3');"/></td>
+                    </tr>
+                    <tr>
+                        <td>D-9</td><td>기독교 중간</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday3');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday3');"/></td>
+                    </tr>
+                    <tr>
+                        <td>D-15</td><td>TOPCIT 시험</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday3');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday3');"/></td>
+                    </tr>
+                    <tr>
+                        <td>D-28</td><td>SAP 플젝 마감</td>
+                        <td><input type="button" class="btn_modify_d-day" onclick="modifyDday('dday3');"/></td>
+                        <td><input type="button" class="btn_delete_d-day" onclick="deleteDday('dday3');"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+    </body>
+</html>

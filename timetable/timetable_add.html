@@ -5,15 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>과목 추가하기</title>
+<<<<<<< HEAD
     <style>
         @import url(timetable_add.css);
     </style>
+=======
+    <script src="timetable_add.js"></script>
+    <style>@import url(timetable_add.css);</style>
+>>>>>>> 6525986ce7892dcbc682b854e271b96339897973
 </head>
 
 <body>
     <div class="add_title">과목 추가하기</div>
     <hr>
     <div class="course_add_list">
+<<<<<<< HEAD
         <table id="add_table">
             <tbody>
                 <tr>
@@ -69,6 +75,83 @@
     <div class="add_btn">
         <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick=""></input>
     </div>
+=======
+        <div class="course_section">
+            <div class="course_title_section">
+                <div class="course_title_label">과목이름</div>
+                <div class="course_title_form">
+                    <input type="text" id="course_title" placeholder="과목이름 입력"/>
+                </div>
+            </div>
+            <div class="professor_name_section">
+                <div class="professor_name_label">교수명</div>
+                <div class="professor_name_form">
+                    <input type="text" id="professor_name" placeholder="교수명 입력"/>
+                </div>
+            </div>
+            <div class="course_time_section">
+                <div class="course_time_form">
+                    <div class="course_time_label">강의시간</div>
+                        <select id="course_day">
+                            <option value="mon">월요일</option>
+                            <option value="tue">화요일</option>
+                            <option value="wed">수요일</option>
+                            <option value="thu">목요일</option>
+                            <option value="fri">금요일</option>
+                            <option value="sat">토요일</option>
+                        </select>
+                        <input type="time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
+                        <input type="time" id="course_end_time" value="09:00" min="09:00" max="21:00"/>
+                        <input type="button" class="btn_add_time" onclick="addCourseTime();"/>
+                    </div>
+            </div>
+            <div class="course_type_section">
+                <div class="course_type_lable">강의종류</div>
+                <div class="course_type_form">
+                    <label><input type="radio" name="course_type" size="20" value="online_realtime" onclick="RadioCourseType('online');" checked>온라인 실시간</label>
+                    <label><input type="radio" name="course_type" size="20" value="online_video"onclick="RadioCourseType('online');">온라인 동영상</label>
+                    <label><input type="radio" name="course_type" size="20" value="offline"onclick="RadioCourseType('offline');">오프라인</label>
+                </div>
+            </div>
+
+            <div class="course_link_section">
+                <div class="course_link_label">강의링크</div>
+                <div class="course_link_form" id="course_link_form">
+                    <input type="url" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="40"/>
+                </div>
+            </div>
+            <div class="course_location_section">
+                <div class="course_location_label">강의실</div>
+                <div class="course_location_form" id ="course_location_form">
+                    <input type="text" id="course_location" placeholder="강의실 입력"/>
+                </div>
+            </div>
+        </div>
+        <script>
+            function RadioCourseType(type) {
+                // 라디오버튼이 온라인실시간, 온라인 동영상 : course_link_form
+                // 라디오버튼이 오프라인 : course_location_form
+                var link = document.getElementsById("course_link_form");
+                var location = document.getElementsById("course_location_form");
+                if (type == 'online') {
+                    alert(type);
+                    location.style.display = "none";
+                    link.style.display = "block";
+                }
+                else {
+                    alert(type);
+                    link.style.display = "none";
+                    location.style.display = "block";
+                }
+            }
+        </script>
+        <div class="add_btn">
+            <input id="btn_add_course" type="button" title="저장하기" value ="저장하기" onclick="addCourse();"></input>
+        </div>
+    </div>
+    
+    
+>>>>>>> 6525986ce7892dcbc682b854e271b96339897973
 </body>
 
 </html>

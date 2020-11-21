@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <style>@import url("folder.css");</style>
+        <style>@import url(../mainframe.css);</style>
+        <script src="folder.js"></script>
+        <script src="menu.js"></script>
+        <script src="mainframe.js"></script>
+        <script src="mainframe_shortcuts.js"></script>
+        <script src="mainframe_profile.js"></script>
+    </head>
+    <body>
+            <div class="page-menu">
+                <div class ="logo_area"> 
+                <img src="/media/logo.png" class= logo onclick="btnHome();"></div>
+                <div class="folder_todo">
+                        <p>할 일 목록</p>
+                        <hr>
+                        <div class="Todolist">
+                            <p><input type="checkbox"> func1 구현</p>
+                            <p><input type="checkbox"> func2 구현</p>
+                            <p><input type="checkbox"> func3 구현</p>
+                            <p><input type="checkbox"> 보고서 쓰기</p>
+                            <p><input type="checkbox"> func1 디버깅</p>
+                            <p><input type="checkbox"> func2 디버깅</p>
+                        </div>
+                        <input type="button" class="folderTodoBtn" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                </div>
+                
+            </div>
+
+            <div class="aside">
+                <div class="login">
+                    <div class="login_white_box">
+                        <div class="profile_section">
+                            <div class="logout">
+                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();"/>
+                            </div>
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <img src="/media/user.png">
+                                <div class="username">박정은님</div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <p>OS (운영체제)</p>
+                <hr>
+                <div class="postIt_plus" onclick="newPostIt();">포스트잇 추가하기</div>
+                <div class="postIt_1" onclick="PostItLink('pid');">PID란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_2" onclick="PostItLink('shell');">shell이란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_3" onclick="PostItLink('scheduler');">scheduler란?
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_4" onclick="PostItContent('chapter1');">chapter1 요점 정리
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+                <div class="postIt_5" onclick="PostItFile();">ssu_shell.c
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
+            </div>
+    </body>
+</html>
