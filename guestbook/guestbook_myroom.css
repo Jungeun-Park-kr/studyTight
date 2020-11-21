@@ -1,54 +1,26 @@
-.friends_list_box {
-    background-color: #d6d6d6;
-    align-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
 .profile {
     width: 64px;
     height: 64px;
-}
-
-.writing-place>table {
-    background-color: gray;
-    width: 200px;
-    height: 200px;
-}
-
-.brn_add_course>button {
-    float: left;
 }
 
 body {
     background-color: #e7eff0;
 }
 
-.page-header {
-    width: 70%;
-    height: 15%;
-    margin-top: 50px;
-}
-
-.page-header>div {
-    display: inline-block;
-}
-
 .information-menu {
     width: 15%;
     height: 100%;
-    float: left;
     margin-right: 10px;
+    float: left;
 }
 
-.information-menu .logo_area {
+.information-menu .logo_area>img {
     width: 150px;
     height: 150px;
-    padding: 10px 10px 10px 10px;
-    margin-top: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-    float: left;
+    padding: 5px 5px 5px 5px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-bottom: 10px;
 }
 
 .information-menu .left-menus>li {
@@ -69,53 +41,157 @@ body {
     height: 24px;
 }
 
+.information-menu .left-menus>div>li>img {
+    width: 120px;
+    height: 120px;
+    list-style-type: none;
+    margin-left: 5px;
+}
+
+.information-menu .left-menus>div {
+    margin-bottom: 100px;
+}
+
+.information-menu .left-menus>div>li {
+    list-style-type: none;
+}
+
 .information-menu .left-menus>li:hover:not(.active) {
     background-color: #6ED4D8;
 }
 
-.aside {
-    width: 15%;
+.my-room {
+    width: 75%;
     height: 100%;
-    float: left;
-}
-
-.section {
-    width: 70%;
-    height: 85%;
-    float: left;
     margin-top: 50px;
+    margin-left: 15%;
+    background: white;
 }
 
-.aside .today {
-    background-color: white;
-    width: 200px;
-    position: fixed;
-    right: 30px;
-    top: 200px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: large;
-    align-items: center;
+.my-room .friends_add {
+    display: inline-block;
 }
 
-.aside .today .todaylist {
+.my-room .friends_add .btn_add_course {
+    float: right;
+    margin-top: 25px;
+    margin-left: 900px;
+}
+
+.my-room .friends_add .title_msg {
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+}
+
+.my-room .friends_add .btn_add_course>input {
+    background-color: #6ED4D8;
+    height: 30px;
+}
+
+.writing-box {
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.writing-button-secret {
+    float: left;
+}
+
+.my-room .writing-button-secret .writing-button>input {
+    background-color: #6ED4D8;
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 100px;
+    height: 40px;
+}
+
+.my-room .writing-button-secret .secret-checkbox>input {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.writing-place {
+    display: inline-block;
+}
+
+#myroom-line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    z-index: 1;
+    width: 1300px;
+}
+
+.friends_list_box {
+    overflow: auto;
+    background-color: #d6d6d6;
+    align-content: center;
+    margin-top: 10px;
+    margin-left: 55px;
+    margin-right: 55px;
+    height: 100px;
+    width: 1120px;
+    float: none;
+}
+
+.friends_list_box #course_table {
     padding: 10px;
 }
 
-#plusbtn:hover {
-    cursor: pointer;
+.talking-palce {
+    display: inline-block;
 }
 
-#plusbtn {
-    border-radius: 2px;
-    background-color: #6ED4D8;
-    display: table-cell;
-    vertical-align: middle;
-    margin-bottom: 10px;
-    width: 100px;
-    border: 10px;
+.mini-profile {
+    float: left;
 }
 
-p {
-    text-align: center;
+.mini-profile>img {
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.user-small-talking {
+    float: left;
+    margin-left: 20px;
+}
+
+.user-small-talking .user-name {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.user-small-talking .user-talking-list {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.user-small-talking .today {
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+}
+
+.user-small-talking .reply-button {
+    margin-left: 120px;
+    margin-top: 10px;
+    float: left;
+}
+
+.my-room .talking-palce {
+    display: inline-block;
+}
+
+.my-room .talking-palce .talking {
+    display: inline-block;
+}
+
+.talking {
+    display: inline-block;
 }

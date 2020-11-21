@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight</title>
     <script src="guestbook_myroom.js"></script>
+    <script src="friends_add.js"></script>
     <style>
         @import url(guestbook_myroom.css);
         @import url(../mainframe.css);
@@ -15,20 +16,22 @@
 <body>
     <div id="wrap">
         <div class="information-menu">
-            <div class="logo_area">
-                <img src="/media/logo.png" class=l ogo onclick="btnHome();">
+            <div class="logo_area" onclick="btnHome();">
+                <img src="media/logo.png"></img>
             </div>
             <ul class="left-menus">
-                <li class="profile" onclick="btnHome();">
-                    <img src="media/person_gray.png"></img>
-                </li>
-                <li class="menu_contact" onclick="btnContact();">
+                <div>
+                    <li class="profile" onclick="btnHome();">
+                        <img src="media/person_gray.png"></img>
+                    </li>
+                </div>
+                <li git class="menu_contact">
                     <img src="media/user.png">&nbsp박정은</img>
                 </li>
-                <li class="menu_timetable" onclick="btnTimetable();">
+                <li class="menu_timetable">
                     <img src="media/office-building.png">&nbsp숭실대학교</img>
                 </li>
-                <li class="menu_dday" onclick="btnDday();">
+                <li class="menu_dday">
                     <img src="media/mortarboard.png">&nbsp컴퓨터학부</img>
                 </li>
             </ul>
@@ -40,8 +43,7 @@
                 <div class="friends_add">
                     <div class="title_msg">Friends</div>
                     <div class="btn_add_course">
-                        <input type="button" value="+ 친구 추가하기" onclick="showfriendsAddPopup();"></input>
-
+                        <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
                     </div>
 
                 </div>
@@ -71,7 +73,7 @@
                     <table>
                         <tr>
                             <!--행(row)선언-->
-                            <th><input type="text" name="writing" value="" placeholder="내용을 입력해주세요" /></th>
+                            <th><input type="text" name="writing" value="" placeholder="내용을 입력해주세요" style="width:1000px;height:120px;" /></th>
                         </tr>
                     </table>
                 </div>
@@ -79,9 +81,47 @@
                     <div class="writing-button">
                         <input type="button" value="글쓰기" onclick="showwritingPopup();"></input>
                     </div>
+                    <div class="secret-checkbox">
+                        <input type="checkbox" name="비밀글"> 비밀글
+                    </div>
 
                 </div>
+            </div>
+            <hr id="myroom-line">
+            <div class="talking-place">
+                <div class="talking">
+                    <div class="mini-profile">
+                        <img src="media/person_gray.png"></img>
+                    </div>
+                    <div class="user-small-talking">
+                        <div class="user-name">
+                            최시언
+                        </div>
+                        <div class="user-talking-list">
+                            이번 웹프로그래밍 문제 이해했어?
+                        </div>
+                        <div class="today-button">
+                            <div class="today">
+                                2020.10.16
+                            </div>
+                            <div class="reply-button">
+                                <input type="button" value="답글쓰기" onclick="showwritingPopup();"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="talking">
 
+                </div>
+                <div class="talking">
+
+                </div>
+                <div class="talking">
+
+                </div>
+                <div class="talking">
+
+                </div>
             </div>
         </div>
         <div class="aside">

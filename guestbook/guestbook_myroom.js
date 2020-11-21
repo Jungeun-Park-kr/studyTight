@@ -1,19 +1,4 @@
-// 아래는 OS 화면 기준으로 중앙에 팝업 띄움
-// var fullWidth = window.screen.width;
-// var fullHeight = window.screen.height;
-// function showTimetableAddPopup() {
-//     var popupWidth = 600;
-//     var popupHeight = 800;
-//     var popupX = (fullWidth/2) - (popupWidth/2);
-//     var popupY = (fullHeight/2) - (popupHeight/2);
-
-//     var url = "timetable_edit.html";
-//     var name = "timetable edit popup"
-//     var option = "width ="+popupWidth+", height ="+popupHeight+", left"+popupX+", top="+popupY+", scrollbars = yes, location = no";
-//     window.open(url, name, option);
-// }
-// 아래는 브라우저 창 크기 기준으로 중앙에 팝업 띄움
-function showTimetableAddPopup() {
+function showFriendsAddPopup() {
     var popupWidth = 650;
     var popupHeight = 800;
     var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
@@ -24,6 +9,21 @@ function showTimetableAddPopup() {
     window.open(url, name, option);
 }
 
-function addCourseTime() {
-    //시간 추가하기 버튼 누를시 추가생성하기
+function modifyCourse(course) {
+    //과목 수정 버튼 누를 경우 해당 과목의 정보 수정
+
+}
+
+function deleteCourse(course) {
+    var ret = confirm("정말로 삭제하시겠습니까?");
+    if (ret) {
+        //삭제 수행
+    } else { //취소버튼 or 다이얼로그 닫은 경우
+        ;
+    }
+}
+
+function get_courses(value) {
+    //파라미터 : td[번호]
+
 }
