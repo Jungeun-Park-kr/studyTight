@@ -53,3 +53,10 @@ body {
     word-break:break-all;
     word-wrap:break-word;
 }
+.section > div > img {
+    width:20px;
+    height:auto;
+ 
+    margin-right:10px;
+
+}
