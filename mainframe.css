@@ -15,6 +15,7 @@ body {
     height : 100%;
     float : left;
     margin-right: 10px;
+    display: block;
 }
 .page-menu .logo_area .logo {
     /* background-image: url("media/logo.png");  */
