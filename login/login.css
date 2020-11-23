@@ -33,6 +33,7 @@
     border : 1px solid #ddd;
 }
 .login_btn input{
+    font-weight: bold;
     width: 100px;
     height: 40px;
     float: left;
@@ -43,6 +44,7 @@
     margin-top: 30px;
 }
 .register_btn input{
+    font-weight: bold;
     width: 100px;
     height: 40px;
     float: right;
