@@ -78,6 +78,8 @@ body {
 }
 .btn_logout {
     background-color:#6ED4D8;
+    border-radius: 5px;
+    border:none;
 }
 .section {
     width:70%;
