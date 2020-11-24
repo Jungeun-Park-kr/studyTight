@@ -79,12 +79,22 @@
             
             <div class="folder">
                 <div class="folder_plus" onclick="newFolder()";><p>+ 폴더 추가하기</p></div>
-                <div class="folder_1" onclick="location.href='/folder/folder.html'"><p>OS (운영체제)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
-                <div class="folder_2" onclick="location.href='/folder/folder.html'"><p>웹 프로그래밍 기초 및 실습</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
-                <div class="folder_3" onclick="location.href='/folder/folder.html'"><p>DB (데이터베이스)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
-                <div class="folder_4" onclick="location.href='/folder/folder.html'"><p>SAP (ABAP)</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
-                <div class="folder_5" onclick="location.href='/folder/folder.html'"><p>철학으로 만나는 기독교</p> <img src="media/empty_star.png" id="star" onclick="starClicked()"/></div>
-                
+                <div class="folder_1">
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()"/>
+                    <p onclick="location.href='/folder/folder.html'">OS (운영체제)</p></div>
+                <div class="folder_2">
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()"/>
+                    <p onclick="location.href='/folder/folder.html'">웹 프로그래밍 기초 및 실습</p></div>
+                <div class="folder_3">
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()"/>
+                    <p onclick="location.href='/folder/folder.html'">DB (데이터베이스)</p></div>
+                <div class="folder_4">
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()"/>
+                    <p onclick="location.href='/folder/folder.html'">SAP (ABAP)</p> </div>
+                <div class="folder_5">
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()"/>
+                    <p onclick="location.href='/folder/folder.html'">철학으로 만나는 기독교</p> 
+                    </div>
             </div>
         </div>
 
@@ -112,10 +122,10 @@
                 <div class="today">
                     <p>오늘 할 일</p>
                     <div class="todaylist">
-                        <p><input type="checkbox">웹프로그래밍 수업 듣기</p>
-                        <p><input type="checkbox">DB 강의 듣기</p>
-                        <p><input type="checkbox">채플 듣기</p>
-                        <p><input type="checkbox">OS 보고서 쓰기</p>
+                        <label><p><input type="checkbox">웹프로그래밍 수업 듣기</p></label>
+                        <label><p><input type="checkbox">DB 강의 듣기</p></label>
+                        <label><p><input type="checkbox">채플 듣기</p></label>
+                        <label><p><input type="checkbox">OS 보고서 쓰기</p></label>
                     </div>
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
                 </div>

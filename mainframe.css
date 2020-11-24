@@ -140,7 +140,7 @@ body {
     /* 폴더를 감싸는 흰 div */
     background-color:white;
     width: 100%;
-    height: 100%
+    height:100%
 }
 /* .section .folder > div > span{
     /* 폴더 추가할 때 플러스 버튼 */
@@ -152,10 +152,14 @@ body {
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
     display:inline-block;
-    margin:20px 7px 20px 7px;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     box-shadow: 2px 2px 2px rgb(128, 128, 128);
     width: 28%;
     height: 15vw;
+    line-height: 13vw;
     text-align:center;
 } 
 .section .folder > div > p {
@@ -163,10 +167,10 @@ body {
 }
 .section .folder > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
-    top:20px;
-    right:20px;
-    width: 25px;
-    height: 25px;
+
+    margin: 5px;
+    width: 25px; 
+    height: auto;
 }
 .folder_1, .folder_5{
     background-color:#E36363;
