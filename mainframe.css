@@ -168,7 +168,7 @@ body {
 } 
 .section .folder > div > p {
     display:block;
-    text-align: center;
+    text-align: center;    
 }
 .section .folder > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
@@ -176,6 +176,7 @@ body {
     margin: 5px;
     width: 25px; 
     height: auto;
+    display: inline;
 }
 .folder_1, .folder_5{
     background-color:#E36363;
