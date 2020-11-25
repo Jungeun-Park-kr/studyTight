@@ -5,6 +5,7 @@
     padding:5px;
     margin: 5px;
     background-color:#e7eff0;
+    border-radius:10px;
     border:none;
     font:bold;
     }
@@ -14,7 +15,8 @@
         padding:5px;
         margin: 5px;
         background-color:#e7eff0;
-        border:none;
+        border-radius:10px;
+        border: none;
         font:bold;
     }
 h3 {
@@ -27,6 +29,7 @@ h3 {
     padding:5px;
     margin: 5px;
     background-color:#6ed4d8;
+    border-radius:10px;
     border:none;
     font:bold;
 }
@@ -49,16 +52,16 @@ table > tbody > tr> td{
 }
 .btn_modify_d-day{ 
     align-content: center;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     border: none;
     background: url("media/edit.png") no-repeat;
     cursor: pointer;
 }
 .btn_delete_d-day{
     align-content: center;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     border: none;
     background: url("media/delete.png") no-repeat;
     cursor: pointer;
