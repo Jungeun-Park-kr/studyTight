@@ -6,17 +6,14 @@ const mainCommentCount = document.querySelector('#count');
 function generateTime() { const date = new Date(); const year = date.getFullYear(); const month = date.getMonth(); const wDate = date.getDate(); const hour = date.getHours(); const min = date.getMinutes(); const sec = date.getSeconds(); const time = year + '-' + month + '-' + wDate + ' ' + hour + ':' + min + ':' + sec; return time; }
 
 function generateUserName() {
-    let alphabet = 'abcdefghijklmnopqrstuvwxyz';
-    var makeUsername = '';
-    for (let i = 0; i < 4; i++) {
-        let index = Math.floor(Math.random(10) * alphabet.length);
-        makeUsername += alphabet[index];
-    }
-    for (let j = 0; j < 4; j++) { makeUsername += "*"; }
-    return makeUsername;
-}
+    return '최시언';
 
-function numberCount(event) { console.log(event.target); if (event.target === voteUp) { console.log("2"); return voteUp.innerHTML++; } else if (event.target === voteDown) { return voteDown.innerHTML++; } }
+} //이후 이름으로 처리
+
+function numberCount(event) {
+    console.log(event.target);
+    if (event.target === voteUp) { console.log("2"); return voteUp.innerHTML++; } else if (event.target === voteDown) { return voteDown.innerHTML++; }
+}
 
 function deleteComments(event) {
     const btn = event.target;
@@ -29,10 +26,7 @@ function showComment(comment) {
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
     const showTime = document.createElement('div');
-    const voteDiv = document.createElement('div');
     const countSpan = document.createElement('span');
-    const voteUp = document.createElement('button');
-    const voteDown = document.createElement('button');
     const commentList = document.createElement('div');
     const delBtn = document.createElement('button');
     delBtn.className = "deleteComment";
@@ -41,27 +35,17 @@ function showComment(comment) {
     userName.className = "name";
     inputValue.className = "inputValue";
     showTime.className = "time";
-    voteDiv.className = "voteDiv";
     userName.innerHTML = generateUserName();
     userName.appendChild(delBtn);
     inputValue.innerText = comment;
     showTime.innerHTML = generateTime();
     countSpan.innerHTML = 0;
-    voteUp.id = "voteUp";
-    voteUp.innerHTML = '↑';
-    voteDown.id = "voteDown";
-    voteDown.innerHTML = '↓';
-    voteDiv.appendChild(voteUp);
-    voteDiv.appendChild(voteDown);
+    delBtn.addEventListener("click", deleteComments);
     commentList.appendChild(userName);
     commentList.appendChild(inputValue);
     commentList.appendChild(showTime);
-    commentList.appendChild(voteDiv);
     rootDiv.prepend(commentList);
-    voteUp.addEventListener("click", numberCount);
-    voteDown.addEventListener("click", numberCount);
-    delBtn.addEventListener("click", deleteComments);
-    console.dir(rootDiv);
+    //이게 마지막에 다 더한 리스트를 추가하는것.
 }
 
 function pressBtn() {
@@ -72,4 +56,5 @@ function pressBtn() {
         inputBar.value = '';
     }
 }
+
 btn.onclick = pressBtn;
