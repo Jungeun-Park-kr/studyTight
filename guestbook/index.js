@@ -40,10 +40,12 @@ function showComment(comment) {
     inputValue.innerText = comment;
     showTime.innerHTML = generateTime();
     countSpan.innerHTML = 0;
+    delBtn.addEventListener("click", deleteComments);
     commentList.appendChild(userName);
     commentList.appendChild(inputValue);
     commentList.appendChild(showTime);
     rootDiv.prepend(commentList);
+    //이게 마지막에 다 더한 리스트를 추가하는것.
 }
 
 function pressBtn() {
