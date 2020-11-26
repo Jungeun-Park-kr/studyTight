@@ -68,14 +68,24 @@ body {
     background: white;
 }
 
+.friends {
+    width: 90%;
+    height: 20%;
+    margin-top: 50px;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: white;
+}
+
 .my-room .friends_add {
+    width: 90%;
     display: inline-block;
 }
 
 .my-room .friends_add .btn_add_course {
     float: right;
     margin-top: 25px;
-    margin-left: 900px;
+    width: 20%;
 }
 
 .my-room .friends_add .title_msg {
@@ -133,8 +143,8 @@ body {
     margin-top: 10px;
     margin-left: 55px;
     margin-right: 55px;
-    height: 100px;
-    width: 1120px;
+    height: 15%;
+    width: 100%;
     float: none;
 }
 
