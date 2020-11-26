@@ -168,7 +168,6 @@ body {
 
 .talking-palce {
     width: 100%;
-    display: inline-block;
 }
 
 .mini-profile {
@@ -185,6 +184,7 @@ body {
 .user-small-talking {
     float: left;
     margin-left: 20px;
+    width: 70%;
 }
 
 .user-small-talking .user-name {
@@ -219,6 +219,6 @@ body {
 
 .talking {
     display: inline-block;
-    margin-bottom: 15px;
-    margin-left: 15px;
+    width: 90%;
+    padding: 15px;
 }
