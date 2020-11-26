@@ -7,6 +7,7 @@
     <title>StudyTight</title>
     <script src="guestbook_myroom.js"></script>
     <script src="friends_add.js"></script>
+    <script src="index.js"></script>
     <style>
         @import url(guestbook_myroom.css);
         @import url(../mainframe.css);
@@ -73,13 +74,13 @@
                     <table>
                         <tr>
                             <!--행(row)선언-->
-                            <th><input type="text" name="writing" value="" placeholder="내용을 입력해주세요" style="width:100%;height:100%;" /></th>
+                            <th><input type="text" name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" /></th>
                         </tr>
                     </table>
                 </div>
                 <div class="writing-button-secret">
                     <div class="writing-button">
-                        <input type="button" value="글쓰기" onclick="showwritingPopup();"></input>
+                        <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup();"></input>
                     </div>
                     <div class="secret-checkbox">
                         <input type="checkbox" name="비밀글"> 비밀글
@@ -113,6 +114,7 @@
                 <div class="talking">
 
                 </div>
+                <hr id="myroom-line">
                 <div class="talking">
                     <div class="mini-profile">
                         <img src="media/person_gray.png"></img>
@@ -134,12 +136,27 @@
                         </div>
                     </div>
                 </div>
+                <hr id="myroom-line">
                 <div class="talking">
 
                 </div>
                 <div class="talking">
 
                 </div>
+
+                <tr>
+                    <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                    <td colspan="6">
+                        <center>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">다음▶</a>
+                        </center>
+                    </td>
+                </tr>>
+
             </div>
         </div>
         <div class="aside">
