@@ -11,6 +11,7 @@ body {
     width: 15%;
     height: 100%;
     margin-right: 10px;
+    margin-left: 20px;
     float: left;
 }
 
@@ -63,8 +64,8 @@ body {
 .my-room {
     width: 75%;
     height: 100%;
-    margin-top: 50px;
-    margin-left: 15%;
+    margin-top: 70px;
+    margin-left: 17%;
     background: white;
 }
 
@@ -78,6 +79,7 @@ body {
 }
 
 .my-room .friends_add {
+    margin-top: 20px;
     width: 90%;
     display: inline-block;
 }
@@ -133,8 +135,10 @@ body {
 }
 
 .writing-place {
+    margin-top: 10px;
     width: 90%;
     height: 20%;
+    margin-left: 0.8%;
     display: inline-block;
 }
 
@@ -163,6 +167,7 @@ body {
 }
 
 .talking-palce {
+    width: 100%;
     display: inline-block;
 }
 
@@ -214,4 +219,6 @@ body {
 
 .talking {
     display: inline-block;
+    margin-bottom: 15px;
+    margin-left: 15px;
 }
