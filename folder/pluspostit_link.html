@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>@import url(pluspostit_link.css);</style>
+        <script src="pluspostit.js"></script>
+    </head>
+    <body>
+        <h3>추가하기</h3>
+        <hr>
+        <div class="list_wrap">
+            <p class="content" onclick="show_content();">글</p>
+            <!-- <div class="vertical_line"></div> -->
+            <p class="link" onclick="show_link();">링크</p>
+            <!-- <div class="vertical_line"></div> -->
+            <p class="file" onclick="show_file();">파일</p>
+        </div>
+        <hr>
+
+        <div class="input_wrap">
+            <p>제목</p>
+            <input type="text" class="input_text" placeholder="제목을 입력하세요">
+            <br>
+            <p>링크</p>
+            <input type="link" class="input_content" placeholder="링크를 입력하세요">
+        </div>
+
+        <input type="button" class="uploadBtn" value="올리기"/>
+    </body>
+</html>
