@@ -26,7 +26,8 @@ function deleteComments(event) {
 }
 
 function showComment(comment) {
-    const userimage = document.createElement('img');
+    var userimage = document.createElement('img');
+    userimage.src = 'media/person_gray.png'; // 이미지 경로 설정 (랜덤)
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
     const showTime = document.createElement('div');
