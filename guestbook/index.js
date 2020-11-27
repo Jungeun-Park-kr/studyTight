@@ -22,8 +22,8 @@ function generateImage() {
 function deleteComments(event) {
     const btn = event.target;
     const list = btn.parentNode.parentNode.parentNode;
-    const hr = btn.parentNode.parentNode.parentNode.next;
-    //rootDiv.remove(hr);
+    const hr = btn.parentNode.parentNode.parentNode.nextSibling;
+    rootDiv.removeChild(hr);
     rootDiv.removeChild(list);
 
 }
