@@ -7,17 +7,33 @@
     width: 50%;
     margin: 10px;
     padding: 0.5em;
-    border-bottom: 1px solid #c1bcba;
 }
 
 #comments {
-    margin-left: 4%;
+    width: 100%;
+}
+
+.inputbox {
+    float: left;
+}
+
+.eachComment {
+    display: inline block;
+    float: left;
 }
 
 .eachComment .name {
     margin-bottom: 0.3em;
     display: flex;
     justify-content: space-between;
+}
+
+.eachComment .mini_image {
+    float: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
 }
 
 .eachComment .inputValue {
