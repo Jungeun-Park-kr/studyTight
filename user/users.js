@@ -4,10 +4,8 @@ userlist.push(
     {
         userId : 'je991025@gmail.com',
         password : 'angelje',
-        name : '박정은'
-        // course: { //과목 정보 담을 객체
-            
-        // }
+        name : '박정은',
+        course : [] //과목 정보 저장할 곳
     }
 );
 

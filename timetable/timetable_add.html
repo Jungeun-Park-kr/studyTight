@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>과목 추가하기</title>
+    <script src="user/users.js"></script>
     <script src="timetable_add.js"></script>
     <style>@import url(timetable_add.css);</style>
 </head>
@@ -37,46 +38,50 @@
                         </select>
                         <input type="time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
                         <input type="time" id="course_end_time" value="09:00" min="09:00" max="21:00"/>
-                        <input type="button" class="btn_add_time" onclick="addCourseTime();"/>
-                    </div>
+                        <input type="button" id="btn_time_plus" class="btn_add_time" onclick="addCourseTime(this)" />
+                </div>
             </div>
             <div class="course_type_section">
                 <div class="course_type_lable">강의종류</div>
-                <div class="course_type_form">
-                    <label><input type="radio" name="course_type" size="20" value="online_realtime" onclick="RadioCourseType('online');" checked>온라인 실시간</label>
-                    <label><input type="radio" name="course_type" size="20" value="online_video"onclick="RadioCourseType('online');">온라인 동영상</label>
-                    <label><input type="radio" name="course_type" size="20" value="offline"onclick="RadioCourseType('offline');">오프라인</label>
+                <div class="course_type_form" id="course_type_radio">
+                    <form>
+                        <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>온라인 실시간</label>
+                        <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">온라인 동영상</label>
+                        <label><input type="radio" name="course_type" size="20" value="offline"  onclick="RadioCourseType();">오프라인</label>
+                    </form>
                 </div>
             </div>
-
-            <div class="course_link_section">
-                <div class="course_link_label">강의링크</div>
-                <div class="course_link_form" id="course_link_form">
-                    <input type="url" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="40"/>
+            <div class="course_link_section" id="course_link" style="visibility: visible;">
+                <div class="course_link_label" id="course_link_label">강의링크</div>
+                <div class="course_link_form" >
+                    <input type="text" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="40" id="course_link_url"/>
                 </div>
             </div>
-            <div class="course_location_section">
+            <div class="course_location_section"  style="visibility: hidden" id="course_location">
                 <div class="course_location_label">강의실</div>
-                <div class="course_location_form" id ="course_location_form">
+                <div class="course_location_form">
                     <input type="text" id="course_location" placeholder="강의실 입력"/>
                 </div>
             </div>
         </div>
         <script>
-            function RadioCourseType(type) {
-                // 라디오버튼이 온라인실시간, 온라인 동영상 : course_link_form
-                // 라디오버튼이 오프라인 : course_location_form
-                var link = document.getElementsById("course_link_form");
-                var location = document.getElementsById("course_location_form");
-                if (type == 'online') {
-                    alert(type);
-                    location.style.display = "none";
-                    link.style.display = "block";
-                }
-                else {
-                    alert(type);
-                    link.style.display = "none";
-                    location.style.display = "block";
+            function RadioCourseType() {
+                var link = document.getElementById("course_link");
+                var label = document.getElementById("course_link_label");
+                var url = document.getElementById("course_link_url");
+                var type = document.getElementsByName("course_type");
+
+                for (var i = 0; i < type.length; i++) {
+                    if (type[2].checked == true) { //오프라인 체크된 경우
+                        label.innerHTML = "강의실";
+                        url.placeholder = '강의실 입력';
+                        return;
+                    }
+                    else { //온라인 체크된 경우
+                        label.innerHTML = "강의링크";
+                        url.placeholder = '메인화면 바로가기 링크로 지원됩니다.';
+                        return;
+                    }
                 }
             }
         </script>
