@@ -36,15 +36,11 @@
     height: 40px;
 }
 
-.eachComment .inputValue {
-    font-size: 1.2em;
-    font-style: italic;
-}
+.eachComment .inputValue {}
 
 .eachComment .time {
-    font-size: 0.7em;
+    font-size: 1.0em;
     color: #c1bcba;
-    font-style: oblique;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
