@@ -1,34 +1,5 @@
-#form-commentInfo {
-    width: 100%;
-}
-
-#comment-count {
-    margin-bottom: 10px;
-}
-
-#comment-input {
-    width: 50%;
-    height: 3.3em;
-}
-
-#submit {
-    background-color: rgb(0, 128, 255);
-    width: 5.5em;
-    height: 3.3em;
-    ;
-    font-size: 15px;
-    font-weight: bold;
-    color: aliceblue;
-}
-
-#voteUp,
-#voteDown {
-    width: 3.5em;
-    height: 1.9em;
-    background-color: aqua;
-}
-
 #comments {
+    width: 100%;
     margin-top: 10px;
 }
 
@@ -39,9 +10,11 @@
     border-bottom: 1px solid #c1bcba;
 }
 
+#comments {
+    margin-left: 4%;
+}
+
 .eachComment .name {
-    font-size: 1.5em;
-    font-weight: bold;
     margin-bottom: 0.3em;
     display: flex;
     justify-content: space-between;
@@ -66,6 +39,7 @@
 }
 
 .eachComment .deleteComment {
-    background-color: red;
-    color: aliceblue;
+    background-color: #6ED4D8;
+    ;
+    color: black;
 }
