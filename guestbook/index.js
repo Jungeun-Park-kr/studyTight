@@ -22,7 +22,10 @@ function generateImage() {
 function deleteComments(event) {
     const btn = event.target;
     const list = btn.parentNode.parentNode.parentNode;
+    const hr = btn.parentNode.parentNode.parentNode.next;
+    //rootDiv.remove(hr);
     rootDiv.removeChild(list);
+
 }
 
 function showComment(comment) {
