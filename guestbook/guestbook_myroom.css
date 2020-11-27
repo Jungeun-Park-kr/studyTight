@@ -198,6 +198,7 @@ body {
 }
 
 .user-small-talking .today {
+    color: #c1bcba;
     margin-top: 10px;
     margin-left: 20px;
     float: left;
@@ -221,4 +222,8 @@ body {
     display: inline-block;
     width: 90%;
     padding: 15px;
+}
+
+.today-button.today {
+    color: #c1bcba;
 }
