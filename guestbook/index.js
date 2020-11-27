@@ -29,6 +29,7 @@ function showComment(comment) {
     var userimage = document.createElement('img');
     userimage.src = 'media/person_gray.png'; // 이미지 경로 설정 (랜덤)
     const inputBox = document.createElement('div');
+    var hzRule = document.createElement('hr'); // make a hr
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
     const showTime = document.createElement('div');
@@ -36,6 +37,7 @@ function showComment(comment) {
     const commentList = document.createElement('div');
     const onlycommend = document.createElement('div');
     const delBtn = document.createElement('button');
+    hzRule.id = "myroom-line";
     delBtn.className = "deleteComment";
     delBtn.innerHTML = "삭제";
     inputBox.className = "inputbox";
@@ -54,12 +56,14 @@ function showComment(comment) {
     delBtn.addEventListener("click", deleteComments);
     commentList.appendChild(userimage);
     commentList.appendChild(inputBox);
+    //commentList.after(hzRule); //댓글을 구분지어주는 코드
     inputBox.appendChild(userName);
     inputBox.appendChild(inputValue);
     inputBox.appendChild(showTime);
+    rootDiv.prepend(hzRule);
     rootDiv.prepend(commentList);
-    //이게 마지막에 다 더한 리스트를 추가하는것.
 }
+//이게 마지막에 다 더한 리스트를 추가하는것.
 
 function pressBtn() {
     const currentVal = inputBar.value;
