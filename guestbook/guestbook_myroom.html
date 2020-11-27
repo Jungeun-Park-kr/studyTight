@@ -10,14 +10,11 @@
     <style>
         @import url(guestbook_myroom.css);
         @import url(../mainframe.css);
+        @import url(index.css);
     </style>
 </head>
 
 <body>
-    <div id="form-commentInfo">
-        <div id="comment-count">댓글 <span id="count">0</span></div> <input id="comment-input" placeholder="댓글을 입력해 주세요."> <button id="submit">등록</button> </div>
-    <div id=comments> </div>
-    <script src="index.js"></script>
     <div id="wrap">
         <div class="information-menu">
             <div class="logo_area" onclick="btnHome();">
@@ -86,6 +83,7 @@
                     </div>
 
                 </div>
+
             </div>
             <hr id="myroom-line">
             <div id=comments> </div>
@@ -143,6 +141,8 @@
                 <div class="talking">
 
                 </div>
+
+                <script src="index.js"></script>
 
                 <tr>
                     <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->

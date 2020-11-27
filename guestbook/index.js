@@ -15,14 +15,18 @@ function numberCount(event) {
     if (event.target === voteUp) { console.log("2"); return voteUp.innerHTML++; } else if (event.target === voteDown) { return voteDown.innerHTML++; }
 }
 
+function generateImage() {
+    return;
+}
+
 function deleteComments(event) {
     const btn = event.target;
     const list = btn.parentNode.parentNode;
     rootDiv.removeChild(list);
-    if (mainCommentCount.innerHTML <= '0') { mainCommentCount.innerHTML = 0; } else { mainCommentCount.innerHTML--; }
 }
 
 function showComment(comment) {
+    const userimage = document.createElement('img');
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
     const showTime = document.createElement('div');
@@ -33,14 +37,17 @@ function showComment(comment) {
     delBtn.innerHTML = "삭제";
     commentList.className = "eachComment";
     userName.className = "name";
+    userimage.className = "image"
+    userimage.innerHTML = generateImage(); //이후 이미지 삽입.
     inputValue.className = "inputValue";
     showTime.className = "time";
-    userName.innerHTML = generateUserName();
+    userName.innerHTML = generateUserName(); //여기에 이후 유저네임 삽입.
     userName.appendChild(delBtn);
     inputValue.innerText = comment;
     showTime.innerHTML = generateTime();
     countSpan.innerHTML = 0;
     delBtn.addEventListener("click", deleteComments);
+    commentList.appendChild(userimage);
     commentList.appendChild(userName);
     commentList.appendChild(inputValue);
     commentList.appendChild(showTime);
@@ -52,7 +59,6 @@ function pressBtn() {
     const currentVal = inputBar.value;
     if (!currentVal.length) { alert("댓글을 입력해주세요!"); } else {
         showComment(currentVal);
-        mainCommentCount.innerHTML++;
         inputBar.value = '';
     }
 }
