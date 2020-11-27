@@ -21,24 +21,28 @@ function generateImage() {
 
 function deleteComments(event) {
     const btn = event.target;
-    const list = btn.parentNode.parentNode;
+    const list = btn.parentNode.parentNode.parentNode;
     rootDiv.removeChild(list);
 }
 
 function showComment(comment) {
     var userimage = document.createElement('img');
     userimage.src = 'media/person_gray.png'; // 이미지 경로 설정 (랜덤)
+    const inputBox = document.createElement('div');
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
     const showTime = document.createElement('div');
     const countSpan = document.createElement('span');
     const commentList = document.createElement('div');
+    const onlycommend = document.createElement('div');
     const delBtn = document.createElement('button');
     delBtn.className = "deleteComment";
     delBtn.innerHTML = "삭제";
+    inputBox.className = "inputbox";
     commentList.className = "eachComment";
+    onlycommend.className = "onlycommend";
     userName.className = "name";
-    userimage.className = "image"
+    userimage.className = "mini_image"
     userimage.innerHTML = generateImage(); //이후 이미지 삽입.
     inputValue.className = "inputValue";
     showTime.className = "time";
@@ -49,9 +53,10 @@ function showComment(comment) {
     countSpan.innerHTML = 0;
     delBtn.addEventListener("click", deleteComments);
     commentList.appendChild(userimage);
-    commentList.appendChild(userName);
-    commentList.appendChild(inputValue);
-    commentList.appendChild(showTime);
+    commentList.appendChild(inputBox);
+    inputBox.appendChild(userName);
+    inputBox.appendChild(inputValue);
+    inputBox.appendChild(showTime);
     rootDiv.prepend(commentList);
     //이게 마지막에 다 더한 리스트를 추가하는것.
 }
