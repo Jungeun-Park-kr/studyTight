@@ -7,7 +7,6 @@
     <title>StudyTight</title>
     <script src="guestbook_myroom.js"></script>
     <script src="friends_add.js"></script>
-    <script src="index.js"></script>
     <style>
         @import url(guestbook_myroom.css);
         @import url(../mainframe.css);
@@ -75,16 +74,12 @@
             </div>
             <div class="writing-place">
                 <div class="writing-box">
-                    <table>
-                        <tr>
-                            <!--행(row)선언-->
-                            <th><input type="text" name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" /></th>
-                        </tr>
-                    </table>
+                    <!--행(row)선언-->
+                    <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
                 </div>
                 <div class="writing-button-secret">
                     <div class="writing-button">
-                        <input type="button" value="글쓰기" onclick="showwritingPopup();"></input>
+                        <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup();"></input>
                     </div>
                     <div class="secret-checkbox">
                         <input type="checkbox" name="비밀글"> 비밀글
@@ -93,6 +88,7 @@
                 </div>
             </div>
             <hr id="myroom-line">
+            <div id=comments> </div>
             <div class="talking-place">
                 <div class="talking">
                     <div class="mini-profile">
@@ -167,6 +163,7 @@
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>
     </div>
+    <script src="index_real.js"></script>
 </body>
 
 </html>
