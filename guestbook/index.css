@@ -5,8 +5,8 @@
 
 .eachComment {
     width: 50%;
-    margin: 10px;
-    padding: 0.5em;
+    margin: 5px;
+    padding: 15px;
 }
 
 #comments {
@@ -19,6 +19,13 @@
 
 .inputbox {
     float: left;
+    margin-left: 5%;
+}
+
+.inputValue {
+    white-space: pre;
+    margin-left: 15px;
+    ;
 }
 
 .eachComment {
@@ -56,4 +63,9 @@
     background-color: #6ED4D8;
     ;
     color: black;
+}
+
+.eachComment .reply-button {
+    margin-left: 120px;
+    margin-top: 10px;
 }

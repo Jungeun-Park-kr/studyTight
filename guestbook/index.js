@@ -6,7 +6,7 @@ const mainCommentCount = document.querySelector('#count');
 function generateTime() { const date = new Date(); const year = date.getFullYear(); const month = date.getMonth(); const wDate = date.getDate(); const hour = date.getHours(); const min = date.getMinutes(); const sec = date.getSeconds(); const time = year + '-' + month + '-' + wDate + ' ' + hour + ':' + min + ':' + sec; return time; }
 
 function generateUserName() {
-    return '최시언';
+    return '양지영';
 
 } //이후 이름으로 처리
 
@@ -39,10 +39,13 @@ function showComment(comment) {
     const countSpan = document.createElement('span');
     const commentList = document.createElement('div');
     const onlycommend = document.createElement('div');
-    const delBtn = document.createElement('button');
+    const delBtn = document.createElement('button'); //삭제버튼
+    const replybutton = document.createElement('button'); //답장버튼.
     hzRule.id = "myroom-line";
     delBtn.className = "deleteComment";
     delBtn.innerHTML = "삭제";
+    replybutton.className = "reply-button";
+    replybutton.innerHTML = "답글쓰기";
     inputBox.className = "inputbox";
     commentList.className = "eachComment";
     onlycommend.className = "onlycommend";
@@ -55,8 +58,10 @@ function showComment(comment) {
     userName.appendChild(delBtn);
     inputValue.innerText = comment;
     showTime.innerHTML = generateTime();
+    showTime.appendChild(replybutton); //답장하기 추가
     countSpan.innerHTML = 0;
     delBtn.addEventListener("click", deleteComments);
+    //replybutton.addEventListener("click", deleteComments); //이후 이벤트 변경.
     commentList.appendChild(userimage);
     commentList.appendChild(inputBox);
     //commentList.after(hzRule); //댓글을 구분지어주는 코드
