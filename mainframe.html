@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,57 +16,59 @@
     </style>
     </script>
 </head>
+
 <body>
     <div id="warp">
-        <div class="page-menu"> 
-        <!-- 여기는 왼쪽 메뉴 (로고, 메뉴버튼들) -->
-            <div class ="logo_area"> 
-                <img src="/media/logo.png" class= logo onclick="btnHomeInHome();">
+        <div class="page-menu">
+            <!-- 여기는 왼쪽 메뉴 (로고, 메뉴버튼들) -->
+            <div class="logo_area">
+                <img src="/media/logo.png" class=l ogo onclick="btnHomeInHome();">
             </div>
             <ul class="left-menus">
                 <li class="menu_home" onclick="btnHomeInHome();">
-                    <img src="media/home.png" >&nbsp내 공부방</img>
+                    <img src="media/home.png">&nbsp내 공부방</img>
                 </li>
                 <li class="menu_contact" onclick="btnContact();">
-                    <img src="media/contact-book.png" >&nbsp방명록</img>
+                    <img src="media/contact-book.png">&nbsp방명록</img>
                 </li>
                 <li class="menu_timetable" onclick="btnTimetable();">
-                    <img src="media/timetable.png" >&nbsp시간표</img>
+                    <img src="media/timetable.png">&nbsp시간표</img>
                 </li>
                 <li class="menu_dday" onclick="btnDday();">
-                    <img src="media/d-day.png" >&nbsp디데이</img>
+                    <img src="media/d-day.png">&nbsp디데이</img>
                 </li>
             </ul>
         </div>
         <div class="page-header" role="banner" class>
-            
+
             <!-- 여기는 상단에 들어갈 헤더 섹션 -->
             <div class="shortcuts_wrap">
-                <div id ="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
+                <div id="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
                 <div id="shortcuts_link" onclick="openLink();">바로가기</div>
                 <!-- <input id="btn_shortcuts_link" type="button" title="바로가기" value="바로가기"> -->
             </div>
         </div>
         <script>
-            var isopen=false;
+            var isopen = false;
             //doc.getElementById("shortcuts_title"); //바로가기 텍스트
             //doc.getElementById("shortcuts_link"); //바로가기 링크 텍스트
             // 실시간 일정 있는 경우
-            doc.getElementById("shortcuts_title").innerHTML="10:30 OS(라) 온라인 실시간";
-            doc.getElementById("shortcuts_link").style.color="blue";
+            doc.getElementById("shortcuts_title").innerHTML = "10:30 OS(라) 온라인 실시간";
+            doc.getElementById("shortcuts_link").style.color = "blue";
+
             function openLink() { //바로가기 버튼 누른경우
                 if (isopen) { //실시간 수업 있는경우 링크로 이동
 
-                }
-                else {
+                } else {
                     alert('현재 등록된 강의 링크가 없습니다.');
                 }
             }
         </script>
-        
+
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="D-day"> <!-- 디데이 설정한 부분 -->
+            <div class="D-day">
+                <!-- 디데이 설정한 부분 -->
                 <div class="d-day1"><span class="d-date1">D-1</span> 정보보안 퀴즈</div>
                 <div class="d-day2"><span class="d-date2">D-3</span> 모바일네트워크 퀴즈</div>
                 <div class="d-day3"><span class="d-date3">D-5</span> DB 과제2</div>
@@ -73,25 +76,31 @@
                 <div class="d-day5"><span class="d-date5">D-15</span> TOPCIT 시험</div>
                 <div class="d-day6"><span class="d-date6">D-28</span> SAP 플젝 마감</div>
             </div>
-            
+
             <div class="folder">
-                <div class="folder_plus" onclick="newFolder()";><p><strong>+</strong>폴더 추가하기</p></div>
+                <div class="folder_plus" onclick="newFolder()" ;>
+                    <p><strong>+</strong>폴더 추가하기</p>
+                </div>
                 <div class="folder_1">
-                    <img src="media/empty_star.png" id="star" onclick="starClicked('star1')"/>
-                    <p onclick="location.href='/folder/folder.html'">OS (운영체제)</p></div>
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()" />
+                    <p onclick="location.href='/folder/folder.html'">OS (운영체제)</p>
+                </div>
                 <div class="folder_2">
-                    <img src="media/empty_star.png" id="star" onclick="starClicked('star2')"/>
-                    <p onclick="location.href='/folder/folder.html'">웹 프로그래밍 기초 및 실습</p></div>
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()" />
+                    <p onclick="location.href='/folder/folder.html'">웹 프로그래밍 기초 및 실습</p>
+                </div>
                 <div class="folder_3">
-                    <img src="media/empty_star.png" id="star" onclick="starClicked('star3')"/>
-                    <p onclick="location.href='/folder/folder.html'">DB (데이터베이스)</p></div>
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()" />
+                    <p onclick="location.href='/folder/folder.html'">DB (데이터베이스)</p>
+                </div>
                 <div class="folder_4">
-                    <img src="media/empty_star.png" id="star" onclick="starClicked('star4')"/>
-                    <p onclick="location.href='/folder/folder.html'">SAP (ABAP)</p> </div>
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()" />
+                    <p onclick="location.href='/folder/folder.html'">SAP (ABAP)</p>
+                </div>
                 <div class="folder_5">
-                    <img src="media/empty_star.png" id="star" onclick="starClicked('star5')"/>
-                    <p onclick="location.href='/folder/folder.html'">철학으로 만나는 기독교</p> 
-                    </div>
+                    <img src="media/empty_star.png" id="star" onclick="starClicked()" />
+                    <p onclick="location.href='/folder/folder.html'">철학으로 만나는 기독교</p>
+                </div>
             </div>
         </div>
 
@@ -102,7 +111,7 @@
                     <div class="login_white_box">
                         <div class="profile_section">
                             <div class="logout">
-                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();"/>
+                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
@@ -110,10 +119,10 @@
                                 <div class="username" id="activeUsername">박혁거세님</div>
                                 <script>
                                     //activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                                    doc.getElementById('activeUsername').innerHTML=activeUser.name+'님';
+                                    doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
                                 </script>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="today">
@@ -124,10 +133,12 @@
                         <label><p><input type="checkbox">채플 듣기</p></label>
                         <label><p><input type="checkbox">OS 보고서 쓰기</p></label>
                     </div>
-                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo();"></input>
+                    <!--+부분 이미지로 넣기-->
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

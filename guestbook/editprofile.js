@@ -18,13 +18,13 @@ console.log('activeUSer:' + activeUser.name);
 // }
 // 아래는 브라우저 창 크기 기준으로 중앙에 팝업 띄움
 function showFriendAddPopup() {
-    var popupWidth = 700;
-    var popupHeight = 800;
+    var popupWidth = 500;
+    var popupHeight = 600;
     var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
     var popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
     var url = "editprofile.html";
     var name = "friend add popup"
-    var option = "width =" + popupWidth + ", height =" + popupHeight + ", left" + popupX + ", top=" + popupY + ", scrollbars = yes, location = no";
+    var option = "width =" + popupWidth + ", height =" + popupHeight + ", left" + popupX + ", top=" + popupY + ", scrollbars = no, location = no";
     window.open(url, name, option);
 }
 

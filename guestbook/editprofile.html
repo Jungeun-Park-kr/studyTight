@@ -11,65 +11,66 @@
     </style>
 </head>
 
-<body>
-    <div class="add_title">프로필 수정하기</div>
-    <hr>
-    <div class="course_add_list">
-        <div class="course_section">
-            <div class="course_title_section">
-                <div class="course_title_label">이름</div>
-                <div class="course_title_form">
-                    <input type="text" id="course_title" placeholder="내용을 입력해주세요" />
-                </div>
-            </div>
-            <div class="professor_name_section">
-                <div class="professor_name_label">학교(소속)</div>
-                <div class="professor_name_form">
-                    <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
-                </div>
-            </div>
-            <div class="professor_name_section">
-                <div class="professor_name_label">학과</div>
-                <div class="professor_name_form">
-                    <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
-                </div>
-            </div>
-            <div class="professor_name_section">
-                <div class="professor_name_label">학년</div>
-                <div class="professor_name_form">
-                    <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
-                </div>
-            </div>
-            <div class="professor_name_section">
-                <div class="professor_name_label">나이</div>
-                <div class="professor_name_form">
-                    <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
-                </div>
-            </div>
-            <div class="course_type_section">
-                <div class="course_type_lable">성별</div>
-                <div class="course_type_form" id="course_type_radio">
-                    <form>
-                        <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>남자</label>
-                        <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">여자</label>
-                    </form>
-                </div>
-            </div>
-            <div class="course_type_section">
-                <div class="course_type_lable">시간표</div>
-                <div class="course_type_form" id="course_type_radio">
-                    <form>
-                        <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>공개</label>
-                        <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">비공개</label>
-                    </form>
-                </div>
+<body style="overflow-x:hidden; overflow-y:auto;"></body>
+
+<div class="add_title">프로필 수정하기</div>
+<hr>
+<div class="course_add_list">
+    <div class="course_section">
+        <div class="course_title_section">
+            <div class="course_title_label">이름</div>
+            <div class="course_title_form">
+                <input type="text" id="course_title" placeholder="내용을 입력해주세요" />
             </div>
         </div>
-
-        <div class="add_btn">
-            <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addCourse();"></input>
+        <div class="professor_name_section">
+            <div class="professor_name_label">학교(소속)</div>
+            <div class="professor_name_form">
+                <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
+            </div>
+        </div>
+        <div class="professor_name_section">
+            <div class="professor_name_label">학과</div>
+            <div class="professor_name_form">
+                <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
+            </div>
+        </div>
+        <div class="professor_name_section">
+            <div class="professor_name_label">학년</div>
+            <div class="professor_name_form">
+                <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
+            </div>
+        </div>
+        <div class="professor_name_section">
+            <div class="professor_name_label">나이</div>
+            <div class="professor_name_form">
+                <input type="text" id="professor_name" placeholder="내용을 입력해주세요" />
+            </div>
+        </div>
+        <div class="course_type_section">
+            <div class="course_type_lable">성별</div>
+            <div class="course_type_form" id="course_type_radio">
+                <form>
+                    <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>남자</label>
+                    <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">여자</label>
+                </form>
+            </div>
+        </div>
+        <div class="course_type_section">
+            <div class="course_type_lable">시간표</div>
+            <div class="course_type_form" id="course_type_radio">
+                <form>
+                    <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>공개</label>
+                    <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">비공개</label>
+                </form>
+            </div>
         </div>
     </div>
+
+    <div class="add_btn">
+        <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addCourse();"></input>
+    </div>
+</div>
 </body>
 
 </html>

@@ -22,7 +22,7 @@ body {
     cursor: pointer;
     position: absolute;
     /* 부모의 기준으로 위치를 맞춘다는 뜻 */
-    left: 50%;
+    left: 40%;
     top: 50%;
 }
 
@@ -49,7 +49,6 @@ th {
 }
 
 .course_add_list .btn_add_time {
-    align-content: center;
     width: 32px;
     height: 32px;
     /* border : none; */
