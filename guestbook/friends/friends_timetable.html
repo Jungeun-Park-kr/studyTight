@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTight/timetable</title>
+    <style>
+        @import url(/timetable/timetable_main.css);
+        @import url(/mainframe.css);
+        @import url(/timetable/timetable_edit.css);
+        @import url(/guestbook/friends/friends_room.css);
+        @import url(/guestbook/friends/friends_room.js);
+    </style>
+    <script src="/user/users.js"></script>
+    <script src="/menu.js"></script>
+    <script src="/timetable/timetable_main.js"></script>
+    <script src="/guestbook/friends/friends_timetable.js"></script>
+</head>
+
+<body>
+    <div id="warp">
+        <div class="information-menu">
+            <div class="logo_area" onclick="btnHome();">
+                <img src="/media/logo.png"></img>
+            </div>
+            <ul class="left-menus">
+                <div>
+                    <li class="profile" onclick="btnHome();">
+                        <img src="/guestbook/media/person_gray.png"></img>
+                    </li>
+                </div>
+                <li class="menu_contact">
+                    <img src="/guestbook/media/user.png">&nbsp최시언</img>
+                </li>
+                <li class="menu_timetable">
+                    <img src="/guestbook/media/office-building.png">&nbsp숭실대학교</img>
+                </li>
+                <li class="menu_dday">
+                    <img src="/guestbook/media/mortarboard.png">&nbsp컴퓨터학부</img>
+                </li>
+                <li class="menu_dday">
+                    <img src="/guestbook/media/books.png">&nbsp3학년 2학기</img>
+                </li>
+                <li class="edit-profile">
+                    <input type="button" id="edit-button-id" value="시간표 보기" onclick="showFriendTimetable();"></input>
+                </li>
+            </ul>
+
+        </div>
+        <div class="page-header" role="banner" class>
+            <div class="timetable_title">최시언님의 시간표 </div>
+        </div>
+
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="titetable_section">
+                <div class="background_box">
+                    <div class="timetable_wrap">
+                        <div class="table_head_wrap">
+                            <table class="table_head">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;"></th>
+                                        <td>월</td>
+                                        <td>화</td>
+                                        <td>수</td>
+                                        <td>목</td>
+                                        <td>금</td>
+                                        <td style="display:none;">토</td>
+                                        <td style="display:none;">일</td>
+                                        <!-- <th  style="padding:0px;"></th> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table_body">
+                            <table class="table_body">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;">
+                                            <div class="hours">
+                                                <!-- width:50 -->
+                                                <div class="hour">1교시(9:00)</div>
+                                                <div class="hour">2교시(10:30)</div>
+                                                <div class="hour">3교시(12:00)</div>
+                                                <div class="hour">4교시(13:30)</div>
+                                                <div class="hour">5교시(15:00)</div>
+                                                <div class="hour">6교시(16:30)</div>
+                                                <div class="hour">7교시(18:00)</div>
+                                                <div class="hour">8교시(19:30)</div>
+                                                <div class="hour">9교시(21:00)</div>
+                                                <div class="hour"></div>
+                                            </div>
+                                        </th>
+                                        <!-- 들어갈 요일별 과목정보 -->
+                                        <td class="mon" style="background-color: lightpink;">
+                                            <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
+                                            <div>monday section</div>
+                                        </td>
+                                        <td class="tue" style="background-color: lightsalmon;">
+                                            <div>tuesday section</div>
+                                        </td>
+                                        <td class="wed" style="background-color: lightsteelblue;">
+                                            <div>wednesday section</div>
+                                        </td>
+                                        <td class="thr" style="background-color: lightyellow;">
+                                            <div>thursday section</div>
+                                        </td>
+                                        <td class="fri" style="background-color: lightseagreen;">
+                                            <div>firday section</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aside">
+            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+        </div>
+    </div>
+</body>
+
+</html>
