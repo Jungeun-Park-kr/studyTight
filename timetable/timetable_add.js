@@ -1,6 +1,7 @@
 var doc = document;
 var timelist = new Array();
 var course_type;
+console.log('activeUSer:'+activeUser.name);
 // 아래는 OS 화면 기준으로 중앙에 팝업 띄움
 // var fullWidth = window.screen.width;
 // var fullHeight = window.screen.height;
@@ -50,6 +51,10 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
         etime : etime.value //종료시간
     }
     timelist.push(time); //time 추가
+    //데이터확인용
+    for (var i=0; i<timelist.length; i++) {
+        console.log(timelist[i].day + timelist[i].stime + timelist[i].etime);
+    }
 }
 
 function addCourse() { //저장하기 버튼
@@ -69,4 +74,6 @@ function addCourse() { //저장하기 버튼
     };
     //현재 로그인 된 사용자의 과목 정보에 추가하기
     activeUser.course.push(course); //현재 로그인 된 사용자의 course list에 추가한 과목 정보 넣기
+    //최근에 추가한 항목
+    console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
 }
