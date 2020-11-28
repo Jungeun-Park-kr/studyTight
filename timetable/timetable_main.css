@@ -47,18 +47,36 @@
     padding:0px;
 }
 .table_body .hours .hour {
-    height:75px;
+    height:60px;
     text-align: center;
     background-color: #e8e8e8;
     border-color: #d6d6d6;
-    border-width: 1px;
-    border-style: solid;
+    border : none;
+    /* border-width: 1px;
+    border-style: solid; */
+}
+.table_body .hours .hour2 {
+    height:60px;
+    text-align: center;
+    background-color: whitesmoke;
+    border-color: #d6d6d6;
+    border : none;
+    /* border-width: 1px;
+    border-style: solid; */
 }
 .table_body th {
     width:5%;
     padding:0px;
+    vertical-align: top;
 }
 .table_body td {
     width:18%;
     padding : 0px;
+    vertical-align: top;
+}
+
+
+.table_body td div {
+    height:15px;
+    padding:0px;
 }
