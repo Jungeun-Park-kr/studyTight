@@ -1,5 +1,5 @@
 function btnHome() {
-    location.replace("../mainframe.html"); //홈 주소 //뒤로가기불가
+    location.replace("/mainframe.html"); //홈 주소 //뒤로가기불가
     //location.href("#"); //뒤로가기 가능
 }
 
