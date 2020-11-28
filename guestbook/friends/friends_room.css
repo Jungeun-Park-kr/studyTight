@@ -37,11 +37,15 @@ body {
     cursor: pointer;
 }
 
+.logo_area {
+    cursor: pointer;
+}
+
 .edit-profile>#edit-button-id {
     cursor: pointer;
     background-color: #6ED4D8;
     height: 30px;
-    border-radius: 3px;
+    border-radius: 10px;
     background-color: #6ED4D8;
     display: table-cell;
     vertical-align: middle;
@@ -112,7 +116,7 @@ body {
 .my-room .friends_add .btn_add_course>input {
     background-color: #6ED4D8;
     height: 30px;
-    border-radius: 3px;
+    border-radius: 10px;
     background-color: #6ED4D8;
     display: table-cell;
     vertical-align: middle;
@@ -145,7 +149,7 @@ body {
     margin-left: 10px;
     width: 100px;
     height: 40px;
-    border-radius: 3px;
+    border-radius: 10px;
     display: table-cell;
     vertical-align: middle;
     margin-bottom: 10px;
@@ -232,7 +236,7 @@ body {
     margin-top: 10px;
     float: left;
     background-color: #6ED4D8;
-    border-radius: 3px;
+    border-radius: 10px;
     display: table-cell;
     vertical-align: middle;
     margin-bottom: 10px;
