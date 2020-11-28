@@ -25,7 +25,7 @@
     }
     
     #course_table tbody tr:hover {
-        background-color: #6ED4D8;
+        font-weight: bold;
     }
     
     #course_table tbody tr tr {
