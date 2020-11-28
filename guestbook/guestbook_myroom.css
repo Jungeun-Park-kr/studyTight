@@ -101,6 +101,13 @@ body {
 .my-room .friends_add .btn_add_course>input {
     background-color: #6ED4D8;
     height: 30px;
+    border-radius: 3px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    height: 30px;
+    border: 10px;
 }
 
 .writing-box {
@@ -127,6 +134,11 @@ body {
     margin-left: 10px;
     width: 100px;
     height: 40px;
+    border-radius: 3px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: 10px;
 }
 
 .my-room .writing-button-secret .secret-checkbox>input {
@@ -208,6 +220,12 @@ body {
     margin-left: 120px;
     margin-top: 10px;
     float: left;
+    background-color: #6ED4D8;
+    border-radius: 3px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: 10px;
 }
 
 .my-room .talking-palce {
