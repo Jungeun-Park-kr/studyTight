@@ -6,7 +6,7 @@ const mainCommentCount = document.querySelector('#count');
 function generateTime() { const date = new Date(); const year = date.getFullYear(); const month = date.getMonth(); const wDate = date.getDate(); const hour = date.getHours(); const min = date.getMinutes(); const sec = date.getSeconds(); const time = year + '-' + month + '-' + wDate + ' ' + hour + ':' + min + ':' + sec; return time; }
 
 function generateUserName() {
-    return '양지영';
+    return '박정은';
 
 } //이후 이름으로 처리
 
