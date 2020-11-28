@@ -1,8 +1,11 @@
-.list_wrap > p{
+.list_wrap >  p{
     display:inline-block;
     width:30%;
     height:20px;
     text-align: center;
+}
+.file {
+    background-color: #d6d6d6;
 }
 .vertical_line{
     height:30px;
@@ -11,7 +14,7 @@
     background-color:black;
     /* 적용이 안된다 */
 }
-.input_wrap > p {
+.input_wrap >  p {
     display:inline-block;
     margin:10px;
 }
@@ -21,11 +24,8 @@
 .input_content{
     height:30px;
 }
+
 .uploadBtn {
     margin:5px;  
     background-color:#6ED4D8;
-}
-.content {
-    background-color:#d6d6d6;
-    height:100px;
 }

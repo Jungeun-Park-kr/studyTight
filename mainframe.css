@@ -142,7 +142,7 @@ body {
 .section .folder {
     /* 폴더를 감싸는 흰 div */
     background-color:white;
-    width: 100%;
+    width:100%;
     height:100%;
     text-align: center;
 }
@@ -168,7 +168,7 @@ body {
 } 
 .section .folder > div > p {
     display:block;
-    text-align: center;    
+  
 }
 .section .folder > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
@@ -178,6 +178,9 @@ body {
     height: auto;
     display: inline;
 }
+/* .section .folder > div > span {
+    display:block;
+} */
 .folder_1, .folder_5{
     background-color:#E36363;
 }
