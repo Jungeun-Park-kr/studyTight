@@ -21,3 +21,4 @@ function createUser(userid, userpw, username) { //userlist에 새로운 사용�
 }
 
 activeUser = userlist[0]; //test사용자를 로그인 시켜둠
+//console.log('현재 사용자 : '+activeUser.name);
