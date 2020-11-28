@@ -9,7 +9,7 @@
     <script src="friends_add.js"></script>
     <script src="menu_for_myroom.js"></script>
     <style>
-        @import url(guestbook_myroom.css);
+        @import url(friends_room.css);
         @import url(../mainframe.css);
         @import url(index.css);
         @import url(reply.css);
@@ -24,12 +24,12 @@
             </div>
             <ul class="left-menus">
                 <div>
-                    <li class="profile">
+                    <li class="profile" onclick="btnHome();">
                         <img src="media/person_gray.png"></img>
                     </li>
                 </div>
                 <li class="menu_contact">
-                    <img src="media/user.png">&nbsp박정은</img>
+                    <img src="media/user.png">&nbsp최시언</img>
                 </li>
                 <li class="menu_timetable">
                     <img src="media/office-building.png">&nbsp숭실대학교</img>
@@ -37,43 +37,18 @@
                 <li class="menu_dday">
                     <img src="media/mortarboard.png">&nbsp컴퓨터학부</img>
                 </li>
+                <li class="menu_dday">
+                    <img src="media/books.png">&nbsp3학년 2학기</img>
+                </li>
                 <li class="edit-profile">
-                    <input type="button" id="edit-button-id" value="프로필 수정하기" onclick="showwritingPopup();"></input>
+                    <input type="button" id="edit-button-id" value="시간표 보기" onclick="showwritingPopup();"></input>
                 </li>
             </ul>
 
         </div>
         <div class="my-room">
             <!-- 방명록 -->
-            <div class="friends">
-                <div class="friends_add">
-                    <div class="title_msg">Friends</div>
-                    <div class="btn_add_course">
-                        <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
-                    </div>
 
-                </div>
-                <div class="friends_list_box">
-                    <table id="course_table">
-                        </tbody>
-                        <tbody>
-                            <tr onclick="btnfriends();">
-                                <td>양지영</td>
-                                <td>sidjyoung@naver.com</td>
-                            </tr>
-                            <tr onclick="btnfriends();">
-                                <td>최시언</td>
-                                <td>noino08189@naver.com</td>
-                            </tr>
-                            <tr onclick="btnfriends();">
-                                <td>김삿갓</td>
-                                <td>kimsatgat@naver.com </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
             <div class="writing-place">
                 <div class="writing-box">
                     <!--행(row)선언-->

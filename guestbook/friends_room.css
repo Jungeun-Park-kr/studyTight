@@ -1,0 +1,258 @@
+.profile {
+    width: 64px;
+    height: 64px;
+}
+
+body {
+    background-color: #e7eff0;
+}
+
+.information-menu {
+    width: 15%;
+    height: 100%;
+    margin-right: 10px;
+    margin-left: 20px;
+    float: left;
+}
+
+.information-menu .logo_area>img {
+    width: 150px;
+    height: 150px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
+
+.information-menu .left-menus>li {
+    /* border-bottom:1px solid #252626; */
+    width: 150px;
+    position: relative;
+    list-style-type: none;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    color: black;
+    cursor: pointer;
+}
+
+.edit-profile>#edit-button-id {
+    cursor: pointer;
+    background-color: #6ED4D8;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 100px;
+    border: 10px;
+    margin-left: 13px;
+}
+
+.information-menu .left-menus>li>img {
+    width: 24px;
+    height: 24px;
+}
+
+.information-menu .left-menus>div>li>img {
+    width: 120px;
+    height: 120px;
+    list-style-type: none;
+    margin-left: 5px;
+}
+
+.information-menu .left-menus>div {
+    margin-bottom: 100px;
+}
+
+.information-menu .left-menus>div>li {
+    list-style-type: none;
+}
+
+.my-room {
+    width: 75%;
+    height: 100%;
+    margin-top: 70px;
+    margin-left: 17%;
+    background: white;
+}
+
+.friends {
+    width: 90%;
+    height: 20%;
+    margin-top: 50px;
+    margin-left: 1%;
+    margin-right: 2%;
+    background: white;
+}
+
+.my-room .friends_add {
+    margin-top: 20px;
+    width: 90%;
+    display: inline-block;
+}
+
+.btn_add_course {
+    float: right;
+    margin-top: 25px;
+    width: 10%;
+}
+
+.my-room .friends_add .title_msg {
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+}
+
+.my-room .friends_add .btn_add_course>input {
+    background-color: #6ED4D8;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    height: 30px;
+    border: 10px;
+}
+
+.writing-box {
+    width: 70%;
+    height: 100px;
+    float: left;
+    margin-left: 55px;
+    margin-top: 20px;
+}
+
+.writing-box table {
+    width: 100%;
+    height: 100%;
+}
+
+.writing-button-secret {
+    float: left;
+    margin-left: 5%;
+}
+
+.my-room .writing-button-secret .writing-button>input {
+    background-color: #6ED4D8;
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: 10px;
+}
+
+.my-room .writing-button-secret .secret-checkbox>input {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.writing-place {
+    margin-top: 20px;
+    width: 90%;
+    height: 20%;
+    margin-left: 0.8%;
+    display: inline-block;
+}
+
+#myroom-line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    z-index: 1;
+    width: 90%;
+}
+
+.friends_list_box {
+    overflow: auto;
+    background-color: #d6d6d6;
+    align-content: center;
+    margin-top: 10px;
+    margin-left: 55px;
+    margin-right: 55px;
+    height: 15%;
+    width: 85.5%;
+    float: none;
+}
+
+.friends_list_box #course_table {
+    padding: 10px;
+}
+
+.talking-palce {
+    width: 100%;
+}
+
+.mini-profile {
+    float: left;
+}
+
+.mini-profile>img {
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.user-small-talking {
+    float: left;
+    margin-left: 20px;
+    width: 70%;
+}
+
+.user-small-talking .user-name {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.user-small-talking .user-talking-list {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.user-small-talking .today {
+    color: #c1bcba;
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+}
+
+.user-small-talking .reply-button {
+    margin-left: 120px;
+    margin-top: 10px;
+    float: left;
+    background-color: #6ED4D8;
+    border-radius: 3px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: 10px;
+}
+
+.my-room .talking-palce {
+    display: inline-block;
+}
+
+.my-room .talking-palce .talking {
+    display: inline-block;
+}
+
+.talking {
+    display: inline-block;
+    width: 90%;
+    padding: 15px;
+}
+
+.today-button.today {
+    color: #c1bcba;
+}
