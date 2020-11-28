@@ -8,6 +8,10 @@ body {
     margin:10px;
 }
 
+.course_title_section, .professor_name_section, .course_time_section, .course_type_section, .course_link_section {
+    margin : 20px 0px 5px;
+}
+
 
 .course_section {
     width : 600px;
