@@ -8,12 +8,25 @@ function selectdate(){
     gap=Math.floor(gap/(1000*60*60*24))+1;
    
     var dday=document.getElementById("d-date");
-    dday.innerHTML="D-"+gap;
-    //화면에 나오는 게 안나온다.
+    dday.setAttribute('value',"D-"+gap)
+}
+function selectContent(){
+        var content=prompt("D-day 내용을 입력하세요","ex)웹 공부하기");
+        dContent=document.getElementById("d-content")
+        dContent.setAttribute('value',content)
 }
 function storeDday(day,content){
-    //해당 디데이와 내용을 저장함...
-    alert("D-day를 저장하였습니다.");
+    var Dday=document.getElementById('.d-day');
+    var Dcontent = document.getElementById('.d-content');
+
+    var day=Dday.getAttribute("value");
+    var content=Dcontent.getAttribute("value");
+
+    localStorage.setItem('d-day',day);
+    localStorage.setItem('d-content',content);
+
+    alert("저장되었습니다.")
+
 }
 function modifyDday(dday){
     //해당 디데이를 수정해야 함
