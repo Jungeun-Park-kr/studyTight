@@ -3,12 +3,17 @@ var activeUser = new Object(); //로그인 중인 사용자를 담을 객체
 userlist.push(
     {
         userId : 'je991025@gmail.com',
-        password : 'angelje',
+        password : 'angelje/profile.png',
         name : '박정은',
-        course : [] //과목 정보 저장할 곳
+        profile_image : '/media/profile',
+        course : [], //과목 정보 저장할 곳
+        guestbook : [], //방명록 정보 저장할 곳
+        d_day :[] //디데이 정보 저장할 곳
+
     }
 );
 
+//과목정보
 var course1 = {
     title : "OS(운영체제)",
     professor : "김철홍",
@@ -61,5 +66,8 @@ function createUser(userid, userpw, username) { //userlist에 새로운 사용�
     return true;
 }
 
-activeUser =    [0]; //test사용자를 로그인 시켜둠
+activeUser = userlist[0]; //test사용자를 로그인 시켜둠
 //console.log('현재 사용자 : '+activeUser.name);
+
+
+
