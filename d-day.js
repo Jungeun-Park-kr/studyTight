@@ -6,7 +6,7 @@ function selectdate(){
 
     var gap=futureDate.getTime()-today.getTime();
     gap=Math.floor(gap/(1000*60*60*24))+1;
-   
+
     var dday=document.getElementById("d-date");
     dday.setAttribute('value',"D-"+gap)
 }
@@ -19,14 +19,13 @@ function storeDday(day,content){
     var Dday=document.getElementById('.d-day');
     var Dcontent = document.getElementById('.d-content');
 
-    var day=Dday.getAttribute("value");
-    var content=Dcontent.getAttribute("value");
+    var day=Dday.getAttribute('value');
+    var content=Dcontent.getAttribute('value');
 
     localStorage.setItem('d-day',day);
     localStorage.setItem('d-content',content);
 
-    alert("저장되었습니다.")
-
+    alert("저장되었습니다.");
 }
 function modifyDday(dday){
     //해당 디데이를 수정해야 함
