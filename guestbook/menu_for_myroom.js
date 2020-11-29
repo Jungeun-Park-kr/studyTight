@@ -12,7 +12,7 @@ function btnTimetable() {
 }
 
 function btnfriends() {
-    location.replace("/guestbook/friends/friends_room.html"); //홈 주소 //뒤로가기불가
+    location.href="/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기불가
     //location.href("#"); //뒤로가기 가능
 }
 
