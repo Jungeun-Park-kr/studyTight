@@ -31,10 +31,8 @@ body {
     margin-bottom: 15px;
 }
 .section{
+    /* 포스트잇 내부 가운데 */
     vertical-align: middle;
-}
-.section > div {
-    text-align:center;
 }
 .section > p {
     font-size:1.5em;
@@ -54,30 +52,27 @@ body {
     background-color:#E36363;
 }
 .section > div {
-    border-radius: 3px;
+     /* 포스트잇 하나하나 */
     box-shadow: 2px 2px 2px rgb(141, 140, 140);
     display:inline-block;
-    margin:20px 15px 20px 7px;
-    width: 28%;
+    margin-left:30px;
+    margin-right:30px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    width: 23%;
     height: 15vw;
-    vertical-align: middle;
-    text-align:center;
     line-height: 13vw;
+    vertical-align: middle;
 }
 .section > div > p {
     display: inline-block;
     text-align:center;
+    padding-left:25px;
+
 }
-.section > div > img:hover {
+.section > div > img{
     visibility: inherit;
-    display:inline;
-    width:20px;
-    height:auto;
-    margin:5px;
-    float:right;
-}
-.section > div > img {
-    visibility: hidden;
     display:inline;
     width:20px;
     height:auto;
