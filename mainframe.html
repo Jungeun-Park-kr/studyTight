@@ -58,7 +58,7 @@
             for(var i=0; i<courselist.length; i++) {
                 course = getRealtimeCourse(courselist[i]); //courselist에서 실시간 강의 찾기
                 console.log('리턴:'+course);
-                if (course != null) {
+                if (course != null) { //30분이내 실시간 강의 있는 경우
                     isopen = true;
                     if (courselist[i].type !== 'offline') { //온라인일 경우 링크 넣기
                         console.log('온라인임:'+courselist[i].location);
