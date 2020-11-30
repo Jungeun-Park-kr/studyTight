@@ -1,11 +1,12 @@
 var userlist = new Array(); //사용자들을 담을 배열
 var activeUser = new Object(); //로그인 중인 사용자를 담을 객체
+
 userlist.push(
     {
         userId : 'je991025@gmail.com',
-        password : 'angelje/profile.png',
+        password : 'angelje',
         name : '박정은',
-        profile_image : '/media/profile',
+        profile_image : '/media/profile/profile.png',
         course : [], //과목 정보 저장할 곳
         guestbook : [], //방명록 정보 저장할 곳
         d_day :[] //디데이 정보 저장할 곳
@@ -55,6 +56,12 @@ var time3 = {
     etime : "14:45" //종료시간
 }
 course3.time.push(time3);
+//activeUser = userlist[0]; //test사용자를 로그인 시켜둠
+
+//console.log('현재 사용자 : '+activeUser.name);
+//localStorage.setItem('activeUser', activeUser);
+localStorage.setItem('userlist', userlist);
+
 
 function createUser(userid, userpw, username) { //userlist에 새로운 사용자 추가
     var user = new Object();
@@ -66,8 +73,16 @@ function createUser(userid, userpw, username) { //userlist에 새로운 사용�
     return true;
 }
 
-activeUser = userlist[0]; //test사용자를 로그인 시켜둠
-//console.log('현재 사용자 : '+activeUser.name);
 
+
+
+function getActiveUser(username) { //사용자 이름으로 현재 접속중인 사용자 객체 찾아서 리턴
+    for (var i=0; i<userlist.length; i++) {
+        if (userlist[i].name == username) { 
+            activeUser = userlist[i];
+            return activeUser;
+        }
+    }
+}
 
 
