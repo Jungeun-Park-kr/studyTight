@@ -96,7 +96,7 @@
                                             </div>
                                         </th>
                                         <!-- 들어갈 요일별 과목정보 -->
-                                        <td class="mon" id="mon" style="background-color: lightpink; height:15px;">
+                                        <td class="mon" id="mon" style="height:15px;">
                                             <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
                                             <div id ="mon9.1"></div>
                                             <div id ="mon9.2"></div>
@@ -198,7 +198,7 @@
                                             <div id ="tue20.3"></div>
                                             <div id ="tue20.4"></div>
                                         </td>
-                                        <td class="wed" style="background-color: lightsteelblue;">
+                                        <td class="wed">
                                             <!-- <p>wednesday section</p> -->
                                             <div id ="wed9.1"></div>
                                             <div id ="wed9.2"></div>
@@ -355,13 +355,38 @@
                                     <script>
                                         var os1 = document.getElementById("mon10.2");
                                         var os2 = document.getElementById("mon11.3");
-                                        os1.style.backgroundColor = "black";
-                                        os2.style.backgroundColor = "black";
+                                        var os3 = document.getElementById("mon10.3");
+                                        var os4 = document.getElementById("mon10.4");
+                                        var os5 = document.getElementById("mon11.1");
+                                        var os6 = document.getElementById("mon11.2");
+                                        os1.innerHTML = '웹프로그래밍기초및실습';
+                                        os1.style.backgroundColor = "lightpink";
+                                        os2.style.backgroundColor = "lightpink";
+                                        os3.style.backgroundColor = "lightpink";
+                                        os4.style.backgroundColor = "lightpink";
+                                        os5.style.backgroundColor = "lightpink";
+                                        os6.style.backgroundColor = "lightpink";
 
                                         var db1 = document.getElementById("wed13.3");
                                         var db2 = document.getElementById("wed14.3");
-                                        db1.style.backgroundColor="black";
-                                        db2.style.backgroundColor="black";
+                                        var db3 = document.getElementById("wed13.4");
+                                        var db4 = document.getElementById("wed14.1");
+                                        var db5 = document.getElementById("wed14.2");
+                                        db1.innerHTML='데이터베이스';
+                                        db1.style.backgroundColor="lightsteelblue";
+                                        db2.style.backgroundColor="lightsteelblue";
+                                        db3.style.backgroundColor="lightsteelblue";
+                                        db4.style.backgroundColor="lightsteelblue";
+                                        db5.style.backgroundColor="lightsteelblue";
+
+
+                                        var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                        activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                        var courselist = activeUser.course;
+                                        for (var i=0; i<couselist.length; i++) {
+                                            var tmp = courselist[i];
+                                            showCourse(tmp.title, tmp.time); //제목, 시간리스트로 시간표에 출력하기
+                                        }
                                     </script>
 
                                 </tbody>
