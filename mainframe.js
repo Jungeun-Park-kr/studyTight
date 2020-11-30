@@ -35,13 +35,13 @@ function newFolder(){
 
 function getRealtimeCourse(course) {
         var type, tmptime, day, st, sh, sm;
-        var curday = 1; //테스트용 시간
-        var curhour = 12;
-        var curmin = 40; 
-        // var curday = getDay(); 
-        // var curhour = getHours();
-        // var curmin = getMinutes();
-        var cur = (curhour*3600)+(curmin*60); //시간 초단위로 변환
+        // var curday = 1; //테스트용 시간 (웹프로그래밍기초및실습 나오면 정상)
+        // var curhour = 12;
+        // var curmin = 40; 
+        var curday = getDay(); 
+        var curhour = getHours();
+        var curmin = getMinutes();
+        var cur = (curhour*3600)+(curmin*60); //현재시간 초단위로 변환
         console.log(cur);
         for(var i=0; i<course.time.length; i++) {
                 tmptime = course.time[i];
@@ -53,7 +53,7 @@ function getRealtimeCourse(course) {
                 console.log('sh,sm'+sh+sm);
                 if (day == curday) { //요일 비교
                         console.log('요일동일');
-                        var cortime = (sh*3600)+(sm*60);
+                        var cortime = (sh*3600)+(sm*60); //시작시간 초단위로 변환
                         console.log(course);
                         var gap = cortime - cur; //남은시간 계산
                         console.log('gap'+gap);
