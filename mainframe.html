@@ -79,7 +79,12 @@
                     var win = window.open(link, '_blank');
                     win.focus();
                 } else {
-                    alert('현재 등록된 강의 링크가 없습니다.');
+                    if (isonline) {
+                        alert('현재 등록된 강의 링크가 없습니다.');
+                    }
+                    else {
+                        alert('현재 시간표에 등록된 일정이 없습니다');
+                    }
                 }
             }
         </script>
