@@ -27,7 +27,13 @@ var time1 = {
     stime : "10:30", //시작시간
     etime : "11:45" //종료시간
 }
+var time4 = {
+    day : "tue", //mon, tue, ... 저장
+    stime : "10:30", //시작시간
+    etime : "11:45" //종료시간
+}
 course1.time.push(time1);
+course1.time.push(time4);
 userlist[0].course.push(course1);
 
 var course2 = {
