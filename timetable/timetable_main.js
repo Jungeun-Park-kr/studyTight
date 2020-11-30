@@ -35,15 +35,16 @@ function showCourse(title, timelist) {
         sh = st[0]; //시는 바로 입력
         sm = getMinuteId(st[1]);
         //종료시간
-        et = tmp.etime.split(':');
+        et = tmptime.etime.split(':');
         eh = et[0];
         em = getMinuteId(et[1]);
         //시작시간 id만들기 및 속성적용
-        tdid = tmp.day+sh+'.'+sm;
+        tdid = tmptime.day+sh+'.'+sm;
         console.log(tdid);
         tmpvar = document.getElementById(tdid);
         tmpvar.innerHTML=title; //첫줄에는 과목이름
         tmpvar.style.backgroundColor=color;
+        
         //시간 더해가면서 id 만들기 및 속성적용
         while(1) {
             sm++;
@@ -56,16 +57,15 @@ function showCourse(title, timelist) {
                     break;
                 }
             }
-            tdid = tmp.day+sh+'.'+sm;
+            console.log(tmptime.day);
+            tdid = tmptime.day+sh+'.'+sm;
             console.log(tdid);
             tmpvar = document.getElementById(tdid);
+            if(sm==4) { //border 없애기
+                tmpvar.style.borderStyle="";
+            }
             tmpvar.style.backgroundColor = color;
         }
-        //마지막 종료시간 id만들기 및 속성적용
-        tdid = tmp.day+eh+'.'+em;
-        console.log(tdid);
-        tmpvar = document.getElementById(tdid);
-        tmpvar.style.backgroundColor = color;
     }
 }
 
