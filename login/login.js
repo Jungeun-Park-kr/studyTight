@@ -70,7 +70,7 @@ function login() {
     activeUser.id = userId; //활성화된 사용자 아이디 저장
     activeUser.name = userName; //활성화된 사용자 이름 저장
 
-    localStorage.setItem("userimg", activeUser.profile_image);
+    // localStorage.setItem("userimg", activeUser.userImage);
     localStorage.setItem("username", activeUser.name);
     var tmp = localStorage.getItem("username");
     console.log('로그인 제대로 되었는지 확인:'+tmp);
