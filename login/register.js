@@ -63,10 +63,17 @@ function register() {
     }
     //사용자가 입력한 정보들을 회원정보 리스트에 추가하기
     //in here
-    var newUser = createUser(userId, userPassword, userName); //유저 객체 생성 (user/user.js)
+    var newUser = createUser(userId, userPassword, userName); //유저 객체 생성 (user/user.js) 성공시 true리턴
     if (newUser) { //회원가입 완료
         alert('study Tight 회원가입을 축하합니다.');
-        location.replace("/login/login.html"); //로그인 화면으로 이동
+        for (var i=0; i<userlist.length; i++) {
+            console.log('user'+i+':'+userlist[i].name);
+        }
+        setTimeout(function(){
+            location.replace("/login/login.html"); //로그인 화면으로 이동
+            alert('asdf');
+        }, 2000);
+        //location.replace("/login/login.html"); //로그인 화면으로 이동
     }
     else { //유저 추가 에러 발생
         alert('회원가입을 실패했습니다. 다시 시도해주세요.');
@@ -127,6 +134,8 @@ function register() {
 
 function id_check() { //아이디 중복확인 메소드
     var userId = doc.getElementById('userId').value;
+    var isdup = false;
+
     console.log(userId);
     //입력유무 확인
     if (!userId) { //아이디 입력 안했을 때
@@ -143,7 +152,14 @@ function id_check() { //아이디 중복확인 메소드
         return;
     }
     //리스트에 회원명단 넣어두고 반복문으로 입력받은 id와 비교하는 방식??
-    if (true) {
+    for (var i=0; i<userlist.length; i++) {
+        if (userlist[i].userId == userId) { //userlist의 id와 일치하면 사용불가
+            isdup = true;
+            break;
+        }
+    }
+
+    if (!isdup) {
         alert('사용가능한 아이디입니다.');
         isIdCheck = true;
         return;
