@@ -50,15 +50,34 @@
         </div>
         <script>
             var isopen = false;
-            //doc.getElementById("shortcuts_title"); //바로가기 텍스트
-            //doc.getElementById("shortcuts_link"); //바로가기 링크 텍스트
+            var isonline = false;
+            var course, link;
+            var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+            activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+            var courselist = activeUser.course;
+            for(var i=0; i<courselist.length; i++) {
+                course = getRealtimeCourse(courselist[i]); //courselist에서 실시간 강의 찾기
+                console.log('리턴:'+course);
+                if (course != null) {
+                    isopen = true;
+                    if (courselist[i].type !== 'offline') { //온라인일 경우 링크 넣기
+                        console.log('온라인임:'+courselist[i].location);
+                        isonline = true;
+                        link = courselist[i].location;
+                    }
+                    break;
+                }
+            }
             // 실시간 일정 있는 경우
-            doc.getElementById("shortcuts_title").innerHTML = "10:30 OS(라) 온라인 실시간";
-            doc.getElementById("shortcuts_link").style.color = "blue";
-
+            if (isopen) {
+                console.log('실시간o'+course);
+                doc.getElementById("shortcuts_title").innerHTML = course;
+            }            
             function openLink() { //바로가기 버튼 누른경우
                 if (isopen) { //실시간 수업 있는경우 링크로 이동
-
+                    doc.getElementById("shortcuts_link").style.color = "blue";
+                    var win = window.open(link, '_blank');
+                    win.focus();
                 } else {
                     alert('현재 등록된 강의 링크가 없습니다.');
                 }

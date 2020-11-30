@@ -41,7 +41,7 @@ var course2 = {
     professor : "최지웅",
     time : [], //과목 시간 담은 리스트
     type : "online_video", //과목 타입(online_realtime,online_video,offline)
-    location : "http://myclass.ssu.ac.kr/" //강의실/강의링크
+    location : "http://myclass.ssu.ac.kr" //강의실/강의링크
 };
 var time2 = {
     day : "mon", //mon, tue, ... 저장
@@ -56,7 +56,7 @@ var course3 = {
     professor : "박동주",
     time : [], //과목 시간 담은 리스트
     type : "online_video", //과목 타입(online_realtime,online_video,offline)
-    location : "http://myclass.ssu.ac.kr/" //강의실/강의링크
+    location : "http://myclass.ssu.ac.kr" //강의실/강의링크
 };
 var time3 = {
     day : "wed", //mon, tue, ... 저장
