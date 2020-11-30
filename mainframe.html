@@ -115,14 +115,14 @@
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <img src="media/profile.png" onclick="location.href='#프로필수정화면'">
+                                <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
                                 <div class="username" id="activeUsername">박혁거세님</div>
                                 <script>
-                                    //activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                                    var username = localStorage.getItem('username');
+                                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
                                     // doc.getElementById('activeUsername').innerHTML = username + '님';
-                                    activeUser = getActiveUser(username);
+                                    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
                                     doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
+                                    doc.getElementById('activeUserimg').src = activeUser.userImage;
                                 </script>
                             </div>
                         </div>

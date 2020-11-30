@@ -6,7 +6,7 @@ userlist.push(
         userId : 'je991025@gmail.com',
         password : 'angelje',
         name : '박정은',
-        profile_image : '/media/profile/profile.png',
+        userImage : '/media/profile.png',
         course : [], //과목 정보 저장할 곳
         guestbook : [], //방명록 정보 저장할 곳
         d_day :[] //디데이 정보 저장할 곳
