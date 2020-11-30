@@ -28,6 +28,7 @@ var time1 = {
     etime : "11:45" //종료시간
 }
 course1.time.push(time1);
+userlist[0].course.push(course1);
 
 var course2 = {
     title : "웹프로그래밍기초및실습",
@@ -42,6 +43,7 @@ var time2 = {
     etime : "14:45" //종료시간
 }
 course2.time.push(time2);
+userlist[0].course.push(course2);
 
 var course3 = {
     title : "데이터베이스",
@@ -56,6 +58,7 @@ var time3 = {
     etime : "14:45" //종료시간
 }
 course3.time.push(time3);
+userlist[0].course.push(course3);
 //activeUser = userlist[0]; //test사용자를 로그인 시켜둠
 
 //console.log('현재 사용자 : '+activeUser.name);
