@@ -60,7 +60,8 @@
                 console.log('리턴:'+course);
                 if (course != null) {
                     isopen = true;
-                    if (!courselist[i].type == 'offline') { //온라인일 경우 링크 넣기
+                    if (courselist[i].type !== 'offline') { //온라인일 경우 링크 넣기
+                        console.log('온라인임:'+courselist[i].location);
                         isonline = true;
                         link = courselist[i].location;
                     }
