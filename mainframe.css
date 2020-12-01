@@ -1,3 +1,6 @@
+#wrap {
+    min-width: 1300px;
+}
 body {
     background-color: #e7eff0;
 }

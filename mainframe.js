@@ -47,12 +47,14 @@ function newFolder(){
 
 function getRealtimeCourse(course) {
         var type, tmptime, day, st, sh, sm;
+        var date = new Date();
         // var curday = 1; //테스트용 시간 (웹프로그래밍기초및실습 나오면 정상)
         // var curhour = 12;
         // var curmin = 40; 
-        var curday = getDay(); 
-        var curhour = getHours();
-        var curmin = getMinutes();
+        var curday = date.getDay(); 
+        var curhour = date.getHours();
+        var curmin = date.getMinutes();
+        console.log ('현재 요일:'+curday +' 시간:'+curhour+'분:'+curmin);
         var cur = (curhour*3600)+(curmin*60); //현재시간 초단위로 변환
         console.log(cur);
         for(var i=0; i<course.time.length; i++) {
