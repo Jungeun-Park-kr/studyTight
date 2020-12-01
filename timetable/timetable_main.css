@@ -10,12 +10,12 @@
     text-align: center;
     font-weight: bold;
     margin:0 auto;
-    width: 90%;
+    width: 100%;
     font-size: 20px;
 }
 .page-header .edit_btn {
+    width : 15%;
     float:right;
-    width: 10%;
 }
 .page-header .edit_btn > input {
     width: 130px;
