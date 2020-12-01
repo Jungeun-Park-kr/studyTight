@@ -2,7 +2,7 @@
 <html>
     <head> 
         <style>@import url("folder.css");</style>
-        <style>@import url(../mainframe.css);</style>
+        <style>@import url(/mainframe.css);</style>
         <script src="folder.js"></script>
         <script src="menu.js"></script>
         <script src="mainframe.js"></script>
@@ -10,6 +10,7 @@
         <script src="mainframe_profile.js"></script>
     </head>
     <body>
+        <div id="wrap">
             <div class="page-menu">
                 <div class ="logo_area"> 
                 <img src="/media/logo.png" class= logo onclick="btnHome();"></div>
@@ -65,5 +66,6 @@
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked();">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked();"></div>
             </div>
+        </div>
     </body>
 </html>
