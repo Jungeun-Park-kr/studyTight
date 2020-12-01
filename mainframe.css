@@ -84,6 +84,8 @@ body {
     background-color:#6ED4D8;
     border-radius: 10px;
     border:none;
+    cursor:pointer;
+    font-size:12px;
 }
 .section {
     width:70%;
@@ -118,6 +120,7 @@ body {
     width:140px;
     height:40px;
     border:10px;
+    cursor: pointer;
 }
 .D-day {
     text-align:center;
@@ -132,8 +135,6 @@ body {
     border-radius: 3px;
     box-shadow: 2px 2px 2px rgb(128, 128, 128);
     vertical-align: middle;
-   
-
 }
 .section .D-day > div > span {
     /* 세로 정렬 필요 */
