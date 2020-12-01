@@ -1,3 +1,7 @@
+#wrap_edit {
+    min-width: 1300px;
+}
+
 .background-box {
     background-color: azure;
     align-content: center;
@@ -25,15 +29,16 @@
     text-align: left;
     font-size: 15px;
     font-weight: bold;
-    width: 80%;
+    width: 70%;
     margin: 10px;
     margin-left: 20px;
 }
 
 .timetable_edit_header .btn_add_course {
-    float: left;
-    width: 10%;
+    float: right;
+    width: 130px;
     margin: 10px;
+    margin-right:20px;
     text-align: center;
 }
 
