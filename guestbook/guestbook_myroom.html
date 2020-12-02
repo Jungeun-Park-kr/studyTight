@@ -20,8 +20,8 @@
 <body>
     <div id="wrap">
         <div class="information-menu">
-            <div class="logo_area" onclick="btnHome();">
-                <img src="media/logo.png"></img>
+            <div class="logo_area">
+                <img src="/media/logo.png" class=logo onclick="btnHome();">
             </div>
             <ul class="left-menus">
                 <div>
@@ -44,79 +44,39 @@
             </ul>
 
         </div>
-        <div class="my-room">
-            <!-- 방명록 -->
-            <div class="friends">
-                <div class="friends_add">
-                    <div class="title_msg">Friends</div>
-                    <div class="btn_add_course">
-                        <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
-                    </div>
-
-                </div>
-                <div class="friends_list_box">
-                    <table id="course_table">
-                        </tbody>
-                        <tbody>
-                            <tr onclick="btnfriends();">
-                                <td>양지영</td>
-                                <td>sidjyoung@naver.com</td>
-                            </tr>
-                            <tr onclick="btnfriends();">
-                                <td>최시언</td>
-                                <td>noino08189@naver.com</td>
-                            </tr>
-                            <tr onclick="btnfriends();">
-                                <td>김삿갓</td>
-                                <td>kimsatgat@naver.com </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="writing-place">
-                <div class="writing-box">
-                    <!--행(row)선언-->
-                    <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
-                </div>
-                <div class="writing-button-secret">
-                    <div class="writing-button">
-                        <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup();"></input>
-                    </div>
-                    <div class="secret-checkbox">
-                        <input type="checkbox" name="비밀글"> 비밀글
-                    </div>
-
-                </div>
-
-            </div>
-            <hr id="myroom-line">
-            <div id=comments> </div>
-            <div class="talking-place">
-                <div class="talking">
-                    <div class="mini-profile">
-                        <img src="media/person_gray.png"></img>
-                    </div>
-                    <div class="user-small-talking">
-                        <div class="user-name">
-                            최시언
+        <div class ="section">
+            <div class="my-room">
+                <!-- 방명록 -->
+                <div class="friends">
+                    <div class="friends_add">
+                        <div class="title_msg">Friends</div>
+                        <div class="btn_add_course">
+                            <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
                         </div>
-                        <div class="user-talking-list">
-                            이번 웹프로그래밍 문제 이해했어?
-                        </div>
-                        <div class="today-button">
-                            <div class="today">
-                                2020-10-16 12:13:11
-                            </div>
-                            <div class="reply-button" id=reply-button1>
-                                <input type="button" value="답글쓰기"></input>
-                            </div>
-                        </div>
+    
                     </div>
+                    <div class="friends_list_box">
+                        <table id="course_table">
+                            </tbody>
+                            <tbody>
+                                <tr onclick="btnfriends();">
+                                    <td>양지영</td>
+                                    <td>sidjyoung@naver.com</td>
+                                </tr>
+                                <tr onclick="btnfriends();">
+                                    <td>최시언</td>
+                                    <td>noino08189@naver.com</td>
+                                </tr>
+                                <tr onclick="btnfriends();">
+                                    <td>김삿갓</td>
+                                    <td>kimsatgat@naver.com </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
                 </div>
-
-                <div class="reply-place" id=replyplace1>
+                <div class="writing-place">
                     <div class="writing-box">
                         <!--행(row)선언-->
                         <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
@@ -128,58 +88,101 @@
                         <div class="secret-checkbox">
                             <input type="checkbox" name="비밀글"> 비밀글
                         </div>
-
+    
                     </div>
-
+    
                 </div>
-
                 <hr id="myroom-line">
-                <div class="talking">
-                    <div class="mini-profile">
-                        <img src="media/person_gray.png"></img>
-                    </div>
-                    <div class="user-small-talking">
-                        <div class="user-name">
-                            김삿갓
+                <div id=comments> </div>
+                <div class="talking-place">
+                    <div class="talking">
+                        <div class="mini-profile">
+                            <img src="media/person_gray.png"></img>
                         </div>
-                        <div class="user-talking-list">
-                            너 시간표 진짜 신기하다. 잘 보고가! <br>다음에 수업 겹치면 같이 듣자!
-                        </div>
-                        <div class="today-button">
-                            <div class="today">
-                                2020-11-26 16:13:12
+                        <div class="user-small-talking">
+                            <div class="user-name">
+                                최시언
                             </div>
-                            <div class="reply-button">
-                                <input type="button" value="답글쓰기"></input>
+                            <div class="user-talking-list">
+                                이번 웹프로그래밍 문제 이해했어?
+                            </div>
+                            <div class="today-button">
+                                <div class="today">
+                                    2020-10-16 12:13:11
+                                </div>
+                                <div class="reply-button" id=reply-button1>
+                                    <input type="button" value="답글쓰기"></input>
+                                </div>
                             </div>
                         </div>
                     </div>
+    
+                    <div class="reply-place" id=replyplace1>
+                        <div class="writing-box">
+                            <!--행(row)선언-->
+                            <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                        </div>
+                        <div class="writing-button-secret">
+                            <div class="writing-button">
+                                <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup();"></input>
+                            </div>
+                            <div class="secret-checkbox">
+                                <input type="checkbox" name="비밀글"> 비밀글
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                    <hr id="myroom-line">
+                    <div class="talking">
+                        <div class="mini-profile">
+                            <img src="media/person_gray.png"></img>
+                        </div>
+                        <div class="user-small-talking">
+                            <div class="user-name">
+                                김삿갓
+                            </div>
+                            <div class="user-talking-list">
+                                너 시간표 진짜 신기하다. 잘 보고가! <br>다음에 수업 겹치면 같이 듣자!
+                            </div>
+                            <div class="today-button">
+                                <div class="today">
+                                    2020-11-26 16:13:12
+                                </div>
+                                <div class="reply-button">
+                                    <input type="button" value="답글쓰기"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr id="myroom-line ">
+                    <div class="talking ">
+    
+                    </div>
+                    <div class="talking ">
+    
+                    </div>
+    
+                    <script src="index.js "></script>
+    
+                    <tr>
+                        <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                        <td colspan="6 ">
+                            <center>
+                                <a href="# ">1</a>
+                                <a href="# ">2</a>
+                                <a href="# ">3</a>
+                                <a href="# ">4</a>
+                                <a href="# ">다음▶</a>
+                            </center>
+                        </td>
+                    </tr>
+    
                 </div>
-                <hr id="myroom-line ">
-                <div class="talking ">
-
-                </div>
-                <div class="talking ">
-
-                </div>
-
-                <script src="index.js "></script>
-
-                <tr>
-                    <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                    <td colspan="6 ">
-                        <center>
-                            <a href="# ">1</a>
-                            <a href="# ">2</a>
-                            <a href="# ">3</a>
-                            <a href="# ">4</a>
-                            <a href="# ">다음▶</a>
-                        </center>
-                    </td>
-                </tr>
-
             </div>
         </div>
+        
         <div class="aside ">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>

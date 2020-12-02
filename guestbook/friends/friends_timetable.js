@@ -1,6 +1,12 @@
 function showFriendTimetable() {
-    location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
-    
+    //친구의 시간표 정보 공개여부 확인
+    var isSecret = false;
+    if (isSecret) { //비밀인 경우
+        alert('시간표를 비공개한 회원입니다.');
+    }
+    else {
+        location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
+    }
 }
 
 function showFriendCourse(title, timelist) {
