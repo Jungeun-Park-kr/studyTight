@@ -60,7 +60,7 @@
                             <tbody id = "course_table_body">
                                 <!-- <tr><td>OS(운영체제)</td><td>목요일 10:30 - 11:45</td><td>온라인 실시간</td><td>김철홍</td>
                                     <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c1+');"/></td>
-                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');" style="width:32px"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');"  style="width:32px"/></td>
                                 </tr>
                                 <tr><td>웹프로그래밍기초및실습</td><td>월요일 13:00 - 14:45</td><td>온라인 동영상</td><td>최지웅</td>
                                     <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
@@ -95,9 +95,12 @@
                     var target = document.getElementsByClassName('btn_delete_course');
                     for (var i=0; i<target.length; i++) {
                         target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
+                            var title = this.parentElement.parentElement.firstElementChild.innerHTML;
+                            console.log(title); //과목 이름 가져오기
                             var ret = confirm("정말로 삭제하시겠습니까?");
                             if (ret) { //삭제 수행
                                 var parent = document.getElementById('course_table_body');
+                                deleteCourse(title);
                                 parent.removeChild(this.parentElement.parentElement);
                             }else { //취소버튼 or 다이얼로그 닫은 경우
                                 ;
