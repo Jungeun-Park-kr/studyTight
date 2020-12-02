@@ -44,7 +44,7 @@
         
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="titetable_section">
+            <div class="timetable_section">
                 <div class="background_box">
                     <div class="timetable_wrap">
                         <div class="table_head_wrap">
@@ -349,18 +349,17 @@
                                             <div id ="fri20.4"></div>
                                         </td>
                                     </tr>
-                                    <script>
-                                        var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
-                                        activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                                        var courselist = activeUser.course;
-                                        for (var i=0; i<courselist.length; i++) {
-                                            var tmp = courselist[i];
-                                            showCourse(tmp.title, tmp.time); //제목, 시간리스트로 시간표에 출력하기
-                                        }
-                                    </script>
-
                                 </tbody>
                             </table>
+                            <script>
+                                var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                var courselist = activeUser.course;
+                                for (var i=0; i<courselist.length; i++) {
+                                    var tmp = courselist[i];
+                                    showCourse(tmp.title, tmp.time); //제목, 시간리스트로 시간표에 출력하기
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
