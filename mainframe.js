@@ -9,20 +9,21 @@
 // button.addEventListener('click',saveToLocalStorage); //button클릭하면 local로 저장하기
 // const storedInput=localStorage.getItem('todolist'); //local에 저장한 것 불러오기
 function plusTodo(){
-        var text=window.prompt("오늘의 할일을 입력하세요","ex) 웹 공부하기");
-        var wrap=document.getElementById('todaylist');
-        if(text!=null){
+        var plus_label=document.createElement('label');
+        var wrap=document.getElementById('todaylist')
+        var new_text=window.prompt("오늘의 할일을 입력하세요","");
+
                 var new_checkbox=document.createElement('input');
                 new_checkbox.setAttribute('type','checkbox');
                 new_checkbox.setAttribute('id','new_checkbox')
                 
                 var new_p=document.createElement('p');
-                new_p.innerHTML=text;
+                new_p.innerHTML=new_text;
+                //
+
                 
-                var new_label=document.createElement('label');
-                new_label.setAttribute('for','new_checkbox');
-                new_label.innerText=new_p;
                 wrap.appendChild(new_label);
+                wrap.appendChild(new_p)
 
                 // var new_todo=document.createElement("input");
                 // new_todo.setAttribute("type","checkbox");
@@ -35,7 +36,7 @@ function plusTodo(){
                 // wrap.appendChild(new_label);
                 
                         //일단 안된다 ,,
-}
+
 }
 function starClicked(){
         document.getElementById("star").src="/media/full_star.png";
