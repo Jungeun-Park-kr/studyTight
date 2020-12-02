@@ -11,18 +11,20 @@ body {
     width: 15%;
     height: 100%;
     margin-right: 10px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     float: left;
 }
 
-.information-menu .logo_area>img {
+.logo_area .logo {
+    /* background-image: url("media/logo.png");  */
     width: 150px;
-    height: 150px;
-    padding: 5px 5px 5px 5px;
-    margin-top: 25px;
-    margin-left: 25px;
-    margin-bottom: 10px;
+    height : 150px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor:pointer;
 }
+
 
 .information-menu .left-menus>li {
     /* border-bottom:1px solid #252626; */
@@ -37,9 +39,6 @@ body {
     cursor: pointer;
 }
 
-.logo_area {
-    cursor: pointer;
-}
 
 .edit-profile>#edit-button-id {
     cursor: pointer;
@@ -77,10 +76,16 @@ body {
 }
 
 .my-room {
-    width: 75%;
+    /* width: 75%;
     height: 100%;
     margin-top: 70px;
     margin-left: 17%;
+    background: white; */
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    margin-left: 20px;
     background: white;
 }
 
