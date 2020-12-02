@@ -109,7 +109,16 @@ body {
     padding:10px;
     font-size:small;
 }
-
+.new_todo {
+    padding:10px;
+    font-size:small;
+}
+.todaylist > label > input,p {
+    display: inline-block;
+}
+.todaylist > label {
+    display:block;
+}
 
 .btnplusTodo {
     border-radius: 10px; 
