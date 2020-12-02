@@ -73,7 +73,14 @@ function addCourse() { //저장하기 버튼
         location : document.getElementById("course_location").value //강의실/강의링크
     };
     //현재 로그인 된 사용자의 과목 정보에 추가하기
+    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
     activeUser.course.push(course); //현재 로그인 된 사용자의 course list에 추가한 과목 정보 넣기
-    //최근에 추가한 항목
+    //최근에 추가한 항목 log로 확인해보기
     console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
+    // setTimeout(function(){ //테스트용 2초 딜레이
+    //     alert('asdf');
+    //     window.close(); //창 닫기
+    // }, 2000);
+    window.close(); //창 닫기
 }
