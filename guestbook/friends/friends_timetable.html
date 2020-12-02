@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +13,20 @@
     </style>
     <script src="/user/users.js"></script>
     <script src="/menu.js"></script>
+    <script src="/timetable/timetable_edit.js"></script>
     <script src="/timetable/timetable_main.js"></script>
     <script src="/guestbook/friends/friends_timetable.js"></script>
 </head>
-
+<script>
+    var friend;
+    //var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+    var fname = "최시언";
+    if (fname != null) {
+        friend = getActiveUser(fname); //친구 정보 가져오기
+        //친구의 시간표 공개/비공개 여부 확인
+        //비공개인 경우 : (시간표 보기 버튼 누르면 친구 방명록 메인(friends_room.html)에서 팝업으로 비공개한 회원입니다 띄우기)
+    }
+</script>
 <body>
     <div id="warp">
         <div class="information-menu">
@@ -54,14 +63,14 @@
 
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="titetable_section">
+            <div class="timetable_section">
                 <div class="background_box">
                     <div class="timetable_wrap">
                         <div class="table_head_wrap">
                             <table class="table_head">
                                 <tbody>
                                     <tr>
-                                        <th style="padding:0px;"></th>
+                                        <th style="padding:0px;"></th> 
                                         <td>월</td>
                                         <td>화</td>
                                         <td>수</td>
@@ -80,8 +89,20 @@
                                     <tr>
                                         <th style="padding:0px;">
                                             <div class="hours">
+                                                <div class="hour" >(9:00)</div>
+                                                <div class="hour2">(10:00)</div>
+                                                <div class="hour">(11:00)</div>
+                                                <div class="hour2">(12:00)</div>
+                                                <div class="hour">(13:00)</div>
+                                                <div class="hour2">(16:00)</div>
+                                                <div class="hour">(15:00)</div>
+                                                <div class="hour2">(16:00)</div>
+                                                <div class="hour">(17:00)</div>
+                                                <div class="hour2">(18:00)</div>
+                                                <div class="hour">(19:00)</div>
+                                                <div class="hour2" style="border-bottom: none">(20:00)</div>
                                                 <!-- width:50 -->
-                                                <div class="hour">1교시(9:00)</div>
+                                                <!-- <div class="hour">1교시(9:00)</div>
                                                 <div class="hour">2교시(10:30)</div>
                                                 <div class="hour">3교시(12:00)</div>
                                                 <div class="hour">4교시(13:30)</div>
@@ -89,28 +110,274 @@
                                                 <div class="hour">6교시(16:30)</div>
                                                 <div class="hour">7교시(18:00)</div>
                                                 <div class="hour">8교시(19:30)</div>
-                                                <div class="hour">9교시(21:00)</div>
+                                                <div class="hour">9교시(21:00)</div> -->
                                                 <div class="hour"></div>
                                             </div>
                                         </th>
                                         <!-- 들어갈 요일별 과목정보 -->
-                                        <td class="mon" style="background-color: lightpink;">
+                                        <td class="mon" style="height:15px; border-left: 0.1px solid #d6d6d6;">
                                             <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
-                                            <div>monday section</div>
+                                            <div id ="fmon9.1"></div>
+                                            <div id ="fmon9.2"></div>
+                                            <div id ="fmon9.3"></div>
+                                            <div id ="fmon9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon10.1"></div>
+                                            <div id ="fmon10.2"></div>
+                                            <div id ="fmon10.3"></div>
+                                            <div id ="fmon10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon11.1"></div>
+                                            <div id ="fmon11.2"></div>
+                                            <div id ="fmon11.3"></div>
+                                            <div id ="fmon11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon12.1"></div>
+                                            <div id ="fmon12.2"></div>
+                                            <div id ="fmon12.3"></div>
+                                            <div id ="fmon12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon13.1"></div>
+                                            <div id ="fmon13.2"></div>
+                                            <div id ="fmon13.3"></div>
+                                            <div id ="fmon13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon14.1"></div>
+                                            <div id ="fmon14.2"></div>
+                                            <div id ="fmon14.3"></div>
+                                            <div id ="fmon14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon15.1"></div>
+                                            <div id ="fmon15.2"></div>
+                                            <div id ="fmon15.3"></div>
+                                            <div id ="fmon15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon16.1"></div>
+                                            <div id ="fmon16.2"></div>
+                                            <div id ="fmon16.3"></div>
+                                            <div id ="fmon16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon17.1"></div>
+                                            <div id ="fmon17.2"></div>
+                                            <div id ="fmon17.3"></div>
+                                            <div id ="fmon17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon18.1"></div>
+                                            <div id ="fmon18.2"></div>
+                                            <div id ="fmon18.3"></div>
+                                            <div id ="fmon18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon19.1"></div>
+                                            <div id ="fmon19.2"></div>
+                                            <div id ="fmon19.3"></div>
+                                            <div id ="fmon19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fmon20.1"></div>
+                                            <div id ="fmon20.2"></div>
+                                            <div id ="fmon20.3"></div>
+                                            <div id ="fmon20.4"></div>
                                         </td>
-                                        <td class="tue" style="background-color: lightsalmon;">
-                                            <div>tuesday section</div>
+                                        <td class="tue" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="ftue9.1"></div>
+                                            <div id ="ftue9.2"></div>
+                                            <div id ="ftue9.3"></div>
+                                            <div id ="ftue9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue10.1"></div>
+                                            <div id ="ftue10.2"></div>
+                                            <div id ="ftue10.3"></div>
+                                            <div id ="ftue10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue11.1"></div>
+                                            <div id ="ftue11.2"></div>
+                                            <div id ="ftue11.3"></div>
+                                            <div id ="ftue11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue12.1"></div>
+                                            <div id ="ftue12.2"></div>
+                                            <div id ="ftue12.3"></div>
+                                            <div id ="ftue12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue13.1"></div>
+                                            <div id ="ftue13.2"></div>
+                                            <div id ="ftue13.3"></div>
+                                            <div id ="ftue13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue14.1"></div>
+                                            <div id ="ftue14.2"></div>
+                                            <div id ="ftue14.3"></div>
+                                            <div id ="ftue14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue15.1"></div>
+                                            <div id ="ftue15.2"></div>
+                                            <div id ="ftue15.3"></div>
+                                            <div id ="ftue15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue16.1"></div>
+                                            <div id ="ftue16.2"></div>
+                                            <div id ="ftue16.3"></div>
+                                            <div id ="ftue16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue17.1"></div>
+                                            <div id ="ftue17.2"></div>
+                                            <div id ="ftue17.3"></div>
+                                            <div id ="ftue17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue18.1"></div>
+                                            <div id ="ftue18.2"></div>
+                                            <div id ="ftue18.3"></div>
+                                            <div id ="ftue18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue19.1"></div>
+                                            <div id ="ftue19.2"></div>
+                                            <div id ="ftue19.3"></div>
+                                            <div id ="ftue19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="ftue20.1"></div>
+                                            <div id ="ftue20.2"></div>
+                                            <div id ="ftue20.3"></div>
+                                            <div id ="ftue20.4"></div>
                                         </td>
-                                        <td class="wed" style="background-color: lightsteelblue;">
-                                            <div>wednesday section</div>
+                                        <td class="wed" style="border-left: 0.1px solid #d6d6d6;">
+                                            <!-- <p>wednesday section</p> -->
+                                            <div id ="fwed9.1"></div>
+                                            <div id ="fwed9.2"></div>
+                                            <div id ="fwed9.3"></div>
+                                            <div id ="fwed9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed10.1"></div>
+                                            <div id ="fwed10.2"></div>
+                                            <div id ="fwed10.3"></div>
+                                            <div id ="fwed10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed11.1"></div>
+                                            <div id ="fwed11.2"></div>
+                                            <div id ="fwed11.3"></div>
+                                            <div id ="fwed11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed12.1"></div>
+                                            <div id ="fwed12.2"></div>
+                                            <div id ="fwed12.3"></div>
+                                            <div id ="fwed12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed13.1"></div>
+                                            <div id ="fwed13.2"></div>
+                                            <div id ="fwed13.3"></div>
+                                            <div id ="fwed13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed14.1"></div>
+                                            <div id ="fwed14.2"></div>
+                                            <div id ="fwed14.3"></div>
+                                            <div id ="fwed14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed15.1"></div>
+                                            <div id ="fwed15.2"></div>
+                                            <div id ="fwed15.3"></div>
+                                            <div id ="fwed15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed16.1"></div>
+                                            <div id ="fwed16.2"></div>
+                                            <div id ="fwed16.3"></div>
+                                            <div id ="fwed16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed17.1"></div>
+                                            <div id ="fwed17.2"></div>
+                                            <div id ="fwed17.3"></div>
+                                            <div id ="fwed17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed18.1"></div>
+                                            <div id ="fwed18.2"></div>
+                                            <div id ="fwed18.3"></div>
+                                            <div id ="fwed18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed19.1"></div>
+                                            <div id ="fwed19.2"></div>
+                                            <div id ="fwed19.3"></div>
+                                            <div id ="fwed19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fwed20.1"></div>
+                                            <div id ="fwed20.2"></div>
+                                            <div id ="fwed20.3"></div>
+                                            <div id ="fwed20.4"></div>
                                         </td>
-                                        <td class="thr" style="background-color: lightyellow;">
-                                            <div>thursday section</div>
+                                        <td class="thr" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="fthu9.1"></div>
+                                            <div id ="fthu9.2"></div>
+                                            <div id ="fthu9.3"></div>
+                                            <div id ="fthu9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu10.1" ></div>
+                                            <div id ="fthu10.2"></div>
+                                            <div id ="fthu10.3"></div>
+                                            <div id ="fthu10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu11.1"></div>
+                                            <div id ="fthu11.2"></div>
+                                            <div id ="fthu11.3"></div>
+                                            <div id ="fthu11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu12.1"></div>
+                                            <div id ="fthu12.2"></div>
+                                            <div id ="fthu12.3"></div>
+                                            <div id ="fthu12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu13.1"></div>
+                                            <div id ="fthu13.2"></div>
+                                            <div id ="fthu13.3"></div>
+                                            <div id ="fthu13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu14.1"></div>
+                                            <div id ="fthu14.2"></div>
+                                            <div id ="fthu14.3"></div>
+                                            <div id ="fthu14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu15.1"></div>
+                                            <div id ="fthu15.2"></div>
+                                            <div id ="fthu15.3"></div>
+                                            <div id ="fthu15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu16.1"></div>
+                                            <div id ="fthu16.2"></div>
+                                            <div id ="fthu16.3"></div>
+                                            <div id ="fthu16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu17.1"></div>
+                                            <div id ="fthu17.2"></div>
+                                            <div id ="fthu17.3"></div>
+                                            <div id ="fthu17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu18.1"></div>
+                                            <div id ="fthu18.2"></div>
+                                            <div id ="fthu18.3"></div>
+                                            <div id ="fthu18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu19.1"></div>
+                                            <div id ="fthu19.2"></div>
+                                            <div id ="fthu19.3"></div>
+                                            <div id ="fthu19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fthu20.1"></div>
+                                            <div id ="fthu20.2"></div>
+                                            <div id ="fthu20.3"></div>
+                                            <div id ="fthu20.4"></div>
                                         </td>
-                                        <td class="fri" style="background-color: lightseagreen;">
-                                            <div>firday section</div>
+                                        <td class="fri" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="fri9.1"></div>
+                                            <div id ="fri9.2"></div>
+                                            <div id ="fri9.3"></div>
+                                            <div id ="fri9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri10.1"></div>
+                                            <div id ="fri10.2"></div>
+                                            <div id ="fri10.3"></div>
+                                            <div id ="fri10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri11.1"></div>
+                                            <div id ="fri11.2"></div>
+                                            <div id ="fri11.3"></div>
+                                            <div id ="fri11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri12.1"></div>
+                                            <div id ="fri12.2"></div>
+                                            <div id ="fri12.3"></div>
+                                            <div id ="fri12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri13.1"></div>
+                                            <div id ="fri13.2"></div>
+                                            <div id ="fri13.3"></div>
+                                            <div id ="fri13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri14.1"></div>
+                                            <div id ="fri14.2"></div>
+                                            <div id ="fri14.3"></div>
+                                            <div id ="fri14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri15.1"></div>
+                                            <div id ="fri15.2"></div>
+                                            <div id ="fri15.3"></div>
+                                            <div id ="fri15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri16.1"></div>
+                                            <div id ="fri16.2"></div>
+                                            <div id ="fri16.3"></div>
+                                            <div id ="fri16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri17.1"></div>
+                                            <div id ="fri17.2"></div>
+                                            <div id ="fri17.3"></div>
+                                            <div id ="fri17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri18.1"></div>
+                                            <div id ="fri18.2"></div>
+                                            <div id ="fri18.3"></div>
+                                            <div id ="fri18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri19.1"></div>
+                                            <div id ="fri19.2"></div>
+                                            <div id ="fri19.3"></div>
+                                            <div id ="fri19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri20.1"></div>
+                                            <div id ="fri20.2"></div>
+                                            <div id ="fri20.3"></div>
+                                            <div id ="fri20.4"></div>
                                         </td>
                                     </tr>
+                                    <script>
+                                        console.log(friend.name);
+                                        var courselist = friend.course;
+                                        console.log(courselist);
+                                        for (var i=0; i<courselist.length; i++) {
+                                            var tmp = courselist[i];
+                                            showFriendCourse(tmp.title, tmp.time); //제목, 시간리스트로 시간표에 출력하기
+                                        }
+                                    </script>
+
                                 </tbody>
                             </table>
                         </div>
