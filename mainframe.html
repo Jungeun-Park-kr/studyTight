@@ -70,12 +70,12 @@
             }
             // 실시간 일정 있는 경우
             if (isopen) {
-                console.log('실시간o'+course);
+                console.log('실시간O : '+course);
                 doc.getElementById("shortcuts_title").innerHTML = course;
+                doc.getElementById("shortcuts_link").style.color = "blue";
             }            
             function openLink() { //바로가기 버튼 누른경우
                 if (isopen) { //실시간 수업 있는경우 링크로 이동
-                    doc.getElementById("shortcuts_link").style.color = "blue";
                     var win = window.open(link, '_blank');
                     win.focus();
                 } else {
