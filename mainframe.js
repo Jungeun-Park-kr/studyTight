@@ -9,34 +9,26 @@
 // button.addEventListener('click',saveToLocalStorage); //button클릭하면 local로 저장하기
 // const storedInput=localStorage.getItem('todolist'); //local에 저장한 것 불러오기
 function plusTodo(){
-        var plus_label=document.createElement('label');
+        var new_label=document.createElement('label');
         var wrap=document.getElementById('todaylist')
         var new_text=window.prompt("오늘의 할일을 입력하세요","");
+        var new_checkbox=document.createElement('input');
+        var new_p=document.createElement('label');
 
-                var new_checkbox=document.createElement('input');
-                new_checkbox.setAttribute('type','checkbox');
-                new_checkbox.setAttribute('id','new_checkbox')
-                
-                var new_p=document.createElement('p');
-                new_p.innerHTML=new_text;
-                //
+        new_p.innerHTML=new_text;
 
-                
-                wrap.appendChild(new_label);
-                wrap.appendChild(new_p)
 
-                // var new_todo=document.createElement("input");
-                // new_todo.setAttribute("type","checkbox");
-                // new_todo.setAttribute("id","new_todo");
-                // new_todo.setAttribute("value",text);
-                
-                // var new_label=document.createElement('label');
-                // new_label.setAttribute('for','new_todo'); //해당 checkbox id
-                
-                // wrap.appendChild(new_label);
-                
-                        //일단 안된다 ,,
+        new_checkbox.setAttribute('type','checkbox');
+        new_checkbox.setAttribute('id','new_checkbox');
 
+
+        new_label.appendChild(new_checkbox);
+        new_label.appendChild(new_p);
+
+        wrap.appendChild(new_label);  
+        
+        new_label.className="new_todo"
+                //완성 ㅎㅎ
 }
 function starClicked(){
         document.getElementById("star").src="/media/full_star.png";
