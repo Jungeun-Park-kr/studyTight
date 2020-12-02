@@ -15,15 +15,15 @@
                 <div class ="logo_area"> 
                 <img src="/media/logo.png" class= logo onclick="btnHome();"></div>
                 <div class="folder_todo">
-                        <p>할 일 목록</p>
+                        <p class="wrap_Todolist">할 일 목록</p>
                         <hr>
-                        <div class="Todolist">
-                            <label><p><input type="checkbox"> func1 구현</p></label>
-                            <label><p><input type="checkbox"> func2 구현</p></label>
-                            <label><p><input type="checkbox"> func3 구현</p></label>
-                            <label><p><input type="checkbox"> 보고서 쓰기</p></label>
-                            <label><p><input type="checkbox"> func1 디버깅</p></label>
-                            <label><p><input type="checkbox"> func2 디버깅</p></label>
+                        <div class="Todolist" id="Todolist">
+                            <label><input type="checkbox"><p> func1 구현</p></label>
+                            <label><input type="checkbox"><p> func2 구현</p></label>
+                            <label><input type="checkbox"><p> func3 구현</p></label>
+                            <label><input type="checkbox"><p> 보고서 쓰기</p></label>
+                            <label><input type="checkbox"><p> func1 디버깅</p></label>
+                            <label><input type="checkbox"><p> func2 디버깅</p></label>
                         </div>
                         <input type="button" class="folderTodoBtn" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
                 </div>

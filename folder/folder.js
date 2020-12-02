@@ -34,7 +34,26 @@ function PostItFile(){
     alert("저장된 파일로 접근합니다.");
 }
 function plusTodo(){
-    alert("할 일을 추가합니다");
+    var new_label=document.createElement('label');
+    var wrap=document.getElementById('Todolist')
+    var new_text=window.prompt("할 일 목록을 채우세요","");
+    var new_checkbox=document.createElement('input');
+    var new_p=document.createElement('label');
+
+    new_p.innerHTML=new_text;
+
+
+    new_checkbox.setAttribute('type','checkbox');
+    new_checkbox.setAttribute('id','new_checkbox');
+
+
+    new_label.appendChild(new_checkbox);
+    new_label.appendChild(new_p);
+
+    wrap.appendChild(new_label);  
+    
+    new_label.className="new_folder_todo"
+            //완성 ㅎㅎ
 }
 function btnHome(){
     location.replace("../mainframe.html");
