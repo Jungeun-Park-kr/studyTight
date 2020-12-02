@@ -11,8 +11,6 @@ function showTimetableAddPopup() {
 
 function getCourses(course) { //파라미터:courselist
     var tbody = document.getElementById('course_table_body'); //table body 가져오기
-    //var nrow, ncell1, ncell2, ncell3, ncell4, ncell5, ncell6;
-    // var table = document.getElementById("course_table"); //table 자체 가져오기
     for(var i=0; i<course.length; i++) { //과목 개수만큼 반복하기
         var nrow = tbody.insertRow(-1); //제일 하단에 추가
         var ncell1 = nrow.insertCell(0); //과목명 셀
@@ -33,12 +31,9 @@ function getCourses(course) { //파라미터:courselist
         ncell2.innerHTML = timetext;
         ncell3.innerHTML = courseType(course[i].type, course[i].location);
         ncell4.innerHTML = course[i].professor;
-        ncell5.innerHTML = '<input type="button" class="btn_modify_course" onclick="modifyCourse();"/>';
-        ncell6.innerHTML = '<input type="button" class="btn_delete_course" onclick="deleteCourse();"/>';
-
+        ncell5.innerHTML = '<input type="button" class="btn_modify_course" onclick="modifyCourse(this);"/>';
+        ncell6.innerHTML = '<input type="button" class="btn_delete_course" onclick="deleteCourse(this);"/>';
     }
-
-
 }
 
 function courseDay(day) {
@@ -68,17 +63,24 @@ function courseType(type, location) { //과목 타입(online_realtime,online_vid
 }
 
 
-function modifyCourse(course) { 
+function modifyCourse(obj) { 
     //과목 수정 버튼 누를 경우 해당 과목의 정보 수정
     
 }
 
-function deleteCourse(course) {
-    var ret = confirm("정말로 삭제하시겠습니까?");
-    if (ret) {
-        //삭제 수행
-    }else { //취소버튼 or 다이얼로그 닫은 경우
-        ;
+function deleteCourse(obj) {
+    var target = document.getElementsByClassName('btn_delete_course');
+    for (var i=0; i<target.length; i++) {
+        target[i].addEventListener('click', function() {
+            var ret = confirm("정말로 삭제하시겠습니까?");
+            if (ret) { //삭제 수행
+                var parent = document.target[i].parentElement;
+                parent.removeChild(this);
+            }else { //취소버튼 or 다이얼로그 닫은 경우
+                ;
+            }
+        })
     }
+
 }
 
