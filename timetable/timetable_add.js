@@ -83,7 +83,6 @@ function addCourse() { //저장하기 버튼
     //     window.close(); //창 닫기
     // }, 2000);
 
-    localStorage.setItem('newCourse', course.title); //새로 추가한 과목 이름 저장
     opener.parent.location.reload(); //부모창 새로고침
     //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
     window.close(); //창 닫기
