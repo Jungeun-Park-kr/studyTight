@@ -71,6 +71,32 @@ userlist[0].course.push(course3);
 //localStorage.setItem('activeUser', activeUser);
 localStorage.setItem('userlist', userlist);
 
+userlist.push (
+    {
+        userId : 'noino08189@naver.com',
+        password : 'asdfasdf',
+        name : '최시언',
+        userImage : '/media/user.png',
+        course : [],
+        guestbook : [],
+        d_day : []
+    }
+)
+var course4 = {
+    title : "운영체제",
+    professor : "홍지만",
+    time : [], //과목 시간 담은 리스트
+    type : "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location : "https://ssu-ac-kr.zoom.us/j/99482576655?pwd=andKL2dvV0lxeHRuYm0xaXlIN1BhZz09" //강의실/강의링크
+};
+var time5 = {
+    day : "thu", //mon, tue, ... 저장
+    stime : "10:30", //시작시간
+    etime : "11:45" //종료시간
+}
+course4.time.push(time5);
+userlist[1].course.push(course4);
+
 
 function createUser(userid, userpw, username) { //userlist에 새로운 사용자 추가
     var user = new Object();
