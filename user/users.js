@@ -94,4 +94,30 @@ function getActiveUser(username) { //사용자 이름으로 현재 접속중인 
     }
 }
 
+//d-day
+var d_day1 = {
+    day: 1,
+    content: "정보보안 퀴즈"
+};
+var d_day2 = {
+    day: 3,
+    content: "모바일네트워크 퀴즈"
+};
+var d_day3 = {
+    day: 5,
+    content: "DB 과제2"
+};
+var d_day4 = {
+    day: 9,
+    content: "기독교 중간"
+};
+var d_day5 = {
+    day: 15,
+    content: "TOPCIT 시험"
+};
+userlist[0].d_day.push(d_day1);
+userlist[0].d_day.push(d_day2);
+userlist[0].d_day.push(d_day3);
+userlist[0].d_day.push(d_day4);
+userlist[0].d_day.push(d_day5); //d-day 정보를 넣음
 
