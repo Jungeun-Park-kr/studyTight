@@ -35,11 +35,22 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
     var index = sel.selectedIndex; //선택된 옵션 인덱스 (요일 인덱스)
     var stime = document.getElementById("course_start_time"); //시작시간
     var etime = document.getElementById("course_end_time"); //종료시간
+    // console.log(stime.value);
+    // console.log(etime.value);
+    // if (etime < stime) {
+    //     alert('시작시간이 종료시간보다 빨라야 합니다.');
+    //     stime.value="09:00";
+    //     etime.value="19:15";
+    //     stime.focus();
+    //     return
+    // }
+
     var time; //시간 정보를 담은 텍스트
     time = sel.options[index].text + ' ' + stime.value + ' ~ ' + etime.value;
     newP.innerHTML = '(클릭시 삭제) ' + time;
-    newP.addEventListener("click",
-    function() {
+    newP.addEventListener("click", function() {
+        var t = time; //시간 저장해두기
+        deleteTime(t); //시간 삭제하기
         var p = this.parentElement;
         p.removeChild(this);
     });
@@ -57,20 +68,63 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
     }
 }
 
+function deleteTime(time) {
+    for (var i=0; i<timelist.length; i++) {
+        if (timelist[i].day == time.day) {
+            if (timelist[i].stime == time.stime) {
+                if (timelist[i].etime == time.etime) {
+                    console.log('찾음! 삭제할 시간:'+timelist[i].stime);
+                    timelist.splice(i,1);
+                    break;
+                }
+            }
+        }
+    }
+    console.log('--잘 삭제되었나 확인--')
+    for (var j=0; j<timelist.length; j++) {
+        console.log(timelist[j].etime);
+    }
+}
+
 function addCourse() { //저장하기 버튼
+    var title = document.getElementById("course_title").value;
+    var professor = document.getElementById("professor_name").value;
+    var location = document.getElementById('course_link_url').value;
     var ctype = document.getElementsByName("course_type");
     var course_type;
-    for (var i=0; i<ctype.length; i++) {
+    for (var i=0; i<ctype.length; i++) { //강의종류 라디오버튼 확인
         if (ctype[i].checked == true) {
             course_type = ctype[i].value;
         }
     }
+    //입력 잘 되었나 확인
+    if (!title) {
+        alert('과목이름을 입력해주세요');
+        document.getElementById("course_title").focus();
+        return;
+    }
+    if (!professor) {
+        alert('교수명을 입력해주세요');
+        document.getElementById("professor_name").focus();
+        return;
+    }
+    if (timelist.length < 1) {
+        alert('+ 버튼을 눌러 강의 시간을 추가해주세요');
+        return;
+    }
+    if (!location) {
+        alert('강의링크(강의실)를 입력해주세요');
+        document.getElementById("course_location").focus();
+        return;
+    }
+
+    //입력한 과목 추가
     var course = {
-        title : document.getElementById("course_title").value,
-        professor : document.getElementById("professor_name").value,
+        title : title,
+        professor : professor,
         time : timelist, //과목 시간 담은 리스트
         type : course_type, //과목 타입(online_realtime,online_video,offline)
-        location : document.getElementById("course_location").value //강의실/강의링크
+        location : location //강의실/강의링크
     };
     //현재 로그인 된 사용자의 과목 정보에 추가하기
     var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
