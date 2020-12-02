@@ -71,8 +71,7 @@
     border-radius: 15px; */
 }
 
-.course_list td,
-th {
+.course_list td, th {
     text-align: left;
     padding: 8px;
 }

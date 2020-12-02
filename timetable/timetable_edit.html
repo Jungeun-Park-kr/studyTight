@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight</title>
     <script src="/user/users.js"></script>
+    <script src="/login/login.js"></script>
     <script src="/timetable/timetable_main.js"></script>
     <script src="/timetable/timetable_edit.js"></script>
     <script src="/timetable/timetable_add.js"></script>
@@ -54,12 +55,12 @@
                 <div class="timetable_edit_section">
                     <!-- 여기에 본격적인 내용 -->
                     <div class ="course_list">
-                        <table id = "course_table">
-                            <thead><tr><th>과목명</th><th>시간</th><th>강의 방식</th><th>교수명</th><th class="modi">수정</th><th class="del">삭제</th></tr></tbody>
-                            <tbody>
-                                <tr><td>OS(운영체제)</td><td>목요일 10:30 - 11:45</td><td>온라인 실시간</td><td>김철홍</td>
+                        <table id = "course_table" style="table-layout:fixed; word-break:break-all;">
+                            <thead><tr><th style='width:20%'>과목명</th style='width:30%'><th>시간</th><th style='width:20%'>강의 방식</th><th style='width:10%'>교수명</th><th  style='width:10%' class="modi">수정</th><th class="del" style='width:10%'>삭제</th></tr></tbody>
+                            <tbody id = "course_table_body">
+                                <!-- <tr><td>OS(운영체제)</td><td>목요일 10:30 - 11:45</td><td>온라인 실시간</td><td>김철홍</td>
                                     <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c1+');"/></td>
-                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');" style="width:32px"/></td>
                                 </tr>
                                 <tr><td>웹프로그래밍기초및실습</td><td>월요일 13:00 - 14:45</td><td>온라인 동영상</td><td>최지웅</td>
                                     <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
@@ -76,13 +77,16 @@
                                 <tr><td>철학으로만나는기독교</td><td>수요일 16:30 - 17:45</td><td>온라인 동영상</td><td>성신형</td>
                                     <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
                                     <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
-                    
                 </div>
-                
+                <script>
+                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                    getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
+                </script>
             </div>
         </div>    
         <div class="aside">
