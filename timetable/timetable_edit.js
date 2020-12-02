@@ -31,8 +31,8 @@ function getCourses(course) { //파라미터:courselist
         ncell2.innerHTML = timetext;
         ncell3.innerHTML = courseType(course[i].type, course[i].location);
         ncell4.innerHTML = course[i].professor;
-        ncell5.innerHTML = '<input type="button" class="btn_modify_course" onclick="modifyCourse(this);"/>';
-        ncell6.innerHTML = '<input type="button" class="btn_delete_course" onclick="deleteCourse(this);"/>';
+        ncell5.innerHTML = '<input type="button" class="btn_modify_course"/>';
+        ncell6.innerHTML = '<input type="button" class="btn_delete_course"/>';
     }
 }
 
@@ -68,19 +68,19 @@ function modifyCourse(obj) {
     
 }
 
-function deleteCourse(obj) {
-    var target = document.getElementsByClassName('btn_delete_course');
-    for (var i=0; i<target.length; i++) {
-        target[i].addEventListener('click', function() {
-            var ret = confirm("정말로 삭제하시겠습니까?");
-            if (ret) { //삭제 수행
-                var parent = document.target[i].parentElement;
-                parent.removeChild(this);
-            }else { //취소버튼 or 다이얼로그 닫은 경우
-                ;
-            }
-        })
+function deleteCourse(title) { //해당 과목이름을 가진 과목을 DB에서 삭제하기
+    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+    var courselist = activeUser.course;
+    for (var i=0; i<courselist.length; i++) {
+        if (courselist[i].title === title) { //해당 데이터 삭제
+            console.log('찾음! 삭제할 과목:'+courselist[i].title);
+            courselist.splice(i, 1);
+        }
     }
-
+    console.log('--잘 삭제되었나 확인--')
+    for (var i=0; i<courselist.length; i++) {
+        console.log(courselist[i].title);
+    }
 }
 
