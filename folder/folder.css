@@ -5,27 +5,38 @@ body {
     background-color: #c7c5c565;
     border-radius: 5px;
 }
-.folder_todo > p {
+.wrap_Todolist {
     /* 할 일 목록 부분 */
     text-align: center;
     font-weight: bold;
     padding-top:15px;
     font-size:1.3em;
     margin-left:15px;
- 
+    vertical-align: middle;  
 }
-.folder_todo > label {
+.Todolist > label {
+    display:block;
     margin-left:15px;
+}
+.Todolist > label > input, p {
+    display:inline-block;
 }
 .Todolist > p {
     margin-left:20px;
+
+}
+.new_folder_todo{
+    margin-left:20px;
     margin-top:10px;
+    margin-bottom: 25px;
 }
 .folderTodoBtn{
     background-color:#6ED4D8;
+    border:none;
     border-radius: 10px;
     width:100px;
     height:35px;
+    margin-top:20px;
     margin-left:50px;
     margin-right:30px;
     margin-bottom: 15px;
