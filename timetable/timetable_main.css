@@ -4,6 +4,7 @@
 }
 .timetable_section {
     float:left;
+    width:100%;
 }
 .page-header .timetable_title {
     float:left;
