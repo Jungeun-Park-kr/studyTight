@@ -35,20 +35,53 @@ function storeDday(){
 
 }
 function plusDday(new_date, new_content){
+    var d_table=document.getElementById('table-d');
+
+    var new_tr=document.createElement('tr');
+    new_tr.setAttribute('class','new_tr');
+
+    var td1=document.createElement('td');
+    var td2=document.createElement('td');
+    var td3=document.createElement('td');
+    var td4=document.createElement('td');
+
+    td1.innerText="D-"+new_date;
+    td2.innerText=new_content;
+    td2.setAttribute('id','pluscontent')
+    td3.setAttribute('class','new_modify_btn');
+    //td3.setAttribute('id','new_modify_btn')
+    new_modify_btn.onclick=function(){
+        var prompt=prompt("수정할 내용을 입력하세요");
+        pluscontent.innerText=prompt;
+    };
+    td4.setAttribute('class','new_delete_btn');
+    td4.onclick=function(){
+        document.getElementById('table_body').removeChild(t4.parentElement.parentElement); 
+    };
+
     
+    new_tr.appendChild(td1);
+    new_tr.appendChild(td2);
+    new_tr.appendChild(td3);
+    new_tr.appendChild(td4);
+
+    d_table.appendChild(new_tr);
 }
 
-function modifyDday(dday){
+function modifyDday(order){
+    var content_modify=document.getElementsByClassName('content');
+    var modi_content=prompt("수정할 내용을 입력하세요");
+ 
+    content_modify.item(order).innerText=modi_content;
+    
+    //수정완료 ^^
 
 }
-function deleteDday(){
-    var eventTarget=document.getElementsByClassName('btn_delete_d-day');
+function deleteDday(order){
+    var content_delete=document.getElementsByClassName('btn_delete_d-day');
+    var parent=document.getElementById('table_body');
 
-   // for(var i=0; i < eventTarget.length; i++){
-    //    var d=eventTarget[i];
-        var parent=document.getElementById('table_body');
-        parent.removeChild(eventTarget.parentElement.parentElement);
-        // i++;
-        //다 똑같은 d를 가질까.. 흠.. 삭제는 골라서는 안되고 전체가 삭제된다.
-       // }
-}
+        parent.removeChild(content_delete.item(order).parentElement.parentElement);
+        //삭제 완료 ^^
+       }
+
