@@ -46,6 +46,26 @@ table > th {
     text-align: center;
     padding:3px;
 }
+.new_tr > td{
+    text-align:center;
+    padding:3px;
+}
+.new_delete_btn {
+    align-content: center;
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: url("media/delete.png") no-repeat;
+    cursor: pointer;
+}
+.new_modify_btn{
+    align-content: center;
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: url("media/edit.png") no-repeat;
+    cursor: pointer;
+}
 table > tbody >  tr> td{
     text-align:center;
     padding:3px;
