@@ -6,7 +6,7 @@ function newPostIt(){
     var popupHeight = 300;
     var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
     var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
-    var url = "pluspostit.html";
+    var url = "pluspostit.html"; 
     var name = "plus postIt"
     var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
     window.open(url, name, option);
@@ -28,7 +28,14 @@ function PostItLink(goto){
     }
 }
 function PostItContent(title){
-        alert("내용을 클릭했습니다.");
+    var popupWidth = 400;
+    var popupHeight = 300;
+    var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
+    var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
+    var url = "pluspostit.html"; 
+    var name = "plus postIt"
+    var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
+    window.open(url, name, option);
 }
 function PostItFile(){
     alert("저장된 파일로 접근합니다.");

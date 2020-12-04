@@ -30,9 +30,19 @@ function plusTodo(){
         new_label.className="new_todo"
                 //완성 ㅎㅎ
 }
-function starClicked(){
-        document.getElementById("star").src="/media/full_star.png";
-//하나만 적용된다 ㄱ-
+function starClicked(order){
+        //document.getElementById("star").src="/media/full_star.png";
+        var star=document.getElementsByClassName('star');
+
+        star[order].src="media/full_star.png"
+        star[order].setAttribute('mark','true');
+        console.log('mark:',mark);
+
+        if(star[order].mark=='true'){
+                //별을 통해서 자기 위의 div를 어떻게 찾냐..ㅋㅋ
+        }
+        //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 하냐,,,ㅋㅋㅋ
+        //일단 empty_star되는 것도 코드를 짰는데 왜인지 안돼서 일단 없앰.
 }
 function newFolder(){
         alert("폴더 추가하기 버튼을 눌렀습니다");
