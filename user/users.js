@@ -147,3 +147,4 @@ userlist[0].d_day.push(d_day3);
 userlist[0].d_day.push(d_day4);
 userlist[0].d_day.push(d_day5); //d-day 정보를 넣음
 
+var folder=new Object();
