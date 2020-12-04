@@ -13,18 +13,18 @@ function newPostIt(){
 }
 function PostItLink(goto){
     if(goto=='pid'){
-        var link=window.open();
-        link.location="http://www.profibus.co.kr/data/Pid.pdf";
+        // var link=window.open();
+        // link.location="http://www.profibus.co.kr/data/Pid.pdf";
      
 
     }
     else if(goto=='shell'){
-        var link=window.open();
-        link.location="https://jhnyang.tistory.com/57";
+        // var link=window.open();
+        // link.location="https://jhnyang.tistory.com/57";
     }
     else if(goto=='scheduler'){
-        var link=window.open();
-        link.location="https://k39335.tistory.com/32";
+        // var link=window.open();
+        // link.location="https://k39335.tistory.com/32";
     }
 }
 function PostItContent(title){
@@ -32,8 +32,8 @@ function PostItContent(title){
     var popupHeight = 300;
     var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
     var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
-    var url = "pluspostit.html"; 
-    var name = "plus postIt"
+    //var url = "pluspostit.html"; 
+    //var name = "plus postIt"
     var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
     window.open(url, name, option);
 }
@@ -67,4 +67,18 @@ function btnHome(){
 }
 function logout(){
     location.replace("../login/login.html")
+}
+function onEditClicked(order){
+    var edit_btn=document.getElementsByClassName("editFolder");
+    //img 객체들이 있음 0부터 5까지
+    
+    var edit_content=prompt("바꿀 포스트잇 이름을 입력하세요","");
+
+    var edit_div=document.getElementById('postIt_1');
+    edit_div.innerHTML=edit_content;
+    //아직 css부분은 안건들임
+
+}
+function ononDeleteClicked(order){
+
 }

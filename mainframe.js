@@ -35,13 +35,11 @@ function starClicked(order){
         var star=document.getElementsByClassName('star');
 
         star[order].src="media/full_star.png"
-        star[order].setAttribute('mark','true');
-        console.log('mark:',mark);
-
-        if(star[order].mark=='true'){
-                //별을 통해서 자기 위의 div를 어떻게 찾냐..ㅋㅋ
-        }
-        //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 하냐,,,ㅋㅋㅋ
+       // if(star[order].mark=='true'){
+                //별을 통해서 감싼 div를 찾고 그것의 순서를 바꿔야 함..
+                //근데 어떻게 하는지 모름
+      //  }
+        //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 해야 할 지 모름
         //일단 empty_star되는 것도 코드를 짰는데 왜인지 안돼서 일단 없앰.
 }
 function newFolder(){

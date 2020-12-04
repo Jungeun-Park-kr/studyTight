@@ -3,6 +3,7 @@
     <head>
         <style>@import url(pluspostit_file.css);</style>
         <script src="pluspostit.js"></script>
+        <script src="pluspostit_file.js"></script>
     </head>
     <body>
         <h3>추가하기</h3>
@@ -21,10 +22,10 @@
             <input type="text" class="input_text" placeholder="제목을 입력하세요">
             <br>
             <p>파일</p>
-            <input type="file" class="input_file" placeholder="파일 위치 찾기">
+            <input type="file" id="input_file" class="input_file" placeholder="파일 위치 찾기">
             
         </div>
 
-        <input type="button" class="uploadBtn" value="올리기"/>
+        <input type="button" class="uploadBtn" value="올리기" onclick="uploadFile()"/>
     </body>
 </html>
