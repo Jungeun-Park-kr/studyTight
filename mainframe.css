@@ -173,7 +173,20 @@ body {
     /* //font-weight:bold;
     font-size:1.5em; */
 /* } */
-.section .folder > div {
+.folder_plus{
+    margin-left:50px;
+    margin-right:50px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    width: 18%;
+    height: 15vw;
+    line-height: 13vw;
+    vertical-align: middle;
+    padding-right:25px;
+    display:inline-block;
+}
+.section .folder > div > div {
     /* 각 폴더에 대해서 */
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
@@ -189,11 +202,15 @@ body {
     vertical-align: middle;
     padding-right:25px;
 } 
-.section .folder > div > p {
+
+.section .folder > div > div > p {
     display:block;
   
 }
-.section .folder > div > img {
+.wrap_folder {
+    display: inline;
+}
+.section .folder > div > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
     margin: 5px;

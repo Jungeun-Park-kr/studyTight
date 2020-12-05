@@ -53,16 +53,32 @@ body {
     border-radius: 3px;
    
 }
-.postIt_1, .postIt_2, .postIt_3{
+#postIt_1, #postIt_2, #postIt_3{
     background-color:#6ED4D8;
 }
-.postIt_4{
+#postIt_4{
     background-color:#E3B863;
 }
-.postIt_5{
+#postIt_5{
     background-color:#E36363;
 }
-.section > div {
+.wrap_postit{
+    display:inline;
+}
+.postIt_plus {
+    box-shadow: 2px 2px 2px rgb(141, 140, 140);
+    display:inline-block;
+    margin-left:30px;
+    margin-right:30px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 2px rgb(128, 128, 128);
+    width: 23%;
+    height: 15vw;
+    line-height: 13vw;
+    vertical-align: middle;
+}
+.section > div > div {
      /* 포스트잇 하나하나 */
     box-shadow: 2px 2px 2px rgb(141, 140, 140);
     display:inline-block;
@@ -76,13 +92,13 @@ body {
     line-height: 13vw;
     vertical-align: middle;
 }
-.section > div > p {
+.section > div > div > p {
     display: inline-block;
     text-align:center;
     padding-left:25px;
 
 }
-.section > div > img{
+.section > div > div > img{
     visibility: inherit;
     display:inline;
     width:20px;
