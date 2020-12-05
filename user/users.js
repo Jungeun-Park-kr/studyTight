@@ -9,8 +9,8 @@ userlist.push(
         userImage : '/media/profile.png',
         course : [], //과목 정보 저장할 곳
         guestbook : [], //방명록 정보 저장할 곳
-        d_day :[] //디데이 정보 저장할 곳
-
+        d_day :[], //디데이 정보 저장할 곳
+        folder: []
     }
 );
 
@@ -147,4 +147,40 @@ userlist[0].d_day.push(d_day3);
 userlist[0].d_day.push(d_day4);
 userlist[0].d_day.push(d_day5); //d-day 정보를 넣음
 
-var folder=new Object();
+var folder1= {
+    title: "OS",
+    star: "true",
+    postIt:[]
+}
+var folder2={
+    title:"웹플밍",
+    star:"true",
+    postIt:[]
+}
+var folder3={
+    title:"DB",
+    star:"false",
+    postIt:[]
+}
+var folder4={
+    title:"SAP (ABAP)",
+    star:"false",
+    postIt:[]
+}
+var postIt1={
+    title: "PID란?",
+    type:"link"
+}
+var postIt2={
+    title: "shell이란?",
+    type:"link"
+}
+folder1.push.postIt(postIt1);
+folder1.push.postIt(postIt2);
+userlist[0].folder.push(folder1);
+userlist[0].folder.push(folder2);
+userlist[0].folder.push(folder3);
+userlist[0].folder.push(folder4);
+
+
+
