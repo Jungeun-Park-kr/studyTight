@@ -12,6 +12,9 @@ function selectdate(){
 
     return gap
 }
+function sayPrompt(){
+    alert("등록 버튼을 통해서 날짜와 내용을 입력하세요")
+}
 
 function selectContent(){
         content=prompt("D-day 내용을 입력하세요","ex)웹 공부하기");
@@ -95,3 +98,5 @@ function new_delete(){
    parent.removeChild(btn.parentElement)
    //삭제 완료 ^^
 }
+//user의 정보들 가져오기 완료
+//가져와서 삭제, 추가 가능함.

@@ -162,17 +162,17 @@ var folder1= {
 var folder2={
     title:"웹플밍",
     star:"true",
-    postIt:[]
+   // postIt:[]
 }
 var folder3={
     title:"DB",
     star:"false",
-    postIt:[]
+   // postIt:[]
 }
 var folder4={
     title:"SAP (ABAP)",
     star:"false",
-    postIt:[]
+   // postIt:[]
 }
 var postIt1={
     title: "PID란?",

@@ -124,34 +124,45 @@
                 </script>
             </div>
 
-            <div class="folder">
-                <div class="folder_plus" onclick="newFolder()" ;>
+            <div class="folder_">
+                <div id="folder_plus" onclick="newFolder()" ;>
                     <p><strong>+</strong>폴더 추가하기</p>
                 </div>
                 <div id="wrap_folder" class="wrap_folder">
-                <div id="folder_1" class="folder_1">
+
+                <div id="folder_1" class="folder">
                     <img src="media/empty_star.png" class="star" onclick="starClicked(0)" />
-                    <p onclick="location.href='/folder/folder.html'">OS</p>
+                    <p onclick="location.href='/folder/folder.html'"></p>
                 </div>
                 <!-- 영상 찍을 때를 위해서 이 위의 폴더만 클릭하고 새로운 폴더 만들기 --> 
-                <div class="folder_2">
+                <div id="folder_2" class="folder">
                     <img src="media/empty_star.png" class="star" onclick="starClicked(1)" />
-                    <p onclick="location.href='/folder/folder.html'">웹플밍</p>
+                    <p onclick="location.href='/folder/folder.html'"></p>
                 </div>
-                <div class="folder_3">
+                <div id="folder_3" class="folder">
                     <img src="media/empty_star.png" class="star"  onclick="starClicked(2)" />
-                    <p onclick="location.href='/folder/folder.html'">DB</p>
+                    <p onclick="location.href='/folder/folder.html'"></p>
                 </div>
-                <div class="folder_4">
+                <div id="folder_4" class="folder">
                     <img src="media/empty_star.png" class="star"  onclick="starClicked(3)" />
-                    <p onclick="location.href='/folder/folder.html'">SAP (ABAP)</p>
+                    <p onclick="location.href='/folder/folder.html'"></p>
                 </div>
-                <!-- <div class="folder_5">
-                    <img src="media/empty_star.png" class="star" onclick="starClicked(4)" />
-                    <p onclick="location.href='/folder/folder.html'">철·만·기</p>
-                </div> -->
+                <script>
+                    var username=localStorage.getItem('username');
+                    activeUser=getActiveUser(username);
+                    var folder_list=activeUser.folder;
+                    var this_folder=document.getElementsByClassName("folder");
+                    for(var i=0;i<folder_list.length;i++){
+                        var tmp=folder_list[i];
+                        //tmp에는 folder명들이 저장되어 있음 - console로 확인완료
+                        //근데 왜 안보여지는 거니
+                        var new_p=document.createElement("p");
+                        new_p=tmp.title;
+                        this_folder[i].append(new_p)
+                    }
+                </script>
             </div>
-            </div>
+        </div>
         </div>
 
         <div class="aside">
@@ -189,6 +200,13 @@
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
                 </div>
+                <div class="caution">
+                    <pre>
+                        오늘(11:59 PM)기준으로 완료된 할 일은
+                        내일(12:00 AM)기준으로 제거되고, 
+                        완료되지 않은 할 일은 유지됩니다.
+                    </pre>
+                </div>
             </div>
         </div>
     </div>
@@ -196,4 +214,5 @@
         console.log("현재화면:메인화면, 사용자:"+ activeUser.name);
     </script>
 </body>
+
 </html>
