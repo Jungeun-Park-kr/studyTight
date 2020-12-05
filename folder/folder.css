@@ -47,6 +47,8 @@ body {
 }
 .section > p {
     font-size:1.5em;
+    font-weight: bold;
+
 }
 .postIt_plus{
     background-color:white;
@@ -77,6 +79,8 @@ body {
     height: 15vw;
     line-height: 13vw;
     vertical-align: middle;
+    text-align:center;
+    padding-left:30px;
 }
 .section > div > div {
      /* 포스트잇 하나하나 */
@@ -91,12 +95,8 @@ body {
     height: 15vw;
     line-height: 13vw;
     vertical-align: middle;
-}
-.section > div > div > p {
-    display: inline-block;
-    text-align:center;
-    padding-left:25px;
-
+    text-align: center;
+    padding-left:40px;
 }
 .section > div > div > img{
     visibility: inherit;
