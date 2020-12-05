@@ -132,12 +132,12 @@ function addCourse() { //저장하기 버튼
     activeUser.course.push(course); //현재 로그인 된 사용자의 course list에 추가한 과목 정보 넣기
     //최근에 추가한 항목 log로 확인해보기
     console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
-    // setTimeout(function(){ //테스트용 2초 딜레이
-    //     alert('asdf');
-    //     window.close(); //창 닫기
-    // }, 2000);
+    setTimeout(function(){ //테스트용 2초 딜레이
+        alert('asdf');
+        window.close(); //창 닫기
+    }, 2000);
 
     opener.parent.location.reload(); //부모창 새로고침
     //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
-    window.close(); //창 닫기
+    //window.close(); //창 닫기
 }

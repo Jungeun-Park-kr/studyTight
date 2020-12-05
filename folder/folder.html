@@ -3,11 +3,12 @@
     <head> 
         <style>@import url("folder.css");</style>
         <style>@import url(/mainframe.css);</style>
-        <script src="folder.js"></script>
-        <script src="menu.js"></script>
-        <script src="mainframe.js"></script>
-        <script src="mainframe_shortcuts.js"></script>
-        <script src="mainframe_profile.js"></script>
+        <script src ="/user/users.js"></script>
+        <script src="/folder/folder.js"></script>
+        <script src="/menu.js"></script>
+        <script src="/mainframe.js"></script>
+        <script src="/mainframe_shortcuts.js"></script>
+        <script src="/mainframe_profile.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -39,8 +40,14 @@
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <img src="/media/user.png">
-                                <div class="username">박정은님</div>
+                                <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
+                                <div class="username" id="activeUsername">박혁거세님</div>
+                                <script>
+                                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                    document.getElementById('activeUsername').innerHTML = activeUser.name + '님';
+                                    document.getElementById('activeUserimg').src = activeUser.userImage;
+                                </script>
                             </div>
                         </div> 
                     </div>
