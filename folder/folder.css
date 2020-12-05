@@ -55,7 +55,7 @@ body {
     border-radius: 3px;
    
 }
-#postIt_1, #postIt_2, #postIt_3{
+/* #postIt_1, #postIt_2, #postIt_3{
     background-color:#6ED4D8;
 }
 #postIt_4{
@@ -63,7 +63,7 @@ body {
 }
 #postIt_5{
     background-color:#E36363;
-}
+} */
 .wrap_postit{
     display:inline;
 }

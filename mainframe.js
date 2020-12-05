@@ -33,18 +33,17 @@ function plusTodo(){
 function starClicked(order){
         //document.getElementById("star").src="/media/full_star.png";
         var star=document.getElementsByClassName('star');
-
-        star[order].src="media/full_star.png"
-       // if(star[order].mark=='true'){
-                //별을 통해서 감싼 div를 찾고 그것의 순서를 바꿔야 함..
-                //근데 어떻게 하는지 모름
-      //  }
-        //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 해야 할 지 모름
-        //일단 empty_star되는 것도 코드를 짰는데 왜인지 안돼서 일단 없앰.
+        if(star[order].src=="media/full_star.png"){
+                star[order].src="media/empty_star.png"
+        }
+        //이 if문이 안먹힘..
+        else{
+                star[order].src="media/full_star.png"
+        }
 }
 function newFolder(){
-       var new_name=prompt("폴더 이름을 입력하세요","");
-         var new_div=document.createElement('div');
+        var new_name=prompt("폴더 이름을 입력하세요","");
+        var new_div=document.createElement('div');
 
         var origin_div=document.getElementById('wrap_folder');
         //append로 안함

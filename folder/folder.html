@@ -54,25 +54,56 @@
                 </div>
             </div>
             <div class="section">
-                <p>OS (운영체제)</p>
+                <p id="section_p">
+                    <script>
+                        var username=localStorage.getItem('username')
+                        activeUser=getActiveUser(username)
+                        var get_p=document.getElementById("section_p")
+                        var get_name=activeUser.folder[0].title
+                        console.log(get_name)
+                        get_p.innerHTML=get_name;
+                    </script>
+                </p>
                 <hr>
                 <div class="postIt_plus" onclick="newPostIt();"><p>포스트잇 추가하기</p></div>
                 <div id="wrap_postit" class="wrap_postit">
-                <div id="postIt_1"  onclick="PostItLink('pid');"><p class="post">PID란?</p>
+                <div id="postIt_1" class="postIt" onclick="PostItLink('pid');"><p class="post"></p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(0);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(0);"></div>
-                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post">shell이란?</p>
+                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post"></p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(1);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(1);"></div>
-                <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');"><p class="post">scheduler란?</p>
+                <!-- <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');"><p class="post">scheduler란?</p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(2);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(2);"></div>
                 <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');"><p class="post">chap1 정리</p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(3);">
-                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(3);"></div>
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(3);"></div> -->
                 <!-- <div id="postIt_5" class="postIt" onclick="PostItFile();"><p>ssu_shell.c</p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(4);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(4);"></div> -->
+                <script>
+                    var username=localStorage.getItem('username')
+                    activeUser=getActiveUser(username);
+                    var name_p=document.getElementsByClassName("post");//2개 있음
+                    var name_div=document.getElementsByClassName("postIt")
+                    var name_post_list=activeUser.folder[0].postIt; //2개가 있음
+                    for(var i=0; i<name_post_list.length;i++){
+                        var postit=name_post_list[i]; //title과 type이 같이 있음
+                        name_p[i].innerHTML=postit.title;
+                        
+                        if(postit.type=="link"){
+                            name_div[i].style.backgroundColor="#6ED4D8"
+                        }
+                        else if(postit.type=="file"){
+                            name_div[i].style.backgroundColor="#E3B863"
+                        }
+                        else{ //type이 content라면
+                            name_div[i].style.getElementsByClassName="#E36363"
+                        }
+                    }
+                    //여기서 folder 색 지정해주기 type="link"면 이런 식으로
+                </script>
                 </div>
             </div>
         </div>

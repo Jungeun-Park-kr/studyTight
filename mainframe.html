@@ -151,6 +151,7 @@
                     var username=localStorage.getItem('username');
                     activeUser=getActiveUser(username);
                     var folder_list=activeUser.folder;
+                    var star_list=document.getElementsByClassName("star")
                     var this_folder=document.getElementsByClassName("folder");
                     for(var i=0;i<folder_list.length;i++){
                         var tmp=folder_list[i];
@@ -159,6 +160,11 @@
                         var new_p=document.createElement("p");
                         new_p=tmp.title;
                         this_folder[i].append(new_p)
+
+                        if(tmp.star=="true"){
+                            star_list[i].src="/media/full_star.png"
+                        }
+
                     }
                 </script>
             </div>
