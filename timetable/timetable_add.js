@@ -114,7 +114,7 @@ function addCourse() { //저장하기 버튼
     }
     if (!location) {
         alert('강의링크(강의실)를 입력해주세요');
-        document.getElementById("course_location").focus();
+        document.getElementById("course_link_url").focus();
         return;
     }
 
@@ -135,7 +135,7 @@ function addCourse() { //저장하기 버튼
     setTimeout(function(){ //테스트용 2초 딜레이
         alert('asdf');
         window.close(); //창 닫기
-    }, 2000);
+    }, 200000000);
 
     opener.parent.location.reload(); //부모창 새로고침
     //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
