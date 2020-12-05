@@ -42,8 +42,41 @@ function starClicked(order){
         //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 해야 할 지 모름
         //일단 empty_star되는 것도 코드를 짰는데 왜인지 안돼서 일단 없앰.
 }
+var new_star;
 function newFolder(){
-        alert("폴더 추가하기 버튼을 눌렀습니다");
+       var new_name=prompt("폴더 이름을 입력하세요","");
+         var new_div=document.createElement('div');
+
+        var origin_div=document.getElementById('wrap_folder');
+        //append로 안함
+        var before_div=document.getElementById('folder_1');
+
+        //별 넣기
+        new_star=document.createElement('img');
+        new_star.setAttribute('id','new_star');
+        new_star.src="media/empty_star.png"
+        new_star.style.float="left";
+        new_star.style.margin="5px";
+        new_star.style.width="25px";
+        new_star.style.height="auto";
+        new_star.style.dispaly="inline";
+        new_star.setAttribute('onclick',"newClicked();")
+
+        var new_p=document.createElement('p');
+        new_p.innerHTML=new_name;
+
+        new_div.setAttribute('class','new_div');
+        new_div.append(new_star);
+        new_div.append(new_p);
+
+        origin_div.insertBefore(new_div,before_div);
+
+        return new_star;
+
+}
+function newClicked(){
+        var star=document.getElementById('new_star');
+        star.src="media/full_star.png"
 }
 
 function getRealtimeCourse(course) {
