@@ -27,7 +27,7 @@ function getCourses(course) { //파라미터:courselist
             var text = courseDay(course[i].time[j].day) +' '+ course[i].time[j].stime +'-'+ course[i].time[j].etime;
             timetext = timetext + text + '\n';
         }
-        console.log(timetext);
+        //console.log(timetext);
         ncell2.innerHTML = timetext;
         ncell3.innerHTML = courseType(course[i].type, course[i].location);
         ncell4.innerHTML = course[i].professor;
@@ -75,31 +75,59 @@ function showCourseEditPopup(course) {
 }
 
 function editBtn() {
+    console.log('누름')
     var old = localStorage.getItem('editCourse'); //수정할 과목이름 저장
+    var title = document.getElementById("course_title").value;
+    var professor = document.getElementById("professor_name").value;
+    var location = document.getElementById('course_link_url').value;
+    var ctype = document.getElementsByName("course_type");
+    console.log('누름2')
     if (old == null) //수정할 과목 없으면 저장X
         return ;
-    //사용자가 수정한 내용 저장
-    var ctype = document.getElementsByName("course_type");
+        console.log('누름10')
     var course_type;
     for (var i=0; i<ctype.length; i++) {
         if (ctype[i].checked == true) {
             course_type = ctype[i].value;
         }
     }
+    console.log('누름3')
+    //입력 잘 되었나 확인
+    if (!title) {
+        alert('과목이름을 입력해주세요');
+        document.getElementById("course_title").focus();
+        return;
+    }
+    if (!professor) {
+        alert('교수명을 입력해주세요');
+        document.getElementById("professor_name").focus();
+        return;
+    }
+    if (timelist.length < 1) {
+        alert('+ 버튼을 눌러 강의 시간을 추가해주세요');
+        return;
+    }
+    if (!location) {
+        alert('강의링크(강의실)를 입력해주세요');
+        document.getElementById("course_link_url").focus();
+        return;
+    }
+    console.log('누름4')
     var course = {
-        title : document.getElementById("course_title").value,
-        professor : document.getElementById("professor_name").value,
+        title : title,
+        professor : professor,
         time : timelist, //과목 시간 담은 리스트
         type : course_type, //과목 타입(online_realtime,online_video,offline)
-        location : document.getElementById("course_location").value //강의실/강의링크
+        location : location //강의실/강의링크
     };
+    console.log('누름5')
     modifyCourse(course); //변경사항 적용
+    setTimeout(function(){ //테스트용 2초 딜레이
+        alert('asdf');
+        window.close(); //창 닫기
+    }, 200000000);
     opener.parent.location.reload(); //부모창 새로고침
-    // setTimeout(function(){ //테스트용 2초 딜레이
-    //     alert('asdf');
-    //     window.close(); //창 닫기
-    // }, 2000);
-    window.close(); //창 닫기
+    //window.close(); //창 닫기
 }
 
 
