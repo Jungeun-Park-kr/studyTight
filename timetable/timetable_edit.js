@@ -122,12 +122,12 @@ function editBtn() {
     };
     console.log('누름5')
     modifyCourse(course); //변경사항 적용
-    setTimeout(function(){ //테스트용 2초 딜레이
-        alert('asdf');
-        window.close(); //창 닫기
-    }, 200000000);
+    // setTimeout(function(){ //테스트용 2초 딜레이
+    //     alert('asdf');
+    //     window.close(); //창 닫기
+    // }, 200000000);
     opener.parent.location.reload(); //부모창 새로고침
-    //window.close(); //창 닫기
+    window.close(); //창 닫기
 }
 
 
@@ -144,10 +144,11 @@ function modifyCourse(course) { //해당 과목 정보 변경하기
     }
     localStorage.removeItem('editCourse'); //변경 완료한 것은 삭제
     console.log('--잘 변경되었나 확인--')
-    for (var i=0; i<courselist.length; i++) {
-        console.log(courselist[i].title);
-        console.log(courselist[i].professor);
-    }
+    console.info(courselist);
+    // for (var i=0; i<courselist.length; i++) {
+    //     console.log(courselist[i].title);
+    //     console.log(courselist[i].professor);
+    // }
 }
 
 function deleteCourse(title) { //해당 과목이름을 가진 과목을 DB에서 삭제하기
@@ -161,8 +162,9 @@ function deleteCourse(title) { //해당 과목이름을 가진 과목을 DB에�
         }
     }
     console.log('--잘 삭제되었나 확인--')
-    for (var i=0; i<courselist.length; i++) {
-        console.log(courselist[i].title);
-    }
+    console.info(courselist);
+    // for (var i=0; i<courselist.length; i++) {
+    //     console.log(courselist[i].title);
+    // }
 }
 

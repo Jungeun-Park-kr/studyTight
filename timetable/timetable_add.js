@@ -1,7 +1,7 @@
 var doc = document;
 var timelist = new Array();
 var course_type;
-console.log('activeUSer:'+activeUser.name);
+//console.log('activeUSer:'+activeUser.name);
 // 아래는 OS 화면 기준으로 중앙에 팝업 띄움
 var fullWidth = window.screen.width;
 var fullHeight = window.screen.height;
@@ -63,9 +63,11 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
     }
     timelist.push(time); //time 추가
     //데이터확인용
-    for (var i=0; i<timelist.length; i++) {
-        console.log(timelist[i].day + timelist[i].stime + timelist[i].etime);
-    }
+    console.log('추가된 시간 확인')
+    console.info(timelist);
+    // for (var i=0; i<timelist.length; i++) {
+    //     console.log(timelist[i].day + timelist[i].stime + timelist[i].etime);
+    // }
 }
 
 function deleteTime(time) {
@@ -81,9 +83,10 @@ function deleteTime(time) {
         }
     }
     console.log('--잘 삭제되었나 확인--')
-    for (var j=0; j<timelist.length; j++) {
-        console.log(timelist[j].etime);
-    }
+    console.info(timelist);
+    // for (var j=0; j<timelist.length; j++) {
+    //     console.log(timelist[j].etime);
+    // }
 }
 
 function addCourse() { //저장하기 버튼
@@ -131,13 +134,16 @@ function addCourse() { //저장하기 버튼
     activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
     activeUser.course.push(course); //현재 로그인 된 사용자의 course list에 추가한 과목 정보 넣기
     //최근에 추가한 항목 log로 확인해보기
-    console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
-    setTimeout(function(){ //테스트용 2초 딜레이
-        alert('asdf');
-        window.close(); //창 닫기
-    }, 200000000);
+    console.log('---잘 추가되었나 확인---');
+    console.info(activeUser.course);
+    //console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
+    
+    // setTimeout(function(){ //테스트용 2초 딜레이
+    //     alert('asdf');
+    //     window.close(); //창 닫기
+    // }, 200000000);
 
     opener.parent.location.reload(); //부모창 새로고침
     //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
-    //window.close(); //창 닫기
+    window.close(); //창 닫기
 }
