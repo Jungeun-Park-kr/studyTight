@@ -92,7 +92,6 @@ function new_modify(){
 function new_delete(){
     var btn=document.getElementById("new_delete_btn")
     var parent=document.getElementById('table_body')
-     //child가 아니래
    parent.removeChild(btn.parentElement)
-   //삭제는 아직 안된다
+   //삭제 완료 ^^
 }

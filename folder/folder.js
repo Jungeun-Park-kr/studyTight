@@ -69,16 +69,19 @@ function logout(){
     location.replace("../login/login.html")
 }
 function onEditClicked(order){
-    var edit_btn=document.getElementsByClassName("editFolder");
-    //img 객체들이 있음 0부터 5까지
-    
     var edit_content=prompt("바꿀 포스트잇 이름을 입력하세요","");
 
-    var edit_div=document.getElementById('postIt_1');
-    edit_div.innerHTML=edit_content;
-    //아직 css부분은 안건들임
+    var edit_div=document.getElementsByClassName('post');
+    edit_div.item(order).textContent=edit_content
+   //수정 완료 ^^
 
 }
-function ononDeleteClicked(order){
+function onDeleteClicked(order){
+    var delete_btn=document.getElementsByClassName("deleteFolder"); //여러 개의 div들
+   // delete_btn.item(order)
 
+    var wrap=document.getElementById("wrap_postit"); //포스트잇을 감싸는 div
+
+    wrap.removeChild(delete_btn.item(order).parentElement);
+    //삭제 완료^^
 }
