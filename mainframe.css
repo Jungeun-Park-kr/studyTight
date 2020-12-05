@@ -132,7 +132,7 @@ body {
     cursor: pointer;
 }
 .D-day {
-    text-align:center;
+   text-align:center;
 }
 .section .D-day > div { 
     /* d-day표시 */
