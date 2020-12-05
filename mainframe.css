@@ -154,7 +154,7 @@ body {
     font-weight:bold;
     color:red;
 }
-.section .folder {
+.section .folder_ {
     /* 폴더를 감싸는 흰 div */
     margin-left:4.8%;
     margin-top:2%;
@@ -173,7 +173,7 @@ body {
     /* //font-weight:bold;
     font-size:1.5em; */
 /* } */
-.folder_plus{
+#folder_plus{
     margin-left:50px;
     margin-right:50px;
     margin-top: 40px;
@@ -186,7 +186,7 @@ body {
     padding-right:25px;
     display:inline-block;
 }
-.section .folder > div > div {
+.section .folder_ > div > div {
     /* 각 폴더에 대해서 */
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
@@ -203,14 +203,17 @@ body {
     padding-right:25px;
 } 
 
-.section .folder > div > div > p {
+.section .folder_ > div > div > p {
     display:block;
-  
+}
+.caution {
+    text-align:center;
+    width:12%;
 }
 .wrap_folder {
     display: inline;
 }
-.section .folder > div > div > img {
+.section .folder_ > div > div > img {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
     margin: 5px;
@@ -221,13 +224,13 @@ body {
 /* .section .folder > div > span {
     display:block;
 } */
-.folder_1, .folder_5{
+#folder_1, #folder_5{
     background-color:#E36363;
 }
-.folder_2, .folder_3{
+#folder_2, #folder_3{
     background-color:#E3B863;
 }
-.folder_plus, .folder_4{
+#folder_plus, #folder_4{
     background-color:#6ED4D8;
 }
 .new_div {

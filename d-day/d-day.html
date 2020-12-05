@@ -3,14 +3,15 @@
     <head>
         <style>@import url("d-day.css");</style>
         <script src="d-day.js"></script>
+        <script src="/user/users.js"></script>
     </head>
     <body>
         <h3>디데이 관리</h3>
         <hr>
         <div class="plus-part">
             <!-- 추가할 때의 부분 -->
-            <input type="button" id="d-date" class="d-date" onclick="selectdate()" value="날짜"></input>
-            <input type="button" id="d-content"class="d-content" onclick="selectContent()" value="내용"/>
+            <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input>
+            <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"/>
             <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
             <input type="button" class="d-plus" value="디데이 추가" onclick="storeDday('day','content');"
                 value="디데이 추가"></input>
@@ -25,37 +26,50 @@
                 </thead>
                 <tbody id="table_body">
                     <tr>
-                        <td>D-1</td><td class="content" contenteditable="false">정보보안 퀴즈</td>
+                        <td class="day">D-1</td><td class="content" contenteditable="false">정보보안 퀴즈</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(0)"></td>
                         <td><button class='btn_delete_d-day' onclick="deleteDday(0)"></td>
                     </tr>
                     <tr>
-                        <td>D-3</td><td class="content" contenteditable="false">모바일네트워크 퀴즈</td>
+                        <td class="day">D-3</td><td class="content" contenteditable="false">모바일네트워크 퀴즈</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(1)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(1)"></button></td>
                     </tr>
                     <tr>
-                        <td>D-5</td><td class="content" contenteditable="false">DB 과제2</td>
+                        <td class="day">D-5</td><td class="content" contenteditable="false">DB 과제2</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(2)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(2)"></button></td>
                     </tr>
                     <tr>
-                        <td>D-9</td><td class="content" contenteditable="false">기독교 중간</td>
+                        <td class="day">D-9</td><td class="content" contenteditable="false">기독교 중간</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(3)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(3)"></button></td>
                     </tr>
                     <tr>
-                        <td>D-15</td><td class="content" contenteditable="false">TOPCIT 시험</td>
+                        <td class="day">D-15</td><td class="content" contenteditable="false">TOPCIT 시험</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(4)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(4)"></button></td>
                     </tr>
                     <tr>
-                        <td>D-28</td><td  class="content" contenteditable="false">SAP 플젝 마감</td>
+                        <td class="day">D-28</td><td  class="content" contenteditable="false">SAP 플젝 마감</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(5)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(5)"></button></td>
                     </tr>
                 
                 </tbody>
+                <script>
+                    var username=localStorage.getItem('username');
+                    activeUser=getActiveUser(username);
+                    var day_td=document.getElementsByClassName("day");
+                    var content_td=document.getElementsByClassName("content")
+                    var d_daylist=activeUser.d_day;
+
+                    for(var i=0; i<d_daylist.length;i++){
+                        var tmp=d_daylist[i];
+                        day_td[i].innerHTML="D-"+tmp.day;
+                        content_td[i].innerHTML=tmp.content
+                    }
+                </script>
             </table>
         </div>
         <hr>
