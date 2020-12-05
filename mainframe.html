@@ -93,12 +93,35 @@
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="D-day">
                 <!-- 디데이 설정한 부분 -->
-                <div class="d-day1"><span class="d-date1">D-1</span> 정보보안 퀴즈</div>
-                <div class="d-day2"><span class="d-date2">D-3</span> 모바일네트워크 퀴즈</div>
-                <div class="d-day3"><span class="d-date3">D-5</span> DB 과제2</div>
-                <div class="d-day4"><span class="d-date4">D-9</span> 기독교 중간</div>
-                <div class="d-day5"><span class="d-date5">D-15</span> TOPCIT 시험</div>
-                <div class="d-day6"><span class="d-date6">D-28</span> SAP 플젝 마감</div>
+                <div class="d-day" id="d-day1"><span class="d-date" id="d-date1"></span></div>
+                <div class="d-day" id="d-day2"><span class="d-date" id="d-date2"></span></div>
+                <div class="d-day" id="d-day3" value=""><span class="d-date" id="d-date3" value=""></span></div>
+                <div class="d-day" id="d-day4" value=""><span class="d-date" id="d-date4" value=""></span></div>
+                <div class="d-day" id="d-day5" value=""><span class="d-date" id="d-date5" value=""></span></div>
+                <div class="d-day" id="d-day6" value=""><span class="d-date" id="d-date6" value=""></span></div>
+                <script>
+                    var username=localStorage.getItem('username');
+                    activeUser=getActiveUser(username);
+                    var show_day=document.getElementsByClassName("d-date");
+                    var show_content=document.getElementsByClassName("d-day")
+                    var d_daylist=activeUser.d_day; //5개로 저장되어 있으니까 
+                        for(var i=0; i<d_daylist.length; i++){
+                            var tmp=d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
+                            //showDday(tmp.day,tmp.content) //각 날짜와 내용 보여줌
+                        
+                                show_day[i].innerHTML="D-"+tmp.day
+                            if(tmp.day<'4'){
+                                show_day[i].style.color="red"
+                            }
+                            else if(tmp.day<'8'){
+                                show_day[i].style.color="blue"
+                            }
+                            else {
+                                show_day[i].style.color="black"
+                            }
+                        }
+                    
+                </script>
             </div>
 
             <div class="folder">
@@ -173,5 +196,4 @@
         console.log("현재화면:메인화면, 사용자:"+ activeUser.name);
     </script>
 </body>
-
 </html>

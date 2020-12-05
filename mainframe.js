@@ -42,7 +42,6 @@ function starClicked(order){
         //이거를 star된 걸 1로 설정해서 값에 넣어서 순서대로 보이게 해야하는데 어떻게 해야 할 지 모름
         //일단 empty_star되는 것도 코드를 짰는데 왜인지 안돼서 일단 없앰.
 }
-var new_star;
 function newFolder(){
        var new_name=prompt("폴더 이름을 입력하세요","");
          var new_div=document.createElement('div');
