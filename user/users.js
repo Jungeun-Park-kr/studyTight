@@ -191,19 +191,27 @@ userlist[0].folder.push(folder4);
 var friendslist1 = { //기본 박정은 방명록
     profileimage: "./media/profile.png",
     profilelist: [],
-    commnetlist: [],
+    commentlist: [],
     guestbookowner: "박정은" //방명록의 주인
 }
 
 var friendslist2 = {
     profileimage: "./media/profile.png",
     profilelist: [],
-    commnetlist: [],
+    commentlist: [],
     guestbookowner: "최시언" //방명록의 주인
+}
+
+var friendslist3 = {
+    profileimage: "./media/profile.png",
+    profilelist: [],
+    commentlist: [],
+    guestbookowner: "김삿갓" //방명록의 주인
 }
 
 userlist[0].guestbook.push(friendslist1); //삽입
 userlist[0].guestbook.push(friendslist2); //삽입
+userlist[0].guestbook.push(friendslist3); //삽입
 
 var profilelist1 = {
     profilename: "박정은",
@@ -257,7 +265,7 @@ var commentlist4 = { //비공개여부 테스트용
 }
 
 
-friendslist1.commnetlist.push(commnetlist1);
-friendslist1.commnetlist.push(commnetlist2);
-friendslist1.commnetlist.push(commnetlist3);
-friendslist2.commnetlist.push(commnetlist4);
+friendslist1.commentlist.push(commentlist1);
+friendslist1.commentlist.push(commentlist2);
+friendslist1.commentlist.push(commentlist3);
+friendslist2.commentlist.push(commentlist4);
