@@ -16,6 +16,13 @@
         @import url(/guestbook/reply.css);
     </style>
 </head>
+<script>
+    var username = localStorage.getItem('username');
+    activeUser = getActiveUser(username);
+    var friendslist = activeUser.friendslist;
+    var profilelist = activeUser.profilelist;
+    var commnetlist = activeUser.commnetlist;
+</script>
 
 <body>
     <div id="wrap">
@@ -44,7 +51,7 @@
             </ul>
 
         </div>
-        <div class ="section">
+        <div class="section">
             <div class="my-room">
                 <!-- 방명록 -->
                 <div class="friends">
@@ -53,8 +60,9 @@
                         <div class="btn_add_course">
                             <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
                         </div>
-    
+
                     </div>
+
                     <div class="friends_list_box">
                         <table id="course_table">
                             </tbody>
@@ -74,7 +82,7 @@
                             </tbody>
                         </table>
                     </div>
-    
+
                 </div>
                 <div class="writing-place">
                     <div class="writing-box">
@@ -88,9 +96,9 @@
                         <div class="secret-checkbox">
                             <input type="checkbox" name="비밀글"> 비밀글
                         </div>
-    
+
                     </div>
-    
+
                 </div>
                 <hr id="myroom-line">
                 <div id=comments> </div>
@@ -116,7 +124,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="reply-place" id=replyplace1>
                         <div class="writing-box">
                             <!--행(row)선언-->
@@ -129,11 +137,11 @@
                             <div class="secret-checkbox">
                                 <input type="checkbox" name="비밀글"> 비밀글
                             </div>
-    
+
                         </div>
-    
+
                     </div>
-    
+
                     <hr id="myroom-line">
                     <div class="talking">
                         <div class="mini-profile">
@@ -158,14 +166,14 @@
                     </div>
                     <hr id="myroom-line ">
                     <div class="talking ">
-    
+
                     </div>
                     <div class="talking ">
-    
+
                     </div>
-    
+
                     <script src="index.js "></script>
-    
+
                     <tr>
                         <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
                         <td colspan="6 ">
@@ -178,11 +186,11 @@
                             </center>
                         </td>
                     </tr>
-    
+
                 </div>
             </div>
         </div>
-        
+
         <div class="aside ">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>
