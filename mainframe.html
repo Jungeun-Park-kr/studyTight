@@ -95,10 +95,10 @@
                 <!-- 디데이 설정한 부분 -->
                 <div class="d-day" id="d-day1"><span class="d-date" id="d-date1"></span></div>
                 <div class="d-day" id="d-day2"><span class="d-date" id="d-date2"></span></div>
-                <div class="d-day" id="d-day3" value=""><span class="d-date" id="d-date3" value=""></span></div>
-                <div class="d-day" id="d-day4" value=""><span class="d-date" id="d-date4" value=""></span></div>
-                <div class="d-day" id="d-day5" value=""><span class="d-date" id="d-date5" value=""></span></div>
-                <div class="d-day" id="d-day6" value=""><span class="d-date" id="d-date6" value=""></span></div>
+                <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" ></span></div>
+                <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" ></span></div>
+                <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" ></span></div>
+                <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" ></span></div>
                 <script>
                     var username=localStorage.getItem('username');
                     activeUser=getActiveUser(username);
@@ -109,15 +109,21 @@
                             var tmp=d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
                             //showDday(tmp.day,tmp.content) //각 날짜와 내용 보여줌
                         
-                                show_day[i].innerHTML="D-"+tmp.day
+                                show_content[i].innerHTML="D-"+tmp.day
+                                show_day[i].innerHTML=tmp.content
+                                console.log(tmp.day,tmp.content);
+                                show_content[i].appendChild(show_day[i])
+                                //현재 굵기, 글씨 색 바꿔야 함, console에 무슨무슨 시험만 출력되지 않음
+                                //innerTExt, innerHTML, setAttribute해도 안된다.
+                                
                             if(tmp.day<'4'){
-                                show_day[i].style.color="red"
+                                show_content[i].style.color="red"
                             }
                             else if(tmp.day<'8'){
-                                show_day[i].style.color="blue"
+                                show_content[i].style.color="blue"
                             }
                             else {
-                                show_day[i].style.color="black"
+                                show_content[i].style.color="black"
                             }
                         }
                     
@@ -161,7 +167,7 @@
                         new_p.setAttribute("class",'moveto')
                         new_p=tmp.title;
                         this_folder[i].append(new_p)
-                        new_p.setAttribute(onclick,'moveTo(tmp.title)')
+                       // new_p.setAttribute(onclick,'moveTo(tmp.title)')
                         if(tmp.star=="true"){
                             star_list[i].src="/media/full_star.png"
                             }
@@ -205,7 +211,12 @@
                         <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
                         <label><input type="checkbox"><p>DB 강의 듣기</p></label>
                         <label><input type="checkbox"><p>채플 듣기</p></label>
-                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label>
+                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> 
+                        <script>
+                                //여기 안에 오늘 날짜를 조작해서 다음날로 이동하면
+                                // var parent=document.getElementById("Todolist");
+                                // parent.removechild()함수 사용하면 된다!
+                            </script>
                     </div>
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
