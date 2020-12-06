@@ -158,13 +158,17 @@
                         //tmp에는 folder명들이 저장되어 있음 - console로 확인완료
                         //근데 왜 안보여지는 거니
                         var new_p=document.createElement("p");
+                        new_p.setAttribute("class",'moveto')
                         new_p=tmp.title;
                         this_folder[i].append(new_p)
-
+                        new_p.setAttribute(onclick,'moveTo(tmp.title)')
                         if(tmp.star=="true"){
                             star_list[i].src="/media/full_star.png"
+                            }
                         }
-
+                    function moveTo(title){
+                        var obj=getElementsByClassName("moveto");
+                        
                     }
                 </script>
             </div>
