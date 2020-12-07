@@ -112,10 +112,10 @@
                             show_day.setAttribute("class","d-day")
                             show_content.setAttribute("class","d-date")
                             var tmp=d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
-                            console.log(tmp.day,tmp.content);
+                            //console.log(tmp.day,tmp.content);
                             show_day.innerHTML="D-"+tmp.day
                             show_content.innerHTML=tmp.content
-                            console.log(show_day.innerHTML,show_content.innerHTML)
+                            //console.log(show_day.innerHTML,show_content.innerHTML)
                             show_day.appendChild(show_content)
                             parentDiv.appendChild(show_day)
                             show_day.style.fontWeight="bold"
@@ -140,12 +140,12 @@
                 </div>
                 <div id="wrap_folder" class="wrap_folder">
 
-                <div id="folder_1" class="folder">
+                <!-- <div id="folder_1" class="folder">
                     <img src="media/empty_star.png" class="star" onclick="starClicked(0)" />
                     <p onclick="location.href='/folder/folder.html'"></p>
-                </div>
+                </div> -->
                 <!-- 영상 찍을 때를 위해서 이 위의 폴더만 클릭하고 새로운 폴더 만들기 --> 
-                <div id="folder_2" class="folder">
+                <!-- <div id="folder_2" class="folder">
                     <img src="media/empty_star.png" class="star" onclick="starClicked(1)" />
                     <p onclick="location.href='/folder/folder.html'"></p>
                 </div>
@@ -156,30 +156,74 @@
                 <div id="folder_4" class="folder">
                     <img src="media/empty_star.png" class="star"  onclick="starClicked(3)" />
                     <p onclick="location.href='/folder/folder.html'"></p>
-                </div>
+                </div> -->
                 <script>
-                    var username=localStorage.getItem('username');
-                    activeUser=getActiveUser(username);
-                    var folder_list=activeUser.folder;
-                    var star_list=document.getElementsByClassName("star")
-                    var this_folder=document.getElementsByClassName("folder");
-                    for(var i=0;i<folder_list.length;i++){
-                        var tmp=folder_list[i];
-                        //tmp에는 folder명들이 저장되어 있음 - console로 확인완료
-                        //근데 왜 안보여지는 거니
-                        var new_p=document.createElement("p");
-                        new_p.setAttribute("class",'moveto')
-                        new_p=tmp.title;
-                        this_folder[i].append(new_p)
-                       // new_p.setAttribute(onclick,'moveTo(tmp.title)')
-                        if(tmp.star=="true"){
-                            star_list[i].src="/media/full_star.png"
-                            }
-                        }
-                    function moveTo(title){
-                        var obj=getElementsByClassName("moveto");
-                        
-                    }
+                    // var username=localStorage.getItem('username');
+                    // activeUser=getActiveUser(username);
+                    // var folder_list=activeUser.folder;
+                    // var star_list=document.getElementsByClassName("star")
+                    // var this_folder=document.getElementsByClassName("folder");
+                    // for(var i=0;i<folder_list.length;i++){
+                    //     var tmp=folder_list[i];
+                    //     //tmp에는 folder명들이 저장되어 있음 - console로 확인완료
+                    //     //근데 왜 안보여지는 거니
+                    //     var new_p=document.createElement("p");
+                    //     new_p.setAttribute("class",'moveto')
+                    //     new_p=tmp.title;
+                    //     this_folder[i].append(new_p)
+                    //    // new_p.setAttribute(onclick,'moveTo(tmp.title)')
+                    //     if(tmp.star=="true"){
+                    //         star_list[i].src="/media/full_star.png"
+                    //         }
+                    //     }
+                    
+            var username=localStorage.getItem('username');
+            activeUser=getActiveUser(username);
+            var folder_list=activeUser.folder;
+
+            var wrap=document.getElementById("wrap_folder")
+
+            for(var i=0;i<folder_list.length;i++){
+                var ran_color=Math.random();
+                
+                var tmp=folder_list[i]
+                var new_div=document.createElement("div")
+                new_div.setAttribute("class","folder")
+                var new_star=document.createElement("img")
+                new_star.setAttribute("class","folder_star")
+                var new_p=document.createElement("p");
+                new_p.setAttribute("class","folder_course")
+                
+                new_p.innerHTML=tmp.title
+
+                new_p.setAttribute("onclick","toNextPage("+i+")")
+
+                //console.log(tmp.title)
+                if(tmp.star=="true"){
+                    new_star.src="media/full_star.png"
+                }
+                else{
+                    new_star.src="media/empty_star.png"
+                }
+                var random=Math.floor(ran_color*3);
+                if(random==0){
+                    new_div.style.backgroundColor="#E36363"
+                }
+                else if(random==1){
+                    new_div.style.backgroundColor="#E3B863"
+                }
+                else{
+                    new_div.style.backgroundColor="#6ED4D8"
+                }
+
+
+                new_div.appendChild(new_star)
+                new_div.appendChild(new_p)
+                wrap.appendChild(new_div)
+                    //랜덤함수로 folder마다 색을 달리 함
+            }
+
+
                 </script>
             </div>
         </div>

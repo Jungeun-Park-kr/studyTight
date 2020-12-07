@@ -62,7 +62,7 @@ function newFolder(){
 
         var new_p=document.createElement('p');
         new_p.innerHTML=new_name;
-
+        new_p.setAttribute("onclick","toNextPage("+6+")")
         new_div.setAttribute('class','new_div');
         new_div.append(new_star);
         new_div.append(new_p);
@@ -142,4 +142,9 @@ function dayStrToNum(day) {
                 case 'fri':
                         return 5;
         }
+}
+function toNextPage(order){
+        var that_p=document.getElementsByClassName("folder_course");
+        location.href="/folder/folder.html?index="+order
+        
 }
