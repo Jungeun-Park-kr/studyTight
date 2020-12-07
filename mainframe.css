@@ -134,7 +134,7 @@ body {
 .D-day {
    text-align:center;
 }
-.section .D-day > div { 
+.d-day { 
     /* d-day표시 */
     display: inline-block;
     margin: 10px;
@@ -151,8 +151,8 @@ body {
     padding-left:20px;
     margin-top:8px;
     margin-right: 40px;
-    font-weight:bold;
-    color:red;
+    /* //font-weight:bold;
+   // color:red; */
 }
 .section .folder_ {
     /* 폴더를 감싸는 흰 div */

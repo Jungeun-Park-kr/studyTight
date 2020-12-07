@@ -91,42 +91,46 @@
 
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="D-day">
+            <div class="D-day" id="D-day">
                 <!-- 디데이 설정한 부분 -->
-                <div class="d-day" id="d-day1"><span class="d-date" id="d-date1"></span></div>
+                <!-- <div class="d-day" id="d-day1"><span class="d-date" id="d-date1"></span></div>
                 <div class="d-day" id="d-day2"><span class="d-date" id="d-date2"></span></div>
                 <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" ></span></div>
                 <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" ></span></div>
                 <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" ></span></div>
-                <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" ></span></div>
+                <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" ></span></div> -->
                 <script>
                     var username=localStorage.getItem('username');
                     activeUser=getActiveUser(username);
-                    var show_day=document.getElementsByClassName("d-date");
-                    var show_content=document.getElementsByClassName("d-day")
-                    var d_daylist=activeUser.d_day; //5개로 저장되어 있으니까 
-                        for(var i=0; i<d_daylist.length; i++){
+
+                    var parentDiv=document.getElementById("D-day")
+
+                    var d_daylist=activeUser.d_day;
+                    for(var i=0; i<d_daylist.length; i++){
+                        var show_day=document.createElement("div");
+                        var show_content=document.createElement("span");
+                            show_day.setAttribute("class","d-day")
+                            show_content.setAttribute("class","d-date")
                             var tmp=d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
-                            //showDday(tmp.day,tmp.content) //각 날짜와 내용 보여줌
-                        
-                                show_content[i].innerHTML="D-"+tmp.day
-                                show_day[i].innerHTML=tmp.content
-                                console.log(tmp.day,tmp.content);
-                                show_content[i].appendChild(show_day[i])
-                                //현재 굵기, 글씨 색 바꿔야 함, console에 무슨무슨 시험만 출력되지 않음
-                                //innerTExt, innerHTML, setAttribute해도 안된다.
-                                
+                            console.log(tmp.day,tmp.content);
+                            show_day.innerHTML="D-"+tmp.day
+                            show_content.innerHTML=tmp.content
+                            console.log(show_day.innerHTML,show_content.innerHTML)
+                            show_day.appendChild(show_content)
+                            parentDiv.appendChild(show_day)
+                            show_day.style.fontWeight="bold"
+                            show_content.style.color="black"
                             if(tmp.day<'4'){
-                                show_content[i].style.color="red"
+                                show_day.style.color="red"
+                            
                             }
                             else if(tmp.day<'8'){
-                                show_content[i].style.color="blue"
+                                show_day.style.color="blue"
                             }
                             else {
-                                show_content[i].style.color="black"
+                                show_day.style.color="black"
                             }
                         }
-                    
                 </script>
             </div>
 
