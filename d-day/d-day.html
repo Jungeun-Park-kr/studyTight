@@ -2,7 +2,6 @@
 <html>
     <head>
         <style>@import url("d-day.css");</style>
-        <script src="d-day.js"></script>
         <script src="/user/users.js"></script>
     </head>
     <body>
@@ -25,7 +24,7 @@
                 
                 </thead>
                 <tbody id="table_body">
-                    <tr>
+                    <!-- <tr>
                         <td class="day">D-1</td><td class="content" contenteditable="false">정보보안 퀴즈</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(0)"></td>
                         <td><button class='btn_delete_d-day' onclick="deleteDday(0)"></td>
@@ -54,24 +53,51 @@
                         <td class="day">D-28</td><td  class="content" contenteditable="false">SAP 플젝 마감</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(5)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(5)"></button></td>
-                    </tr>
+                    </tr> -->
                 
                 </tbody>
                 <script>
                     var username=localStorage.getItem('username');
                     activeUser=getActiveUser(username);
-                    var day_td=document.getElementsByClassName("day");
-                    var content_td=document.getElementsByClassName("content")
                     var d_daylist=activeUser.d_day;
+
+                    var parent_table=document.getElementById("table_body")
 
                     for(var i=0; i<d_daylist.length;i++){
                         var tmp=d_daylist[i];
-                        day_td[i].innerHTML="D-"+tmp.day;
-                        content_td[i].innerHTML=tmp.content
+
+                        var new_tr=document.createElement("tr");
+                        new_tr.setAttribute("class","new_tr")
+                        var new_td1=document.createElement("td");
+                        new_td1.setAttribute("class","day");
+                        var new_td2=document.createElement("td");
+                        new_td2.setAttribute("class","content")
+                        var new_td3=document.createElement("td");
+                        var td3_btn=document.createElement("button")
+                        td3_btn.setAttribute("class","btn_modify_d-day");
+                        td3_btn.setAttribute("onclick","modifyDday("+i+")")
+                        new_td3.appendChild(td3_btn)
+                        var new_td4=document.createElement("td");
+                        var td4_btn=document.createElement("button");
+                        td4_btn.setAttribute("class","btn_delete_d-day")
+                        td4_btn.setAttribute("onclick","deleteDday("+i+")")
+                        new_td4.appendChild(td4_btn);
+
+                        new_td1.innerHTML="D-"+tmp.day
+                        new_td2.innerHTML=tmp.content
+
+                        new_tr.appendChild(new_td1);
+                        new_tr.appendChild(new_td2)
+                        new_tr.appendChild(new_td3)
+                        new_tr.appendChild(new_td4)
+
+                        parent_table.appendChild(new_tr);
                     }
+                    
                 </script>
             </table>
         </div>
         <hr>
     </body>
+    <script src="d-day.js"></script>
 </html>

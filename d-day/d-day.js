@@ -72,7 +72,7 @@ function modifyDday(order){
     var content_modify=document.getElementsByClassName('content');
     var modi_content=prompt("수정할 내용을 입력하세요");
  
-    content_modify.item(order).innerText=modi_content;
+    content_modify.item(order).innerHTML=modi_content;
     
     //수정완료 ^^
 
@@ -81,14 +81,25 @@ function deleteDday(order){
     var content_delete=document.getElementsByClassName('btn_delete_d-day');
     var parent=document.getElementById('table_body');
 
+    // var content=document.getElementsByClassName("content") //여러개가 있다
+    // var username = localStorage.getItem('username'); 
+    // activeUser = getActiveUser(username);  
+    // var day_list = activeUser.d_day; //안에 6개 있다
+    // for (var i=0; i<day_list.length; i++) {
+    //     if (day_list[i].content == content.item(order)) { //해당 데이터 삭제
+    //         localStorage.removeItem(day_list[i]) //i번째 인덱스를 하나 삭제
+    //         console.log("삭제된 D-day는 "+day_list[i].content)
+    // }
+    //}
+    //local에서 삭제되는 건 하는 중 ㅜ ㅜ 
         parent.removeChild(content_delete.item(order).parentElement.parentElement);
         //삭제 완료 ^^
-       }
+        }
 function new_modify(){
     var btn=document.getElementById("pluscontent");
 
     var new_mod=prompt("수정할 내용을 입력하세요");
-    btn.innerText=new_mod;
+    btn.innerHTML=new_mod;
     //수정 완료^^
     
 }
