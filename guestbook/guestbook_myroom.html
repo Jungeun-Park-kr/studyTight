@@ -118,52 +118,40 @@
 
                     </div>
 
-
                     <script>
                         function showfriendlist() {
                             var username = localStorage.getItem('username');
                             activeUser = getActiveUser(username);
-                            myprofile = activeUser.guestbook.profile;
-                            var parent_table = document.getElementById("leftmenu"); //부모테이블
-                            var profile = document.createElement("div");
-                            var new_td1 = document.createElement("li");
-                            var userimage = document.createElement('img');
-                            userimage.src = activeUser.userImage; // 이미지 경로 설정
-                            //userimage.innerHTML = "&nbsp" + activeUser.name;
+                            myfriends = activeUser.guestbook.friendslist;
+                            var parent_table = document.getElementById("course_body"); //부모테이블
 
-                            //다섯번째 li , 테스트에서는 공개되지 않음.
-                            if (myprofile.age_secret == false) {
-                                var Fifth = document.createElement("li");
-                                Fifth.setAttribute("class", "age");
-                                var Fifthimage = document.createElement('img');
-                                Fifthimage.src = "media/age.png";
-                                Fifth.innerHTML = "&nbsp" + myprofile.age;
-                                Fifth.prepend(Fifthimage);
-                                parent_table.prepend(Fifth);
+
+                            for (i = 0; i < myfriends.length; i++) {
+                                var box = document.createElement("tr");
+                                var name = document.createElement("td");
+                                var email = document.createElement("td");
+                                box.addEventListener('click', function(event) {
+                                    location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
+                                })
+                                name.innerHTML = myfriends[i].guestbookowner;
+                                email.innerHTML = myfriends[i].email;
+                                box.appendChild(name);
+                                box.appendChild(email);
+                                parent_table.appendChild(box);
                             }
+
                         }
                     </script>
 
-
                     <div class="friends_list_box">
                         <table id="course_table">
-                            <tbody>
-                                <tr onclick="btnfriends('양지영');">
-                                    <td>양지영</td>
-                                    <td>sidjyoung@naver.com</td>
-                                </tr>
-                                <tr onclick="btnfriends('최시언');">
-                                    <td>최시언</td>
-                                    <td>noino0819@naver.com</td>
-                                </tr>
-                                <tr onclick="btnfriends('김삿갓');">
-                                    <td>김삿갓</td>
-                                    <td>kimsatgat@naver.com </td>
-                                </tr>
+                            <tbody id="course_body">
+                                <script>
+                                    showfriendlist();
+                                </script>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
                 <div class="writing-place">
                     <div class="writing-box">
@@ -183,8 +171,10 @@
                 </div>
                 <hr id="myroom-line">
                 <div id=comments> </div>
-                <div class="talking-place">
-                    <div class="talking">
+                <div class="talking-place" id="talking-place">
+
+
+                    <!-- <div class="talking">
                         <div class="mini-profile">
                             <img src="media/person_gray.png"></img>
                         </div>
@@ -199,13 +189,83 @@
                                 <div class="today">
                                     2020-10-16 12:13:11
                                 </div>
-                                <div class="reply-button" id=reply-button1>
+                                <div class="reply-button">
                                     <input type="button" value="답글쓰기"></input>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
+                    <script>
+                        function showtalkinglist() {
+                            myfriends = activeUser.guestbook.friendslist;
+                            var username = localStorage.getItem('username');
+                            activeUser = getActiveUser(username);
+                            mytalking = activeUser.guestbook.commentlist;
+                            var parent_table = document.getElementById("talking-place"); //부모테이블
+
+                            for (i = 0; i < mytalking.length; i++) {
+                                var div1 = document.createElement("div");
+                                div1.setAttribute("class", "talking");
+                                var div2 = document.createElement("div");
+                                div2.setAttribute("class", "mini-profile");
+                                var img = document.createElement("img");
+                                //img.src = myfriends[0].profileimage;
+                                //해당 친구에 맞게 프로필출력
+                                for (j = 0; j < myfriends.length; j++) {
+                                    //console.log(myfriends[j].guestbookowner);
+                                    if (mytalking[i].Author == myfriends[j].guestbookowner) {
+                                        img.src = myfriends[j].profileimage;
+                                        //console.log("get");
+                                        break;
+                                    }
+                                }
+                                var div3 = document.createElement("div");
+                                div3.setAttribute("class", "user-small-talking");
+                                var div4 = document.createElement("div");
+                                div4.setAttribute("class", "user-name");
+                                div4.innerHTML = mytalking[i].Author;
+                                var div5 = document.createElement("div");
+                                div5.setAttribute("class", "user-talking-list");
+                                div5.innerHTML = mytalking[i].mycommnet;
+                                var div6 = document.createElement("div");
+                                div6.setAttribute("class", "today-button");
+                                var div7 = document.createElement("div");
+                                div7.setAttribute("class", "today");
+                                div7.innerHTML = mytalking[i].today;
+                                var div8 = document.createElement("div");
+                                div8.setAttribute("class", "reply-button");
+                                var div9 = document.createElement("input");
+                                div9.type = "button";
+                                div9.value = "답글쓰기";
+                                //리스너 추가
+                                div9.addEventListener('click', function(event) {
+                                        location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
+                                    })
+                                    //넣기
+                                div8.appendChild(div9);
+                                div6.appendChild(div7);
+                                div6.appendChild(div8);
+                                div3.appendChild(div4);
+                                div3.appendChild(div5);
+                                div3.appendChild(div6);
+                                div2.appendChild(img);
+                                div1.appendChild(div2);
+                                div1.appendChild(div3);
+                                parent_table.appendChild(div1);
+
+                                var hr = document.createElement("hr");
+                                hr.id = "myroom-line";
+                                parent_table.append(hr);
+
+                            }
+
+                        }
+                    </script>
+
+                    <script>
+                        showtalkinglist();
+                    </script>
                     <div class="reply-place" id=replyplace1>
                         <div class="writing-box">
                             <!--행(row)선언-->
@@ -220,36 +280,6 @@
                             </div>
 
                         </div>
-
-                    </div>
-
-                    <hr id="myroom-line">
-                    <div class="talking">
-                        <div class="mini-profile">
-                            <img src="media/person_gray.png"></img>
-                        </div>
-                        <div class="user-small-talking">
-                            <div class="user-name">
-                                김삿갓
-                            </div>
-                            <div class="user-talking-list">
-                                너 시간표 진짜 신기하다. 잘 보고가! <br>다음에 수업 겹치면 같이 듣자!
-                            </div>
-                            <div class="today-button">
-                                <div class="today">
-                                    2020-11-26 16:13:12
-                                </div>
-                                <div class="reply-button">
-                                    <input type="button" value="답글쓰기"></input>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr id="myroom-line ">
-                    <div class="talking ">
-
-                    </div>
-                    <div class="talking ">
 
                     </div>
 

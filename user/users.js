@@ -12,6 +12,7 @@ userlist.push({
         //프로필 이미지는 user에 바로 있음
         profile: {},
         //방명록 주인도 필요없을듯
+        commentlist: [],
     },
     d_day: [], //디데이 정보 저장할 곳
     folder: []
@@ -222,28 +223,23 @@ userlist[0].guestbook.profile = {
     }
     //친구 목록 리스트 추가
 var friendslist1 = { //기본 박정은 방명록
-    profileimage: "./media/profile.png",
+    profileimage: "./media/profile1.png",
     guestbookowner: "양지영", //방명록의 주인
     email: "sidjyoung@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist1);
 var friendslist2 = {
-    profileimage: "./media/profile.png",
+    profileimage: "./media/profile2.png",
     guestbookowner: "최시언", //방명록의 주인
     email: "noino0819@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist2);
 var friendslist3 = {
-    profileimage: "./media/profile.png",
+    profileimage: "./media/profile3.png",
     guestbookowner: "김삿갓", //방명록의 주인
-    email: "kimsatgat@naver.com";
+    email: "kimsatgat@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist3);
-
-
-//userlist[0].guestbook.push(friendslist1); //삽입
-//userlist[0].guestbook.push(friendslist2); //삽입
-//userlist[0].guestbook.push(friendslist3); //삽입
 
 
 // var profilelist1 = {
@@ -287,6 +283,7 @@ userlist[1].guestbook.profile = {
 var commentlist1 = {
     Author: "최시언",
     mycommnet: "너 이번 웹프로그래밍 문제 이해했어?",
+    today: "2020-10-16 12:13:11",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
@@ -294,22 +291,49 @@ var commentlist2 = {
     Author: "김삿갓",
     mycommnet: "너 시간표 진짜 신기하다.",
     mycommnet1: "잘 보고가!다음에 수업 겹치면 같이 듣자!",
+    today: "2020-11-26 16:13:12",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
 var commentlist3 = { //비공개여부 테스트용
     Author: "김삿갓",
     mycommnet: "사실 나도 궁금했어",
+    today: "2020-11-27 17:13:12",
     commnetsecret: 1 // 공개는 0, 비공개는 1
 }
 
 var commentlist4 = { //비공개여부 테스트용
     Author: "양지영",
     mycommnet: "나도 다녀가!",
+    today: "2020-11-29 08:13:12",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
-friendslist1.commentlist.push(commentlist1);
-friendslist1.commentlist.push(commentlist2);
-friendslist1.commentlist.push(commentlist3);
-friendslist2.commentlist.push(commentlist4);
+var commentlist5 = { //비공개여부 테스트용
+    Author: "양지영",
+    mycommnet: "나도 다녀가!",
+    today: "2020-11-29 08:13:12",
+    commnetsecret: 0 // 공개는 0, 비공개는 1
+}
+
+var commentlist6 = { //비공개여부 테스트용
+    Author: "최시언",
+    mycommnet: "나 근데 웹실습도 못했어...",
+    today: "2020-11-29 10:13:12",
+    commnetsecret: 0 // 공개는 0, 비공개는 1
+}
+
+var commentlist7 = { //비공개여부 테스트용
+    Author: "최시언",
+    mycommnet: "너는 ... 했어....?",
+    today: "2020-11-30 08:08:12",
+    commnetsecret: 0 // 공개는 0, 비공개는 1
+}
+
+userlist[0].guestbook.commentlist.push(commentlist1); //삽입
+userlist[0].guestbook.commentlist.push(commentlist2); //삽입
+userlist[0].guestbook.commentlist.push(commentlist3); //삽입
+userlist[0].guestbook.commentlist.push(commentlist4); //삽입
+userlist[0].guestbook.commentlist.push(commentlist5); //삽입
+userlist[0].guestbook.commentlist.push(commentlist6); //삽입
+userlist[0].guestbook.commentlist.push(commentlist7); //삽입
