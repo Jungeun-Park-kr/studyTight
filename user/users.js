@@ -251,10 +251,14 @@ userlist[0].guestbook.friendslist.push(friendslist3);
 userlist[1].guestbook.profile = {
     profilename: "최시언",
     school: "숭실대학교",
+    school_secret: false,
     major: "컴퓨터학부",
+    major_secret: false,
     grade: "3",
+    grade_secret: false,
     age: "22",
-    gender: 2, //여자는 2, 남자는 1
+    age_secret: true,
+    gender: "2", //여자는 2, 남자는 1
     profilesecret: false //공개는 0, 비공개는 1
 };
 // var profilelist2 = {
