@@ -55,15 +55,6 @@ body {
     border-radius: 3px;
    
 }
-/* #postIt_1, #postIt_2, #postIt_3{
-    background-color:#6ED4D8;
-}
-#postIt_4{
-    background-color:#E3B863;
-}
-#postIt_5{
-    background-color:#E36363;
-} */
 .wrap_postit{
     display:inline;
 }
@@ -98,7 +89,15 @@ body {
     text-align: center;
     padding-left:40px;
 }
-.section > div > div > img{
+.editFolder{
+    visibility: inherit;
+    display:inline;
+    width:20px;
+    height:auto;
+    margin:5px;
+    float:right;
+}
+.deleteFolder{
     visibility: inherit;
     display:inline;
     width:20px;
