@@ -16,6 +16,10 @@ body {
     margin: 20px 0px 5px;
 }
 
+.secret_section {
+    right: 20px;
+}
+
 .course_section {
     width: 600px;
     margin: 0 auto;
@@ -42,6 +46,10 @@ body {
     padding: 0 10px;
     color: #333333;
     display: inline-block;
+}
+
+.course_secret_label {
+    margin-left: 60%;
 }
 
 .course_title_form,
