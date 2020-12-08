@@ -27,3 +27,13 @@ function get_courses(value) {
     //파라미터 : td[번호]
 
 }
+
+function showmyprofile(profile) { //게스트북의 프로필 받아옴.
+    //입력받은 정보로 프로필 출력하기
+    var name, school, major,
+
+        tmpvar = document.getElementById(tdid);
+    tmpvar.innerHTML = title; //첫줄에는 과목이름
+    tmpvar.style.backgroundColor = color;
+
+}

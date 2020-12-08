@@ -196,6 +196,13 @@
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>
     </div>
+
+    <script>
+        var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+        activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+        var guestbook = activeUser.guestbook; //게스트북 가져오기
+        showmyprofile(guestbook.profile); //나에대한 정보를 비밀 유무에 따라 출력하기
+    </script>
 </body>
 
 </html>

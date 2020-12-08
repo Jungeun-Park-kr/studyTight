@@ -7,10 +7,10 @@ userlist.push({
     name: '박정은',
     userImage: '/media/profile.png',
     course: [], //과목 정보 저장할 곳
-    guestbook: {  //방명록 정보 저장할 곳
-        friendslist : [],
+    guestbook: { //방명록 정보 저장할 곳
+        friendslist: [],
         //프로필 이미지는 user에 바로 있음
-        profile : {},
+        profile: {},
         //방명록 주인도 필요없을듯
     },
     d_day: [], //디데이 정보 저장할 곳
@@ -165,17 +165,17 @@ var folder1 = {
 var folder2 = {
     title: "웹플밍",
     star: "true",
-    postIt:[]
+    postIt: []
 }
 var folder3 = {
     title: "DB",
     star: "false",
-    postIt:[]
+    postIt: []
 }
 var folder4 = {
     title: "SAP (ABAP)",
     star: "false",
-    postIt:[]
+    postIt: []
 }
 var postIt1 = {
     title: "PID란?",
@@ -202,15 +202,15 @@ userlist[0].folder.push(folder4);
 //     //방명록 주인도 필요없을듯
 // }
 userlist[0].guestbook.profile = {
-    profilename: "박정은",
-    school: "숭실대학교",
-    major: "컴퓨터학부",
-    grade: "3",
-    age: "22",
-    gender: 2, //여자는 2, 남자는 1
-    profilesecret: false //공개는 0, 비공개는 1
-}
-//친구 목록 리스트 추가
+        profilename: "박정은",
+        school: "숭실대학교",
+        major: "컴퓨터학부",
+        grade: "3",
+        age: "22",
+        gender: 2, //여자는 2, 남자는 1
+        profilesecret: false //공개는 0, 비공개는 1
+    }
+    //친구 목록 리스트 추가
 var friendslist1 = { //기본 박정은 방명록
     profileimage: "./media/profile.png",
     profilelist: [],
@@ -273,10 +273,6 @@ userlist[1].guestbook.profile = {
 //friendslist1.profilelist.push(profilelist1);
 //friendslist2.profilelist.push(profilelist2);
 
-
-
-
-
 var commentlist1 = {
     Author: "최시언",
     mycommnet: "너 이번 웹프로그래밍 문제 이해했어?",
@@ -298,10 +294,9 @@ var commentlist3 = { //비공개여부 테스트용
 
 var commentlist4 = { //비공개여부 테스트용
     Author: "양지영",
-    mycommnet: "나도 다녀가!.",
+    mycommnet: "나도 다녀가!",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
-
 
 friendslist1.commentlist.push(commentlist1);
 friendslist1.commentlist.push(commentlist2);
