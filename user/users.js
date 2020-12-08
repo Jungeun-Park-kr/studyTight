@@ -181,7 +181,7 @@ var folder4 = {
 var postIt1 = {
     title: "PID란?",
     type: "link",
-    url:"https://pkr7098.tistory.com/63"
+    url: "https://pkr7098.tistory.com/63"
 }
 var postIt2 = {
     title: "shell이란?",
@@ -210,10 +210,14 @@ userlist[0].folder.push(folder4);
 userlist[0].guestbook.profile = {
         profilename: "박정은",
         school: "숭실대학교",
+        school_secret: false,
         major: "컴퓨터학부",
+        major_secret: false,
         grade: "3",
+        grade_secret: false,
         age: "22",
-        gender: 2, //여자는 2, 남자는 1
+        age_secret: true,
+        gender: "2", //여자는 2, 남자는 1
         profilesecret: false //공개는 0, 비공개는 1
     }
     //친구 목록 리스트 추가

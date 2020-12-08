@@ -32,24 +32,69 @@
                 <img src="/media/logo.png" class=logo onclick="btnHome();">
             </div>
             <ul class="left-menus" id=leftmenu>
-                <div>
-                    <li class="profile">
-                        <img src="media/person_gray.png"></img>
-                    </li>
-                </div>
-                <li class="menu_contact">
-                    <img src="media/user.png">&nbsp박정은</img>
-                </li>
-                <li class="menu_timetable">
-                    <img src="media/office-building.png">&nbsp숭실대학교</img>
-                </li>
-                <li class="menu_dday">
-                    <img src="media/mortarboard.png">&nbsp컴퓨터학부</img>
-                </li>
-                <li class="edit-profile">
-                    <input type="button" id="edit-button-id" value="프로필 수정하기" onclick="showFriendAddPopup();"></input>
-                </li>
             </ul>
+
+            <script>
+                var username = localStorage.getItem('username');
+                activeUser = getActiveUser(username);
+                myprofile = activeUser.guestbook.profile;
+                var parent_table = document.getElementById("leftmenu"); //부모테이블
+                var profile = document.createElement("div");
+                var new_td1 = document.createElement("li");
+                var userimage = document.createElement('img');
+                userimage.src = activeUser.userImage; // 이미지 경로 설정
+                //userimage.innerHTML = "&nbsp" + activeUser.name;
+
+                //첫번째 profile.
+                new_td1.setAttribute("class", "profile");
+                new_td1.appendChild(userimage);
+                profile.appendChild(new_td1);
+                parent_table.appendChild(profile);
+
+                //두번째 li
+                var second = document.createElement("li");
+                second.setAttribute("class", "menu_contact");
+                var secondimage = document.createElement('img');
+                secondimage.src = "media/user.png";
+                second.innerHTML = "&nbsp" + activeUser.name;
+                second.prepend(secondimage);
+                parent_table.appendChild(second);
+
+                //여기부턴 공개여부에 따라 달라짐
+                //세번째 li
+                //console.log(myprofile.school_secret); _데이터테스트
+                if (myprofile.school_secret == false) {
+                    var third = document.createElement("li");
+                    third.setAttribute("class", "school");
+                    var thirdimage = document.createElement('img');
+                    thirdimage.src = "media/office-building.png";
+                    third.innerHTML = "&nbsp" + myprofile.school;
+                    third.prepend(thirdimage);
+                    parent_table.appendChild(third);
+                }
+
+                //네번째 li
+                if (myprofile.major_secret == false) {
+                    var fourth = document.createElement("li");
+                    fourth.setAttribute("class", "major");
+                    var fourthimage = document.createElement('img');
+                    fourthimage.src = "media/mortarboard.png";
+                    fourth.innerHTML = "&nbsp" + myprofile.major;
+                    fourth.prepend(fourthimage);
+                    parent_table.appendChild(fourth);
+                }
+
+                //다섯번째 li , 테스트에서는 공개되지 않음.
+                if (myprofile.major_secret == false) {
+                    var Fifth = document.createElement("li");
+                    Fifth.setAttribute("class", "age");
+                    var Fifthimage = document.createElement('img');
+                    Fifthimage.src = "media/age.png";
+                    Fifth.innerHTML = "&nbsp" + myprofile.age;
+                    Fifth.prepend(Fifthimage);
+                    parent_table.appendChild(Fifth);
+                }
+            </script>
 
         </div>
         <div class="section">
@@ -196,15 +241,6 @@
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
         </div>
     </div>
-
-    <script>
-        var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
-        activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-        //console.log(activeUser.guestbook);
-        var guestbook = activeUser.guestbook; //게스트북 가져오기
-        console.log(guestbook.profile);
-        showmyprofile(guestbook.profile); //나에대한 정보를 비밀 유무에 따라 출력하기
-    </script>
 </body>
 
 </html>
