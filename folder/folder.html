@@ -113,22 +113,39 @@
                     
                     var find=document.getElementById("section_p")
 
-                    for(var i=0;i<5;i++){
-                        if(activeUser.folder[i].title==find)
-                            var name_folder=activeUser.folder[i]
-                            return name_folder
+                    var now_order; //폴더 순서 가져오기
+                    
+                    //console.log(activeUser.folder.length)
+                    //현재 folder이름 찾기
+                    for(var i=0; i<activeUser.folder.length;i++) //폴더 4개있음
+                    {
+                        if(activeUser.folder[i].title===find.innerHTML)
+                        {console.log("현재 과목은"+find.innerHTML)
+                        var now_folder=i;
+                         //해당 폴더 정하기. folder[i]번째인지 아닌지
+                        //now_folder는 말 그대로 값만 가리키니까 안된다... 
+                        console.log("현재 폴더 순서는"+now_folder)
+                        }
+                        now_order=now_folder
                     }
-                     var name_post_list=name_folder.postIt; //어떤 폴더로 해야할까? 폴더를 설정하는 기준!
-                    for(var i=0; i<name_post_list.length;i++){
-                        var new_div=document.createElement("div")
-                        var new_p=document.createElement("p")
-                        var edit_img=document.createElement("img")
-                        var delete_img=document.createElement("img");
-
+                    // console.log(activeUser.folder[now_folder].title,activeUser.folder[now_folder].star)
+                    //   var name_post_list=activeUser.folder[now_folder].postIt; //위에서 정한 해당 폴더의 포스트잇 가져와서 안에 내용물 만들기.
+                    // for(var i=0; i<name_post_list.length;i++){
+                    //     console.log(name_post_list[i].title,name_post_list[i].type)
+                    //     var new_div=document.createElement("div")
+                    //     new_div.setAttribute("class","postIt")
+                    //     var new_p=document.createElement("p")
+                    //     new_p.setAttribute("class","post")
+                    //     var edit_img=document.createElement("img")
+                    //     edit_img.setAttribute("class","editFolder")
+                    //     edit_img.setAttribute("onclick","onEditClicked("+i+")")
+                    //     var delete_img=document.createElement("img");
+                    //     delete_img.setAttribute("class","deleteFolder")
+                    //     delete_img.setAttribute("onclick","onDeleteClicked("+i+")")
                         
-
-
-                    }
+                    //     new_div.innerHTML=name_folder.postIt[i].title;
+                    //     console.log(new_div.innerHTML)
+                    // }
                     //여기서 folder 색 지정해주기 type="link"면 이런 식으로
                 </script>
                 </div>
