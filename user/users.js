@@ -255,7 +255,7 @@ userlist[1].guestbook.profile = {
     grade: "3",
     age: "22",
     gender: 2, //여자는 2, 남자는 1
-    profilesecret: false //공개는 0, 비공개는 1
+    profilesecret: true //공개는 0, 비공개는 1
 };
 // var profilelist2 = {
 //     profilename: "최시언",

@@ -378,6 +378,8 @@
                                         </td>
                                     </tr>
                                     <script>
+                                        var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+                                        var friend = getActiveUser(fname); //친구 정보 가져오기
                                         console.log(friend.name);
                                         var courselist = friend.course;
                                         console.log(courselist);
