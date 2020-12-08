@@ -30,16 +30,18 @@ function plusTodo(){
         new_label.className="new_todo"
                 //완성 ㅎㅎ
 }
+var toggle=1;
 function starClicked(order){
         //document.getElementById("star").src="/media/full_star.png";
-        var star=document.getElementsByClassName('star');
-        if(star[order].src=="media/full_star.png"){
-                star[order].src="media/empty_star.png"
-        }
-        //이 if문이 안먹힘..
-        else{
+        var star=document.getElementsByClassName('folder_star');
+        if(toggle%2==1){
                 star[order].src="media/full_star.png"
         }
+        else{
+                star[order].src="media/empty_star.png"
+        }
+        toggle++;
+        //별 완료 ㅎㅎ
 }
 function newFolder(){
         var new_name=prompt("폴더 이름을 입력하세요","");

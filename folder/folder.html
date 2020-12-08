@@ -6,11 +6,14 @@
         <script src ="/user/users.js"></script>
         <script src="/folder/folder.js"></script>
         <script src="/menu.js"></script>
-        <script src="/mainframe.js"></script>
+        <!-- <script src="/mainframe.js"></script> -->
         <script src="/mainframe_shortcuts.js"></script>
         <script src="/mainframe_profile.js"></script>
     </head>
     <body>
+        <script>
+            var folder_name=document.createElement("div");
+        </script>
         <div id="wrap">
             <div class="page-menu">
                 <div class ="logo_area"> 
@@ -61,8 +64,8 @@
                         var movedTo=document.location.href
 
                         var link=document.location.href.split("=");
-                        link[1]
-                        console.log(link)
+                        
+                        //console.log(link)
 
                         var p_name=document.getElementById("section_p")
                         
@@ -86,7 +89,8 @@
                         else if(link[1]==4){
                             var name=activeUser.folder[4].title
                             p_name.innerHTML=name;
-                        }    
+                        }   
+                        folder_name.innerHTML=p_name.innerHTML
                     </script>
                 </p>
                 <hr>
@@ -111,41 +115,61 @@
                     var username=localStorage.getItem('username')
                     activeUser=getActiveUser(username);
                     
-                    var find=document.getElementById("section_p")
-
-                    var now_order; //폴더 순서 가져오기
+                    //var find=document.getElementById("section_p")
+                    console.log(folder_name.innerHTML)
+                    var now_order=document.createElement("div"); //폴더 순서 가져오기
                     
                     //console.log(activeUser.folder.length)
                     //현재 folder이름 찾기
                     for(var i=0; i<activeUser.folder.length;i++) //폴더 4개있음
                     {
-                        if(activeUser.folder[i].title===find.innerHTML)
-                        {console.log("현재 과목은"+find.innerHTML)
-                        var now_folder=i;
+                        if(activeUser.folder[i].title===folder_name.innerHTML)
+                        {console.log("현재 과목은 "+folder_name.innerHTML)
+                            now_order.innerHTML=i;
                          //해당 폴더 정하기. folder[i]번째인지 아닌지
                         //now_folder는 말 그대로 값만 가리키니까 안된다... 
-                        console.log("현재 폴더 순서는"+now_folder)
+                        console.log("현재 폴더 순서는"+now_order.innerHTML)
                         }
-                        now_order=now_folder
+                        //now_order=now_folder
                     }
-                    // console.log(activeUser.folder[now_folder].title,activeUser.folder[now_folder].star)
-                    //   var name_post_list=activeUser.folder[now_folder].postIt; //위에서 정한 해당 폴더의 포스트잇 가져와서 안에 내용물 만들기.
-                    // for(var i=0; i<name_post_list.length;i++){
-                    //     console.log(name_post_list[i].title,name_post_list[i].type)
-                    //     var new_div=document.createElement("div")
-                    //     new_div.setAttribute("class","postIt")
-                    //     var new_p=document.createElement("p")
-                    //     new_p.setAttribute("class","post")
-                    //     var edit_img=document.createElement("img")
-                    //     edit_img.setAttribute("class","editFolder")
-                    //     edit_img.setAttribute("onclick","onEditClicked("+i+")")
-                    //     var delete_img=document.createElement("img");
-                    //     delete_img.setAttribute("class","deleteFolder")
-                    //     delete_img.setAttribute("onclick","onDeleteClicked("+i+")")
+                    var parent=document.getElementById("wrap_postit")
+                      var name_post_list=activeUser.folder[now_order.innerHTML].postIt; //위에서 정한 해당 폴더의 포스트잇 가져와서 안에 내용물 만들기.
+                    for(var i=0; i<name_post_list.length;i++){
+                        //console.log(name_post_list[i].title,name_post_list[i].type); //제대로 나온다.
+                        //var tmp=name_post_list[i]; //안에 title과 type이 있다
+                        var new_div=document.createElement("div")
+                        new_div.setAttribute("class","postIt")
+                        var new_p=document.createElement("p")
+                        new_p.setAttribute("class","post")
+                        var edit_img=document.createElement("img")
+                        edit_img.setAttribute("class","editFolder")
+                        edit_img.setAttribute("onclick","onEditClicked("+i+")")
+                        edit_img.src="media/edit.png"
+                        var delete_img=document.createElement("img");
+
+                        delete_img.setAttribute("class","deleteFolder")
+                        delete_img.setAttribute("onclick","onDeleteClicked("+i+")")
+                        delete_img.src="media/delete.png"
                         
-                    //     new_div.innerHTML=name_folder.postIt[i].title;
-                    //     console.log(new_div.innerHTML)
-                    // }
+                        new_p.innerHTML=name_post_list[i].title;
+
+                        new_div.appendChild(new_p)
+                        new_div.appendChild(edit_img)
+                        new_div.appendChild(delete_img)
+
+                        parent.appendChild(new_div)
+
+                        if(name_post_list[i].type=="link"){
+                            new_div.style.backgroundColor="#6ED4D8"
+                        }
+                        else if(name_post_list[i].type=="file"){
+                            new_div.style.backgroundColor="#E3B86"
+                        }else { //글인 경우는 type이 content
+                            new_div.style.backgroundColor="#E36363"
+                        }
+
+
+                    }
                     //여기서 folder 색 지정해주기 type="link"면 이런 식으로
                 </script>
                 </div>
