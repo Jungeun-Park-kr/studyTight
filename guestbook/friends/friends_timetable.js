@@ -1,11 +1,21 @@
-function showFriendTimetable() {
-    //친구의 시간표 정보 공개여부 확인
-    var isSecret = false;
-    if (isSecret) { //비밀인 경우
-        alert('시간표를 비공개한 회원입니다.');
-    }
-    else {
-        location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
+
+function showFriendTimetable() { //친구의 시간표 정보 공개여부 확인
+    var friend;
+    var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+    //var fname = "최시언"; //테스트용 최시언
+    if (fname != null) {
+        friend = getActiveUser(fname); //친구 정보 가져오기
+        console.info(friend);
+        //친구의 시간표 공개/비공개 여부 확인
+        var isSecret = friend.guestbook.profile.profilesecret;
+        if (isSecret) {
+             //비공개인 경우 : (시간표 보기 버튼 누르면 친구 방명록 메인(friends_room.html)에서 팝업으로 비공개한 회원입니다 띄우기)
+            alert('시간표를 비공개한 회원입니다.');
+        }
+        else { //공개인 경우
+       location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
+        }
+        
     }
 }
 
