@@ -149,7 +149,8 @@ var d_day5 = {
 var d_day6 = {
     day: "8",
     content: "무슨무슨 시험"
-}
+};
+
 userlist[0].d_day.push(d_day1);
 userlist[0].d_day.push(d_day2);
 userlist[0].d_day.push(d_day3);
@@ -179,11 +180,16 @@ var folder4 = {
 }
 var postIt1 = {
     title: "PID란?",
-    type: "link"
+    type: "link",
+    url:"https://pkr7098.tistory.com/63"
 }
 var postIt2 = {
     title: "shell이란?",
-    type: "link"
+    type: "link",
+    url: "https://jhnyang.tistory.com/57"
+}
+var postIt3 = {
+    title: ""
 }
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
