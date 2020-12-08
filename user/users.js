@@ -7,7 +7,12 @@ userlist.push({
     name: '박정은',
     userImage: '/media/profile.png',
     course: [], //과목 정보 저장할 곳
-    guestbook: [], //방명록 정보 저장할 곳
+    guestbook: {  //방명록 정보 저장할 곳
+        friendslist : [],
+        //프로필 이미지는 user에 바로 있음
+        profile : {},
+        //방명록 주인도 필요없을듯
+    },
     d_day: [], //디데이 정보 저장할 곳
     folder: []
 });
@@ -77,7 +82,7 @@ userlist.push({
     name: '최시언',
     userImage: '/media/user.png',
     course: [],
-    guestbook: [],
+    guestbook: {},
     d_day: []
 })
 var course4 = {
@@ -117,6 +122,8 @@ function getActiveUser(username) { //사용자 이름으로 현재 접속중인 
         }
     }
 }
+
+
 
 //d-day
 var d_day1 = {
@@ -188,56 +195,87 @@ userlist[0].folder.push(folder4);
 
 
 //guestbook
-var friendslist1 = { //기본 박정은 방명록
-    profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "박정은" //방명록의 주인
-}
-
-var friendslist2 = {
-    profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "최시언" //방명록의 주인
-}
-
-var friendslist3 = {
-    profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "김삿갓" //방명록의 주인
-}
-
-userlist[0].guestbook.push(friendslist1); //삽입
-userlist[0].guestbook.push(friendslist2); //삽입
-userlist[0].guestbook.push(friendslist3); //삽입
-
-var profilelist1 = {
+// userlist[0].guestbook = {
+//     friendslist : [],
+//     //프로필 이미지는 user에 바로 있음
+//     profile : {},
+//     //방명록 주인도 필요없을듯
+// }
+userlist[0].guestbook.profile = {
     profilename: "박정은",
     school: "숭실대학교",
     major: "컴퓨터학부",
     grade: "3",
     age: "22",
     gender: 2, //여자는 2, 남자는 1
-    profilesecret: 0 //공개는 0, 비공개는 1
+    profilesecret: false //공개는 0, 비공개는 1
 }
+//친구 목록 리스트 추가
+var friendslist1 = { //기본 박정은 방명록
+    profileimage: "./media/profile.png",
+    profilelist: [],
+    commentlist: [],
+    guestbookowner: "박정은" //방명록의 주인
+}
+userlist[0].guestbook.friendslist.push(friendslist1);
+var friendslist2 = {
+    profileimage: "./media/profile.png",
+    profilelist: [],
+    commentlist: [],
+    guestbookowner: "최시언" //방명록의 주인
+}
+userlist[0].guestbook.friendslist.push(friendslist2);
+var friendslist3 = {
+    profileimage: "./media/profile.png",
+    profilelist: [],
+    commentlist: [],
+    guestbookowner: "김삿갓" //방명록의 주인
+}
+userlist[0].guestbook.friendslist.push(friendslist3);
 
-var profilelist2 = {
+
+//userlist[0].guestbook.push(friendslist1); //삽입
+//userlist[0].guestbook.push(friendslist2); //삽입
+//userlist[0].guestbook.push(friendslist3); //삽입
+
+
+// var profilelist1 = {
+//     profilename: "박정은",
+//     school: "숭실대학교",
+//     major: "컴퓨터학부",
+//     grade: "3",
+//     age: "22",
+//     gender: 2, //여자는 2, 남자는 1
+//     profilesecret: true //공개는 false, 비공개는 true
+// }
+userlist[1].guestbook.profile = {
     profilename: "최시언",
     school: "숭실대학교",
     major: "컴퓨터학부",
     grade: "3",
     age: "22",
     gender: 2, //여자는 2, 남자는 1
-    profilesecret: 1 //공개는 0, 비공개는 1
-}
+    profilesecret: false //공개는 0, 비공개는 1
+};
+// var profilelist2 = {
+//     profilename: "최시언",
+//     school: "숭실대학교",
+//     major: "컴퓨터학부",
+//     grade: "3",
+//     age: "22",
+//     gender: 2, //여자는 2, 남자는 1
+//     profilesecret: false //공개는 0, 비공개는 1
+// }
 
-userlist[0].guestbook.push(friendslist1); //삽입
-userlist[0].guestbook.push(friendslist2); //삽입
+//userlist[0].guestbook.push(friendslist1); //삽입
+//userlist[0].guestbook.push(friendslist2); //삽입
 
-friendslist1.profilelist.push(profilelist1);
-friendslist2.profilelist.push(profilelist2);
+//friendslist1.profilelist.push(profilelist1);
+//friendslist2.profilelist.push(profilelist2);
+
+
+
+
 
 var commentlist1 = {
     Author: "최시언",
