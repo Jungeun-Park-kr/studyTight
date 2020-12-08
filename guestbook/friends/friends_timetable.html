@@ -19,22 +19,9 @@
     <script src="/guestbook/friends/friends_timetable.js"></script>
 </head>
 <script>
-    // var friend;
-    // var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
-    // //var fname = "최시언"; //테스트용 최시언
-    // if (fname != null) {
-    //     friend = getActiveUser(fname); //친구 정보 가져오기
-    //     //친구의 시간표 공개/비공개 여부 확인
-    //     var isSecret = friend.guestbook.profile.profilesecret;
-    //     if (isSecret) {
-    //          //비공개인 경우 : (시간표 보기 버튼 누르면 친구 방명록 메인(friends_room.html)에서 팝업으로 비공개한 회원입니다 띄우기)
-    //            alert('시간표를 비공개한 회원입니다.');
-    //     }
-    //     else { //공개인 경우
-    //    location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
-    //     }
-        
-    // }
+    var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+    var friend = getActiveUser(fname); //친구 정보 가져오기
+    console.log(friend.name);
 </script>
 <body>
     <div id="warp">
@@ -67,7 +54,11 @@
 
         </div>
         <div class="page-header" role="banner" class>
-            <div class="timetable_title">최시언님의 시간표 </div>
+            <div id="timetable_title" class="timetable_title">김아무개님의 시간표 </div>
+            <script>
+                var title = document.getElementById("timetable_title");
+                title.innerHTML = fname+'님의 시간표';
+            </script>
         </div>
 
         <div class="section">
@@ -378,9 +369,6 @@
                                         </td>
                                     </tr>
                                     <script>
-                                        var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
-                                        var friend = getActiveUser(fname); //친구 정보 가져오기
-                                        console.log(friend.name);
                                         var courselist = friend.course;
                                         console.log(courselist);
                                         for (var i=0; i<courselist.length; i++) {
