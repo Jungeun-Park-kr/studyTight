@@ -118,52 +118,40 @@
 
                     </div>
 
-
                     <script>
                         function showfriendlist() {
                             var username = localStorage.getItem('username');
                             activeUser = getActiveUser(username);
-                            myprofile = activeUser.guestbook.profile;
-                            var parent_table = document.getElementById("leftmenu"); //부모테이블
-                            var profile = document.createElement("div");
-                            var new_td1 = document.createElement("li");
-                            var userimage = document.createElement('img');
-                            userimage.src = activeUser.userImage; // 이미지 경로 설정
-                            //userimage.innerHTML = "&nbsp" + activeUser.name;
+                            myfriends = activeUser.guestbook.friendslist;
+                            var parent_table = document.getElementById("course_body"); //부모테이블
 
-                            //다섯번째 li , 테스트에서는 공개되지 않음.
-                            if (myprofile.age_secret == false) {
-                                var Fifth = document.createElement("li");
-                                Fifth.setAttribute("class", "age");
-                                var Fifthimage = document.createElement('img');
-                                Fifthimage.src = "media/age.png";
-                                Fifth.innerHTML = "&nbsp" + myprofile.age;
-                                Fifth.prepend(Fifthimage);
-                                parent_table.prepend(Fifth);
+
+                            for (i = 0; i < myfriends.length; i++) {
+                                var box = document.createElement("tr");
+                                var name = document.createElement("td");
+                                var email = document.createElement("td");
+                                box.addEventListener('click', function(event) {
+                                    location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
+                                })
+                                name.innerHTML = myfriends[i].guestbookowner;
+                                email.innerHTML = myfriends[i].email;
+                                box.appendChild(name);
+                                box.appendChild(email);
+                                parent_table.appendChild(box);
                             }
+
                         }
                     </script>
 
-
                     <div class="friends_list_box">
                         <table id="course_table">
-                            <tbody>
-                                <tr onclick="btnfriends('양지영');">
-                                    <td>양지영</td>
-                                    <td>sidjyoung@naver.com</td>
-                                </tr>
-                                <tr onclick="btnfriends('최시언');">
-                                    <td>최시언</td>
-                                    <td>noino0819@naver.com</td>
-                                </tr>
-                                <tr onclick="btnfriends('김삿갓');">
-                                    <td>김삿갓</td>
-                                    <td>kimsatgat@naver.com </td>
-                                </tr>
+                            <tbody id="course_body">
+                                <script>
+                                    showfriendlist();
+                                </script>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
                 <div class="writing-place">
                     <div class="writing-box">

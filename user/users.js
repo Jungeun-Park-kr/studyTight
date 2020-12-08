@@ -236,7 +236,7 @@ userlist[0].guestbook.friendslist.push(friendslist2);
 var friendslist3 = {
     profileimage: "./media/profile.png",
     guestbookowner: "김삿갓", //방명록의 주인
-    email: "kimsatgat@naver.com";
+    email: "kimsatgat@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist3);
 
@@ -287,6 +287,7 @@ userlist[1].guestbook.profile = {
 var commentlist1 = {
     Author: "최시언",
     mycommnet: "너 이번 웹프로그래밍 문제 이해했어?",
+    today: "2020-10-16 12:13:11",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
@@ -294,22 +295,25 @@ var commentlist2 = {
     Author: "김삿갓",
     mycommnet: "너 시간표 진짜 신기하다.",
     mycommnet1: "잘 보고가!다음에 수업 겹치면 같이 듣자!",
+    today: "2020-11-26 16:13:12",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
 var commentlist3 = { //비공개여부 테스트용
     Author: "김삿갓",
     mycommnet: "사실 나도 궁금했어",
+    today: "2020-11-27 17:13:12",
     commnetsecret: 1 // 공개는 0, 비공개는 1
 }
 
 var commentlist4 = { //비공개여부 테스트용
     Author: "양지영",
     mycommnet: "나도 다녀가!",
+    today: "2020-11-29 08:13:12",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
-friendslist1.commentlist.push(commentlist1);
-friendslist1.commentlist.push(commentlist2);
-friendslist1.commentlist.push(commentlist3);
-friendslist2.commentlist.push(commentlist4);
+// friendslist1.commentlist.push(commentlist1);
+// friendslist1.commentlist.push(commentlist2);
+// friendslist1.commentlist.push(commentlist3);
+// friendslist2.commentlist.push(commentlist4);
