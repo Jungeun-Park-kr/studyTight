@@ -223,23 +223,20 @@ userlist[0].guestbook.profile = {
     //친구 목록 리스트 추가
 var friendslist1 = { //기본 박정은 방명록
     profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "박정은" //방명록의 주인
+    guestbookowner: "양지영", //방명록의 주인
+    email: "sidjyoung@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist1);
 var friendslist2 = {
     profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "최시언" //방명록의 주인
+    guestbookowner: "최시언", //방명록의 주인
+    email: "noino0819@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist2);
 var friendslist3 = {
     profileimage: "./media/profile.png",
-    profilelist: [],
-    commentlist: [],
-    guestbookowner: "김삿갓" //방명록의 주인
+    guestbookowner: "김삿갓", //방명록의 주인
+    email: "kimsatgat@naver.com";
 }
 userlist[0].guestbook.friendslist.push(friendslist3);
 

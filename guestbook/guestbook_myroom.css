@@ -14,16 +14,16 @@ body {
     /* margin-left: 20px; */
     float: left;
 }
+
 .logo_area .logo {
     /* background-image: url("media/logo.png");  */
     width: 150px;
-    height : 150px;
+    height: 150px;
     padding: 10px 10px 10px 10px;
     margin-top: 20px;
     margin-left: 20px;
-    cursor:pointer;
+    cursor: pointer;
 }
-
 
 #course_table tbody tr:hover {
     font-weight: bold;
@@ -190,7 +190,7 @@ body {
     margin-top: 10px;
     margin-left: 55px;
     margin-right: 55px;
-    height: 15%;
+    height: 0.5%;
     width: 85.5%;
     float: none;
 }
