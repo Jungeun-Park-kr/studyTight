@@ -204,6 +204,32 @@
         var guestbook = activeUser.guestbook; //게스트북 가져오기
         console.log(guestbook.profile);
         showmyprofile(guestbook.profile); //나에대한 정보를 비밀 유무에 따라 출력하기
+
+
+        function showmyprofile(profile) { //게스트북의 프로필 받아옴.
+            //입력받은 정보로 프로필 출력하기
+            console.log(profile);
+            var name, school, major, grade, age, gender, profilesecret;
+            var school_secret, major_secret, grade_secret;
+            name = profile.name; //기본정보
+            school = profile.school;
+            major = profile.major;
+            age = profile.age;
+            gender = profile.gender;
+            profilesecret = profile.profilesecret;
+
+            school_secret = profile.school_secret; //비밀여부
+            major_secret = profile.major_secret;
+            grade_secret = profile.grade_secret;
+
+            console.log(gender);
+
+
+            myvar = document.getElementById(leftmenu); //좌측 띄어줄것들.
+            // myvar.innerHTML = title; //첫줄에는 과목이름
+            // tmpvar.style.backgroundColor = color;
+
+        }
     </script>
 </body>
 

@@ -30,6 +30,7 @@ function get_courses(value) {
 
 function showmyprofile(profile) { //게스트북의 프로필 받아옴.
     //입력받은 정보로 프로필 출력하기
+    console.log(profile);
     var name, school, major, grade, age, gender, profilesecret;
     var school_secret, major_secret, grade_secret;
     name = profile.name; //기본정보
@@ -43,8 +44,7 @@ function showmyprofile(profile) { //게스트북의 프로필 받아옴.
     major_secret = profile.major_secret;
     grade_secret = profile.grade_secret;
 
-    console.log("프로필 in js" + profile);
-    console.log("이름 in js" + name);
+
 
     myvar = document.getElementById(leftmenu); //좌측 띄어줄것들.
     // myvar.innerHTML = title; //첫줄에는 과목이름
