@@ -18,13 +18,12 @@ body {
 .logo_area .logo {
     /* background-image: url("media/logo.png");  */
     width: 150px;
-    height : 150px;
+    height: 150px;
     padding: 10px 10px 10px 10px;
     margin-top: 20px;
     margin-left: 20px;
-    cursor:pointer;
+    cursor: pointer;
 }
-
 
 .information-menu .left-menus>li {
     /* border-bottom:1px solid #252626; */
@@ -38,7 +37,6 @@ body {
     color: black;
     cursor: pointer;
 }
-
 
 .edit-profile>#edit-button-id {
     cursor: pointer;
@@ -227,6 +225,11 @@ body {
 .user-small-talking .user-talking-list {
     margin-top: 10px;
     margin-left: 30px;
+}
+
+.user-small-talking .user-talking-list1 {
+    margin-top: 10px;
+    margin-left: 50%;
 }
 
 .user-small-talking .today {
