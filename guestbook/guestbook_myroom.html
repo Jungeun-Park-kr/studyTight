@@ -130,14 +130,7 @@
                                 var box = document.createElement("tr");
                                 var name = document.createElement("td");
                                 var email = document.createElement("td");
-                                box.addEventListener('click', function (e) {
-                                    //console.info(this);
-                                    var children = this.childNodes; //클릭한 객체의 자식 가져옴
-                                    console.info(children);
-                                    console.info(children[0]); //0번째 요소가 이름
-                                    console.log('방명록 이동할 친구 이름:'+children[0].innerHTML);  
-                                    var fname = children[0].innerHTML;
-                                    localStorage.setItem('friendName', fname); //localStorage에 방문하는 친구이름 저장  
+                                box.addEventListener('click', function(event) {
                                     location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
                                 })
                                 name.innerHTML = myfriends[i].guestbookowner;
@@ -289,6 +282,8 @@
                                         input3.type = "checkbox";
                                         input3.name = "비밀글";
 
+                                        var checked = input3.checked;
+
                                         div5.prepend(input3);
                                         div4.appendChild(input2);
                                         div3.appendChild(div4);
@@ -301,7 +296,6 @@
                                         btn.parentNode.parentNode.parentNode.parentNode.after(div1);
                                         // btn.appendchild(div1);
                                         //console.log(btn.parentNode.parentNode.parentNode.parentNode);
-                                        //console.log(div4);
                                         div4.addEventListener('click', function(event) {
                                             //만들기
 
@@ -329,8 +323,11 @@
                                             var div5 = document.createElement("div");
                                             div5.setAttribute("class", "user-talking-list");
                                             div5.innerHTML = btn.parentNode.parentNode.previousSibling.firstChild.value; //내가 박스에 작성한 코멘트
-                                            btn.parentNode.parentNode.previousSibling.firstChild.value = '';
-                                            //console.log(btn.parentNode.parentNode.previousSibling.firstChild);
+                                            //btn.parentNode.parentNode.previousSibling.firstChild.value = '';
+                                            //console.log(btn.parentNode.nextSibling.firstChild.checked); //입력한 댓글.
+
+                                            //아래에다가 넣어줄commnetlist를 만들어줄거임.
+
                                             //위에 있는 식이 내가 입력할 박스의 값.
                                             var div6 = document.createElement("div");
                                             div6.setAttribute("class", "today-button");
@@ -364,6 +361,16 @@
                                             div2.appendChild(img);
                                             div1.appendChild(div2);
                                             div1.appendChild(div3);
+
+                                            //console.log(div9);
+                                            var commentlist = {
+                                                Author: activeUser.name,
+                                                mycommnet: btn.parentNode.parentNode.previousSibling.firstChild.value,
+                                                today: generateTime(),
+                                                commnetsecret: btn.parentNode.nextSibling.firstChild.checked
+                                                    //공개여부에 따라 달라져야됨.
+                                            }
+                                            console.log(commentlist);
 
                                             btn.parentNode.parentNode.parentNode.previousSibling.after(div1);
 
