@@ -76,7 +76,7 @@ function login() {
         location.replace("/mainframe.html"); //메인 화면으로 이동
         alert('asdf');
     }, 2000000);
-    //location.replace("/mainframe.html"); //메인 화면으로 이동
+    location.replace("/mainframe.html"); //메인 화면으로 이동
 }
 
 function logout() {
