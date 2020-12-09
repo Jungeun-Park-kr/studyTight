@@ -311,7 +311,7 @@ var commentlist4 = { //비공개여부 테스트용
 
 var commentlist5 = { //비공개여부 테스트용
     Author: "양지영",
-    mycommnet: "나도 다녀가!",
+    mycommnet: "나도 다녀가!!!",
     today: "2020-11-29 08:13:12",
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
