@@ -243,19 +243,34 @@
                         <label><input type="checkbox"><p>채플 듣기</p></label>
                         <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> 
                         <script>
-                                //여기 안에 오늘 날짜를 조작해서 다음날로 이동하면
-                                // var parent=document.getElementById("Todolist");
-                                // parent.removechild()함수 사용하면 된다!
-                            </script>
+                        var parent_list=document.getElementById("todaylist");
+
+                        var now=new Date();
+                        //조작된 시간
+                        var open=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,56);
+                        var end=new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
+                        
+                        var nt=now.getTime();
+                        var ot=open.getTime();
+                        var et=end.getTime();
+
+                        setTimeout(function(){
+                            parent_list.remove();
+                        },2000);
+                        //현재 시간이 56초고 2초 뒤에 사라지게 만들었음.
+                        </script>
                     </div>
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
                 </div>
                 <div class="caution">
                     <pre>
-                        오늘(11:59 PM)기준으로 완료된 할 일은
-                        내일(12:00 AM)기준으로 제거되고, 
-                        완료되지 않은 할 일은 유지됩니다.
+                        오늘(11:59 PM)기준으로 
+                        완료된 할 일은
+                        내일(12:00 AM)기준으로 
+                        제거되고, 
+                        완료되지 않은 할 일은 
+                        유지됩니다.
                     </pre>
                 </div>
             </div>

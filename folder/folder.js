@@ -91,6 +91,27 @@ function gotoUrl(order){
     //순서에 맞게 들어온 애들을 보여주기.
     //해당 그걸로 이동하게
     var goto=activeUser.folder[0].postIt[order].url;
-    var link=window.open();
-    link.location=goto
+    
+    if(activeUser.folder[0].postIt[order].type=="link"){
+        var link=window.open();
+        link.location=goto}
+    else if(activeUser.folder[0].postIt[order].type=="content"){
+        alert(goto);
+
+        // var file=goto
+        // var rawFile=new XMLHttpRequest();
+        // rawFile.open("GET",file,false);
+        // rawFile.onreadystatechange=function(){
+        //     if(rawFile.readyState===4){
+        //         if(rawFile.status===200 || rawFile.status==0){
+        //             var allText=rawFile.responseText;
+        //             alert(allText);
+        //         }
+        //     }
+        // }
+        // //rawFile.send(null); //에러나는데 해결 방법은 jqeury랑 php사용임..
+    }
+    else {
+        alert("파일의 위치는 "+goto+" 입니다");
+    }
 }

@@ -186,13 +186,19 @@ var postIt2 = {
     url: "https://jhnyang.tistory.com/57"
 }
 var postIt3 = {
+    title: "요점정리 1",
+    type: "content",
+    url: "이번 강의는 OS의 기본적인 것에 대해서 배웠습니다."
+}
+var postIt4 = {
     title: "강의노트 1",
     type: "file",
-    url: "file:///‪C:/Users/82103/Desktop/testFile.txt"
+    url: "C:\Users\82103\Desktop"
 }
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
 folder1.postIt.push(postIt3);
+folder1.postIt.push(postIt4);
 userlist[0].folder.push(folder1);
 userlist[0].folder.push(folder2);
 userlist[0].folder.push(folder3);

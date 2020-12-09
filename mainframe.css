@@ -207,8 +207,13 @@ body {
     display:block;
 }
 .caution {
-    text-align:center;
     width:12%;
+    position:relative;
+    
+    top: 20px;
+    text-align: center;
+    font-size:large;
+    align-items: center;
 }
 .wrap_folder {
     display: inline;
