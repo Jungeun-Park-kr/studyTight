@@ -2,6 +2,7 @@
 function showFriendTimetable() { //친구의 시간표 정보 공개여부 확인
     var friend;
     var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+    console.log(fname);
     //var fname = "최시언"; //테스트용 최시언
     if (fname != null) {
         friend = getActiveUser(fname); //친구 정보 가져오기
@@ -13,7 +14,7 @@ function showFriendTimetable() { //친구의 시간표 정보 공개여부 확�
             alert('시간표를 비공개한 회원입니다.');
         }
         else { //공개인 경우
-       location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
+            location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
         }
         
     }
