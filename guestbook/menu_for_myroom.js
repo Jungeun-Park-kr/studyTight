@@ -23,12 +23,12 @@ function btnTimetable() {
     }
 }
 
-function btnfriends(name) {
-    console.log('방명록 이동할 친구 이름:'+name);
-    localStorage.setItem('friendName', name); //파라미터로 받아와서 여기서 접속하는 친구이름 등록해주기
-    location.href="/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기불가
-    //location.href("#"); //뒤로가기 가능
-}
+// function btnfriends(name) {
+//     console.log('방명록 이동할 친구 이름:'+name);
+//     localStorage.setItem('friendName', name); //파라미터로 받아와서 여기서 접속하는 친구이름 등록해주기
+//     location.href="/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기불가
+//     //location.href("#"); //뒤로가기 가능
+// }
 
 function btnDday() {
     var popupWidth = 600;
