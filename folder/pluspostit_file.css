@@ -27,5 +27,7 @@
 
 .uploadBtn {
     margin:5px;  
+    border-radius:10px;
+    border:none;
     background-color:#6ED4D8;
 }
