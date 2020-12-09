@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>친구 추가하기</title>
+    <script src="/user/users.js"></script>
     <style>
         @import url(friends_add.css);
     </style>
@@ -18,7 +19,7 @@
             <tbody>
                 <tr>
                     <th>이메일</th>
-                    <td><input type="text" name="course_title" size="20" style="width:80%; border:1;"> </td>
+                    <td><input type="text" name="course_title" size="20" id="this" style="width:80%; border:1;"> </td>
                 </tr>
 
             </tbody>
@@ -26,8 +27,33 @@
     </div>
 
     <div class="add_btn">
-        <input id="btn_add_course" type="button" title="추가" value="추가" onclick=""></input>
+        <input id="btn_add_course" type="button" title="추가" value="추가" onclick="addprofile();"></input>
     </div>
+    <script>
+        check = 1;
+
+        var username = localStorage.getItem('username');
+        activeUser = getActiveUser(username);
+        friendslist = activeUser.guestbook.friendslist;
+        console.log(friendslist);
+
+        function addprofile() {
+            var value1 = document.getElementById('this').value;
+            if (value1 == "") {
+                alert("친구의 이메일을 입력해주세요");
+                check = 0;
+            } //저장금지
+
+            var myfriendslist = {
+                profileimage: "./media/profile2.png",
+                guestbookowner: "나의친구", //방명록의 주인
+                email: ""
+            }
+            friendslist.email = value1;
+            friendslist.push(myfriendslist);
+            console.log(friendslist);
+        }
+    </script>
 </body>
 
 </html>
