@@ -72,7 +72,7 @@ function onEditClicked(order){
     var edit_content=prompt("바꿀 포스트잇 이름을 입력하세요","");
 
     var edit_div=document.getElementsByClassName('post');
-    edit_div.item(order).textContent=edit_content
+    edit_div[order].innerHTML=edit_content
    //수정 완료 ^^
 
 }
@@ -84,4 +84,13 @@ function onDeleteClicked(order){
 
     wrap.removeChild(delete_btn.item(order).parentElement);
     //삭제 완료^^
+}
+function gotoUrl(order){
+    var username=localStorage.getItem("username");
+    activeUser=getActiveUser(username);
+    //순서에 맞게 들어온 애들을 보여주기.
+    //해당 그걸로 이동하게
+    var goto=activeUser.folder[0].postIt[order].url;
+    var link=window.open();
+    link.location=goto
 }

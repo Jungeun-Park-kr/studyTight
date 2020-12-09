@@ -116,7 +116,7 @@
                     activeUser=getActiveUser(username);
                     
                     //var find=document.getElementById("section_p")
-                    console.log(folder_name.innerHTML)
+                    //console.log(folder_name.innerHTML)
                     var now_order=document.createElement("div"); //폴더 순서 가져오기
                     
                     //console.log(activeUser.folder.length)
@@ -136,7 +136,7 @@
                       var name_post_list=activeUser.folder[now_order.innerHTML].postIt; //위에서 정한 해당 폴더의 포스트잇 가져와서 안에 내용물 만들기.
                     for(var i=0; i<name_post_list.length;i++){
                         //console.log(name_post_list[i].title,name_post_list[i].type); //제대로 나온다.
-                        //var tmp=name_post_list[i]; //안에 title과 type이 있다
+                        var tmp=name_post_list[i].url; //안에 title과 type이 있다
                         var new_div=document.createElement("div")
                         new_div.setAttribute("class","postIt")
                         var new_p=document.createElement("p")
@@ -152,7 +152,8 @@
                         delete_img.src="media/delete.png"
                         
                         new_p.innerHTML=name_post_list[i].title;
-
+                        new_p.setAttribute("onclick","gotoUrl("+i+")")//url전달
+                        console.log(name_post_list[i].url)
                         new_div.appendChild(new_p)
                         new_div.appendChild(edit_img)
                         new_div.appendChild(delete_img)
@@ -163,7 +164,7 @@
                             new_div.style.backgroundColor="#6ED4D8"
                         }
                         else if(name_post_list[i].type=="file"){
-                            new_div.style.backgroundColor="#E3B86"
+                            new_div.style.backgroundColor="#E3B863"
                         }else { //글인 경우는 type이 content
                             new_div.style.backgroundColor="#E36363"
                         }
