@@ -29,8 +29,10 @@ function deleteComments(event) {
 }
 
 function showComment(comment) {
+    var username = localStorage.getItem('username');
+    activeUser = getActiveUser(username);
     var userimage = document.createElement('img');
-    userimage.src = '/guestbook/media/person_gray.png'; // 이미지 경로 설정 (랜덤)
+    userimage.src = activeUser.userImage;
     const inputBox = document.createElement('div');
     var hzRule = document.createElement('hr'); // make a hr
     const userName = document.createElement('div');
