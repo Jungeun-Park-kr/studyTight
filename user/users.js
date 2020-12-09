@@ -18,6 +18,8 @@ userlist.push({
     folder: []
 });
 
+
+
 //과목정보
 var course1 = {
     title: "OS(운영체제)",
@@ -77,9 +79,15 @@ userlist.push({
     userId: 'noino08189@naver.com',
     password: 'asdfasdf',
     name: '최시언',
-    userImage: '/media/user.png',
+    userImage: '/media/profile2.png',
     course: [],
-    guestbook: {},
+    guestbook: { //방명록 정보 저장할 곳
+        friendslist: [],
+        //프로필 이미지는 user에 바로 있음
+        profile: {},
+        //방명록 주인도 필요없을듯
+        commentlist: [],
+    },
     d_day: []
 })
 var course4 = {
@@ -223,7 +231,7 @@ userlist[0].guestbook.profile = {
         grade_secret: false,
         age: "22",
         age_secret: true,
-        gender: "2", //여자는 2, 남자는 1
+        gender: true, //여자는 2, 남자는 1
         profilesecret: false //공개는 0, 비공개는 1
     }
     //친구 목록 리스트 추가
@@ -335,6 +343,20 @@ var commentlist7 = { //비공개여부 테스트용
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
+var commentlist8 = {
+    Author: "최시언",
+    mycommnet: "비밀글이지롱!",
+    today: "2020-10-16 12:13:11",
+    commnetsecret: 1 // 공개는 0, 비공개는 1
+}
+
+var commentlist9 = {
+    Author: "최시언",
+    mycommnet: "이건비밀글이아니지롱!",
+    today: "2020-10-16 12:13:13",
+    commnetsecret: 0 // 공개는 0, 비공개는 1
+}
+
 userlist[0].guestbook.commentlist.push(commentlist1); //삽입
 userlist[0].guestbook.commentlist.push(commentlist2); //삽입
 userlist[0].guestbook.commentlist.push(commentlist3); //삽입
@@ -342,3 +364,5 @@ userlist[0].guestbook.commentlist.push(commentlist4); //삽입
 userlist[0].guestbook.commentlist.push(commentlist5); //삽입
 userlist[0].guestbook.commentlist.push(commentlist6); //삽입
 userlist[0].guestbook.commentlist.push(commentlist7); //삽입
+userlist[1].guestbook.commentlist.push(commentlist8); //삽입
+userlist[1].guestbook.commentlist.push(commentlist9); //삽입
