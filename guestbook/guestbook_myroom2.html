@@ -223,7 +223,7 @@
                             mytalking = activeUser.guestbook.commentlist;
                             var parent_table = document.getElementById("talking-place"); //부모테이블
 
-                            for (i = 0; i < 5; i++) {
+                            for (i = 5; i < mytalking.length; i++) {
                                 var div1 = document.createElement("div");
                                 div1.setAttribute("class", "talking");
                                 var div2 = document.createElement("div");
@@ -231,7 +231,7 @@
                                 var img = document.createElement("img");
                                 //img.src = myfriends[0].profileimage;
                                 //해당 친구에 맞게 프로필출력
-                                for (j = 0; j < 5; j++) {
+                                for (j = 0; j < myfriends.length; j++) {
                                     //console.log(myfriends[j].guestbookowner);
                                     if (mytalking[i].Author == myfriends[j].guestbookowner) {
                                         img.src = myfriends[j].profileimage;
@@ -432,11 +432,8 @@
                         <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
                         <td colspan="6 ">
                             <center>
-                                <a href="#">1</a>
-                                <a href="/guestbook/guestbook_myroom2.html">2</a>
-                                <a href="# "></a>
-                                <a href="# "></a>
-                                <a href="# "></a>
+                                <a href="/guestbook/guestbook_myroom.html">1</a>
+                                <a href="# ">2</a>
                             </center>
                         </td>
                     </tr>
