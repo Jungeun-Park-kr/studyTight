@@ -237,7 +237,9 @@
                                         img.src = myfriends[j].profileimage;
                                         //console.log("get");
                                         break;
-                                    }
+                                    } else
+                                        img.src = "/media/profile.png";
+
                                 }
                                 var div3 = document.createElement("div");
                                 div3.setAttribute("class", "user-small-talking");
