@@ -327,7 +327,7 @@ userlist[2].guestbook.profile = {
     school: "숭실대학교",
     school_secret: false,
     major: "컴퓨터학부",
-    major_secret: True,
+    major_secret: true,
     grade: "3",
     grade_secret: false,
     age: "23",
