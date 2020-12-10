@@ -15,6 +15,7 @@
     border-radius: 10px;
     line-height: 40px;
     font-weight: bold;
+    color: palevioletred;
 }
 #shortcuts_link {
     float:left;

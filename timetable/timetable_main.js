@@ -26,21 +26,22 @@ function showCourse(title, timelist) {
     //입력받은 정보로 시간표 출력하기
     var tdid, st, et, sh, sm, eh, em;
     var color, tmpvar;
+    color = getColor();
     for(var i=0; i<timelist.length; i++) {
         tmptime = timelist[i];
         //요일 및 색깔지정
-        color = getDayColor(tmptime.day);
+        //color = getColor(tmptime.day);
         //시작시간
         st = tmptime.stime.split(':');
-        sh = st[0]; //시는 바로 입력
+        sh = parseInt(st[0]); //시는 바로 입력
         sm = getMinuteId(st[1]);
         //종료시간
         et = tmptime.etime.split(':');
-        eh = et[0];
+        eh = parseInt(et[0]);
         em = getMinuteId(et[1]);
         //시작시간 id만들기 및 속성적용
         tdid = tmptime.day+sh+'.'+sm;
-        //console.log(tdid);
+        //console.log(title+tdid);
         tmpvar = document.getElementById(tdid);
         tmpvar.innerHTML=title; //첫줄에는 과목이름
         tmpvar.style.backgroundColor=color;
@@ -52,14 +53,15 @@ function showCourse(title, timelist) {
                 sh++;
                 sm = 1;
             }
-            if (sh >= eh) { //종료조건 확인
-                if (sm >= em) { 
+            if (sh > eh) { //종료조건 확인
+                if (sm > em) { 
+                    typeof(eh);
                     break;
                 }
             }
             //console.log(tmptime.day);
             tdid = tmptime.day+sh+'.'+sm;
-            //console.log(tdid);
+            //console.log(title+tdid);
             tmpvar = document.getElementById(tdid);
             if(sm==4) { //border 없애기
                 tmpvar.style.borderStyle="";
@@ -68,7 +70,52 @@ function showCourse(title, timelist) {
         }
     }
 }
-
+function getColor() {
+    // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
+    // return color;
+    var rand = Math.random();
+    rand = Math.floor(rand*19);
+    switch(rand) {
+        case 0:
+            return "lightpink";
+        case 1:
+            return"lightsalmon";
+        case 2:
+            return "lightsteelblue";
+        case 3:
+            return "lightyellow";
+        case 4:
+            return "mediumaquamarine";
+        case 5:
+            return "lightgray";
+        case 6:
+            return "thistle";
+        case 7:
+            return "paleturquoise";
+        case 8:
+            return "yellowgreen";
+        case 9:
+            return "peachpuff";
+        case 10:
+            return "wheat";
+        case 11:
+            return "palegreen";
+        case 12:
+            return "moccasin";
+        case 13:
+            return "mistyrose";
+        case 14:
+            return "oldlace";
+        case 15:
+            return "palegoldenrod";
+        case 16:
+            return "palegreen";
+        case 17:
+            return "paleturquoise";
+        case 18:
+            return "palevioletred";
+    }
+}
 function getDayColor(day) {
     switch(day) {
         case 'mon':
