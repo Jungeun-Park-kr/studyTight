@@ -34,11 +34,11 @@ function showCourse(title, timelist) {
         //시작시간
         st = tmptime.stime.split(':');
         sh = parseInt(st[0]); //시는 바로 입력
-        sm = getMinuteId(st[1]);
+        sm = getMinuteId(parseInt(st[1]));
         //종료시간
         et = tmptime.etime.split(':');
         eh = parseInt(et[0]);
-        em = getMinuteId(et[1]);
+        em = getMinuteId(parseInt(et[1]));
         //시작시간 id만들기 및 속성적용
         tdid = tmptime.day+sh+'.'+sm;
         //console.log(title+tdid);
@@ -54,8 +54,12 @@ function showCourse(title, timelist) {
                 sm = 1;
             }
             if (sh > eh) { //종료조건 확인
-                if (sm > em) { 
-                    typeof(eh);
+                //console.log('종료조건1');
+                break;
+            }
+            else if(sh == eh) {
+                if (sm >= em) {
+                    //console.log('종료조건2');
                     break;
                 }
             }
@@ -135,13 +139,13 @@ function getDayColor(day) {
 
 function getMinuteId(min) { //분은 케이스 나누기
     switch (min) { 
-        case "00":
+        case 0:
             return 1;
-        case "15":
+        case 15:
             return 2;
-        case "30":
+        case 30:
             return 3;
-        case "45":
+        case 45:
             return 4;
         default :
             return 1;
