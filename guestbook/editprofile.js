@@ -18,8 +18,8 @@ console.log('activeUSer:' + activeUser.name);
 // }
 // 아래는 브라우저 창 크기 기준으로 중앙에 팝업 띄움
 function showFriendAddPopup() {
-    var popupWidth = 500;
-    var popupHeight = 600;
+    var popupWidth = 650;
+    var popupHeight = 750;
     var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
     var popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
     var url = "editprofile.html";
