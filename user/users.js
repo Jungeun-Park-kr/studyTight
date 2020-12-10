@@ -121,7 +121,127 @@ userlist.push({
     },
     d_day: []
 })
+//김삿갓 과목
+var course_ksg = {
+    title: "경제발전론",
+    professor: "김지석",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg1 = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "10:30", //시작시간
+    etime: "12:00" //종료시간
+}
+var time_ksg2 = {
+    day: "wed", //mon, tue, ... 저장
+    stime: "9:00", //시작시간
+    etime: "10:30" //종료시간
+}
+course_ksg.time.push(time_ksg1);
+course_ksg.time.push(time_ksg2);
+userlist[3].course.push(course_ksg);
 
+var course_ksg2 = {
+    title: "거시경제학",
+    professor: "이영화",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg3 = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "14:00" //종료시간
+}
+var time_ksg4 = {
+    day: "wed", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "15:00" //종료시간
+}
+course_ksg2.time.push(time_ksg3);
+course_ksg2.time.push(time_ksg4);
+userlist[3].course.push(course_ksg2);
+var course_ksg3 = {
+    title: "공공경제학",
+    professor: "최주리",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg5 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "14:00" //종료시간
+}
+var time_ksg6 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "15:00" //종료시간
+}
+course_ksg3.time.push(time_ksg5);
+course_ksg3.time.push(time_ksg6);
+userlist[3].course.push(course_ksg3);
+var course_ksg4 = {
+    title: "근대경제사",
+    professor: "박제명",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg7 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "15:00", //시작시간
+    etime: "16:30" //종료시간
+}
+var time_ksg8 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "15:00", //시작시간
+    etime: "16:30" //종료시간
+}
+course_ksg4.time.push(time_ksg7);
+course_ksg4.time.push(time_ksg8);
+userlist[3].course.push(course_ksg4);
+var course_ksg5 = {
+    title: "국제물류론",
+    professor: "천정수",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg9 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "16:30", //시작시간
+    etime: "18:00" //종료시간
+}
+var time_ksg10 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "16:30", //시작시간
+    etime: "18:00" //종료시간
+}
+course_ksg5.time.push(time_ksg9);
+course_ksg5.time.push(time_ksg10);
+userlist[3].course.push(course_ksg5);
+
+course_ksg6 = {
+    title: "경제통상통계학",
+    professor: "김세훈",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+time_ksg11 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "9:00", //시작시간
+    etime: "12:00" //종료시간
+}
+course_ksg6.time.push(time_ksg11);
+userlist[3].course.push(course_ksg6);
+
+
+
+//박정은 과목정보
 var course4 = {
     title: "운영체제",
     professor: "홍지만",
@@ -340,7 +460,7 @@ userlist[3].guestbook.profile = {
     profilename: "김삿갓",
     school: "중앙대학교",
     school_secret: false,
-    major: "기계공학부",
+    major: "경제학과",
     major_secret: false,
     grade: "3",
     grade_secret: false,
@@ -349,6 +469,8 @@ userlist[3].guestbook.profile = {
     gender: false, //여자는 2, 남자는 1
     profilesecret: true //공개는 0, 비공개는 1
 };
+
+
 // var profilelist2 = {
 //     profilename: "최시언",
 //     school: "숭실대학교",
