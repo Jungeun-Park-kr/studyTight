@@ -91,32 +91,32 @@ function newClicked(){
 function getRealtimeCourse(course) {
         var type, tmptime, day, st, sh, sm, et, eh, em;
         var date = new Date();
-        // var curday = 1; //테스트용 시간 (웹프로그래밍기초및실습 나오면 정상)
-        // var curhour = 12;
-        // var curmin = 46; 
+        //현재 시간
         var curday = date.getDay(); 
         var curhour = date.getHours();
         var curmin = date.getMinutes();
-        console.log ('현재 요일:'+curday +' 시간:'+curhour+'분:'+curmin);
+        //온라인 - 테스트용 시간 (웹프로그래밍기초및실습 나오면 정상)
+        // var curday = 1; //월요일
+        // var curhour = 12; //오후 12시
+        // var curmin = 46;  //46분
+        //오프라인 - 테스트용 시간2 (철학으로만나는기독교 나오면 됨)
+        // var curday = 3;
+        // var curhour = 13;
+        // var curmin = 40;
         var cur = (curhour*3600)+(curmin*60); //현재시간 초단위로 변환
-        console.log(cur);
         for(var i=0; i<course.time.length; i++) {
                 tmptime = course.time[i];
                 day = dayStrToNum(tmptime.day); //요일을 번호로 바꿔서 저장
                 st = tmptime.stime.split(':'); //시,분으로 나누기
                 sh = Number(st[0]); //시작 시
                 sm = Number(st[1]); //시작 분
-                console.log('종료시간'+tmptime.etime);
                 et = tmptime.etime.split(':');
                 eh = Number(et[0]); //종료 시
                 em = Number(et[1]); //종료 분
                 if (day == curday) { //요일 비교
                         var starttime = (sh*3600)+(sm*60); //시작시간 초단위로 변환
                         var endtime = (eh*3600)+(em*60);
-                        //var classtime = endtime-starttime; //수업 시간 계산
-                        console.log(course);
                         var gap = starttime - cur; //수업 시작까지 남은시간 계산
-                        console.log('gap'+gap);
                         if (gap >=0 && gap <= 1800) { //30분 이내에 수업이 있는 경우
                                 type = getCourseType(course.type, course.location);
                                 return (tmptime.stime+' '+course.title+' '+type); //시작시간 과목이름 과목종류 리턴

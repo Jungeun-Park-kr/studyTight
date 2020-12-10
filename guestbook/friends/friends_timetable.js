@@ -24,10 +24,11 @@ function showFriendCourse(title, timelist) {
     //입력받은 정보로 시간표 출력하기
     var tdid, st, et, sh, sm, eh, em;
     var color, tmpvar;
+    color = getColor();
     for(var i=0; i<timelist.length; i++) {
         tmptime = timelist[i];
         //요일 및 색깔지정
-        color = getDayColor(tmptime.day);
+        //color = getDayColor(tmptime.day);
         //시작시간
         st = tmptime.stime.split(':');
         sh = st[0]; //시는 바로 입력
