@@ -75,23 +75,19 @@ function showCourseEditPopup(course) {
 }
 
 function editBtn() {
-    console.log('누름')
     var old = localStorage.getItem('editCourse'); //수정할 과목이름 저장
     var title = document.getElementById("course_title").value;
     var professor = document.getElementById("professor_name").value;
     var location = document.getElementById('course_link_url').value;
     var ctype = document.getElementsByName("course_type");
-    console.log('누름2')
     if (old == null) //수정할 과목 없으면 저장X
         return ;
-        console.log('누름10')
     var course_type;
     for (var i=0; i<ctype.length; i++) {
         if (ctype[i].checked == true) {
             course_type = ctype[i].value;
         }
     }
-    console.log('누름3')
     //입력 잘 되었나 확인
     if (!title) {
         alert('과목이름을 입력해주세요');
@@ -112,7 +108,6 @@ function editBtn() {
         document.getElementById("course_link_url").focus();
         return;
     }
-    console.log('누름4')
     var course = {
         title : title,
         professor : professor,
@@ -120,12 +115,15 @@ function editBtn() {
         type : course_type, //과목 타입(online_realtime,online_video,offline)
         location : location //강의실/강의링크
     };
-    console.log('누름5')
     modifyCourse(course); //변경사항 적용
+
+    console.log('변경내용 확인')
+    console.info(courselist);
+    console.log('수정이 완료되었습니다. 6초 뒤에 창이 닫힙니다.');
+
     setTimeout(function(){ //테스트용 2초 딜레이
-        alert('asdf');
         window.close(); //창 닫기
-    }, 200000000);
+    }, 6000);
     //opener.parent.location.reload(); //부모창 새로고침
     ///window.close(); //창 닫기
 }
@@ -138,17 +136,10 @@ function modifyCourse(course) { //해당 과목 정보 변경하기
     var courselist = activeUser.course;
     for (var i=0; i<courselist.length; i++) {
         if (courselist[i].title === title) { //해당 데이터 삭제
-            console.log('찾음! 수정할 과목:'+courselist[i].title);
             courselist.splice(i,1,course); //i번째 과목 데이터 하나를 변경사항으로 교체
         }
     }
     localStorage.removeItem('editCourse'); //변경 완료한 것은 삭제
-    console.log('--잘 변경되었나 확인--')
-    console.info(courselist);
-    // for (var i=0; i<courselist.length; i++) {
-    //     console.log(courselist[i].title);
-    //     console.log(courselist[i].professor);
-    // }
 }
 
 function deleteCourse(title) { //해당 과목이름을 가진 과목을 DB에서 삭제하기
@@ -157,14 +148,10 @@ function deleteCourse(title) { //해당 과목이름을 가진 과목을 DB에�
     var courselist = activeUser.course;
     for (var i=0; i<courselist.length; i++) {
         if (courselist[i].title === title) { //해당 데이터 삭제
-            console.log('찾음! 삭제할 과목:'+courselist[i].title);
             courselist.splice(i, 1); //i번째 인덱스를 하나 삭제
         }
     }
-    console.log('--잘 삭제되었나 확인--')
+    console.log('삭제여부 확인')
     console.info(courselist);
-    // for (var i=0; i<courselist.length; i++) {
-    //     console.log(courselist[i].title);
-    // }
 }
 

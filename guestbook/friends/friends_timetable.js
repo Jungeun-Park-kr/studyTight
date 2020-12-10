@@ -31,15 +31,14 @@ function showFriendCourse(title, timelist) {
         //color = getDayColor(tmptime.day);
         //시작시간
         st = tmptime.stime.split(':');
-        sh = st[0]; //시는 바로 입력
-        sm = getMinuteId(st[1]);
+        sh = parseInt(st[0]); //시는 바로 입력
+        sm = getMinuteId(parseInt(st[1]));
         //종료시간
         et = tmptime.etime.split(':');
-        eh = et[0];
-        em = getMinuteId(et[1]);
+        eh = parseInt(et[0]);
+        em = getMinuteId(parseInt(et[1]));
         //시작시간 id만들기 및 속성적용
         tdid = 'f'+tmptime.day+sh+'.'+sm;
-        console.log(tdid);
         tmpvar = document.getElementById(tdid);
         tmpvar.innerHTML=title; //첫줄에는 과목이름
         tmpvar.style.backgroundColor=color;
@@ -51,14 +50,17 @@ function showFriendCourse(title, timelist) {
                 sh++;
                 sm = 1;
             }
-            if (sh >= eh) { //종료조건 확인
-                if (sm >= em) { 
+            if (sh > eh) { //종료조건 확인
+                //console.log('종료조건1');
+                break;
+            }
+            else if(sh == eh) {
+                if (sm >= em) {
+                    //console.log('종료조건2');
                     break;
                 }
             }
-            console.log(tmptime.day);
             tdid = 'f'+tmptime.day+sh+'.'+sm;
-            console.log(tdid);
             tmpvar = document.getElementById(tdid);
             if(sm==4) { //border 없애기
                 tmpvar.style.borderStyle="";

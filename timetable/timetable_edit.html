@@ -86,7 +86,6 @@
                     var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
                     activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
                     getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
-
                     var edit = document.getElementsByClassName('btn_modify_course');
                     for (var i=0; i<edit.length; i++) {
                         edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
@@ -99,7 +98,7 @@
                     for (var i=0; i<target.length; i++) {
                         target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
                             var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
-                            console.log(title); //과목 이름 가져오기
+                            //console.log(title); //과목 이름 가져오기
                             var ret = confirm("정말로 삭제하시겠습니까?");
                             if (ret) { //삭제 수행
                                 var parent = document.getElementById('course_table_body');
@@ -129,7 +128,6 @@
                                 <script>
                                     var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
                                     activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                                    // doc.getElementById('activeUsername').innerHTML = username + '님';
                                     doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
                                     doc.getElementById('activeUserimg').src = activeUser.userImage;
                                 </script>
@@ -139,14 +137,41 @@
                 </div>
                 <div class="today">
                     <p>오늘 할 일</p>
-                    <div class="todaylist">
-                        <label><p><input type="checkbox">웹프로그래밍 수업 듣기</p></label>
-                        <label><p><input type="checkbox">DB 강의 듣기</p></label>
-                        <label><p><input type="checkbox">채플 듣기</p></label>
-                        <label><p><input type="checkbox">OS 보고서 쓰기</p></label>
+                    <div class="todaylist" id="todaylist">
+                        <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
+                        <label><input type="checkbox"><p>DB 강의 듣기</p></label>
+                        <label><input type="checkbox"><p>채플 듣기</p></label>
+                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> 
+                        <script>
+                        var parent_list=document.getElementById("todaylist");
+
+                        var now=new Date();
+                        //조작된 시간
+                        //var open=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,56);
+                        var end=new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
+                        
+                        var nt=now.getTime();
+                        //var ot=open.getTime();
+                        var et=end.getTime();
+
+                        setTimeout(function(){
+                            while(parent_list.hasChildNodes()){
+                                parent_list.removeChild(parent_list.firstChild)
+                            }
+                        },2000);
+                        //현재 시간이 56초고 2초 뒤에 사라지게 만들었음.
+                        </script>
                     </div>
-                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo();"></input>
+                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
+                </div>
+                <div class="caution">
+                    오늘(11:59 PM)기준으로 
+                    완료된 할 일은
+                    내일(12:00 AM)기준으로 
+                    제거되고, 
+                    완료되지 않은 할 일은 
+                    유지됩니다.
                 </div>
             </div>
         </div>
