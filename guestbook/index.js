@@ -28,6 +28,8 @@ function deleteComments(event) {
 
 }
 
+
+
 function showComment(comment) {
     var username = localStorage.getItem('username');
     activeUser = getActiveUser(username);
@@ -79,8 +81,21 @@ function pressBtn() {
     const currentVal = inputBar.value;
     if (!currentVal.length) { alert("댓글을 입력해주세요!"); } else {
         showComment(currentVal);
+
+        var mycommentlist = {
+                Author: activeUser.name,
+                mycommnet: document.getElementById('comment-input').value,
+                today: generateTime(),
+                commnetsecret: document.getElementById('mysecretbox').checked
+                    //공개여부에 따라 달라져야됨.
+            }
+            //console.log(document.getElementById('comment-input').value);
+        activeUser.guestbook.commentlist.push(mycommentlist);
+        console.log(activeUser.guestbook.commentlist);
         inputBar.value = '';
     }
+
 }
+
 
 btn.onclick = pressBtn;
