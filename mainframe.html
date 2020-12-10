@@ -235,6 +235,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="caution">
+                    <p>오늘(11:59 PM)기준으로 
+                        완료된 할 일은
+                        내일(12:00 AM)기준으로 
+                        제거되고, 
+                        완료되지 않은 할 일은 
+                        유지됩니다.
+                    </p>
+                </div>
                 <div class="today">
                     <p>오늘 할 일</p>
                     <div class="todaylist" id="todaylist">
@@ -255,23 +264,15 @@
                         var et=end.getTime();
 
                         setTimeout(function(){
-                            parent_list.remove();
+                            while(parent_list.hasChildNodes()){
+                                parent_list.removeChild(parent_list.firstChild)
+                            }
                         },2000);
                         //현재 시간이 56초고 2초 뒤에 사라지게 만들었음.
                         </script>
                     </div>
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
-                </div>
-                <div class="caution">
-                    <pre>
-                        오늘(11:59 PM)기준으로 
-                        완료된 할 일은
-                        내일(12:00 AM)기준으로 
-                        제거되고, 
-                        완료되지 않은 할 일은 
-                        유지됩니다.
-                    </pre>
                 </div>
             </div>
         </div>
