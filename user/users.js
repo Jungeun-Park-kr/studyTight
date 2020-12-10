@@ -35,61 +35,61 @@ userlist.push({
 
 //사용자2 최시언
 userlist.push({
-    userId: 'noino08189@naver.com',
-    password: 'asdfasdf',
-    name: '최시언',
-    userImage: '/media/profile2.png',
-    course: [],
-    guestbook: { //방명록 정보 저장할 곳
-        friendslist: [],
-        profile: {},
-        commentlist: [],
-    },
-    d_day: []
-})
-//사용자3 김삿갓
+        userId: 'noino08189@naver.com',
+        password: 'asdfasdf',
+        name: '최시언',
+        userImage: '/media/profile2.png',
+        course: [],
+        guestbook: { //방명록 정보 저장할 곳
+            friendslist: [],
+            profile: {},
+            commentlist: [],
+        },
+        d_day: []
+    })
+    //사용자3 김삿갓
 userlist.push({
-    userId: 'kimsatgat@naver.com',
-    password: 'kimkimsatgatsatgat',
-    name: '김삿갓',
-    userImage: '/media/profile3.png',
-    course: [],
-    guestbook: { //방명록 정보 저장할 곳
-        friendslist: [],
-        profile: {},
-        commentlist: [],
-    },
-    d_day: []
-})
-//사용자 4 양지영 (친구 추가할 사람)
+        userId: 'kimsatgat@naver.com',
+        password: 'kimkimsatgatsatgat',
+        name: '김삿갓',
+        userImage: '/media/profile3.png',
+        course: [],
+        guestbook: { //방명록 정보 저장할 곳
+            friendslist: [],
+            profile: {},
+            commentlist: [],
+        },
+        d_day: []
+    })
+    //사용자 4 양지영 (친구 추가할 사람)
 userlist.push({
-    userId: 'sidjyoung@naver.com',
-    password: 'sheepjiyoung',
-    name: '양지영',
-    userImage: '/media/profile1.png',
-    course: [],
-    guestbook: { //방명록 정보 저장할 곳
-        friendslist: [],
-        profile: {},
-        commentlist: [],
-    },
-    d_day: []
-})
-//사용자 5 - 추가할 사용자 정보(데모영상)
-// userlist.push({
-//     userId: 'suho@gmail.com',
-//     password: 'junm0522',
-//     name: '김준면',
-//     userImage: '/media/user.png',
-//     course: [], //과목 정보 저장할 곳
-//     guestbook: { //방명록 정보 저장할 곳
-//         friendslist: [],
-//         profile: {},
-//         commentlist: [],
-//     },
-//     d_day: [], //디데이 정보 저장할 곳
-//     folder: []
-// });
+        userId: 'sidjyoung@naver.com',
+        password: 'sheepjiyoung',
+        name: '양지영',
+        userImage: '/media/profile1.png',
+        course: [],
+        guestbook: { //방명록 정보 저장할 곳
+            friendslist: [],
+            profile: {},
+            commentlist: [],
+        },
+        d_day: []
+    })
+    //사용자 5 - 추가할 사용자 정보(데모영상)
+    // userlist.push({
+    //     userId: 'suho@gmail.com',
+    //     password: 'junm0522',
+    //     name: '김준면',
+    //     userImage: '/media/user.png',
+    //     course: [], //과목 정보 저장할 곳
+    //     guestbook: { //방명록 정보 저장할 곳
+    //         friendslist: [],
+    //         profile: {},
+    //         commentlist: [],
+    //     },
+    //     d_day: [], //디데이 정보 저장할 곳
+    //     folder: []
+    // });
 
 
 
@@ -462,18 +462,18 @@ userlist[0].folder.push(folder4);
 
 //guestbook
 userlist[0].guestbook.profile = {
-        profilename: "박정은",
-        school: "숭실대학교",
-        school_secret: false,
-        major: "컴퓨터학부",
-        major_secret: false,
-        grade: "3",
-        grade_secret: false,
-        age: "22",
-        age_secret: true,
-        gender: true,
-        profilesecret: false //공개는 0, 비공개는 1
-    }
+    profilename: "박정은",
+    school: "숭실대학교",
+    school_secret: false,
+    major: "컴퓨터학부",
+    major_secret: false,
+    grade: "3",
+    grade_secret: false,
+    age: "22",
+    age_secret: true,
+    gender: true,
+    profilesecret: false //공개는 0, 비공개는 1
+}
 
 //친구 목록 리스트 추가
 var friendslist1 = { //기본 박정은 방명록

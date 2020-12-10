@@ -33,13 +33,13 @@
             </div>
             <ul class="left-menus" id=leftmenu>
                 <li class="edit-profile">
-                    <input type="button" id="edit-button-id" value="프로필 수정하기" onclick="showFriendAddPopup();"></input>
+                    <input type="button" id="edit-button-id" value="시간표 보기" onclick="showFriendTimetable();"></input>
                 </li>
             </ul>
             <script>
                 function showprofile() {
                     var username = localStorage.getItem('username');
-                    activeUser = getActiveUser(username);
+                    activeUser = getActiveUser('김삿갓');
                     myprofile = activeUser.guestbook.profile;
                     var parent_table = document.getElementById("leftmenu"); //부모테이블
                     var profile = document.createElement("div");
@@ -47,18 +47,6 @@
                     var userimage = document.createElement('img');
                     userimage.src = activeUser.userImage; // 이미지 경로 설정
                     //userimage.innerHTML = "&nbsp" + activeUser.name;
-
-
-                    //여섯번째 li , 테스트에서는 공개되지 않음.
-                    if (myprofile.grade_secret == false) {
-                        var Fifth = document.createElement("li");
-                        Fifth.setAttribute("class", "grade");
-                        var Fifthimage = document.createElement('img');
-                        Fifthimage.src = "media/calendar.png";
-                        Fifth.innerHTML = "&nbsp" + myprofile.grade + "학년";
-                        Fifth.prepend(Fifthimage);
-                        parent_table.prepend(Fifth);
-                    }
 
                     //다섯번째 li , 테스트에서는 공개되지 않음.
                     if (myprofile.age_secret == false) {
@@ -112,13 +100,29 @@
                     parent_table.prepend(profile);
 
                 }
+
+                function showFriendTimetable() { //친구의 시간표 정보 공개여부 확인
+                    var friend;
+                    var fname = localStorage.getItem('friendName'); //친구 이름 가져오기
+                    console.log(fname);
+                    //var fname = "최시언"; //테스트용 최시언
+                    if (fname != null) {
+                        friend = getActiveUser(fname); //친구 정보 가져오기
+                        console.info(friend);
+                        //친구의 시간표 공개/비공개 여부 확인
+                        var isSecret = friend.guestbook.profile.profilesecret;
+                        if (isSecret) {
+                            //비공개인 경우 : (시간표 보기 버튼 누르면 친구 방명록 메인(friends_room.html)에서 팝업으로 비공개한 회원입니다 띄우기)
+                            alert('시간표를 비공개한 회원입니다.');
+                        } else { //공개인 경우
+                            location.replace("/guestbook/friends/friends_timetable.html"); //시간표 주소
+                        }
+
+                    }
+                }
             </script>
             <script>
                 showprofile();
-                var username = localStorage.getItem('username');
-                activeUser = getActiveUser(username);
-                myprofile = activeUser.guestbook.profile;
-                console.log(myprofile);
             </script>
 
         </div>
@@ -126,60 +130,7 @@
             <div class="my-room">
                 <!-- 방명록 -->
                 <div class="friends">
-                    <div class="friends_add">
-                        <div class="title_msg">Friends</div>
-                        <div class="btn_add_course">
-                            <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
-                        </div>
 
-                    </div>
-
-                    <script>
-                        function showfriendlist() {
-                            var username = localStorage.getItem('username');
-                            activeUser = getActiveUser(username);
-                            myfriends = activeUser.guestbook.friendslist;
-                            var parent_table = document.getElementById("course_body"); //부모테이블
-
-
-                            for (i = 0; i < myfriends.length; i++) {
-                                var box = document.createElement("tr");
-                                var name = document.createElement("td");
-                                var email = document.createElement("td");
-                                box.addEventListener('click', function(e) {
-                                    //console.info(this);
-                                    var children = this.childNodes; //클릭한 객체의 자식 가져옴
-                                    console.info(children);
-                                    console.info(children[0]); //0번째 요소가 이름
-                                    console.log('방명록 이동할 친구 이름:' + children[0].innerHTML);
-                                    var fname = children[0].innerHTML;
-                                    localStorage.setItem('friendName', fname); //localStorage에 방문하는 친구이름 저장  
-                                    if (fname == '최시언')
-                                        location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
-                                    if (fname == '양지영')
-                                        location.href = "/guestbook/guestbook_myroom_y.html"; //홈 주소 //뒤로가기가능
-                                    if (fname == '김삿갓')
-                                        location.href = "/guestbook/guestbook_myroom_k.html"; //홈 주소 //뒤로가기가능
-                                })
-                                name.innerHTML = myfriends[i].guestbookowner;
-                                email.innerHTML = myfriends[i].email;
-                                box.appendChild(name);
-                                box.appendChild(email);
-                                parent_table.appendChild(box);
-                            }
-
-                        }
-                    </script>
-
-                    <div class="friends_list_box">
-                        <table id="course_table">
-                            <tbody id="course_body">
-                                <script>
-                                    showfriendlist();
-                                </script>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
                 <div class="writing-place" id=wBOX>
                     <div class="writing-box">
@@ -462,7 +413,7 @@
                         <td colspan="6 ">
                             <center>
                                 <a href="#">1</a>
-                                <a href="/guestbook/guestbook_myroom2.html">2</a>
+                                <a href="#"></a>
                                 <a href="# "></a>
                                 <a href="# "></a>
                                 <a href="# "></a>
