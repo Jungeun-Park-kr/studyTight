@@ -26,73 +26,7 @@
                 <img src="/media/logo.png" class=logo onclick="btnHome();">
             </div>
             <ul class="left-menus">
-                <script>
-                    localStorage.setItem('friendName', '최시언');
 
-                    function showprofile() {
-                        var username = localStorage.getItem('username');
-                        activeUser = getActiveUser(username);
-                        myprofile = activeUser.guestbook.profile;
-                        var parent_table = document.getElementById("leftmenu"); //부모테이블
-                        var profile = document.createElement("div");
-                        var new_td1 = document.createElement("li");
-                        var userimage = document.createElement('img');
-                        userimage.src = activeUser.userImage; // 이미지 경로 설정
-                        //userimage.innerHTML = "&nbsp" + activeUser.name;
-
-                        //다섯번째 li , 테스트에서는 공개되지 않음.
-                        if (myprofile.age_secret == false) {
-                            var Fifth = document.createElement("li");
-                            Fifth.setAttribute("class", "age");
-                            var Fifthimage = document.createElement('img');
-                            Fifthimage.src = "media/age.png";
-                            Fifth.innerHTML = "&nbsp" + myprofile.age;
-                            Fifth.prepend(Fifthimage);
-                            parent_table.prepend(Fifth);
-                        }
-
-                        //네번째 li
-                        if (myprofile.major_secret == false) {
-                            var fourth = document.createElement("li");
-                            fourth.setAttribute("class", "major");
-                            var fourthimage = document.createElement('img');
-                            fourthimage.src = "media/mortarboard.png";
-                            fourth.innerHTML = "&nbsp" + myprofile.major;
-                            fourth.prepend(fourthimage);
-                            parent_table.prepend(fourth);
-                        }
-
-                        //여기부턴 공개여부에 따라 달라짐
-                        //세번째 li
-                        //console.log(myprofile.school_secret); _데이터테스트
-                        if (myprofile.school_secret == false) {
-                            var third = document.createElement("li");
-                            third.setAttribute("class", "school");
-                            var thirdimage = document.createElement('img');
-                            thirdimage.src = "media/office-building.png";
-                            third.innerHTML = "&nbsp" + myprofile.school;
-                            third.prepend(thirdimage);
-                            parent_table.prepend(third);
-                        }
-
-
-                        //두번째 li
-                        var second = document.createElement("li");
-                        second.setAttribute("class", "menu_contact");
-                        var secondimage = document.createElement('img');
-                        secondimage.src = "media/user.png";
-                        second.innerHTML = "&nbsp" + activeUser.name;
-                        second.prepend(secondimage);
-                        parent_table.prepend(second);
-
-                        //첫번째 profile.
-                        new_td1.setAttribute("class", "profile");
-                        new_td1.appendChild(userimage);
-                        profile.appendChild(new_td1);
-                        parent_table.prepend(profile);
-
-                    }
-                </script>
                 <div>
                     <li class="profile" onclick="btnHome();">
                         <img src="/guestbook/media/profile2.png"></img>
@@ -114,6 +48,74 @@
                     <input type="button" id="edit-button-id" value="시간표 보기" onclick="showFriendTimetable();"></input>
                 </li>
             </ul>
+            <script>
+                localStorage.setItem('friendName', '최시언');
+
+                function showprofile() {
+                    var username = localStorage.getItem('username');
+                    activeUser = getActiveUser(username);
+                    myprofile = activeUser.guestbook.profile;
+                    var parent_table = document.getElementById("leftmenu"); //부모테이블
+                    var profile = document.createElement("div");
+                    var new_td1 = document.createElement("li");
+                    var userimage = document.createElement('img');
+                    userimage.src = activeUser.userImage; // 이미지 경로 설정
+                    //userimage.innerHTML = "&nbsp" + activeUser.name;
+
+                    //다섯번째 li , 테스트에서는 공개되지 않음.
+                    if (myprofile.age_secret == false) {
+                        var Fifth = document.createElement("li");
+                        Fifth.setAttribute("class", "age");
+                        var Fifthimage = document.createElement('img');
+                        Fifthimage.src = "media/age.png";
+                        Fifth.innerHTML = "&nbsp" + myprofile.age;
+                        Fifth.prepend(Fifthimage);
+                        parent_table.prepend(Fifth);
+                    }
+
+                    //네번째 li
+                    if (myprofile.major_secret == false) {
+                        var fourth = document.createElement("li");
+                        fourth.setAttribute("class", "major");
+                        var fourthimage = document.createElement('img');
+                        fourthimage.src = "media/mortarboard.png";
+                        fourth.innerHTML = "&nbsp" + myprofile.major;
+                        fourth.prepend(fourthimage);
+                        parent_table.prepend(fourth);
+                    }
+
+                    //여기부턴 공개여부에 따라 달라짐
+                    //세번째 li
+                    //console.log(myprofile.school_secret); _데이터테스트
+                    if (myprofile.school_secret == false) {
+                        var third = document.createElement("li");
+                        third.setAttribute("class", "school");
+                        var thirdimage = document.createElement('img');
+                        thirdimage.src = "media/office-building.png";
+                        third.innerHTML = "&nbsp" + myprofile.school;
+                        third.prepend(thirdimage);
+                        parent_table.prepend(third);
+                    }
+
+
+                    //두번째 li
+                    var second = document.createElement("li");
+                    second.setAttribute("class", "menu_contact");
+                    var secondimage = document.createElement('img');
+                    secondimage.src = "media/user.png";
+                    second.innerHTML = "&nbsp" + activeUser.name;
+                    second.prepend(secondimage);
+                    parent_table.prepend(second);
+
+                    //첫번째 profile.
+                    new_td1.setAttribute("class", "profile");
+                    new_td1.appendChild(userimage);
+                    profile.appendChild(new_td1);
+                    parent_table.prepend(profile);
+
+                }
+                showprofile();
+            </script>
 
         </div>
         <div class="section">
