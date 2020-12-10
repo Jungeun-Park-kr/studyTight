@@ -90,6 +90,38 @@ userlist.push({
     },
     d_day: []
 })
+
+userlist.push({
+    userId: 'sidjyoung@naver.com',
+    password: 'sheepjiyoung',
+    name: '양지영',
+    userImage: '/media/profile1.png',
+    course: [],
+    guestbook: { //방명록 정보 저장할 곳
+        friendslist: [],
+        //프로필 이미지는 user에 바로 있음
+        profile: {},
+        //방명록 주인도 필요없을듯
+        commentlist: [],
+    },
+    d_day: []
+})
+userlist.push({
+    userId: 'kimsatgat@naver.com',
+    password: 'kimkimsatgatsatgat',
+    name: '김삿갓',
+    userImage: '/media/profile3.png',
+    course: [],
+    guestbook: { //방명록 정보 저장할 곳
+        friendslist: [],
+        //프로필 이미지는 user에 바로 있음
+        profile: {},
+        //방명록 주인도 필요없을듯
+        commentlist: [],
+    },
+    d_day: []
+})
+
 var course4 = {
     title: "운영체제",
     professor: "홍지만",
@@ -178,7 +210,7 @@ var folder3 = {
     star: "false",
     postIt: []
 }
-var folder3= {
+var folder3 = {
     title: "라라",
     star: "false",
     postIt: []
@@ -212,7 +244,7 @@ var postIt4 = {
 var postIt5 = {
     title: "mdn 사이트",
     type: "link",
-    url : "https://developer.mozilla.org/ko/"
+    url: "https://developer.mozilla.org/ko/"
 }
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
@@ -243,7 +275,7 @@ userlist[0].guestbook.profile = {
         grade_secret: false,
         age: "22",
         age_secret: true,
-        gender: true, //여자는 2, 남자는 1
+        gender: true,
         profilesecret: false //공개는 0, 비공개는 1
     }
     //친구 목록 리스트 추가
@@ -286,8 +318,36 @@ userlist[1].guestbook.profile = {
     grade_secret: false,
     age: "22",
     age_secret: true,
-    gender: "2", //여자는 2, 남자는 1
+    gender: true,
     profilesecret: false //공개는 0, 비공개는 1
+};
+
+userlist[2].guestbook.profile = {
+    profilename: "양지영",
+    school: "숭실대학교",
+    school_secret: false,
+    major: "컴퓨터학부",
+    major_secret: True,
+    grade: "3",
+    grade_secret: false,
+    age: "23",
+    age_secret: true,
+    gender: true,
+    profilesecret: true //공개는 0, 비공개는 1
+};
+
+userlist[3].guestbook.profile = {
+    profilename: "김삿갓",
+    school: "중앙대학교",
+    school_secret: false,
+    major: "기계공학부",
+    major_secret: false,
+    grade: "3",
+    grade_secret: false,
+    age: "20",
+    age_secret: true,
+    gender: false, //여자는 2, 남자는 1
+    profilesecret: true //공개는 0, 비공개는 1
 };
 // var profilelist2 = {
 //     profilename: "최시언",
