@@ -122,12 +122,12 @@ function editBtn() {
     };
     console.log('누름5')
     modifyCourse(course); //변경사항 적용
-    // setTimeout(function(){ //테스트용 2초 딜레이
-    //     alert('asdf');
-    //     window.close(); //창 닫기
-    // }, 200000000);
-    opener.parent.location.reload(); //부모창 새로고침
-    window.close(); //창 닫기
+    setTimeout(function(){ //테스트용 2초 딜레이
+        alert('asdf');
+        window.close(); //창 닫기
+    }, 200000000);
+    //opener.parent.location.reload(); //부모창 새로고침
+    ///window.close(); //창 닫기
 }
 
 
