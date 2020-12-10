@@ -1,7 +1,8 @@
 var doc = document;
 
-console.log('activeUser:'+activeUser.name);
-console.log('userlist[0]:'+userlist[0].name);
+//로그인 완료한 후에는 주석처리하기
+console.log('DB에 있는 유저 정보');
+console.info(userlist);
 
 function btnLoginHome() {
     location.replace("login.html");
@@ -14,10 +15,6 @@ function login() {
     var id_ok = false;
     var pass_ok = false;
 
-    //입력 잘 되었나 확인용
-    console.log(userId);
-    console.log(userPassword);
-
     //입력여부 확인
     if (!userId) { //아이디 입력 안했을 때
         alert('아이디를 입력하세요');
@@ -29,25 +26,18 @@ function login() {
         doc.getElementById('userPassword').focus(); //커서 가도록 함
         return;
     }
-    console.log(userId);
-    console.log(userPassword);
-    console.log('------userlist와 사용자가 입력한 아이디/비번 비교 시작-------');
+
     //회원정보와 일치하는지 확인
     for (var i=0; i<userlist.length; i++) {
-        console.log(userlist[i].userId);
-        // console.log(this.name);
         if (userlist[i].userId == userId) { //id 일치 확인
             id_ok = true;
-            //console.log('id는 존재');
             if (userlist[i].password === userPassword) { //pw 일치 확인
                 pass_ok = true;
                 userName = userlist[i].name; //사용자의 이름 저장
-                //console.log('아이디, 비번 모두 존재');
                 break;
             }
         }
     }
-
     
     if (id_ok===false) { //아이디 확인(아이디조차 존재하지 않는 경우)
         alert('아이디를 다시 확인해주세요');
@@ -70,12 +60,10 @@ function login() {
 
     localStorage.setItem("username", activeUser.name);
     var tmp = localStorage.getItem("username");
-    console.log('로그인 제대로 되었는지 확인:'+tmp);
-    console.info(localStorage.getItem('username'));
+    console.log('로그인이 성공되었습니다. 5초 뒤에 메인 화면으로 이동합니다.')
     setTimeout(function(){
         location.replace("/mainframe.html"); //메인 화면으로 이동
-        alert('asdf');
-    }, 2000000);
+    }, 5000);
     //location.replace("/mainframe.html"); //메인 화면으로 이동
 }
 
@@ -85,7 +73,10 @@ function logout() {
     localStorage.removeItem('username');
     var tmp = localStorage.getItem('username');
     if (tmp== null)
-        console.log('로그아웃 되었습니다:'+tmp);
+        console.log('로그아웃 되었습니다. 5초 뒤 로그인 화면으로 이동합니다.');
     //로그인 화면으로 이동
-    location.replace("login/login.html");
+    setTimeout(function(){
+        location.replace("login/login.html");
+    }, 5000);
+    //location.replace("login/login.html");
 }
