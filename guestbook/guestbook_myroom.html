@@ -130,7 +130,14 @@
                                 var box = document.createElement("tr");
                                 var name = document.createElement("td");
                                 var email = document.createElement("td");
-                                box.addEventListener('click', function(event) {
+                                box.addEventListener('click', function (e) {
+                                    //console.info(this);
+                                    var children = this.childNodes; //클릭한 객체의 자식 가져옴
+                                    console.info(children);
+                                    console.info(children[0]); //0번째 요소가 이름
+                                    console.log('방명록 이동할 친구 이름:'+children[0].innerHTML);  
+                                    var fname = children[0].innerHTML;
+                                    localStorage.setItem('friendName', fname); //localStorage에 방문하는 친구이름 저장  
                                     location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
                                 })
                                 name.innerHTML = myfriends[i].guestbookowner;

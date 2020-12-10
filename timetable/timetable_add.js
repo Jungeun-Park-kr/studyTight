@@ -138,12 +138,12 @@ function addCourse() { //저장하기 버튼
     console.info(activeUser.course);
     //console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
     
-    // setTimeout(function(){ //테스트용 2초 딜레이
-    //     alert('asdf');
-    //     window.close(); //창 닫기
-    // }, 200000000);
+    setTimeout(function(){ //테스트용 2초 딜레이
+        alert('asdf');
+        window.close(); //창 닫기
+    }, 200000000);
 
-    opener.parent.location.reload(); //부모창 새로고침
+    //opener.parent.location.reload(); //부모창 새로고침
     //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
-    window.close(); //창 닫기
+    //window.close(); //창 닫기
 }
