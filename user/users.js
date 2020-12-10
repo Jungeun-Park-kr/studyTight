@@ -35,7 +35,7 @@ userlist.push({
 
 //사용자2 최시언
 userlist.push({
-        userId: 'noino08189@naver.com',
+        userId: 'noino0819@naver.com',
         password: 'asdfasdf',
         name: '최시언',
         userImage: '/media/profile2.png',
@@ -362,6 +362,13 @@ function getActiveUser(username) { //사용자 이름으로 현재 접속중인 
     }
 }
 
+function getActiveUserlist(username) { //사용자 이름으로 현재 접속중인 사용자 객체 찾아서 리턴
+
+    return userlist;
+
+
+}
+
 
 
 //d-day
@@ -468,12 +475,27 @@ userlist[0].guestbook.profile = {
     major: "컴퓨터학부",
     major_secret: false,
     grade: "3",
-    grade_secret: false,
+    grade_secret: true,
     age: "22",
     age_secret: true,
     gender: true,
     profilesecret: false //공개는 0, 비공개는 1
 }
+
+// 아래 있는게 프로필 내용 저장하는것
+// userlist[0].guestbook.profile = {
+//     profilename: "박정은",
+//     school: "숭실대학교",
+//     school_secret: true,
+//     major: "컴퓨터학부",
+//     major_secret: false,
+//     grade: "3",
+//     grade_secret: false,
+//     age: "22",
+//     age_secret: true,
+//     gender: true,
+//     profilesecret: false //공개는 0, 비공개는 1
+// }
 
 //친구 목록 리스트 추가
 var friendslist1 = { //기본 박정은 방명록
@@ -495,6 +517,14 @@ var friendslist3 = {
     email: "sidjyoung@naver.com"
 }
 userlist[0].guestbook.friendslist.push(friendslist3);
+
+//(추가된 영상용.)
+// var friendslist4 = {
+//     profileimage: "/media/user.png",
+//     guestbookowner: "김준면", //방명록의 주인
+//     email: "suho@gmail.com"
+// }
+// userlist[0].guestbook.friendslist.push(friendslist4);
 
 
 
@@ -623,6 +653,14 @@ var commentlist9 = {
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
+// 영상 테스트용
+// var commentlist10 = { 
+//     Author: "박정은",
+//     mycommnet: "안녕하세요!",
+//     today: "2020-12-11 13:08:12",
+//     commnetsecret: 0 // 공개는 0, 비공개는 1
+// }
+
 userlist[0].guestbook.commentlist.push(commentlist1); //삽입
 userlist[0].guestbook.commentlist.push(commentlist2); //삽입
 userlist[0].guestbook.commentlist.push(commentlist3); //삽입
@@ -630,5 +668,6 @@ userlist[0].guestbook.commentlist.push(commentlist4); //삽입
 userlist[0].guestbook.commentlist.push(commentlist5); //삽입
 userlist[0].guestbook.commentlist.push(commentlist6); //삽입
 userlist[0].guestbook.commentlist.push(commentlist7); //삽입
+// userlist[0].guestbook.commentlist.push(commentlist10); //삽입
 userlist[1].guestbook.commentlist.push(commentlist8); //삽입
 userlist[1].guestbook.commentlist.push(commentlist9); //삽입

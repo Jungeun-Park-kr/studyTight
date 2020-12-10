@@ -123,6 +123,10 @@
             </script>
             <script>
                 showprofile();
+                var username = localStorage.getItem('username');
+                activeUser = getActiveUser('김삿갓');
+                myprofile = activeUser.guestbook.profile;
+                console.log(myprofile);
             </script>
 
         </div>

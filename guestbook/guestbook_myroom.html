@@ -260,14 +260,20 @@
                                 var img = document.createElement("img");
                                 //img.src = myfriends[0].profileimage;
                                 //해당 친구에 맞게 프로필출력
+                                cehckprofile = 1;
                                 for (j = 0; j < 5; j++) {
                                     //console.log(myfriends[j].guestbookowner);
+
+
                                     if (mytalking[i].Author == myfriends[j].guestbookowner) {
                                         img.src = myfriends[j].profileimage;
+                                        cehckprofile = 0;
                                         //console.log("get");
                                         break;
                                     }
                                 }
+                                if (cehckprofile != 0)
+                                    img.src = "media/profile.png";
                                 var div3 = document.createElement("div");
                                 div3.setAttribute("class", "user-small-talking");
                                 var div4 = document.createElement("div");

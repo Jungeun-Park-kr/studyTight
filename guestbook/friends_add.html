@@ -35,8 +35,7 @@
         var username = localStorage.getItem('username');
         activeUser = getActiveUser(username);
         friendslist = activeUser.guestbook.friendslist;
-        console.log(friendslist);
-
+        isthere = 0; //추가하려는 친구의 이메일이 존재하지 않는경우 0
         function addprofile() {
             var value1 = document.getElementById('this').value;
             if (value1 == "") {
@@ -44,13 +43,43 @@
                 check = 0;
             } //저장금지
 
-            var myfriendslist = {
-                profileimage: "./media/profile2.png",
-                guestbookowner: "나의친구", //방명록의 주인
-                email: ""
+
+            for (var i = 0; i < userlist.length; i++) {
+                if (userlist[i].userId == value1) {
+                    myfriend = userlist[i];
+                    isthere = 1;
+                    check = 1;
+                    //console.log(myfriend);
+                }
+                //console.log(userlist[i].userId);
+                //console.log(value1);
             }
-            friendslist.email = value1;
-            friendslist.push(myfriendslist);
+
+            if (isthere == 0) {
+                alert("유효하지 않은 이메일입니다");
+                check = 0;
+            } //저장금지
+
+            //console.log(friendslist);
+            for (var i = 0; i < friendslist.length; i++) {
+                if (friendslist[i].email == value1) {
+                    alert("이미 존재하는 친구입니다");
+                    isthere = 1;
+                    check = 0;
+                    //console.log(myfriend);
+                }
+                //console.log(userlist[i].userId);
+                //console.log(value1);
+            }
+            if (check == 1) {
+                var myfriendslist = {
+                    profileimage: myfriend.userImage,
+                    guestbookowner: myfriend.name, //방명록의 주인
+                    email: myfriend.userId
+                }
+
+                friendslist.push(myfriendslist);
+            }
             console.log(friendslist);
         }
     </script>
