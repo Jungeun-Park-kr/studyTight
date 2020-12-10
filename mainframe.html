@@ -137,6 +137,50 @@
             <div class="folder_">
                 <div id="folder_plus" onclick="newFolder()" ;>
                     <p><strong>+</strong>폴더 추가하기</p>
+                
+                <script>
+                    var username=localStorage.getItem('username');
+                    activeUser=getActiveUser(username);
+                function newFolder(){
+                    var new_name=prompt("폴더 이름을 입력하세요","");
+                    var new_div=document.createElement('div');
+
+                    var origin_div=document.getElementById('wrap_folder');
+                    //append로 안함
+                    var before_div=document.getElementById('folder_1');
+
+                    //별 넣기
+                    new_star=document.createElement('img');
+                    new_star.setAttribute('id','new_star');
+                    new_star.src="media/empty_star.png"
+                    new_star.style.float="left";
+                    new_star.style.margin="5px";
+                    new_star.style.width="25px";
+                    new_star.style.height="auto";
+                    new_star.style.dispaly="inline";
+                    new_star.setAttribute('onclick',"newClicked();")
+
+                    var new_p=document.createElement('p');
+                    new_p.innerHTML=new_name;
+                    new_p.setAttribute("onclick","toNextPage("+6+")")
+                    new_div.setAttribute('class','new_div');
+                    new_div.append(new_star);
+                    new_div.append(new_p);
+
+                    origin_div.insertBefore(new_div,before_div);
+
+                    var new_folder={
+                        title:new_p.innerHTML,
+                        star: "false",
+                        postIt:[]
+
+                    }
+            activeUser.folder.push(new_folder);
+
+            console.info(activeUser.folder)
+                }
+
+                </script>
                 </div>
                 <div id="wrap_folder" class="wrap_folder">
 
