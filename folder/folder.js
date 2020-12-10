@@ -1,12 +1,12 @@
 //각 홈페이지를 만들어야 하나?
 // https://stackoverrun.com/ko/q/3898207 과목명 불러올 때 참고하기
-function newPostIt(){
+function newPostIt(index){
     //파일, 내용 , 링크 저장하는 팝업창
     var popupWidth = 400;
     var popupHeight = 300;
     var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
     var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
-    var url = "pluspostit.html"; 
+    var url = "pluspostit.html?index="+index; 
     var name = "plus postIt"
     var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
     window.open(url, name, option);
@@ -85,17 +85,17 @@ function onDeleteClicked(order){
     wrap.removeChild(delete_btn.item(order).parentElement);
     //삭제 완료^^
 }
-function gotoUrl(order){
+function gotoUrl(order,folder_order){
     var username=localStorage.getItem("username");
     activeUser=getActiveUser(username);
     //순서에 맞게 들어온 애들을 보여주기.
     //해당 그걸로 이동하게
-    var goto=activeUser.folder[0].postIt[order].url;
+    var goto=activeUser.folder[folder_order].postIt[order].url;
     
-    if(activeUser.folder[0].postIt[order].type=="link"){
+    if(activeUser.folder[folder_order].postIt[order].type=="link"){
         var link=window.open();
         link.location=goto}
-    else if(activeUser.folder[0].postIt[order].type=="content"){
+    else if(activeUser.folder[folder_order].postIt[order].type=="content"){
         alert(goto);
 
         // var file=goto

@@ -206,15 +206,6 @@ body {
 .folder_course {
     display:block;
 }
-.caution {
-    width:12%;
-    position:relative;
-    
-    top: 20px;
-    text-align: center;
-    font-size:large;
-    align-items: center;
-}
 .wrap_folder {
     display: inline;
 }

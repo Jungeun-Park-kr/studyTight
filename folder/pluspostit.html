@@ -5,6 +5,13 @@
         <script src="pluspostit.js"></script>
         <script src="/user/users.js"></script>
     </head>
+    <script>
+                var movedTo=document.location.href
+
+                var link=document.location.href.split("=");
+                //console.log(link[1]);   
+                var order=link[1]
+    </script>
     <body>
         <h3>추가하기</h3>
         <hr>
@@ -28,8 +35,9 @@
         <input type="button" class="uploadBtn" onclick="uploadContent()" value="올리기"/>
     </body>
     <script>
-        var username=localStorage.getItem('username');
-        activeUser=getActiveUser(username)
+    var username=localStorage.getItem('username');
+    activeUser=getActiveUser(username)
+
         function uploadContent(){
             var new_name=document.getElementById("input_text").value
             var new_content=document.getElementById("input_content").value
@@ -44,9 +52,9 @@
             }
 
             
-            activeUser.folder[0].postIt.push(new_content)
+            activeUser.folder[order].postIt.push(new_content)
 
-            console.info(activeUser.folder[0])
+            console.info(activeUser.folder[order])
                     //저장되었다고 보여짐. 단지 팝업을 닫으면 추가는 안된다.
 }
     </script>

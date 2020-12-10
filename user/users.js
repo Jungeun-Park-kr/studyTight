@@ -203,10 +203,16 @@ var postIt4 = {
     type: "file",
     url: "C:\Users\82103\Desktop"
 }
+var postIt5 = {
+    title: "mdn 사이트",
+    type: "link",
+    url : "https://developer.mozilla.org/ko/"
+}
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
 folder1.postIt.push(postIt3);
 folder1.postIt.push(postIt4);
+folder2.postIt.push(postIt2);
 userlist[0].folder.push(folder1);
 userlist[0].folder.push(folder2);
 userlist[0].folder.push(folder3);

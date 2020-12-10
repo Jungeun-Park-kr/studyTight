@@ -6,6 +6,12 @@
         <script src="pluspostit_file.js"></script>
         <script src="/user/users.js"></script>
     </head>
+    <script>
+        var movedTo=document.location.href
+
+        var link=document.location.href.split("=");
+        //console.log(link[1]);
+    </script>
     <body>
         <h3>추가하기</h3>
         <hr>
@@ -29,28 +35,28 @@
 
         <input type="button" class="uploadBtn" value="올리기" onclick="uploadFile()"/>
         <script>
-            var username=localStorage.getItem('username');
-            activeUser=getActiveUser(username)
-            function uploadFile(){
+            // var username=localStorage.getItem('username');
+            // activeUser=getActiveUser(username)
+            // function uploadFile(){
 
-                var new_name=document.getElementById("input_text").value
-                var new_file=document.getElementById("input_file").value
-                //alert("올리기 버튼을 눌렀습니다.");
-                ///console.log(new_name, new_content);
+            //     var new_name=document.getElementById("input_text").value
+            //     var new_file=document.getElementById("input_file").value
+            //     //alert("올리기 버튼을 눌렀습니다.");
+            //     ///console.log(new_name, new_content);
     
     
-                var new_content={
-                    title:new_name,
-                    type: "file",
-                    url: new_file
-                }
+            //     var new_content={
+            //         title:new_name,
+            //         type: "file",
+            //         url: new_file
+            //     }
     
                 
-                activeUser.folder[0].postIt.push(new_content)
+            //     activeUser.folder[0].postIt.push(new_content)
     
-                console.info(activeUser.folder[0])
-                        //저장되었다고 보여짐. 단지 팝업을 닫으면 추가는 안된다.
-            }
+            //     console.info(activeUser.folder[0])
+            //             //저장되었다고 보여짐. 단지 팝업을 닫으면 추가는 안된다.
+            // }
 
         </script>
     </body>
