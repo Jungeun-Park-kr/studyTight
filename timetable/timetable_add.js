@@ -1,7 +1,7 @@
 var doc = document;
 var timelist = new Array();
 var course_type;
-//console.log('activeUSer:'+activeUser.name);
+
 // 아래는 OS 화면 기준으로 중앙에 팝업 띄움
 var fullWidth = window.screen.width;
 var fullHeight = window.screen.height;
@@ -35,16 +35,6 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
     var index = sel.selectedIndex; //선택된 옵션 인덱스 (요일 인덱스)
     var stime = document.getElementById("course_start_time"); //시작시간
     var etime = document.getElementById("course_end_time"); //종료시간
-    // console.log(stime.value);
-    // console.log(etime.value);
-    // if (etime < stime) {
-    //     alert('시작시간이 종료시간보다 빨라야 합니다.');
-    //     stime.value="09:00";
-    //     etime.value="19:15";
-    //     stime.focus();
-    //     return
-    // }
-
     var time; //시간 정보를 담은 텍스트
     time = sel.options[index].text + ' ' + stime.value + ' ~ ' + etime.value;
     newP.innerHTML = '(클릭시 삭제) ' + time;
@@ -65,9 +55,6 @@ function addCourseTime(obj) {    //시간 추가하기 버튼 누를시 데이�
     //데이터확인용
     console.log('추가된 시간 확인')
     console.info(timelist);
-    // for (var i=0; i<timelist.length; i++) {
-    //     console.log(timelist[i].day + timelist[i].stime + timelist[i].etime);
-    // }
 }
 
 function deleteTime(time) {
@@ -75,18 +62,15 @@ function deleteTime(time) {
         if (timelist[i].day == time.day) {
             if (timelist[i].stime == time.stime) {
                 if (timelist[i].etime == time.etime) {
-                    console.log('찾음! 삭제할 시간:'+timelist[i].stime);
+                    //console.log('찾음! 삭제할 시간:'+timelist[i].stime);
                     timelist.splice(i,1);
                     break;
                 }
             }
         }
     }
-    console.log('--잘 삭제되었나 확인--')
+    console.log('삭제된 시간 확인')
     console.info(timelist);
-    // for (var j=0; j<timelist.length; j++) {
-    //     console.log(timelist[j].etime);
-    // }
 }
 
 function addCourse() { //저장하기 버튼
@@ -134,16 +118,18 @@ function addCourse() { //저장하기 버튼
     activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
     activeUser.course.push(course); //현재 로그인 된 사용자의 course list에 추가한 과목 정보 넣기
     //최근에 추가한 항목 log로 확인해보기
-    console.log('---잘 추가되었나 확인---');
-    console.info(activeUser.course);
+    // console.log('---잘 추가되었나 확인---');
+    // console.info(activeUser.course);
     //console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
     
+    console.log('과목 추가여부 확인')
+    console.info(activeUser);
+    console.log('과목 추가가 완료되었습니다. 10초뒤에 창을 닫습니다.')
     setTimeout(function(){ //테스트용 2초 딜레이
-        alert('asdf');
         window.close(); //창 닫기
-    }, 200000000);
+    }, 10000);
 
     //opener.parent.location.reload(); //부모창 새로고침
-    //opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
+    ////opener.parent.location='/timetable/timetable_edit.html'; //이것도 가능
     //window.close(); //창 닫기
 }
