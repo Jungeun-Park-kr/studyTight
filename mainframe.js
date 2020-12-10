@@ -43,40 +43,49 @@ function starClicked(order){
         toggle++;
         //별 완료 ㅎㅎ
 }
-function newFolder(){
-        var new_name=prompt("폴더 이름을 입력하세요","");
-        var new_div=document.createElement('div');
+// function newFolder(){
+//         var new_name=prompt("폴더 이름을 입력하세요","");
+//         var new_div=document.createElement('div');
 
-        var origin_div=document.getElementById('wrap_folder');
-        //append로 안함
-        var before_div=document.getElementById('folder_1');
+//         var origin_div=document.getElementById('wrap_folder');
+//         //append로 안함
+//         var before_div=document.getElementById('folder_1');
 
-        //별 넣기
-        new_star=document.createElement('img');
-        new_star.setAttribute('id','new_star');
-        new_star.src="media/empty_star.png"
-        new_star.style.float="left";
-        new_star.style.margin="5px";
-        new_star.style.width="25px";
-        new_star.style.height="auto";
-        new_star.style.dispaly="inline";
-        new_star.setAttribute('onclick',"newClicked();")
+//         //별 넣기
+//         new_star=document.createElement('img');
+//         new_star.setAttribute('id','new_star');
+//         new_star.src="media/empty_star.png"
+//         new_star.style.float="left";
+//         new_star.style.margin="5px";
+//         new_star.style.width="25px";
+//         new_star.style.height="auto";
+//         new_star.style.dispaly="inline";
+//         new_star.setAttribute('onclick',"newClicked();")
 
-        var new_p=document.createElement('p');
-        new_p.innerHTML=new_name;
-        new_p.setAttribute("onclick","toNextPage("+6+")")
-        new_div.setAttribute('class','new_div');
-        new_div.append(new_star);
-        new_div.append(new_p);
+//         var new_p=document.createElement('p');
+//         new_p.innerHTML=new_name;
+//         new_p.setAttribute("onclick","toNextPage("+6+")")
+//         new_div.setAttribute('class','new_div');
+//         new_div.append(new_star);
+//         new_div.append(new_p);
 
-        origin_div.insertBefore(new_div,before_div);
+//         origin_div.insertBefore(new_div,before_div);
 
-        return new_star;
 
-}
+//         //return new_star;
+
+// }
+var tog=1;
 function newClicked(){
         var star=document.getElementById('new_star');
-        star.src="media/full_star.png"
+        if(tog%2==0){
+                star.src="media/full_star.png"
+        }
+        else{
+                star.src="media/empty_star.png"
+        }
+        tog++;
+        
 }
 
 function getRealtimeCourse(course) {
