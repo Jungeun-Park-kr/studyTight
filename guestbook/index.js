@@ -25,6 +25,9 @@ function deleteComments(event) {
     const hr = btn.parentNode.parentNode.parentNode.nextSibling;
     rootDiv.removeChild(hr);
     rootDiv.removeChild(list);
+    activeUser = getActiveUser(username);
+    activeUser.guestbook.commentlist.pop();
+    console.log(activeUser.guestbook.commentlist);
 
 }
 

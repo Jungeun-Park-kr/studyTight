@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -162,6 +162,7 @@
                     activeUser = getActiveUser('최시언');
                     mytalking = activeUser.guestbook.commentlist;
                     console.log(mytalking);
+                    console.log(activeUser.guestbook.profile);
 
                     function showtalkinglist() {
                         myfriends = activeUser.guestbook.friendslist;
@@ -169,6 +170,7 @@
                         activeUser = getActiveUser(username);
                         mytalking = activeUser.guestbook.commentlist;
                         console.log(mytalking);
+                        
                         var parent_table = document.getElementById("talking-place"); //부모테이블
 
                         for (i = 0; i < 5; i++) {
