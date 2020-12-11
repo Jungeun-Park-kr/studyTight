@@ -281,28 +281,32 @@
                 <div class="today">
                     <p>오늘 할 일</p>
                     <div class="todaylist" id="todaylist">
-                        <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
-                        <label><input type="checkbox"><p>DB 강의 듣기</p></label>
-                        <label><input type="checkbox"><p>채플 듣기</p></label>
-                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> 
+                        <label><input type="checkbox"class="checkbox" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox"><p class="p_p">DB 강의 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox" checked><p class="p_p">채플 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> 
                         <script>
-                        var parent_list=document.getElementById("todaylist");
+                        // var parent_list=document.getElementById("todaylist");
 
-                        var now=new Date();
-                        //조작된 시간
-                        //var open=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,56);
-                        var end=new Date(now.getFullYear(),now.getMonth(),now.getDate(),24,00,00);
+                        // var checkbox_length=document.getElementsByClassName("checkbox")
+                        // var label_length=document.getElementsByTagName("label")
+                        // var p_length=document.getElementsByClassName("p_p")
+                        // //var today=new Date(); 현재 
+                        // var futureDate=new Date(20,12,13,12,00,00,00);
+                        // var today=new Date(20,12,14,12,01,00,00); //조작된 시간
+
+                        // var gap=today.getTime()-futureDate.getTime();
+                        // gap=Math.floor(gap/(1000*60*60*24))+1;
+
+                        //     console.log(gap)
+
+                        // console.log(checkbox_length.length)
                         
-                        var nt=now.getTime();
-                        //var ot=open.getTime();
-                        var et=end.getTime();
-
-                        setTimeout(function(){
-                            while(parent_list.hasChildNodes()){
-                                parent_list.removeChild(parent_list.firstChild)
-                            }
-                        },2000);
-                        //현재 시간이 56초고 2초 뒤에 사라지게 만들었음.
+                        //     for(var i=0;i<checkbox_length.length;i++){
+                        //         console.log(checkbox_length[i].checked)
+                        //             if(checkbox_length[i].checked)
+                        //                 {parent_list.removeChild(label_length[i]);
+                        //     }}내일 날짜로 생각한 경우
                         </script>
                     </div>
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>

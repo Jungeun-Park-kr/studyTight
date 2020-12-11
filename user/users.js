@@ -432,7 +432,7 @@ function getActiveUserlist(username) { //사용자 이름으로 현재 접속중
 
 //d-day
 var d_day1 = {
-    day: "1",
+    day: "2",
     content: "정보보안 퀴즈"
 };
 var d_day2 = {
@@ -451,17 +451,17 @@ var d_day5 = {
     day: "7",
     content: "TOPCIT 시험"
 };
-var d_day6 = {
-    day: "8",
-    content: "무슨무슨 시험"
-};
+// var d_day6 = {
+//     day: "8",
+//     content: "웹플밍 시험"
+// }; 추가된 데이터
 
 userlist[0].d_day.push(d_day1);
 userlist[0].d_day.push(d_day2);
 userlist[0].d_day.push(d_day3);
 userlist[0].d_day.push(d_day4);
-userlist[0].d_day.push(d_day5); //d-day 정보를 넣음
-userlist[0].d_day.push(d_day6);
+userlist[0].d_day.push(d_day5); 
+//userlist[0].d_day.push(d_day6);
 
 var folder1 = {
     title: "OS",
