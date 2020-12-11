@@ -65,7 +65,27 @@ function plusTodo(){
     new_checkbox.setAttribute('type','checkbox');
     new_checkbox.setAttribute('id','new_checkbox');
 
-
+    new_checkbox.addEventListener("click", function() {
+        var parent = this.parentElement;
+        //클릭하면 false로 변경되도록
+        if (this.checked) { //체크된 경우
+            //사용자 정보에서 false로 바꾸기//
+            //console.log('체크됨2'+parent.childNodes[1].innerHTML);
+            var todo = parent.childNodes[1].innerHTML; //할일 이름 저장
+            var todolist = folder.todo;
+            for (var i=0; i<todolist.length; i++) {
+                if (todolist[i].content == todo) { //파라미터와 일치하는 투두 가져오기
+                    //삭제하기
+                    //todolist.splice(i,1);
+                    //아니면 값만 바꾸기
+                    todolist[i].isfinished = true;
+                    break;
+                }
+            }
+        }
+        console.log('변경사항 확인');
+        console.info(folder.todo);
+    });
     new_label.appendChild(new_checkbox);
     new_label.appendChild(new_p);
 
@@ -77,9 +97,9 @@ function plusTodo(){
     }
     folder.todo.push(newtodo);
     console.log('할일 추가 확인');
-    console.info(user.folder);
+    console.info(folder.todo);
     
-    new_label.className="new_folder_todo"
+    new_label.className="new_folder_todo";
             //완성 ㅎㅎ
 }
 function btnHome(){
@@ -133,5 +153,85 @@ function gotoUrl(order,folder_order){
     }
     else {
         alert("파일의 위치는 "+goto+" 입니다");
+    }
+}
+
+function getTodoList() {
+    var username = localStorage.getItem('username');
+    var user = getActiveUser(username);
+    var folderlist = user.folder;
+    var folder;
+    for (var i=0; i<folderlist.length; i++) {
+        if (folderlist[i].title == curfolder) { //사용자가 클릭한 폴더 정보 받아오기
+            folder = folderlist[i];
+            break;
+        }
+    }
+    //todo list에 있는 데이터 뿌려주기
+    var todolist = folder.todo;
+
+    for (var i=0; i<todolist.length; i++) {
+        if (!todolist[i].isfinished) { //만료되지 않은 경우 뿌림
+            var new_label=document.createElement('label');
+            var wrap=document.getElementById('Todolist')
+            var new_checkbox=document.createElement('input');
+            var new_p=document.createElement('label');      
+            new_p.innerHTML = todolist[i].content;
+            new_checkbox.setAttribute('type','checkbox');
+            new_checkbox.setAttribute('id','new_checkbox');
+            new_label.appendChild(new_checkbox);
+            new_label.appendChild(new_p);
+            wrap.appendChild(new_label);
+
+            new_label.className="new_folder_todo";
+            new_checkbox.addEventListener("click", function() {
+                var parent = this.parentElement;
+                //클릭하면 false로 변경되도록
+                if (this.checked) { //체크된 경우
+                    //사용자 정보에서 false로 바꾸기//
+                    //console.log('체크됨2'+parent.childNodes[1].innerHTML);
+                    var todo = parent.childNodes[1].innerHTML; //할일 이름 저장
+                    var todolist = folder.todo;
+                    for (var i=0; i<todolist.length; i++) {
+                        if (todolist[i].content == todo) { //파라미터와 일치하는 투두 가져오기
+                            //삭제하기
+                            //todolist.splice(i,1);
+                            //아니면 값만 바꾸기
+                            todolist[i].isfinished = true;
+                            break;
+                        }
+                    }
+                }
+                console.log('변경사항 확인');
+                console.info(folder.todo);
+            });
+        } else { //만료 되었으므로 삭제
+            //눈에 보이지 않게
+            //in here
+            todolist.splice(i, 1); //데이터에서 삭제
+        }
+    }
+    console.log('현재 폴더의 할 일 목록 확인');
+    console.info(todolist);
+}
+
+
+function getTodo(content) { //할일목록 이름으로 가져오기
+    var username = localStorage.getItem('username');
+    var user = getActiveUser(username);
+    var folderlist = user.folder;
+    var title = localStorage.getItem('folder'); //현재 폴더이름 가져오기
+    var folder;
+    for (var i=0; i<folderlist.length; i++) {
+        if (folderlist[i].title == title) { //사용자가 클릭한 폴더 정보 받아오기
+            folder = folderlist[i];
+            break;
+        }
+    }
+    var todolist = folder.todo;
+    for (var i=0; i<todolist.length; i++) {
+        if (todolist[i].content == content) { //파라미터와 일치하는 투두 가져오기
+            return todolist[i];
+        }
     }
 }
