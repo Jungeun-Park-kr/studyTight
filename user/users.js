@@ -1,6 +1,7 @@
 var userlist = new Array(); //사용자들을 담을 배열
 var activeUser = new Object(); //로그인 중인 사용자를 담을 객체
 
+//사용자1 박정은
 userlist.push({
     userId: 'je991025@gmail.com',
     password: 'angelje',
@@ -9,15 +10,28 @@ userlist.push({
     course: [], //과목 정보 저장할 곳
     guestbook: { //방명록 정보 저장할 곳
         friendslist: [],
-        //프로필 이미지는 user에 바로 있음
         profile: {},
-        //방명록 주인도 필요없을듯
         commentlist: [],
     },
     d_day: [], //디데이 정보 저장할 곳
     folder: []
 });
 
+//추가할 과목(데모영상)
+// var course_new = {
+//     title: "SAP (ABAP)",
+//     professor: "홍지만",
+//     time: [], //과목 시간 담은 리스트
+//     type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+//     location: "https://zoom.us/j/96212336817" //강의실/강의링크
+// };
+// var time_new = {
+//     day: "mon", //mon, tue, ... 저장
+//     stime: "16:30", //시작시간
+//     etime: "19:30" //종료시간
+// }
+// course_new.time.push(time_new);
+// userlist[0].course.push(course_new);
 
 //사용자2 최시언
 userlist.push({
@@ -124,31 +138,150 @@ var course3 = {
     location: "http://myclass.ssu.ac.kr" //강의실/강의링크
 };
 var time3 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "14:45" //종료시간
+}
+course3.time.push(time3);
+userlist[0].course.push(course3);
+
+var course3 = {
+    title: "철학으로만나는기독교",
+    professor: "성신형",
+    time: [], //과목 시간 담은 리스트
+    type: "offline", //과목 타입(online_realtime,online_video,offline)
+    location: "미래관302" //강의실/강의링크
+};
+var time3 = {
     day: "wed", //mon, tue, ... 저장
     stime: "13:30", //시작시간
     etime: "14:45" //종료시간
 }
 course3.time.push(time3);
 userlist[0].course.push(course3);
-//activeUser = userlist[0]; //test사용자를 로그인 시켜둠
+
+
+//김삿갓 과목
+var course_ksg = {
+    title: "경제발전론",
+    professor: "김지석",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg1 = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "10:30", //시작시간
+    etime: "12:00" //종료시간
+}
+var time_ksg2 = {
+    day: "wed", //mon, tue, ... 저장
+    stime: "9:00", //시작시간
+    etime: "10:30" //종료시간
+}
+course_ksg.time.push(time_ksg1);
+course_ksg.time.push(time_ksg2);
+userlist[2].course.push(course_ksg);
+
+var course_ksg2 = {
+    title: "거시경제학",
+    professor: "이영화",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg3 = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "14:00" //종료시간
+}
+var time_ksg4 = {
+    day: "wed", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "15:00" //종료시간
+}
+course_ksg2.time.push(time_ksg3);
+course_ksg2.time.push(time_ksg4);
+userlist[2].course.push(course_ksg2);
+var course_ksg3 = {
+    title: "공공경제학",
+    professor: "최주리",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg5 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "14:00" //종료시간
+}
+var time_ksg6 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "15:00" //종료시간
+}
+course_ksg3.time.push(time_ksg5);
+course_ksg3.time.push(time_ksg6);
+userlist[2].course.push(course_ksg3);
+var course_ksg4 = {
+    title: "근대경제사",
+    professor: "박제명",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg7 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "15:00", //시작시간
+    etime: "16:30" //종료시간
+}
+var time_ksg8 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "15:00", //시작시간
+    etime: "16:30" //종료시간
+}
+course_ksg4.time.push(time_ksg7);
+course_ksg4.time.push(time_ksg8);
+userlist[2].course.push(course_ksg4);
+var course_ksg5 = {
+    title: "국제물류론",
+    professor: "천정수",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+var time_ksg9 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "16:30", //시작시간
+    etime: "18:00" //종료시간
+}
+var time_ksg10 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "16:30", //시작시간
+    etime: "18:00" //종료시간
+}
+course_ksg5.time.push(time_ksg9);
+course_ksg5.time.push(time_ksg10);
+userlist[2].course.push(course_ksg5);
+
+course_ksg6 = {
+    title: "경제통상통계학",
+    professor: "김세훈",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.cua.ac.kr" //강의실/강의링크
+};
+time_ksg11 = {
+    day: "thu", //mon, tue, ... 저장
+    stime: "9:00", //시작시간
+    etime: "12:00" //종료시간
+}
+course_ksg6.time.push(time_ksg11);
+userlist[2].course.push(course_ksg6);
 
 
 
-userlist.push({
-    userId: 'noino08189@naver.com',
-    password: 'asdfasdf',
-    name: '최시언',
-    userImage: '/media/profile2.png',
-    course: [],
-    guestbook: { //방명록 정보 저장할 곳
-        friendslist: [],
-        //프로필 이미지는 user에 바로 있음
-        profile: {},
-        //방명록 주인도 필요없을듯
-        commentlist: [],
-    },
-    d_day: []
-})
+//최시언 과목정보
 var course4 = {
     title: "운영체제",
     professor: "홍지만",
@@ -160,6 +293,48 @@ var time5 = {
     day: "thu", //mon, tue, ... 저장
     stime: "10:30", //시작시간
     etime: "11:45" //종료시간
+}
+course4.time.push(time5);
+userlist[1].course.push(course4);
+course4 = {
+    title: "데이터베이스",
+    professor: "박동주",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.ssu.ac.kr" //강의실/강의링크
+};
+time5 = {
+    day: "tue", //mon, tue, ... 저장
+    stime: "13:30", //시작시간
+    etime: "15:00" //종료시간
+}
+course4.time.push(time5);
+userlist[1].course.push(course4);
+course4 = {
+    title: "컴퓨터공학특강2",
+    professor: "박성호",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.ssu.ac.kr" //강의실/강의링크
+};
+time5 = {
+    day: "wed", //mon, tue, ... 저장
+    stime: "12:00", //시작시간
+    etime: "13:15" //종료시간
+}
+course4.time.push(time5);
+userlist[1].course.push(course4);
+course4 = {
+    title: "웹프로그래밍기초및실습",
+    professor: "최지웅",
+    time: [], //과목 시간 담은 리스트
+    type: "online_video", //과목 타입(online_realtime,online_video,offline)
+    location: "http://myclass.ssu.ac.kr" //강의실/강의링크
+};
+time5 = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "13:00", //시작시간
+    etime: "14:45" //종료시간
 }
 course4.time.push(time5);
 userlist[1].course.push(course4);
@@ -185,6 +360,13 @@ function getActiveUser(username) { //사용자 이름으로 현재 접속중인 
             return activeUser;
         }
     }
+}
+
+function getActiveUserlist(username) { //사용자 이름으로 현재 접속중인 사용자 객체 찾아서 리턴
+
+    return userlist;
+
+
 }
 
 
@@ -237,11 +419,17 @@ var folder3 = {
     star: "false",
     postIt: []
 }
-// var folder4 = {
-//     title: "SAP (ABAP)",
-//     star: "false",
-//     postIt: []
-// }
+var folder3 = {
+    title: "라라",
+    star: "false",
+    postIt: []
+
+}
+var folder4 = {
+    title: "SAP (ABAP)",
+    star: "false",
+    postIt: []
+}
 var postIt1 = {
     title: "PID란?",
     type: "link",
@@ -265,31 +453,13 @@ var postIt4 = {
 var postIt5 = {
     title: "mdn 사이트",
     type: "link",
-    url : "https://developer.mozilla.org/ko/"
+    url: "https://developer.mozilla.org/ko/"
 }
-// var postIt6= {
-//     title: "요점 정리1",
-//     type: "file",
-//     url : "C:\Users\82103\Desktop\3학년 2학기\웹플밍"
-// } 이거를 추가하기 누른 다음에 이거를 다시 주석 취소하기.
-// var postIt7 = {
-//     title: "window.open",
-//     type: "content",
-//     url: "javascript window.open에 대해서 배웠습니다."
-// }
-//var postIt8 = {
-//     title: "sap 수업 주소",
-//     type: "link",
-//     url: "https://zoom.us/j/96212336817"
-// }
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
 folder1.postIt.push(postIt3);
 folder1.postIt.push(postIt4);
-folder2.postIt.push(postIt5);
-// folder2.postIt.push(postIt6);
-// folder2.postIt.push(postIt7);
-// folder4.postIt.push(postIt8);
+folder2.postIt.push(postIt2);
 userlist[0].folder.push(folder1);
 userlist[0].folder.push(folder2);
 userlist[0].folder.push(folder3);
@@ -298,55 +468,66 @@ userlist[0].folder.push(folder4);
 
 
 //guestbook
-// userlist[0].guestbook = {
-//     friendslist : [],
-//     //프로필 이미지는 user에 바로 있음
-//     profile : {},
-//     //방명록 주인도 필요없을듯
-// }
 userlist[0].guestbook.profile = {
-        profilename: "박정은",
-        school: "숭실대학교",
-        school_secret: false,
-        major: "컴퓨터학부",
-        major_secret: false,
-        grade: "3",
-        grade_secret: false,
-        age: "22",
-        age_secret: true,
-        gender: true, //여자는 2, 남자는 1
-        profilesecret: false //공개는 0, 비공개는 1
-    }
-    //친구 목록 리스트 추가
-var friendslist1 = { //기본 박정은 방명록
-    profileimage: "./media/profile1.png",
-    guestbookowner: "양지영", //방명록의 주인
-    email: "sidjyoung@naver.com"
+    profilename: "박정은",
+    school: "숭실대학교",
+    school_secret: false,
+    major: "컴퓨터학부",
+    major_secret: false,
+    grade: "3",
+    grade_secret: true,
+    age: "22",
+    age_secret: true,
+    gender: true,
+    profilesecret: false //공개는 0, 비공개는 1
 }
-userlist[0].guestbook.friendslist.push(friendslist1);
-var friendslist2 = {
+
+// 아래 있는게 프로필 내용 저장하는것
+// userlist[0].guestbook.profile = {
+//     profilename: "박정은",
+//     school: "숭실대학교",
+//     school_secret: true,
+//     major: "컴퓨터학부",
+//     major_secret: false,
+//     grade: "3",
+//     grade_secret: false,
+//     age: "22",
+//     age_secret: true,
+//     gender: true,
+//     profilesecret: false //공개는 0, 비공개는 1
+// }
+
+//친구 목록 리스트 추가
+var friendslist1 = { //기본 박정은 방명록
     profileimage: "./media/profile2.png",
     guestbookowner: "최시언", //방명록의 주인
     email: "noino0819@naver.com"
 }
-userlist[0].guestbook.friendslist.push(friendslist2);
-var friendslist3 = {
+userlist[0].guestbook.friendslist.push(friendslist1);
+var friendslist2 = {
     profileimage: "./media/profile3.png",
     guestbookowner: "김삿갓", //방명록의 주인
     email: "kimsatgat@naver.com"
 }
+userlist[0].guestbook.friendslist.push(friendslist2);
+//친구 추가 (데모영상용)
+var friendslist3 = {
+    profileimage: "./media/profile1.png",
+    guestbookowner: "양지영", //방명록의 주인
+    email: "sidjyoung@naver.com"
+}
 userlist[0].guestbook.friendslist.push(friendslist3);
 
-
-// var profilelist1 = {
-//     profilename: "박정은",
-//     school: "숭실대학교",
-//     major: "컴퓨터학부",
-//     grade: "3",
-//     age: "22",
-//     gender: 2, //여자는 2, 남자는 1
-//     profilesecret: true //공개는 false, 비공개는 true
+//(추가된 영상용.)
+// var friendslist4 = {
+//     profileimage: "/media/user.png",
+//     guestbookowner: "김준면", //방명록의 주인
+//     email: "suho@gmail.com"
 // }
+// userlist[0].guestbook.friendslist.push(friendslist4);
+
+
+
 userlist[1].guestbook.profile = {
     profilename: "최시언",
     school: "숭실대학교",
@@ -357,9 +538,41 @@ userlist[1].guestbook.profile = {
     grade_secret: false,
     age: "22",
     age_secret: true,
-    gender: "2", //여자는 2, 남자는 1
+    gender: true,
     profilesecret: false //공개는 0, 비공개는 1
 };
+
+
+userlist[2].guestbook.profile = {
+    profilename: "김삿갓",
+    school: "중앙대학교",
+    school_secret: false,
+    major: "경제학과",
+    major_secret: false,
+    grade: "3",
+    grade_secret: false,
+    age: "20",
+    age_secret: true,
+    gender: false, //여자는 2, 남자는 1
+    profilesecret: true //공개는 0, 비공개는 1
+};
+
+//추가할  데이터 (데모영상용)
+userlist[3].guestbook.profile = {
+    profilename: "양지영",
+    school: "숭실대학교",
+    school_secret: false,
+    major: "컴퓨터학부",
+    major_secret: true,
+    grade: "3",
+    grade_secret: false,
+    age: "23",
+    age_secret: true,
+    gender: true,
+    profilesecret: true //공개는 0, 비공개는 1
+};
+
+
 // var profilelist2 = {
 //     profilename: "최시언",
 //     school: "숭실대학교",
@@ -440,6 +653,14 @@ var commentlist9 = {
     commnetsecret: 0 // 공개는 0, 비공개는 1
 }
 
+// 영상 테스트용
+// var commentlist10 = { 
+//     Author: "박정은",
+//     mycommnet: "안녕하세요!",
+//     today: "2020-12-11 13:08:12",
+//     commnetsecret: 0 // 공개는 0, 비공개는 1
+// }
+
 userlist[0].guestbook.commentlist.push(commentlist1); //삽입
 userlist[0].guestbook.commentlist.push(commentlist2); //삽입
 userlist[0].guestbook.commentlist.push(commentlist3); //삽입
@@ -447,5 +668,6 @@ userlist[0].guestbook.commentlist.push(commentlist4); //삽입
 userlist[0].guestbook.commentlist.push(commentlist5); //삽입
 userlist[0].guestbook.commentlist.push(commentlist6); //삽입
 userlist[0].guestbook.commentlist.push(commentlist7); //삽입
+// userlist[0].guestbook.commentlist.push(commentlist10); //삽입
 userlist[1].guestbook.commentlist.push(commentlist8); //삽입
 userlist[1].guestbook.commentlist.push(commentlist9); //삽입
