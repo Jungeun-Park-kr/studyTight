@@ -17,21 +17,6 @@ userlist.push({
     folder: []
 });
 
-//추가할 과목(데모영상)
-// var course_new = {
-//     title: "SAP (ABAP)",
-//     professor: "홍지만",
-//     time: [], //과목 시간 담은 리스트
-//     type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
-//     location: "https://zoom.us/j/96212336817" //강의실/강의링크
-// };
-// var time_new = {
-//     day: "mon", //mon, tue, ... 저장
-//     stime: "16:30", //시작시간
-//     etime: "19:30" //종료시간
-// }
-// course_new.time.push(time_new);
-// userlist[0].course.push(course_new);
 
 //사용자2 최시언
 userlist.push({
@@ -76,21 +61,21 @@ userlist.push({
         d_day: []
     })
     //사용자 5 - 추가할 사용자 정보(데모영상)
-    // userlist.push({
-    //     userId: 'suho@gmail.com',
-    //     password: 'junm0522',
-    //     name: '김준면',
-    //     userImage: '/media/user.png',
-    //     course: [], //과목 정보 저장할 곳
-    //     guestbook: { //방명록 정보 저장할 곳
-    //         friendslist: [],
-    //         profile: {},
-    //         commentlist: [],
-    //     },
-    //     d_day: [], //디데이 정보 저장할 곳
-    //     folder: []
-    // });
-
+    //김준면 추가시에 사용
+// userlist.push({
+//     userId: 'suho@gmail.com',
+//     password: 'junm0522',
+//     name: '김준면',
+//     userImage: '/media/user.png',
+//     course: [], //과목 정보 저장할 곳
+//     guestbook: { //방명록 정보 저장할 곳
+//         friendslist: [],
+//         profile: {},
+//         commentlist: [],
+//     },
+//     d_day: [], //디데이 정보 저장할 곳
+//     folder: []
+// });
 // //김준면 사용자, 방명록 데이터(데모영상) (초기 이름 제외 모두 비공개)
 // userlist[4].guestbook.profile = {
 //     profilename: userlist[4].name,
@@ -107,7 +92,23 @@ userlist.push({
 // };
 
 
-//과목정보
+//추가할 과목(데모영상)
+var course_new = {
+    title: "SAP (ABAP)",
+    professor: "홍지만",
+    time: [], //과목 시간 담은 리스트
+    type: "online_realtime", //과목 타입(online_realtime,online_video,offline)
+    location: "https://zoom.us/j/96212336817" //강의실/강의링크
+};
+var time_new = {
+    day: "mon", //mon, tue, ... 저장
+    stime: "16:30", //시작시간
+    etime: "19:30" //종료시간
+}
+course_new.time.push(time_new);
+userlist[0].course.push(course_new);
+
+//과목정보 (기존 OS)
 var course1 = {
     title: "OS(운영체제)",
     professor: "김철홍",
@@ -129,20 +130,36 @@ course1.time.push(time1);
 course1.time.push(time4);
 userlist[0].course.push(course1);
 
-var course2 = {
-    title: "웹프로그래밍기초및실습",
-    professor: "최지웅",
-    time: [], //과목 시간 담은 리스트
-    type: "online_video", //과목 타입(online_realtime,online_video,offline)
-    location: "http://myclass.ssu.ac.kr" //강의실/강의링크
-};
-var time2 = {
-    day: "mon", //mon, tue, ... 저장
-    stime: "13:00", //시작시간
-    etime: "14:45" //종료시간
-}
-course2.time.push(time2);
-userlist[0].course.push(course2);
+// //수정할 과목정보 (데모영상용)
+// course1 = {
+//     title: "OS(운영체제)",
+//     professor: "홍지만",
+//     time: [], //과목 시간 담은 리스트
+//     type: "offline", //과목 타입(online_realtime,online_video,offline)
+//     location: "정보관 302호" //강의실/강의링크
+// };
+// time1 = {
+//     day: "mon", //mon, tue, ... 저장
+//     stime: "09:00", //시작시간
+//     etime: "10:15" //종료시간
+// }
+// course1.time.push(time1);
+// userlist[0].course.push(course1);
+
+// var course2 = {
+//     title: "웹프로그래밍기초및실습",
+//     professor: "최지웅",
+//     time: [], //과목 시간 담은 리스트
+//     type: "online_video", //과목 타입(online_realtime,online_video,offline)
+//     location: "http://myclass.ssu.ac.kr" //강의실/강의링크
+// };
+// var time2 = {
+//     day: "mon", //mon, tue, ... 저장
+//     stime: "13:00", //시작시간
+//     etime: "14:45" //종료시간
+// }
+// course2.time.push(time2);
+// userlist[0].course.push(course2);
 
 var course3 = {
     title: "데이터베이스",
@@ -451,17 +468,18 @@ var d_day5 = {
     day: "7",
     content: "TOPCIT 시험"
 };
-// var d_day6 = {
-//     day: "8",
-//     content: "웹플밍 시험"
-// }; 추가된 데이터
 
 userlist[0].d_day.push(d_day1);
 userlist[0].d_day.push(d_day2);
 userlist[0].d_day.push(d_day3);
 userlist[0].d_day.push(d_day4);
 userlist[0].d_day.push(d_day5); 
-//userlist[0].d_day.push(d_day6);
+
+// var d_day6 = {
+//     day: "8",
+//     content: "웹플밍 시험"
+// }; //추가된 데이터
+//  userlist[0].d_day.push(d_day6);
 
 var folder1 = {
     title: "OS",
@@ -492,7 +510,7 @@ var folder3 = {
     todo: []
 }
 var folder3 = {
-    title: "라라",
+    title: "정보보안",
     star: "false",
     postIt: [],
     todo: []
@@ -513,38 +531,52 @@ var postIt2 = {
     type: "link",
     url: "https://jhnyang.tistory.com/57"
 }
-var postIt3 = {
-    title: "요점정리 1",
-    type: "content",
-    url: "이번 강의는 OS의 기본적인 것에 대해서 배웠습니다."
-}
-var postIt4 = {
-    title: "강의노트 1",
-    type: "file",
-    url: "C:\Users\82103\Desktop"
-}
-var postIt5 = {
-    title: "mdn 사이트",
-    type: "link",
-    url: "https://developer.mozilla.org/ko/"
-}
+
+// var postIt3 = {
+//     title: "요점정리 1",
+//     type: "content",
+//     url: "요점정리 1입니다."
+// }
+// folder2.postIt.push(postIt3);
+
+
+// var postIt4 = {
+//     title: "요점정리노트 1",
+//     type: "file",
+//     url: "C:\\Users\\82103\\Desktop\\요점정리.pdf"
+// }
+// folder2.postIt.push(postIt4);
+
+// var postIt5 = {
+//     title: "mdn 사이트",
+//     type: "link",
+//     url: "https://developer.mozilla.org/ko/"
+// }
+// folder2.postIt.push(postIt5);
+
 folder1.postIt.push(postIt1);
 folder1.postIt.push(postIt2);
-folder1.postIt.push(postIt3);
-folder1.postIt.push(postIt4);
-folder2.postIt.push(postIt2);
 userlist[0].folder.push(folder1);
 userlist[0].folder.push(folder2);
 userlist[0].folder.push(folder3);
 userlist[0].folder.push(folder4);
 
+
 // 추가할 폴더 (데모영상용)
 // var folder5 = {
 //     title : "데이터베이스",
 //     star : "false",
-//     postIt: []
+//     postIt: [],
+//     todo:[]
 // }
+// // 추가할 할 일 (데모영상용) 
+// // folder_todo = {
+// //     content: "기말 공부",
+// //     isfinished : true
+// // }
+// // folder5.todo.push(folder_todo);
 // userlist[0].folder.push(folder5);
+
 
 //guestbook
 userlist[0].guestbook.profile = {
@@ -561,7 +593,7 @@ userlist[0].guestbook.profile = {
     profilesecret: false //공개는 0, 비공개는 1
 }
 
-// 아래 있는게 프로필 내용 저장하는것
+//아래 있는게 프로필 내용 저장하는것
 // userlist[0].guestbook.profile = {
 //     profilename: "박정은",
 //     school: "숭실대학교",
@@ -620,7 +652,6 @@ userlist[1].guestbook.profile = {
     gender: true,
     profilesecret: false //공개는 0, 비공개는 1
 };
-
 
 userlist[2].guestbook.profile = {
     profilename: "김삿갓",

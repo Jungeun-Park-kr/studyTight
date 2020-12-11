@@ -32,16 +32,21 @@ function plusTodo(){
 }
 var toggle=1;
 function starClicked(order){
+        var username=localStorage.getItem('username');
+        activeUser=getActiveUser(username);
         //document.getElementById("star").src="/media/full_star.png";
         var star=document.getElementsByClassName('folder_star');
         if(toggle%2==1){
                 star[order].src="media/full_star.png"
+                activeUser.folder[order].star="false"
         }
         else{
                 star[order].src="media/empty_star.png"
+                activeUser.folder[order].star="true"
         }
         toggle++;
         //별 완료 ㅎㅎ
+        console.info(activeUser.folder[order])
 }
 // function newFolder(){
 //         var new_name=prompt("폴더 이름을 입력하세요","");
@@ -100,9 +105,9 @@ function getRealtimeCourse(course) {
         // var curhour = 12; //오후 12시
         // var curmin = 46;  //46분
         //오프라인 - 테스트용 시간2 (철학으로만나는기독교 나오면 됨)
-        // var curday = 3;
-        // var curhour = 13;
-        // var curmin = 40;
+        // var curday = 3; //수요일
+        // var curhour = 13; //오후 1시
+        // var curmin = 40; //40분
         var cur = (curhour*3600)+(curmin*60); //현재시간 초단위로 변환
         for(var i=0; i<course.time.length; i++) {
                 tmptime = course.time[i];
@@ -165,4 +170,29 @@ function toNextPage(order){
         var that_p=document.getElementsByClassName("folder_course");
         location.href="/folder/folder.html?index="+order
         
+}
+
+function refreshToday() {
+        var parent_list=document.getElementById("todaylist");
+
+                        var checkbox_length=document.getElementsByClassName("checkbox1")
+                        var label_length=document.getElementsByTagName("label")
+                        var p_length=document.getElementsByClassName("p_p")
+                        //var today=new Date(); 현재 
+                        var futureDate=new Date(20,12,13,12,00,00,00);
+                        var today=new Date(20,12,14,12,01,00,00); //조작된 시간
+
+                        var gap=today.getTime()-futureDate.getTime();
+                        gap=Math.floor(gap/(1000*60*60*24))+1;
+
+                        console.log(gap)
+
+                        console.log(checkbox_length.length)
+                        
+                        for(var i=0;i<checkbox_length.length;i++){
+                        console.log(checkbox_length[i].checked)
+                                if(checkbox_length[i].checked)
+                                {parent_list.removeChild(label_length[i]);
+                        }}
+
 }

@@ -9,21 +9,6 @@ function register() {
     var userConfirm = doc.getElementById('userConfirm').value;
     var userName = doc.getElementById('userName').value;
 
-    for (var key in userlist) {
-        console.log(key.userName);
-        if (key.userId === userId) { //id 일치 확인
-            id_ok = true;
-            alert('id는 잇음');
-            if (this.userPassword === password) { //pw 일치 확인
-                pass_ok = true;
-                userName = this.name; //사용자의 이름 저장
-                break;
-            }
-        }
-    }
-    // //입력 잘 되었나 확인용
-    // console.log(userId);
-    // console.log(userPassword);
 
     if (!userId) { //아이디 입력 안했을 때
         alert('이메일을 입력하세요');
@@ -66,13 +51,12 @@ function register() {
     var newUser = createUser(userId, userPassword, userName); //유저 객체 생성 (user/user.js) 성공시 true리턴
     if (newUser) { //회원가입 완료
         alert('study Tight 회원가입을 축하합니다.');
-        for (var i=0; i<userlist.length; i++) {
-            console.log('user'+i+':'+userlist[i].name);
-        }
+
+        console.log('회원가입 후 회원정보입니다. 10초 뒤 로그인 화면으로 이동합니다.');
+        console.info(userlist);
         setTimeout(function(){
             location.replace("/login/login.html"); //로그인 화면으로 이동
-            alert('asdf');
-        }, 2000);
+        }, 10000);
         //location.replace("/login/login.html"); //로그인 화면으로 이동
     }
     else { //유저 추가 에러 발생

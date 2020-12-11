@@ -123,7 +123,7 @@ function addCourse() { //저장하기 버튼
     //console.log('title:'+activeUser.course[activeUser.course.length-1].title + ', type:'+activeUser.course[activeUser.course.length-1].type);
     
     console.log('과목 추가여부 확인')
-    console.info(activeUser);
+    console.info(activeUser.course);
     console.log('과목 추가가 완료되었습니다. 10초뒤에 창을 닫습니다.')
     setTimeout(function(){ //테스트용 2초 딜레이
         window.close(); //창 닫기

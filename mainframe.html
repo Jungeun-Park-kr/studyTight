@@ -111,10 +111,11 @@
                             show_day.setAttribute("class","d-day")
                             show_content.setAttribute("class","d-date")
                             var tmp=d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
-                            //console.log(tmp.day,tmp.content);
-                            show_day.innerHTML="D-"+tmp.day
                             show_content.innerHTML=tmp.content
-                            //console.log(show_day.innerHTML,show_content.innerHTML)
+                            
+                            show_day.innerHTML="D-"+tmp.day //현재 날짜
+                            //show_day.innerHTML="D-"+--tmp.day;
+                            
                             show_day.appendChild(show_content)
                             parentDiv.appendChild(show_day)
                             show_day.style.fontWeight="bold"
@@ -230,11 +231,13 @@
                 else{
                     new_star.src="media/empty_star.png"
                 }
+
+                folder_list[i]
                 var random=Math.floor(ran_color*3);
-                if(random==0){
+                if(i%3==0){
                     new_div.style.backgroundColor="#E36363"
                 }
-                else if(random==1){
+                else if(i%3==1){
                     new_div.style.backgroundColor="#E3B863"
                 }
                 else{
@@ -281,34 +284,22 @@
                 <div class="today">
                     <p>오늘 할 일</p>
                     <div class="todaylist" id="todaylist">
-                        <label><input type="checkbox"class="checkbox" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox"><p class="p_p">DB 강의 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox" checked><p class="p_p">채플 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> 
-                        <script>
-                        // var parent_list=document.getElementById("todaylist");
-
-                        // var checkbox_length=document.getElementsByClassName("checkbox")
-                        // var label_length=document.getElementsByTagName("label")
-                        // var p_length=document.getElementsByClassName("p_p")
-                        // //var today=new Date(); 현재 
-                        // var futureDate=new Date(20,12,13,12,00,00,00);
-                        // var today=new Date(20,12,14,12,01,00,00); //조작된 시간
-
-                        // var gap=today.getTime()-futureDate.getTime();
-                        // gap=Math.floor(gap/(1000*60*60*24))+1;
-
-                        //     console.log(gap)
-
-                        // console.log(checkbox_length.length)
-                        
-                        //     for(var i=0;i<checkbox_length.length;i++){
-                        //         console.log(checkbox_length[i].checked)
-                        //             if(checkbox_length[i].checked)
-                        //                 {parent_list.removeChild(label_length[i]);
-                        //     }}내일 날짜로 생각한 경우
-                        </script>
+                        <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label> 
                     </div>
+                    <script>
+                        var username = localStorage.getItem('username');
+                        if (username == '김준면') {
+                            var cell = document.getElementById('todaylist');
+                            while (cell.hasChildNodes()) {
+                                cell.removeChild(cell.firstChild);
+                            }
+                        }
+                        
+                    </script>
+
                     <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                     <!--+부분 이미지로 넣기-->
                 </div>
@@ -321,6 +312,9 @@
                     유지됩니다.
                 </div>
             </div>
+            <script>
+                //refreshToday();
+            </script>
         </div>
     </div>
 </body>

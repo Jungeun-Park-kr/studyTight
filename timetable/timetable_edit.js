@@ -34,6 +34,8 @@ function getCourses(course) { //파라미터:courselist
         ncell5.innerHTML = '<input type="button" class="btn_modify_course"/>';
         ncell6.innerHTML = '<input type="button" class="btn_delete_course"/>';
     }
+    console.log('현재 사용자의 과목 정보');
+    console.info(activeUser.course);
 }
 
 function courseDay(day) {
@@ -118,12 +120,12 @@ function editBtn() {
     modifyCourse(course); //변경사항 적용
 
     console.log('변경내용 확인')
-    console.info(courselist);
-    console.log('수정이 완료되었습니다. 6초 뒤에 창이 닫힙니다.');
+    console.info(activeUser.course);
+    console.log('수정이 완료되었습니다. 10초 뒤에 창이 닫힙니다.');
 
     setTimeout(function(){ //테스트용 2초 딜레이
         window.close(); //창 닫기
-    }, 6000);
+    }, 10000);
     //opener.parent.location.reload(); //부모창 새로고침
     ///window.close(); //창 닫기
 }
