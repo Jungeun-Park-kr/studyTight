@@ -102,7 +102,6 @@
     </div>
 </div>
 <script>
-    check = 1;
 
     var username = localStorage.getItem('username');
     activeUser = getActiveUser(username);
@@ -110,6 +109,7 @@
     console.log(profile);
 
     function addprofile() {
+        check = 1;
         var value1 = document.getElementById('course_title').value;
         if (value1 == "") {
             alert("이름을 입력해주세요");
@@ -136,14 +136,15 @@
             check = 0;
         } //저장금지
 
-        if (check == 1) {
+        
             var value6 = document.getElementById('XY').checked;
             var value7 = document.getElementById('secret').checked;
             var value8 = document.getElementById('school_secret').checked;
             var value9 = document.getElementById('major_secret').checked;
             var value10 = document.getElementById('grade_secret').checked;
             var value11 = document.getElementById('age_secret').checked;
-
+            
+            if(check==1){
             profile.profilename = value1;
             profile.school = value2;
             profile.major = value3;
@@ -155,8 +156,14 @@
             profile.major_secret = value9;
             profile.grade_secret = value10;
             profile.age_secret = value11;
-            console.log(profile);
         }
+            
+            console.log(profile);
+            console.log('프로필 수정이 완료되었습니다. 7초 뒤에 팝업이 꺼집니다.')
+    setTimeout(function(){
+        window.close(); //메인 화면으로 이동
+    }, 7000);
+        
     }
 </script>
 </body>
