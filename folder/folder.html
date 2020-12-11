@@ -39,39 +39,7 @@
                         <input type="button" class="folderTodoBtn" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
                         <script>
                             //할일목록 불러오기
-                            //function getTodoList() {
-                                var username = localStorage.getItem('username');
-                                var user = getActiveUser(username);
-                                var folderlist = user.folder;
-                                var folder;
-                                for (var i=0; i<folderlist.length; i++) {
-                                    if (folderlist[i].title == curfolder) { //사용자가 클릭한 폴더 정보 받아오기
-                                        folder = folderlist[i];
-                                        break;
-                                    }
-                                }
-                                //todo list에 있는 데이터 뿌려주기
-                                var todolist = folder.todo;
-                                for (var i=0; i<todolist.length; i++) {
-                                    if (!todolist[i].isfinished) { //만료되지 않은 경우 뿌림
-                                        var new_label=document.createElement('label');
-                                        var wrap=document.getElementById('Todolist')
-                                        var new_checkbox=document.createElement('input');
-                                        var new_p=document.createElement('label');      
-                                        new_p.innerHTML = todolist[i].content;
-                                        new_checkbox.setAttribute('type','checkbox');
-                                        new_checkbox.setAttribute('id','new_checkbox');
-                                        new_label.appendChild(new_checkbox);
-                                        new_label.appendChild(new_p);
-                                        wrap.appendChild(new_label);
-
-                                        new_label.className="new_folder_todo";
-                                    }
-                                    else { //만료 되었으므로 삭제
-
-                                    }
-                                }
-                            //}
+                            getTodoList();
                             //버튼에 이벤트
                         </script>
                 </div>
