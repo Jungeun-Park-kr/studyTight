@@ -155,6 +155,13 @@ function dayStrToNum(day) {
         }
 }
 function toNextPage(order){
+        //console.log('order:'+order+typeof(order));
+        var username = localStorage.getItem('username');
+        var user = getActiveUser(username);
+        //console.info(user.folder);
+        var folderlist = user.folder;
+        var title = folderlist[order].title;
+        localStorage.setItem("folder", title); //현재 사용자가 클릭한 폴더 이름 저장
         var that_p=document.getElementsByClassName("folder_course");
         location.href="/folder/folder.html?index="+order
         

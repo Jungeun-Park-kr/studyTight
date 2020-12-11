@@ -41,6 +41,18 @@ function PostItFile(){
     alert("저장된 파일로 접근합니다.");
 }
 function plusTodo(){
+    var username = localStorage.getItem('username');
+    var user = getActiveUser(username);
+    var title = localStorage.getItem('folder'); //현재 클릭한 폴더 이름 가져오기
+    var folderlist = user.folder;
+    var folder;
+    for (var i=0; i<folderlist.length; i++) {
+        if (folderlist[i].title == title) { //사용자가 클릭한 폴더 정보 받아오기
+            folder = folderlist[i];
+            break;
+        }
+    }
+
     var new_label=document.createElement('label');
     var wrap=document.getElementById('Todolist')
     var new_text=window.prompt("할 일 목록을 채우세요","");
@@ -57,7 +69,15 @@ function plusTodo(){
     new_label.appendChild(new_checkbox);
     new_label.appendChild(new_p);
 
-    wrap.appendChild(new_label);  
+    wrap.appendChild(new_label);
+    //사용자 정보에 할일 추가
+    var newtodo = {
+        content : new_text,
+        isfinished : false
+    }
+    folder.todo.push(newtodo);
+    console.log('할일 추가 확인');
+    console.info(user.folder);
     
     new_label.className="new_folder_todo"
             //완성 ㅎㅎ
