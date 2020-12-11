@@ -466,42 +466,28 @@ userlist[0].d_day.push(d_day6);
 var folder1 = {
     title: "OS",
     star: "true",
-    postIt: [],
-    todo: []
+    postIt: []
 }
-var folder_todo = {
-    content: "과제6 제출",
-    isfinished : false
-}
-folder1.todo.push(folder_todo);
-folder_todo = {
-    content: "기말 시험 공부",
-    isfinished : false
-}
-folder1.todo.push(folder_todo);
 var folder2 = {
     title: "웹플밍",
     star: "true",
-    postIt: [],
-    todo: []
+    postIt: []
 }
 var folder3 = {
     title: "DB",
     star: "false",
-    postIt: [],
-    todo: []
+    postIt: []
 }
 var folder3 = {
     title: "라라",
     star: "false",
-    postIt: [],
-    todo: []
+    postIt: []
+
 }
 var folder4 = {
     title: "SAP (ABAP)",
     star: "false",
-    postIt: [],
-    todo: []
+    postIt: []
 }
 var postIt1 = {
     title: "PID란?",
@@ -538,13 +524,7 @@ userlist[0].folder.push(folder2);
 userlist[0].folder.push(folder3);
 userlist[0].folder.push(folder4);
 
-// 추가할 폴더 (데모영상용)
-// var folder5 = {
-//     title : "데이터베이스",
-//     star : "false",
-//     postIt: []
-// }
-// userlist[0].folder.push(folder5);
+
 
 //guestbook
 userlist[0].guestbook.profile = {
