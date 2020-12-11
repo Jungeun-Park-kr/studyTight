@@ -69,7 +69,7 @@ function login() {
 
 function logout() {
     //로그아웃
-    activeUser = null;
+    //activeUser = null;
     localStorage.removeItem('username');
     var tmp = localStorage.getItem('username');
     if (tmp== null)

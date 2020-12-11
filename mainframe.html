@@ -282,13 +282,12 @@
                     <p>오늘 할 일</p>
                     <div class="todaylist" id="todaylist">
                         <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
-                        <label><input type="checkbox" checked><p>DB 강의 듣기</p></label>
+                        <label><input type="checkbox"><p>DB 강의 듣기</p></label>
                         <label><input type="checkbox"><p>채플 듣기</p></label>
-                        <label><input type="checkbox" checked><p>OS 보고서 쓰기</p></label> 
+                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> 
                         <script>
                         var parent_list=document.getElementById("todaylist");
 
-                        var checkbox_length=document.getElementsByTagName("checkbox")
                         var now=new Date();
                         //조작된 시간
                         //var open=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,56);
@@ -300,10 +299,7 @@
 
                         setTimeout(function(){
                             while(parent_list.hasChildNodes()){
-                                for(var i=0;i<checkbox_length.length;i++){
-                                    if(checkbox_length[i].getAttribute("checked"))
-                                        parent_list.removeChild(parent_list.checkbox_length[i])
-                            }
+                                parent_list.removeChild(parent_list.firstChild)
                             }
                         },2000);
                         //현재 시간이 56초고 2초 뒤에 사라지게 만들었음.
