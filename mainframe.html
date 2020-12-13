@@ -114,8 +114,8 @@
                         var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
                         show_content.innerHTML = tmp.content
 
-                        //show_day.innerHTML="D-"+tmp.day //현재 날짜
-                        show_day.innerHTML = "D-" + --tmp.day;
+                        show_day.innerHTML="D-"+tmp.day //현재 날짜
+                        //show_day.innerHTML = "D-" + --tmp.day;
 
                         show_day.appendChild(show_content)
                         parentDiv.appendChild(show_day)
@@ -301,7 +301,7 @@
                 </div>
             </div>
             <script>
-                refreshToday();
+                //refreshToday();
             </script>
         </div>
     </div>
