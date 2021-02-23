@@ -1,5 +1,5 @@
 #wrap {
-    min-width: 1300px;
+    min-width: 1190px;
 }
 body {
     background-color: #e7eff0;
@@ -204,6 +204,7 @@ body {
     line-height: 13vw;
     vertical-align: middle;
     padding-right:25px;
+   filter: opacity(1) drop-shadow(0 0 0 #bebebe);
     display:inline-block;
 }
 .folder {
