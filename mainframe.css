@@ -1,8 +1,12 @@
 #wrap {
     min-width: 1190px;
+    
 }
 body {
     background-color: #e7eff0;
+    min-width: 1190px;
+    margin:0 auto;
+    width:60%;
 }
 .page-header {
     width:70%;
@@ -12,13 +16,16 @@ body {
 }
 .page-header > div {
     display: inline-block;
+    margin: 20px;
 }
 .page-menu {
-    width : 15%;
-    height : 100%;
-    float : left;
+    width : 100%;
+    height : auto;
     margin-right: 10px;
     display: block;
+}
+.left-menus > div{
+    display:inline-block;
 }
 .page-menu .logo_area .logo {
     /* background-image: url("media/logo.png");  */
@@ -41,19 +48,19 @@ body {
     color :black;
     cursor:pointer;
 }
-.page-menu .left-menus > li > img {
+/*.page-menu .left-menus > li > img {
     width: 24px;
     height: 24px;
-}
+}*/
 /* .page-menu .left-menus > li.active {
     //활성화 되어있는 메뉴
     background-color: #6ED4D8;
-} */
+} 
 /* 현재 클릭되어있지 않은 메뉴 고를때 변경할 색 */
-.page-menu .left-menus > li:hover:not(.active) {
+/*.page-menu .left-menus > li:hover:not(.active) {
     background-color: #6ED4D8;
     border-radius:10px;
-}
+}*/
 
 .aside {
     width: 15%;
@@ -62,9 +69,9 @@ body {
 }
 
 .aside_wrap {
-    position: fixed;
+    /*position: fixed;
     right:30px;
-    top : 30px;
+    top : 30px;*/
     width:13%;
     height:auto;
     margin:10px;
@@ -96,7 +103,7 @@ body {
     font-size:12px;
 }
 .section {
-    width:70%;
+    width:80%;
     height:85%;
     float:left;
     margin-top: 50px;
