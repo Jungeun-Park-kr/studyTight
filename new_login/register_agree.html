@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        @import url(/new_login/login.css);
+        @import url(/new_login/register.css);
+    </style>
+    <script src="/user/users.js"></script>
+    <script src="/login/register.js"></script>
+    <script src="/login/login.js"></script>
+    
+</head>
+<body>
+    <div id="warp">
+        <div class="login_header"> 
+            <!-- 여기는 왼쪽 메뉴 (로고) -->
+                <div class ="logo_area"> 
+                    <img src="../media/logo.png" onclick="btnLoginHome();">
+                </div>
+            </div>
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="register_section">
+                <p class="terms_chk_all">
+                    <span class="input_chk">
+                        <input type="checkbox" id="chk_all" name="chk_all">
+                        <label for="chk_all">
+                            <span class="chk_all_txt">study Tight 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.</span>
+                        </label>
+                    </span>
+                </p>
+                <ul class="terms_bx_list">
+                    <li class="terms_bx">
+                        <span class="input_chk">
+                            <input type="checkbox" id="termsService" name="termsService" class="chk">
+                            <label for="termsService">
+                                study Tight 이용약관 동의
+                                <span class="terms_necessary">(필수)</span>
+                            </label>
+                        </span>
+                        <div class="terms_box" tabindex="0" id="divService">
+                            <!-- study Tight 이용약관 동의 -->
+                            <div class="article">여기 내용 블라블라</div>
+                        </div>
+                    </li>
+                    <li class="terms_bx">
+                        <span class="input_chk">
+                            <input type="checkbox" id="termsPrivacy" name="termsPrivacy" class="chk">
+                            <label for="termsPrivacy" class="collect_personal">
+                                개인정보 수집 및 이용 동의
+                                <span class="terms_necessary">(필수)</span>
+                            </label>
+                        </span>
+                        <div class="terms_box" tabindex="0" id="divPrivacy">
+                            <!-- 개인정보 수집 및 이용에 대한 안내 -->
+                            <div class="policy_summary">
+                                <p class="policy_summary__text">개인정보보호법에 따라 study Tight에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+                                </p>
+                            </div>
+                            <div class="article">여기 내용 블라블라</div>
+                        </div>
+                    </li>
+                    <li class="terms_bx">
+                        <span class="input_chk">
+                            <input type="checkbox" id="termsEmail" name="termsEmail" value="Y" class="chk">
+                            <label for="termsEmail">
+                                프로모션 정보 수신 동의
+                                <span class="terms_choice trems_no">(선택)</span>
+                            </label>
+                        </span>
+                    </li>
+                </ul>
+                <span class="event_message" style="display:block">study Tight에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(study Tight앱 알림 또는 문자), 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 study Tight 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</span>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+    background-color: #eef7f7;
+    min-width: 1190px;
+    margin:0 auto;
+}
+
+.section {
+    padding-bottom: 100px;
+}
+
+.login_header {
+    margin-top : 100px;
+}
+
+.login_header .logo_area > img {
+    height:225px;
+    display: block;
+    margin : 0 auto;
+    cursor : pointer;
+}
+
+.login_section {
+    width : 450px;
+    margin : 0 auto;
+}
+
+.login_form > input {
+    align-content: center;
+    width : 100%;
+    height : 50px;
+    padding : 6px 13px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border:none;
+    /* border : 1px solid #ddd;  */
+    margin-bottom: 20px;
+    font-size : 12px;
+    cursor : pointer;
+}
+
+.login_btn {
+    margin:0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size :12px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px; /*div내의 텍스트 중앙정렬 (height, line-height값 동일하게)*/
+    background-color: #6ED4D8;
+    border-radius: 10px;
+    border: none;
+    cursor : pointer;
+    margin : 5px 0px;
+}
+.bar {
+    display:inline-block;
+    width: 1px;
+    height: 12px;
+    text-indent: -999em;
+    background: #e4e4e5;
+    vertical-align : bottom;
+}
+
+.login_info {
+    width : 430px;
+    text-align: center;
+    margin: 0 auto;
+    border-top: 1px solid #e4e4e5;
+    padding: 10px;
+    margin-top : 20px;
+}
+
+.login_info a {
+    line-height: 14px;
+    font-size: 14px;
+    display : inline-block;
+    text-decoration: none;
+    color: #8e8e8e;
+    cursor : pointer;
+}
+

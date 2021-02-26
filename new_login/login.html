@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        @import url(/new_login/login.css);
+    </style>
+    <script src="/user/users.js"></script>
+    <script src="/login/login.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+    <div id="warp">
+        <div class="login_header"> 
+        <!-- 여기는 왼쪽 메뉴 (로고) -->
+            <div class ="logo_area"> 
+                <img src="../media/logo.png" onclick="btnLoginHome();">
+            </div>
+        </div>
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="login">
+                <div class="login_section">
+                    <div class="login_form">
+                        <input type="text" id="login_id" placeholder="이메일"/>
+                    </div>
+                    <div class="login_form">
+                        <input type="password" id="login_password" placeholder="비밀번호"/>
+                    </div>
+                    <div class="login_btn" onclick="login();">로그인</div>
+                    <div class="login_info">
+                        <a target="_blank" href="#" class="find_password">비밀번호찾기</a>
+                        <span class="bar" aria-hidden="true"></span>
+                        <a target="_blank" href="#" class="register">회원가입</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
