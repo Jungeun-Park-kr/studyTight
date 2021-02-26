@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        @import url(/new_login/login.css);
+        @import url(/new_login/register.css);
+    </style>
+    <script src="/user/users.js"></script>
+    <script src="/login/register.js"></script>
+    <script src="/login/login.js"></script>
+    
+</head>
+<body>
+    <div id="warp">
+        <div class="login_header"> 
+            <!-- 여기는 왼쪽 메뉴 (로고) -->
+                <div class ="logo_area"> 
+                    <img src="../media/logo.png" onclick="btnLoginHome();">
+                </div>
+            </div>
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="register">
+                <div class="register_section">
+                    <div class="login_label">아이디</div>
+                    <div class="register_form">
+                        <input type="email" id="userId" placeholder="이메일 아이디 입력" name="userId" check_result="fail" required/>
+                        <button class="login_id_check_btn" title="중복확인" onclick="id_check()">중복확인</button>
+                    </div>
+
+                    <div class="login_label">비밀번호</div>
+                    <div class="register_form2">
+                        <input type="password" id="userPassword" placeholder="비밀번호 입력"/>
+                    </div>
+                    <div class="login_label">비밀번호 확인</div>
+                    <div class="register_form2">
+                        <input type="password" id="userConfirm" placeholder="비밀번호 입력"/>
+                    </div>
+                    <div class="login_label">이름</div>
+                    <div class="register_form2">
+                        <input type="text" id="userName" placeholder="상대방이 알아볼 수 있는 나의 이름 입력"/>
+                    </div>
+                    <!-- 취소버튼, 회원가입 버튼 -->
+                    <div class="signUp_btn_section">
+                        <div class="cancel_btn">
+                            <!-- 취소하기 버튼 누르면 로그인 화면으로 이동 -->
+                            <input id="signUp_cancel" type="button" title="취소하기" value="취소하기" onclick="location.href='login.html'">
+                        </div>
+                        <div class ="signup_btn">
+                            <input id="signUp" type="button" title="가입하기" value="가입하기" onclick="register();">
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
