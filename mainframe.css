@@ -6,12 +6,17 @@ body {
     background-color: #e7eff0;
     min-width: 1190px;
     margin:0 auto;
+    
+}
+.body{
     width:60%;
+    margin-left:20%;
+    margin-right:20%;
 }
 .page-header {
-    width:70%;
+    width:100%;
     height:15%;
-    float:left;
+    
     margin-top: 50px;
 }
 .page-header > div {
@@ -21,37 +26,53 @@ body {
 .page-menu {
     width : 100%;
     height : auto;
-    margin-right: 10px;
     display: block;
+    background-color:#e7eff0 0.5;
+}
+.page-menu > div {
+    display:inline-block;
 }
 .left-menus > div{
     display:inline-block;
 }
+.page-menu .logo_area {
+    width:12%;
+    height:auto;
+    display:inline-block;
+}
 .page-menu .logo_area .logo {
     /* background-image: url("media/logo.png");  */
-    width: 150px;
-    height : 100px;
-    padding: 10px 10px 10px 10px;
-    margin-top: 20px;
-    margin-left: 20px;
+    width: 100%;
+    height : auto;
+    padding: 10px;
     cursor:pointer;
 }
-.page-menu .left-menus > li {
+.left-menus{
+    width:60%;
+    text-align:center;
+    display:inline-block;
+}
+.page-menu .left-menus > div {
     /* border-bottom:1px solid #252626; */
-    width:150px;
-    position:relative;
+ 
+   width:100%;
+   line-height:30px;
     list-style-type: none;
-    padding: 5px 5px 5px 5px;
+    padding: 10px 30px;
     margin-top: 10px;
-    margin-bottom: 10px;
-    display: block;
+
+    display: inline;
     color :black;
     cursor:pointer;
+    text-align:center;
+
 }
-/*.page-menu .left-menus > li > img {
-    width: 24px;
-    height: 24px;
-}*/
+.page-menu .left-menus > p :hover {
+    color:#6ED4D8;
+    text-decoration: underline;
+    text-decoration-color: #6ED4D8;
+  
+}
 /* .page-menu .left-menus > li.active {
     //활성화 되어있는 메뉴
     background-color: #6ED4D8;
@@ -78,29 +99,40 @@ body {
     display:table-cell;
 }
 .login {
-    padding : 10%;
+    margin-left:80%;
+    display:inline-block;
 }
-.login_white_box {
-    background-color:white;
-    width : 100%;
+.login > div {
+    display:inline-block;
+}
+#alarm_bell_img {
+    width:7%;
     height:auto;
-    display:table-cell;
+    display:inline;
+}
+.profile_section{
+    width:100%;
+}
+.profile{
+    display:inline-block;
 }
 .profile > img {
-    width:50%;
+    width:7%;
     height:auto;
-    display:block;
+    display:inline;
     margin:auto;
 }
 .username {
     text-align: center;
+    display:inline-block;
 }
 .btn_logout {
-    background-color:#6ED4D8;
+    background-color: #bebebe;
     border-radius: 10px;
     border:none;
     cursor:pointer;
     font-size:12px;
+    display:inline-block;
 }
 .section {
     width:80%;
