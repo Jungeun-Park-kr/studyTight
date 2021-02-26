@@ -38,10 +38,10 @@ function starClicked(order) {
     //document.getElementById("star").src="/media/full_star.png";
     var star = document.getElementsByClassName('folder_star');
     if (toggle % 2 == 1) {
-        star[order].src = "media/full_star.png"
+        star[order].src = "media/fixed_full.png"
         activeUser.folder[order].star = "true"
     } else {
-        star[order].src = "media/empty_star.png"
+        star[order].src = "media/fixed_empty.png"
         activeUser.folder[order].star = "false"
     }
     toggle++;
