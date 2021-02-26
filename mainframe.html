@@ -33,11 +33,36 @@
                 <div class="menu_timetable" onclick="btnTimetable();">
                     시간표
                 </div>
-                <div class="menu_dday" onclick="btnDday();">
+                <!-- <div class="menu_dday" onclick="btnDday();">
                    디데이
-                </div>
+                </div> -->
+            </div>
+            <div class="login">
+      
+                    <div class="profile_section">
+                        <div class="alarm_bell">
+                        <img id="alarm_bell_img" src="/media/empty_bell.png"></div>
+                        <div class="profile">
+                            <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                            <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
+                            <div class="username" id="activeUsername">박혁거세님</div>
+                            <script>
+                                var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                // doc.getElementById('activeUsername').innerHTML = username + '님';
+                                doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
+                                doc.getElementById('activeUserimg').src = activeUser.userImage;
+                            </script>
+                        </div>
+                        <div class="logout">
+                            <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
+                        </div>
+                    </div>
+             
             </div>
         </div>
+        <hr>
+        <div class="body">
         <div class="page-header" role="banner" class>
 
             <!-- 여기는 상단에 들어갈 헤더 섹션 -->
@@ -254,27 +279,6 @@
         <div class="aside">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
             <div class="aside_wrap">
-                <div class="login">
-                    <div class="login_white_box">
-                        <div class="profile_section">
-                            <div class="logout">
-                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
-                            </div>
-                            <div class="profile">
-                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
-                                <div class="username" id="activeUsername">박혁거세님</div>
-                                <script>
-                                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
-                                    activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                                    // doc.getElementById('activeUsername').innerHTML = username + '님';
-                                    doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
-                                    doc.getElementById('activeUserimg').src = activeUser.userImage;
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="today">
                     <p>오늘 할 일</p>
                     <div class="todaylist" id="todaylist">
@@ -304,6 +308,7 @@
                 //refreshToday();
             </script>
         </div>
+    </div>
     </div>
 </body>
 
