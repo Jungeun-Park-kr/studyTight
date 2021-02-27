@@ -9,11 +9,11 @@ body {
 }
 
 .login_header {
-    margin-top : 100px;
+    margin-top : 50px;
 }
 
 .login_header .logo_area > img {
-    height:225px;
+    height : 225px;
     display: block;
     margin : 0 auto;
     cursor : pointer;
@@ -32,7 +32,7 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
     border:none;
-    /* border : 1px solid #ddd;  */
+    border: solid 1px rgba(0,0,0,.08);
     margin-bottom: 20px;
     font-size : 12px;
     cursor : pointer;
@@ -44,13 +44,15 @@ body {
     font-weight: bold;
     font-size :12px;
     width: 100%;
-    height: 60px;
-    line-height: 60px; /*div내의 텍스트 중앙정렬 (height, line-height값 동일하게)*/
+    height: 55px;
+    line-height: 55px; /*div내의 텍스트 중앙정렬 (height, line-height값 동일하게)*/
     background-color: #6ED4D8;
+    border: solid 1px rgba(0,0,0,.08);
     border-radius: 10px;
-    border: none;
     cursor : pointer;
     margin : 5px 0px;
+    font-size: 15px;
+    font-weight: 700;
 }
 .bar {
     display:inline-block;
