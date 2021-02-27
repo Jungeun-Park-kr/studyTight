@@ -14,10 +14,17 @@ body {
     background-color: #e7eff0;
 }
 
+.page-bottom {
+    margin-top: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
 .information-menu {
     width: 15%;
     height: 100%;
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-top: 80px;
     /* margin-left: 20px; */
     float: left;
 }
@@ -38,7 +45,7 @@ body {
     margin-left: 0px;
 }
 
-.information-menu .left-menus>li {
+.information-menu .left-menus-book>li {
     /* border-bottom:1px solid #252626; */
     width: 150px;
     position: relative;
@@ -63,23 +70,22 @@ body {
     border: 10px;
 }
 
-.information-menu .left-menus>li>img {
+.information-menu .left-menus-book>li>img {
     width: 24px;
     height: 24px;
 }
 
-.information-menu .left-menus>div>li>img {
-    width: 120px;
-    height: 120px;
+.information-menu .left-menus-book>div>li>img {
+    width: 100%;
+    height: auto;
     list-style-type: none;
-    margin-left: 5px;
 }
 
-.information-menu .left-menus>div {
+.information-menu .left-menus-book>div {
     margin-bottom: 100px;
 }
 
-.information-menu .left-menus>div>li {
+.information-menu .left-menus-book>div>li {
     list-style-type: none;
 }
 
@@ -91,7 +97,6 @@ body {
     height: 100%;
     padding-bottom: 20px;
     margin-bottom: 40px;
-    margin-left: 20px;
     background: white;
 }
 

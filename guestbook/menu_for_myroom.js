@@ -3,7 +3,7 @@ function btnHome() {
     //location.href("#"); //뒤로가기 가능
     var fname = localStorage.getItem('friendName');
     if (fname != null) { //페이지 빠져나가기 전에 방문한 친구 이름 삭제
-        localStorage.removeItem('friendName'); 
+        localStorage.removeItem('friendName');
     }
 }
 
@@ -11,15 +11,15 @@ function btnContact() {
     location.replace("/guestbook/guestbook_myroom.html"); //방명록 주소
     var fname = localStorage.getItem('friendName');
     if (fname != null) { //페이지 빠져나가기 전에 방문한 친구 이름 삭제
-        localStorage.removeItem('friendName'); 
+        localStorage.removeItem('friendName');
     }
 }
 
 function btnTimetable() {
-    location.replace("timetable/timetable_main.html"); //시간표 주소
+    location.replace("/timetable/timetable_main.html"); //시간표 주소
     var fname = localStorage.getItem('friendName');
     if (fname != null) { //페이지 빠져나가기 전에 방문한 친구 이름 삭제
-        localStorage.removeItem('friendName'); 
+        localStorage.removeItem('friendName');
     }
 }
 
