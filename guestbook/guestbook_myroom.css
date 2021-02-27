@@ -1,6 +1,13 @@
-.profile {
-    width: 64px;
-    height: 64px;
+.profile>img {
+    width: 7%;
+    height: auto;
+    display: inline;
+    margin: auto;
+}
+
+.username {
+    text-align: center;
+    display: inline-block;
 }
 
 body {
