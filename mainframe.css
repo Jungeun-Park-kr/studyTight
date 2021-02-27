@@ -12,15 +12,16 @@ body {
     width:60%;
     margin-left:20%;
     margin-right:20%;
+    height:100%;
 }
 .page-header {
-    width:100%;
+    width:80%;
     height:15%;
- 
+    display:inline-block;
 }
 .page-header > div {
     display: inline-block;
-    margin: 20px;
+    margin-top: 20px;
 }
 .page-menu {
     width : 100%;
@@ -45,16 +46,16 @@ body {
     height : auto;
     padding: 10px;
     cursor:pointer;
+ 
 }
 .left-menus{
 
+    display:inline-block;
     text-align:center;
-    display:inline;
-    position:relative;
-    top:0px;
-    
-    margin-left:20%;
-    margin-right:20%;
+
+    width:32%;
+  margin-left:20%;
+  margin-right:20%;
 }
 .page-menu .left-menus > div {
     /* border-bottom:1px solid #252626; */
@@ -87,7 +88,7 @@ body {
 }*/
 
 .aside {
-    width: 15%;
+    width: 18%;
     height : 100%;
     float : right;
 }
@@ -96,10 +97,10 @@ body {
     /*position: fixed;
     right:30px;
     top : 30px;*/
-    width:13%;
+    width:12%;
     height:auto;
     margin:10px;
-    display:table-cell;
+    display:inline;
 }
 .login {
     margin-left:80%;
@@ -136,6 +137,7 @@ body {
 .username {
     
     display:inline-block;
+    font-size:12px;
 }
 .logout{
     display:inline;
@@ -152,7 +154,7 @@ body {
     width:80%;
     height:85%;
     float:left;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .aside .today {
@@ -167,7 +169,11 @@ body {
     font-size:large;
     align-items: center;
 }
-
+.aside_wrap > p {
+    font-size:13px;
+    font-weight:bold;
+    margin:10px 15% 0px 15%;
+}
 .caution {
     width:100%;
     /* padding:5px; */
@@ -178,7 +184,7 @@ body {
 }
 
 .aside .today .todaylist {
-    padding:10px;
+    
     font-size:small;
 }
 .new_todo {
@@ -187,6 +193,7 @@ body {
 }
 .todaylist > label > input,p {
     display: inline-block;
+    font-size:11px;
 }
 .todaylist > label {
     display:block;
@@ -211,19 +218,23 @@ body {
     /* d-day표시 */
     display: inline-block;
     margin: 10px;
-    width: 28%;
+    width: 20%;
     height: 40px;
     background: white;
     border-radius: 3px;
     box-shadow: 2px 2px 2px rgb(128, 128, 128);
     vertical-align: middle;
+    font-size:12px;
+    font-weight:bolder;
 }
+
 .d-date {
     /* 세로 정렬 필요 */
     display: inline-block;
-    padding-left:20px;
-    margin-top:8px;
-    margin-right: 40px;
+    padding-left:10px;
+    margin-top:10px;
+    margin-right: 10px;
+    font-size:11px;
     /* //font-weight:bold;
    // color:red; */
 }
