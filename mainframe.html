@@ -61,7 +61,7 @@
 
             </div>
         </div>
-        <div class="body">
+<div class="body">
         <div class="page-header" role="banner" class>
 
             <!-- 여기는 상단에 들어갈 헤더 섹션 -->
@@ -113,6 +113,39 @@
             }
         </script>
 
+        <div class="aside">
+            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+            <div class="aside_wrap">
+                    <p>오늘 할 일</p>
+                    <div class="today">
+                    <div class="todaylist" id="todaylist">
+                        <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
+                        <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
+                    </div>
+                    <script>
+                        var username = localStorage.getItem('username');
+                        if (username == '김준면') {
+                            var cell = document.getElementById('todaylist');
+                            while (cell.hasChildNodes()) {
+                                cell.removeChild(cell.firstChild);
+                            }
+                        }
+                    </script>
+
+                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
+                    <!--+부분 이미지로 넣기-->
+                </div>
+                <div class="caution">
+                    오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
+                </div>
+            </div>
+            <script>
+                //refreshToday();
+            </script>
+        </div>
+
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="D-day" id="D-day">
@@ -155,6 +188,8 @@
                         }
                     }
                 </script>
+                <div class="d-day" onclick="" id="d-day-plus"><strong>+</strong>디데이 추가하기
+                </div>
             </div>
 
             <div class="folder_">
@@ -276,38 +311,7 @@
             </div>
         </div>
 
-        <div class="aside">
-            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
-            <div class="aside_wrap">
-                <div class="today">
-                    <p>오늘 할 일</p>
-                    <div class="todaylist" id="todaylist">
-                        <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
-                    </div>
-                    <script>
-                        var username = localStorage.getItem('username');
-                        if (username == '김준면') {
-                            var cell = document.getElementById('todaylist');
-                            while (cell.hasChildNodes()) {
-                                cell.removeChild(cell.firstChild);
-                            }
-                        }
-                    </script>
-
-                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
-                    <!--+부분 이미지로 넣기-->
-                </div>
-                <div class="caution">
-                    오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
-                </div>
-            </div>
-            <script>
-                //refreshToday();
-            </script>
-        </div>
+        
     </div>
     </div>
 </body>
