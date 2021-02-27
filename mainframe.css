@@ -16,8 +16,7 @@ body {
 .page-header {
     width:100%;
     height:15%;
-    
-    margin-top: 50px;
+ 
 }
 .page-header > div {
     display: inline-block;
@@ -25,8 +24,8 @@ body {
 }
 .page-menu {
     width : 100%;
-    height : auto;
-    display: block;
+    height:fit-content;
+    display:block;
     background-color:rgba(255, 255, 255, 0.5);
 }
 .page-menu > div {
@@ -48,24 +47,29 @@ body {
     cursor:pointer;
 }
 .left-menus{
-    width:60%;
+
     text-align:center;
-    display:inline-block;
+    display:inline;
+    position:relative;
+    top:0px;
+    
+    margin-left:20%;
+    margin-right:20%;
 }
 .page-menu .left-menus > div {
     /* border-bottom:1px solid #252626; */
  
-   width:100%;
+   width:auto;
    line-height:30px;
     list-style-type: none;
     padding: 10px 30px;
-    margin-top: 10px;
-
-    display: inline;
+    font-size:12px;
+    font-weight: bold;
+    display: inline-block;
     color :black;
     cursor:pointer;
     text-align:center;
-
+    margin:0 15px;
 }
 .page-menu .left-menus > div:hover {
     color:#6ED4D8;
@@ -110,20 +114,31 @@ body {
     display:inline;
 }
 .profile_section{
-    width:100%;
+    margin-left:2%;
+    position:fixed;
+    top:5px;
+
+}
+.profile_section > div {
+    margin: 5px 10px;
+}
+.alarm_bell{
+    display:inline;
 }
 .profile{
-    display:inline-block;
+    display:inline;
 }
 .profile > img {
     width:7%;
     height:auto;
-    display:inline;
     margin:auto;
 }
 .username {
-    text-align: center;
+    
     display:inline-block;
+}
+.logout{
+    display:inline;
 }
 .btn_logout {
     background-color: rgba(190, 190, 190,0.5);
@@ -131,7 +146,7 @@ body {
     border:none;
     cursor:pointer;
     font-size:12px;
-    display:inline-block;
+    display:inline;
 }
 .section {
     width:80%;
