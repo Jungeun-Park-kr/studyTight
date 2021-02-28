@@ -15,38 +15,32 @@
     </style>
     </script> -->
     <style>
+      
         @import url(new_mainframe.css);
         @import url(mainframe_shortcuts.css);
+        @import url(header.css);
     </style>
 </head>
 
 <body>
     <div id="wrap">
-        <div class="page-menu">
-            <!-- 여기는 왼쪽 메뉴 (로고, 메뉴버튼들) -->
+        <div class="main_header">
+            <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
             <div class="logo_area">
-                <img src="/media/logo.png" class=logo onclick="btnHomeInHome();">
+                <a href="#" class="logo_tight"><img src="/media/logo.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+                <div class="group_menu">
+                    <ul class="list_menu">
+                        <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
+                        <li class="menu_item"><a href="#" class="menu">방명록</a></li>
+                        <li class="menu_item"><a href="#" class="menu">시간표</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="left-menus">
-                <div class="menu_home" onclick="btnHomeInHome();">
-                    내 공부방
-                </div>
-                <div class="menu_contact" onclick="btnContact();">
-                    방명록
-                </div>
-                <div class="menu_timetable" onclick="btnTimetable();">
-                    시간표
-                </div>
-                <!-- <div class="menu_dday" onclick="btnDday();">
-                디데이
-                </div> -->
-            </div>
+            
             <div class="login">
-
                     <div class="profile_section">
                         <div class="alarm_bell">
-                            <img id="alarm_bell_img" src="/media/empty_bell.png">
-                        </div>
+                        <img id="alarm_bell_img" src="/media/empty_bell.png"></div>
                         <div class="profile">
                             <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
                             <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">

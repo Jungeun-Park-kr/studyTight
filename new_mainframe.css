@@ -110,33 +110,34 @@ body {
 .login > div {
     display:inline-block;
 }
-#alarm_bell_img {
-    width:7%;
-    height:auto;
-    display:inline;
-}
-.profile_section{
-    margin-left:2%;
-    position:fixed;
-    top:5px;
-
-}
 .profile_section > div {
-    margin: 5px 10px;
+    margin: 5px 0px 5px 10px;
 }
+
 .alarm_bell{
     display:inline;
 }
+#alarm_bell_img {
+    height : 15px;
+    padding-top : 2px;
+    display:inline;
+    margin : 0 auto;
+}
+.profile_section{
+    margin-left:2%;
+    position:absolute;
+    top:5px;
+}
+
+
 .profile{
     display:inline;
 }
 .profile > img {
-    width:7%;
-    height:auto;
-    margin:auto;
+    height: 15px;
+    margin: 0 auto;
 }
 .username {
-    
     display:inline-block;
     font-size:12px;
 }
