@@ -1,3 +1,18 @@
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+   }
+    
+   @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(//fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+   }
+   
 .register_section {
     width : 450px;
     margin : 0 auto;
@@ -58,12 +73,14 @@ input {
 }
 
 .chk_all_txt {
+    font-family:Open Sans;
     text-decoration: underline;
     /* font-weight: bold; */
     word-break: break-all;
 } 
 
 .event_message {
+    font-family:Open Sans;
     padding-top: 10px;
     color: #666;
 }
@@ -150,6 +167,7 @@ li {
     text-align: center;
     cursor: pointer;
     box-sizing: border-box;
+    font-family:Open Sans;
 }
 
 .btn_default {
@@ -170,10 +188,11 @@ li {
 
 /* 아래는 원래 있던 코드 */
 .login_label {
+    font-weight: bold;
     font-size : 15px;
     margin : 20px 0px 5px;
     padding : 0 10px;
-    color : #999;
+    /* color : #999; */
 }
 .register_form, .register_form2 {
     padding: 0 10px;
