@@ -12,7 +12,18 @@
     font-weight: 700;
     src: local('Open Sans Bold'), local('OpenSans-Bold'), url(//fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
    }
-   
+
+.register_header {
+    margin-top:1.5%;
+}
+
+.register_header .logo_area > img {
+    height : 225px;
+    display: block;
+    margin : 0 auto;
+    cursor : pointer;
+}
+
 .register_section {
     width : 450px;
     margin : 0 auto;
