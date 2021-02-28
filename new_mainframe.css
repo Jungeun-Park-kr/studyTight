@@ -234,9 +234,9 @@ body {
     padding-left:10px;
     margin-top:10px;
     margin-right: 10px;
-    font-size:11px;
-    /* //font-weight:bold;
-   // color:red; */
+    font-size:13px;
+    font-weight:bolder;
+    /* color:red; */
 }
 .section .folder_ {
     /* 폴더를 감싸는 흰 div */
@@ -285,57 +285,45 @@ body {
     display:inline-block;
     margin:20px;
     width: 12%;
-    height: 50px;
-    padding-bottom:15%;
+    height: 65px;
+    /* padding-bottom:10%; */
     line-height: 13vw;
     
     vertical-align: middle;
-    padding-right:25px;
+
 } 
-folder > 
+.folder_img {
+    width:100%;
+    height:auto;
+}
 .folder_course {
     display:block;
 }
 .wrap_folder {
     display: inline;
-   
+
 }
-.folder_star {
+.fixed {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
     margin: 5px;
-    width: 25px; 
+    width: 10px; 
     height: auto;
     display: inline;
 }
 /* .section .folder > div > span {
     display:block;
 } */
-#folder_1, #folder_5{
+/* #folder_1{
     background-image:url(/media/plus_folder_green.png);
 }
-#folder_2, #folder_3{
-    background-image:url(/media/plus_folder_.pink);
+#folder_2{
+    background-image:url(/media/plus_folder_red.png);
+}
+#folder_3{
+    background-image:url(/media/plus_folder_yellow.png);
 }
  #folder_4{
     background-image:url(/media/plus_folder_orange.png);
-}
-.new_div {
-    display:inline-block;
-    margin:20px;
-    box-shadow: 2px 2px 2px rgb(128, 128, 128);
-    width: 12%;
-    height: 15vw;
-    line-height: 13vw;
-    vertical-align: middle;
-    padding-right:25px;
-    background-color: #E3B863;
-}
-.new_div > img {
-    float:left;
-    margin: 5px;
-    width: 25px; 
-    height: auto;
-    display: inline;
-    src:"media/fixed_empty.png"
-}
+} */
+
