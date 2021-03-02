@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <style>@import url("new_folder.css");
+        
+        </style>
+    </head>
+    <body>
+        <div class="main_header">
+            <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+            <div class="logo_area">
+                <a href="#" class="logo_tight"><img src="/media/logo.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+                <div class="group_menu">
+                    <ul class="list_menu">
+                        <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
+                        <li class="menu_item"><a href="#" class="menu">방명록</a></li>
+                        <li class="menu_item"><a href="#" class="menu">시간표</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="login">
+                    <div class="profile_section">
+                        <div class="alarm_bell">
+                        <img id="alarm_bell_img" src="/media/empty_bell.png"></div>
+                        <div class="profile">
+                            <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                            <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
+                            <div class="username" id="activeUsername">박혁거세님</div>
+
+                        </div>
+                        <div class="logout">
+                            <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="section">
+                <p id="section_p">
+                    공부할 내용
+                </p>
+                <hr>
+                
+                <div id="wrap_postit" class="wrap_postit">
+                <div src="media/post_it_yellow.png" id="postIt_1" class="postIt" onclick="PostItLink('pid');"><p class="post"></p>
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked(0);">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(0);"></div>
+                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post"></p>
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked(1);">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(1);"></div>
+                <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');"><p class="post">scheduler란?</p>
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked(2);">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(2);"></div>
+                <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');"><p class="post">chap1 정리</p>
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked(3);">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(3);"></div> 
+                <div id="postIt_5" class="postIt" onclick="PostItFile();"><p>ssu_shell.c</p>
+                    <img src="media/edit.png" class="editFolder" onclick="onEditClicked(4);">
+                    <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(4);"></div>
+                </div>
+                <div id="postIt_plus" lcass="postIt" onclick="newPostIt(link[1]);"><p>포스트잇 추가하기</p></div>
+            </div>
+
+            <div class="folder_todo">
+                <p class="wrap_Todolist">할 일 목록</p>
+                <hr>
+                <div class="Todolist" id="Todolist">
+                    <label><input type="checkbox"><p> func1 구현</p></label>
+                    <label><input type="checkbox"><p> func2 구현</p></label>
+                    <label><input type="checkbox"><p> func3 구현</p></label>
+                    <label><input type="checkbox"><p> 보고서 쓰기</p></label>
+                    <label><input type="checkbox"><p> func1 디버깅</p></label>
+                    <label><input type="checkbox"><p> func2 디버깅</p></label>
+                </div>
+                <input type="button" class="folderTodoBtn" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                
+        </div>
+        </div>
+    </div>
+    </body>
+</html>
