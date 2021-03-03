@@ -39,15 +39,15 @@
         <div class="wrap">
             <div class="section">
                 <p id="section_p">
-                    공부할 내용
+                    study Tight!
                 </p>
                 <hr>
                 
                 <div id="wrap_postit" class="wrap_postit">
-                <div src="media/post_it_yellow.png" id="postIt_1" class="postIt" onclick="PostItLink('pid');"><p class="post"></p>
+                <div  id="postIt_1" class="postIt" onclick="PostItLink('pid');"><p class="post"></p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(0);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(0);"></div>
-                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post"></p>
+                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post">pid란?</p>
                     <img src="media/edit.png" class="editFolder" onclick="onEditClicked(1);">
                     <img src="media/delete.png" class="deleteFolder" onclick="onDeleteClicked(1);"></div>
                 <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');"><p class="post">scheduler란?</p>
@@ -65,19 +65,18 @@
 
             <div class="folder_todo">
                 <p class="wrap_Todolist">할 일 목록</p>
-                <hr>
-                <div class="Todolist" id="Todolist">
-                    <label><input type="checkbox"><p> func1 구현</p></label>
-                    <label><input type="checkbox"><p> func2 구현</p></label>
-                    <label><input type="checkbox"><p> func3 구현</p></label>
-                    <label><input type="checkbox"><p> 보고서 쓰기</p></label>
-                    <label><input type="checkbox"><p> func1 디버깅</p></label>
-                    <label><input type="checkbox"><p> func2 디버깅</p></label>
-                </div>
-                <input type="button" class="folderTodoBtn" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
                 
+                <div class="Todolist" id="Todolist">
+                    <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
+                    <label><input type="checkbox"><p>DB 강의 듣기</p></label>
+                    <label><input type="checkbox"><p>채플 듣기</p></label>
+                    <label><input type="checkbox"><p>OS 보고서 쓰기</p></label>
+                </div>
+                <input type="button" class="btnplusTodo" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                <div class="caution">
+                    오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
+                </div>
         </div>
         </div>
-    </div>
     </body>
 </html>
