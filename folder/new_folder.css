@@ -137,11 +137,20 @@ body {
     margin-left:20%;
 }
 .section{
-    display:inline-block;
+    float:left;
+    width:80%;
+    margin-right:10px;
+    margin-top:15px;
 }
 /* .wrap > div {
     display:inline-block;
 } */
+.wrap_postit > div
+{
+    display:inline-block;
+    margin:0 10px;
+    width:20%;
+}
 .folder_todo{
     float:right;
     width:18%;
@@ -191,3 +200,10 @@ label{
     font-size: 9px;
 }
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
+
+/* 포스트잇 내부 설정 */
+.postIt > img {
+    width:100%;
+    height:auto;
+}
+/* hover하면 3버튼 나오게,별표시 넣기*/
