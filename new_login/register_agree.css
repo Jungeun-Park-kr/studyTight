@@ -1,0 +1,251 @@
+
+.register_header {
+    margin-top:1.5%;
+}
+
+.register_header .logo_area > img {
+    height : 225px;
+    display: block;
+    margin : 0 auto;
+    cursor : pointer;
+}
+
+.register_section {
+    width : 450px;
+    margin : 0 auto;
+}
+
+.policy_summary {
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+.input_chk {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+}
+.terms_chk_all .input_chk input {
+    margin : 10px 5px 5px 5px;
+    width:24px;
+    height:24px;
+    display: inline-block;
+    position: absolute;
+    overflow: hidden;
+}
+.input_chk > input {
+    width:24px;
+    height:24px;
+    display: inline-block;
+    margin:0px;
+    position: absolute;
+    overflow: hidden;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.terms_chk_all .input_chk label {
+    padding-left: 34px;
+    line-height: 21px;
+}
+.input_chk label {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-left: 29px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
+    cursor: pointer;
+    color: #333;
+    box-sizing: border-box;
+}
+input {
+    display: inline-block;
+}
+
+.chk_all_txt {
+    font-family:Open Sans;
+    text-decoration: underline;
+    /* font-weight: bold; */
+    word-break: break-all;
+} 
+
+.event_message {
+    font-family:Open Sans;
+    padding-top: 10px;
+    color: #666;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.terms_bx {
+    display: block;
+    padding-top: 30px;
+}
+
+.terms_bx_list {
+    margin-top: 4px;
+    margin-bottom : 0px;
+}
+
+.terms_box {
+    position: relative;
+    overflow: auto;
+    height: 88px;
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid #dadada;
+    background: #fff;
+    box-sizing: border-box;
+    scrollbar-base-color: #d9d9d9;
+    scrollbar-arrow-color: #8e8e8e;
+    scrollbar-3dlight-color: #d9d9d9;
+    scrollbar-darkshadow-color: #d9d9d9;
+    scrollbar-face-color: #d9d9d9;
+    scrollbar-highlight-color: #d9d9d9;
+    scrollbar-shadow-color: #d9d9d9;
+    scrollbar-track-color: #f2f2f2;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.agree_bottom {
+    width:450px;
+    margin : 0 auto; 
+}
+
+/* 취소, 확인 버튼 */
+
+ .btn_area.double {
+    width: 450px; 
+    margin-top : 20px;
+}
+
+.btn_area.double .btn_type {
+    font-style: normal;
+}
+
+.btn_area.double>span {
+    display: block;
+    float: left;
+    width: 50%;
+}
+.btn_area>span .btn_type {
+    width: auto;
+    margin: 0 5px;
+}
+
+.btn_type {
+    font-weight: 400;
+}
+.btn_type {
+    display: block;
+    width: 100%;
+    padding: 15px 0 15px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-family:Open Sans;
+}
+
+.btn_default {
+    color: #fff;
+    background-color: #8e8e8e;
+    border-radius: 10px;
+}
+.btn_primary {
+    color: #fff;
+    border: solid 1px rgba(0,0,0,.08);
+    border-radius: 10px;
+    background-color: #6ED4D8;
+}
+
+.btn_area.double a {
+    text-decoration: none;
+}
+
+/* 아래는 원래 있던 코드 */
+.login_label {
+    font-weight: bold;
+    font-size : 15px;
+    margin : 20px 0px 5px;
+    padding : 0 10px;
+    /* color : #999; */
+}
+.register_form, .register_form2 {
+    padding: 0 10px;
+}
+.register_form input {
+    align-content: center;
+    width : 250px;
+    height : 40px;
+    padding : 0 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border : 1px solid #ddd;
+}
+.register_form2 input {
+    align-content: center;
+    width : 350px;
+    height : 40px;
+    padding : 0 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border : 1px solid #ddd;
+}
+
+.register_form > button {
+    width: 90px;
+    height: 40px;
+    background-color: #6ED4D8;
+    padding : 0 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border : 1px solid #ddd;
+    cursor: pointer;
+}
+
+.signUp_btn_section {
+    width : 370px;
+    height: 60px;
+    margin:0 auto;
+}
+
+.signup_btn input {
+    margin:0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size :12px;
+    width: 100%;
+    height: 55px;
+    line-height: 40px; /*div내의 텍스트 중앙정렬 (height, line-height값 동일하게)*/
+    background-color: #6ED4D8;
+    border: solid 1px rgba(0,0,0,.08);
+    border-radius: 10px;
+    cursor : pointer;
+    margin : 20px 0px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+
