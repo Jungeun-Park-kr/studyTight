@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <style>
+        @import url(/font.css);
         @import url(/new_login/login.css);
+        @import url(/new_login/register_agree.css);
         @import url(/new_login/register.css);
     </style>
     <script src="/user/users.js"></script>
@@ -15,57 +17,149 @@
 </head>
 <body>
     <div id="warp">
-        <div class="login_header"> 
+        <div class="register_header"> 
             <!-- 여기는 왼쪽 메뉴 (로고) -->
-                <div class ="logo_area"> 
-                    <img src="../media/logo.png" onclick="btnLoginHome();">
-                </div>
+            <div class ="logo_area"> 
+                <img src="../media/logo.png" onclick="btnLoginHome();">
             </div>
+        </div>
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="register_section">
+            <div class="join_section">
                 <div class="join_content">
-                    <div class="login_label">이메일</div>
-
-
-                    <!-- <div class="join_row">
-                        <h3 class="join_title">
-                            <label for="email">이메일</label>
-                        </h3>
-                        <span class="ps_box int_email">
-							<input type="text" id="email" name="email" class="int" title="EMAIL" maxlength="20">
-                             <span class="step_url">@xxxx.com</span> 
-                        </span>
-                        <span>
-                            <a href="#" id="btnChkDuplicate" class="btn_type btn_check" role="button">중복확인</a>
-                        </span>
-                    </div> -->
-
-
-
-
-                    <div class="register_form">
-                        <input type="email" id="userId" placeholder="이메일 아이디 입력" name="userId" check_result="fail" required/>
-                        <button class="login_id_check_btn" title="중복확인" onclick="id_check()">중복확인</button>
-                    </div>
-                    <div class="login_label">비밀번호</div>
-                    <div class="register_form2">
-                        <input type="password" id="userPassword" placeholder="비밀번호 입력"/>
-                    </div>
-                    <div class="login_label">비밀번호 확인</div>
-                    <div class="register_form2">
-                        <input type="password" id="userConfirm" placeholder="비밀번호 입력"/>
-                    </div>
-                    <div class="login_label">이름</div>
-                    <div class="register_form2">
-                        <input type="text" id="userName" placeholder="상대방이 알아볼 수 있는 나의 이름 입력"/>
-                    </div>
-                    <!-- 취소버튼, 회원가입 버튼 -->
-                    <div class="signUp_btn_section">
-                        <div class ="signup_btn">
-                            <input id="signUp" type="button" title="가입하기" value="가입하기" onclick="register();">
+                    <!-- 이메일 영역 -->
+                    <div class="join_row join_email" id="emilDiv">
+                        <div class="join_label">이메일</div>
+                        <div class="email_verify_area">
+                            <span class="join_form">
+                                <input type="join_email" id="join_email" name="join_email" placeholder="타 사이트 이메일 계정 입력" maxlength="30"/>
+                            </span>
+                            <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+                                <span class="">인증번호 받기</span>
+                            </a>
+                        </div>
+                        <!-- 인증번호 입력 영역 -->
+                        <div class="email_verify_area">
+                            <span class="join_form">
+                                <input type="tel" id="join_email_verify" name="join_email_verify" placeholder="인증번호 입력" maxlength="5"/>
+                            </span>
+                            <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+                                <span class="">인증번호 확인</span>
+                            </a>
                         </div>
                     </div>
+                    <!-- 비밀번호 영역 -->
+                    <div class="join_row join_pw" id="pwDiv">
+                        <div class="join_label">비밀번호</div>
+                        <div class="pw_input_area">
+                            <span class="join_form">
+                                <input type="password" id="join_email" name="join_email" placeholder="비밀번호 (6자리 ~ 32자리)" maxlength="32"/>
+                            </span>
+                        </div>
+                        <div class="pw_verify_area">
+                            <span class="join_form">
+                                <input type="password" id="join_email" name="join_email" placeholder="비밀번호 재확인" maxlength="32"/>
+                            </span>
+                            <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+                                <span class="">비밀번호 확인</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+
+                    <!--  개인정보 입력 영역  -->
+                    <!-- 이름 영역 -->
+                    <div class="join_row join_name" id="infoDiv">
+                        <div class="join_label">이름</div>
+                        <div class="name_input_area">
+                            <span class="join_form">
+                                <input type="text" id="name" name="name" title="이름" class="int" placeholder="타인에게 공개될 내 이름 입력" maxlength="40">
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- 성별 영역 -->
+                    <div class="join_row join_gender" id="genderDiv">
+                        <div class="join_label">성별</div>
+                        <div class="gender_input_area">
+                            <div class="gender_code">
+                                <select id="gender" name="gender" class="sel">
+                                    <option value selected>성별</option>
+                                    <option value="M">남자</option>
+                                    <option value="F">여자</option>
+                                    <option value="U">선택 안함</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="join_row join_birth" id="birthDiv">
+                        <!-- 생년월일 영역 -->
+                        <div class="join_label">생년월일</div>
+                        <div class="bir_wrap">
+                            <div class="bir_yy">
+								<span class="join_form">
+									<input type="text" id="yy" placeholder="년(4자)" aria-label="년(4자)" class="int" maxlength="4">
+								</span>
+                            </div>
+                            <div class="bir_mm">
+								<div class="month_code">
+									<select id="mm" class="sel" aria-label="월">
+										<option value="">월</option>
+										  	 			<option value="01">
+                                                            1
+                                                        </option>
+										  	 			<option value="02">
+                                                            2
+                                                        </option>
+										  	 			<option value="03">
+                                                            3
+                                                        </option>
+										  	 			<option value="04">
+                                                            4
+                                                        </option>
+										  	 			<option value="05">
+                                                            5
+                                                        </option>
+										  	 			<option value="06">
+                                                            6
+                                                        </option>
+										  	 			<option value="07">
+                                                            7
+                                                        </option>
+										  	 			<option value="08">
+                                                            8
+                                                        </option>
+										  	 			<option value="09">
+                                                            9
+                                                        </option>
+										  	 			<option value="10">
+                                                            10
+                                                        </option>
+										  	 			<option value="11">
+                                                            11
+                                                        </option>
+										  	 			<option value="12">
+                                                            12
+                                                        </option>
+									</select>
+								</div>
+                            </div>
+                            <div class="bir_dd">
+								<span class="join_form">
+									<input type="text" id="dd" placeholder="일" aria-label="일" class="int" maxlength="2">
+									<label for="dd" class="lbl"></label>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 가입하기 버튼 -->
+                    <div class="btn_area">
+                        <button type="button" id="btnJoin" class="btn_type btn_primary"><span>가입하기</span></button>
+                    </div>
+
+
 
                 </div>
                 

@@ -12,14 +12,14 @@
     src: local('Open Sans Bold'), local('OpenSans-Bold'), url(//fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
 
-p {
+p , div{
     font-family : Open Sans;
 }
 
-div {
+input, label, span {
     font-family : Open Sans;
 }
 
-input {
-    font-family : Open Sans;
+li, ul, ol {
+    font-family: Open Sans;
 }
