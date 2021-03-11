@@ -2,7 +2,9 @@
 <html>
     <head> 
         <style>@import url("new_folder.css");
-        
+                @import url("/font.css");
+                @import url("/header.css");
+                @import url("/mainframe_shortcuts.css");
         </style>
     </head>
     <body>
@@ -13,6 +15,7 @@
                 <div class="group_menu">
                     <ul class="list_menu">
                         <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
+                        <a href="" class="menu_underline" src="media/colored_straight_line.png"></a>
                         <li class="menu_item"><a href="#" class="menu">방명록</a></li>
                         <li class="menu_item"><a href="#" class="menu">시간표</a></li>
                     </ul>
@@ -38,25 +41,27 @@
         </div>
         <div class="wrap">
             <div class="section">
-                <p id="section_p">
+                <p class="folder_name">
                     study Tight!
                 </p>
                 <hr>
                 
                 <div id="wrap_postit" class="wrap_postit">
-                <div  id="postIt_1" class="postIt" onclick="PostItLink('pid');"><p class="post">pid란?</p>
-                    <img src="media/post_it_yellow.png"></div>
-                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');"><p class="post">shell이란?</p>
-                    <img src="media/post_it_yellow.png"></div>
-                <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');"><p class="post">scheduler란?</p>
-                    <img src="media/post_it_yellow.png"></div>
-                <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');"><p class="post">chap1 정리</p>
-                    <img src="media/post_it_yellow.png"></div>
-                <div id="postIt_5" class="postIt" onclick="PostItFile();"><p>ssu_shell.c</p>
-                    <img src="media/post_it_yellow.png"></div>
+                <div  id="postIt_1" class="postIt" onclick="PostItLink('pid');">
+                    <img src="media/post_it_yellow.png"><p class="post">pid란?</p></div>
+                <div id="postIt_2" class="postIt" onclick="PostItLink('shell');">
+                    <img src="media/post_it_yellow.png"><p class="post">shell이란?</p></div>
+                <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');">
+                    <img src="media/post_it_yellow.png"><p class="post">scheduler란?</p></div>
+                <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');">
+                    <img src="media/post_it_yellow.png"><p class="post">chap1 정리</p></div>
+                <div id="postIt_5" class="postIt" onclick="PostItFile();">
+                    <img src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p></div>
+                
+                <div id="postIt_plus" class="postIt" onclick="newPostIt(link[1]);">
+                    <img src="media/post_it_orange.png"><p class="post">추가하기</p></div>
                 </div>
-                <div id="postIt_plus" lcass="postIt" onclick="newPostIt(link[1]);"><p>포스트잇 추가하기</p></div>
-            </div>
+                </div>
 
             <div class="folder_todo">
                 <p class="wrap_Todolist">할 일 목록</p>

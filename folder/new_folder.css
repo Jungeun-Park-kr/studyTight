@@ -1,4 +1,4 @@
-.main_header {
+/* .main_header {
     height:100px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
@@ -19,7 +19,7 @@
 
 .logo_tight .img_logo {
     width:100%;
-    /* width:130px; */
+    
     background-position: 0 -158px;
     background-repeat: no-repeat;
     vertical-align: top;
@@ -31,8 +31,7 @@
     overflow: hidden;
     position: relative;
     margin-right:12%;
-    /* margin-left : 13%;
-    margin-right : 13%; */
+    
     padding: 50px 100px 11px 100px; 
 }
 
@@ -53,7 +52,7 @@ ul {
 }
 
 .list_menu {
-    /* font-weight: 700; */
+    
     color: #000;
     letter-spacing: -.3px;
     margin : 0 auto;
@@ -76,7 +75,7 @@ ul {
     text-decoration: underline;
     text-decoration-color: #6ED4D8;
     font-weight: 700;
-}
+} 
 
 .profile_section{
     margin-left:2%;
@@ -139,33 +138,51 @@ body {
 .section{
     float:left;
     width:80%;
+    height:550px;
     margin-right:10px;
     margin-top:15px;
+    background-image:url("/media/plus_folder_gray.png");
+    background-size:cover;
 }
+/* .section:after{
+    opacity: 0.5!important;
+    filter:alpha(opacity=50);
+    
+} */
 /* .wrap > div {
     display:inline-block;
 } */
 .wrap_postit > div
 {
     display:inline-block;
-    margin:0 10px;
-    width:20%;
+    margin:20px 35px 20px 20px;
+    width: 12%;
+    height: 65px;
 }
 .folder_todo{
     float:right;
     width:18%;
     display:inline;
 }
+.folder_name{
+    font-size:15px;
+    font-weight:bold;
+    margin-top:35px;
+    margin-left:10px;
+}
+
 /* 여기부터 오늘 할 일 */
 .wrap_Todolist{
     text-align:center;
     width:100%;
     font-size:13px;
 }
-p {
-    font-size:13px;
+
+label > input {
+    font-size:11px;
+    display:inline-block;
 }
-label > input,p {
+label > p{
     font-size:11px;
     display:inline-block;
 }
@@ -199,11 +216,77 @@ label{
     margin-top:10px;
     font-size: 9px;
 }
+.login {
+    margin-left:80%;
+    display:inline-block;
+    width:20%;
+}
+.login > div {
+    display:inline-block;
+}
+.profile_section > div {
+    margin: 5px 0px 5px 10px;
+}
+
+.alarm_bell{
+    display:inline;
+}
+#alarm_bell_img {
+    height : 15px;
+    padding-top : 2px;
+    display:inline;
+    margin : 0 auto;
+}
+.profile_section{
+    margin-left:2%;
+    position:absolute;
+    top:5px;
+
+}
+
+
+.profile{
+    display:inline;
+}
+.profile > img {
+    height: 15px;
+    margin: 0 auto;
+}
+.username {
+    display:inline-block;
+    font-size:12px;
+}
+.logout{
+    display:inline;
+}
+.btn_logout {
+    background-color: rgba(190, 190, 190,0.5);
+    border-radius: 10px;
+    border:none;
+    cursor:pointer;
+    font-size:12px;
+    display:inline;
+}
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
 .postIt > img {
     width:100%;
     height:auto;
+
+}
+.postIt > p {
+    font-size:12px;
+}
+.post {
+    position:absolute;
+    z-index:1;
+    top:50%;
+    width:100%;
+    margin:0 auto;
+    text-align: center;
+}
+.postIt{
+    position:relative;
 }
 /* hover하면 3버튼 나오게,별표시 넣기*/
