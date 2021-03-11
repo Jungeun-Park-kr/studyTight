@@ -71,11 +71,19 @@ body {
     text-align:center;
     margin:0 15px;
 }
-.page-menu .left-menus > div:hover {
-    color:#6ED4D8;
-    text-decoration: underline;
-    text-decoration-color: #6ED4D8;
+.menu_underline{    
+    width:50px;
+    opacity:0;
 }
+.page-menu .left-menus > div:hover .menu_underline{
+    color:#6ED4D8;
+    
+    text-decoration-color: #6ED4D8;
+
+        opacity: 1;
+    
+}
+
 /* .page-menu .left-menus > li.active {
     //활성화 되어있는 메뉴
     background-color: #6ED4D8;
