@@ -270,7 +270,7 @@ body {
     width: 12%;
     height: 65px;
     vertical-align: middle;
-  
+    position:relative;
    /* 참고하기: https://today-myday.tistory.com/8 */
     display:inline-block;
 }

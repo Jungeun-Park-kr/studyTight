@@ -1,0 +1,17 @@
+.choice_header{
+    font-size:12px; 
+    font-weight:bold;
+    text-align: center;
+}
+.choice{
+    font-size:15px;
+}
+table{
+    width:100%;
+}
+table > th {
+    vertical-align:middle;
+}
+.wrap_choice{
+        margin:20px 0;
+}

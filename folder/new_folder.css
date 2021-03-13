@@ -129,7 +129,7 @@ ul {
 /* 폴더 내부 */
 body {
     background-color: #e7eff0;
-
+    min-width:1190px;
 }
 .wrap{
     width:60%;
