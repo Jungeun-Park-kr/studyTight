@@ -6,6 +6,7 @@
                 @import url("/header.css");
                 @import url("/mainframe_shortcuts.css");
         </style>
+        <script src="new_folder.js"></script>
     </head>
     <body>
         <div class="main_header">
@@ -58,7 +59,7 @@
                 <div id="postIt_5" class="postIt" onclick="PostItFile();">
                     <img src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p></div>
                 
-                <div id="postIt_plus" class="postIt" onclick="newPostIt(link[1]);">
+                <div id="postIt_plus" class="postIt" onclick="newPostIt();">
                     <img src="media/post_it_orange.png"><p class="post">추가하기</p></div>
                 </div>
                 </div>
@@ -72,7 +73,7 @@
                     <label><input type="checkbox"><p>채플 듣기</p></label>
                     <label><input type="checkbox"><p>OS 보고서 쓰기</p></label>
                 </div>
-                <input type="button" class="btnplusTodo" value="추가하기" onclick="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                <input type="button" class="btnplusTodo" value="추가하기" @click="plusTodo();"></input> <!--+부분 이미지로 넣기-->
                 <div class="caution">
                     오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
                 </div>
