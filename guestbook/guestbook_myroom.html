@@ -169,10 +169,16 @@
                     <div class="friends">
                         <div class="friends_add">
                             <div class="title_msg">Friends</div>
-                            <div class="btn_add_course">
-                                <input type="button" value="+ 친구 추가하기" onclick="showAddfriendsPopup();"></input>
-                            </div>
+                            <div class="group-dropdown" onclick="showhiddengroup();">[기본그룹] ▼</div>
 
+                            <div class="btn_add_course">
+                                <input type="button" value="+ 친구 추가하기" onclick="showFriendsEditPopup();"></input>
+                            </div>
+                            <ul id=submenu>
+                                <li>Dropdown1</li>
+                                <li>Dropdown2</li>
+                                <li>Dropdown3</li>
+                            </ul>
                         </div>
 
                         <script>

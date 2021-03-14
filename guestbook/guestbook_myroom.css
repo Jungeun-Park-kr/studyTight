@@ -14,6 +14,11 @@ body {
     background-color: #e7eff0;
 }
 
+.img {
+    width: 100px;
+    height: 100px;
+}
+
 .page-bottom {
     margin-top: 30px;
     margin-left: 20%;
@@ -55,6 +60,7 @@ body {
     margin-bottom: 10px;
     display: block;
     color: black;
+    font-size: 12px;
 }
 
 .edit-profile>#edit-button-id {
@@ -68,21 +74,22 @@ body {
     margin-bottom: 10px;
     height: 30px;
     border: 10px;
+    font-size: 12px;
 }
 
 .information-menu .left-menus-book>li>img {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
 }
 
 .information-menu .left-menus-book>div>li>img {
-    width: 100%;
-    height: auto;
+    width: 100px;
+    height: 100px;
     list-style-type: none;
 }
 
 .information-menu .left-menus-book>div {
-    margin-bottom: 100px;
+    margin-bottom: 40px;
 }
 
 .information-menu .left-menus-book>div>li {
@@ -110,21 +117,43 @@ body {
 }
 
 .my-room .friends_add {
-    margin-top: 20px;
     width: 90%;
+    height: 50px;
     display: inline-block;
+}
+
+#submenu {
+    position: relative;
+    width: 50%;
+    left: 7px;
+    top: 45px;
+    list-style: none;
+    display: block;
+    visibility: hidden
+}
+
+.group-dropdown {
+    margin-top: 40px;
+    margin-left: 10px;
+    display: block;
+    float: left;
+}
+
+.group-dropdown :hover #submunu {
+    visibility: visible;
 }
 
 .btn_add_course {
     float: right;
     margin-top: 25px;
     width: 10%;
+    font-size: 12px;
 }
 
 .my-room .friends_add .title_msg {
-    margin-top: 20px;
-    margin-left: 50px;
-    font-size: 30px;
+    margin-top: 40px;
+    margin-left: 60px;
+    font-size: 20px;
     font-weight: bold;
     float: left;
 }
@@ -133,12 +162,14 @@ body {
     background-color: #6ED4D8;
     height: 30px;
     border-radius: 10px;
-    background-color: #6ED4D8;
     display: table-cell;
     vertical-align: middle;
     margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
     height: 30px;
     border: 10px;
+    font-size: 12px;
 }
 
 .writing-box {
@@ -161,15 +192,20 @@ body {
 
 .my-room .writing-button-secret .writing-button>input {
     background-color: #6ED4D8;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 10px;
-    width: 100px;
+    width: 80px;
     height: 40px;
     border-radius: 10px;
     display: table-cell;
     vertical-align: middle;
     margin-bottom: 10px;
     border: 10px;
+    font-size: 12px;
+}
+
+.secret-checkbox {
+    font-size: 12px;
 }
 
 .my-room .writing-button-secret .secret-checkbox>input {
@@ -205,8 +241,13 @@ body {
     float: none;
 }
 
+.user-small-talking {
+    font-size: 12px;
+}
+
 .friends_list_box #course_table {
     padding: 10px;
+    font-size: 13px;
 }
 
 .talking-palce {
