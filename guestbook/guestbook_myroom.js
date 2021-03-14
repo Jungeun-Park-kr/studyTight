@@ -9,6 +9,24 @@ function showFriendsAddPopup() {
     window.open(url, name, option);
 }
 
+
+function showhiddengroup() {
+    mydiv = document.getElementById(submenu); //좌측 띄어줄것들.
+    mydiv.style.visibility = "visible"
+    Console.log(mydiv);
+}
+
+function showFriendsEditPopup() {
+    var popupWidth = 650;
+    var popupHeight = 800;
+    var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+    var popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
+    var url = "friends_edit.html";
+    var name = "timetable add popup"
+    var option = "width =" + popupWidth + ", height =" + popupHeight + ", left" + popupX + ", top=" + popupY + ", scrollbars = yes, location = no";
+    window.open(url, name, option);
+}
+
 function modifyCourse(course) {
     //과목 수정 버튼 누를 경우 해당 과목의 정보 수정
 
@@ -46,7 +64,7 @@ function showmyprofile(profile) { //게스트북의 프로필 받아옴.
     console.log("프로필 in js" + profile);
     console.log("이름 in js" + name);
 
-    myvar = document.getElementById(leftmenu); //좌측 띄어줄것들.
+    myvar = document.getElementById(leftmenu); //좌측 띄어줄것들. //좌측 띄어줄것들.
     // myvar.innerHTML = title; //첫줄에는 과목이름
     // tmpvar.style.backgroundColor = color;
 

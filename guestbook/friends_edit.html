@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구 추가하기</title>
+    <script src="/user/users.js"></script>
+    <style>
+        @import url(friends_add.css);
+    </style>
+</head>
+
+<body style="overflow-x:hidden; overflow-y:auto;">
+    <div class="add_title">친구 관리하기</div>
+    <hr>
+    <div id=forsearch>검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+    <div class="course_add_list">
+        <table id="add_table">
+            <tbody>
+                <tr>
+                    <th>이메일</th>
+                    <td><input type="text" name="course_title" size="20" id="this" style="width:80%; border:1;"> </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="add_btn">
+        <input id="btn_add_course" type="button" title="추가" value="추가" onclick="addprofile();"></input>
+    </div>
+    <script>
+        check = 1;
+
+        var username = localStorage.getItem('username');
+        activeUser = getActiveUser(username);
+        friendslist = activeUser.guestbook.friendslist;
+        isthere = 0; //추가하려는 친구의 이메일이 존재하지 않는경우 0
+        function addprofile() {
+            var value1 = document.getElementById('this').value;
+            if (value1 == "") {
+                alert("친구의 이메일을 입력해주세요");
+                check = 0;
+            } //저장금지
+
+
+            for (var i = 0; i < userlist.length; i++) {
+                if (userlist[i].userId == value1) {
+                    myfriend = userlist[i];
+                    isthere = 1;
+                    check = 1;
+                    //console.log(myfriend);
+                }
+                //console.log(userlist[i].userId);
+                //console.log(value1);
+            }
+
+            if (isthere == 0) {
+                alert("유효하지 않은 이메일입니다");
+                check = 0;
+            } //저장금지
+
+            //console.log(friendslist);
+            for (var i = 0; i < friendslist.length; i++) {
+                if (friendslist[i].email == value1) {
+                    alert("이미 존재하는 친구입니다");
+                    isthere = 1;
+                    check = 0;
+                    //console.log(myfriend);
+                }
+                //console.log(userlist[i].userId);
+                //console.log(value1);
+            }
+            if (check == 1) {
+                var myfriendslist = {
+                    profileimage: myfriend.userImage,
+                    guestbookowner: myfriend.name, //방명록의 주인
+                    email: myfriend.userId
+                }
+
+                friendslist.push(myfriendslist);
+                console.log('친구추가가 완료되었습니다. 5초 뒤에 팝업이 닫힙니다.')
+                setTimeout(function() {
+                    window.close(); //메인 화면으로 이동
+                }, 5000);
+            }
+            console.log(friendslist);
+
+        }
+    </script>
+</body>
+
+</html>
