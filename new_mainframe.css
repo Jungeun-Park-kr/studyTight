@@ -84,6 +84,13 @@ body {
     
 }
 
+.left-menus > .menu_home:hover , .left-menus > .menu_contact:hover , .left-menus > .menu_timetable:hover {
+    color:#6ED4D8;
+    text-decoration: underline;
+    text-decoration-color: #6ED4D8;
+    font-weight: 700;
+}
+
 /* .page-menu .left-menus > li.active {
     //활성화 되어있는 메뉴
     background-color: #6ED4D8;

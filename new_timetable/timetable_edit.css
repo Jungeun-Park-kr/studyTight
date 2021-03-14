@@ -1,0 +1,105 @@
+#wrap_edit {
+    min-width: 1300px;
+}
+
+.background-box {
+    background-color: azure;
+    align-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.timetable_edit_header {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+#timetable-line {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.timetable_edit_header>div {
+    display: inline-block;
+}
+
+.timetable_edit_header .title_msg {
+    float: left;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    width: 70%;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.timetable_edit_header .btn_add_course {
+    float: right;
+    width: 130px;
+    margin: 10px;
+    margin-right:20px;
+    text-align: center;
+}
+
+.timetable_edit_header .btn_add_course>input {
+    width: 130px;
+    height: 30px;
+    background-color: #6ED4D8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.timetable_edit_section {
+    display: inline-block;
+    width: 100%;
+}
+
+.course_list {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    /* width : 100%; */
+}
+
+.course_list>table {
+    width: 100%;
+    border-collapse: collapse;
+    /* -moz-border-radius: 15px;
+    border:3px solid  6ED4D8;
+    border-radius: 15px; */
+}
+
+.course_list td, th {
+    text-align: left;
+    padding: 8px;
+}
+
+.course_list>table>thead {
+    background-color: #6ED4D8;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+.course_list>table>tbody>tr {
+    font-size: 15px;
+    border-bottom: 1px solid gray;
+}
+
+.course_list table .btn_modify_course {
+    align-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: url("media/edit.png") no-repeat;
+    cursor: pointer;
+}
+
+.course_list table .btn_delete_course {
+    background: url("media/delete.png") no-repeat;
+    width: 32px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+}
