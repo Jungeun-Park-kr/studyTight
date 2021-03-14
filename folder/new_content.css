@@ -1,21 +1,3 @@
-.choice_header{
-    font-size:12px; 
-    font-weight:bold;
-    text-align: center;
-}
-.choice{
-    font-size:15px;
-}
-table{
-    width:100%;
-}
-table > th {
-    vertical-align:middle;
-}
-.wrap_choice{
-        margin:20px 0;
-}
-/* new_link의 경우 */
 .uploadBtn{
 
     padding:10px;
@@ -68,6 +50,7 @@ table > th {
 .choice > p{
     text-align: center;
 }
-#input_content{
-    height:80%;
+textarea{
+    
+    width:80%;
 }
