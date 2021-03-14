@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과목 추가하기</title>
+    <script src="/user/users.js"></script>
+    <script src="/timetable/timetable_add.js"></script>
+    <style>@import url(/timetable/timetable_add.css);</style>
+</head>
+<body>
+    <div class="add_title">과목 추가하기</div>
+    <hr>
+    <div class="course_add_list">
+        <div class="course_section">
+            <div class="course_title_section">
+                <div class="course_title_label">과목이름</div>
+                <div class="course_title_form">
+                    <input type="text" id="course_title" placeholder="과목이름 입력"/>
+                </div>
+            </div>
+            <div class="professor_name_section">
+                <div class="professor_name_label">교수명</div>
+                <div class="professor_name_form">
+                    <input type="text" id="professor_name" placeholder="교수명 입력"/>
+                </div>
+            </div>
+            <div class="course_time_section">
+                <div class="course_time_form">
+                    <div class="course_time_label">강의시간</div>
+                        <select id="course_day">
+                            <option value="mon">월요일</option>
+                            <option value="tue">화요일</option>
+                            <option value="wed">수요일</option>
+                            <option value="thu">목요일</option>
+                            <option value="fri">금요일</option>
+                            <option value="sat">토요일</option>
+                        </select>
+                        <input type="time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
+                        <input type="time" id="course_end_time" value="09:15" min="09:15" max="21:00"/>
+                        <input type="button" id="btn_time_plus" class="btn_add_time" onclick="addCourseTime(this)" />
+                </div>
+            </div>
+            <div class="course_type_section">
+                <div class="course_type_lable">강의종류</div>
+                <div class="course_type_form" id="course_type_radio">
+                    <form>
+                        <label><input type="radio" name="course_type" size="20" value="online_realtime"  onclick="RadioCourseType();" checked>온라인 실시간</label>
+                        <label><input type="radio" name="course_type" size="20" value="online_video"  onclick="RadioCourseType();">온라인 동영상</label>
+                        <label><input type="radio" name="course_type" size="20" value="offline"  onclick="RadioCourseType();">오프라인</label>
+                    </form>
+                </div>
+            </div>
+            <div class="course_link_section" id="course_link" style="visibility: visible;">
+                <div class="course_link_label" id="course_link_label">강의링크</div>
+                <div class="course_link_form" >
+                    <input type="text" id="course_link_url" name="course_link" placeholder="메인화면 바로가기 링크로 지원됩니다." size="40"/>
+                </div>
+            </div>
+        </div>
+        <script>
+            function RadioCourseType() {
+                var link = document.getElementById("course_link");
+                var label = document.getElementById("course_link_label");
+                var url = document.getElementById("course_link_url");
+                var type = document.getElementsByName("course_type");
+
+                for (var i = 0; i < type.length; i++) {
+                    if (type[2].checked == true) { //오프라인 체크된 경우
+                        label.innerHTML = "강의실";
+                        url.placeholder = '강의실 입력';
+                        return;
+                    }
+                    else { //온라인 체크된 경우
+                        label.innerHTML = "강의링크";
+                        url.placeholder = '메인화면 바로가기 링크로 지원됩니다.';
+                        return;
+                    }
+                }
+            }
+        </script>
+        <div class="add_btn">
+            <input id="btn_add_course" type="button" title="저장하기" value ="저장하기" onclick="addCourse();"></input>
+        </div>
+    </div>
+</body>
+
+</html>
