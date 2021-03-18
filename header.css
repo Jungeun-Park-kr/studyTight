@@ -12,13 +12,15 @@
     display: block;
     overflow: hidden;
     position: relative;
+    /* float:left 안할시 메뉴들이 밑으로 내려가버림! */
     float:left;
-    width:12%;
+    /* width:12%; //  바로 아래의 이미지 크기에 맞게 되기 때문에 필요 없을 듯 */
 }
 
 .logo_tight .img_logo {
-    width:100%;
-    /* width:130px; */
+    /* width:100%; // 비율X -> 환경마다 다르게 보이는 문제 발생 */
+    /* 흰색 header bar의 높이가 100px => 로고도 딱 맞게 100px */
+    height : 100px; 
     background-position: 0 -158px;
     background-repeat: no-repeat;
     vertical-align: top;
@@ -29,7 +31,7 @@
     display: flex;
     overflow: hidden;
     position: relative;
-    margin-right:12%;
+    margin-right:15%;
     /* margin-left : 13%;
     margin-right : 13%; */
     padding: 50px 100px 11px 100px; 
@@ -77,3 +79,141 @@ ul {
     font-weight: 700;
 }
 
+.page-header {
+    width:80%;
+    height:15%;
+    display:inline-block;
+}
+.page-header > div {
+    display: inline-block;
+    margin-top: 20px;
+}
+.page-menu {
+    width : 100%;
+    height:fit-content;
+    display:block;
+    background-color:rgba(255, 255, 255, 0.5);
+    /* position: relative; */
+}
+.page-menu > div {
+    display:inline-block;
+}
+.page-menu .logo_area {
+    width:10%;
+    height:auto;
+    display:inline-block;
+    position:absolute;
+    left: 0;
+    
+}
+.page-menu .logo_area .logo {
+    /* background-image: url("media/logo.png");  */
+    width: 100%;
+    height : auto;
+    padding: 10px;
+    cursor:pointer;
+}
+.left-menus{
+    display:inline-block;
+    text-align:center;
+    height:fit-content;
+    width:40%;
+    margin-left:30%;
+    margin-right:30%;
+    margin-top:50px;
+}
+.page-menu .left-menus > div {
+    /* border-bottom:1px solid #252626; */
+    width:auto;
+    line-height:30px;
+    list-style-type: none;
+    padding: 10px 30px;
+    font-size:15px;
+    font-weight: bold;
+    display: inline-block;
+    color :black;
+    cursor:pointer;
+    text-align:center;
+    margin:0 15px;
+}
+
+/* .page-menu .left-menus > li.active {
+    //활성화 되어있는 메뉴
+    background-color: #6ED4D8;
+} 
+/* 현재 클릭되어있지 않은 메뉴 고를때 변경할 색 */
+/*.page-menu .left-menus > li:hover:not(.active) {
+    background-color: #6ED4D8;
+    border-radius:10px;
+}*/
+
+.menu_underline{    
+    width:50px;
+    opacity:0;
+}
+.page-menu .left-menus > div:hover .menu_underline{
+    color:#6ED4D8;
+    
+    text-decoration-color: #6ED4D8;
+
+        opacity: 1;
+    
+}
+
+.left-menus > .menu_home:hover , .left-menus > .menu_contact:hover , .left-menus > .menu_timetable:hover {
+    color:#6ED4D8;
+    text-decoration: underline;
+    text-decoration-color: #6ED4D8;
+    font-weight: 700;
+}
+
+.login {
+    margin-left:80%;
+    display:inline-block;
+}
+.login > div {
+    display:inline-block;
+}
+.profile_section > div {
+    margin: 5px 0px 5px 10px;
+}
+
+.alarm_bell{
+    display:inline;
+}
+#alarm_bell_img {
+    height : 15px;
+    padding-top : 2px;
+    display:inline;
+    margin : 0 auto;
+}
+.profile_section{
+    margin-left:2%;
+    position:absolute;
+    /* 상단에서 10픽셀, 우측에서 20픽셀 떨어지게 위치 고정 */
+    top: 10px;
+    right: 15px;
+}
+
+.profile{
+    display:inline;
+}
+.profile > img {
+    height: 15px;
+    margin: 0 auto;
+}
+.username {
+    display:inline-block;
+    font-size:12px;
+}
+.logout{
+    display:inline;
+}
+.btn_logout {
+    background-color: rgba(190, 190, 190,0.5);
+    border-radius: 10px;
+    border:none;
+    cursor:pointer;
+    font-size:12px;
+    display:inline;
+}
