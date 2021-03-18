@@ -1,13 +1,12 @@
 #wrap {
     min-width: 1190px;
-    
 }
 body {
     background-color: #e7eff0;
     min-width: 1190px;
     margin:0 auto;
-    
 }
+
 .body{
     width:60%;
     margin-left:20%;
@@ -15,15 +14,6 @@ body {
     height:100%;
 }
 
-/* .page-menu .left-menus > li.active {
-    //활성화 되어있는 메뉴
-    background-color: #6ED4D8;
-} 
-/* 현재 클릭되어있지 않은 메뉴 고를때 변경할 색 */
-/*.page-menu .left-menus > li:hover:not(.active) {
-    background-color: #6ED4D8;
-    border-radius:10px;
-}*/
 
 .aside {
     width: 18%;
@@ -40,7 +30,6 @@ body {
     margin:10px;
     display:inline;
 }
-
 
 .section {
     width:80%;
