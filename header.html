@@ -1,7 +1,10 @@
+<style>
+    @import url(/header.css);
+</style>
 <div class="main_header">
     <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
     <div class="logo_area">
-        <a href="#" class="logo_tight"><img src="/media/logo.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+        <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
         <div class="group_menu">
             <ul class="list_menu">
                 <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
@@ -13,8 +16,9 @@
     
     <div class="login">
             <div class="profile_section">
-                <div class="alarm_bell">
-                <img id="alarm_bell_img" src="/media/empty_bell.png"></div>
+                <!-- 일단은 알람벨 크기가 애매(?)하고 기능 추가 전이기 때문에 생략! -->
+                <!-- <div class="alarm_bell">
+                <img id="alarm_bell_img" src="/media/empty_bell.png"></div> -->
                 <div class="profile">
                     <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
                     <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">

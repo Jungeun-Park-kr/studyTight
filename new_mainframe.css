@@ -14,82 +14,6 @@ body {
     margin-right:20%;
     height:100%;
 }
-.page-header {
-    width:80%;
-    height:15%;
-    display:inline-block;
-}
-.page-header > div {
-    display: inline-block;
-    margin-top: 20px;
-}
-.page-menu {
-    width : 100%;
-    height:fit-content;
-    display:block;
-    background-color:rgba(255, 255, 255, 0.5);
-    /* position: relative; */
-}
-.page-menu > div {
-    display:inline-block;
-}
-.page-menu .logo_area {
-    width:10%;
-    height:auto;
-    display:inline-block;
-    position:absolute;
-    left: 0;
-    
-}
-.page-menu .logo_area .logo {
-    /* background-image: url("media/logo.png");  */
-    width: 100%;
-    height : auto;
-    padding: 10px;
-    cursor:pointer;
-}
-.left-menus{
-    display:inline-block;
-    text-align:center;
-    height:fit-content;
-    width:40%;
-    margin-left:30%;
-    margin-right:30%;
-    margin-top:50px;
-}
-.page-menu .left-menus > div {
-    /* border-bottom:1px solid #252626; */
-    width:auto;
-    line-height:30px;
-    list-style-type: none;
-    padding: 10px 30px;
-    font-size:15px;
-    font-weight: bold;
-    display: inline-block;
-    color :black;
-    cursor:pointer;
-    text-align:center;
-    margin:0 15px;
-}
-.menu_underline{    
-    width:50px;
-    opacity:0;
-}
-.page-menu .left-menus > div:hover .menu_underline{
-    color:#6ED4D8;
-    
-    text-decoration-color: #6ED4D8;
-
-        opacity: 1;
-    
-}
-
-.left-menus > .menu_home:hover , .left-menus > .menu_contact:hover , .left-menus > .menu_timetable:hover {
-    color:#6ED4D8;
-    text-decoration: underline;
-    text-decoration-color: #6ED4D8;
-    font-weight: 700;
-}
 
 /* .page-menu .left-menus > li.active {
     //활성화 되어있는 메뉴
@@ -116,55 +40,8 @@ body {
     margin:10px;
     display:inline;
 }
-.login {
-    margin-left:80%;
-    display:inline-block;
-}
-.login > div {
-    display:inline-block;
-}
-.profile_section > div {
-    margin: 5px 0px 5px 10px;
-}
-
-.alarm_bell{
-    display:inline;
-}
-#alarm_bell_img {
-    height : 15px;
-    padding-top : 2px;
-    display:inline;
-    margin : 0 auto;
-}
-.profile_section{
-    margin-left:2%;
-    position:absolute;
-    top:5px;
-}
 
 
-.profile{
-    display:inline;
-}
-.profile > img {
-    height: 15px;
-    margin: 0 auto;
-}
-.username {
-    display:inline-block;
-    font-size:12px;
-}
-.logout{
-    display:inline;
-}
-.btn_logout {
-    background-color: rgba(190, 190, 190,0.5);
-    border-radius: 10px;
-    border:none;
-    cursor:pointer;
-    font-size:12px;
-    display:inline;
-}
 .section {
     width:80%;
     height:85%;
