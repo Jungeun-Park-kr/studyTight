@@ -1,16 +1,17 @@
-<link rel="stylesheet" type="text/css" href="header.css"/>
-<link rel="stylesheet" type="text/css" href="component.css"/>
+<style>
+    @import url(/header.css);
+</style>
 <div class="main_header">
     <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
     <div class="logo_area">
         <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
-        <section class="group_menu">
-            <nav class="menu_effect">
-                <a href="#" class="menu">내 공부방</a>
-                <a href="#" class="menu">방명록</a>
-                <a href="#" class="menu">시간표</a>
-            </nav>
-        </section>
+        <div class="group_menu">
+            <ul class="list_menu">
+                <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
+                <li class="menu_item"><a href="#" class="menu">방명록</a></li>
+                <li class="menu_item"><a href="#" class="menu">시간표</a></li>
+            </ul>
+        </div>
     </div>
     
     <div class="login">
