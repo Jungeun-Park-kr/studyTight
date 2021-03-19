@@ -1,154 +1,51 @@
-/* .main_header {
-    height:100px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-
-}
-.logo_area {
-    height:100%;
-}
-
-.logo_tight {
-    text-decoration: none;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    float:left;
-    width:12%;
-}
-
-.logo_tight .img_logo {
-    width:100%;
-    
-    background-position: 0 -158px;
-    background-repeat: no-repeat;
-    vertical-align: top;
-    content: '';
-}
-
-.group_menu {
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    margin-right:12%;
-    
-    padding: 50px 100px 11px 100px; 
-}
-
-ol, ul {
-    list-style: none;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-ul {
-    display: block;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding : 0px;
-    margin-top : 30px;
-    margin-bottom : 30px;
-}
-
-.list_menu {
-    
-    color: #000;
-    letter-spacing: -.3px;
-    margin : 0 auto;
-}
-
-.list_menu .menu_item {
-    float:left;
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
-.menu {
-    text-decoration: none;
-    font-size: 13px;
-    color:#000;
-}
-
-.menu:hover {
-    color:#6ED4D8;
-    text-decoration: underline;
-    text-decoration-color: #6ED4D8;
-    font-weight: 700;
-} 
-
-.profile_section{
-    margin-left:2%;
-    position:absolute;
-    top:5px;
-}
-
-
-.profile{
-    display:inline;
-}
-.profile > img {
-    height: 15px;
-    margin: 0 auto;
-}
-.username {
-    display:inline-block;
-    font-size:12px;
-}
-.logout{
-    display:inline;
-}
-.btn_logout {
-    background-color: rgba(190, 190, 190,0.5);
-    border-radius: 10px;
-    border:none;
-    cursor:pointer;
-    font-size:12px;
-    display:inline;
-}
-.profile_section > div {
-    margin: 5px 0px 5px 10px;
-}
-
-.alarm_bell{
-    display:inline;
-}
-#alarm_bell_img {
-    height : 15px;
-    padding-top : 2px;
-    display:inline;
-    margin : 0 auto;
-}
-.profile_section{
-    margin-left:2%;
-    position:absolute;
-    top:5px;
-    right:5px;
-}
 
 /* 폴더 내부 */
 body {
     background-color: #e7eff0;
     min-width:1190px;
 }
-.wrap{
+.wrap_folder{
     width:60%;
     margin-left:20%;
 }
 .section{
     float:left;
     width:80%;
-    height:550px;
+    height:35vw;
     margin-right:10px;
     margin-top:15px;
+
+}
+ /* .section::before{
+    content:"";
+    opacity:0.5;
+
+    position:absolute;
+    margin-left:20%;
+    margin-top:8%;
+    width:48%;
+    margin-right:10px;
+    height:35vw;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
     background-image:url("/media/plus_folder_gray.png");
     background-size:cover;
-}
-/* .section:after{
-    opacity: 0.5!important;
-    filter:alpha(opacity=50);
+
+}  */
+.section:after{
+    content:"";
+    background-image:url(/media/plus_folder_gray.png);
+    opacity:1;
+    position:absolute;
+    top:0;
+    left:0;
+    width:48%;
+    background-size:cover;
     
-} */
+    
+} 
 /* .wrap > div {
     display:inline-block;
 } */
@@ -216,61 +113,11 @@ label{
     margin-top:10px;
     font-size: 9px;
 }
-.login {
-    margin-left:80%;
-    display:inline-block;
-    width:20%;
-}
-.login > div {
-    display:inline-block;
-}
-.profile_section > div {
-    margin: 5px 0px 5px 10px;
-}
 
-.alarm_bell{
-    display:inline;
-}
-#alarm_bell_img {
-    height : 15px;
-    padding-top : 2px;
-    display:inline;
-    margin : 0 auto;
-}
-.profile_section{
-    margin-left:2%;
-    position:absolute;
-    top:5px;
-
-}
-
-
-.profile{
-    display:inline;
-}
-.profile > img {
-    height: 15px;
-    margin: 0 auto;
-}
-.username {
-    display:inline-block;
-    font-size:12px;
-}
-.logout{
-    display:inline;
-}
-.btn_logout {
-    background-color: rgba(190, 190, 190,0.5);
-    border-radius: 10px;
-    border:none;
-    cursor:pointer;
-    font-size:12px;
-    display:inline;
-}
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-.postIt > img {
+.post_img {
     width:100%;
     height:auto;
 
@@ -278,6 +125,7 @@ label{
 .postIt > p {
     font-size:12px;
 }
+
 .post {
     position:absolute;
     z-index:1;
@@ -290,3 +138,26 @@ label{
     position:relative;
 }
 /* hover하면 3버튼 나오게,별표시 넣기*/
+.fixed_star{
+    position:relative;
+    z-index:1;
+    width:15px;
+    margin-top:-87px;
+    margin-left:3px;
+    float:left;
+    opacity:0;
+}
+.fixed_star:hover{
+    opacity:1;
+}
+.three_button{
+    position:relative;
+    z-index:1;
+    margin-top:-87px;
+    width:15px;
+    float:right;
+    opacity:0;
+}
+.three_button:hover{
+    opacity:1;
+}
