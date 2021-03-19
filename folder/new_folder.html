@@ -1,46 +1,26 @@
+
 <!DOCTYPE html>
-<html>
-    <head> 
-        <style>@import url("new_folder.css");
-                @import url("/font.css");
-                @import url("/header.css");
-                @import url("/mainframe_shortcuts.css");
-        </style>
+<html lang="ko">
+    <head>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">   
+        $(document).ready( function() {
+            $("#header_folder").load("/header.html");  
+        });
+        </script>
         <script src="new_folder.js"></script>
+        <style>@import url(new_folder.css);
+            @import url(/font.css);
+            @import url(/mainframe_shortcuts.css);
+    </style>
+    <link rel="stylesheet" href="/component.css">
+    <link rel="stylesheet" href="/header.css">
     </head>
     <body>
-        <div class="main_header">
-            <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
-            <div class="logo_area">
-                <a href="#" class="logo_tight"><img src="/media/logo.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
-                <div class="group_menu">
-                    <ul class="list_menu">
-                        <li class="menu_item"><a href="#" class="menu">내 공부방</a></li>
-                        <a href="" class="menu_underline" src="media/colored_straight_line.png"></a>
-                        <li class="menu_item"><a href="#" class="menu">방명록</a></li>
-                        <li class="menu_item"><a href="#" class="menu">시간표</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="login">
-                    <div class="profile_section">
-                        <div class="alarm_bell">
-                        <img id="alarm_bell_img" src="/media/empty_bell.png"></div>
-                        <div class="profile">
-                            <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                            <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
-                            <div class="username" id="activeUsername">박혁거세님</div>
+        <div id="header_folder">
 
-                        </div>
-                        <div class="logout">
-                            <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
-                        </div>
-                    </div>
-
-            </div>
         </div>
-        <div class="wrap">
+        <div class="wrap_folder">
             <div class="section">
                 <p class="folder_name">
                     study Tight!
@@ -49,18 +29,28 @@
                 
                 <div id="wrap_postit" class="wrap_postit">
                 <div  id="postIt_1" class="postIt" onclick="PostItLink('pid');">
-                    <img src="media/post_it_yellow.png"><p class="post">pid란?</p></div>
+                    <img class="post_img"src="media/post_it_yellow.png"><p class="post">pid란?</p>
+                    <img class="fixed_star" src="/media/empty_star.png">
+                    <img class="three_button" src="media/three_button.png"></div>
                 <div id="postIt_2" class="postIt" onclick="PostItLink('shell');">
-                    <img src="media/post_it_yellow.png"><p class="post">shell이란?</p></div>
+                    <img class="post_img"src="media/post_it_yellow.png"><p class="post">shell이란?</p>
+                    <img class="fixed_star" src="/media/empty_star.png">
+                    <img class="three_button" src="media/three_button.png"></div>
                 <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');">
-                    <img src="media/post_it_yellow.png"><p class="post">scheduler란?</p></div>
+                    <img class="post_img" src="media/post_it_yellow.png"><p class="post">scheduler란?</p>
+                    <img class="fixed_star" src="/media/empty_star.png">
+                    <img class="three_button" src="media/three_button.png"></div>
                 <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');">
-                    <img src="media/post_it_yellow.png"><p class="post">chap1 정리</p></div>
+                    <img class="post_img" src="media/post_it_yellow.png"><p class="post">chap1 정리</p>
+                    <img class="fixed_star" src="/media/empty_star.png">
+                    <img class="three_button" src="media/three_button.png"></div>
                 <div id="postIt_5" class="postIt" onclick="PostItFile();">
-                    <img src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p></div>
+                    <img class="post_img" src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p>
+                    <img class="fixed_star" src="/media/empty_star.png">
+                    <img class="three_button" src="media/three_button.png"></div>
                 
                 <div id="postIt_plus" class="postIt" onclick="newPostIt();">
-                    <img src="media/post_it_orange.png"><p class="post">추가하기</p></div>
+                    <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div>
                 </div>
                 </div>
 
