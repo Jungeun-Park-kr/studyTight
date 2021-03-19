@@ -157,10 +157,7 @@ ul {
     font-weight: 700;
 } */
 
-.login {
-    margin-left:80%;
-    display:inline-block;
-}
+
 .login > div {
     display:inline-block;
 }
@@ -177,13 +174,13 @@ ul {
     display:inline;
     margin : 0 auto;
 }
-.profile_section{
-    margin-left:2%;
-    position:absolute;
-    /* 상단에서 10픽셀, 우측에서 20픽셀 떨어지게 위치 고정 */
-    top: 10px;
-    right: 15px;
+.profile_section {
+    position: relative;
+    top: -95px;
+    float: right;
+    margin-right: 10px;
 }
+
 
 .profile{
     display:inline;
