@@ -30,24 +30,49 @@
                 <div id="wrap_postit" class="wrap_postit">
                 <div  id="postIt_1" class="postIt" onclick="PostItLink('pid');">
                     <img class="post_img"src="media/post_it_yellow.png"><p class="post">pid란?</p>
-                    <img class="fixed_star" src="/media/empty_star.png">
-                    <img class="three_button" src="media/three_button.png"></div>
+                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
+                    <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
+                    <div id="dropdown-content0" class="dropdown_content">
+                    <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
+                    <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
+                    </div>
+                </div>
                 <div id="postIt_2" class="postIt" onclick="PostItLink('shell');">
                     <img class="post_img"src="media/post_it_yellow.png"><p class="post">shell이란?</p>
-                    <img class="fixed_star" src="/media/empty_star.png">
-                    <img class="three_button" src="media/three_button.png"></div>
+                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(1);">
+                    <img class="three_button" src="media/three_button.png" onclick="showPostMenu(1);">
+                    <div id="dropdown-content1" class="dropdown_content">
+                        <button role="menuitem" class="dropdown_choice" id="revise_post1" onclick="revisePostClicked(1);"></button>
+                        <button role="menuitem" class="dropdown_choice" id="delete_post1" onclick="deletePostClicked(1);"></button>
+                        </div>
+                </div>
                 <div id="postIt_3" class="postIt" onclick="PostItLink('scheduler');">
                     <img class="post_img" src="media/post_it_yellow.png"><p class="post">scheduler란?</p>
-                    <img class="fixed_star" src="/media/empty_star.png">
-                    <img class="three_button" src="media/three_button.png"></div>
+                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(2);">
+                    <img class="three_button" src="media/three_button.png" onclick="showPostMenu(2);">
+                    <div id="dropdown-content2" class="dropdown_content">
+                        <button role="menuitem" class="dropdown_choice" id="revise_post2" onclick="revisePostClicked(2);"></button>
+                        <button role="menuitem" class="dropdown_choice" id="delete_post2" onclick="deletePostClicked(2);"></button>
+                        </div>
+                </div>
                 <div id="postIt_4" class="postIt" onclick="PostItContent('chapter1');">
                     <img class="post_img" src="media/post_it_yellow.png"><p class="post">chap1 정리</p>
-                    <img class="fixed_star" src="/media/empty_star.png">
-                    <img class="three_button" src="media/three_button.png"></div>
+                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(3);">
+                    <img class="three_button" src="media/three_button.png" onclick="showPostMenu(3);">
+                    <div id="dropdown-content3" class="dropdown_content">
+                        <button role="menuitem" class="dropdown_choice" id="revise_post3" onclick="revisePostClicked(3);"></button>
+                        <button role="menuitem" class="dropdown_choice" id="delete_post3" onclick="deletePostClicked(3);"></button>
+                        </div>
+                </div>
                 <div id="postIt_5" class="postIt" onclick="PostItFile();">
                     <img class="post_img" src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p>
-                    <img class="fixed_star" src="/media/empty_star.png">
-                    <img class="three_button" src="media/three_button.png"></div>
+                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(4);">
+                    <img class="three_button" src="media/three_button.png" onclick="showPostMenu(4);">
+                    <div id="dropdown-content4" class="dropdown_content">
+                        <button role="menuitem" class="dropdown_choice" id="revise_post4" onclick="revisePostClicked(4);"></button>
+                        <button role="menuitem" class="dropdown_choice" id="delete_post4" onclick="deletePostClicked(4);"></button>
+                        </div>
+                </div>
                 
                 <div id="postIt_plus" class="postIt" onclick="newPostIt();">
                     <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div>
