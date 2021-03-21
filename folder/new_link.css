@@ -1,17 +1,14 @@
-body{
-    display:none;
-    position:absolute;
-    background-color:#fff;
-    z-index:10;
-}
+/* new_link의 경우 */
 .uploadBtn{
 
     padding:10px;
     background-color:#6ED4D8;
     border-radius:10px;
+ 
     border:none;
     font-size:12px;
     font-weight:bold;
+    
 }
 .cancelBtn{
     padding:10px;
@@ -39,22 +36,6 @@ body{
     right:10px;
 
 }
-.wrap_choice{
-    display:flex;
-}
-.choice{
-    flex:1;
-    margin-left:35px;
-}
-.choice > img {
-    height:50px;
-    width:auto;
-    margin:0 auto;
-}
-.choice > p{
-    text-align: center;
-}
-textarea{
-    
-    width:80%;
+#input_content{
+    height:80%;
 }
