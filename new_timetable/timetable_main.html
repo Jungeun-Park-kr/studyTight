@@ -15,7 +15,6 @@
     <style>
         @import url(/new_mainframe.css);
         @import url(/timetable/timetable_main.css);
-        @import url(/mainframe.css);
         @import url(/timetable/timetable_edit.css);
     </style>
     <script src="/user/users.js"></script>
@@ -25,12 +24,9 @@
 </head>
 <body>
     <div id="wrap">
-        <div id="header">
+        <div id="header" role="banner">
         </div>
-        
-        <div class="body">
-        <!-- section을 div class= "body"로 나중에 이름 변경 -->
-        <div class="section"> 
+        <div id="container" role="main">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="timetable_section">
                 <div class="background_box">
@@ -356,7 +352,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
         <div class="aside">
             <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
