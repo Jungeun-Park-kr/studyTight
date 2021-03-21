@@ -1,7 +1,7 @@
 function newPostIt(){
     //파일, 내용 , 링크 저장하는 팝업창
     var popupWidth = 400;
-    var popupHeight = 300;
+    var popupHeight = 180;
     var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
     var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
     var url = "new_choice.html"; 
