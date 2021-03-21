@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
     <head>
         <style>
         @import url(new_choice.css);
-        @import url(/font.css);
+        /* @import url(/font.css); */
         </style>
         <script src="new_folder.js"></script>
     </head>
 
-    <body>
+    <body class="body_choice">
         <div>
             <div class="header_choice">
                 작성할 종류를 선택하세요.
             </div>
 
-            <hr>
+            <hr/>
 
-            <div class="wrap_choice">
-                <!-- <table>
-                <th><div class="choice" onclick="choice(0);"> 글 </div></th>
-                <th><div class="choice" onclick="choice(1);">링크</div></th>
-                <th><div class="choice" onclick="choice(2);">파일</div></th>
-                </table> -->
+            <!-- <div class="wrap_choice">
                 <div class="choice" onclick="choice(0);"><img src="media/content.png"><p>글</p></div>
                 <div class="choice" onclick="choice(1);"><img src="media/link.png"><p>링크</p></div>
                 <div class="choice" onclick="choice(2);"><img src="media/file.png"><p>파일</p></div>
-            </div>
+            </div> -->
+            <ul class="wrap_choice">
+                <li class="choice" onclick="choice(0);">
+                    <img src="media/content.png" ><span>글</span></img>
+                </li>
+                <li class="choice" onclick="choice(1);">
+                    <img src="media/link.png"><span>링크</span></img>
+                </li>
+                <li class="choice" onclick="choice(2);">
+                    <img src="media/file.png"><span>파일</span></img>
+                </li>
+            </ul>
             
         </div>
     </body>
