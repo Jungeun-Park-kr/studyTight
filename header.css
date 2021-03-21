@@ -4,6 +4,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     border-radius:3px;
     box-shadow:0px 3px 5px 0px #999;
+    margin-bottom: 20px;
 }
 .logo_area {
     height:100%;
@@ -52,16 +53,6 @@ ul {
     text-decoration: none;
     font-size: 13px;
     color:#000;
-}
-
-.page-header {
-    width:80%;
-    height:15%;
-    display:inline-block;
-}
-.page-header > div {
-    display: inline-block;
-    margin-top: 20px;
 }
 
 
