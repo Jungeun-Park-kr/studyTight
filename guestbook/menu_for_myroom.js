@@ -1,5 +1,5 @@
 function btnHome() {
-    location.replace("/mainframe.html"); //홈 주소 //뒤로가기불가
+    location.replace("/new_mainframe.html"); //홈 주소 //뒤로가기불가
     //location.href("#"); //뒤로가기 가능
     var fname = localStorage.getItem('friendName');
     if (fname != null) { //페이지 빠져나가기 전에 방문한 친구 이름 삭제
