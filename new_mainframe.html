@@ -14,9 +14,10 @@
     });
     </script>
     <style>
+        @import url(/mainframe_shortcuts.css);
         @import url(/new_mainframe.css);
         @import url(/font.css); 
-        @import url(/mainframe_shortcuts.css);
+
     </style>
 </head>
 
@@ -25,213 +26,218 @@
         <div id="header" role="banner">
         </div>
         <div id="container" role="main">
-            <div class="shortcuts_wrap">
-                <div id="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
-                <div id="shortcuts_link" onclick="openLink();">바로가기</div>
+            <div id="shortcuts_wrap">
+                <div class="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
+                <div class="shortcuts_link" onclick="openLink();">바로가기</div>
+            </div>
+            <div id="MAIN_LEFT" class="column_left">
+                <div class="section">
+                    <!-- 여기는 본문 들어갈 메인 섹션 -->
+                    <div class="D-day" id="D-day">
+                        <!-- 디데이 설정한 부분 -->
+                        <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-1</span>A</div>
+                        <div class="d-day" id="d-day2"><span class="d-date" id="d-date2">D-2</span>B</div>
+                        <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-3</span>C</div>
+                        <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-4</span>D</div>
+                        <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-5</span>E</div>
+                        <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" >D-6</span>F</div>
+                        <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
+                        <!-- <script>
+                            var username = localStorage.getItem('username');
+                            activeUser = getActiveUser(username);
+        
+                            var parentDiv = document.getElementById("D-day")
+        
+                            var d_daylist = activeUser.d_day;
+                            for (var i = 0; i < d_daylist.length; i++) {
+                                var show_day = document.createElement("div");
+                                var show_content = document.createElement("span");
+                                show_day.setAttribute("class", "d-day")
+                                show_content.setAttribute("class", "d-date")
+                                var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
+                                show_content.innerHTML = tmp.content
+        
+                                show_day.innerHTML="D-"+tmp.day //현재 날짜
+                                //show_day.innerHTML = "D-" + --tmp.day;
+        
+                                show_day.appendChild(show_content)
+                                parentDiv.appendChild(show_day)
+                                show_day.style.fontWeight = "bold"
+                                show_content.style.color = "black"
+                                if (tmp.day < '4') {
+                                    show_day.style.color = "red"
+        
+                                } else if (tmp.day < '8') {
+                                    show_day.style.color = "blue"
+                                } else {
+                                    show_day.style.color = "black"
+                                }
+                            }
+                        </script> -->
+                    
+                    </div>
+        
+                    <div class="folder_">
+                        
+                        <!-- <div id="wrap_folder" class="wrap_folder"> -->
+        
+                            <div id="folder_1" class="folder">
+                                <img src="media/plus_folder_yellow.png" class="folder_img"/>
+                                <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
+                                <p class="main_folder_name">알고리즘</p>
+                            
+                            
+                            <!-- <p onclick="location.href='/folder/folder.html'">A</p> -->
+                        </div>
+                        
+                            <div id="folder_2" class="folder">
+                                <img src="media/plus_folder_green.png"  class="folder_img"/>
+                                <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(1)" />
+                                <p class="main_folder_name">컴통신</p>
+                            
+                            
+                            <!-- <p onclick="location.href='/folder/folder.html'">B</p> -->
+                        </div>
+                        <div id="folder_3" class="folder">
+                            <img src="media/plus_folder_red.png"  class="folder_img"/>
+                            <img src="media/fixed_empty.png" class="fixed"  onclick="fixedClicked(2)" />
+                            <p class="main_folder_name">네트워크</p>
+                            
+                            
+                            <!-- <p onclick="location.href='/folder/folder.html'">C</p> -->
+                        </div>
+                        <div id="folder_4" class="folder">
+                            <img src="media/plus_folder_orange.png"  class="folder_img"/>
+                            <img src="media/fixed_empty.png" class="fixed"  onclick="fixedClicked(3)" />
+                            <p class="main_folder_name">정보보안</p>
+                            
+                            <!-- <p onclick="location.href='/folder/folder.html'">D</p> -->
+                        </div>
+                            <!-- <script>
+                                var username = localStorage.getItem('username');
+                                activeUser = getActiveUser(username);
+                                var folder_list = activeUser.folder;
+        
+                                var wrap = document.getElementById("wrap_folder")
+        
+                                for (var i = 0; i < folder_list.length; i++) {
+                                    var ran_color = Math.random();
+        
+                                    var tmp = folder_list[i]
+                                    var new_div = document.createElement("div")
+                                    new_div.setAttribute("class", "folder")
+                                    var new_star = document.createElement("img")
+                                    new_star.setAttribute("class", "folder_star")
+                                    new_star.setAttribute("onclick", "starClicked(" + i + ")")
+                                    var new_p = document.createElement("p");
+                                    new_p.setAttribute("class", "folder_course")
+        
+                                    new_p.innerHTML = tmp.title
+        
+                                    new_p.setAttribute("onclick", "toNextPage(" + i + ")")
+        
+                                    //console.log(tmp.title)
+                                    if (tmp.star == "true") {
+                                        new_star.src = "media/fixed_full.png"
+                                    } else {
+                                        new_star.src = "media/fixed_empty.png"
+                                    }
+        
+                                    folder_list[i]
+                                    var random = Math.floor(ran_color * 3);
+                                    if (i % 3 == 0) {
+                                        new_div.style.backgroundColor = "#E36363"
+                                    } else if (i % 3 == 1) {
+                                        new_div.style.backgroundColor = "#E3B863"
+                                    } else {
+                                        new_div.style.backgroundColor = "#6ED4D8"
+                                    }
+        
+        
+                                    new_div.appendChild(new_star)
+                                    new_div.appendChild(new_p)
+                                    wrap.appendChild(new_div)
+                                        //랜덤함수로 folder마다 색을 달리 함
+                                }
+                            </script> -->
+                        <!-- </div> -->
+                        <div id="folder_plus" onclick="newFolder()" ;>
+                            <img src="media/plus_folder_gray.png"/><p>추가하기</p>
+        
+                            <!-- <script>
+                                var username = localStorage.getItem('username');
+                                activeUser = getActiveUser(username);
+        
+                                function newFolder() {
+                                    var new_name = prompt("폴더 이름을 입력하세요", "");
+                                    var new_div = document.createElement('div');
+        
+                                    var origin_div = document.getElementById('wrap_folder');
+                                    //append로 안함
+                                    var before_div = document.getElementById('folder_1');
+        
+                                    //별 넣기
+                                    new_star = document.createElement('img');
+                                    new_star.setAttribute('id', 'new_star');
+                                    new_star.src = "media/empty_star.png"
+                                    new_star.style.float = "left";
+                                    new_star.style.margin = "5px";
+                                    new_star.style.width = "25px";
+                                    new_star.style.height = "auto";
+                                    new_star.style.dispaly = "inline";
+                                    new_star.setAttribute('onclick', "newClicked();")
+        
+                                    var new_p = document.createElement('p');
+                                    new_p.innerHTML = new_name;
+                                    new_p.setAttribute("onclick", "toNextPage(" + 6 + ")")
+                                    new_div.setAttribute('class', 'new_div');
+                                    new_div.append(new_star);
+                                    new_div.append(new_p);
+        
+                                    origin_div.insertBefore(new_div, before_div);
+        
+                                    var new_folder = {
+                                        title: new_p.innerHTML,
+                                        star: "false",
+                                        postIt: []
+        
+                                    }
+                                    activeUser.folder.push(new_folder);
+        
+                                    console.info(activeUser.folder)
+                                }
+                            </script> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="MAIN_RIGHT" class="column_right">
+                <div class="aside">
+                    <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+                    <div class="aside_wrap">
+                            <p>오늘 할 일</p>
+                            <div class="today">
+                            <div class="todaylist" id="todaylist">
+                                <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
+                                <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
+                                <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
+                                <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
+                            </div>
+                            <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
+                            <!--+부분 이미지로 넣기-->
+                        </div>
+                        <div class="caution">
+                            오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
+                        </div>
+                    </div>
+                    <script>
+                        //refreshToday();
+                    </script>
+                </div>
             </div>
         
-        <div class="aside">
-            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
-            <div class="aside_wrap">
-                    <p>오늘 할 일</p>
-                    <div class="today">
-                    <div class="todaylist" id="todaylist">
-                        <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
-                        <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
-                    </div>
-                    <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
-                    <!--+부분 이미지로 넣기-->
-                </div>
-                <div class="caution">
-                    오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
-                </div>
-            </div>
-            <script>
-                //refreshToday();
-            </script>
-        </div>
 
-        <div class="section">
-            <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="D-day" id="D-day">
-                <!-- 디데이 설정한 부분 -->
-                <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-1</span>A</div>
-                <div class="d-day" id="d-day2"><span class="d-date" id="d-date2">D-2</span>B</div>
-                <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-3</span>C</div>
-                <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-4</span>D</div>
-                <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-5</span>E</div>
-                <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" >D-6</span>F</div>
-                <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
-                <!-- <script>
-                    var username = localStorage.getItem('username');
-                    activeUser = getActiveUser(username);
-
-                    var parentDiv = document.getElementById("D-day")
-
-                    var d_daylist = activeUser.d_day;
-                    for (var i = 0; i < d_daylist.length; i++) {
-                        var show_day = document.createElement("div");
-                        var show_content = document.createElement("span");
-                        show_day.setAttribute("class", "d-day")
-                        show_content.setAttribute("class", "d-date")
-                        var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
-                        show_content.innerHTML = tmp.content
-
-                        show_day.innerHTML="D-"+tmp.day //현재 날짜
-                        //show_day.innerHTML = "D-" + --tmp.day;
-
-                        show_day.appendChild(show_content)
-                        parentDiv.appendChild(show_day)
-                        show_day.style.fontWeight = "bold"
-                        show_content.style.color = "black"
-                        if (tmp.day < '4') {
-                            show_day.style.color = "red"
-
-                        } else if (tmp.day < '8') {
-                            show_day.style.color = "blue"
-                        } else {
-                            show_day.style.color = "black"
-                        }
-                    }
-                </script> -->
-            
-            </div>
-
-            <div class="folder_">
-                
-                <!-- <div id="wrap_folder" class="wrap_folder"> -->
-
-                    <div id="folder_1" class="folder">
-                        <img src="media/plus_folder_yellow.png" class="folder_img"/>
-                        <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
-                        <p class="main_folder_name">알고리즘</p>
-                    
-                    
-                    <!-- <p onclick="location.href='/folder/folder.html'">A</p> -->
-                </div>
-                
-                    <div id="folder_2" class="folder">
-                        <img src="media/plus_folder_green.png"  class="folder_img"/>
-                        <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(1)" />
-                        <p class="main_folder_name">컴통신</p>
-                    
-                    
-                    <!-- <p onclick="location.href='/folder/folder.html'">B</p> -->
-                </div>
-                <div id="folder_3" class="folder">
-                    <img src="media/plus_folder_red.png"  class="folder_img"/>
-                    <img src="media/fixed_empty.png" class="fixed"  onclick="fixedClicked(2)" />
-                    <p class="main_folder_name">네트워크</p>
-                    
-                    
-                    <!-- <p onclick="location.href='/folder/folder.html'">C</p> -->
-                </div>
-                <div id="folder_4" class="folder">
-                    <img src="media/plus_folder_orange.png"  class="folder_img"/>
-                    <img src="media/fixed_empty.png" class="fixed"  onclick="fixedClicked(3)" />
-                    <p class="main_folder_name">정보보안</p>
-                    
-                    <!-- <p onclick="location.href='/folder/folder.html'">D</p> -->
-                </div>
-                    <!-- <script>
-                        var username = localStorage.getItem('username');
-                        activeUser = getActiveUser(username);
-                        var folder_list = activeUser.folder;
-
-                        var wrap = document.getElementById("wrap_folder")
-
-                        for (var i = 0; i < folder_list.length; i++) {
-                            var ran_color = Math.random();
-
-                            var tmp = folder_list[i]
-                            var new_div = document.createElement("div")
-                            new_div.setAttribute("class", "folder")
-                            var new_star = document.createElement("img")
-                            new_star.setAttribute("class", "folder_star")
-                            new_star.setAttribute("onclick", "starClicked(" + i + ")")
-                            var new_p = document.createElement("p");
-                            new_p.setAttribute("class", "folder_course")
-
-                            new_p.innerHTML = tmp.title
-
-                            new_p.setAttribute("onclick", "toNextPage(" + i + ")")
-
-                            //console.log(tmp.title)
-                            if (tmp.star == "true") {
-                                new_star.src = "media/fixed_full.png"
-                            } else {
-                                new_star.src = "media/fixed_empty.png"
-                            }
-
-                            folder_list[i]
-                            var random = Math.floor(ran_color * 3);
-                            if (i % 3 == 0) {
-                                new_div.style.backgroundColor = "#E36363"
-                            } else if (i % 3 == 1) {
-                                new_div.style.backgroundColor = "#E3B863"
-                            } else {
-                                new_div.style.backgroundColor = "#6ED4D8"
-                            }
-
-
-                            new_div.appendChild(new_star)
-                            new_div.appendChild(new_p)
-                            wrap.appendChild(new_div)
-                                //랜덤함수로 folder마다 색을 달리 함
-                        }
-                    </script> -->
-                <!-- </div> -->
-                <div id="folder_plus" onclick="newFolder()" ;>
-                    <img src="media/plus_folder_gray.png"/><p>추가하기</p>
-
-                    <!-- <script>
-                        var username = localStorage.getItem('username');
-                        activeUser = getActiveUser(username);
-
-                        function newFolder() {
-                            var new_name = prompt("폴더 이름을 입력하세요", "");
-                            var new_div = document.createElement('div');
-
-                            var origin_div = document.getElementById('wrap_folder');
-                            //append로 안함
-                            var before_div = document.getElementById('folder_1');
-
-                            //별 넣기
-                            new_star = document.createElement('img');
-                            new_star.setAttribute('id', 'new_star');
-                            new_star.src = "media/empty_star.png"
-                            new_star.style.float = "left";
-                            new_star.style.margin = "5px";
-                            new_star.style.width = "25px";
-                            new_star.style.height = "auto";
-                            new_star.style.dispaly = "inline";
-                            new_star.setAttribute('onclick', "newClicked();")
-
-                            var new_p = document.createElement('p');
-                            new_p.innerHTML = new_name;
-                            new_p.setAttribute("onclick", "toNextPage(" + 6 + ")")
-                            new_div.setAttribute('class', 'new_div');
-                            new_div.append(new_star);
-                            new_div.append(new_p);
-
-                            origin_div.insertBefore(new_div, before_div);
-
-                            var new_folder = {
-                                title: new_p.innerHTML,
-                                star: "false",
-                                postIt: []
-
-                            }
-                            activeUser.folder.push(new_folder);
-
-                            console.info(activeUser.folder)
-                        }
-                    </script> -->
-                </div>
-            </div>
-        </div>
+        
     </div>
         
     </div>

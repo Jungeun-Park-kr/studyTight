@@ -1,12 +1,23 @@
 
-.shortcuts_wrap {
-    width:100%;
+#shortcuts_wrap {
+    position: relative;
+    width: 1130px;
+    padding: 0px 30px 20px;
     margin: 0 auto;
+    height: auto;
 }
-#shortcuts_title {
+
+/* 자식이 float속성을 사용해도 wrap으로 감싸기 위해 아래 코드 사용 */
+#shortcuts_wrap:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.shortcuts_title {
     font-family : Open Sans;
     float: left;
-    width:50%;
+    width:550px;
     height:40px;
     margin: 0 auto;
     margin-left: 20%;
@@ -19,10 +30,11 @@
     font-weight: bold;
 
 }
-#shortcuts_link {
+
+.shortcuts_link {
     font-family:Open Sans;
     float:left;
-    width:10%;
+    width:100px;
     margin: 0 auto;
     height:40px;
     margin-right: 10%;
@@ -35,7 +47,8 @@
     line-height: 40px;
     cursor: pointer;
 }
-#shortcuts_link:hover{
+
+.shortcuts_link:hover{
     text-decoration: underline;
 }
 /* #btn_shortcuts_link {
