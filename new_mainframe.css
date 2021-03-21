@@ -1,19 +1,43 @@
-#wrap {
-    min-width: 1080px;
+body, button, input, select, table, textarea {
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 body {
-    background-color: #e7eff0;
-    min-width: 1080px;
-    margin:0 auto;
+    /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
+    따라서 명시적으로 margin:0px로 지정해줌! */
+    margin : 0px;
 }
 
-.body{
-    width:60%;
-    margin-left:20%;
-    margin-right:20%;
-    height:100%;
+#wrap {
+    overflow: hidden;
+    min-width: 1190px;
 }
 
+#header {
+    position: relative;
+    background-color: #fff;
+    z-index: 2000;
+}
+
+#container {
+    position: relative;
+    width: 1130px;
+    padding: 20px 30px;
+    margin: 0 auto;
+    letter-spacing: -.2px;
+}
+
+#container {
+    position: relative;
+    width: 1130px;
+    padding: 20px 30px;
+    margin: 0 auto;
+    letter-spacing: -.2px;
+}
 
 .aside {
     width: 18%;
@@ -26,13 +50,6 @@ body {
     height:auto;
     margin:10px;
     display:inline;
-}
-
-.section {
-    width:80%;
-    height:85%;
-    float:left;
-    margin-top: 20px;
 }
 
 .aside .today {
@@ -116,7 +133,7 @@ body {
     font-weight:bolder;
     /* color:red; */
 }
-.section .folder_ {
+.container .folder_ {
     /* 폴더를 감싸는 흰 div */
     margin-left:4.8%;
     margin-top:2%;
@@ -130,7 +147,7 @@ body {
     align-items: center;
 
 }
-/* .section .folder > div > span{
+/* .container .folder > div > span{
     /* 폴더 추가할 때 플러스 버튼 */
     /* //font-weight:bold;
     font-size:1.5em; */
@@ -189,7 +206,7 @@ body {
     width: 15px; 
     height: auto;
 }
-/* .section .folder > div > span {
+/* .container .folder > div > span {
     display:block;
 } */
 /* #folder_1{
