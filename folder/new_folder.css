@@ -2,22 +2,40 @@
 /* 폴더 내부 */
 body {
     background-color: #e7eff0;
+    margin:0px;
+    height:100%;
+}
+#wrap{
+    overflow:hidden;
     min-width:1190px;
 }
-.wrap_folder{
-    width:60%;
-    margin-left:20%;
+#container{
+    position: relative;
+    width: 1190px;
+    padding: 20px 30px;
+    margin: 0 auto;
+    letter-spacing: -.2px;
 }
-.section{
-    min-width: 718px;
+#container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/* 
+#MAIN_LEFT{
+    width:850px;
     float:left;
-    width:80%; 
+} */
+.section{
+    /* min-width: 718px; */
+    float:left;
+    width:750px; 
     height:550px;
     /* height:35vw;
     width:718px; */
-    margin-right:10px;
-    margin-top:15px;
-    background-image:url("/media/plus_folder_gray.png");
+    /* margin-right:10px;
+    margin-top:15px; */
+    background-image:url("/media/folder_grey.svg");
     background-size:cover;
 
 }
@@ -62,9 +80,9 @@ body {
 
     height: 65px;
 }
-.folder_todo{
+#MAIN_RIGHT{
     float:right;
-    width:18%;
+    width:250px;
     display:inline;
 }
 .folder_name{
@@ -183,8 +201,8 @@ label{
 }
 .dropdown_content > button{
     margin:0 auto;
-    background-color: white;
-    border:white;
+    background-color: rgba(255,255,255,0.8);
+    border:white; 
     border-style:none;
     display:flex;
     align-items: center;
@@ -196,7 +214,8 @@ label{
     border: radius 0;
     box-sizing: border-box;
     color:black;
-    font:11px;
+    font-size:10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     min-height:32px;
     padding:0 12px;
     text-align:start;
