@@ -3,14 +3,26 @@
     <head>
         <style>@import url("d-day.css");</style>
         <script src="/user/users.js"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+        <script> $(document).ready(function() {
+            $("#datepicker").datepicker(); });
+            </script>
+
+
     </head>
     <body>
-        <h3>디데이 관리</h3>
+        <p>디데이 관리</p>
         <hr>
         <div class="plus-part">
             <!-- 추가할 때의 부분 -->
-            <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input>
-            <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"/>
+            <div id="datepicker"></div>
+            <input type="button" id="d-date" class="d-date" onclick="showDatePicker('datepicker');" value="날짜"></input>
+            <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
+            <input type="text" id="d-content" class="d-content" placeholder="내용">
+            <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->
+            <!-- <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"></input> -->
             <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
             <input type="button" class="d-plus" value="디데이 추가" onclick="storeDday('day','content');"
                 value="디데이 추가"></input>
@@ -18,13 +30,13 @@
         <hr>
         <div>
             <!-- 테이블 형식으로 수정, 삭제 만들기 -->
-            <table id="table-d">
+            <!-- <table id="table-d">
                 <thead>
                     <tr><th>D-day</th><th>내용</th><th>수정</th><th>삭제</th></tr>
                 
                 </thead>
                 <tbody id="table_body">
-                    <!-- <tr>
+                    <tr>
                         <td class="day">D-1</td><td class="content" contenteditable="false">정보보안 퀴즈</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(0)"></td>
                         <td><button class='btn_delete_d-day' onclick="deleteDday(0)"></td>
@@ -53,10 +65,10 @@
                         <td class="day">D-28</td><td  class="content" contenteditable="false">SAP 플젝 마감</td>
                         <td><button class="btn_modify_d-day" onclick="modifyDday(5)"></button></td>
                         <td><button class="btn_delete_d-day" onclick="deleteDday(5)"></button></td>
-                    </tr> -->
+                    </tr>
                 
-                </tbody>
-                <script>
+                </tbody> -->
+                <!-- <script>
                     var username=localStorage.getItem('username');
                     activeUser=getActiveUser(username);
                     var d_daylist=activeUser.d_day;
@@ -103,9 +115,13 @@
                     }
                     
                 </script>
-            </table>
+            </table> -->
         </div>
-        <hr>
+
+        <div class="buttons_wrap">
+            <input type="button" class="cancelBtn" value="취소" onclick="cancelLink()"/>
+            <input type="button" class="uploadBtn" value="완료" onclick="uploadLink()"/>
+        </div>
     </body>
     <script src="d-day.js"></script>
 </html>
