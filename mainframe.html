@@ -35,12 +35,42 @@
                     <!-- 여기는 본문 들어갈 메인 섹션 -->
                     <div class="D-day" id="D-day">
                         <!-- 디데이 설정한 부분 -->
-                        <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-1</span>A</div>
-                        <div class="d-day" id="d-day2"><span class="d-date" id="d-date2">D-2</span>B</div>
-                        <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-3</span>C</div>
-                        <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-4</span>D</div>
-                        <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-5</span>E</div>
-                        <div class="d-day" id="d-day6"><span class="d-date" id="d-date6" >D-6</span>F</div>
+                        <div class="d-day" id="d-day0"><span class="d-date" id="d-date0">D-1</span>영어 공부하기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(0);">
+                            <div id="dropdown-day0" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day0" onclick="reviseDayClicked(0);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day0" onclick="deleteDayClicked(0);"></button>
+                            </div></div>
+                        <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-2</span>유세인트 학인하기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(1);">
+                            <div id="dropdown-day1" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day1" onclick="reviseDayClicked(1);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day1" onclick="deleteDayClicked(1);"></button>
+                            </div></div>
+                        <div class="d-day" id="d-day2"><span class="d-date" id="d-date2" >D-3</span>보고서 제출하기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(2);">
+                            <div id="dropdown-day2" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day2" onclick="reviseDayClicked(2);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day2" onclick="deleteDayClicked(2);"></button>
+                            </div></div>
+                        <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-4</span>책 찾아보기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(3);">
+                            <div id="dropdown-day3" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day3" onclick="reviseDayClicked(3);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day3" onclick="deleteDayClicked(3);"></button>
+                            </div></div>
+                        <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-5</span>예제 찾아보기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(4);">
+                            <div id="dropdown-day4" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day4" onclick="reviseDayClicked(4);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day4" onclick="deleteDayClicked(4);"></button>
+                            </div></div>
+                        <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-6</span>문제 풀기
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(5);">
+                            <div id="dropdown-day5" class="dropdown_day">
+                            <button role="menuitem" class="dropdown_choice" id="revise_day5" onclick="reviseDayClicked(5);"></button>
+                            <button role="menuitem" class="dropdown_choice" id="delete_day5" onclick="deleteDayClicked(5);"></button>
+                            </div></div>
                         <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
                         <!-- <script>
                             var username = localStorage.getItem('username');
