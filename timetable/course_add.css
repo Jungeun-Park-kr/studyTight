@@ -1,5 +1,5 @@
-/* 레이어 팝업 */
-
+/****** 레이어(모달) 팝업 ******/
+/* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
 .modal { 
     position: fixed; 
     left: 0; 
@@ -12,9 +12,10 @@
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 } 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) */
 .modal-content { 
     position: absolute; 
-    top: 55%; 
+    top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     background-color: white; 
@@ -25,6 +26,7 @@
     margin : 0 auto;
 } 
 
+/* 아래 주석표시는 필요없는 코드들이에요.. 무시해주세용 */
 /* .modal {
     position: fixed;
     top: 0;
@@ -55,8 +57,8 @@
 } */
 
 
-/* 팝업 내 요소들 */
-
+/****** 팝업 내 요소들 ******/
+/* 팝업 제목 */
 .title{ 
     font-size:13px;
     margin-bottom:10px;
