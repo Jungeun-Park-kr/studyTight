@@ -111,3 +111,17 @@ function new_delete(){
 }
 //user의 정보들 가져오기 완료
 //가져와서 삭제, 추가 가능함.
+
+function showDatePicker(datepicker){
+    var obj=document.getElementById(datepicker);
+    if(obj.style.display=="block"){
+        obj.style.display="none";
+    }
+    else{
+        obj.style.display="block";
+    }
+    //날짜를 누르면 display=none으로 된 다음에
+    //해당 날짜가 "날짜"에 입력되어야 함
+    //크기를 조절할 수 없어 창 크기를 수정해야 함
+    
+}

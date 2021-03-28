@@ -1,38 +1,74 @@
-#wrap {
-    min-width: 1080px;
+body, button, input, select, table, textarea {
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 body {
-    background-color: #e7eff0;
-    min-width: 1080px;
-    margin:0 auto;
+    /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
+    따라서 명시적으로 margin:0px로 지정해줌! */
+    margin : 0px;
 }
 
-.body{
-    width:60%;
-    margin-left:20%;
-    margin-right:20%;
-    height:100%;
-}
-
-
-.aside {
-    width: 18%;
+html, body {
+    /* wrap으로 감싸는 영역의 height가 0으로 떠서 상위 영역인 body의 height:100%으로 함*/
     height : 100%;
-    float : right;
 }
+
+/* wrap 부분 : html의 <body>태그 전체를 감싸는 부분 */
+#wrap {
+    overflow: hidden;
+    min-width: 1190px;
+}
+
+/* header부분 : 로고,메뉴,로그인 표시 영역 */
+#header {
+    position: relative;
+    background-color: #fff;
+    z-index: 2000;
+}
+
+/* 메인 영역 : 헤더 아래 메인 콘텐츠들 표시 영역 */
+#container {
+    position: relative;
+    width: 1190px;
+    padding: 20px 30px;
+    margin: 0 auto;
+    letter-spacing: -.2px;
+}
+
+/* 자식이 float속성을 사용해도 wrap으로 감싸기 위해 아래 코드 사용 */
+#container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 메인의 좌측 영역 : 폴더, d-day를 감싸는 영역 */
+.column_left {
+    /* 네이버 : 750 */
+    float:left;
+    width: 850px;
+}
+
+/* 메인의 우측 영역: 오늘 할 일 영역 */
+.column_right {
+    /* 네이버 : 350 */
+    float:right;
+    width: 250px;
+}
+
+
+
+/* @@@@아래부터는 원래 있던 코드 : 기존의 코드 영역을 위에 추가한 새로운 태그들로 감쌌음!@@@ */
 
 .aside_wrap {
     width:12%;
-    height:auto;
+    /* height:auto; */
     margin:10px;
     display:inline;
-}
-
-.section {
-    width:80%;
-    height:85%;
-    float:left;
-    margin-top: 20px;
 }
 
 .aside .today {
@@ -96,16 +132,16 @@ body {
     /* d-day표시 */
     display: inline-block;
     margin: 10px;
-    width: 20%;
+    width: 170px;
     height: 40px;
     background: white;
     border-radius: 3px;
     box-shadow: 2px 2px 2px rgb(128, 128, 128);
     vertical-align: middle;
     font-size:12px;
+    font-family: 'Open Sans' !important;
     font-weight:bolder;
 }
-
 .d-date {
     /* 세로 정렬 필요 */
     display: inline-block;
@@ -113,10 +149,12 @@ body {
     margin-top:10px;
     margin-right: 10px;
     font-size:13px;
-    font-weight:bolder;
+    font-weight:bold;
+    font-family: 'Open Sans' !important;
+
     /* color:red; */
 }
-.section .folder_ {
+.container .folder_ {
     /* 폴더를 감싸는 흰 div */
     margin-left:4.8%;
     margin-top:2%;
@@ -130,7 +168,7 @@ body {
     align-items: center;
 
 }
-/* .section .folder > div > span{
+/* .container .folder > div > span{
     /* 폴더 추가할 때 플러스 버튼 */
     /* //font-weight:bold;
     font-size:1.5em; */
@@ -189,7 +227,7 @@ body {
     width: 15px; 
     height: auto;
 }
-/* .section .folder > div > span {
+/* .container .folder > div > span {
     display:block;
 } */
 /* #folder_1{
@@ -204,4 +242,61 @@ body {
  #folder_4{
     background-image:url(/media/plus_folder_orange.png);
 } */
+/* .d-dayBtn{
+    position:relative;
+    z-index:1;
+    right:7px;
+    top:7px;
 
+    width:22px;
+    float:right;
+    opacity:0; 
+}
+.d-dayBtn:hover{
+    opacity:1;
+} */
+.dropdown_day{
+    display:none;
+
+    position:relative;
+    z-index:1;
+    top:20px;
+    right:-10px;
+    width:auto;
+    float:right;
+}
+.dropdown_day > button{
+    margin:0 auto;
+    background-color: rgba(255,255,255,0.8);
+    border:white; 
+    border-style:none;
+    display:flex;
+    align-items: center;
+}
+.dropdown_choice{
+    -webkit-tap-highlight-color: transparent;
+    background:none;
+    border:none;
+    border: radius 0;
+    box-sizing: border-box;
+    color:black;
+    font-size:10px;
+    font-family: 'Open Sans' !important;
+    padding:0 12px;
+    text-align:start;
+    user-select:none;
+    width:100%;
+}
+.day_button{
+    position:relative;
+    z-index:1;
+    top:10px;
+    right:5px;
+    width:20px;
+    float:right;
+    
+    opacity:0;
+}
+.day_button:hover{
+    opacity:1;
+}

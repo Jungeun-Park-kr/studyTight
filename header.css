@@ -1,11 +1,18 @@
+body {
+    /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
+    따라서 명시적으로 margin:0px로 지정해줌! */
+    margin : 0px;
+}
+
 .main_header {
     height:100px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius:3px;
     box-shadow:0px 3px 5px 0px #999;
-    margin-bottom: 20px;
+    z-index: inherit;
 }
+
 .logo_area {
     height:100%;
 }

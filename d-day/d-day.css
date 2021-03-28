@@ -1,3 +1,13 @@
+div, input , p , h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#datepicker{
+    display:none;
+    position:relative;
+    z-index:1;
+    left:5px;
+    width:35px;
+}
 .d-date{ 
     /* 날짜 선택하는 부분 */
     width:130px;
@@ -8,6 +18,7 @@
     border-radius:10px;
     border:none;
     font:bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 .d-content{
         width: 220px;
@@ -18,9 +29,12 @@
         border-radius:10px;
         border: none;
         font:bold;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
-h3 {
-    font:bold;
+p {
+    font-weight:bold;
+    font-size:15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .d-plus{
     /* 저장 버튼 */
@@ -38,6 +52,7 @@ h3 {
     justify-content: center;
     align-items: center;
 }
+/*
 table{
     border:none;
     width: 100%;
@@ -85,5 +100,33 @@ table > tbody >  tr> td{
     border: none;
     background: url("media/delete.png") no-repeat;
     cursor: pointer;
-}
+}*/
 
+.buttons_wrap{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+
+}
+.uploadBtn{
+
+    padding:10px;
+    background-color:#6ED4D8;
+    border-radius:10px;
+ 
+    border:none;
+    font-size:12px;
+    font-weight:bold;
+    
+}
+.cancelBtn{
+    padding:10px;
+    border-radius:10px;
+    border-color: #6ED4D8;
+    border-style:solid;
+    background-color: white;
+    border-width:1px;
+    font-size:12px;
+    font-weight:bold;
+    margin-right:10px;
+}

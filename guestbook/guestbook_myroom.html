@@ -33,10 +33,15 @@
     var commnetlist = activeUser.commnetlist;
 </script>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 474e9e3eea0d084a0441d93b7fba38e8be98cdb9
 <body>
     <div id="wrap">
         <div id="header">
         </div>
+<<<<<<< HEAD
         <div class="body">
             <div class="page-bottom">
                 <div class="information-menu">
@@ -79,6 +84,39 @@
                                 Fifth.prepend(Fifthimage);
                                 parent_table.prepend(Fifth);
                             }
+=======
+        
+        <div class="page-bottom">
+            <div class="information-menu">
+                <div class="left-menus-book" id=leftmenu>
+                    <li class="edit-profile">
+                        <input type="button" id="edit-button-id" value="프로필 수정하기" onclick="showFriendAddPopup();"></input>
+                    </li>
+                </div>
+                <script>
+                    function showprofile() {
+                        var username = localStorage.getItem('username');
+                        activeUser = getActiveUser(username);
+                        myprofile = activeUser.guestbook.profile;
+                        var parent_table = document.getElementById("leftmenu"); //부모테이블
+                        var profile = document.createElement("div");
+                        var new_td1 = document.createElement("li");
+                        var userimage = document.createElement('img');
+                        userimage.src = activeUser.userImage; // 이미지 경로 설정
+                        //userimage.innerHTML = "&nbsp" + activeUser.name;
+
+
+                        //여섯번째 li , 테스트에서는 공개되지 않음.
+                        if (myprofile.grade_secret == false) {
+                            var Fifth = document.createElement("li");
+                            Fifth.setAttribute("class", "grade");
+                            var Fifthimage = document.createElement('img');
+                            Fifthimage.src = "media/calendar.png";
+                            Fifth.innerHTML = "&nbsp" + myprofile.grade + "학년";
+                            Fifth.prepend(Fifthimage);
+                            parent_table.prepend(Fifth);
+                        }
+>>>>>>> 474e9e3eea0d084a0441d93b7fba38e8be98cdb9
 
                             //네번째 li
                             if (myprofile.major_secret == false) {
