@@ -3,6 +3,24 @@
     display: inline-block;
 }
 
+#wrap {
+    overflow: hidden;
+    min-width: 1190px;
+}
+
+.section {
+    float: left;
+    width: 70%;
+}
+
+#container {
+    position: relative;
+    width: 1190px;
+    padding: 20px 30px;
+    margin: 0 auto;
+    letter-spacing: -.2px;
+}
+
 body {
     background-color: #e7eff0;
 }
