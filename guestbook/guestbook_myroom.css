@@ -10,7 +10,7 @@
 
 .section {
     float: left;
-    width: 70%;
+    width: 930px;
 }
 
 #container {
@@ -157,9 +157,18 @@ select {
     -webkit-appearance: none;
     /* 네이티브 외형 감추기 */
     -moz-appearance: none;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
     appearance: none;
     margin-top: 40px;
     margin-left: 3%;
+    background-image: url("media/dropdown.png");
+    background-size: 7px 7px;
+    background-position: calc(100% - 10px) calc(1em), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
 }
 
 
