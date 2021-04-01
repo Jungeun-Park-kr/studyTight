@@ -2,7 +2,7 @@
 <html>
     <head>
         <style>
-        @import url(new_choice.css);
+        @import url(new_file.css);
         @import url(/font.css);
         </style>
     </head>
@@ -15,9 +15,12 @@
             <p>제목</p>
             <input type="text" id="input_text" class="input_text" placeholder="제목을 입력하세요">
             <br>
-            <p>파일</p>
-            <input type="file" id="input_file" class="input_file" placeholder="파일 불러오기">
-            
+            <div class="filebox"> 
+                <input class="upload-name" value="파일선택" disabled="disabled">
+                <label for="ex_filename">업로드</label> 
+                <input type="file" id="ex_filename" class="upload-hidden">
+            </div>
+
         </div>
 
         <div class="buttons_wrap">

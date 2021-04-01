@@ -222,3 +222,90 @@ label{
     user-select:none;
     width:100%;
 }
+/****** 레이어(모달) 팝업 ******/
+/* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
+.modal_postIt{ 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: scale(1.1); 
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+} 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
+.modal-content { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 400px; 
+    height: 200px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+} 
+
+/****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
+/* 버튼 클릭시 보이기+애니메이션 */
+.show_modal { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: scale(1.0); 
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
+} 
+/****** 모달 팝업에 보일 콘텐츠들 ******/
+/* 타이틀 */
+.title{ 
+    font-size:13px;
+    margin-bottom:20px;
+    letter-spacing: 2px; 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+} 
+/* 본문 내용 */
+.content {
+    font-size : 11px;
+    letter-spacing : 2px;
+}
+/* 닫기 버튼 */
+.close_button { 
+    float: right; 
+    width: 1.5rem; 
+    line-height: 1.5rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    background-color: lightgray; 
+} 
+.close_button:hover { 
+    background-color: darkgray; 
+}
+
+/* 폴더 추가하기 안에 모달 내부 스타일 */
+.wrap_choice{
+    list-style:none;
+    margin:20px 0;
+    margin-left: 10px;
+}
+.choice{
+    display:inline-block;
+    margin:0 20px;
+    text-align: center;
+}
+.choice > img {
+    height:50px;
+    width:40px;
+
+    margin:10px 0;
+    display:block;
+    align-content: center;  
+}
+.choice > span{
+    font-size:11px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}

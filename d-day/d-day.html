@@ -6,10 +6,13 @@
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
-        <script> $(document).ready(function() {
-            $("#datepicker").datepicker(); });
-            </script>
+        
+        <script type="text/javascript">
+            window.addEventListener('load',function(){
+                window.scrollTo(0,1);
+            },false);
 
+        </script>
 
     </head>
     <body>
@@ -17,8 +20,11 @@
         <hr>
         <div class="plus-part">
             <!-- 추가할 때의 부분 -->
-            <div id="datepicker"></div>
-            <input type="button" id="d-date" class="d-date" onclick="showDatePicker('datepicker');" value="날짜"></input>
+            
+            <input type="text" id="d-date" class="d-date" value="날짜"></input>
+            <script> $(function() {
+                $("#d-date").datepicker(); });
+                </script>
             <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
             <input type="text" id="d-content" class="d-content" placeholder="내용">
             <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->

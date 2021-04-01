@@ -156,11 +156,11 @@ html, body {
 }
 .container .folder_ {
     /* 폴더를 감싸는 흰 div */
-    margin-left:4.8%;
-    margin-top:2%;
+    margin-left:40px;
+    margin-top:20px;
     justify-content: center;
     background-color:white;
-    width:90%;
+    /* width:90%; */
     height:100%;
     text-align: center;
     vertical-align: middle;
@@ -174,8 +174,8 @@ html, body {
     font-size:1.5em; */
 /* } */
 #folder_plus{
-    margin:20px;
-    width: 12%;
+    margin:17px;
+    width: 102px;
     height: 65px;
     vertical-align: middle;
     position:relative;
@@ -186,10 +186,10 @@ html, body {
     width:100%;
     height:auto;
 }
-#folder_plus > img > p {
+#folder_plus > p {
     text-align: center;
 	position: relative;
-	top: 50%;
+	top: -80%;
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
@@ -198,8 +198,8 @@ html, body {
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
     display:inline-block;
-    margin:20px;
-    width: 12%;
+    margin:17px;
+    width: 102px;
     height: 65px;
     /* padding-bottom:10%; */
 
@@ -210,6 +210,13 @@ html, body {
     width:100%;
     height:auto;
 
+}
+.main_folder_name{
+    text-align: center;
+	position: relative;
+	top: -80%;
+	left: 50%;
+	transform: translate( -50%, -50% );
 }
 .folder_course {
     display:block;
@@ -223,7 +230,7 @@ html, body {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
     position:relative;
-    margin-top:-70px; 
+    margin-top:-85%; 
     width: 15px; 
     height: auto;
 }
@@ -287,7 +294,7 @@ html, body {
     user-select:none;
     width:100%;
 }
-.day_button{
+.day_button{ 
     position:relative;
     z-index:1;
     top:10px;
@@ -298,5 +305,18 @@ html, body {
     opacity:0;
 }
 .day_button:hover{
+    opacity:1;
+}
+
+.folder_button{ 
+    position:relative;
+    z-index:1;
+    top:-70px;
+    /* right:5px; */
+    width:15px;
+    float:right;
+    opacity:0;
+}
+.folder_button:hover{
     opacity:1;
 }

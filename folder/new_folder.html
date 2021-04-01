@@ -9,6 +9,8 @@
         });
         </script>
         <script src="new_folder.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <style>@import url(new_folder.css);
             @import url(/font.css);
             @import url(/mainframe_shortcuts.css);
@@ -78,10 +80,53 @@
                     
                     <div id="postIt_plus" class="postIt" onclick="newPostIt();">
                         <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div>
-                    </div>
-                    </div>
+
+                        <div id="modal" class="modal_postIt">
+                            <div class="modal-content">
+                                <span class="close_button close_postIt_button">&times;</span>
+                                <p class="title">작성할 종류를 선택하세요</p> 
+                                <form action="#post.js" method="POST">
+                                    <ul class="wrap_choice">
+                                        <li class="choice" onclick="choice(0);">
+                                            <img src="media/content.png" ><span>글</span></img>
+                                        </li>
+                                        <li class="choice" onclick="choice(1);">
+                                            <img src="media/link.png"><span>링크</span></img>
+                                        </li>
+                                        <li class="choice" onclick="choice(2);">
+                                            <img src="media/file.png"><span>파일</span></img>
+                                        </li>
+                                    </ul> 
+                                </form>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $("#modal").draggable({
+                                containment: 'window',
+                                scroll: false
+                            });
+                    </script> 
+                    <!-- <script type="text/javascript">
+                        var modal_register = document.querySelector(".modal_register"); // 팝업 될 레이어 class명
+                        var trigger_register = document.querySelector("#postIt_plus"); // 가입하기 버튼
+                        var closeRegisterButton = document.querySelector(".close_register_button");  // 우측 상단 닫기 버튼
+                        var confirmRegisterButton = document.querySelector("#confirm_register"); // <- 확인 버튼 (취소 버튼 용으로 씀)
+                        function toggleRegisterModal() {
+                            modal_register.classList.toggle("show_modal");
+                        }
+                        function windowOnClick(event) {
+                            if (event.register === modal_register) {
+                                toggleRegisterModal();
+                            }
+                        }
+                        trigger_register.addEventListener("click", toggleRegisterModal);
+                        confirmRegisterButton.addEventListener("click", toggleRegisterModal);
+                        closeRegisterButton.addEventListener("click", toggleRegisterModal);
+                        window.addEventListener("click", windowOnClick);
+                    </script> -->
                 </div>
-            
+            </div>
+        </div>
                 <div id="MAIN_RIGHT">
                     <p class="wrap_Todolist">할 일 목록</p>
                     

@@ -1,63 +1,84 @@
-.login .login_title, .register .register_title {
-    float:left;
-    font-weight: bold;
-    font-size: 35px;
-    text-align: center;
-    margin:0 auto;
-    width:100%;
-    margin-top: 130px;
-    color: #333333;
-    margin-bottom: 50px;
+body {
+    background-color: #eef7f7;
+    min-width: 1190px;
+    margin: 0 auto;
 }
+
+.section {
+    padding-bottom: 100px;
+}
+
+.login_header {
+    margin-top: 10%;
+}
+
+.login_header .logo_area>img {
+    height: 225px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
 .login_section {
-    width : 350px;
-    margin:0 auto;
+    width: 450px;
+    margin: 0 auto;
 }
-.login_label {
-    font-size : 15px;
-    margin : 20px 0px 5px;
-    padding : 0 10px;
-    color : #999;
 
-}
-.login_form {
-    padding: 0 10px;
-}
-.login_form input {
+.login_form>input {
     align-content: center;
-    width : 100%;
-    height : 40px;
-    padding : 0 15px;
+    width: 100%;
+    height: 50px;
+    padding: 6px 13px;
     box-sizing: border-box;
-    border-radius: 5px;
-    border : 1px solid #ddd;
-}
-.login_btn input{
-    font-weight: bold;
-    width: 100px;
-    height: 40px;
-    float: left;
-    background-color: #6ED4D8;
     border-radius: 10px;
     border: none;
+    border: solid 1px rgba(0, 0, 0, .08);
+    margin-bottom: 20px;
+    font-size: 12px;
     cursor: pointer;
-    margin-top: 30px;
-}
-.register_btn input{
-    font-weight: bold;
-    width: 100px;
-    height: 40px;
-    float: right;
-    background-color: #6ED4D8;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    margin-top: 30px;
-}
-.login_btn {
-    margin-left: 15px;
 }
 
-.register_btn {
-    margin-right : 15px;
+.login_btn {
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    /*div내의 텍스트 중앙정렬 (height, line-height값 동일하게)*/
+    background-color: #6ED4D8;
+    border: solid 1px rgba(0, 0, 0, .08);
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 5px 0px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.bar {
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    text-indent: -999em;
+    background: #e4e4e5;
+    vertical-align: bottom;
+}
+
+.login_info {
+    width: 430px;
+    text-align: center;
+    margin: 0 auto;
+    border-top: 1px solid #e4e4e5;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.login_info a {
+    line-height: 14px;
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: none;
+    color: #8e8e8e;
+    cursor: pointer;
 }
