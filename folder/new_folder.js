@@ -53,7 +53,7 @@ function choice(index){
         var popupHeight = 300;
         var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
         var popupY = (document.body.offsetHeight/2) - (popupHeight/2);
-        var url = "new_link.html"; 
+        var url = "new_file.html"; 
         var name = "plus link"
         var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
         window.open(url, name, option);
