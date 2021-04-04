@@ -27,7 +27,7 @@ body {
 .course_time_section,
 .course_type_section,
 .course_link_section {
-    margin: 10px 0px 20px;
+    margin: 20px 0px 20px;
 }
 
 .search_box {
@@ -54,38 +54,6 @@ body {
     display: inline-block;
 }
 
-select {
-    /* 원하는 너비설정 */
-    padding: .5em .3em;
-    /* 여백으로 높이 설정 */
-    font-family: inherit;
-    /* 폰트 상속 */
-    background: no-repeat 95% 50%;
-    /* 네이티브 화살표 대체 */
-    border: 1px solid #999;
-    border-radius: 0px;
-    /* iOS 둥근모서리 제거 */
-    -webkit-appearance: none;
-    /* 네이티브 외형 감추기 */
-    -moz-appearance: none;
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 10px;
-    display: inline-block;
-    line-height: 1.5em;
-    padding: 0.5em 3.5em 0.5em 1em;
-    appearance: none;
-    margin-top: 40px;
-    margin-left: 3%;
-    background-image: url("media/dropdown.png");
-    background-size: 7px 7px;
-    background-position: calc(100% - 10px) calc(1em), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
-}
-
-.course_title_section div {
-    margin-left: 10%;
-}
-
 .course_title_label,
 .professor_name_label,
 .course_type_lable,
@@ -93,7 +61,7 @@ select {
 .course_link_label,
 .course_location_label {
     font-size: 15px;
-    width: 100px;
+    width: 70px;
     margin: 10px 0px 5px;
     padding: 0 10px;
     color: #333333;
