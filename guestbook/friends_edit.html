@@ -8,37 +8,29 @@
     <script src="/user/users.js"></script>
     <style>
         @import url(/guestbook/friends_edit.css);
+        @import url(/font.css);
     </style>
 </head>
 
 <body style="overflow-x:hidden; overflow-y:auto;"></body>
 
-<div class="add_title">친구 관리하기</div>
+<div class="add_title">친구 추가하기</div>
 <hr>
 <div class="course_add_list">
     <div class="course_section">
         <div class="secret_section">
-            <div class="course_secret_label">선택된 친구</div>
+            <div class="course_secret_label">해당 친구를 추가할 그룹을 선택해 주세요</div>
         </div>
         <div class="course_title_section">
 
 
-            <div class="course_secret_label">양지영</div>
-
             <div class="course_type_form" id="course_type_radio">
 
             </div>
+            양지영 sefsef@nate.com
         </div>
 
 
-    </div>
-    <hr>
-    <div class="professor_name_section">
-        <div class="professor_name_label">즐겨찾기 여부</div>
-        <input type="checkbox" name="select_friend" value="select" checked>
-        <div class="professor_name_form">
-            즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
-        </div>
     </div>
     <hr>
     <div class="professor_name_section">
@@ -51,9 +43,25 @@
             <option value="spanish">연락XX</option>
           </select>
     </div>
-    <hr>
-    <div class="delete_section">
-        친구 삭제하기
+    <div class="add_group_section">
+        <img src="/media/plus.png" id=plus> 새로운 그룹 추가하기
+    </div>
+
+    <div class="course_section">
+        <div class="course_title_section">
+
+            <div class="course_title_form">
+                <input type="text" id="course_title" placeholder="추가할 그룹의 이름을 적어주세요" />
+            </div>
+            <div class="course_type_form" id="course_type_radio">
+
+            </div>
+            <div class="search_btn">
+                <input id="search_course" type="button" title="추가하기" value="그룹추가" onclick="addprofile();"></input>
+            </div>
+        </div>
+
+
     </div>
     <!-- <div class="professor_name_section">
         <div class="professor_name_label">학년</div>
