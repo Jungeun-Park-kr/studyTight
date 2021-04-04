@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTight</title>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
     <script type="text/javascript">   
     $(document).ready( function() {
         $("#header").load("/header.html");  
@@ -284,9 +287,55 @@
                     </script>
                 </div>
             </div>
-        
+        <!-- d-day 추가하기 모달 팝업 -->
+    <div id="modal" class="modal modal_day">
+        <div class="modal-content-day">
+        <span class="close_button close_day_button">&times;</span>
+        <h1 class="title">디데이 추가하기</h1>
+        <form action="#post.js" method="POST">
+            <div class="plus-part">
+                <!-- 추가할 때의 부분 -->
+                
+                <div><input type="text" id="modal-d-date" class="d-date" value="날짜"></input>
+                <script> $(function() {
+                    $("#modal-d-date").datepicker(); });
+                    </script>
+                <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
+                <input type="text" id="modal-d-content" class="d-content" placeholder="내용"></div>
+                <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->
+                <!-- <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"></input> -->
+                <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
+                <div><input type="button" class="modal-d-plus" value="디데이 추가" onclick="storeDday();"
+                    value="디데이 추가"></input></div>
+            </div> 
+        </form>
+        </div>
+    </div>
 
-        
+    <script>
+    var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
+    var trigger_day = document.querySelector("#d-day-plus"); // 가입하기 버튼
+    var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
+    
+    function toggleDayModal() {
+        modal_day.classList.toggle("show_modal");
+    }
+    function windowOnClick(event) {
+        if (event.target === modal_day) {
+            toggleDayModal();
+        }
+    }
+    trigger_day.addEventListener("click", toggleDayModal);
+
+    closeDayButton.addEventListener("click", toggleDayModal);
+    window.addEventListener("click", windowOnClick);
+
+    function storeDday(){
+        alert("추가했습니다~");
+    }
+
+    </script>
+
     </div>
         
     </div>
