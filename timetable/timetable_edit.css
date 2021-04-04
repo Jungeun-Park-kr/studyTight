@@ -3,10 +3,9 @@
 }
 
 /* header부분 : 로고,메뉴,로그인 표시 영역 */
-#header {
+.header {
     position: relative;
     background-color: #fff;
-    z-index: 2000;
 }
 
 .background-box {
