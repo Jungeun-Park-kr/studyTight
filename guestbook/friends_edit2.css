@@ -8,6 +8,13 @@ body {
     margin: 10px;
 }
 
+.delete_section {
+    font-weight: bold;
+    color: red;
+    margin-left: 1%;
+    margin-top: 20px;
+}
+
 #search_course {
     width: 80px;
     height: 40px;
@@ -27,7 +34,7 @@ body {
 .course_time_section,
 .course_type_section,
 .course_link_section {
-    margin: 20px 0px 20px;
+    margin: 10px 0px 20px;
 }
 
 .search_box {
@@ -52,50 +59,25 @@ body {
 .course_link_section div,
 .course_location_section div {
     display: inline-block;
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 
-.course_title_label,
-.professor_name_label,
-.course_type_lable,
-.course_time_label,
-.course_link_label,
-.course_location_label {
-    font-size: 15px;
-    width: 70px;
-    margin: 10px 0px 5px;
-    padding: 0 10px;
-    color: #333333;
-    display: inline-block;
-}
-
-.course_secret_label {
-    font-size: 15px;
-    margin: 10px 0px 5px;
-    padding: 0 10px;
-    color: #333333;
-    display: inline-block;
-    margin-left: 1%;
-}
-
-.course_title_form,
-.professor_name_form,
-.course_type_form,
-.course_link_form,
-.course_location_form {
-    padding: 0 10px;
-}
-
-.course_title_form input,
-.professor_name_form input,
-.course_link_form input,
-.course_location_form input {
-    width: 230px;
-    align-content: center;
-    height: 30px;
-    padding: 0 15px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+button,
+input,
+select,
+table,
+textarea {
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 
 select {
@@ -126,8 +108,51 @@ select {
     background-position: calc(100% - 10px) calc(1em), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
 }
 
-#plus {
-    width: 20px;
+.course_title_section div {
+    margin-left: 10%;
+}
+
+.course_title_label,
+.professor_name_label,
+.course_type_lable,
+.course_time_label,
+.course_link_label,
+.course_location_label {
+    font-size: 15px;
+    width: 100px;
+    margin: 10px 0px 5px;
+    padding: 0 10px;
+    color: #333333;
+    display: inline-block;
+}
+
+.course_secret_label {
+    font-size: 15px;
+    margin: 10px 0px 5px;
+    padding: 0 10px;
+    color: #333333;
+    display: inline-block;
+    margin-left: 1%;
+}
+
+.course_title_form,
+.professor_name_form,
+.course_type_form,
+.course_link_form,
+.course_location_form {
+    padding: 0 10px;
+}
+
+.course_title_form input,
+.professor_name_form input,
+.course_link_form input,
+.course_location_form input {
+    align-content: center;
+    height: 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .add_btn input {
