@@ -1,5 +1,5 @@
-/* 레이어 팝업 */
-
+/****** 레이어(모달) 팝업 ******/
+/* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
 .modal { 
     position: fixed; 
     left: 0; 
@@ -12,6 +12,7 @@
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 } 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
 .modal-content { 
     position: absolute; 
     top: 50%; 
@@ -24,6 +25,7 @@
     border-radius: 0.5rem; 
     margin : 0 auto;
 } 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 작은 버전 */
 .modal-content-small {
     position: absolute; 
     top: 50%; 
@@ -37,8 +39,8 @@
     margin : 0 auto;
 }
 
-/* 버튼 클릭시 이벤트 + 모달 팝업 띄우기 */
-/* 버튼 클릭시 이벤트 */
+/****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
+/* 버튼 클릭시 보이기+애니메이션 */
 .show_modal { 
     opacity: 1; 
     visibility: visible; 
@@ -46,7 +48,7 @@
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
 } 
 
-
+/****** 모달 팝업에 보일 콘텐츠들 ******/
 /* 타이틀 */
 .title{ 
     font-size:13px;
@@ -58,12 +60,6 @@
     font-size : 11px;
     letter-spacing : 2px;
 }
-/* form { 
-    margin: 0 auto; 
-    width: 340px; 
-    align-content: center;
-    
-}  */
 
 /* 닫기 버튼 */
 .close_button { 
@@ -79,23 +75,6 @@
     background-color: darkgray; 
 }
 
-
-/* 확인 버튼 */
-/* #confirm { 
-    width: 200px; height: 40px; 
-    text-align: center; 
-    border: none; 
-    margin-top: 20px; 
-    margin-left: 50px;
-    margin-right: 50px;
-    cursor: pointer; 
-} 
-#confirm:hover{ 
-    color: #fff; 
-    background-color: #216282; 
-    opacity: 0.9; 
-} */
-
 /* 확인 버튼 */
 .btn_confirm {
     color: #000;
@@ -106,14 +85,14 @@
     cursor: pointer;
     border-radius: 10px;
     /* margin : 30px 50px 20px; */
-    /* 버튼을 제일 아래에 고정시키기 */
+    /* 마진 대신 버튼을 제일 아래에 고정시키기 */
     position: absolute;
     bottom:20px;
     left:20%;
 } 
-
+/* 확인 버튼 hover 색깔 (아직 확정X) */
 .btn_confirm:hover {
     color: #fff;
-    background-color: #216282;
+    background-color: #4b9194;
     opacity: 0.9;
 }
