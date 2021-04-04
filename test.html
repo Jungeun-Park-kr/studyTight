@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    var modal_register = document.querySelector(".modal_register"); // 팝업 될 레이어 class명
+    var trigger_register = document.querySelector(".register"); // 가입하기 버튼
+    var closeRegisterButton = document.querySelector(".close_register_button");  // 우측 상단 닫기 버튼
+    var confirmRegisterButton = document.querySelector("#confirm_register"); // <- 확인 버튼 (취소 버튼 용으로 씀)
+
+
+    function toggleRegisterModal() {
+        modal_register.classList.toggle("show_modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.register === modal_register) {
+            toggleRegisterModal();
+        }
+    }
+    
+    trigger_register.addEventListener("click", toggleRegisterModal);
+    confirmRegisterButton.addEventListener("click", toggleRegisterModal);
+    closeRegisterButton.addEventListener("click", toggleRegisterModal);
+    window.addEventListener("click", windowOnClick);
+</script>
