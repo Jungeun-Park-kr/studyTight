@@ -2,6 +2,8 @@ body {
     /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
     따라서 명시적으로 margin:0px로 지정해줌! */
     margin : 0px;
+    /* 스크롤 유무에 따라 header레이아웃이 밀려서 항상 스크롤을 보이게 고정해둠! */
+    overflow-y: scroll
 }
 
 .main_header {

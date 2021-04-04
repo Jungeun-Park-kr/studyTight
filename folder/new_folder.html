@@ -3,14 +3,14 @@
 <html lang="ko">
     <head>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script type="text/javascript">   
         $(document).ready( function() {
             $("#header").load("/header.html");  
         });
         </script>
         <script src="new_folder.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <style>@import url(new_folder.css);
             @import url(/font.css);
             @import url(/mainframe_shortcuts.css);
@@ -78,52 +78,9 @@
                             </div>
                     </div>
                     
-                    <div id="postIt_plus" class="postIt" onclick="newPostIt();">
+                    <div id="postIt_plus" class="postIt">
                         <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div>
 
-                        <div id="modal" class="modal_postIt">
-                            <div class="modal-content">
-                                <span class="close_button close_postIt_button">&times;</span>
-                                <p class="title">작성할 종류를 선택하세요</p> 
-                                <form action="#post.js" method="POST">
-                                    <ul class="wrap_choice">
-                                        <li class="choice" onclick="choice(0);">
-                                            <img src="media/content.png" ><span>글</span></img>
-                                        </li>
-                                        <li class="choice" onclick="choice(1);">
-                                            <img src="media/link.png"><span>링크</span></img>
-                                        </li>
-                                        <li class="choice" onclick="choice(2);">
-                                            <img src="media/file.png"><span>파일</span></img>
-                                        </li>
-                                    </ul> 
-                                </form>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $("#modal").draggable({
-                                containment: 'window',
-                                scroll: false
-                            });
-                    </script> 
-                    <!-- <script type="text/javascript">
-                        var modal_register = document.querySelector(".modal_register"); // 팝업 될 레이어 class명
-                        var trigger_register = document.querySelector("#postIt_plus"); // 가입하기 버튼
-                        var closeRegisterButton = document.querySelector(".close_register_button");  // 우측 상단 닫기 버튼
-                        var confirmRegisterButton = document.querySelector("#confirm_register"); // <- 확인 버튼 (취소 버튼 용으로 씀)
-                        function toggleRegisterModal() {
-                            modal_register.classList.toggle("show_modal");
-                        }
-                        function windowOnClick(event) {
-                            if (event.register === modal_register) {
-                                toggleRegisterModal();
-                            }
-                        }
-                        trigger_register.addEventListener("click", toggleRegisterModal);
-                        confirmRegisterButton.addEventListener("click", toggleRegisterModal);
-                        closeRegisterButton.addEventListener("click", toggleRegisterModal);
-                        window.addEventListener("click", windowOnClick);
-                    </script> -->
                 </div>
             </div>
         </div>
@@ -143,6 +100,106 @@
                 </div>
 
     </div>
+
+        <!-- 종류 선택하기 -->
+    <div id="modal" class="modal_postIt">
+        <div class="modal-postIt-content">
+            <span class="close_button close_postIt_button">&times;</span>
+            <p class="title">작성할 종류를 선택하세요</p> 
+            <form action="#post.js" method="POST">
+                <ul class="wrap_choice">
+                    <li class="choice" id="choice_content" >
+                        <img src="media/content.png" ><span>글</span></img>
+                    </li>
+                    <li class="choice" onclick="choice(1);">
+                        <img src="media/link.png"><span>링크</span></img>
+                    </li>
+                    <li class="choice" onclick="choice(2);">
+                        <img src="media/file.png"><span>파일</span></img>
+                    </li>
+                </ul> 
+            </form>
+        </div>
+    </div>
+
+    <!-- 글을 선택한 경우 -->
+    <div id="modal" class="modal_content">
+        <div class="modal-content-content">
+            <span class="close_button close_content_button">&times;</span>
+            <form action="#post.js" method="POST">
+                <p class="title">글 작성하기</p>
+        <hr>
+
+        <div class="input_wrap">
+            <p>제목</p>
+            <label><input type="text" id="input_title" class="input_text" placeholder="제목을 입력하세요"></label>
+            <br>
+            <p>내용</p>
+            <label><textarea id="input_content" class="input_text" rows="40" cols="30" name="contents" placeholder="내용을 입력하세요"></textarea></label>
+        </div>
+
+        <div class="buttons_wrap">
+            <input type="button" class="cancelBtn" value="취소" onclick="cancelLink()"/>
+            <input type="button" class="uploadBtn" value="완료" onclick="uploadLink()"/>
+        </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(".modal_postIt").draggable({
+            containment: 'window',
+            scroll: false
+        });
+</script>
+<script type="text/javascript">
+    var modal_register = document.querySelector(".modal_postIt"); // 팝업 될 레이어 class명
+    // var modal_content=document.querySelector(".modal_content");
+
+    var trigger_register = document.querySelector("#postIt_plus"); // 폴더 추가하기 버튼
+    // var trigger_content=document.querySelector("#choice_content");
+    
+    var closeRegisterButton=document.querySelector(".close_postIt_button");
+    // var closeContentButton = document.querySelector(".close_content_button");  // 우측 상단 닫기 버튼
+    function toggleRegisterModal() {
+        modal_register.classList.toggle("show_modal");
+    }
+    function toggleContentModal(){
+        modal_content.classList.toggle("show_modal");
+    }
+    function windowOnClick(event) {
+        if (event.target === modal_register) {
+            toggleRegisterModal();
+        }
+        // else if(event.target===modal_content){
+        //     toggleContentModal();
+        // }
+    }
+    trigger_register.addEventListener("click", toggleRegisterModal);
+    // trigger_content.addEventListener("click",toggleContentModal);
+    closeRegisterButton.addEventListener("click", toggleRegisterModal);
+    // closeContentButton.addEventListener("click",toggleContentModal);
+    window.addEventListener("click", windowOnClick);
+</script>
+<script type="text/javascript">
+    var modal_content=document.querySelector(".modal_content");
+    var trigger_content=document.querySelector("#choice_content");
+    var closeContentButton = document.querySelector(".close_content_button");
+
+    function toggleContentModal(){
+        modal_content.classList.toggle("show_modal");
+    }
+    function windowOnClick(event) {
+        if(event.target===modal_content){
+            toggleContentModal();
+        }
+    }
+    
+    trigger_content.addEventListener("click",toggleContentModal);
+    closeContentButton.addEventListener("click",toggleContentModal);
+    window.addEventListener("click", windowOnClick);
+
+</script>
     </div>
     </body>
 </html>

@@ -9,24 +9,24 @@ function newPostIt(){
     // var option = "width ="+popupWidth+", height ="+popupHeight+", left="+popupX+", top="+popupY+", scrollbars = yes, location = no";
     // window.open(url, name, option);
 
-        var modal_postIt = document.querySelector(".modal_postIt"); // 팝업 될 레이어 class명
-        var trigger_postIt = document.querySelector("#postIt_plus"); // 가입하기 버튼
-        var closePostItButton = document.querySelector(".close_postIt_button");  // 우측 상단 닫기 버튼
-        function togglePostItModal() {
-            modal_postIt.classList.toggle("show_modal");
-            }
-        function windowOnClick(event) {
-            if (event.register === modal_postIt) {
-                togglePostItModal();
-                            }}
-        trigger_postIt.addEventListener("click", togglePostItModal);
-        closePostItButton.addEventListener("click", togglePostItModal);
-        window.addEventListener("click", windowOnClick);
+        // var modal_postIt = document.querySelector(".modal_postIt"); // 팝업 될 레이어 class명
+        // var trigger_postIt = document.querySelector("#postIt_plus"); // 가입하기 버튼
+        // var closePostItButton = document.querySelector(".close_postIt_button");  // 우측 상단 닫기 버튼
+        // function togglePostItModal() {
+        //     modal_postIt.classList.toggle("show_modal");
+        //     }
+        // function windowOnClick(event) {
+        //     if (event.register === modal_postIt) {
+        //         togglePostItModal();
+        //                     }}
+        // trigger_postIt.addEventListener("click", togglePostItModal);
+        // closePostItButton.addEventListener("click", togglePostItModal);
+        // window.addEventListener("click", windowOnClick);
 }
 function choice(index){
     //0-2가 글, 링크, 파일 순으로 되어있음
     if(index==0){
-        window.close();
+        
         var popupWidth = 400;
         var popupHeight = 1000;
         var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
@@ -37,7 +37,7 @@ function choice(index){
         window.open(url, name, option);
     }
     else if(index==1){
-        window.close();
+        
         var popupWidth = 400;
         var popupHeight = 300;
         var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
@@ -48,7 +48,7 @@ function choice(index){
         window.open(url, name, option);
     }
     else{ //index==2
-        window.close();
+        
         var popupWidth = 400;
         var popupHeight = 300;
         var popupX = (document.body.offsetWidth/2) - (popupWidth/2);
