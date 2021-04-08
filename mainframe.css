@@ -71,7 +71,7 @@ html, body {
     display:inline;
 }
 
-.aside .today {
+.aside .todaylist {
     background-color:white;
     width:100%;
     margin-top: 20px;
@@ -85,8 +85,8 @@ html, body {
 }
 .aside_wrap > p {
     font-size:13px;
-    font-weight:bold;
-    margin:10px 15% 0px 15%;
+    text-align: center;
+    width:100%;
 }
 .caution {
     width:100%;
@@ -97,9 +97,12 @@ html, body {
     font-size: 9px;
 }
 
-.aside .today .todaylist {
+.aside .todaylist > label {
     
     font-size:small;
+    margin:10px;
+    text-align: left
+    ;
 }
 .new_todo {
     padding:10px;
