@@ -89,102 +89,99 @@
     </a>
 
     <div class="modal" id="choiceTypeModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div id="choice-modal"class="modal-dialog modal-choice">
+        <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">포스트잇 추가하기</h4>
-            </div><div class="container"></div>
-            <div class="modal-body">
-              작성할 종류를 선택하세요.
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <a data-toggle="modal" href="#choice_content" class="btn">
-                <img src="media/content.png" >글</a>
-              <a data-toggle="modal" href="#choice_link" class="btn">
-                <img src="media/link.png">링크</a>
-              <a data-toggle="modal" href="#choice_file" class="btn">
-              <img src="media/file.png">>파일</a>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">포스트잇 추가하기</h4>
+            </div><div class="container-choice"></div>
+            <div class="modal-body">작성할 종류를 선택하세요.
+            <br>
+            <br>
+            <a data-toggle="modal" href="#choice_content" class="btn">
+                <img src="media/content.png" ><p>글</p></a>
+            <a data-toggle="modal" href="#choice_link" class="btn">
+                <img src="media/link.png"><p>링크</p></a>
+            <a data-toggle="modal" href="#choice_file" class="btn">
+            <img src="media/file.png"><p>파일</p></a>
             </div>
-            <!-- <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
-              <a href="#" class="btn btn-primary">Save changes</a>
-            </div> -->
-          </div>
+        </div>
         </div>
     </div>
+
     <div class="modal" id="choice_content" data-backdrop="static">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-dialog modal-writing1">
+        <div class="modal-content writing-inside1">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">글 작성하기</h4>
-            </div><div class="container"></div>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">글 작성하기</h4>
+            </div><div class="container-content"></div>
             <div class="modal-body">
                 <p>제목</p>
-                <label><input type="text" id="input_title" class="input_text" placeholder="제목을 입력하세요"></label>
+                <input type="text" id="input_title" class="input_text" placeholder="제목을 입력하세요">
+                <br>
                 <br>
                 <p>내용</p>
-                <label><textarea id="input_content" class="input_text" rows="40" cols="30" name="contents" placeholder="내용을 입력하세요"></textarea></label>
+                <textarea id="input_content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
-              <a href="#" class="btn btn-primary">완료</a>
+            <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
+            <a href="#" class="btn uploadBtn">완료</a>
             </div>
-          </div>
+        </div>
         </div>
     </div>
     
     <div class="modal" id="choice_link" data-backdrop="static">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-dialog modal-writing2">
+        <div class="modal-content writing-inside2">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">링크 작성하기</h4>
-            </div><div class="container"></div>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">링크 작성하기</h4>
+            </div><div class="container-link"></div>
             <div class="modal-body">
                 <p>제목</p>
                 <input type="text" id="input_text" class="input_text" placeholder="제목을 입력하세요">
+                <br>
                 <br>
                 <p>링크</p>
                 <input type="text" id="input_link" class="input_link" placeholder="링크를 입력하세요">
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
-              <a href="#" class="btn btn-primary">완료</a>
+                <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
+                <a href="#" class="btn uploadBtn">완료</a>
             </div>
-          </div>
+        </div>
         </div>
     </div>
 
     <div class="modal" id="choice_file" data-backdrop="static">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-dialog modal-writing3">
+        <div class="modal-content writing-inside3">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">파일 작성하기</h4>
-              <hr>
-            </div><div class="container"></div>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">파일 작성하기</h4>
+
+            </div>
+            <div class="container-file"></div>
+            <div class="modal-body">
                     <p>제목</p>
                     <input type="text" id="input_text" class="input_text" placeholder="제목을 입력하세요">
+                    <br>
                     <br>
                     <div class="filebox"> 
                         <input class="upload-name" value="파일선택" disabled="disabled">
                         <label for="ex_filename">업로드</label> 
                         <input type="file" id="ex_filename" class="upload-hidden">
                     </div>
-        
-                
-        
-            </div>
-            <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
-              <a href="#" class="btn btn-primary">완료</a>
-            </div>
-          </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
+                        <a href="#" class="btn uploadBtn">완료</a>
+                    </div>
+                </div>
+            
+        </div>
         </div>
     </div>
             </div>
