@@ -101,8 +101,7 @@ html, body {
     
     font-size:small;
     margin:10px;
-    text-align: left
-    ;
+    text-align: left;
 }
 .new_todo {
     padding:10px;
@@ -143,7 +142,7 @@ html, body {
     vertical-align: middle;
     font-size:12px;
     font-family: 'Open Sans' !important;
-    font-weight:bolder;
+
 }
 .d-date {
     /* 세로 정렬 필요 */
@@ -224,6 +223,7 @@ html, body {
     width: 400px; 
     height: 200px; 
     border-radius: 0.5rem; 
+    z-index:500;
     margin : 0 auto;
 } 
 /****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
