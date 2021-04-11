@@ -98,19 +98,26 @@ body {
     text-align:center;
     width:100%;
     font-size:13px;
+
 }
 
 label > input {
     font-size:11px;
     display:inline-block;
+    margin: 3px 3px 3px 4px;
 }
 label > p{
     font-size:11px;
     display:inline-block;
+    font-weight:normal;
+    margin:11px 1px;
 }
 label{
     display:block;
     margin:10px;
+    font-size:small;
+    text-align: left;
+    
 }
 .Todolist{
     width:100%;
@@ -222,9 +229,21 @@ label{
     user-select:none;
     width:100%;
 }
+
+
+.modal-body > img {
+    height:50px;
+    width:40px;
+
+    margin:10px 0;
+    display:block;
+    align-content: center;  
+}
+
+
 /****** 레이어(모달) 팝업 ******/
 /* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
-.modal_postIt{ 
+/* .modal_postIt{ 
     position: fixed; 
     left: 0; 
     top: 0; 
@@ -232,10 +251,11 @@ label{
     height: 100%; 
     background-color: rgba(0, 0, 0, 0.5); 
     opacity: 0; 
+    z-index:1;
     visibility: hidden; 
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-} 
+}  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
 .modal-postIt-content { 
     position: absolute; 
@@ -248,7 +268,7 @@ label{
     height: 200px; 
     border-radius: 0.5rem; 
     margin : 0 auto;
-    z-index:500;
+    /* z-index:500; */
 } 
 ul {
     padding:0
@@ -284,7 +304,7 @@ ul {
 }
 
 /* 폴더 추가하기 안에 모달 내부 스타일 */
-.wrap_choice{
+/* .wrap_choice{
     list-style:none;
     margin:20px 0;
     margin-left: 10px;
@@ -293,6 +313,7 @@ ul {
     display:inline-block;
     margin:0 20px;
     text-align: center;
+    cursor: pointer;
 }
 .choice > img {
     height:50px;
@@ -307,7 +328,7 @@ ul {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
-/* 글 쓰기  */
+글 쓰기 
 .modal_content{ 
     position: fixed; 
     left: 0; 
@@ -318,9 +339,10 @@ ul {
     opacity: 0; 
     visibility: hidden; 
     transform: scale(1.1); 
+    z-index:501;
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  
-/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
+모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전
 .modal-content-content { 
     position: absolute; 
     top: 50%; 
@@ -399,4 +421,4 @@ ul {
 textarea{
     
     width:80%;
-}
+} */
