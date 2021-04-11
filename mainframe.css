@@ -27,7 +27,7 @@ html, body {
 #header {
     position: relative;
     background-color: #fff;
-    z-index: 2000;
+    /* z-index: 1; */
 }
 
 /* 메인 영역 : 헤더 아래 메인 콘텐츠들 표시 영역 */
@@ -223,7 +223,7 @@ html, body {
     width: 400px; 
     height: 200px; 
     border-radius: 0.5rem; 
-    z-index:500;
+    /* z-index:500; */
     margin : 0 auto;
 } 
 /****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
