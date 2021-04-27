@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    
+    <title>StudyTight</title>
+    <script src="/routes/users.js"></script>
+    <script src="/routes/timetable/timetable_main.js"></script>
+    <script src="/routes/timetable/timetable_edit.js"></script>
+    <script src="/routes/timetable/timetable_add.js"></script>
+    <style>
+        @import url(/public/font.css); 
+        @import url(/public/mainframe.css);
+        @import url(/public/timetable/timetable_main.css);
+        @import url(/public/timetable/timetable_edit.css);
+    </style>
+    <link rel="stylesheet" type="text/css" href="/public/timetable/course_add_modal.css"/>
+</head>
+<body> 
+    <div id="wrap">
+        <div class="header" role="banner">
+            <link rel="stylesheet" type="text/css" href="/public/header.css"/>
+            <link rel="stylesheet" type="text/css" href="/public/component.css"/>
+            <link rel="stylesheet" type="text/css" href="/public/font.css"/>
+            <div class="main_header">
+                <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+                <div class="logo_area">
+                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+                    <section class="group_menu">
+                        <nav class="menu_effect">
+                            <a href="#" class="menu">내 공부방</a>
+                            <a href="#" class="menu">방명록</a>
+                            <a href="#" class="menu">시간표</a>
+                        </nav>
+                    </section> 
+                </div>
+                <div class="login">
+                        <div class="profile_section">
+                            <!-- 일단은 알람벨 크기가 애매(?)하고 기능 추가 전이기 때문에 생략! -->
+                            <!-- <div class="alarm_bell">
+                            <img id="alarm_bell_img" src="/media/empty_bell.png"></div> -->
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
+                                <div class="username" id="activeUsername">박혁거세님</div>
+                                <!--                             
+                                <script>
+                                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                    activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                    // doc.getElementById('activeUsername').innerHTML = username + '님';
+                                    doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
+                                    doc.getElementById('activeUserimg').src = activeUser.userImage;
+                                </script> -->
+                            </div>
+                            <div class="logout">
+                                <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="container" role="main">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="background-box">
+                <div class="timetable_edit_header">
+                    <div class="title_msg">전체 수강중인 과목</div>
+                    <div class="btn_add_course">
+                        <!-- <input type ="button" value="+ 과목 추가하기" onclick="showTimetableAddPopup();"></input> -->
+                        <input type ="button" value="+ 과목 추가하기" class="trigger"></input>
+                    </div>
+                    
+                </div>
+                
+                <hr id ="timetable-line">
+                <div class="timetable_edit_section">
+                    <!-- 여기에 본격적인 내용 -->
+                    <div class ="course_list">
+                        <table id = "course_table" style="table-layout:fixed; word-break:break-all;">
+                            <thead><tr><th style='width:20%'>과목명</th style='width:30%'><th>시간</th><th style='width:20%'>강의 방식</th><th style='width:10%'>교수명</th><th  style='width:10%' class="modi">수정</th><th class="del" style='width:10%'>삭제</th></tr></tbody>
+                            <tbody id = "course_table_body">
+                                <!-- <tr><td>OS(운영체제)</td><td>목요일 10:30 - 11:45</td><td>온라인 실시간</td><td>김철홍</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c1+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c1+');"  style="width:32px"/></td>
+                                </tr>
+                                <tr><td>웹프로그래밍기초및실습</td><td>월요일 13:00 - 14:45</td><td>온라인 동영상</td><td>최지웅</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
+                                </tr>
+                                <tr><td>데이터베이스</td><td>수요일 13:30 - 14:45 </td><td>온라인 동영상</td><td>박동주</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
+                                </tr>
+                                <tr><td>웹프로그래밍설계및실습</td><td>화요일 12:00 - 13:50</td><td>온라인 동영상</td><td>송현주</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
+                                </tr>
+                                <tr><td>철학으로만나는기독교</td><td>수요일 16:30 - 17:45</td><td>온라인 동영상</td><td>성신형</td>
+                                    <td><input type="button" class="btn_modify_course" onclick="modifyCourse('+c2+');"/></td>
+                                    <td><input type="button" class="btn_delete_course" onclick="deleteCourse('+c2+');"/></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <script>
+                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                    getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
+                    var edit = document.getElementsByClassName('btn_modify_course');
+                    for (var i=0; i<edit.length; i++) {
+                        edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
+                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                            //console.log('수정할과목:'+title); 
+                            showCourseEditPopup(title);
+                        })
+                    }
+                    var target = document.getElementsByClassName('btn_delete_course');
+                    for (var i=0; i<target.length; i++) {
+                        target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
+                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                            //console.log(title); //과목 이름 가져오기
+                            var ret = confirm("정말로 삭제하시겠습니까?");
+                            if (ret) { //삭제 수행
+                                var parent = document.getElementById('course_table_body');
+                                deleteCourse(title);
+                                parent.removeChild(this.parentElement.parentElement);
+                            }else { //취소버튼 or 다이얼로그 닫은 경우
+                                ;
+                            }
+                        })
+                    }
+                </script>
+            </div>
+        </div>    
+        
+
+        <!-- 팝업 될 레이어 -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close_button"> &times;</span>
+                <h1 class="title">과목 추가하기</h1>
+                <form action="#post.js" method="POST">
+                    <div class="add_label">과목 이름</div>
+                    <input type="text" class="add_input" name="course_title" placeholder="내용을 입력해주세요." required="required">
+                    
+                    <div class="add_label">교수명</div>
+                    <input type="text" class="add_input" name="course_professor" placeholder="내용을 입력해주세요." required="required">
+
+                    <input type="button" class="btn_day_add" id="btn_day_add" title="시간 및 날짜 추가" alt="시간 및 날짜 추가" value="+ 시간 및 날짜 추가"></input>
+                    <div class="add_label">강의 방식 및 시간</div>
+                    
+                    <div class="add_wrap">
+                        <div class="type_label">강의 방식</div>
+                        <div class="course_type_form" id="course_type_radio">
+                            <label for="radio1" class="mdl-radio mdl-js-radio">
+                                <input type="radio" id="radio1" name="course_type" value="online_realtime" class="mdl-radio__button">
+                                <span class="mdl-radio__label">온라인 실시간</span>
+                            </label>
+                            <label for="radio2" class="mdl-radio mdl-js-radio">
+                                <input type="radio" id="radio2" name="course_type" value="online_video" class="mdl-radio__button">
+                                <span class="mdl-radio__label">온라인 동영상</span>
+                            </label>
+                            <label for="radio3" class="mdl-radio mdl-js-radio">
+                                <input type="radio" id="radio3" name="course_type" value="offline" class="mdl-radio__button" checked="checked"> 
+                                <span class="mdl-radio__label">오프라인</span>
+                            </label>
+                        </div>
+
+                        <div class="type_label">강의 시간</div>
+                        <div class="course_time_bundle">
+                            <select id="course_day" class="course_day">
+                                <option value="mon">월요일</option>
+                                <option value="tue">화요일</option>
+                                <option value="wed">수요일</option>
+                                <option value="thu">목요일</option>
+                                <option value="fri">금요일</option>
+                                <option value="sat">토요일</option>
+                            </select>
+                            <input type="time" class="course_time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
+                            <input type="time" class="course_time" id="course_end_time" value="09:15" min="09:15" max="21:00"/>
+                            <span class="time_add_button">+</span>
+                        </div>
+                        
+                        <!-- <input type="button" id="btn_time_plus" class="btn_add_time" onclick="addCourseTime(this)" /> -->
+                        <div class="type_label" id="course_location_label">강의실</div>
+                        <input type="text" class="course_location" id="course_location" name="course_location" placeholder="강의실 입력" required="required">
+                        
+                        <input type="button" class="btn_time_add" title="추가하기" alt="추가하기" value="추가하기">
+                    </div>
+        
+                    <input type="submit" class="btn_type btn_primary" id="course.save" title="저장하기" alt="저장하기" value="저장하기">
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var modal = document.querySelector(".modal"); // 팝업 될 레이어 class명
+            var trigger = document.querySelector(".trigger"); // 과목 추가하기 버튼
+            var closeButton = document.querySelector(".close_button"); // 과목 추가 팝업 닫기 버튼
+            // var saveButton = document.querySelector(".save_button"); // 과목 추가 저장하기 버튼
+        
+        
+            function toggleModal() {
+                modal.classList.toggle("show_modal");
+            }
+        
+            function windowOnClick(event) {
+                if (event.target === modal) {
+                    toggleModal();
+                }
+            }
+        
+            trigger.addEventListener("click", toggleModal);
+            closeButton.addEventListener("click", toggleModal);
+            window.addEventListener("click", windowOnClick);
+
+            // 강의 방식 라디오 버튼
+            $(document).ready(function () {
+                $("input:radio[name=course_type]").click(function () {
+                // getter (선택된 강의종류 가져오기)
+                var radioVal = $('input[name="course_type"]:checked').val();
+                    if (radioVal=="offline") {
+                        console.log("오프라인");
+                        $('#course_location_label').html('강의실');
+                        $('#course_location').attr('placeholder', '강의실 입력');
+                    } else {
+                        console.log("온라인");
+                        $('#course_location_label').html('강의 링크');
+                        $('#course_location').attr('placeholder', '강의링크 입력');
+                    }
+                });
+            });
+        </script>
+    </div>
+
+</body>
+</html>

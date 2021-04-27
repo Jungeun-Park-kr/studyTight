@@ -1,4 +1,19 @@
-# studyTight 
+# studyTight - team0922
+
+
+
+# REST API 사용법 (계속 추가 예정)
+
+> npm start 
+
+- 서버가 시작되며, 터미널 창에 `3000번 포트에서 대기중` 이 뜸
+
+- 주소창에  `localhost:3000`  입력
+
+- mainframe.html이 뜰 것임!
+
+
+
 # 프로젝트 작업 목록표
 
 | 기능       | depth1           | depth2          | depth3   | 담당   | 진행사항 |
