@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -11,10 +13,24 @@ dotenv.config();
 // const pageRouter = require('./routes/page');
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static("public"));
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
+
+// mongoDB Connect information
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+});
+const connection = mongoose.connection;
+connection.once("open", () => {
+    console.log("MongoDB database connection success");
+});
 
 app.get('/', (req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     // res.send('Hello, Express'); // 테스트용
