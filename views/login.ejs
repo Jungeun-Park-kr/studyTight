@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <style>
-        @import url(/login/login.css);
+        @import url(/public/login/login.css);
         @import url(/font.css); 
     </style>
     <script src="/user/users.js"></script>
@@ -19,7 +19,7 @@
         <div class="login_header"> 
             <!-- 여기는 왼쪽 메뉴 (로고) -->
             <div class ="logo_area"> 
-                <img src="../media/logo.png" onclick="btnLoginHome();">
+                <img src="/public/media/logo_big.png" onclick="btnLoginHome();">
             </div>
         </div>
         <div class="section">
@@ -32,11 +32,12 @@
                     <div class="login_form">
                         <input type="password" id="login_password" placeholder="비밀번호"/>
                     </div>
-                    <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="login();" id="log.login">
+                    <!-- <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="login();" id="log.login"> -->
+                    <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="location.href='/'" id="log.login">
                     <div class="login_info">
                         <a target="_blank" href="#" class="find_password">비밀번호찾기</a>
                         <span class="bar" aria-hidden="true"></span>
-                        <a target="_blank" href="#" class="register">회원가입</a>
+                        <a target="_blank" href="/signup_agree" class="register">회원가입</a>
                     </div>
                 </div>
             </div>
