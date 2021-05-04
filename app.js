@@ -11,11 +11,13 @@ const PORT = process.env.PORT||3000;
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
 const connect = require('./schemas'); // mongoDB를 위한 index.js, 스키마 정의
-
+const indexRoute = require("./routes/index"); // routes
 
 const app = express();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
-app.set('view engine', 'html'); // 뷰엔진 세팅
+app.set('views', __dirname+'/views');
+app.set('view engine', 'ejs'); // 뷰엔진 세팅
+
 connect(); // mongoDB connection start
 
 
@@ -45,6 +47,13 @@ app.get('/', (req, res) => { // app.get('주소', 라우터) : GET 요청이 올
     // res.send('Hello, Express'); // 테스트용
     res.sendFile(path.join(__dirname, '/views/mainframe.html'));
 });
+
+// use routes
+app.use("/", indexRoute);
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/login/login.html'));
+})
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
     console.log(app.get('port'), '번 포트에서 대기 중');
