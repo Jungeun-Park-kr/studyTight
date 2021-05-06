@@ -12,9 +12,10 @@
 </script>
 <script type="text/javascript">   
     $(document).ready( function() {
-        $("#header").load("/header.html");  
+        $("#header").load("/views/header.html");  
     });
     </script>
+<script src="new_folder.js"></script>
 <style>@import url(new_folder.css);</style>
 </head>
 
@@ -36,7 +37,15 @@
                         <img class="post_img"src="media/post_it_yellow.png"><p class="post">pid란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
-                        <div id="dropdown-content0" class="dropdown_content">
+                        <div id="dropdown-content0" class="dropdown_content"> 
+                            <div id="color_change0" class="dropdown_color">
+                                <button id="color0" class="color_choice" style="background-color: #f29b34;" onclick="changePostItColor('#f29b34')"></button>
+                                <button id="color1" class="color_choice" style="background-color: #97ce68;" onclick="changePostItColor('#97ce68')"></button>
+                                <button id="color2" class="color_choice" style="background-color: #fcd341; "onclick="changePostItColor('#fcd341')"></button>
+                                <button id="color3" class="color_choice" style="background-color:#e36363;" onclick="changePostItColor('#e36363')"></button>
+                                <button id="color3" class="color_choice" style="background-color:#4dbdc2;" onclick="changePostItColor('#4dbdc2')"></button>
+
+                            </div>
                         <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
                         <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
                         </div>
@@ -82,7 +91,14 @@
                         <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div> -->
                     <!-- <a data-toggle="modal" href="#choiceTypeModal" id="openBtn" class="btn btn-primary">추가하기</a> -->
                 <!-- </div> -->
-                
+            
+                <!-- <div class="postIt" id="openBtn"></div>
+                <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
+                    <img class="post_img" src="media/post_it_orange.png">
+                    
+                </a>
+                <p>포스트잇 추가하기</p>
+                </div> -->
 
     <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
         <img class="post_img" src="media/post_it_orange.png" value="추가하기">
