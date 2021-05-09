@@ -20,8 +20,11 @@
                 <img id="alarm_bell_img" src="/media/empty_bell.png"></div> -->
                 <div class="profile">
                     <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                    <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
-                    <div class="username" id="activeUsername">박혁거세님</div>
+                    <!-- <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">
+                    <div class="username" id="activeUsername">박혁거세님</div> -->
+
+
+
 <!--                             
                     <script>
                         var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
@@ -31,8 +34,11 @@
                         doc.getElementById('activeUserimg').src = activeUser.userImage;
                     </script> -->
                 </div>
-                <div class="logout">
+                <!-- <div class="logout">
                     <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
+                </div> -->
+                <div class="logout">
+                    <input type="button" class="btn_logout" title="로그인" value="로그인" onclick="location.href='/login'" />
                 </div>
             </div>
 

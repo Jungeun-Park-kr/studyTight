@@ -14,9 +14,9 @@
         @import url(/login/register.css);
         @import url(/login/register_modal.css);
     </style>
-    <script src="/user/users.js"></script>
+    <!-- <script src="/user/users.js"></script>
     <script src="/login/register.js"></script>
-    <script src="/login/login.js"></script>
+    <script src="/login/login.js"></script> -->
     
 </head>
 <body>
@@ -24,12 +24,13 @@
         <div class="register_header"> 
             <!-- 여기는 왼쪽 메뉴 (로고) -->
             <div class ="logo_area"> 
-                <img src="/public/media/logo_big.png" onclick="btnLoginHome();">
+                <img src="/public/media/logo_big.png" onclick="location.href='/'">
             </div>
         </div>
         <div id="container" role="main">
             <div class="section">
                 <!-- 여기는 본문 들어갈 메인 섹션 -->
+                <form id="join_form" method="POST" action="/signup">
                 <div class="join_section">
                     <div class="join_content">
                         <!-- 이메일 영역 -->
@@ -37,7 +38,7 @@
                             <div class="join_label">이메일</div>
                             <div class="email_verify_area">
                                 <span class="join_form">
-                                    <input type="join_email" id="join_email" name="join_email" placeholder="타 사이트 이메일 계정 입력" maxlength="30"/>
+                                    <input type="email" id="email" name="email" placeholder="타 사이트 이메일 계정 입력" maxlength="30" required/>
                                 </span>
                                 <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
                                     <span class="send_verify">인증번호 받기</span>
@@ -46,7 +47,7 @@
                             <!-- 인증번호 입력 영역 -->
                             <div class="email_verify_area">
                                 <span class="join_form">
-                                    <input type="tel" id="join_email_verify" name="join_email_verify" placeholder="인증번호 입력" maxlength="5"/>
+                                    <input type="tel" id="email_verify" name="email_verify" placeholder="인증번호 입력" maxlength="5" required/>
                                 </span>
                                 <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
                                     <span class="chk_verify">인증번호 확인</span>
@@ -59,12 +60,12 @@
                             <div class="join_label">비밀번호</div>
                             <div class="pw_input_area">
                                 <span class="join_form">
-                                    <input type="password" id="join_pw" name="join_pw" placeholder="비밀번호 (6자리 ~ 32자리)" maxlength="32"/>
+                                    <input type="password" id="password" name="password" placeholder="비밀번호 (6자리 ~ 32자리)" maxlength="32" required/>
                                 </span>
                             </div>
                             <div class="pw_verify_area">
                                 <span class="join_form">
-                                    <input type="password" id="join_pw_verify" name="join_pw_verify" placeholder="비밀번호 재확인" maxlength="32"/>
+                                    <input type="password" id="password_verify" name="password_verify" placeholder="비밀번호 재확인" maxlength="32" required/>
                                 </span>
                                 <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
                                     <span class="">비밀번호 확인</span>
@@ -79,7 +80,7 @@
                             <div class="join_label">이름</div>
                             <div class="name_input_area">
                                 <span class="join_form">
-                                    <input type="text" id="name" name="name" title="이름" class="int" placeholder="타인에게 공개될 내 이름 입력" maxlength="40">
+                                    <input type="text" id="name" name="name" title="이름" class="int" placeholder="타인에게 공개될 내 이름 입력" maxlength="40" required>
                                 </span>
                             </div>
                         </div>
@@ -162,14 +163,13 @@
 
                         <!-- 가입하기 버튼 -->
                         <div class="btn_area">
-                            <button type="button" id="btnJoin" class="btn_type btn_primary"><span class="register">가입하기</span></button>
+                            <button type="button" id="btnJoin" class="btn_type btn_primary" type="submit" ><span class="register">가입하기</span></button>
                         </div>
-
-
 
                     </div>
                     
                 </div>
+            </form>
                 
             </div>
         
