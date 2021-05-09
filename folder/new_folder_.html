@@ -44,7 +44,7 @@
                                 <button id="color2" class="color_choice" style="background-color: #fcd341; "onclick="changePostItColor('#fcd341')"></button>
                                 <button id="color3" class="color_choice" style="background-color:#e36363;" onclick="changePostItColor('#e36363')"></button>
                                 <button id="color3" class="color_choice" style="background-color:#4dbdc2;" onclick="changePostItColor('#4dbdc2')"></button>
-
+    <!-- 색 바꾸기 함수로 보낼 때 인자로 몇번 째 포스트잇인지도 넣기 -->
                             </div>
                         <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
                         <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
@@ -104,7 +104,7 @@
         <img class="post_img" src="media/post_it_orange.png" value="추가하기">
     </a>
 
-    <div class="modal" id="choiceTypeModal">
+    <div class="modal" id="choiceTypeModal" data-backdrop="static">
         <div id="choice-modal"class="modal-dialog modal-choice">
         <div class="modal-content">
             <div class="modal-header">
@@ -125,6 +125,11 @@
         </div>
     </div>
 
+    <!-- <script>
+        $('')
+    </script> -->
+
+
     <div class="modal" id="choice_content" data-backdrop="static">
         <div class="modal-dialog modal-writing1">
         <div class="modal-content writing-inside1">
@@ -134,7 +139,7 @@
             </div><div class="container-content"></div>
             <div class="modal-body">
                 <p>제목</p>
-                <input type="text" id="input_title" class="input_text" placeholder="제목을 입력하세요">
+                <input type="text" id="input_content_title" class="input_text" placeholder="제목을 입력하세요">
                 <br>
                 <br>
                 <p>내용</p>
@@ -157,7 +162,7 @@
             </div><div class="container-link"></div>
             <div class="modal-body">
                 <p>제목</p>
-                <input type="text" id="input_text" class="input_text" placeholder="제목을 입력하세요">
+                <input type="text" id="input_link_text" class="input_text" placeholder="제목을 입력하세요">
                 <br>
                 <br>
                 <p>링크</p>
@@ -182,7 +187,7 @@
             <div class="container-file"></div>
             <div class="modal-body">
                     <p>제목</p>
-                    <input type="text" id="input_text" class="input_text" placeholder="제목을 입력하세요">
+                    <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요">
                     <br>
                     <br>
                     <div class="filebox"> 
