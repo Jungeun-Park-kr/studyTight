@@ -8,24 +8,28 @@ const dotenv = require('dotenv');
 const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT||3000;
 
+
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
 const connect = require('./schemas'); // mongoDB를 위한 index.js, 스키마 정의
 const indexRoute = require("./routes/index"); // routes
+const userRouter = require('./routes/')
 
 const app = express();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 app.set('views', __dirname+'/views');
 app.set('view engine', 'ejs'); // 뷰엔진 세팅
 
+
+
 connect(); // mongoDB connection start
-
-
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static("public"));
+
 
 
 // mongoDB Connect information (테스트용)
