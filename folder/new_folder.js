@@ -67,7 +67,10 @@ function showPostMenu(index){
     $(`#delete_post${index}`).text("삭제하기");
     $(`#delete_post${index}`).show();
 }
-
+function hidePostMenu(index){
+    $(`#dropdown-content${index}`).hide();
+    
+}
 function revisePostClicked(index){
     alert("제목이나 글을 수정하였습니다.");
 }
@@ -87,12 +90,17 @@ function deletePostClicked(index){
 
 var star_toggle=1
 function starPostClicked(index){
+    var postIt=document.getElementsByClassName("class");
     var star=document.getElementsByClassName('fixed_star');
     if(star_toggle%2==1){
         star[index].src="/media/full_star.png"
         star[index].style.opacity=1;
     }else{
         star[index].src="/media/empty_star.png"
+        star[index].style.opacity=0;
+        $(`star[${index}]`).hover(function(){
+            star[index].style.opacity=1;
+        })
         // hover할 때만 있도록 설정해야 함.
     }
     star_toggle++;

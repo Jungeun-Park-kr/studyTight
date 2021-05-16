@@ -30,27 +30,18 @@
                     <p class="folder_name">
                         study Tight!
                     </p>
-                    <hr/>
                     
                     <div id="wrap_postit" class="wrap_postit">
-                    <div  id="postIt_1" class="postIt">
+                    <div  id="postIt_0" class="postIt">
                         <img class="post_img"src="media/post_it_yellow.png"><p class="post">pid란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
                         <div id="dropdown-content0" class="dropdown_content"> 
-                            <div id="color_change0" class="dropdown_color">
-                                <button id="color0" class="color_choice" style="background-color: #f29b34;" onclick="changePostItColor('#f29b34')"></button>
-                                <button id="color1" class="color_choice" style="background-color: #97ce68;" onclick="changePostItColor('#97ce68')"></button>
-                                <button id="color2" class="color_choice" style="background-color: #fcd341; "onclick="changePostItColor('#fcd341')"></button>
-                                <button id="color3" class="color_choice" style="background-color:#e36363;" onclick="changePostItColor('#e36363')"></button>
-                                <button id="color3" class="color_choice" style="background-color:#4dbdc2;" onclick="changePostItColor('#4dbdc2')"></button>
-    <!-- 색 바꾸기 함수로 보낼 때 인자로 몇번 째 포스트잇인지도 넣기 -->
-                            </div>
                         <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
                         <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
                         </div>
                     </div>
-                    <div id="postIt_2" class="postIt">
+                    <div id="postIt_1" class="postIt">
                         <img class="post_img"src="media/post_it_yellow.png"><p class="post">shell이란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(1);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(1);">
@@ -59,7 +50,7 @@
                             <button role="menuitem" class="dropdown_choice" id="delete_post1" onclick="deletePostClicked(1);"></button>
                             </div>
                     </div>
-                    <div id="postIt_3" class="postIt">
+                    <div id="postIt_2" class="postIt">
                         <img class="post_img" src="media/post_it_yellow.png"><p class="post">scheduler란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(2);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(2);">
@@ -68,7 +59,7 @@
                             <button role="menuitem" class="dropdown_choice" id="delete_post2" onclick="deletePostClicked(2);"></button>
                             </div>
                     </div>
-                    <div id="postIt_4" class="postIt">
+                    <div id="postIt_3" class="postIt">
                         <img class="post_img" src="media/post_it_yellow.png"><p class="post">chap1 정리</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(3);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(3);">
@@ -77,7 +68,7 @@
                             <button role="menuitem" class="dropdown_choice" id="delete_post3" onclick="deletePostClicked(3);"></button>
                             </div>
                     </div>
-                    <div id="postIt_5" class="postIt">
+                    <div id="postIt_4" class="postIt">
                         <img class="post_img" src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(4);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(4);">
@@ -99,6 +90,14 @@
                 </a>
                 <p>포스트잇 추가하기</p>
                 </div> -->
+
+                <script>
+                    $('body').click(function(e){
+                        if($(`#dropdown-content${e}`).show())
+                            hidePostMenu();
+                    })
+                </script>
+
 
     <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
         <img class="post_img" src="media/post_it_orange.png" value="추가하기">
