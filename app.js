@@ -11,7 +11,7 @@ const PORT = process.env.PORT||3000;
 
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
-const connect = require('./schemas'); // mongoDB를 위한 index.js, 스키마 정의
+const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 정의
 const indexRoute = require("./routes/index"); // routes
 const userRouter = require('./routes/')
 
