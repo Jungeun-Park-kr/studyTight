@@ -15,7 +15,6 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: 200%;
     /* 부모의 기준으로 위치를 맞춘다는 뜻
         position: absolute; 
     left:50%;
@@ -41,7 +40,6 @@ body {
 }
 
 .course_section {
-    width: 600px;
     margin: 0 auto;
 }
 
@@ -119,7 +117,7 @@ select {
     line-height: 1.5em;
     padding: 0.5em 3.5em 0.5em 1em;
     appearance: none;
-    margin-top: 40px;
+    /* margin-top: 40px; // modal  팝업후 이상하여 수정함 */ 
     margin-left: 3%;
     background-image: url("media/dropdown.png");
     background-size: 7px 7px;
