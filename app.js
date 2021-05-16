@@ -12,8 +12,12 @@ const PORT = process.env.PORT||3000;
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
 const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 정의
-const indexRoute = require("./routes/index"); // routes
-const userRouter = require('./routes/')
+
+// router
+const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
+const userRouter = require('./routes/user'); // user 라우터
+const signupRouter = require('./routes/signup'); // 회원가입 라우터
+const loginRouter = require('./routes/login');
 
 const app = express();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
@@ -28,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 
 
@@ -47,16 +51,17 @@ app.use(express.static("public"));
 
 
 
-app.get('/', (req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
-    // res.send('Hello, Express'); // 테스트용
-    res.sendFile(path.join(__dirname, '/views/mainframe.html'));
-});
+
 
 // use routes
-app.use("/", indexRoute);
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/login/login.html'));
+// 상단에 없는 라우터 요청시 에러 처리
+app.use((req, res, next) => {
+    res.status(404).send('Not Found (없는 라우터 요청)');
 })
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
