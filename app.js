@@ -7,17 +7,20 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT||3000;
+const passport = require('passport');
 
 
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
 const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 정의
+const passportConfig = require('./passport');
 
 // router
 const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
 const userRouter = require('./routes/user'); // user 라우터
-const signupRouter = require('./routes/signup'); // 회원가입 라우터
-const loginRouter = require('./routes/login');
+const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인, 회원가입, 로그아웃)
+// const signupRouter = require('./routes/signup'); // 회원가입 라우터
+// const loginRouter = require('./routes/login');
 
 const app = express();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
@@ -56,8 +59,9 @@ app.use(express.static('public'));
 // use routes
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
+app.use('/auth', authRouter);
+// app.use('/signup', signupRouter);
+// app.use('/login', loginRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {

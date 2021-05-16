@@ -18,6 +18,7 @@
     },
     "homepage": "https://github.com/jungeunpark-amber/studyTight#readme",
     "dependencies": {
+        "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
@@ -27,7 +28,9 @@
         "express-session": "^1.17.1",
         "mongoose": "^5.12.6",
         "morgan": "^1.10.0",
-        "multer": "^1.4.2"
+        "multer": "^1.4.2",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.7"
