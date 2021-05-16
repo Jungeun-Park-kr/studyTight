@@ -1,13 +1,13 @@
-function showFriendsAddPopup() {
-    var popupWidth = 650;
-    var popupHeight = 800;
-    var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
-    var popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
-    var url = "timetable_add.html";
-    var name = "timetable add popup"
-    var option = "width =" + popupWidth + ", height =" + popupHeight + ", left" + popupX + ", top=" + popupY + ", scrollbars = yes, location = no";
-    window.open(url, name, option);
-}
+// function showFriendsAddPopup() {
+//     var popupWidth = 650;
+//     var popupHeight = 800;
+//     var popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+//     var popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
+//     var url = "timetable_add.html";
+//     var name = "timetable add popup"
+//     var option = "width =" + popupWidth + ", height =" + popupHeight + ", left" + popupX + ", top=" + popupY + ", scrollbars = yes, location = no";
+//     window.open(url, name, option);
+// }
 
 
 function showhiddengroup() {

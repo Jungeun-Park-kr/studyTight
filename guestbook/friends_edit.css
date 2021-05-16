@@ -59,7 +59,6 @@ body {
 .course_link_label,
 .course_location_label {
     font-size: 15px;
-    width: 70px;
     margin: 10px 0px 5px;
     padding: 0 10px;
     color: #333333;
@@ -81,6 +80,10 @@ body {
 .course_link_form,
 .course_location_form {
     padding: 0 10px;
+}
+
+.professor_name_form{
+    width: 280px;
 }
 
 .course_title_form input,
