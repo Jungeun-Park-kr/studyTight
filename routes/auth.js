@@ -29,21 +29,26 @@ router.get('/agree', (req, res) => {
 router.post('/signup', isNotLoggedIn, async (req, res, next) => {
     const {email, name, password} = req.body;
     
-     console.log('회원가입 버튼 누름');
+    console.log('회원가입 버튼 누름');
+    console.log('email:'+email+', name:'+name+', password:'+password);
 
     try {
-        const exUser = await User.findOne( {where: {email}}); // 이메일 중복 확인
+        const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
         if (exUser) {
+            console.log('이미 가입된 회원입니다.');
             return res.redirect('/signup?error=exist');
         }
         const hash = await bcrypt.hash(password, 12);
-        await User.create({
+        const user = await User.create({
             email : email,
             name : name,
             password: hash,
         });
-        return res.redirect('/');
+        console.log('추가된 user:'+user);
+
+        return res.redirect('/login');
     } catch (error) {
+        console.log('회원가입 에러');
         console.error(error);
         return next(error);
     }
@@ -75,8 +80,8 @@ router.post('/signup', isNotLoggedIn, async (req, res, next) => {
 
 
 
-// GET /auth/login 라우터 
-router.get('/login', isNotLoggedIn,(req, res, next) => {
+// POST /auth/login 라우터 
+router.post('/login', isNotLoggedIn,(req, res, next) => {
      // user : 인증 성공 시 유저 정보
      // info : 인증 오류에 대한 메시지
      // 인증 성공시 req.login으로 세션에 유저 정보 저장
@@ -99,8 +104,6 @@ router.get('/login', isNotLoggedIn,(req, res, next) => {
             return res.redirect('/');
         });
     }) (req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, net) 붙임
-    
-    res.render(path.join(__dirname, '../views/login.ejs'));
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {

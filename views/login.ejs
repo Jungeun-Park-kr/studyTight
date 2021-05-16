@@ -26,21 +26,23 @@
         <div class="section">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="login">
-                <div class="login_section">
-                    <div class="login_form">
-                        <input type="text" id="login_id" placeholder="이메일"/>
+                <form id="login-form" action="/auth/login" method="POST">
+                    <div class="login_section">
+                        <div class="login_form">
+                            <input type="text" name="email" id="email" placeholder="이메일" required autofocus/>
+                        </div>
+                        <div class="login_form">
+                            <input type="password" name="password" id="password" placeholder="비밀번호" required/>
+                        </div>
+                        <!-- <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="login();" id="log.login"> -->
+                        <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" id="log.login">
+                        <div class="login_info">
+                            <a target="_blank" href="#" class="find_password">비밀번호찾기</a>
+                            <span class="bar" aria-hidden="true"></span>
+                            <a target="_self" href="/auth/agree" class="register">회원가입</a>
+                        </div>
                     </div>
-                    <div class="login_form">
-                        <input type="password" id="login_password" placeholder="비밀번호"/>
-                    </div>
-                    <!-- <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="login();" id="log.login"> -->
-                    <input type="submit" title="로그인" alt="로그인" value="로그인" class="login_btn" onclick="location.href='/'" id="log.login">
-                    <div class="login_info">
-                        <a target="_blank" href="#" class="find_password">비밀번호찾기</a>
-                        <span class="bar" aria-hidden="true"></span>
-                        <a target="_self" href="/auth/agree" class="register">회원가입</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

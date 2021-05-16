@@ -77,7 +77,8 @@ app.use('/login', loginRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
-    res.status(404).send('Not Found (없는 라우터 요청)');
+    // console.info(req);
+    res.status(404).send(req+' Not Found (없는 라우터 요청)');
 })
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
