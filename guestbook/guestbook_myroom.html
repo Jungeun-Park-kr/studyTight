@@ -139,10 +139,64 @@
                                 <div class="btn_add_course">
                                     <input type="button" class = "trigger" value="+ 친구 추가하기" onclick="showFriendsEditPopup();"></input>
                                 </div>
-                                <!-- 팝업 될 레이어 --> 
-        <div class="modal"> 
+
+
+                                <!-- 첫번쨰로 팝업될 친구 검색 레이어-->
+
+
+                                <div class="modal"> 
+                                    <div class="modal-content"> 
+                                        <span class="close-button">&times;</span> 
+                                        <h1 class="title">친구 추가하기</h1> 
+                                        <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                                        <div class="course_add_list">
+                                            <div class="course_section">
+                                                <div class="secret_section">
+                                                    <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                                </div>
+                                                <div class="course_title_section">
+                                        
+                                                    <div class="course_title_form">
+                                                        <input type="text" id="course_title" placeholder="ex) StudyTight@naver.com" />
+                                                    </div>
+                                                    <div class="course_type_form" id="course_type_radio">
+                                        
+                                                    </div>
+                                                    <div class="search_btn">
+                                                        <input id="search_course" type="button" title="검색하기" value="검색" onclick="addprofile();"></input>
+                                                    </div>
+                                                </div>
+                                        
+                                        
+                                            </div>
+                                            <hr>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">양지영</div>
+                                                <div class="professor_name_form">
+                                                    sefsef@nate.com
+                                                </div>
+                                                <input type="checkbox" name="select_friend" value="select" checked>
+                                            </div>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">최시언</div>
+                                                <div class="professor_name_form">
+                                                    noino0819@naver.com
+                                                </div>
+                                                <input type="checkbox" name="select_friend" value="select" checked>
+                                            </div>
+                                            <div class="add_btn">
+                                                <input id="btn_add_course" class = "trigger2"type="button" title="저장하기" value="선택하기" onclick="addprofile();"></input>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div> 
+                                </div>
+
+
+                                <!-- 팝업 될  두번째 레이어 -->
+        <div class="modal2"> 
         <div class="modal-content"> 
-            <span class="close-button">&times;</span> 
+            <span class="close-button2">&times;</span> 
             <h1 class="title">친구 추가하기</h1> 
             <div class="course_add_list">
                 <div class="course_section">
@@ -195,33 +249,50 @@
                     <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
                 </div>
             </div>
+            <script type="text/javascript"> 
+                var modal = document.querySelector(".modal"); 
+                var modal2 = document.querySelector(".modal2"); 
+                var trigger = document.querySelector(".trigger"); 
+                var trigger2 = document.querySelector(".trigger2"); 
+                var closeButton = document.querySelector(".close-button"); 
+                var closeButton2 = document.querySelector(".close-button2"); 
+                var cancelButton = document.querySelector("#cancel");
+        
+               //console.log(modal);
+        
+                function toggleModal() { 
+                    modal.classList.toggle("show-modal"); 
+                }
+
+                function toggleModal2() { 
+                    modal2.classList.toggle("show-modal"); 
+                }
+        
+                function windowOnClick(event) { 
+                    if (event.target === modal) { 
+                        toggleModal(); 
+                    } 
+                }
+
+                function windowOnClick(event) { 
+                    if (event.target === modal2) { 
+                        toggleModal2(); 
+                    } 
+                }
+        
+                trigger.addEventListener("click", toggleModal); 
+                trigger2.addEventListener("click", toggleModal2); 
+                closeButton.addEventListener("click", toggleModal); 
+                closeButton2.addEventListener("click", toggleModal2); 
+                cancel.addEventListener("click", toggleModal); 
+                window.addEventListener("click", windowOnClick); 
+            </script>
+
             </form>
         </div> 
-    </div>
+    </div> 
 
-<script type="text/javascript"> 
-        var modal = document.querySelector(".modal"); 
-        var trigger = document.querySelector(".trigger"); 
-        var closeButton = document.querySelector(".close-button"); 
-        var cancelButton = document.querySelector("#cancel");
 
-       //console.log(modal);
-
-        function toggleModal() { 
-            modal.classList.toggle("show-modal"); 
-        }
-
-        function windowOnClick(event) { 
-            if (event.target === modal) { 
-                toggleModal(); 
-            } 
-        }
-
-        trigger.addEventListener("click", toggleModal); 
-        closeButton.addEventListener("click", toggleModal); 
-        cancel.addEventListener("click", toggleModal); 
-        window.addEventListener("click", windowOnClick); 
-    </script>
                             </form>
                         </div>
 
