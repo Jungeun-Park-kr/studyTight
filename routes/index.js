@@ -25,8 +25,8 @@ router.use((req, res, next) => {
 router.get('/', isLoggedIn, (req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
         // res.send('Hello, Express'); // 테스트용
-        res.render(path.join(__dirname, '../views/mainframe.ejs', {ejs: require('ejs')} ), {
-            // title: 'StudyTight 메인화면',
+        res.render(path.join(__dirname, '../views/mainframe.ejs' ), {
+            title: 'StudyTight 메인화면',
         });
     }
     catch (err) {
