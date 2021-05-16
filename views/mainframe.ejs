@@ -5,26 +5,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyTight</title>
+    <title><%= title %></title>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
     <script type="text/javascript">   
-    $(document).ready( function() {
-        $("#header").load("/views/header.html");  
-        // $("#leftside").load("common/leftside.html");  
-    });
-    </script>
+    // $(document).ready( function() {
+    //     // $("#header").load('/views/header.html');
+    //     $("#header").render('/views/header.html');
+
+    //     // $("#leftside").load("common/leftside.html");  
+    // });
+    // </script>
     <link rel="stylesheet" href="/public/mainframe_shortcuts.css">
     <link rel="stylesheet" href="/public/mainframe.css">
     <link rel="stylesheet" href="/public/font.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/public/header.css"/>
+        <link rel="stylesheet" type="text/css" href="/public/component.css"/>
+        <link rel="stylesheet" type="text/css" href="/public/font.css"/>
 </head>
 
 <body>
     <div id="wrap">
         <div id="header" role="banner">
+            <div class="main_header">
+                <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+                <div class="logo_area">
+                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+                    <section class="group_menu">
+                        <nav class="menu_effect">
+                            <a href="#" class="menu">내 공부방</a>
+                            <a href="#" class="menu">방명록</a>
+                            <a href="#" class="menu">시간표</a>
+                        </nav>
+                    </section>
+                </div>
+                <div class="login">
+                        <div class="profile_section">
+                            <% if (user) { %>
+                            <!-- 일단은 알람벨 크기가 애매(?)하고 기능 추가 전이기 때문에 생략! -->
+                            <!-- <div class="alarm_bell">
+                            <img id="alarm_bell_img" src="/media/empty_bell.png"></div> -->
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <!-- <img id="activeUserimg" src="/media/user.png" onclick="location.href='#프로필수정화면'">-->
+                                <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
+            <!--                             
+                                <script>
+                                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                                    activeUser = getActiveUser(username); //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                                    // doc.getElementById('activeUsername').innerHTML = username + '님';
+                                    doc.getElementById('activeUsername').innerHTML = activeUser.name + '님';
+                                    doc.getElementById('activeUserimg').src = activeUser.userImage;
+                                </script> -->
+                            </div>
+                            
+                            <!-- <div class="logout">
+                                
+                            </div> -->
+                            <div class="logout">
+                                    <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
+                                    
+                            </div>
+                            <% } else{ %>
+                            <div class="logout">
+                                <input type="button" class="btn_logout" title="로그인" value="로그인" onclick="location.href='/login'" />
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
         </div>
+
+
+    
         <div id="container" role="main">
             <div id="shortcuts_wrap">
                 <div class="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
@@ -36,37 +93,37 @@
                     <div class="D-day" id="D-day">
                         <!-- 디데이 설정한 부분 -->
                         <div class="d-day" id="d-day0"><span class="d-date" id="d-date0">D-100</span>완투쓰리포오육칠
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(0);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(0);">
                             <div id="dropdown-day0" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day0" onclick="reviseDayClicked(0);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day0" onclick="deleteDayClicked(0);"></button>
                             </div></div>
                         <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-2</span>유세인트 학인하기
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(1);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(1);">
                             <div id="dropdown-day1" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day1" onclick="reviseDayClicked(1);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day1" onclick="deleteDayClicked(1);"></button>
                             </div></div>
                         <div class="d-day" id="d-day2"><span class="d-date" id="d-date2" >D-3</span>보고서 제출하기
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(2);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(2);">
                             <div id="dropdown-day2" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day2" onclick="reviseDayClicked(2);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day2" onclick="deleteDayClicked(2);"></button>
                             </div></div>
                         <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-4</span>책 찾아보기
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(3);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(3);">
                             <div id="dropdown-day3" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day3" onclick="reviseDayClicked(3);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day3" onclick="deleteDayClicked(3);"></button>
                             </div></div>
                         <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-5</span>예제 찾아보기
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(4);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(4);">
                             <div id="dropdown-day4" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day4" onclick="reviseDayClicked(4);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day4" onclick="deleteDayClicked(4);"></button>
                             </div></div>
                         <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-6</span>문제 풀기
-                            <img class="day_button" src="/media/three_button.png" onclick="showDayMenu(5);">
+                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(5);">
                             <div id="dropdown-day5" class="dropdown_day">
                             <button role="menuitem" class="dropdown_choice" id="revise_day5" onclick="reviseDayClicked(5);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_day5" onclick="deleteDayClicked(5);"></button>
@@ -112,10 +169,10 @@
                         <!-- <div id="wrap_folder" class="wrap_folder"> -->
         
                             <div id="folder_0" class="folder">
-                                <img src="/media/plus_folder_yellow.png" class="folder_img"/>
-                                <img src="/media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
+                                <img src="media/plus_folder_yellow.png" class="folder_img"/>
+                                <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
                                 <p class="main_folder_name">알고리즘</p>
-                                <img class="folder_button" src="/media/three_button.png" onclick="showFolderMenu(0);">
+                                <img class="folder_button" src="media/three_button.png" onclick="showFolderMenu(0);">
                                 <div id="dropdown-folder0" class="dropdown_folder">
                                 <button role="menuitem" class="dropdown_choice" id="revise_folder0" onclick="reviseFolderClicked(0);"></button>
                                 <button role="menuitem" class="dropdown_choice" id="delete_folder0" onclick="deleteFolderClicked(0);"></button>
@@ -272,33 +329,13 @@
                                 <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
                                 <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
                             </div>
-                            <input type="button" class="btnplusTodo" value="+ 할 일 추가하기"></input>
+                            <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
                             <!--+부분 이미지로 넣기-->
                         </div>
                         <div class="caution">
                             오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
                         </div>
-                        <!-- 오늘 할 일 추가하기 모달 팝업 -->
-                        <div id="modal" class="modal modal_todo">
-                            <div class="modal-content-todo">
-                                <span class="close_button close_todo_button">&times;</span>
-                                <form action="#post.js" method="POST">
-                                    <p class="title">오늘 할 일 추가하기</p>
-                            <hr>
-
-                            <div class="input_wrap">
-                                <label><input type="text" id="input_todo" class="input_todo" placeholder="오늘 할 일을 입력하세요"></label>
-                            
-                            </div>
-
-                            <div class="buttons_wrap">
-                                <input type="button" class="uploadBtn" value="완료" onclick="uploadTodo()"/>
-                            </div>
-                                </form>
-                            </div>
-                        </div>
-
-                </div>
+                    </div>
             </div>
         <!-- d-day 추가하기 모달 팝업 -->
     <div id="modal" class="modal modal_day">
@@ -313,8 +350,11 @@
                 <script> $(function() {
                     $("#modal-d-date").datepicker(); });
                     </script>
-                
+                <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
                 <input type="text" id="modal-d-content" class="d-content" placeholder="내용 (최대 7자)"></div>
+                <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->
+                <!-- <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"></input> -->
+                <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
                 <div><input type="button" class="modal-d-plus" value="디데이 추가" onclick="storeDday();"
                     value="디데이 추가"></input></div>
             </div> 
@@ -324,29 +364,20 @@
 
     <script>
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
-    var modal_todo=document.querySelector(".modal_todo"); 
-    var trigger_day = document.querySelector("#d-day-plus"); 
-    var trigger_todo=document.querySelector(".btnplusTodo");
+    var trigger_day = document.querySelector("#d-day-plus"); // 가입하기 버튼
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
-    var closeTodoButton=document.querySelector(".close_todo_button");
-
+    
     function toggleDayModal() {
         modal_day.classList.toggle("show_modal");
-    }
-    function toggleTodoModal(){
-        modal_todo.classList.toggle("show_modal");
     }
     function windowOnClick(event) {
         if (event.target === modal_day) {
             toggleDayModal();
-        }else if(event.target==modal_todo){
-            toggleTodoModal();
         }
     }
     trigger_day.addEventListener("click", toggleDayModal);
-    trigger_todo.addEventListener("click",toggleTodoModal);
+
     closeDayButton.addEventListener("click", toggleDayModal);
-    closeTodoButton.addEventListener("click",toggleTodoModal);
     window.addEventListener("click", windowOnClick);
 
     function storeDday(){

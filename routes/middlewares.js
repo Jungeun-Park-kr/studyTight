@@ -1,16 +1,23 @@
+const path = require('path'); // 현재 프로젝트의 경로
+
 exports.isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticatd()) { // 로그인 상태 확인
+    if (req.isAuthenticated()) { // 로그인 상태 확인
         next(); // 로그인 상태이면 다음 미들웨어로 넘어감
     } else { // 로그인 안된 상태
-        res.status(403).send('로그인 필요');
+        // res.status(403).send('로그인 필요');
+        res.render(path.join(__dirname, '../views/mainframe.ejs'),
+            {title : 'study Tight 메인',
+            }
+        );
+        
     }
 };
 
 exports.isNotLoggedIn = (req, res, next) => {
-    if (!req.isAuthenticatd()) {
+    if (!req.isAuthenticated()) {
         next();
     } else {
         const message = encodeURIComponent('로그인한 상태입니다.');
-        res.redired(`/?error=${message}`);
+        res.redirect(`/?error=${message}`);
     }
 };

@@ -15,17 +15,18 @@ dotenv.config();
 const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 정의
 const passportConfig = require('./passport');
 
-// router
-const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
-const userRouter = require('./routes/user'); // user 라우터
-const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인, 회원가입, 로그아웃)
-// const signupRouter = require('./routes/signup'); // 회원가입 라우터
-// const loginRouter = require('./routes/login');
-
 const app = express();
+passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 app.set('views', __dirname+'/views');
 app.set('view engine', 'ejs'); // 뷰엔진 세팅
+
+// router
+const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
+const userRouter = require('./routes/user'); // user 라우터
+const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인 처리, 회원가입 처리, 로그아웃 처리)
+const signupRouter = require('./routes/signup'); // 회원가입 라우터
+const loginRouter = require('./routes/login'); // 로그인 라우터
 
 
 
@@ -37,6 +38,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static('public'));
 
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // mongoDB Connect information (테스트용)
@@ -55,13 +68,12 @@ app.use(express.static('public'));
 
 
 
-
 // use routes
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
-// app.use('/signup', signupRouter);
-// app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
