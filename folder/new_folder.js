@@ -61,15 +61,33 @@ function choice(index){
 }
 function showPostMenu(index){
     //나중에 index로 받아서 처리하기
+    var dropdown=document.getElementsByClassName('dropdown_content')[index];
+    
+
     $(`#dropdown-content${index}`).show();
+    $(`#dropwdown-content${index}`).attr('data-value','open');
+    dropdown.setAttribute('data-value','open')
+    var value=dropdown.getAttribute('data-value');
+    console.log("지금 클릭된 것의 index:"+index+", value="+value);
     $(`#revise_post${index}`).text("수정하기");
     $(`#revise_post${index}`).show();
     $(`#delete_post${index}`).text("삭제하기");
     $(`#delete_post${index}`).show();
 }
-function hidePostMenu(index){
-    $(`#dropdown-content${index}`).hide();
+function hidePostMenu(){
+    var dropdown=document.getElementsByClassName('dropdown_content');
     
+    for(i=0;i<dropdown.length;i++){
+        var value=document.getElementsByClassName('dropdown_content')[i].getAttribute('data-value');
+        console.log('index:'+i+', value:'+value);
+    if(value=='open'){
+        console.log("현재 열린 것의 index:"+i);
+        $(`#dropdown-content${i}`).hide();
+        $(`#revise_post${i}`).hide();
+        $(`#delete_post${i}`).hide();
+        dropdown[i].setAttribute('data-value','close');
+    }
+}
 }
 function revisePostClicked(index){
     alert("제목이나 글을 수정하였습니다.");
@@ -104,4 +122,29 @@ function starPostClicked(index){
         // hover할 때만 있도록 설정해야 함.
     }
     star_toggle++;
+}
+function uploadTodo(){
+    var str=$('#input_todo').val();
+    console.log(str);
+    $('#plusTodoModal').modal('hide');
+    
+}
+function cancelClicked(){
+    $('.modal').modal('hide');
+}
+function uploadContent(){
+    var title=$('#input_content_title').val();
+    var title_type=$('#input_content_title').attr('name');
+    var content_type=$('#input_content').attr('name');
+    var content=$('#input_content').val();
+    console.log(title_type+":"+title);
+    console.log(content_type+":"+content);
+
+    $('.modal').modal('hide');
+}
+function uploadLink(){
+    $('.modal').modal('hide');
+}
+function uploadFile(){
+    $('.modal').modal('hide');
 }
