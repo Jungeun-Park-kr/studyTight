@@ -200,7 +200,7 @@ html, body {
     justify-content: center;
     align-items: center;
 } */
-.modal_day { 
+.modal_day, .modal_todo { 
     position: fixed; 
     left: 0; 
     top: 0; 
@@ -213,7 +213,7 @@ html, body {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 } 
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-day { 
+.modal-content-day, .modal-content-todo { 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -258,7 +258,40 @@ html, body {
 #d-day-plus{
     cursor:pointer;
 }
+.uploadBtn{
+    cursor:pointer;
+    padding:10px;
+    background-color:#6ED4D8;
+    border-radius:10px;
+    border:none;
+    font-size:12px;
+    font-weight:bold;
+}
+.cancelBtn{
+    padding:10px;
+    cursor:pointer;
+    border-radius:10px;
+    border-color: #6ED4D8;
+    border-style:solid;
+    background-color: white;
+    border-width:1px;
+    font-size:12px;
+    font-weight:bold;
+    margin-right:10px;
+}
+.buttons_wrap{
+    position:fixed;
+    bottom:10px;
+    right:10px;
 
+}
+.input_todo{
+    height:24px;
+    width:80%;
+    margin:20px auto;
+    padding-top: 2px;
+    text-align: center;
+}
 /*  */
 .container .folder_ {
     /* 폴더를 감싸는 흰 div */

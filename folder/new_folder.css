@@ -72,13 +72,16 @@ body {
 /* .wrap > div {
     display:inline-block;
 } */
+.wrap_postit{
+    margin-top: 30px;
+}
 .wrap_postit > .postIt
 {
     display:inline-block;
     margin:20px 35px 20px 20px;
-    width: 12%; 
+    width: 90px; 
 
-    height: 65px;
+    height: 90px;
 }
 #MAIN_RIGHT{
     float:right;
@@ -89,7 +92,7 @@ body {
     font-size:15px;
     font-weight:bold;
     margin-top:35px;
-    margin-left:10px;
+    margin-left:70px;
     color:black;
 }
 
@@ -150,8 +153,10 @@ label{
 /* 포스트잇 내부 설정 */
 .post_img {
     width:100%;
-    height:auto;
-
+    height:90px;
+    object-fit: fill;
+    /* width:90px;
+    height:90px; */
 }
 .postIt > p {
     font-size:12px;
@@ -162,7 +167,7 @@ label{
 .post {
     position:absolute;
     z-index:1;
-    top:50%;
+    top:40%;
     width:100%;
     margin:0 auto;
     text-align: center;
@@ -501,7 +506,7 @@ textarea{
 }
 
 .uploadBtn{
-
+    cursor:pointer;
     padding:10px;
     background-color:#6ED4D8;
     border-radius:10px;
@@ -510,6 +515,7 @@ textarea{
     font-weight:bold;
 }
 .cancelBtn{
+    cursor:pointer;
     padding:10px;
     border-radius:10px;
     border-color: #6ED4D8;
