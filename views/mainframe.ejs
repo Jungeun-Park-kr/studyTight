@@ -34,7 +34,7 @@
             <div class="main_header">
                 <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
                 <div class="logo_area">
-                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="btnHomeInHome();" alt=""/></a>
+                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt=""/></a>
                     <section class="group_menu">
                         <nav class="menu_effect">
                             <a href="#" class="menu">내 공부방</a>
@@ -67,14 +67,14 @@
                                 
                             </div> -->
                             <div class="logout">
-                                    <input type="button" class="btn_logout" title="로그아웃" value="로그아웃" onclick="logout();" />
-                                    
+                                <input type="submit" class="btn_logout" title="로그아웃" value="로그아웃" onClick="location.href='/auth/logout'"/>    
                             </div>
-                            <% } else{ %>
+                            <% } %>
+                            <!-- <%# } else{ %>
                             <div class="logout">
                                 <input type="button" class="btn_logout" title="로그인" value="로그인" onclick="location.href='/login'" />
                             </div>
-                            <% } %>
+                            <%# } %> -->
                         </div>
                     </div>
                 </div>

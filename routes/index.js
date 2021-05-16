@@ -34,6 +34,19 @@ router.get('/', isLoggedIn, (req, res) => { // app.get('주소', 라우터) : GE
         console.error(err);
         next(err);
     }
-
 });
+
+router.get('/', isNotLoggedIn, (req, res) => {
+    try {
+        // res.send('Hello, Express'); // 테스트용
+        res.render(path.join(__dirname, '../views/login.ejs' ), {
+            title: 'StudyTight 메인화면',
+        });
+    }
+    catch (err) {
+        console.error('routes/index.js 에서 에러');
+        console.error(err);
+        next(err);
+    }
+})
 

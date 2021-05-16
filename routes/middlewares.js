@@ -5,8 +5,8 @@ exports.isLoggedIn = (req, res, next) => {
         next(); // 로그인 상태이면 다음 미들웨어로 넘어감
     } else { // 로그인 안된 상태
         // res.status(403).send('로그인 필요');
-        res.render(path.join(__dirname, '../views/mainframe.ejs'),
-            {title : 'study Tight 메인',
+        res.render(path.join(__dirname, '../views/login.ejs'),
+            {title : 'studyTight 로그인',
             }
         );
         
