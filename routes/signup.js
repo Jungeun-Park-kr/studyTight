@@ -1,12 +1,12 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// const path = require('path'); // 현재 프로젝트의 경로
+const path = require('path'); // 현재 프로젝트의 경로
 
-// // GET /signup 라우터 (signup으로 왔을때의 root)
-// router.get('/', (req, res) => {
-//     res.render(path.join(__dirname, '../views/signup.ejs'));
-// });
+// GET /signup 라우터 (signup으로 왔을때의 root)
+router.get('/', (req, res) => {
+    res.render(path.join(__dirname, '../views/signup.ejs'));
+});
 
 
 // router.get('/agree', (req, res) => {
@@ -46,4 +46,4 @@
 //         });
 // });
 
-// module.exports = router;
+module.exports = router;
