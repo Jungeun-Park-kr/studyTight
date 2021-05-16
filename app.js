@@ -27,6 +27,7 @@ const userRouter = require('./routes/user'); // user 라우터
 const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인 처리, 회원가입 처리, 로그아웃 처리)
 const signupRouter = require('./routes/signup'); // 회원가입 라우터
 const loginRouter = require('./routes/login'); // 로그인 라우터
+const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 
 
 
@@ -58,6 +59,7 @@ app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+app.use('/email', emailRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {

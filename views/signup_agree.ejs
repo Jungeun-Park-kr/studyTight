@@ -77,6 +77,7 @@
                 </ul>
                 <span class="event_message" style="display:block">study Tight에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(study Tight앱 알림 또는 문자), 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 study Tight 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</span>
             </div>
+            
             <div class="agree_bottom"> 
                 <div class="btn_area double">
                     <span><!-- tg-text=terms_button_cancel -->
@@ -89,3 +90,18 @@
     </div>
 </body>
 </html>
+<script>
+    var chk_all = document.getElementById('chk_all');
+    var chk_service = document.getElementById('termsService');
+    var chk_privacy = document.getElementById('termsPrivacy');
+    var chk_email = document.getElementById('termsEmail');
+
+
+
+    if (chk_all.checked) {
+        console.log('모두체크');
+        chk_service.checked= true;
+        chk_privacy.checked= true;
+        chk_email.chekced= true;
+    }
+</script>
