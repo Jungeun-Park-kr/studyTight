@@ -9,74 +9,41 @@ const router = express.Router();
 const path = require('path'); // 현재 프로젝트의 경로
 
 
-
-router.get('/agree', (req, res) => {
-    //res.send('This is signup page');
-    res.render(path.join(__dirname, '../views/signup_agree.ejs'));
-});
-
-
-
-// // GET /auth/signup 라우터 (signup으로 왔을때의 root)
-// router.get('/signup', (req, res) => {
-//     res.render(path.join(__dirname, '../views/signup.ejs'));
+// router.get('/agree', (req, res) => {
+//     //res.send('This is signup page');
+//     res.render(path.join(__dirname, '../views/signup_agree.ejs'));
 // });
 
 
-
-// POST /auth/signup 라우터 
-// 회원가입 form
-router.post('/signup', isNotLoggedIn, async (req, res, next) => {
-    const {email, name, password} = req.body;
+// // POST /auth/signup 라우터 
+// // 회원가입 form
+// router.post('/signup', isNotLoggedIn, async (req, res, next) => {
+//     const {email, name, password} = req.body;
     
-    console.log('회원가입 버튼 누름');
-    console.log('email:'+email+', name:'+name+', password:'+password);
+//     console.log('회원가입 버튼 누름');
+//     console.log('email:'+email+', name:'+name+', password:'+password);
 
-    try {
-        const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
-        if (exUser) {
-            console.log('이미 가입된 회원입니다.');
-            return res.redirect('/signup?error=exist');
-        }
-        const hash = await bcrypt.hash(password, 12);
-        const user = await User.create({
-            email : email,
-            name : name,
-            password: hash,
-        });
-        console.log('추가된 user:'+user);
+//     try {
+//         const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
+//         if (exUser) {
+//             console.log('이미 가입된 회원입니다.');
+//             return res.redirect('/signup?error=exist');
+//         }
+//         const hash = await bcrypt.hash(password, 12);
+//         const user = await User.create({
+//             email : email,
+//             name : name,
+//             password: hash,
+//         });
+//         console.log('추가된 user:'+user);
 
-        return res.redirect('/login');
-    } catch (error) {
-        console.log('회원가입 에러');
-        console.error(error);
-        return next(error);
-    }
-    // console.log(req.body);
-    // User.find({ email:req.body.email })
-    //     .exec()
-    //     .then(user => {
-    //         if (user.length >= 1) {
-    //             res.send('<script type="text/javascript">alert("이미 존재하는 이메일입니다."); window.location="/signup"; </script>');
-    //         } else {
-    //             const user = new User({
-    //                 _id: new mongoose.Types.ObjectId(),
-    //                 name:req.body.name,
-    //                 email: req.body.email,
-    //                 password: req.body.password
-    //             });
-    //             user
-    //                 .save()
-    //                 .then(result => {
-    //                     console.log(result);
-    //                     res.redirect("/");
-    //                 })
-    //                 .catch(err => {
-    //                     console.log(err);
-    //                 });
-    //               }
-    //     });
-});
+//         return res.redirect('/login');
+//     } catch (error) {
+//         console.log('회원가입 에러');
+//         console.error(error);
+//         return next(error);
+//     }
+// });
 
 
 
@@ -112,9 +79,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
     req.session.destroy();
     res.redirect('/');
 })
-
-
-
 
 
 module.exports = router;

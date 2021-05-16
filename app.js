@@ -52,22 +52,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// mongoDB Connect information (테스트용)
-// const uri = process.env.ATLAS_URI;
-// const connect = mongoose.connect(uri, {
-//     dbName: 'studyTight',
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-// });
-// const connection = mongoose.connection;
-// connection.once("open", () => {
-//     console.log("MongoDB database connection success");
-// });
-
-
-
-
 // use routes
 app.use('/', indexRouter);
 app.use('/user', userRouter);
