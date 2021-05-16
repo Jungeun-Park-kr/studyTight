@@ -9,6 +9,9 @@ body {
     overflow:hidden;
     min-width:1190px;
 }
+#wow{
+    background-size:90px 90px;
+}
 #container{
     position: relative;
     width: 1190px;
@@ -95,7 +98,6 @@ body {
     margin-left:70px;
     color:black;
 }
-
 /* 여기부터 오늘 할 일 */
  .wrap_Todolist{
     text-align:center;
@@ -128,17 +130,25 @@ label{
     background-color:white;
     border-radius: 10px;
 }
-.btnplusTodo{
+.plusTodoBtn{
     border-radius: 10px; 
     background-color:#6ED4D8;
     display:table-cell;
     vertical-align: middle;
     margin-bottom:10px;
-    
-    width:95%;
+    width:250px;
     height:40px;
     border:10px;
     cursor: pointer;
+}
+.plusTodoBtn > a {
+    text-decoration: none;
+    color:#000;
+}
+a:link {
+    text-decoration: none!important;
+    color:#000;
+    text-align: center;
 }
 .caution{
     width:100%;
@@ -151,12 +161,17 @@ label{
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-.post_img {
+img svg{
     width:100%;
     height:90px;
     object-fit: fill;
     /* width:90px;
     height:90px; */
+}
+.post_img{
+    width:100%;
+    height:90px;
+    object-fit: fill;
 }
 .postIt > p {
     font-size:12px;
@@ -259,7 +274,9 @@ label{
     display:block;
     align-content: center;  
 }
-
+.plusTodoBtn{
+    background-color: #6ED4D8;
+}
 
 /****** 레이어(모달) 팝업 ******/
 /* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
@@ -277,7 +294,7 @@ label{
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-postIt-content { 
+.modal-postIt-content, .modal-content-todo { 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -445,6 +462,19 @@ textarea{
     width:80%;
 } */
 
+#todo-plus-modal{
+    width:400px;
+    height:200px;
+    text-align: center;
+    overflow:hidden;
+    position: absolute; 
+    background-color: white;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    border-radius: 10px; 
+}
+
 /* choice할 때의 modal */
 #choiceTypeModal{
     width:550px;
@@ -504,7 +534,19 @@ textarea{
 .modal-writing1 > textarea{
     width:80%;
 }
+.buttons_wrap{
+    position:fixed;
+    bottom:10px;
+    right:10px;
 
+}
+.input_todo{
+    height:24px;
+    width:80%;
+    margin:20px auto;
+    padding-top: 2px;
+    text-align: center;
+}
 .uploadBtn{
     cursor:pointer;
     padding:10px;

@@ -21,8 +21,8 @@
 
 <body>
     <div id="wrap">
-            <div id="header">
-            </div> 
+            <!-- <div id="header">
+            </div>  -->
             
         <div id="container">
             <div id="MAIN_LEFT">
@@ -33,16 +33,17 @@
                     
                     <div id="wrap_postit" class="wrap_postit">
                     <div  id="postIt_0" class="postIt">
-                        <img class="post_img"src="media/post_it_yellow.png"><p class="post">pid란?</p>
+                        <img id="wow"class="post_img"src="media/post_blue.svg"><p class="post">pid란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
                         <div id="dropdown-content0" class="dropdown_content"> 
                         <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
                         <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
                         </div>
+                        
                     </div>
                     <div id="postIt_1" class="postIt">
-                        <img class="post_img"src="media/post_it_yellow.png"><p class="post">shell이란?</p>
+                        <img id="wow2" class="post_img"src="media/post_yellow.svg"><p class="post">shell이란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(1);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(1);">
                         <div id="dropdown-content1" class="dropdown_content">
@@ -51,7 +52,7 @@
                             </div>
                     </div>
                     <div id="postIt_2" class="postIt">
-                        <img class="post_img" src="media/post_it_yellow.png"><p class="post">scheduler란?</p>
+                        <img class="post_img" src="media/post_red.svg"><p class="post">scheduler란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(2);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(2);">
                         <div id="dropdown-content2" class="dropdown_content">
@@ -60,7 +61,7 @@
                             </div>
                     </div>
                     <div id="postIt_3" class="postIt">
-                        <img class="post_img" src="media/post_it_yellow.png"><p class="post">chap1 정리</p>
+                        <img class="post_img" src="media/post_orange.svg"><p class="post">chap1 정리</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(3);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(3);">
                         <div id="dropdown-content3" class="dropdown_content">
@@ -69,10 +70,10 @@
                             </div>
                     </div>
                     <div id="postIt_4" class="postIt">
-                        <img class="post_img" src="media/post_it_yellow.png"><p class="post">ssu_shell.c</p>
+                        <img class="post_img" src="media/post_green.svg"><p class="post">ssu_shell.c</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(4);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(4);">
-                        <div id="dropdown-content4" class="dropdown_content">
+                        <div id="dropdown-content4" class="dropdown_content" data-value='close'>
                             <button role="menuitem" class="dropdown_choice" id="revise_post4" onclick="revisePostClicked(4);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_post4" onclick="deletePostClicked(4);"></button>
                             </div>
@@ -92,15 +93,21 @@
                 </div> -->
 
                 <script>
-                    $('body').click(function(e){
-                        if($(`#dropdown-content${e}`).show())
+                    $(document).click(function(e){
+                        var dropdown=document.getElementsByClassName('dropdown_content');
+                        for(i=0;i<dropdown.length;i++){
+                        var value=dropdown[i].getAttribute('data-value');
+                            if(value==='open' && !(e.target.id==`dropdown-content${i}`)){
+                            console.log("열림!");
                             hidePostMenu();
+                    
+                        }}
                     })
                 </script>
 
 
     <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
-        <img class="post_img" src="media/post_it_orange.png" value="추가하기">
+        <img class="post_img" src="media/post_gray.svg" value="추가하기">
     </a>
 
     <div class="modal" id="choiceTypeModal" data-backdrop="static">
@@ -137,16 +144,18 @@
             <h4 class="modal-title">글 작성하기</h4>
             </div><div class="container-content"></div>
             <div class="modal-body">
+                <form action='' method='POST'>
                 <p>제목</p>
-                <input type="text" id="input_content_title" class="input_text" placeholder="제목을 입력하세요">
+                <input type="text" id="input_content_title" name="title" class="input_text" placeholder="제목을 입력하세요">
                 <br>
                 <br>
                 <p>내용</p>
-                <textarea id="input_content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
+                <textarea id="input_content" name="content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
+            </form>
             </div>
             <div class="modal-footer">
-            <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
-            <a href="#" class="btn uploadBtn">완료</a>
+            <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked();">취소</a>
+            <a href="#" class="btn uploadBtn" onclick="uploadContent();">완료</a>
             </div>
         </div>
         </div>
@@ -160,6 +169,7 @@
             <h4 class="modal-title">링크 작성하기</h4>
             </div><div class="container-link"></div>
             <div class="modal-body">
+                <form action='' method='POST'>
                 <p>제목</p>
                 <input type="text" id="input_link_text" class="input_text" placeholder="제목을 입력하세요">
                 <br>
@@ -167,9 +177,10 @@
                 <p>링크</p>
                 <input type="text" id="input_link" class="input_link" placeholder="링크를 입력하세요">
             </div>
+        </form>
             <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
-                <a href="#" class="btn uploadBtn">완료</a>
+                <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked()">취소</a>
+                <a href="#" class="btn uploadBtn" onclick="uploadLink();">완료</a>
             </div>
         </div>
         </div>
@@ -196,8 +207,8 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn cancelBtn">취소</a>
-                        <a href="#" class="btn uploadBtn">완료</a>
+                        <a href="#" data-dismiss="modal" onclick="cancelClicked();" class="btn cancelBtn">취소</a>
+                        <a href="#" class="btn uploadBtn" onclick="uploadFile();">완료</a>
                     </div>
                 </div>
             
@@ -215,10 +226,72 @@
                         <label><input type="checkbox"><p>채플 듣기</p></label>
                         <label><input type="checkbox"><p>OS 보고서 쓰기</p></label>
                     </div>
-                    <input type="button" class="btnplusTodo" value="추가하기" @click="plusTodo();"></input> <!--+부분 이미지로 넣기-->
+                    <!--<input type="button" class="btnplusTodo" value="추가하기"></input>--> <!--+부분 이미지로 넣기-->
+                        <a data-toggle="modal" href="#plusTodoModal" class="plusTodoBtn" id="openTodoBtn">오늘 할 일 추가하기</a>
                     <div class="caution">
                         오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
                     </div>
+                    </div>
+
+                    <div class="modal" id="plusTodoModal" data-backdrop="static">
+                        <div id="todo-plus-modal"class="modal-dialog modal-choice">
+                        <div class="modal-todo-content">
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <p class="modal-title">오늘 할 일 추가하기</p>
+                            </div><form action="./todolist" method="POST">
+                    
+                        <div class="input_wrap">
+                            <input type="text" id="input_todo" name="new_todo" class="input_todo" placeholder="오늘 할 일을 입력하세요">
+                        
+                        </div>
+                            </form>
+                            <div class="buttons_wrap">
+                                <input type="submit" class="uploadBtn" value="완료" onclick="uploadTodo()"/>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    <!-- <div id="modal" class="modal modal_todo">
+                        <div class="modal-content-todo">
+                            <span class="close_button close_todo_button">&times;</span>
+                            <form action="#post.js" method="POST">
+                                <p class="title">오늘 할 일 추가하기</p>
+                        <hr>
+
+                        <div class="input_wrap">
+                            <label><input type="text" id="input_todo" class="input_todo" placeholder="오늘 할 일을 입력하세요"></label>
+                        
+                        </div>
+
+                        <div class="buttons_wrap">
+                            <input type="button" class="uploadBtn" value="완료" onclick="uploadTodo()"/>
+                        </div>
+                            </form>
+                        </div>
+                    </div> -->
+                    
+                    <!-- <script>
+                        var modal_todo=document.querySelector(".modal_todo"); 
+                        var trigger_todo=document.querySelector(".btnplusTodo");
+                        var closeTodoButton=document.querySelector(".close_todo_button");
+                    
+                        
+                        function toggleTodoModal(){
+                            modal_todo.classList.toggle("show_modal");
+                        }
+                        function windowOnClick(event) {
+                        if(event.target==modal_todo){
+                                toggleTodoModal();
+                            }
+                        }
+
+                        trigger_todo.addEventListener("click",toggleTodoModal);
+
+                        closeTodoButton.addEventListener("click",toggleTodoModal);
+                        window.addEventListener("click", windowOnClick);
+                    
+                        </script> -->
                 </div>
 
     </div>
