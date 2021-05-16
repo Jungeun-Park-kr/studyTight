@@ -20,9 +20,11 @@
         @import url(/guestbook/guestbook_myroom.css);
         @import url(/guestbook/index.css);
         @import url(/guestbook/reply.css);
+        @import url(/guestbook/add_popup.css);
         @import url(/new_mainframe.css);
         @import url(/font.css);
         @import url(mainframe_shortcuts.css);
+        @import url(/guestbook/friends_edit.css);
     </style>
 </head>
 <script>
@@ -128,15 +130,240 @@
                             <div class="title_msg">Friends</div>
                             <form>
                                 <select name="group-dropdown">
-                                  <option value="none">=== 선택 ===</option>
-                                  <option value="korean" selected>기본그룹</option>
-                                  <option value="english">고등학교 친구들</option>
-                                  <option value="chinese">대학교 친구들</option>
-                                  <option value="spanish">연락XX</option>
+                                <option value="none">=== 선택 ===</option>
+                                <option value="korean" selected>기본그룹</option>
+                                <option value="english">고등학교 친구들</option>
+                                <option value="chinese">대학교 친구들</option>
+                                <option value="spanish">연락XX</option>
                                 </select>
+                                <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png" ></img>
+                                <!-- 이후 모달 팝업으로 추가.-->
                                 <div class="btn_add_course">
-                                    <input type="button" value="+ 친구 추가하기" onclick="showFriendsEditPopup();"></input>
+                                    <input type="button" class = "trigger" value="+ 친구 추가하기"></input>
+                                    <!-- 위에 존재하던 onclick 메소드는 모달팝업을 이용하면서 삭제하게 되었습니다 -->
                                 </div>
+
+
+                                <!--친구 수정을 위합 모달 팝업-->
+                                <div class="modal3"> 
+                                    <div class="modal-content"> 
+                                        <span class="close-button3">&times;</span> 
+                                        <h1 class="title">친구 관리하기</h1> 
+                                        <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                                        <div class="course_add_list">
+                                            <div class="course_section">
+                                                <div class="secret_section">
+                                                    <div class="course_secret_label">선택된 친구</div>
+                                                </div>
+                                                <div class="course_title_section">
+                                        
+                                        
+                                                    <div class="course_secret_label">양지영 ssdsdf@nate.com</div>
+                                        
+                                                    <div class="course_type_form" id="course_type_radio">
+                                        
+                                                    </div>
+                                                </div>
+                                        
+                                        
+                                            </div>
+                                            <hr>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">즐겨찾기 여부</div>
+                                                <input type="checkbox" name="select_friend" value="select" checked>
+                                                <div class="professor_name_form">
+                                                    즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">그룹변경</div>
+                                                <select name="group-dropdown">
+                                                    <option value="none">=== 선택 ===</option>
+                                                    <option value="korean" selected>기본그룹</option>
+                                                    <option value="english">고등학교 친구들</option>
+                                                    <option value="chinese">대학교 친구들</option>
+                                                    <option value="spanish">연락XX</option>
+                                                  </select>
+                                            </div>
+                                            <hr>
+                                            <div class="delete_section">
+                                                친구 삭제하기
+                                            </div>
+                                            <div class="add_btn">
+                                                <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div> 
+                                </div>
+
+                                <!-- 첫번째로 팝업될 친구 검색 레이어-->
+
+
+                                <div class="modal"> 
+                                    <div class="modal-content"> 
+                                        <span class="close-button">&times;</span> 
+                                        <h1 class="title">친구 추가하기</h1> 
+                                        <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                                        <div class="course_add_list">
+                                            <div class="course_section">
+                                                <div class="secret_section">
+                                                    <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                                </div>
+                                                <div class="course_title_section">
+                                        
+                                                    <div class="course_title_form">
+                                                        <input type="text" id="course_title" placeholder="ex) StudyTight@naver.com" />
+                                                    </div>
+                                                    <div class="course_type_form" id="course_type_radio">
+                                        
+                                                    </div>
+                                                    <div class="search_btn">
+                                                        <input id="search_course" type="button" title="검색하기" value="검색" onclick="addprofile();"></input>
+                                                    </div>
+                                                </div>
+                                        
+                                        
+                                            </div>
+                                            <hr>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">양지영</div>
+                                                <div class="professor_name_form">
+                                                    sefsef@nate.com
+                                                </div>
+                                                <input type="checkbox" name="select_friend" value="select" checked>
+                                            </div>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">최시언</div>
+                                                <div class="professor_name_form">
+                                                    noino0819@naver.com
+                                                </div>
+                                                <input type="checkbox" name="select_friend" value="select" checked>
+                                            </div>
+                                            <div class="add_btn">
+                                                <input id="btn_add_course" class = "trigger2"type="button" title="저장하기" value="선택하기" onclick="addprofile();"></input>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div> 
+                                </div>
+
+
+                                <!-- 팝업 될  두번째 레이어 -->
+        <div class="modal2"> 
+        <div class="modal-content"> 
+            <span class="close-button2">&times;</span> 
+            <h1 class="title">친구 추가하기</h1> 
+            <div class="course_add_list">
+                <div class="course_section">
+                    <div class="secret_section">
+                        <div class="course_secret_label">해당 친구를 추가할 그룹을 선택해 주세요</div>
+                    </div>
+                    <div class="course_title_section">
+            
+            
+                        <div class="course_type_form" id="course_type_radio">
+            
+                        </div>
+                        양지영 sefsef@nate.com
+                    </div>
+            
+            
+                </div>
+                <hr>
+                <div class="professor_name_section">
+                    <div class="professor_name_label">그룹변경</div>
+                    <select name="group-dropdown">
+                        <option value="none">=== 선택 ===</option>
+                        <option value="korean" selected>기본그룹</option>
+                        <option value="english">고등학교 친구들</option>
+                        <option value="chinese">대학교 친구들</option>
+                        <option value="spanish">연락XX</option>
+                    </select>
+                </div>
+                <div class="add_group_section">
+                    <img src="/media/plus.png" id=plus> 새로운 그룹 추가하기
+                </div>
+            
+                <div class="course_section">
+                    <div class="course_title_section">
+            
+                        <div class="course_title_form">
+                            <input type="text" id="course_title" placeholder="추가할 그룹의 이름을 적어주세요" />
+                        </div>
+                        <div class="course_type_form" id="course_type_radio">
+            
+                        </div>
+                        <div class="search_btn">
+                            <input id="search_course" type="button" title="추가하기" value="그룹추가" onclick="addprofile();"></input>
+                        </div>
+                    </div>
+            
+            
+                </div>
+                <div class="add_btn">
+                    <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
+                </div>
+            </div>
+            <script type="text/javascript"> 
+                var modal = document.querySelector(".modal"); 
+                var modal2 = document.querySelector(".modal2"); 
+                var modal3 = document.querySelector(".modal3"); 
+                var trigger = document.querySelector(".trigger"); 
+                var trigger2 = document.querySelector(".trigger2");
+                var trigger3 = document.querySelector(".trigger3");  
+                var closeButton = document.querySelector(".close-button"); 
+                var closeButton2 = document.querySelector(".close-button2"); 
+                var closeButton3 = document.querySelector(".close-button3"); 
+                var cancelButton = document.querySelector("#cancel");
+        
+               //console.log(modal);
+        
+                function toggleModal() { 
+                    modal.classList.toggle("show-modal"); 
+                }
+
+                function toggleModal2() { 
+                    modal2.classList.toggle("show-modal"); 
+                    modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
+                }
+
+                function toggleModal3() { 
+                    modal3.classList.toggle("show-modal"); 
+                }
+
+                function toggleModal2_close() { 
+                    modal2.classList.toggle("show-modal"); 
+                }
+        
+                function windowOnClick(event) { 
+                    if (event.target === modal) { 
+                        toggleModal(); 
+                    } 
+                }
+
+                function windowOnClick(event) { 
+                    if (event.target === modal2) { 
+                        toggleModal2(); 
+                    } 
+                }
+        
+                trigger.addEventListener("click", toggleModal); 
+                trigger2.addEventListener("click", toggleModal2); 
+                trigger3.addEventListener("click", toggleModal3); 
+                closeButton.addEventListener("click", toggleModal); 
+                closeButton2.addEventListener("click", toggleModal2_close); 
+                closeButton3.addEventListener("click", toggleModal3); 
+                cancel.addEventListener("click", toggleModal); 
+                window.addEventListener("click", windowOnClick); 
+            </script>
+
+            </form>
+        </div> 
+    </div> 
+
+
                             </form>
                         </div>
 

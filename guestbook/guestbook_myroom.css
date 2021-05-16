@@ -127,6 +127,19 @@ body {
     background: white;
 }
 
+#friend_edit {
+    cursor: pointer;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-bottom: 3px;
+    height: 16px;
+    border: 10px;
+    font-size: 12px;
+    background-position:top right; 
+    background-repeat:no-repeat;
+        
+}
+
 .my-room .friends_add {
     width: 90%;
     height: 50px;
@@ -164,7 +177,7 @@ select {
     line-height: 1.5em;
     padding: 0.5em 3.5em 0.5em 1em;
     appearance: none;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: 3%;
     background-image: url("media/dropdown.png");
     background-size: 7px 7px;
