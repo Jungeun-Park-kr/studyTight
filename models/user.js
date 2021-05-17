@@ -10,6 +10,14 @@ const userSchema = new Schema( {
     profile_image : { type: String,
         default: '/public/media/user.png'
     },
+    email_auth : {type: Boolean, 
+        required:true,
+        default : false
+    },
+    auth_number : {
+        type: String,
+        default: ''
+    }
     // provider: { //로그인 로컬로
     //     type: String,
     //     default: 'local',
