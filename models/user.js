@@ -7,16 +7,9 @@ const userSchema = new Schema( {
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     name :{ type: String, required: true },
+    birth : {type: String, required: true},
     profile_image : { type: String,
         default: '/public/media/user.png'
-    },
-    email_auth : {type: Boolean, 
-        required:true,
-        default : false
-    },
-    auth_number : {
-        type: String,
-        default: ''
     },
     promotion : { type : Boolean }
     // provider: { //로그인 로컬로

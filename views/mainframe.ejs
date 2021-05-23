@@ -310,21 +310,22 @@
                 <div class="aside">
                     <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
                     <div class="aside_wrap">
-                            <p>오늘 할 일</p>
+                        <p>오늘 할 일</p>
+                        
+                        <div class="todaylist" id="todaylist">
+                            <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
+                            <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
+                            <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
+                            <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
+                            <input type="button" class="btnplusTodo" value="+   할 일 추가하기" onclick="plusTodo()"></input>
+                        </div>
                             
-                            <div class="todaylist" id="todaylist">
-                                <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
-                                <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
-                                <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
-                                <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
-                            </div>
-                            <input type="button" class="btnplusTodo" value="+ 할 일 추가하기" onclick="plusTodo()"></input>
-                            <!--+부분 이미지로 넣기-->
-                        </div>
+                        <!--+부분 이미지로 넣기-->
+                    
                         <div class="caution">
-                            오늘(11:59 PM)기준으로 완료된 할 일은 내일(12:00 AM)기준으로 제거되고, 완료되지 않은 할 일은 유지됩니다.
+                            오늘(11:59 PM)기준으로 완료된 할 일은<br>내일(12:00 AM)기준으로 제거되고,<br>완료되지 않은 할 일은 유지됩니다.
                         </div>
-                    </div>
+                </div>
             </div>
         <!-- d-day 추가하기 모달 팝업 -->
     <div id="modal" class="modal modal_day">

@@ -46,13 +46,16 @@ router.get('/', (req, res) => {
 // 회원가입 form
 router.post('/', isNotLoggedIn, async (req, res, next) => {
     // 이전 동의 화면에서 체크한 프로모션 수신 동의 여부 확인
-    const promotion = localStorage.getItem('promotion') == 'true' ? true : false ;
-    localStorage.removeItem('promotion');
+    var promotion = typeof window !== 'undefined' ? localStorage.getItem('promotion') : null;
+    if (promotion != null)
+        localStorage.removeItem('promotion');
+    else
+        promotion = false;
 
-    const {email, name, password} = req.body;
+    const {email, name, password, birth} = req.body;
     
     console.log('회원가입 버튼 누름');
-    console.log('email:'+email+', name:'+name+', password:'+password);
+    console.log('email:'+email+', name:'+name+', password:'+password, 'promotion:', promotion);
 
     try {
         const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
@@ -68,11 +71,12 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
             email : email,
             name : name,
             password: hash,
+            birth : birth,
             promotion : promotion,
         });
         console.log('추가된 user:'+ user);
-
-        return res.redirect('/login');
+        res.send('success');
+        // return res.redirect('/login');
     } catch (error) {
         console.log('회원가입 에러');
         console.error(error);
