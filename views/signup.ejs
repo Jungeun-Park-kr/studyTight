@@ -35,7 +35,7 @@
                 
                 <div class="join_section">
                     <!-- <form id="join_form" method="POST"> -->
-                    <form id="join_form">
+                    <!-- <form id="join_form"> -->
                         <div class="join_content">
                             <!-- 이메일 영역 -->
                             <div class="join_row join_email" id="emilDiv">
@@ -43,7 +43,7 @@
                                 <div class="email_verify_area">
                                 
                                         <span class="join_form">
-                                            <input type="email" id="email" name="email" placeholder="이메일 입력" maxlength="30" required autofocus/>
+                                            <input type="email" id="email" name="email" placeholder="이메일 입력" maxlength="30"/>
                                         </span>
 
                                         <a  class="btn_verify btn_primary" id="btn_email_send" role='button'>
@@ -82,12 +82,12 @@
                                         <input type="password" id="password_verify" name="password_verify" placeholder="비밀번호 재확인" maxlength="32" />
                                     </span>
 
-                                    <a href="#" class="btn_verify btn_primary" id="btnPassVerify" role="button">
-                                        <span class="">비밀번호 확인</span>
+                                    <a href="#" class="btn_verify btn_primary" id="btn_password_verify" role="button">
+                                        <span class="password_verify">비밀번호 확인</span>
                                     </a>
                                 </div>
-                                
                             </div>
+
 
                             <!--  개인정보 입력 영역  -->
                             <!-- 이름 영역 -->
@@ -178,10 +178,11 @@
 
                             <!-- 가입하기 버튼 -->
                             <div class="btn_area">
-                                <button id="btnJoin" class="btn_type btn_primary" formaction="/signup" ><span class="register">가입하기</span></button>
+                                <button id="btnJoin" class="btn_type btn_primary"><span class="register">가입하기</span></button>
+                                <!-- <button id="btnJoin" class="btn_type btn_primary" formaction="/signup" ><span class="register">가입하기</span></button> -->
                             </div>
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         
@@ -233,6 +234,20 @@
 
                 <!-- 확인 버튼 -->
                 <input type="button" id="confirm_check" class="btn_confirm" value="확인"> 
+            </div>
+        </div>
+        <div id="modal" class="modal modal_password">
+            <div class="modal-content-small">
+                <span class="close_button close_password_button">&times;</span>
+                <h1 class="title">비밀번호 확인</h1>
+
+                <!-- 내용 띄울 부분 -->
+                <div class="content">
+                    비밀번호 확인이 완료 되었습니다.
+                </div>
+
+                <!-- 확인 버튼 -->
+                <input type="button" id="confirm_password" class="btn_confirm" value="확인"> 
             </div>
         </div>
         <div id="modal" class="modal modal_register">
@@ -288,28 +303,35 @@
 
 
         <script type="text/javascript">
+        $(document).ready(function() {
             var modal_fail = document.querySelector(".modal_fail"); // 팝업 될 레이어 class명
             var modal_send = document.querySelector(".modal_send");
             var modal_check = document.querySelector(".modal_check");
             var modal_register = document.querySelector(".modal_register"); 
+            var modal_password = document.querySelector(".modal_password");
             
             var trigger_verify_fail = document.querySelector(".verify_fail_info"); // 인증번호 받기 실패 안내 버튼
             var trigger_send_verify = document.querySelector(".send_verify"); // 인증번호 받기 버튼
             var trigger_chk_verify = document.querySelector(".chk_verify"); // 인증번호 확인 버튼
             var trigger_register = document.querySelector(".register"); // 가입하기 버튼
+            var trigger_password = document.querySelector(".password_verify"); // 비밀번호 확인 버튼
             
             var closeFailButton = document.querySelector(".close_fail_button"); // 우측 상단 닫기 버튼
             var closeSendButton = document.querySelector(".close_send_button");
             var closeCheckButton = document.querySelector(".close_check_button");
             var closeRegisterButton = document.querySelector(".close_register_button");
+            var closePasswordButton = document.querySelector(".close_password_button");
 
             var confirmFailButton = document.querySelector("#confirm_fail"); // <- 확인 버튼 (취소 버튼 용으로 씀)
             var confirmSendButton = document.querySelector("#confirm_send");
             var confirmCheckButton = document.querySelector("#confirm_check");
             var confirmRegisterButton = document.querySelector("#confirm_register");
+            var confirmPasswordButton = document.querySelector("#confirm_password");
 
             var authNum; // 인증번호
             var isAuthChecked = false;
+            var isPassChecked = false;
+            
         
             function toggleFailModal() {
                 modal_fail.classList.toggle("show_modal");
@@ -322,8 +344,10 @@
                 modal_check.classList.toggle("show_modal");
             }
             function toggleRegisterModal() {
-                console.log('toggle signup modal ㅁㄴㅇㄹ');
                 modal_register.classList.toggle("show_modal");
+            }
+            function togglePasswordModal() {
+                modal_password.classList.toggle("show_modal");
             }
         
             function windowOnClick(event) {
@@ -335,13 +359,15 @@
                 } else if (event.target === modal_check) {
                     toggleCheckModal();
                     
-                } else if (event.register === modal_register) {
+                } else if (event.target === modal_register) {
                     toggleRegisterModal();
+                } else if (event.target === modal_password) {
+                    togglePasswordModal();
                 }
             }
 
             function sendAuthEmail(event) {
-                $(document).ready(function() {
+
                     // 인증번호 전송 버튼
                     $('#btn_email_send').click(function() {
                         var email = $('#email').val(); // 입력받은 이메일
@@ -370,43 +396,111 @@
                         });
                         
                     });
-                });
+                
             }
 
             function emailCheck(event) {
                 //console.log('인증번호 확인');
-                $(document).ready(function() {
-                    $('#btn_email_verify').click(function() {
-                        if ( $('#email_verify').val() == authNum) {
-                            console.log('인증번호 확인 성공');
-                            isAuthChecked = true;
-                        } else {
-                            alert('인증번호가 일치하지 않습니다.\n다시한번 확인해주세요');
-                        }
-                        
-                        
-                    });
-                });
-                
+                if ( $('#email_verify').val() == authNum) {
+                    console.log('인증번호 확인 성공');
+                    isAuthChecked = true;
+                    toggleCheckModal();
+                } else {
+                    alert('인증번호가 일치하지 않습니다.\n다시한번 확인해주세요');
+                }   
             }
+
+
+            function passwordCheck(event) {
+                var pass1 = $('#password').val();
+                var pass2 = $('#password_verify').val();
+                if (pass1.trim() === '') {
+                    alert('비밀번호를 입력해주세요');
+                } else if (pass2.trim() === '') {
+                    alert('재확인 비밀번호를 입력해주세요');
+                }
+                else if (pass1 === pass2) { // 비밀번호 확인 성공
+                    isPassChecked = true;
+                    togglePasswordModal();
+                } else {
+                    alert('비밀번호가 일치하지 않습니다.\n비밀번호를 확인 후 재시도해주세요.');
+                }
+            }
+
+            function registerCheck(event) {
+                //입력 확인
+                var name = $('#name').val();
+                var gender = $('#gender option:selected').val(); //선택된 성별 값 가져옴
+                var birthY = $('#yy').val(); // 년도 4글자 입력 
+                var birthM = $('#mm option:selected').val(); // 선택된 월
+                var birthD = $('#dd').val(); // 일 최대 2글자 입력
+
+                var isFilled = name.trim()!=='' && gender!=='성별' && birthY!=='' && birthM!=='월' && birthD!=='' ? true : false;
+
+                // console.log('name:',name);
+                // console.log('gender:',gender);
+                // console.log('birthY:',birthY);
+                // console.log('birthM:',birthM);
+                // console.log('birthD:',birthD);
+                // console.log('isFilled :', isFilled);
+
+                if (!isAuthChecked) { // 이메일 인증 확인
+                        alert('이메일 인증을 해주세요.');
+                } else if (!isPassChecked) { // 비밀번호 입력 확인
+                    alert('비밀번호 재확인을 해주세요');
+                } else if (!isFilled) { // 모두 입력 되었는지 확인
+                    alert('모든 회원가입 폼을 작성해주세요.');
+                } else { // 모든 조건 만족해야 가입 성공
+                    // 회원가입 양식 전송
+                    $.ajax({
+                            type:"POST",
+                            async : true,
+                            url:'/signup',
+                            data : {
+                                email: $('#email').val(),
+                                password: $('#password').val(),
+                                name : $('#name').val(),
+                                birth : birthY+'.'+birthM+'.'+birthD+'.',
+                                // promotion : localStorage.getItem('promotion'), // 이건 라우터에서 해줌
+                            },
+                            success:function(data){ // 이메일 전송 성공한 경우
+                                console.log('가입 성공');
+                                toggleRegisterModal();
+                            }, 
+                            error: function(err) { // POST 요청 실패시
+                                console.log('가입 실패' + err);
+                            }
+                        });
+                    
+                }
+            }
+
+            function succeededRegister() { // 로그인 성공 팝업에서 [확인],[X]버튼 클릭시 로그인 페이지로 이동
+                location.href = '/login';
+            }
+
             
+
             trigger_verify_fail.addEventListener("click", toggleFailModal);
             trigger_send_verify.addEventListener("click", sendAuthEmail);
             trigger_chk_verify.addEventListener("click", emailCheck);
-            trigger_register.addEventListener("click", toggleRegisterModal);
+            trigger_register.addEventListener("click", registerCheck);
+            trigger_password.addEventListener("click", passwordCheck);
 
             confirmFailButton.addEventListener("click", toggleFailModal);
             confirmSendButton.addEventListener("click", toggleSendModal);
             confirmCheckButton.addEventListener("click", toggleCheckModal);
-            confirmRegisterButton.addEventListener("click", toggleRegisterModal);
+            confirmRegisterButton.addEventListener("click", succeededRegister); // 회원가입 성공 - 로그인 페이지로 이동
+            confirmPasswordButton.addEventListener('click', togglePasswordModal);
             
             closeFailButton.addEventListener("click", toggleFailModal);
             closeSendButton.addEventListener("click", toggleSendModal);
             closeCheckButton.addEventListener("click", toggleCheckModal);
-            closeRegisterButton.addEventListener("click", toggleRegisterModal);
+            closeRegisterButton.addEventListener("click", succeededRegister); // 회원가입 성공 - 로그인 페이지로 이동
+            closePasswordButton.addEventListener('click', togglePasswordModal);
 
             window.addEventListener("click", windowOnClick);
-        
+        });
         </script>
     </div>
         
