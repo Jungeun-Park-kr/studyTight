@@ -33,7 +33,7 @@
                     
                     <div id="wrap_postit" class="wrap_postit">
                     <div  id="postIt_0" class="postIt">
-                        <img id="wow"class="post_img"src="media/post_blue.svg"><p class="post">pid란?</p>
+                        <img id="wow"class="post_img" src="media/Post_yellow.png"><p class="post">pid란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
                         <div id="dropdown-content0" class="dropdown_content"> 
@@ -73,12 +73,23 @@
                         <img class="post_img" src="media/post_green.svg"><p class="post">ssu_shell.c</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(4);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(4);">
-                        <div id="dropdown-content4" class="dropdown_content" data-value='close'>
+                        <div id="dropdown-content4 " class="dropdown_content" data-value='close'>
                             <button role="menuitem" class="dropdown_choice" id="revise_post4" onclick="revisePostClicked(4);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_post4" onclick="deletePostClicked(4);"></button>
                             </div>
                     </div>
-                    
+                    <script>
+                        var star=document.getElementsByClassName('fixed_star');
+for(i=0;i<star.length;i++){
+    if(star[i].src=="media/empty_star.png" && star[i].style.opacity==0){
+        console.log(i+"번째가 빈 별이다.");
+        star[i].hover(function(){
+            star[i].style.opacity=1;
+            console.log("수정했다");
+        })
+    }
+}
+                        </script>
                     <!-- <div id="postIt_plus" class="postIt">
                         <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div> -->
                     <!-- <a data-toggle="modal" href="#choiceTypeModal" id="openBtn" class="btn btn-primary">추가하기</a> -->
@@ -97,12 +108,27 @@
                         var dropdown=document.getElementsByClassName('dropdown_content');
                         for(i=0;i<dropdown.length;i++){
                         var value=dropdown[i].getAttribute('data-value');
-                            if(value==='open' && !(e.target.id==`dropdown-content${i}`)){
-                            console.log("열림!");
-                            hidePostMenu();
-                    
+                            if(!(e.target.closest('.dropdown_content'))){
+                                if(value=='open'){
+                            console.log("닫는 중");
+                            
+                                }
                         }}
                     })
+
+                    // document.addEventListener('click',function(e){
+                    //     var classList=document.getElementsByClassName('dropdown_content')
+                    //     if(e.target.className!='dropdown_content'){
+                    //         for(i=0;i<classList.length;i++){
+                    //             var value=classList[i].getAttribute('data-value');
+                    //             if(value=='open')
+                    //                 console.log("닫힘");    
+                    //             //hidePostMenu(i);
+                    //         }
+                    //     }else{
+                    //         console.log("그 곳을 클릭함")
+                    //     }
+                    // })
                 </script>
 
 

@@ -65,29 +65,34 @@ function showPostMenu(index){
     
 
     $(`#dropdown-content${index}`).show();
-    $(`#dropwdown-content${index}`).attr('data-value','open');
-    dropdown.setAttribute('data-value','open')
-    var value=dropdown.getAttribute('data-value');
-    console.log("지금 클릭된 것의 index:"+index+", value="+value);
+  //  $(`#dropwdown-content${index}`).attr('data-value','open');
+    
     $(`#revise_post${index}`).text("수정하기");
     $(`#revise_post${index}`).show();
     $(`#delete_post${index}`).text("삭제하기");
     $(`#delete_post${index}`).show();
+
+    dropdown.setAttribute('data-value','open')
+    var value=dropdown.getAttribute('data-value');
+    console.log("지금 클릭된 것의 index:"+index+", value="+value);
 }
-function hidePostMenu(){
+
+function hidePostMenu(index){
     var dropdown=document.getElementsByClassName('dropdown_content');
     
-    for(i=0;i<dropdown.length;i++){
-        var value=document.getElementsByClassName('dropdown_content')[i].getAttribute('data-value');
-        console.log('index:'+i+', value:'+value);
-    if(value=='open'){
-        console.log("현재 열린 것의 index:"+i);
-        $(`#dropdown-content${i}`).hide();
-        $(`#revise_post${i}`).hide();
-        $(`#delete_post${i}`).hide();
+    // for(i=0;i<dropdown.length;i++){
+    //     var value=document.getElementsByClassName('dropdown_content')[i].getAttribute('data-value');
+    //     console.log('index:'+i+', value:'+value);
+    // if(value=='open'){
+        console.log("현재 열린 것의 index:"+index);
+        $(`#dropdown-content${index}`).hide();
+        $(`#revise_post${index}`).hide();
+        $(`#delete_post${index}`).hide();
         dropdown[i].setAttribute('data-value','close');
-    }
-}
+        console.log("닫힘");
+
+    //}
+//}
 }
 function revisePostClicked(index){
     alert("제목이나 글을 수정하였습니다.");
@@ -116,9 +121,7 @@ function starPostClicked(index){
     }else{
         star[index].src="/media/empty_star.png"
         star[index].style.opacity=0;
-        $(`star[${index}]`).hover(function(){
-            star[index].style.opacity=1;
-        })
+        
         // hover할 때만 있도록 설정해야 함.
     }
     star_toggle++;
