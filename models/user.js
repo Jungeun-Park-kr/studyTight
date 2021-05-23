@@ -17,7 +17,8 @@ const userSchema = new Schema( {
     auth_number : {
         type: String,
         default: ''
-    }
+    },
+    promotion : { type : Boolean }
     // provider: { //로그인 로컬로
     //     type: String,
     //     default: 'local',

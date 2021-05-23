@@ -45,6 +45,10 @@ router.get('/', (req, res) => {
 // POST /signup 라우터 
 // 회원가입 form
 router.post('/', isNotLoggedIn, async (req, res, next) => {
+    // 이전 동의 화면에서 체크한 프로모션 수신 동의 여부 확인
+    const promotion = localStorage.getItem('promotion') == 'true' ? true : false ;
+    localStorage.removeItem('promotion');
+
     const {email, name, password} = req.body;
     
     console.log('회원가입 버튼 누름');
@@ -64,8 +68,9 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
             email : email,
             name : name,
             password: hash,
+            promotion : promotion,
         });
-        console.log('추가된 user:'+user);
+        console.log('추가된 user:'+ user);
 
         return res.redirect('/login');
     } catch (error) {
@@ -73,6 +78,7 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         console.error(error);
         return next(error);
     }
+    
 });
 
 module.exports = router;

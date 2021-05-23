@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
 
     <title>회원가입</title>
     
@@ -32,7 +34,8 @@
                 <!-- 여기는 본문 들어갈 메인 섹션 -->
                 
                 <div class="join_section">
-                    <form id="join_form" method="POST">
+                    <!-- <form id="join_form" method="POST"> -->
+                    <form id="join_form">
                         <div class="join_content">
                             <!-- 이메일 영역 -->
                             <div class="join_row join_email" id="emilDiv">
@@ -40,10 +43,10 @@
                                 <div class="email_verify_area">
                                 
                                         <span class="join_form">
-                                            <input type="email" id="email" name="email" placeholder="지메일 입력" maxlength="30" required autofocus/>
+                                            <input type="email" id="email" name="email" placeholder="이메일 입력" maxlength="30" required autofocus/>
                                         </span>
 
-                                        <a  class="btn_verify btn_primary" id="btnSend" role='button'>
+                                        <a  class="btn_verify btn_primary" id="btn_email_send" role='button'>
                                             <span class="send_verify">인증번호 받기</span>
                                         </a>
                                         <script>
@@ -57,10 +60,10 @@
                                 <!-- 인증번호 입력 영역 -->
                                 <div class="email_verify_area">
                                     
-                                    <span class="join_form">
-                                        <input type="tel" id="email_verify" name="email_verify" placeholder="인증번호 입력" maxlength="5" />
+                                    <span class="join_form" >
+                                        <input type="tel" id="email_verify" name="email_verify" placeholder="인증번호 입력" maxlength="6" disabled='true'/>
                                     </span>
-                                    <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+                                    <a href="#" class="btn_verify btn_primary" id="btn_email_verify" role="button">
                                         <span class="chk_verify">인증번호 확인</span>
                                     </a>
                                 </div>
@@ -79,7 +82,7 @@
                                         <input type="password" id="password_verify" name="password_verify" placeholder="비밀번호 재확인" maxlength="32" />
                                     </span>
 
-                                    <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+                                    <a href="#" class="btn_verify btn_primary" id="btnPassVerify" role="button">
                                         <span class="">비밀번호 확인</span>
                                     </a>
                                 </div>
@@ -246,6 +249,45 @@
             </div>
         </div>
         <script type="text/javascript">
+            // $(document).ready(function() {
+            //     // 인증번호 전송 버튼
+            //     $('#btn_email_send').click(function() {
+            //         var email = $('#email').val(); // 입력받은 이메일
+            //         var inputBox = $('#email_verify'); // 인증번호 입력란
+            //         var verifyBtn = $('#btn_email_verify'); //인증번호 확인 버튼
+                    
+            //         // 이메일 전송
+            //         $.ajax({
+            //             type:"POST",
+            //             async : true,
+            //             url:'/email',
+            //             data : {
+            //                 email: email,
+            //             },
+            //             success:function( authNum ){ // 이메일 전송 성공한 경우
+            //                 console.log('인증번호 전송 성공');
+            //                 // 이메일 전송 성공 팝업 띄우기
+
+
+
+            //                 console.log("authNum : " + authNum);
+            //                 inputBox.removeAttr('disabled'); // disabled 속성 삭제
+            //             }, 
+            //             error: function(err) { // POST 요청 실패시
+            //                 console.log('인증번호 보내기 실패' + err);
+            //             }
+                                
+            //         });
+
+
+                    
+            //     });
+            // });
+
+        </script>
+
+
+        <script type="text/javascript">
             var modal_fail = document.querySelector(".modal_fail"); // 팝업 될 레이어 class명
             var modal_send = document.querySelector(".modal_send");
             var modal_check = document.querySelector(".modal_check");
@@ -265,6 +307,9 @@
             var confirmSendButton = document.querySelector("#confirm_send");
             var confirmCheckButton = document.querySelector("#confirm_check");
             var confirmRegisterButton = document.querySelector("#confirm_register");
+
+            var authNum; // 인증번호
+            var isAuthChecked = false;
         
             function toggleFailModal() {
                 modal_fail.classList.toggle("show_modal");
@@ -296,21 +341,52 @@
             }
 
             function sendAuthEmail(event) {
-                
-                const email = $("#email").val();
-                console.log('입력한 이메일:'+email);
-                
-                //$.post('http://localhost:3000/email');
-                //toggleSendModal();
-                $.post('/email', {email : email}, function(data) {
-                    console.log('인증번호 받기 누름')
-                    
+                $(document).ready(function() {
+                    // 인증번호 전송 버튼
+                    $('#btn_email_send').click(function() {
+                        var email = $('#email').val(); // 입력받은 이메일
+                        var inputBox = $('#email_verify'); // 인증번호 입력란
+                        var verifyBtn = $('#btn_email_verify'); //인증번호 확인 버튼
+                        
+                        // 이메일 전송
+                        $.ajax({
+                            type:"POST",
+                            async : true,
+                            url:'/email',
+                            data : {
+                                email: email,
+                            },
+                            success:function( data ){ // 이메일 전송 성공한 경우
+                                console.log('인증번호 전송 성공');
+                                toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
+
+                                authNum = data;
+                                console.log("authNum : " + data);
+                                inputBox.removeAttr('disabled'); // disabled 속성 삭제
+                            }, 
+                            error: function(err) { // POST 요청 실패시
+                                console.log('인증번호 보내기 실패' + err);
+                            }
+                        });
+                        
+                    });
                 });
-                toggleSendModal();
             }
 
             function emailCheck(event) {
                 //console.log('인증번호 확인');
+                $(document).ready(function() {
+                    $('#btn_email_verify').click(function() {
+                        if ( $('#email_verify').val() == authNum) {
+                            console.log('인증번호 확인 성공');
+                            isAuthChecked = true;
+                        } else {
+                            alert('인증번호가 일치하지 않습니다.\n다시한번 확인해주세요');
+                        }
+                        
+                        
+                    });
+                });
                 
             }
             
