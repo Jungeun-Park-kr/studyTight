@@ -7,8 +7,8 @@ var appDir = path.dirname(require.main.filename);
 
 
 router.post('/', async(req, res) => {
-    console.log('메일 전송 누름 appDir:'+appDir);
-    console.log('넘어온 이메일:'+req.body.email); // 안됨
+    console.log(req.body);
+    console.log('넘어온 이메일:'+req.body.email); 
 
     let authNum = Math.random().toString().substr(2,6);
     let emailTemplete;
@@ -42,12 +42,14 @@ router.post('/', async(req, res) => {
             console.log(emailError);
         }
         console.log("Finish sending email : " + info.response);
-        // res.send(authNum); // 인증번호
-        res.redirect( path.join(__dirname, '/signup'), );
+        res.send(authNum); // 인증번호
+        // res.redirect( path.join(__dirname, '/signup'));
         transporter.close();
         
         
     });
+
+    return authNum;
 });
 
 module.exports=router;
