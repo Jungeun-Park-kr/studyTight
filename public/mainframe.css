@@ -73,8 +73,8 @@ html, body {
 
 .aside .todaylist {
     background-color:white;
-    width: 90%;
-    margin : 0px 5%;
+    width: 80%;
+    margin : 0px 10%;
     padding: 10px 20px;
     border-radius: 10px;
     text-align: center;
@@ -88,8 +88,8 @@ html, body {
     width: auto;
 }
 .caution {
-    width: 90%;
-    margin : 5px 5%;
+    width: 80%;
+    margin : 5px 10%;
     padding: 0px 5px;
     height:auto;
     font-size: 10px;
