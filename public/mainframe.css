@@ -73,35 +73,32 @@ html, body {
 
 .aside .todaylist {
     background-color:white;
-    width:95%;
-    padding-left: 20px;
-    margin-top: 20px;
-    /* position:fixed;
-    right:30px;
-    top:200px;  */
+    width: 90%;
+    margin : 0px 5%;
+    padding: 10px 20px;
     border-radius: 10px;
     text-align: center;
     font-size:large;
     align-items: center;
 }
 .aside_wrap > p {
+    margin: 10px 20px;
     font-size:13px;
-    margin-left:70px;
-    width:auto;
+    font-weight: bolder;
+    width: auto;
 }
 .caution {
-    width:100%;
-    /* padding:5px; */
-    
+    width: 90%;
+    margin : 5px 5%;
+    padding: 0px 5px;
     height:auto;
-    margin-top:10px;
-    font-size: 9px;
+    font-size: 10px;
+    line-height: 140%;
 }
 
 .aside .todaylist > label {
-    
     font-size:small;
-    margin:10px;
+    margin: 0px;
     text-align: left;
 }
 .new_todo {
@@ -121,10 +118,9 @@ html, body {
     background-color:#6ED4D8;
     display:table-cell;
     vertical-align: middle;
-    margin-bottom:10px;
-    /* width:140px; */
-    width:95%;
-    height:40px;
+    width: 100%;
+    margin-bottom : 5px;
+    height:30px;
     border:10px;
     cursor: pointer;
 }
