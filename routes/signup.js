@@ -4,11 +4,14 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const multer = require('multer');
 const fs = require('fs');
+const store = require('store');
 
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const path = require('path'); // 현재 프로젝트의 경로
+
+var promotion; // 프로모션 수신 동의 여부
 
 try {
     fs.readdirSync('uploads');
@@ -35,6 +38,18 @@ router.get('/agree', (req, res) => {
     res.render(path.join(__dirname, '../views/signup_agree.ejs'));
 });
 
+router.post('/agree', isNotLoggedIn, async (req, res, next) => {
+    try {
+        promotion = req.body.promotion;
+        console.log('promotion:'+promotion);
+        res.send('success');
+    } catch (error) {
+        return next(error);
+    }
+    
+});
+
+
 // GET /signup 라우터 (signup으로 왔을때의 root)
 router.get('/', (req, res) => {
     res.render(path.join(__dirname, '../views/signup.ejs'));
@@ -42,16 +57,10 @@ router.get('/', (req, res) => {
 
 
 
+
 // POST /signup 라우터 
 // 회원가입 form
 router.post('/', isNotLoggedIn, async (req, res, next) => {
-    // 이전 동의 화면에서 체크한 프로모션 수신 동의 여부 확인
-    var promotion = typeof window !== 'undefined' ? localStorage.getItem('promotion') : null;
-    if (promotion != null)
-        localStorage.removeItem('promotion');
-    else
-        promotion = false;
-
     const {email, name, password, birth} = req.body;
     
     console.log('회원가입 버튼 누름');

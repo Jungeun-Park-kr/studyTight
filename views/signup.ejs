@@ -367,36 +367,35 @@
             }
 
             function sendAuthEmail(event) {
-
-                    // 인증번호 전송 버튼
-                    $('#btn_email_send').click(function() {
-                        var email = $('#email').val(); // 입력받은 이메일
-                        var inputBox = $('#email_verify'); // 인증번호 입력란
-                        var verifyBtn = $('#btn_email_verify'); //인증번호 확인 버튼
-                        
-                        // 이메일 전송
-                        $.ajax({
-                            type:"POST",
-                            async : true,
-                            url:'/email',
-                            data : {
-                                email: email,
-                            },
-                            success:function( data ){ // 이메일 전송 성공한 경우
-                                console.log('인증번호 전송 성공');
-                                toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
-
-                                authNum = data;
-                                console.log("authNum : " + data);
-                                inputBox.removeAttr('disabled'); // disabled 속성 삭제
-                            }, 
-                            error: function(err) { // POST 요청 실패시
-                                console.log('인증번호 보내기 실패' + err);
-                            }
-                        });
-                        
-                    });
+                var email = $('#email').val(); // 입력받은 이메일
+                var inputBox = $('#email_verify'); // 인증번호 입력란
+                var verifyBtn = $('#btn_email_verify'); //인증번호 확인 버튼
                 
+                // 이메일 전송
+                $.ajax({
+                    type:"POST",
+                    async : true,
+                    url:'/email',
+                    data : {
+                        email: email,
+                    },
+                    success:function( data ){ // 이메일 전송 성공한 경우
+                        if (data === 'email_error=exist') { // 중복 이메일
+                            alert('이미 가입된 이메일입니다.');
+                        } else {
+                            console.log('인증번호 전송 성공');
+                            toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
+
+                            authNum = data;
+                            console.log("authNum : " + data);
+                            inputBox.removeAttr('disabled'); // disabled 속성 삭제
+                        }
+
+                    }, 
+                    error: function(err) { // POST 요청 실패시
+                        console.log('인증번호 보내기 실패' + err);
+                    }
+                });
             }
 
             function emailCheck(event) {
@@ -461,7 +460,7 @@
                                 password: $('#password').val(),
                                 name : $('#name').val(),
                                 birth : birthY+'.'+birthM+'.'+birthD+'.',
-                                // promotion : localStorage.getItem('promotion'), // 이건 라우터에서 해줌
+                                // promotion , // 이건 라우터에서 해줌
                             },
                             success:function(data){ // 이메일 전송 성공한 경우
                                 console.log('가입 성공');

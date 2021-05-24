@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT||3000;
 const passport = require('passport');
+const store = require('store');
 
 
 dotenv.config();
