@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <style>
         @import url(/font.css);
@@ -90,36 +93,53 @@
             
         </div>
     </div>
-    <script type="text/javascript">
+    <script type="text/javascript" >
         var chk_service = document.getElementById('termsService');
         var chk_privacy = document.getElementById('termsPrivacy');
         var chk_promotion = document.getElementById('termsPromotion');
 
+        var promotion;
+
         $(document).ready(function() {
-            $('#btnAgree').on('click', function() {
+            $('#btnAgree').click(function() {
                 var allchecked = chk_service.checked&&chk_privacy.checked ? true : false;
+
                 if (allchecked) {
-                    $(location).attr('href', '/signup');
+                    $.ajax({
+                            type:"POST",
+                            async : true,
+                            url:'/signup/agree',
+                            data : {
+                                promotion : promotion,
+                            },
+                            success:function(data){ // POST 요청 성공
+                                console.log('promotion in ejs :'+promotion);
+                                $(location).attr('href', '/signup'); 
+                            }, 
+                            error: function(err) { // POST 요청 실패시
+                                console.log('동의 실패' + err);
+                            }
+                    });
                 } else {
                     alert('studyTight 이용약관과 개인정보 수집 및 이용에 대한 안내를\n모두 동의해주세요.');
                 }
             });
 
-            $('#termsPromotion').on('click', function() {
+            $('#termsPromotion').click(function() {
                 var email = $(this).is(':checked');
                 if (email) {
                     console.log('프로모션 수신 체크됨');
-                    localStorage.setItem('promotion', 'true');
+                    promotion = true;
                     
 
                 } else {
                     console.log('프로모션 수신 체크 해제됨');
-                    localStorage.setItem('promotion', 'false');
+                    promotion = false;
                 }
             });
 
             // 전체선택 체크박스
-            $("#chk_all").on("click", function() {
+            $("#chk_all").click(function() {
                 var chkAll = $(this).is(":checked");
                 
                 if (chkAll) {
@@ -128,14 +148,14 @@
                     chk_service.checked = true;
                     chk_privacy.checked = true;
                     chk_promotion.checked = true;
-                    localStorage.setItem('promotion', 'true');
+                    promotion = true;
                 } else {
                     $("#dynamicUL input:checkbox").prop("checked", false);
                     console.log('chk_all(전체체크박스)가 체크 해제되었습니다.');
                     chk_service.checked = false;
                     chk_privacy.checked = false;
                     chk_promotion.checked = false;
-                    localStorage.setItem('promotion', 'false');
+                    promotion = false;
                 }
             });
             // // 동적으로 추가된 체크박스 체크여부 확인
