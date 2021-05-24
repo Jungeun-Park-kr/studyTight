@@ -206,16 +206,19 @@ form {
     background-color: #fff;
 }
 
-.time_add_button { 
-    width: 15px; 
-    line-height: 15px; 
-    padding: 5px 10px;
+p {
+    margin : 2px 0px 2px 0px;
+}
+.time_sub_button { 
+    width: 11px; 
+    line-height: 11px; 
+    padding: 0px 6px;
     text-align: center; 
     cursor: pointer; 
     border-radius: 0.25rem; 
     background-color: lightgray; 
 } 
-.time_add_button:hover{ 
+.time_sub_button:hover{ 
     background-color: darkgray; 
 }
 

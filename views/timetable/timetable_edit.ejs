@@ -164,14 +164,14 @@
             <div class="modal-content">
                 <span class="close_button"> &times;</span>
                 <h1 class="title">과목 추가하기</h1>
-                <form action="#post.js" method="POST">
+                <form id="course_add_form" action="#post.js" method="POST">
                     <div class="add_label">과목 이름</div>
-                    <input type="text" class="add_input" name="course_title" placeholder="내용을 입력해주세요." required="required">
+                    <input type="text" class="add_input" id="course_title" name="course_title" placeholder="내용을 입력해주세요." required="required">
                     
                     <div class="add_label">교수명</div>
-                    <input type="text" class="add_input" name="course_professor" placeholder="내용을 입력해주세요." required="required">
+                    <input type="text" class="add_input" id="course_professor" name="course_professor" placeholder="내용을 입력해주세요." required="required">
 
-                    <input type="button" class="btn_day_add" id="btn_day_add" title="시간 및 날짜 추가" alt="시간 및 날짜 추가" value="+ 시간 및 날짜 추가"></input>
+                    <input type="button" class="btn_day_add" id="btn_day_add" title="강의 시간 추가" alt="강의 시간 추가" value="+ 강의 시간 추가"></input>
                     <div class="add_label">강의 방식 및 시간</div>
                     
                     <div class="add_wrap">
@@ -194,6 +194,7 @@
                         <div class="type_label">강의 시간</div>
                         <div class="course_time_bundle">
                             <select id="course_day" class="course_day">
+                                <option value="default">요일</option>
                                 <option value="mon">월요일</option>
                                 <option value="tue">화요일</option>
                                 <option value="wed">수요일</option>
@@ -202,15 +203,18 @@
                                 <option value="sat">토요일</option>
                             </select>
                             <input type="time" class="course_time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
+                            <p>&nbsp;~&nbsp;</p>
                             <input type="time" class="course_time" id="course_end_time" value="09:15" min="09:15" max="21:00"/>
-                            <span class="time_add_button">+</span>
+
+                            <!-- 시간 + 버튼 필요없음. 시간 1개마다 추가해야함 -->
+                            <!-- <span class="time_add_button">+</span> -->
                         </div>
                         
                         <!-- <input type="button" id="btn_time_plus" class="btn_add_time" onclick="addCourseTime(this)" /> -->
                         <div class="type_label" id="course_location_label">강의실</div>
                         <input type="text" class="course_location" id="course_location" name="course_location" placeholder="강의실 입력" required="required">
                         
-                        <input type="button" class="btn_time_add" title="추가하기" alt="추가하기" value="추가하기">
+                        <input type="button" class="btn_time_add" id="btn_time_add" title="추가하기" alt="추가하기" value="추가하기">
                     </div>
         
                     <input type="submit" class="btn_type btn_primary" id="course.save" title="저장하기" alt="저장하기" value="저장하기">
@@ -222,7 +226,9 @@
             var trigger = document.querySelector(".trigger"); // 과목 추가하기 버튼
             var closeButton = document.querySelector(".close_button"); // 과목 추가 팝업 닫기 버튼
             // var saveButton = document.querySelector(".save_button"); // 과목 추가 저장하기 버튼
-        
+            
+            var num = 0; // 버튼 생성용
+            var count = 0; // 버튼 개수 세기용
         
             function toggleModal() {
                 modal.classList.toggle("show_modal");
@@ -253,6 +259,87 @@
                         $('#course_location').attr('placeholder', '강의링크 입력');
                     }
                 });
+
+
+                $('#btn_time_add').click(function (event) {
+                    var type = $('input[name="course_type"]:checked').val(); // 오프라인, 온라인, 온라인실시간 中 1
+                    var day = $('#course_day option:selected').val(); // default, mon, tue, wed, thu, fri, sat 中 1
+                    var stime = $('#course_start_time').val(); // 09:00 형태
+                    var etime = $('#course_end_time').val();
+                    var classroom = $('#course_location').val(); 
+                    
+                    
+                    if (day === 'default') {
+                        alert('강의 요일을 선택해주세요');
+                    } else if (stime > etime) {
+                        console.log('강의 종료시간은 시작시간보다 늦어야 합니다.');
+                    } else if (classroom.trim() === '' && type == 'offline') {
+                        alert('강의실을 입력해주세요.');
+                    } else if (classroom.trim() === '') {
+                        alert('강의 링크를 입력해주세요.');
+                    } else { // 모두 올바르게 입력
+                        if (count < 5) {
+                            $.ajax({
+                                type:"POST",
+                                async : true,
+                                url:'/timetable/course/time/add',
+                                data : {
+                                    type : type,
+                                    day : day,
+                                    stime : stime,
+                                    etime : etime,
+                                    classroom : classroom,
+                                    btnid : 'time_sub_button'+num, // 삭제 버튼 id 함께 저장
+                                    pid : 'course_time'+num // p태그 id 함께 저장
+                                },
+                                success:function( data ){ // POST요청 성공한 경우
+                                    // 시간 목록 띄우기
+                                    console.log(data);
+                                    $('#course_add_form').after('<p id="course_time'+num+'"> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp; </p><span class="time_sub_button" id="time_sub_button'+num+'">-</span>&nbsp;');
+                                    $('#time_sub_button'+num).click(function (event) { // 해당 시간 삭제 버튼
+                                        console.log('이 시간 삭제해야 합니다');
+                                        $.ajax({
+                                            type:"POST",
+                                            async : true,
+                                            url:'/timetable/course/time/sub',
+                                            data : {
+                                                target : event.target.id, //클릭한 [-]버튼
+
+                                            },
+                                            success:function( data ){ // POST요청 성공한 경우
+                                                console.log('삭제성공',data);
+
+                                                $('#'+data.pid).remove(); // p태그 삭제
+                                                $('#'+data.btnid).remove(); // 버튼 삭제
+                                                count--;
+                                            },
+                                            error: function(err) { // POST 요청 실패시
+                                                console.log('시간 삭제 실패' + err);
+                                            }
+                                        });
+                                    });
+                                    num++;
+                                    count++;
+                                }, 
+                                error: function(err) { // POST 요청 실패시
+                                    console.log('시간 추가 실패' + err);
+                                }
+                            });
+                        } else {
+                            alert ('시간은 최대 5개까지 추가할 수 있습니다.')
+                        }
+                        
+                    }
+                });
+
+
+                $('#btn_time_add').click(function (event) {
+                    var name = $('#course_name').val();
+                    var professor = $('#course_professor').val();
+
+
+                });
+
             });
         </script>
     </div>
