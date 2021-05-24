@@ -47,7 +47,7 @@
                             $('#menu_guestbook').addClass('menu_active');
                             $('#menu_home').removeClass('menu_active');;
                             $('#menu_timetable').removeClass('menu_active');
-                        } else if (location == '/timetable/main') {
+                        } else if (location == '/timetable/main' || location == '/timetable/edit') {
                             $('#menu_timetable').addClass('menu_active');
                             $('#menu_home').removeClass('menu_active');
                             $('#menu_guestbook').removeClass('menu_active');
@@ -64,9 +64,9 @@
                 <div class="login">
                         <div class="profile_section">
                             <% if (user) { %> <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %> 
-                            <!-- 일단은 알람벨 크기가 애매(?)하고 기능 추가 전이기 때문에 생략! -->
-                            <!-- <div class="alarm_bell">
-                            <img id="alarm_bell_img" src="/media/empty_bell.png"></div> -->
+                            <div class="alarm_bell">
+                                <img id="alarm_bell_img" src="/public/media/bell_pure.png">
+                            </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
                                 <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">

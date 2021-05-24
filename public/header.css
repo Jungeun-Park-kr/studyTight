@@ -65,22 +65,8 @@ ul {
 }
 
 
-.login > div {
-    display:inline-block;
-}
-.profile_section > div {
-    margin: 5px 0px 5px 10px;
-}
 
-.alarm_bell{
-    display:inline;
-}
-#alarm_bell_img {
-    height : 15px;
-    padding-top : 2px;
-    display:inline;
-    margin : 0 auto;
-}
+/* 상단 우측 프로필 영역 전체 */
 .profile_section {
     position: relative;
     top: -95px;
@@ -88,17 +74,35 @@ ul {
     margin-right: 10px;
 }
 
+.login > div {
+    display:inline-block;
+}
+.profile_section > div {
+    margin: 5px 0px 5px 4px;
+}
+
+.alarm_bell{
+    display:inline;
+}
+#alarm_bell_img {
+    padding-top : 2px;
+    display:inline;
+    margin : 0 auto;
+    height: 18px;
+}
+
 
 .profile{
     display:inline;
 }
 .profile > img {
-    height: 15px;
+    height: 18px;
     margin: 0 auto;
 }
 .username {
     display:inline-block;
     font-size:12px;
+    line-height:18px;
 }
 .logout{
     display:inline;
