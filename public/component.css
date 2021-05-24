@@ -66,3 +66,11 @@ nav a:focus {
 	-moz-transform: translateY(0px);
 	transform: translateY(0px);
 }
+
+
+.menu_active {
+	outline: none;
+    color:#6ED4D8;
+    text-decoration-color: #6ED4D8;
+    font-weight: 700;
+}
