@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user');
-
+const Timetable = require('./timetable');
 
 const uri = process.env.ATLAS_URI; // .env에 DB계정 잘 입력되었는지 확인
 const connect = () => {

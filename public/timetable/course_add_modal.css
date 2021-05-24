@@ -61,7 +61,7 @@
 /****** 팝업 내 요소들 ******/
 /* 팝업 제목 */
 .title{ 
-    font-size:13px;
+    font-size:15px;
     margin-bottom:10px;
     letter-spacing: 2px; 
 } 
@@ -169,6 +169,9 @@ form {
     cursor: pointer;
     border-radius: 5px;
     float:right;
+}
+.btn_day_add:hover{ 
+    background-color: darkgray; 
 }
 
 /* 강의 방식 및 시간 부분 */

@@ -128,32 +128,32 @@
                     </div>
                 </div>
                 <script>
-                    var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
-                    activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                    getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
-                    var edit = document.getElementsByClassName('btn_modify_course');
-                    for (var i=0; i<edit.length; i++) {
-                        edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
-                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
-                            //console.log('수정할과목:'+title); 
-                            showCourseEditPopup(title);
-                        })
-                    }
-                    var target = document.getElementsByClassName('btn_delete_course');
-                    for (var i=0; i<target.length; i++) {
-                        target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
-                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
-                            //console.log(title); //과목 이름 가져오기
-                            var ret = confirm("정말로 삭제하시겠습니까?");
-                            if (ret) { //삭제 수행
-                                var parent = document.getElementById('course_table_body');
-                                deleteCourse(title);
-                                parent.removeChild(this.parentElement.parentElement);
-                            }else { //취소버튼 or 다이얼로그 닫은 경우
-                                ;
-                            }
-                        })
-                    }
+                    // var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
+                    // activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
+                    // getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
+                    // var edit = document.getElementsByClassName('btn_modify_course');
+                    // for (var i=0; i<edit.length; i++) {
+                    //     edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
+                    //         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                    //         //console.log('수정할과목:'+title); 
+                    //         showCourseEditPopup(title);
+                    //     })
+                    // }
+                    // var target = document.getElementsByClassName('btn_delete_course');
+                    // for (var i=0; i<target.length; i++) {
+                    //     target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
+                    //         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                    //         //console.log(title); //과목 이름 가져오기
+                    //         var ret = confirm("정말로 삭제하시겠습니까?");
+                    //         if (ret) { //삭제 수행
+                    //             var parent = document.getElementById('course_table_body');
+                    //             deleteCourse(title);
+                    //             parent.removeChild(this.parentElement.parentElement);
+                    //         }else { //취소버튼 or 다이얼로그 닫은 경우
+                    //             ;
+                    //         }
+                    //     })
+                    // }
                 </script>
             </div>
         </div>    
