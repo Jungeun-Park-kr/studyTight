@@ -30,6 +30,7 @@ const signupRouter = require('./routes/signup'); // 회원가입 라우터
 const loginRouter = require('./routes/login'); // 로그인 라우터
 const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 // const guestbookRouter = require('./routes/guestbook/comment'); //방명록 라우터
+const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 
 
 
@@ -62,6 +63,7 @@ app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/email', emailRouter);
+app.use('/timetable', timetableRouter);
 // app,use('/user/guestbook', guestbookRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
