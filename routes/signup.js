@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const multer = require('multer');
 const fs = require('fs');
-const store = require('store');
 
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
@@ -85,6 +84,8 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         });
         console.log('추가된 user:'+ user);
         res.send('success');
+        next();
+        
         // return res.redirect('/login');
     } catch (error) {
         console.log('회원가입 에러');

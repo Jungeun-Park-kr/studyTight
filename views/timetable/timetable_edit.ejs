@@ -171,7 +171,7 @@
                     <div class="add_label">교수명</div>
                     <input type="text" class="add_input" id="course_professor" name="course_professor" placeholder="내용을 입력해주세요." required="required">
 
-                    <input type="button" class="btn_day_add" id="btn_day_add" title="강의 시간 추가" alt="강의 시간 추가" value="+ 강의 시간 추가"></input>
+                    <!-- <input type="button" class="btn_day_add" id="btn_day_add" title="강의 시간 추가" alt="강의 시간 추가" value="+ 강의 시간 추가"></input> -->
                     <div class="add_label">강의 방식 및 시간</div>
                     
                     <div class="add_wrap">
@@ -217,7 +217,7 @@
                         <input type="button" class="btn_time_add" id="btn_time_add" title="추가하기" alt="추가하기" value="추가하기">
                     </div>
         
-                    <input type="submit" class="btn_type btn_primary" id="course.save" title="저장하기" alt="저장하기" value="저장하기">
+                    <input type="button" class="btn_type btn_primary" id="course_save" title="저장하기" alt="저장하기" value="저장하기">
                 </form>
             </div>
         </div>
@@ -268,7 +268,6 @@
                     var etime = $('#course_end_time').val();
                     var classroom = $('#course_location').val(); 
                     
-                    
                     if (day === 'default') {
                         alert('강의 요일을 선택해주세요');
                     } else if (stime > etime) {
@@ -301,14 +300,12 @@
                                         $.ajax({
                                             type:"POST",
                                             async : true,
-                                            url:'/timetable/course/time/sub',
+                                            url:'/timetable/course/time/delete',
                                             data : {
                                                 target : event.target.id, //클릭한 [-]버튼
-
                                             },
                                             success:function( data ){ // POST요청 성공한 경우
                                                 console.log('삭제성공',data);
-
                                                 $('#'+data.pid).remove(); // p태그 삭제
                                                 $('#'+data.btnid).remove(); // 버튼 삭제
                                                 count--;
@@ -320,6 +317,13 @@
                                     });
                                     num++;
                                     count++;
+
+                                    // 성공후 입력칸 초기화
+                                    $('input[name="course_type"][value="offline"]').attr('checked', true);
+                                    $('#course_day').val('default').prop('selected', true);
+                                    $('#course_start_time').val('09:00');
+                                    $('#course_end_time').val('09:15');
+                                    $('#course_location').val(''); 
                                 }, 
                                 error: function(err) { // POST 요청 실패시
                                     console.log('시간 추가 실패' + err);
@@ -333,10 +337,33 @@
                 });
 
 
-                $('#btn_time_add').click(function (event) {
-                    var name = $('#course_name').val();
+                $('#course_save').click(function (event) {
+                    var name = $('#course_title').val();
                     var professor = $('#course_professor').val();
-
+                    if (name.trim() === '') {
+                        alert('과목명을 입력해주세요.');
+                    } else if (professor.trim() === '') {
+                        alert('교수님 이름을 입력해주세요.');
+                    } else if (count < 1) {
+                        alert('강의 방식 및 시간을 입력한 후 [추가하기]버튼을 눌러 과목 시간을 추가해주세요');
+                    }
+                    $.ajax({
+                        type:"POST",
+                        async : true,
+                        url:'/timetable/course/add',
+                        data : {
+                            name : name,
+                            professor : professor
+                        },
+                        success:function(data){ // POST요청 성공한 경우
+                            console.log('과목 추가 성공');
+                            toggleModal();
+                            location.href = '/timetable/edit';
+                        },
+                        error: function(err) { // POST 요청 실패시
+                            console.log('과목 추가 실패' + err);
+                        }
+                    });
 
                 });
 
