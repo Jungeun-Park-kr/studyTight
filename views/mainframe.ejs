@@ -342,11 +342,11 @@
                         <p>오늘 할 일</p>
                         
                         <div class="todaylist" id="todaylist">
-                            <label><input type="checkbox"class="checkbox1" checked><p class="p_p">웹프로그래밍 수업 듣기</p></label>
-                            <label><input type="checkbox" class="checkbox1"><p class="p_p">DB 강의 듣기</p></label>
-                            <label><input type="checkbox" class="checkbox1" checked><p class="p_p">채플 듣기</p></label>
-                            <label><input type="checkbox" class="checkbox1"><p class="p_p">OS 보고서 쓰기</p></label>
-                            <input type="button" class="btnplusTodo" value="+   할 일 추가하기" onclick="plusTodo()"></input>
+                            <!-- <label><input type="checkbox"class="checkbox"><p class="p_p"></p></label> -->
+                            <!-- <label><input type="checkbox" class="checkbox"><p class="p_p">DB 강의 듣기</p></label>
+                            <label><input type="checkbox" class="checkbox"><p class="p_p">채플 듣기</p></label>
+                            <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> -->
+                            <input type="button" class="btnplusTodo" value="+   할 일 추가하기"></input>
                         </div>
                             
                         <!--+부분 이미지로 넣기-->
@@ -356,6 +356,21 @@
                         </div>
                 </div>
             </div>
+        <!-- todo-list 추가하기 모달 팝업 -->
+    <div id="modal" class="modal modal_todo">
+        <div class="modal-content-todo">
+        <span class="close_button close_todo_button">&times;</span>
+        <h1 class="title">오늘 할 일 추가히기</h1>
+        <form action="#post.js" method="POST">
+            <div>
+                <input type="text" id="modal-todo" placeholder="할 일을 작성해보세요.">
+            </div>
+            <div>
+                <input type="button" class="modal-d-plus" value="추가"></input>
+            </div>
+        </form>
+        </div>
+    </div>
         <!-- d-day 추가하기 모달 팝업 -->
     <div id="modal" class="modal modal_day">
         <div class="modal-content-day">
@@ -365,42 +380,50 @@
             <div class="plus-part">
                 <!-- 추가할 때의 부분 -->
                 
-                <div><input type="text" id="modal-d-date" class="d-date" value="날짜"></input>
-                <script> $(function() {
+                <div><input type="date" id="modal-d-date" class="d-date" value="날짜"></input>
+                <!-- <script> $(document).ready(function() {
                     $("#modal-d-date").datepicker(); });
-                    </script>
+                    </script> -->
                 <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
                 <input type="text" id="modal-d-content" class="d-content" placeholder="내용 (최대 7자)"></div>
                 <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->
                 <!-- <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"></input> -->
                 <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
-                <div><input type="button" class="modal-d-plus" value="디데이 추가" onclick="storeDday();"
-                    value="디데이 추가"></input></div>
+                <div><input type="button" class="modal-d-plus" value="디데이 추가" onclick="storeDday();"></input></div>
             </div> 
         </form>
         </div>
     </div>
 
     <script>
+    var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
-    var trigger_day = document.querySelector("#d-day-plus"); // 가입하기 버튼
+    var trigger_todo=document.querySelector(".btnplusTodo"); //todo 추가하기 버튼
+    var trigger_day = document.querySelector("#d-day-plus"); // d-day 추가하기 버튼
+    var closeTodoButton=document.querySelector('.close_todo_button');
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
     
     function toggleDayModal() {
         modal_day.classList.toggle("show_modal");
     }
+    function toggleTodoModal(){
+        modal_todo.classList.toggle("show_modal");
+    }
     function windowOnClick(event) {
         if (event.target === modal_day) {
             toggleDayModal();
+        }else if(event.target===modal_todo){
+            toggleTodoModal();
         }
     }
     trigger_day.addEventListener("click", toggleDayModal);
-
+    trigger_todo.addEventListener("click",toggleTodoModal);
     closeDayButton.addEventListener("click", toggleDayModal);
+    closeTodoButton.addEventListener('click',toggleTodoModal);
     window.addEventListener("click", windowOnClick);
 
     function storeDday(){
-        alert("추가했습니다~");
+        alert("추가했습니다~"); //날짜랑 내용이 다 입력되게!
     }
 
     </script>
