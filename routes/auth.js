@@ -9,41 +9,10 @@ const router = express.Router();
 const path = require('path'); // 현재 프로젝트의 경로
 
 
-// router.get('/agree', (req, res) => {
-//     //res.send('This is signup page');
-//     res.render(path.join(__dirname, '../views/signup_agree.ejs'));
-// });
-
-
-// // POST /auth/signup 라우터 
-// // 회원가입 form
-// router.post('/signup', isNotLoggedIn, async (req, res, next) => {
-//     const {email, name, password} = req.body;
-    
-//     console.log('회원가입 버튼 누름');
-//     console.log('email:'+email+', name:'+name+', password:'+password);
-
-//     try {
-//         const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
-//         if (exUser) {
-//             console.log('이미 가입된 회원입니다.');
-//             return res.redirect('/signup?error=exist');
-//         }
-//         const hash = await bcrypt.hash(password, 12);
-//         const user = await User.create({
-//             email : email,
-//             name : name,
-//             password: hash,
-//         });
-//         console.log('추가된 user:'+user);
-
-//         return res.redirect('/login');
-//     } catch (error) {
-//         console.log('회원가입 에러');
-//         console.error(error);
-//         return next(error);
-//     }
-// });
+// GET /auth 라우터 (auth 왔을때의 root)
+router.get('/login', (req, res) => {
+    res.render(path.join(__dirname, '../views/login.ejs'));
+})
 
 
 

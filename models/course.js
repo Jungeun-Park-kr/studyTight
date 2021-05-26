@@ -6,7 +6,7 @@ const { Types: {ObjectId}} = Schema;
 
 
 const courseSchema = new Schema( {
-    user_id : { // 과목 주인 계정
+    user_id : { // 과목 주인의 _id (이메일 아님, 몽고DB 자체 _id)
         type : ObjectId,
         required:true,
         ref: 'User'

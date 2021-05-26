@@ -27,7 +27,6 @@ const indexRouter = require('./routes'); // routes/index (기본 디폴트 라�
 const userRouter = require('./routes/user'); // user 라우터
 const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인 처리, 회원가입 처리, 로그아웃 처리)
 const signupRouter = require('./routes/signup'); // 회원가입 라우터
-const loginRouter = require('./routes/login'); // 로그인 라우터
 const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 // const guestbookRouter = require('./routes/guestbook/comment'); //방명록 라우터
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
@@ -61,7 +60,6 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
 app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 // app,use('/user/guestbook', guestbookRouter);

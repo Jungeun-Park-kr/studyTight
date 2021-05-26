@@ -7,7 +7,7 @@ const User = require('../models/user');
 var appDir = path.dirname(require.main.filename);
 
 
-router.post('/', async(req, res) => {
+router.post('/', async(req, res, next) => {
     const email = req.body.email;
     console.log(req.body);
     console.log('넘어온 이메일:'+req.body.email); 
@@ -20,6 +20,7 @@ router.post('/', async(req, res) => {
         if (exUser) {
             console.log('이미 가입된 이메일입니다.');
             res.send('email_error=exist');
+            next(error);
         }
 
         let authNum = Math.random().toString().substr(2,6);
@@ -52,19 +53,18 @@ router.post('/', async(req, res) => {
         transporter.sendMail(mailOptions, function(emailError, info) {
             if (emailError) {
                 console.log(emailError);
+                console.log('메일 보내기 실패 in /email');
+                next(emailError);
+            } else {
+                console.log("Finish sending email : " + info.response);
+                res.send(authNum); // 인증번호
+                // res.redirect( path.join(__dirname, '/signup'));
+                transporter.close();
             }
-            console.log("Finish sending email : " + info.response);
-            res.send(authNum); // 인증번호
-            // res.redirect( path.join(__dirname, '/signup'));
-            transporter.close();
-            
-            
         });
-
-        return authNum;
-
     } catch(error) {
-        return res(error);
+        console.error(error);
+        next(error);
     }
 });
 
