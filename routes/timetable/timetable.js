@@ -90,10 +90,14 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 
 
 router.get('/edit', isLoggedIn, async (req, res, next) => {
-    console.log('시간표 관리');
+
     try {
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        
         res.render(path.join(__dirname, '../../views/timetable/timetable_edit.ejs' ), {
             title: '시간표 관리',
+            user : res.locals.user,
+            timetable : timetable
         });
     }
     catch (err) {

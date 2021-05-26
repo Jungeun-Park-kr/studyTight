@@ -1,130 +1,55 @@
+function getCourses(course) { //파라미터:courselist
+    var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
+    for(var i=0; i<course.length; i++) { //과목 개수만큼 반복하기
+        var nrow = tbody.insertRow(-1); //제일 하단에 추가
+        var ncell1 = nrow.insertCell(0); //과목명 셀
+        var ncell2 = nrow.insertCell(1); //시간 셀 (요일 시작시간-끝시간)
+        var ncell3 = nrow.insertCell(2); //강의 방식 셀 (온라인실시간/온라인동영상/오프라인-강의실명)
+        var ncell4 = nrow.insertCell(3); //교수명 셀
+        var ncell5 = nrow.insertCell(4); //수정버튼
+        var ncell6 = nrow.insertCell(5); //삭제버튼
 
-function showCourse(title, timelist) {
-    //입력받은 정보로 시간표 출력하기
-    var tdid, st, et, sh, sm, eh, em;
-    var color, tmpvar;
-    color = getColor();
-    for(var i=0; i<timelist.length; i++) {
-        tmptime = timelist[i];
-        //요일 및 색깔지정
-        //color = getColor(tmptime.day);
-        //시작시간
-        st = tmptime.start_time.split(':');
-        sh = parseInt(st[0]); //시는 바로 입력
-        sm = getMinuteId(parseInt(st[1]));
-        //종료시간
-        et = tmptime.end_time.split(':');
-        eh = parseInt(et[0]);
-        em = getMinuteId(parseInt(et[1]));
-        //시작시간 id만들기 및 속성적용
-        tdid = tmptime.day+sh+'.'+sm;
-        //console.log(title+tdid);
-        tmpvar = document.getElementById(tdid);
-        tmpvar.innerHTML=title; //첫줄에는 과목이름
-        tmpvar.style.backgroundColor=color;
-        
-        //시간 더해가면서 id 만들기 및 속성적용
-        while(1) {
-            sm++;
-            if (sm == 5) {
-                sh++;
-                sm = 1;
-            }
-            if (sh > eh) { //종료조건 확인
-                //console.log('종료조건1');
-                break;
-            }
-            else if(sh == eh) {
-                if (sm >= em) {
-                    //console.log('종료조건2');
-                    break;
-                }
-            }
-            //console.log(tmptime.day);
-            tdid = tmptime.day+sh+'.'+sm;
-            //console.log(title+tdid);
-            tmpvar = document.getElementById(tdid);
-            if(sm==4) { //border 없애기
-                tmpvar.style.borderStyle="";
-            }
-            tmpvar.style.backgroundColor = color;
+        ncell1.innerHTML = course[i].course_name; 
+        var timetext="";
+        //console.log(timetext);
+        for (var j=0; j<course[i].schedules.length; j++) { //과목 시간 리스트
+            var text = courseDay(course[i].schedules[j].day) +' '+ course[i].schedules[j].start_time +'-'+ course[i].schedules[j].end_time;
+            timetext = timetext + text + '\n';
         }
+        //console.log(timetext);
+        ncell2.innerHTML = timetext;
+        ncell3.innerHTML = courseType(course[i].course_type, course[i].classroom);
+        ncell4.innerHTML = course[i].professor_name;
+        ncell5.innerHTML = '<input type="button" class="btn_modify_course"/>';
+        ncell6.innerHTML = '<input type="button" class="btn_delete_course"/>';
     }
+    
 }
-function getColor() {
-    // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
-    // return color;
-    var rand = Math.random();
-    rand = Math.floor(rand*19);
-    switch(rand) {
-        case 0:
-            return "lightpink";
-        case 1:
-            return"lightsalmon";
-        case 2:
-            return "lightsteelblue";
-        case 3:
-            return "lightyellow";
-        case 4:
-            return "mediumaquamarine";
-        case 5:
-            return "lightgray";
-        case 6:
-            return "thistle";
-        case 7:
-            return "paleturquoise";
-        case 8:
-            return "yellowgreen";
-        case 9:
-            return "peachpuff";
-        case 10:
-            return "wheat";
-        case 11:
-            return "palegreen";
-        case 12:
-            return "moccasin";
-        case 13:
-            return "mistyrose";
-        case 14:
-            return "oldlace";
-        case 15:
-            return "palegoldenrod";
-        case 16:
-            return "palegreen";
-        case 17:
-            return "paleturquoise";
-        case 18:
-            return "palevioletred";
-    }
-}
-function getDayColor(day) {
+
+function courseDay(day) {
     switch(day) {
         case 'mon':
-            return "lightpink";
+            return "월요일";
         case 'tue':
-            return"lightsalmon";
+            return "화요일";
         case 'wed':
-            return "lightsteelblue";
+            return "수요일";
         case 'thu':
-            return "lightyellow";
+            return "목요일";
         case 'fri':
-            return "lightseagreen";
-        default :
-        return "lightgray";
+            return "금요일";
+        case 'sat':
+            return "토요일";
     }
 }
 
-function getMinuteId(min) { //분은 케이스 나누기
-    switch (min) { 
-        case 0:
-            return 1;
-        case 15:
-            return 2;
-        case 30:
-            return 3;
-        case 45:
-            return 4;
-        default :
-            return 1;
+function courseType(type, classroom) { //과목 타입(online_realtime,online_video,offline)
+    switch (type) {
+        case 'online_realtime':
+            return '온라인 실시간';
+        case 'online_video':
+            return '온라인 동영상';
+        case 'offline': //오프라인이면 강의실을 리턴
+            return classroom;
     }
 }
