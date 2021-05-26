@@ -128,32 +128,94 @@
                     </div>
                 </div>
                 <script>
-                    // var username = localStorage.getItem('username'); //현재 로그인된 사용자 이름 가져오기
-                    // activeUser = getActiveUser(username);  //사용자 이름으로 activeUser의 정보 가져와서 프로필 상태로 띄워줌
-                    // getCourses(activeUser.course); //course 리스트에 있는 과목들 출력해주기
-                    // var edit = document.getElementsByClassName('btn_modify_course');
-                    // for (var i=0; i<edit.length; i++) {
-                    //     edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
-                    //         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
-                    //         //console.log('수정할과목:'+title); 
-                    //         showCourseEditPopup(title);
-                    //     })
-                    // }
-                    // var target = document.getElementsByClassName('btn_delete_course');
-                    // for (var i=0; i<target.length; i++) {
-                    //     target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
-                    //         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
-                    //         //console.log(title); //과목 이름 가져오기
-                    //         var ret = confirm("정말로 삭제하시겠습니까?");
-                    //         if (ret) { //삭제 수행
-                    //             var parent = document.getElementById('course_table_body');
-                    //             deleteCourse(title);
-                    //             parent.removeChild(this.parentElement.parentElement);
-                    //         }else { //취소버튼 or 다이얼로그 닫은 경우
-                    //             ;
-                    //         }
-                    //     })
-                    // }
+                    var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
+                    getCourses(timetable);
+
+                    var edit = document.getElementsByClassName('btn_modify_course');
+                    for (var i=0; i<edit.length; i++) {
+                        edit[i].addEventListener('click', function() { //수정 버튼 리스너 추가
+                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                            console.log('수정할과목:'+title); 
+                            // showCourseEditPopup(title);
+                        });
+                    }
+                    var target = document.getElementsByClassName('btn_delete_course');
+                    for (var i=0; i<target.length; i++) {
+                        target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
+                            var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
+                            console.log('삭제할 과목:' + title); //과목 이름 가져오기
+                            var ret = confirm("정말로 삭제하시겠습니까?");
+                            if (ret) { //삭제 수행
+                                /* var parent = document.getElementById('course_table_body');
+                                deleteCourse(title);
+                                parent.removeChild(this.parentElement.parentElement); */
+                            }else { //취소버튼 or 다이얼로그 닫은 경우
+                                ;
+                            }
+                        });
+                    }
+                    
+                    function getCourses(course) { //파라미터:courselist
+                        var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
+                        for(var i=0; i<course.length; i++) { //과목 개수만큼 반복하기
+                            var nrow = tbody.insertRow(-1); //제일 하단에 추가
+                            var ncell1 = nrow.insertCell(0); //과목명 셀
+                            var ncell2 = nrow.insertCell(1); //시간 셀 (요일 시작시간-끝시간)
+                            var ncell3 = nrow.insertCell(2); //강의 방식 셀 (온라인실시간/온라인동영상/오프라인-강의실명)
+                            var ncell4 = nrow.insertCell(3); //교수명 셀
+                            var ncell5 = nrow.insertCell(4); //수정버튼
+                            var ncell6 = nrow.insertCell(5); //삭제버튼
+
+                            ncell1.innerHTML = course[i].course_name; 
+                            var timetext="";
+                            //console.log(timetext);
+                            for (var j=0; j<course[i].schedules.length; j++) { //과목 스케줄 리스트 - 시간
+                                var text = courseDay(course[i].schedules[j].day) +' '+ course[i].schedules[j].start_time +'-'+ course[i].schedules[j].end_time;
+                                timetext = timetext + text + '<br>';
+                            }
+                            var typetext="";
+                            for (var j=0; j<course[i].schedules.length; j++) { //과목 스케줄 리스트 - 타입
+                                var text = courseType(course[i].schedules[j].course_type, course[i].schedules[j].classroom);
+                                typetext = typetext + text + '<br>';
+                            }
+                            ncell2.innerHTML = timetext;
+                            ncell3.innerHTML = typetext;
+                            ncell4.innerHTML = course[i].professor_name;
+                            ncell5.innerHTML = '<input type="button" class="btn_modify_course"/>';
+                            ncell6.innerHTML = '<input type="button" class="btn_delete_course"/>';
+                        }
+                        
+                    }
+
+                    function courseDay(day) {
+                        switch(day) {
+                            case 'mon':
+                                return "월요일";
+                            case 'tue':
+                                return "화요일";
+                            case 'wed':
+                                return "수요일";
+                            case 'thu':
+                                return "목요일";
+                            case 'fri':
+                                return "금요일";
+                            case 'sat':
+                                return "토요일";
+                        }
+                    }
+
+                    function courseType(type, classroom) { //과목 타입(online_realtime,online_video,offline)
+                        switch (type) {
+                            case 'online_realtime':
+                                return '온라인 실시간';
+                            case 'online_video':
+                                return '온라인 동영상';
+                            case 'offline': //오프라인이면 강의실을 리턴
+                                return classroom;
+                        }
+                    }
+
+
                 </script>
             </div>
         </div>    
