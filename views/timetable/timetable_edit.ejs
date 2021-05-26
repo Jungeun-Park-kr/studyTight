@@ -233,6 +233,10 @@
             function toggleModal() {
                 modal.classList.toggle("show_modal");
             }
+
+            function replaceModal() {
+                modal.classList.replace("modal", "show_modal");
+            }
         
             function windowOnClick(event) {
                 if (event.target === modal) {
@@ -242,7 +246,7 @@
         
             trigger.addEventListener("click", toggleModal);
             closeButton.addEventListener("click", toggleModal);
-            window.addEventListener("click", windowOnClick);
+            // window.addEventListener("click", windowOnClick); //모달 밖 클릭시 닫기 하는 함수
 
             // 강의 방식 라디오 버튼
             $(document).ready(function () {

@@ -16,9 +16,6 @@
         @import url(/login/register.css);
         @import url(/login/register_modal.css);
     </style>
-    <!-- <script src="/user/users.js"></script>
-    <script src="/login/register.js"></script>
-    <script src="/login/login.js"></script> -->
     
 </head>
 <body>
@@ -359,8 +356,6 @@
                 } else if (event.target === modal_check) {
                     toggleCheckModal();
                     
-                } else if (event.target === modal_register) {
-                    toggleRegisterModal();
                 } else if (event.target === modal_password) {
                     togglePasswordModal();
                 }
@@ -393,7 +388,10 @@
 
                     }, 
                     error: function(err) { // POST 요청 실패시
-                        console.log('인증번호 보내기 실패' + err);
+                        
+                        console.log('인증번호 보내기 실패');
+                        console.log(err);
+                        alert('올바르지 않은 이메일입니다.\n확인 후 다시 시도해주세요.')
                     }
                 });
             }
@@ -475,7 +473,7 @@
             }
 
             function succeededRegister() { // 로그인 성공 팝업에서 [확인],[X]버튼 클릭시 로그인 페이지로 이동
-                location.href = '/login';
+                location.href = '/auth/login';
             }
 
             
