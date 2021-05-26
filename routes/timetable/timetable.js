@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const User = require('../../models/user');
 const Course = require('../../models/course');
@@ -10,6 +9,11 @@ const { Mongoose } = require('mongoose');
 
 
 var timeList = new Array();
+
+router.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
 
 
 function courseDay(day) {
@@ -51,11 +55,21 @@ function getCurrentDate(){
 }
 
 router.get('/main', isLoggedIn, async (req, res, next) => {
-    console.log('시간표 메인');
+
     try {
+        console.log('현재 로그인:'+res.locals.user.email);
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        // console.log('---------------------로그인된사람의시간표---------------------');
+        // console.info(timetable);
+
         res.render(path.join(__dirname, '../../views/timetable/timetable_main.ejs' ), {
             title: '내 시간표',
+            user : res.locals.user,
+            timetable : timetable
         });
+
+        
+
     }
     catch (err) {
         console.error('/views/timetable/timetable.js 에서 에러');
@@ -63,6 +77,17 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
+
+// router.get('/main/courses', isLoggedIn, async (req, res, next) => {
+//     try {
+//         console.log(res.locals.user);
+//     } catch (err) {
+//         console.error(err);
+//         next(err);
+//     }
+// });
+
+
 
 router.get('/edit', isLoggedIn, async (req, res, next) => {
     console.log('시간표 관리');
@@ -179,5 +204,6 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
     }
 
 });
+
 
 module.exports = router;
