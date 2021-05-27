@@ -346,18 +346,26 @@
                             <!-- <label><input type="checkbox" class="checkbox"><p class="p_p">DB 강의 듣기</p></label>
                             <label><input type="checkbox" class="checkbox"><p class="p_p">채플 듣기</p></label>
                             <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> -->
+                            
                             <div class="todaylists">
+                                
                             <% for(var i=0;i<todolist.length; i++) { %>
+                                
                                 <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/>
-                                    <label> <input type="checkbox" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
-
+                                <label><input type="checkbox" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
+                                <% console.log(JSON.stringify(todolist[i].todo_content)) %>
                                 <% } %>
                             </div>
                             <input type="submit" class="btnplusTodo" value="+   할 일 추가하기"></input>
                         </div>
-                            
+                        
+                        <script>
+                            //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
+                        </script>
+
+                        
                         <!--+부분 이미지로 넣기-->
-                    
+                        
                         <div class="caution">
                             오늘(11:59 PM)기준으로 완료된 할 일은<br>내일(12:00 AM)기준으로 제거되고,<br>완료되지 않은 할 일은 유지됩니다.
                         </div>
@@ -435,19 +443,19 @@
 
     // todo_value=storeTodoButton.form.todo_content.value;
     // console.log(todo_value);
-    storeTodoButton.onclick=function(event){
-        var content=$('#modal-todo').val();
+    // storeTodoButton.onclick=function(event){
+    //     var content=$('#modal-todo').val();
 
-        if(content.trim()===''){
-            alert('내용을 입력해주세요.');
-        }else{
-            $.ajax({
-                type:"POST",
-                async:true,
-                url:'/'
-            })
-        }
-    }
+    //     if(content.trim()===''){
+    //         alert('내용을 입력해주세요.');
+    //     }else{
+    //         $.ajax({
+    //             type:"POST",
+    //             async:true,
+    //             url:'/'
+    //         })
+    //     }
+    // }
 
     // function storeDday(){
     //     alert("추가했습니다~"); //날짜랑 내용이 다 입력되게!
