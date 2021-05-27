@@ -11,6 +11,7 @@ module.exports = router;
 const path = require('path'); // 현재 프로젝트의 경로
 
 const User = require('../models/user');
+const Todo=require('../models/todo_list');
 const mongoose = require('mongoose');
 
 
@@ -22,11 +23,15 @@ router.use((req, res, next) => {
 
 
 // 메인
-router.get('/', isLoggedIn, (req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
+router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
+
+        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         res.render(path.join(__dirname, '../views/mainframe.ejs' ), {
             title: 'StudyTight 메인화면',
+            todolist : todolist,
         });
     }
     catch (err) {
