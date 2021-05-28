@@ -11,8 +11,8 @@ const userSchema = new Schema( {
     profile_image : { type: String,
         default: '/public/media/user.png'
     },
-    // courses : [{ type : ObjectId, ref: 'Course' }],
-    courses : [{ type : ObjectId}],
+    // courses : [{ type : ObjectId}], // 필요없음 (courses에서 ref한 후에 데이터 가져올때 populate 해주기 때문)
+    
     promotion : { type : Boolean }
     // provider: { //로그인 로컬로
     //     type: String,
