@@ -27,7 +27,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
     try {
 
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
-        console.info(todolist);
+        //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         res.render(path.join(__dirname, '../views/mainframe.ejs' ), {
             title: 'StudyTight 메인화면',
