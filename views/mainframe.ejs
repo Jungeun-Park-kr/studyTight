@@ -470,6 +470,24 @@
                         
                         <script>
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
+                            function onCheckedHandler(){
+                                var checkedBox=document.getElementsByClassName('checkbox').value;
+                                console.log(checkedBox);
+                                var todolists=document.getElementById('todaylists');
+                                var checked=todolists.children.getElementsByClass('checkbox').checked;
+                                
+                                for(var i=0;i<todolists.childNodes.length;i++){
+                                    //if($input[name=checked].)
+                                    //if($(todolists.lastChild[i]).prop('checked')==true){//checkbox가 true면 log찍기. style해서 중간에 줄 긋기
+                                    //      todolists.lastChild[i].style.textDecoration="line-through";}
+                                    //console,log(todolists.lastChild[i]);
+                                    //console.log($('input.checkbox').prop);
+                                }
+                                //$('input[name=checked').each(function(){
+                                    //var checking=$(this).val();
+                                    //console.log(checking);
+                                //})
+                                                       }
                         </script>
 
                         
@@ -563,7 +581,7 @@
     //             async:true,
     //             url:'/'
     //         })
-    //     }
+                //       }
     // }
 
     // function storeDday(){
