@@ -83,14 +83,15 @@
         </div>
         
         <div id="container" role="main">
+            <div class="timetable_wrap">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="page-header" role="banner" class>
-                <div class="timetable_title">내 시간표 </div>
+                <div class="timetable_title"><%=user.name%>의 시간표 </div>
                 <div class="edit_btn">
                     <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표 관리" onclick="location.href='/timetable/edit'"></input>
                 </div>
+                <p style="clear:both;">&nbsp;</p>
             </div>
-
             <div class="timetable_section">
                 <div class="background_box">
                     <div class="timetable_wrap">
@@ -405,6 +406,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <script type="text/javascript">
         var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');

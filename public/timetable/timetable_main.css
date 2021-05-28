@@ -1,15 +1,21 @@
+/* .timetable_wrap {
+    background-color:rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+} */
+
 .background_box {
-    background-color:  whitesmoke;
+    /* background-color:  whitesmoke; */
     align-content: center;
 }
 .timetable_section {
-    float:left;
+    /* float:left; */
     width:100%;
 }
 .page-header .timetable_title {
     text-align: center;
     font-weight: bold;
-    margin:0 auto;
+    /* margin:0 auto; */
+    /* padding-top:20px; */
     width : 100%;
     font-size: 20px;
     line-height: 20px;
