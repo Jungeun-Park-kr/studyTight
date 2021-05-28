@@ -43,7 +43,6 @@
                         const location = window.location.pathname;
                         console.log('현재 url:'+location);
                         if (location == '/') {
-                            // $('#menu_home').css({'outline': 'none', 'color':'#6ED4D8', 'text-decoration-color': '#6ED4D8', 'font-weight': '700' });
                             $('#menu_home').addClass('menu_active');
                             $('#menu_guestbook').removeClass('menu_active');
                             $('#menu_timetable').removeClass('menu_active');
@@ -90,13 +89,11 @@
                 <div class="timetable_edit_header">
                     <div class="title_msg">전체 수강중인 과목</div>
                     <div class="btn_add_course">
-                        <!-- <input type ="button" value="+ 과z목 추가하기" onclick="showTimetableAddPopup();"></input> -->
                         <input type ="button" value="+ 과목 추가하기" class="trigger"></input>
                     </div>
                     
                 </div>
-                
-                <hr id ="timetable-line">
+                <!-- <hr id ="timetable-line"> -->
                 <div class="timetable_edit_section">
                     <!-- 여기에 본격적인 내용 -->
                     <div class ="course_list">
@@ -177,12 +174,7 @@
                             <input type="time" class="course_time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
                             <p>&nbsp;~&nbsp;</p>
                             <input type="time" class="course_time" id="course_end_time" value="09:15" min="09:15" max="21:00"/>
-
-                            <!-- 시간 + 버튼 필요없음. 시간 1개마다 추가해야함 -->
-                            <!-- <span class="time_add_button">+</span> -->
                         </div>
-                        
-                        <!-- <input type="button" id="btn_time_plus" class="btn_add_time" onclick="addCourseTime(this)" /> -->
                         <div class="type_label" id="course_location_label">강의실</div>
                         <input type="text" class="course_location" id="course_location" name="course_location" placeholder="강의실 입력" required="required">
                         
@@ -207,7 +199,6 @@
                     <div class="add_label">교수명</div>
                     <input type="text" class="add_input" id="course_professor_modify" name="course_professor_modify" placeholder="내용을 입력해주세요." required="required">
 
-                    <!-- <input type="button" class="btn_day_add" id="btn_day_add" title="강의 시간 추가" alt="강의 시간 추가" value="+ 강의 시간 추가"></input> -->
                     <div class="add_label">강의 방식 및 시간</div>
                     
                     <div class="add_wrap">
@@ -256,9 +247,6 @@
         </div>
         <script type="text/javascript"> 
         // 시간표 수정 메인 스크립트
-        
-
-        
             function getCourses(course) { //파라미터:courselist
                 var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
                 for(var i=0; i<course.length; i++) { //과목 개수만큼 반복하기
@@ -290,7 +278,6 @@
                 }
                 
             }
-
             function courseDay(day) {
                 switch(day) {
                     case 'mon':
@@ -307,7 +294,6 @@
                         return "토요일";
                 }
             }
-
             function courseType(type, classroom) { //과목 타입(online_realtime,online_video,offline)
                 switch (type) {
                     case 'online_realtime':
@@ -318,14 +304,12 @@
                         return classroom;
                 }
             }
-
             // 추가, 수정 모달 팝업 관련 스크립트
             var modal = document.querySelector(".modal"); // 팝업 될 레이어 class명
             var modal_modify = document.querySelector(".modal-modify"); 
             var trigger = document.querySelector(".trigger"); // 과목 추가하기 버튼
             var closeButton = document.querySelector(".close_button"); // 과목 추가 팝업 닫기 버튼
             var close_button_modify = document.querySelector(".close_button_modify"); // 과목 추가 팝업 닫기 버튼
-            // var saveButton = document.querySelector(".save_button"); // 과목 추가 저장하기 버튼
             
             var num = 0; // 버튼 생성용
             var count = 0; // 버튼 개수 세기용
@@ -350,7 +334,7 @@
             $(document).ready(function () {
                 var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
                 
-                getCourses(timetable);
+                getCourses(timetable); // 시간표 뿌리기
 
                 var edit = document.getElementsByClassName('btn_modify_course');
                 for (var i=0; i<edit.length; i++) {
@@ -636,7 +620,7 @@
                         data : {
                             name : name,
                             professor : professor,
-                            id : modify_id
+                            id : modify_id // 수정할 과목의 _id
                         },
                         success:function(data){ // PUT 요청 성공한 경우
                             console.log('과목 수정 성공');

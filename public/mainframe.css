@@ -49,15 +49,17 @@ html, body {
 /* 메인의 좌측 영역 : 폴더, d-day를 감싸는 영역 */
 .column_left {
     /* 네이버 : 750 */
-    float:left;
+    /* float:left; */
     width: 850px;
+    display:inline-block;
 }
+
 
 /* 메인의 우측 영역: 오늘 할 일 영역 */
 .column_right {
     /* 네이버 : 350 */
     float:right;
-    width: 230px;
+    width: 250px;
 }
 
 
@@ -65,33 +67,30 @@ html, body {
 /* @@@@아래부터는 원래 있던 코드 : 기존의 코드 영역을 위에 추가한 새로운 태그들로 감쌌음!@@@ */
 
 .aside_wrap {
-    width:12%;
-    /* height:auto; */
-    margin:10px;
-    display:inline;
+    margin-left:40px;
+    width: 210px;
 }
 
 .aside .todaylist {
     background-color:white;
-    width: 80%;
-    margin : 0px 10%;
+    width: 210px;
     padding: 10px 20px;
     border-radius: 10px;
     text-align: center;
     font-size:large;
     align-items: center;
 }
+
 .aside_wrap > p {
-    margin: 10px 20px;
+    margin: 10px 0px;
     font-size:13px;
     font-weight: bolder;
-    width: auto;
 }
+
 .caution {
-    width: 80%;
-    margin : 5px 10%;
+    width: 210px;
+    margin : 5px 5px;
     padding: 0px 5px;
-    height:auto;
     font-size: 10px;
     line-height: 140%;
 }
@@ -125,13 +124,14 @@ html, body {
     cursor: pointer;
 }
 .D-day {
-    text-align:center;
+    text-align:left;
 }
 .d-day { 
     /* d-day표시 */
     display: inline-block;
     margin: 10px;
-    width: 170px;
+    /* width: 170px; */
+    width : 190px;
     height: 40px;
     background: white;
     border-radius: 3px;
@@ -290,18 +290,21 @@ html, body {
     text-align: center;
 }
 /*  */
-.container .folder_ {
+.section .folder_ {
     /* 폴더를 감싸는 흰 div */
-    margin-left:40px;
+    width:850px; 
+    min-height: 450px;
+    background-color:rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
     margin-top:20px;
+    /* margin-left:40px;
     justify-content: center;
     background-color:white;
-    /* width:90%; */
     height:100%;
     text-align: center;
     vertical-align: middle;
     border-radius:5px;
-    align-items: center;
+    align-items: center; */
 
 }
 /* .container .folder > div > span{
