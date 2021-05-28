@@ -2,18 +2,8 @@ const express = require("express");
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router = express.Router();
 
-// router.get('/', (req, res) => res.render('index'));
-// router.get('/login', (req, res) => res.render("login", {page:"login"}));
-// router.get('/signup', (req, res) => res.render("signup", {page:"signup"}));
-// router.get('/signup_agree', (req, res) => res.render("signup_agree", {page:"signup_agree"}));
-
-module.exports = router;
-const path = require('path'); // 현재 프로젝트의 경로
-
-const User = require('../models/user');
 const Todo=require('../models/todo_list');
-const mongoose = require('mongoose');
-
+const Course = require('../models/course');
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
@@ -21,17 +11,17 @@ router.use((req, res, next) => {
 });
 
 
-
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
-        res.render(path.join(__dirname, '../views/mainframe.ejs' ), {
+        res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist : todolist,
+            timetable : timetable,
         });
     }
     catch (err) {
@@ -44,7 +34,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
 router.get('/', isNotLoggedIn, (req, res) => {
     try {
         // res.send('Hello, Express'); // 테스트용
-        res.render(path.join(__dirname, '../views/login.ejs' ), {
+        res.render('../views/login.ejs', {
             title: 'StudyTight 메인화면',
         });
     }
@@ -55,3 +45,4 @@ router.get('/', isNotLoggedIn, (req, res) => {
     }
 })
 
+module.exports = router;

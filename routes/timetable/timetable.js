@@ -137,7 +137,7 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
 });
 
 
-router.post('/course/time/delete', isLoggedIn, async (req, res) => {
+router.delete('/course/time/delete', isLoggedIn, async (req, res) => {
     console.log(req.body);
     var targetNum = req.body.target;
     try {
