@@ -13,4 +13,4 @@ const courseSchema = new Schema( {
     classroom: { type: String, required: true },
 });
 
-module.exports = mongoose.model('CourseSchedule', courseSchema);
+module.exports = mongoose.model('Course_Schedule', courseSchema);

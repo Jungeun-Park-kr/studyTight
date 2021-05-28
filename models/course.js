@@ -16,7 +16,7 @@ const courseSchema = new Schema( {
     schedules: [ // 과목 시간 리스트
         {   type : ObjectId,
             // type: Schema.Types.ObjectId, // 위와 동일
-            ref: 'CourseSchedule'
+            ref: 'Course_Schedule'
         }],
     createdAt : {
         type : Date,
