@@ -1,12 +1,8 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
-const User = require('../../models/user');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
 const router = express.Router();
-const path = require('path'); // 현재 프로젝트의 경로
-const { Mongoose } = require('mongoose');
-
 
 var timeList = new Array();
 
@@ -57,12 +53,11 @@ function getCurrentDate(){
 router.get('/main', isLoggedIn, async (req, res, next) => {
 
     try {
-        console.log('현재 로그인:'+res.locals.user.email);
+        //console.log('현재 로그인:'+res.locals.user.email);
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         // console.log('---------------------로그인된사람의시간표---------------------');
         // console.info(timetable);
-
-        res.render(path.join(__dirname, '../../views/timetable/timetable_main.ejs' ), {
+        res.render( '../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
             timetable : timetable
@@ -93,8 +88,8 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
 
     try {
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-        
-        res.render(path.join(__dirname, '../../views/timetable/timetable_edit.ejs' ), {
+        //console.info(timetable);
+        res.render('../views/timetable/timetable_edit.ejs', {
             title: '시간표 관리',
             user : res.locals.user,
             timetable : timetable
@@ -113,7 +108,7 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
 
 router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
     console.log(req.body);
-    const { type, day, stime, etime, classroom, btnid, pid } = req.body;
+    const { type, day, stime, etime, classroom, target } = req.body;
     try {
         var time = {
             type : type,
@@ -121,9 +116,12 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
             stime : stime, //시작시간
             etime : etime, //종료시간
             classroom : classroom, // 링크or강의실
-            btnid : btnid, // 삭제버튼의 id
-            pid : pid
+            target : target // 삭제할 애의 num
         }
+        // 시간 중복 확인
+        // in here
+
+
         timeList.push(time); // 시간 추가
 
         var returnTime = {
@@ -141,17 +139,17 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
 
 router.post('/course/time/delete', isLoggedIn, async (req, res) => {
     console.log(req.body);
-    var targetid = req.body.target;
+    var targetNum = req.body.target;
     try {
         const index = timeList.findIndex(function(item) {
-            return item.btnid === targetid
+            return item.target === targetNum
         });
-        var del = {
-            btnid : timeList[index].btnid,
-            pid : timeList[index].pid
-        }
+        
         timeList.splice(index, 1); // index번째의 시간 1개 삭제
-        res.send(del); //삭제될 태그들의 id 리턴
+        var data = {
+            index : targetNum
+        }
+        res.send(data); //삭제될 태그들의 id 리턴
         
     } catch(err) {
         return (err);
@@ -171,6 +169,7 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
         //     console.log('이미 추가한 과목입니다.');
         //     return res.redirect('/course/add?error=exist');
         // }
+
 
         // mongoDB에 과목 시간 추가
         var courseIdList = new Array();
@@ -197,6 +196,7 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
             schedules : courseIdList, // 과목 시간 리스트
             createdAt : getCurrentDate(), // 과목 추가 날짜
         });
+        timeList = []; // 저장 완료 후 배열 초기화
 
         // user한테도 courses 칼럼에 과목 넣어주기 (이건 불러올때 populate 하면됨)
 
@@ -209,5 +209,21 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
 
 });
 
+router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
+    try {
+        const deleteId = req.params.id;
+        await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId});
+
+        res.render('../views/timetable/timetable_main.ejs', {
+            title: '내 시간표',
+            user : res.locals.user,
+            timetable : timetable
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+    
+});
 
 module.exports = router;
