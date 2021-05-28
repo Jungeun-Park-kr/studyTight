@@ -174,7 +174,6 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
         // mongoDB에 과목 시간 추가
         var courseIdList = new Array();
         for (var i=0; i < timeList.length; i++) {
-            console.log('시간저장 :'+i);
             var courseSchedule = await CourseSchedule.create({
                 day : timeList[i].day,
                 start_time : timeList[i].stime,
@@ -206,14 +205,12 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-
 });
 
 router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
     try {
         const deleteId = req.params.id;
         await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId});
-
         res.render('../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
@@ -223,7 +220,48 @@ router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
     catch (err) {
         next(err);
     }
-    
+});
+
+router.put('/course/modify', isLoggedIn, async (req, res, next) => {
+    try {
+        const {name, professor, id} = req.body;
+        
+        
+
+        var courseIdList = new Array();
+        for (var i=0; i < timeList.length; i++) {
+            var courseSchedule = await CourseSchedule.create({
+                day : timeList[i].day,
+                start_time : timeList[i].stime,
+                end_time : timeList[i].etime,
+                course_type : timeList[i].type,
+                classroom : timeList[i].classroom
+            });
+            courseIdList.push(courseSchedule._id); // course_id 넣기 (과목 1개의 mongodb id값)
+        }
+
+        // mongoDB에 과목 수정
+        await Course.update({ user_id: res.locals.user._id, _id: id }, { 
+            user_id : req.user._id, // 해당 과목의 사용자 obj_id (email 아님! mongodb id값임!)
+            course_name : name,
+            professor_name : professor,
+            schedules : courseIdList, // 과목 시간 리스트
+            createdAt : getCurrentDate(), // 과목 수정 날짜
+        });
+        timeList = []; // 저장 완료 후 배열 초기화
+
+        // // 수정된 timetable 렌더링 위해서 가져오기
+        // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        // res.render('../views/timetable/timetable_edit.ejs', {
+        //     title: '내 시간표',
+        //     user : res.locals.user,
+        //     timetable : timetable
+        // });
+        res.send('success');
+        
+    } catch (err) {
+        next(err);
+    }
 });
 
 module.exports = router;
