@@ -53,7 +53,7 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
         { title : 'study Tight', todolist:todo, timetable:timetable}
     );
     
-    res.send(todo);
+    // res.send(todo);
 }catch(err){
     next(err);
 }
@@ -62,7 +62,8 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
 router.patch('/:id',isLoggedIn, async(req,res,next) => {
     try{
     const todo=await Todo.updateOne({
-        user_id:req.params.user._id
+        user_id:req.params.user._id, //필터링 하는 것
+        todo_content:req.body.todo_content //내용에 따라서도 달라야하니까
     },{
         $set:{
             todo_finished:true
@@ -72,6 +73,7 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => {
     res.render('../views/mainframe.ejs',
         { title : 'study Tight', todolist:todo, timetable:timetable}
     );
+    //res.redirect('/');
 
     }catch(err){
         next(arr);
