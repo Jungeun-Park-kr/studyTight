@@ -3,11 +3,40 @@ const express=require('express');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router=express.Router();
 const Todo=require('../models/todo_list');
+const Course = require('../models/course');
 const fs=require('fs');
 
 router.post('/',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
+    const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+
+    //console.log(JSON.stringify(content)); //추가된 todo값
+    
+    try{
+    //몽고db에 저장
+    const todo=await Todo.create({
+        user_id:req.user._id,
+        todo_content: content,
+        register_date:getCurrentDate(),
+        todo_finished:false
+    });
+
+    //로그인 된 유저 : console.log('로그인:'+req.user.email);
+    // console.log(todo.length);
+    res.render('../views/mainframe.ejs',
+        { title : 'study Tight', todolist:todo, timetable:timetable }
+    );
+    
+    //res.send(todo);
+}catch(err){
+    next(err);
+}
+});
+
+router.post('/todo',isLoggedIn, async(req,res,next) => {
+    var content=req.body.todo_content;
     //console.log(JSON.stringify(content));
+    const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
 
     try{
     //몽고db에 저장
@@ -21,39 +50,14 @@ router.post('/',isLoggedIn, async(req,res,next) => {
     //로그인 된 유저 : console.log('로그인:'+req.user.email);
     // console.log(todo.length);
     res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo}
+        { title : 'study Tight', todolist:todo, timetable:timetable}
     );
     
-    //res.send(todo);
+    res.send(todo);
 }catch(err){
     next(err);
 }
 });
-
-// router.post('/todo',isLoggedIn, async(req,res,next) => {
-//     var content=req.body.todo_content;
-//     //console.log(JSON.stringify(content));
-
-//     try{
-//     //몽고db에 저장
-//     const todo=await Todo.create({
-//         user_id:req.user._id,
-//         todo_content: content,
-//         register_date:getCurrentDate(),
-//         todo_finished:false
-//     });
-
-//     //로그인 된 유저 : console.log('로그인:'+req.user.email);
-//     // console.log(todo.length);
-//     res.render('../views/mainframe.ejs',
-//         { title : 'study Tight', todolist:todo}
-//     );
-    
-    //res.send(todo);
-// }catch(err){
-//     next(err);
-// }
-// });
 
 router.patch('/:id',isLoggedIn, async(req,res,next) => {
     try{
@@ -66,7 +70,7 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => {
     });
 
     res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo}
+        { title : 'study Tight', todolist:todo, timetable:timetable}
     );
 
     }catch(err){

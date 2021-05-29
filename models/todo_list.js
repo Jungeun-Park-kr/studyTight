@@ -1,12 +1,3 @@
-// const mongoose=require('mongoose');
-// mongoose.connect('');
-// mongoose.connection.on('open',function(){
-//     console.log(mongoose.connection.collection);
-//     mongoose.connection.db.collectionNames(function(err,names){
-//         console.log(names);
-//         mongoose.disconnect();
-//     });
-// }); //mongoose를 사용해 mongodb db에 연결
 const mongoose=require('mongoose');
 const {Schema} = mongoose;
 
