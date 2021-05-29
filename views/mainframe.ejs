@@ -460,29 +460,50 @@
                                 <!-- todolist 뿌려주기 -->
                             <% for(var i=0;i<todolist.length; i++) { %>
                                 
-                                <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/>
-                                <label><input type="checkbox" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
-                                <% console.log(JSON.stringify(todolist[i].todo_content)) %>
+                                <!-- <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/> -->
+                                <form> 
+                                <label class='label'><input type="checkbox" onclick="onCheckedHandler('<%= todolist[i]._id %>')" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
                                 <% } %>
+                                </form>
                             </div>
                             <input type="submit" class="btnplusTodo" value="+   할 일 추가하기"></input>
                         </div>
                         
                         <script>
+                            var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
-                            function onCheckedHandler(){
-                                var checkedBox=document.getElementsByClassName('checkbox').value;
-                                console.log(checkedBox);
-                                var todolists=document.getElementById('todaylists');
-                                var checked=todolists.children.getElementsByClass('checkbox').checked;
+                            function onCheckedHandler(todo_id){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
                                 
-                                for(var i=0;i<todolists.childNodes.length;i++){
+                                var checkedIndex;
+                                //console.log(todo_id); 제대로 나온다.
+                                var checkedBox=document.getElementsByClassName('checkbox');
+                                var hidden_input=document.getElementsByClassName('todolist-id');
+                                for(var i=0;i<hidden_input.length;i++){
+                                    if(hidden_input[i].value==todo_id){
+                                        checkedIndex=i;
+                                    }
+                                }
+                                var content=document.getElementsByClassName('p_p');
+                                if(checked_toggle%2==1){ //check된 상태
+                                    content[checkedIndex].style.textDecoration='line-through';
+                                    
+                                }else{   //check되지 않은 상태
+                                    content[checkedIndex].style.textDecoration='none';
+                                    
+                                }
+                                    checked_toggle++;
+                                    //console.log(checkedIndex); 제대로 나온다.
+
+                                var todolists=document.getElementById('todaylists');
+                                
+                                
+                                //for(var i=0;i<todolists.childNodes.length;i++){
                                     //if($input[name=checked].)
                                     //if($(todolists.lastChild[i]).prop('checked')==true){//checkbox가 true면 log찍기. style해서 중간에 줄 긋기
                                     //      todolists.lastChild[i].style.textDecoration="line-through";}
                                     //console,log(todolists.lastChild[i]);
-                                    //console.log($('input.checkbox').prop);
-                                }
+                                   //console.log($('input.checkbox').prop);
+                                //}
                                 //$('input[name=checked').each(function(){
                                     //var checking=$(this).val();
                                     //console.log(checking);
