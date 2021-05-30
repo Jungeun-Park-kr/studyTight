@@ -102,33 +102,10 @@
     
         <div id="container" role="main">
             <div id="shortcuts_wrap">
-                <div class="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
-                <div class="shortcuts_link" onclick="openLink();">바로가기</div>
+                <div class="shortcuts_title" id="shortcuts_title">현재 시간표에 등록된 일정이 없습니다</div>
+                <div class="shortcuts_link" id="shortcuts_link" onclick="openLink();">바로가기</div>
             </div>
-            <script>
-                var isopen = false;
-                var isonline = false;
-                var course, classroom;
-                var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
-                for (var i = 0; i < timetable.length; i++) {
-                course = getRealtimeCourse(timetable[i]); //courselist에서 실시간 강의 찾기
-                    if (course != null) { //30분이내 실시간 강의 있는 경우
-                        isopen = true;
-                        console.log(courselist[i].type);
-                        if (courselist[i].type !== 'offline') { //온라인일 경우 링크 넣기
-                            isonline = true;
-                            classroom = courselist[i].classroom;
-                        }
-                        break;
-                    }
-                }
-                // 실시간 일정 있는 경우
-                if (isopen) {
-                    doc.getElementById("shortcuts_title").innerHTML = course;
-                    if (isonline) {
-                        doc.getElementById("shortcuts_link").style.color = "blue";
-                    }
-                }
+            <script type="text/javascript">
 
                 function openLink() { //바로가기 버튼 누른경우
                     if (isopen && isonline) { //실시간 수업 있는경우 링크로 이동
@@ -144,7 +121,7 @@
                         }
                     }
                 }
-                
+
                 function getRealtimeCourse(course) {
                     var type, tmptime, day, st, sh, sm, et, eh, em;
                     var date = new Date();
@@ -152,17 +129,20 @@
                     var curday = date.getDay();
                     var curhour = date.getHours();
                     var curmin = date.getMinutes();
-                    //온라인 - 테스트용 시간 (웹프로그래밍기초및실습 나오면 정상)
-                    //     var curday = 1; //월요일
-                    //     var curhour = 12; //오후 12시
-                    //     var curmin = 46; //46분
-                    //오프라인 - 테스트용 시간2 (철학으로만나는기독교 나오면 됨)
-                    // var curday = 3; //수요일
-                    // var curhour = 13; //오후 1시
-                    // var curmin = 40; //40분
+
+                    // 오프라인 - 테스트용
+                    // var curday = 4;
+                    // var curhour = 12;
+                    // var curmin = 13;
+
+                    //온라인 - 테스트용 
+                    // var curday = 1; //월요일
+                    // var curhour = 11;  // 오전 11시
+                    // var curmin = 46; //46분
+
                     var cur = (curhour * 3600) + (curmin * 60); //현재시간 초단위로 변환
-                    for (var i = 0; i < course.schedule.length; i++) {
-                        tmptime = course.schedule[i];
+                    for (var i = 0; i < course.schedules.length; i++) {
+                        tmptime = course.schedules[i];
                         day = dayStrToNum(tmptime.day); //요일을 번호로 바꿔서 저장
                         st = tmptime.start_time.split(':'); //시,분으로 나누기
                         sh = Number(st[0]); //시작 시
@@ -175,25 +155,33 @@
                             var endtime = (eh * 3600) + (em * 60);
                             var gap = starttime - cur; //수업 시작까지 남은시간 계산
                             if (gap >= 0 && gap <= 1800) { //30분 이내에 수업이 있는 경우
-                                type = getCourseType(course.schedule[i].type, course.schedule[i].classroom);
-                                return (tmptime.start_time + ' ' + course.title + ' ' + type); //시작시간 과목이름 과목종류 리턴
-                            } else if (starttime <= cur && cur <= endtime) { //수업이 종료될 때 까지 계쏙 띄워두기
-                                type = getCourseType(course.type, course.schedule[i].schedule);
-                                return (tmptime.start_time + ' ' + course.title + ' ' + type); //시작시간 과목이름 과목종류 리턴
+                                type = getCourseType(course.schedules[i].course_type);
+                                return {
+                                    message : tmptime.start_time + ' ~ ' + tmptime.end_time + ' '+ course.course_name,
+                                    type : course.schedules[i].course_type,
+                                    classroom : course.schedules[i].classroom
+                                }; //시간 과목이름 과목종류 리턴
+                            } else if (starttime <= cur && cur <= endtime) { //수업이 종료될 때 까지 계속 띄워두기
+                                type = getCourseType(course.schedules[i].course_type);
+                                return {
+                                    message : tmptime.start_time + ' ~ ' + tmptime.end_time + ' '+ course.course_name,
+                                    type : course.schedules[i].course_type,
+                                    classroom : course.schedules[i].classroom
+                                }; //시간 과목이름 과목종류 리턴
                             }
                         }
                     }
                     return null;
                 }
 
-                function getCourseType(type, location) { //과목 타입(online_realtime,online_video,offline)
+                function getCourseType(type) { //과목 타입(online_realtime,online_video,offline)
                     switch (type) {
                         case 'online_realtime':
                             return "온라인 실시간";
                         case 'online_video':
                             return "온라인 동영상";
                         case 'offline': //오프라인이면 강의실 리턴
-                            return location;
+                            return '오프라인';
                     }
                 }
 
@@ -209,10 +197,42 @@
                             return 4;
                         case 'fri':
                             return 5;
+                        case 'sat':
+                            return 6;
+                        case 'sun':
+                            return 0;
                     }
                 }
 
-
+                //$(document).ready( function() {
+                    var isopen = false;
+                    var isonline = false;
+                    var course;
+                    var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
+                    
+                        for (var i = 0; i < timetable.length; i++) {
+                        course = getRealtimeCourse(timetable[i]); //courselist에서 실시간 강의 찾기
+                        if (course != null) { //30분이내 실시간 강의 있는 경우
+                            isopen = true;
+                            // console.log(course);
+                            if (course.type === 'offline') { // 오프라인일 경우 메시지에 장소 추가
+                                course.message = course.message + ' ('+course.classroom+')';
+                            } else { //온라인일 경우 링크 넣기
+                                isonline = true;
+                                link = course.classroom; // [바로가기]클릭시 이동될 링크
+                            }
+                            break;
+                        }
+                    }
+                    
+                    if (isopen) { // 실시간 일정 있는 경우
+                            $('#shortcuts_title').html(course.message);
+                        if (isonline) {
+                            //document.getElementById("shortcuts_link").style.color = "blue";
+                            $('#shortcuts_link').css({color:"blue"});
+                        }
+                    }
+                //});
             </script>
             <div id="MAIN_LEFT" class="column_left">
                 <div class="section">
