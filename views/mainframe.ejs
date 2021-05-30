@@ -479,12 +479,13 @@
                             <div class="todaylists">
                                 <!-- todolist 뿌려주기 -->
                             <% for(var i=0;i<todolist.length; i++) { %>
-                                
-                                <!-- <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/> -->
-                                <form> 
-                                <label class='label'><input type="checkbox" onclick="onCheckedHandler('<%= todolist[i]._id %>')" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
+                            
+                                <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/>
+                                <!-- <form>  -->
+                                <label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>')" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
                                 <% } %>
-                                </form>
+                                <!-- </form> -->
+                                <!-- if문을 통해서 해당 todolist[i].todo_finished값이 true라면 checkbox에 checked로 띄워지게! -->
                             </div>
                             <input type="submit" class="btnplusTodo" value="+   할 일 추가하기"></input>
                         </div>
@@ -493,7 +494,7 @@
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
                             function onCheckedHandler(todo_id){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
-                                
+                                var link='/todo/'; //
                                 var checkedIndex;
                                 //console.log(todo_id); 제대로 나온다.
                                 var checkedBox=document.getElementsByClassName('checkbox');
@@ -503,15 +504,46 @@
                                         checkedIndex=i;
                                     }
                                 }
+                                var currentState=false;
                                 var content=document.getElementsByClassName('p_p');
                                 if(checked_toggle%2==1){ //check된 상태
                                     content[checkedIndex].style.textDecoration='line-through';
+                                    currentState=true;
+                                    //content[checkedIndex].setAttribute('checked',true);
+                                    link+=todo_id;
+                                    fetch('/',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:true})
+                                        //.then(res => res.json())   
+                                    });
                                     
                                 }else{   //check되지 않은 상태
                                     content[checkedIndex].style.textDecoration='none';
-                                    
+                                    content[checkedIndex].setAttribute('checked',false);
+                                    link+=todo_id;
+                                    currentState=false;
+                                    fetch('/',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:false})
+                                        //.then(res => res.json())  
+                                    });
+
                                 }
+                                //console.log(JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:currentState}));
                                     checked_toggle++;
+                                    //console.log(link);
+
+                                    //$(this).attr('../routes/todo',link); 하이퍼 링크의 href변경하는 것
+                                    
+                                    
                                     //console.log(checkedIndex); 제대로 나온다.
 
                                 var todolists=document.getElementById('todaylists');
@@ -547,6 +579,7 @@
         <form action='/todo' method="POST">
             <div>
                 <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
+                <input type="hidden">
             </div>
             <div>
                 <input type="submit" class="modal-todo-plus" value="확인"></input>
