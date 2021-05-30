@@ -1,0 +1,10 @@
+.find_header {
+    margin-top: 100px;
+}
+
+.find_header .logo_area > img {
+    height: 225px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
