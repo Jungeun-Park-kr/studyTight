@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기:studyTight</title>
+    <style>
+        @import url(/public/login/register_modal.css); 
+        @import url(/public/login/login.css);
+        @import url(/public/font.css); 
+    </style>
+</head>
+<body>
+    <div id="warp">
+        <div class="login_header"> 
+            <div class ="logo_area"> 
+                <img src="/public/media/logo_big.png" onclick="location.href='/'">
+            </div>
+        </div>
+        <div class="section">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="login">
+                <form id="findpw-form" action="/auth/findpw" method="POST">
+                    <div class="login_section">
+                        <h2 style="margin: auto 0; text-align: center;" >비밀번호 찾기</h2>
+                        <div style="text-align: center;">비밀번호를 찾고자 하는 이메일 계정을 입력해주세요.</div>
+                        <br>
+                        <div class="login_form">
+                            <input type="text" name="email" id="email" placeholder="이메일 입력" required autofocus/>
+                        </div>
+                        <input type="submit" title="비밀번호 초기화 메일 발송" value="비밀번호 초기화 메일 발송" class="login_btn">
+                        <div class="login_info">
+                            <a target="_blank" href="/auth/findemail" class="find_password">이메일 찾기</a>
+                            <span class="bar" aria-hidden="true"></span>
+                            <a target="_self" href="/signup/agree" class="register">회원가입</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content-small">
+                <span class="close_button">&times;</span>
+                <h1 class="title">이메일 발송 완료</h1>
+                <!-- 내용 띄울 부분 -->
+                <div class="content">메일 발송 완료!
+                    이메일을 확인하여 초기화 및 변경을 진행해주세요.
+                </div>
+                <!-- 확인 버튼 -->
+                <input type="submit" id="confirm" class="btn_confirm" value="확인"> 
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+                var modal = document.querySelector(".modal"); // 팝업 될 레이어 class명
+                var closeButton = document.querySelector(".close_button"); // 우측 상단 닫기 버튼
+                var confirmButton = document.querySelector("#confirm"); // <- 확인 버튼 (취소 버튼 용으로 씀)
+                function toggleModal() {
+                    modal.classList.toggle("show_modal");
+                }
+                function triggerLogin() {
+                    location.href='/';
+                }
+                
+                confirmButton.addEventListener("click", triggerLogin);
+                closeButton.addEventListener("click", triggerLogin);
+                // window.addEventListener("click", windowOnClick);
+        </script>
+
+
+        <% if (success !== null) { %>
+            <script>
+                toggleModal();
+            </script>
+        <% } %>
+
+        
+    </div>
+</body>
+</html>
