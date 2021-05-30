@@ -1,4 +1,5 @@
 const express=require('express');
+var bodyParser=require('body-parser');
 // const {Mongoose}=require('mongoose');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router=express.Router();
@@ -59,25 +60,25 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
 }
 });
 
-router.patch('/:id',isLoggedIn, async(req,res,next) => {
-    try{
-    const todo=await Todo.updateOne({
-        user_id:req.params.user._id, //필터링 하는 것
-        todo_content:req.body.todo_content //내용에 따라서도 달라야하니까
-    },{
-        $set:{
-            todo_finished:true
-        }
-    });
+// router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
+//     try{
+//     const todo=await Todo.updateOne({
+//         user_id:req.params.user._id, //필터링 하는 것
+//         todo_content:req.body.todo_content //내용에 따라서도 달라야하니까
+//     },{
+//         $set:{
+//             todo_finished:req.body.todo_finished
+//         }
+//     });
+//     console.log(todo_finished);
+//     res.render('../views/mainframe.ejs',
+//         { title : 'study Tight', todolist:todo, timetable:timetable}
+//     );
+//     //res.redirect('/');
 
-    res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable}
-    );
-    //res.redirect('/');
-
-    }catch(err){
-        next(arr);
-    } });
+//     }catch(err){
+//         next(err);
+//     } });
     // try{ //이거는 todo_finished값이 바뀌었으니까
     //     if(req.user._id){
     //     //id가 이미 존재해야 하니까
