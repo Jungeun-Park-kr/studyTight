@@ -12,6 +12,9 @@ const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const User = require('../models/user');
 const router = express.Router();
 
+const Todo=require('../models/todo_list');
+
+const fs=require('fs');
 
 
 
@@ -80,7 +83,7 @@ router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
     res.redirect('/');
-})
+});
 
 
 router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
@@ -95,6 +98,7 @@ router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
                 token : token,
                 user_id: user._id,
                 ttl: 300, // ttl 값 설정 (5분)
+                createdAt : getCurrentDate(),
             };
             await Auth.create(data); // 5. 인증 코드 테이블에 데이터 입력
             
@@ -145,5 +149,48 @@ router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
     }
 });
 
+// GET 비밀번호 초기화 페이지
+router.get('/resetpw:id', isNotLoggedIn, (req, res) => {
+    // const token_id : req.params.id;
+    try {
+        res.render('../views/reset_pw.ejs');
+    } catch(err) {
+        return res.status(403).send('Error');
+    }
+});
+
+// POST 비밀번호 초기화 하기
+router.post('/resetpw', async (req, res) => {
+    try {
+        console.log('token:'+token_id);
+        // 입력받은 token 값이 Auth 테이블에 존재하며 아직 유효한지 확인
+        Auth.findOne({ token:req.body.token, createdAt:{$gt:getCurrentDate()-ttl}
+        }).exec()
+        // .then((Auth) => { // 유저데이터 호출
+        //     //User.find(...)
+        //     console.log(user);
+        // }).then(user) => { // 유저 비밀번호 업데이트
+        //     //User.update(...)
+        // })
+        // .catch((err) => {
+        //     console.error(err);
+        // })
+    } catch(err) {
+        return res.status(403).send('Error');
+    }
+    
+});
+
+function getCurrentDate(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var today = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var milliseconds = date.getMilliseconds();
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+}
 
 module.exports = router;

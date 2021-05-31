@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+
+    <title>비밀번호 변경</title>
+    
+    <style>
+        @import url(/public/login/register.css);
+        @import url(/public/login/login.css);
+        @import url(/public/font.css); 
+        @import url(/public/login/find.css);
+        @import url(/public/login/register_agree.css);
+        @import url(/public/login/register_modal.css);
+    </style>
+    
+</head>
+<body>
+    <div id="warp">
+        <div class="find_header"> 
+            <!-- 여기는 왼쪽 메뉴 (로고) -->
+            <div class ="logo_area"> 
+                <img src="/public/media/logo_big.png" onclick="location.href='/'">
+            </div>
+        </div>
+        <div id="container" role="main">
+            <div class="section">
+                <!-- 여기는 본문 들어갈 메인 섹션 -->
+                <div class="join_section">
+                        <div class="join_content">
+                            <!-- 비밀번호 영역 -->
+                            <div class="join_row join_pw" id="pwDiv">
+                                <div class="join_label">비밀번호</div>
+                                <div class="pw_input_area">
+                                    <span class="join_form">
+                                        <input type="password" id="password" name="password" placeholder="새로운 비밀번호 (6자리 ~ 32자리)" maxlength="32" />
+                                    </span>
+                                </div>
+                                <div class="pw_verify_area">
+                                    <span class="join_form">
+                                        <input type="password" id="password_verify" name="password_verify" placeholder="비밀번호 재확인" maxlength="32" />
+                                    </span>
+                                    <a href="#" class="btn_verify btn_primary" id="btn_password_verify" role="button">
+                                        <span class="password_verify">비밀번호 확인</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- 변경완료 버튼 -->
+                            <div class="btn_area">
+                                <button id="btnJoin" class="btn_type btn_primary"><span class="register">변경 완료</span></button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        
+        </div>
+
+        <div id="modal" class="modal modal_password">
+            <div class="modal-content-small">
+                <span class="close_button close_password_button">&times;</span>
+                <h1 class="title">비밀번호 확인</h1>
+
+                <!-- 내용 띄울 부분 -->
+                <div class="content">
+                    비밀번호 확인이 완료 되었습니다.
+                </div>
+
+                <!-- 확인 버튼 -->
+                <input type="button" id="confirm_password" class="btn_confirm" value="확인"> 
+            </div>
+        </div>
+        <div id="modal" class="modal modal_register">
+            <div class="modal-content-small">
+                <span class="close_button close_register_button">&times;</span>
+                <h1 class="title">비밀번호 변경 완료</h1>
+                <!-- 내용 띄울 부분 -->
+                <div class="content">비밀번호 변경이 완료되었습니다.
+                    로그인을 진행해주세요.</div>
+                <!-- 확인 버튼 -->
+                <input type="submit" id="confirm_register" class="btn_confirm" value="확인"> 
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var modal_register = document.querySelector(".modal_register"); 
+            var modal_password = document.querySelector(".modal_password");
+            
+            var trigger_register = document.querySelector(".register"); // 가입하기 버튼
+            var trigger_password = document.querySelector(".password_verify"); // 비밀번호 확인 버튼
+            
+            var closeRegisterButton = document.querySelector(".close_register_button");
+            var closePasswordButton = document.querySelector(".close_password_button");
+
+            var confirmRegisterButton = document.querySelector("#confirm_register");
+            var confirmPasswordButton = document.querySelector("#confirm_password");
+
+            var isPassChecked = false;
+            
+            function toggleRegisterModal() {
+                modal_register.classList.toggle("show_modal");
+            }
+            function togglePasswordModal() {
+                modal_password.classList.toggle("show_modal");
+            }
+        
+            function windowOnClick(event) {
+                if (event.target === modal_password) {
+                    togglePasswordModal();
+                }
+            }
+
+            function passwordCheck(event) {
+                var pass1 = $('#password').val();
+                var pass2 = $('#password_verify').val();
+                if (pass1.trim() === '') {
+                    alert('비밀번호를 입력해주세요');
+                } else if (pass2.trim() === '') {
+                    alert('재확인 비밀번호를 입력해주세요');
+                }
+                else if (pass1 === pass2) { // 비밀번호 확인 성공
+                    isPassChecked = true;
+                    togglePasswordModal();
+                } else {
+                    alert('비밀번호가 일치하지 않습니다.\n비밀번호를 확인 후 재시도해주세요.');
+                }
+            }
+
+
+            function registerCheck(event) {
+                //입력 확인
+                if (!isPassChecked) { // 비밀번호 입력 확인
+                    alert('비밀번호 재확인을 해주세요');
+                } else { // 모든 조건 만족해야 가입 성공
+                    // 비밀번호 변경 양식 전송
+                    $.ajax({
+                            type:"POST",
+                            async : true,
+                            url:'/resetpw',
+                            data : {
+                                email: 'asdf',
+                                password: $('#password').val(),
+                            },
+                            success:function(data){ // 비밀번호 변경 성공한 경우
+                                toggleRegisterModal();
+                            }, 
+                            error: function(err) { // POST 요청 실패시
+                                console.log('가입 실패' + err);
+                            }
+                        });
+                    
+                }
+            }
+
+            function succeededRegister() { // 성공 팝업에서 [확인],[X]버튼 클릭시 로그인 페이지로 이동
+                location.href = '/auth/login';
+            }
+
+            trigger_register.addEventListener("click", registerCheck);
+            trigger_password.addEventListener("click", passwordCheck);
+
+            confirmRegisterButton.addEventListener("click", succeededRegister); // 회원가입 성공 - 로그인 페이지로 이동
+            confirmPasswordButton.addEventListener('click', togglePasswordModal);
+            
+            closeRegisterButton.addEventListener("click", succeededRegister); // 회원가입 성공 - 로그인 페이지로 이동
+            closePasswordButton.addEventListener('click', togglePasswordModal);
+
+            window.addEventListener("click", windowOnClick);
+        });
+        </script>
+    </div>
+        
+</body>
+</html>
