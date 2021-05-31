@@ -10,7 +10,8 @@ const authSchema = new Schema( {
         required:true,
         ref: 'User'
     }, 
-    ttl : {type:Number, required: true} // token 유효 시간
+    ttl : {type:Number, required: true}, // token 유효 시간
+    createdAt : {type:Date} // 인증 번호 발송 시간
 });
 
 module.exports = mongoose.model('Auth', authSchema);
