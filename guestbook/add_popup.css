@@ -20,6 +20,13 @@
         font-size: 16px; 
         color: #999; 
     } 
+    .modal4{ 
+        text-align: center; 
+        display: block; 
+        margin: 0 auto; 
+        font-size: 16px; 
+        color: #999; 
+    } 
      h1{ 
          font-family: 'Oswald', sans-serif; 
          font-size: 30px; 
@@ -79,7 +86,7 @@
          opacity: 0.9; 
      }
 
-    .modal, .modal2, .modal3 { 
+    .modal, .modal2, .modal3, .modal4 { 
          position: fixed; 
          left: 0; 
          top: 0; 
@@ -104,7 +111,7 @@
          height: 500px; 
          border-radius: 0.5rem; 
      } 
-     .close-button, .close-button2, .close-button3 { 
+     .close-button, .close-button2, .close-button3, .close-button4 { 
          float: right; 
          width: 1.5rem; 
          line-height: 1.5rem; 
