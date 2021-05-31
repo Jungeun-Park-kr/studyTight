@@ -50,6 +50,32 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
     }
 });
 
+
+router.post('/todo',isLoggedIn, async(req,res,next) => {
+    var content=req.body.todo_content;
+    const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+
+    //console.log(JSON.stringify(content)); //추가된 todo값
+    
+    try{
+    //몽고db에 저장
+    const todo=await Todo.create({
+        user_id:req.user._id,
+        todo_content: content,
+        register_date:getCurrentDate(),
+        todo_finished:false
+    });
+
+    //로그인 된 유저 : console.log('로그인:'+req.user.email);
+    // console.log(todo.length);
+    // res.redirect('/')
+    
+    //res.send(todo);
+}catch(err){
+    next(err);
+}
+});
+
 router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     try{
@@ -85,5 +111,17 @@ router.get('/', isNotLoggedIn, (req, res) => {
         next(err);
     }
 })
+
+function getCurrentDate(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var today = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var milliseconds = date.getMilliseconds();
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+}
 
 module.exports = router;
