@@ -44,7 +44,7 @@
             <div class="information-menu">
                 <div class="left-menus-book" id=leftmenu>
                     <li class="edit-profile">
-                        <input type="button" id="edit-button-id" value="프로필 수정하기" onclick="showFriendAddPopup();"></input>
+                        <input type="button" id="edit-button-id" value="프로필 수정하기" class='trigger4' onclick="showFriendAddPopup();"></input>
                     </li>
                 </div>
                 <script>
@@ -306,16 +306,68 @@
                     <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
                 </div>
             </div>
+
+            <div class="modal4"> 
+                <div class="modal-content"> 
+                    <span class="close-button">&times;</span> 
+                    <h1 class="title">친구 추가하기</h1> 
+                    <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                    <div class="course_add_list">
+                        <div class="course_section">
+                            <div class="secret_section">
+                                <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                            </div>
+                            <div class="course_title_section">
+                    
+                                <div class="course_title_form">
+                                    <input type="text" id="course_title" placeholder="ex) StudyTight@naver.com" />
+                                </div>
+                                <div class="course_type_form" id="course_type_radio">
+                    
+                                </div>
+                                <div class="search_btn">
+                                    <input id="search_course" type="button" title="검색하기" value="검색" onclick="addprofile();"></input>
+                                </div>
+                            </div>
+                    
+                    
+                        </div>
+                        <hr>
+                        <div class="professor_name_section">
+                            <div class="professor_name_label">양지영</div>
+                            <div class="professor_name_form">
+                                sefsef@nate.com
+                            </div>
+                            <input type="checkbox" name="select_friend" value="select" checked>
+                        </div>
+                        <div class="professor_name_section">
+                            <div class="professor_name_label">최시언</div>
+                            <div class="professor_name_form">
+                                noino0819@naver.com
+                            </div>
+                            <input type="checkbox" name="select_friend" value="select" checked>
+                        </div>
+                        <div class="add_btn">
+                            <input id="btn_add_course" class = "trigger2"type="button" title="저장하기" value="선택하기" onclick="addprofile();"></input>
+                        </div>
+                    </div>
+                    </form>
+                </div> 
+            </div>
+
             <script type="text/javascript"> 
                 var modal = document.querySelector(".modal"); 
                 var modal2 = document.querySelector(".modal2"); 
                 var modal3 = document.querySelector(".modal3"); 
+                var modal4 = document.querySelector(".modal4"); 
                 var trigger = document.querySelector(".trigger"); 
                 var trigger2 = document.querySelector(".trigger2");
-                var trigger3 = document.querySelector(".trigger3");  
+                var trigger3 = document.querySelector(".trigger3"); 
+                var trigger4 = document.querySelector(".trigger4");   
                 var closeButton = document.querySelector(".close-button"); 
                 var closeButton2 = document.querySelector(".close-button2"); 
                 var closeButton3 = document.querySelector(".close-button3"); 
+                var closeButton4 = document.querySelector(".close-button4"); 
                 var cancelButton = document.querySelector("#cancel");
         
                //console.log(modal);
@@ -333,6 +385,11 @@
                     modal3.classList.toggle("show-modal"); 
                 }
 
+                function toggleModal4() { 
+                    modal.classList.toggle("show-modal"); 
+                }
+
+
                 function toggleModal2_close() { 
                     modal2.classList.toggle("show-modal"); 
                 }
@@ -348,13 +405,21 @@
                         toggleModal2(); 
                     } 
                 }
+
+                function windowOnClick(event) { 
+                    if (event.target === modal4) { 
+                        toggleModal4(); 
+                    } 
+                }
         
                 trigger.addEventListener("click", toggleModal); 
                 trigger2.addEventListener("click", toggleModal2); 
-                trigger3.addEventListener("click", toggleModal3); 
+                trigger3.addEventListener("click", toggleModal3);
+                trigger4.addEventListener("click", toggleModal4);  
                 closeButton.addEventListener("click", toggleModal); 
                 closeButton2.addEventListener("click", toggleModal2_close); 
                 closeButton3.addEventListener("click", toggleModal3); 
+                closeButton4.addEventListener("click", toggleModal4); 
                 cancel.addEventListener("click", toggleModal); 
                 window.addEventListener("click", windowOnClick); 
             </script>

@@ -28,7 +28,7 @@ const userRouter = require('./routes/user'); // user 라우터
 const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인 처리, 회원가입 처리, 로그아웃 처리)
 const signupRouter = require('./routes/signup'); // 회원가입 라우터
 const emailRouter = require('./routes/email'); // 이메일 인증 라우터
-//const guestbookRouter = require('./routes/guestbook/main'); //방명록 라우터
+const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라우터
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 const todoRouter=require('./routes/todo');
 
@@ -61,8 +61,8 @@ app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/email', emailRouter);
-app.use('/timetable', timetableRouter); 
-// app,use('/user/guestbook', guestbookRouter);
+app.use('/timetable', timetableRouter);
+app.use('/guestbook', guestbookRouter);
 // app.use('/todo',todoRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리

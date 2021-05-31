@@ -8,7 +8,7 @@ const profile_schema=new Schema({
         ref: 'User'
     }, 
     school:{type:String, required:true},
-    school_private:{type:Boolean, required:ture},
+    school_private:{type:Boolean, required:true},
     major:{type:String, required:true},
     major_private:{type:Boolean, required:true},
     grade:{type:Number, required:true},
