@@ -1,9 +1,12 @@
 const express = require("express");
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router = express.Router();
-
 const Todo=require('../models/todo_list');
 const Course = require('../models/course');
+
+var objectId=require('mongodb').ObjectID; 
+//Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
+//이 에러 때문에 일단 추가함. 
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
@@ -14,8 +17,10 @@ router.use((req, res, next) => {
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        // r
+        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         res.render('../views/mainframe.ejs', {
@@ -87,7 +92,7 @@ router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 �
             todo_finished:req.body.todo_finished
         }
     });
-    console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
+    //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
     res.render('../views/mainframe.ejs',
         { title : 'study Tight', todolist:todo, timetable:timetable}
@@ -96,8 +101,24 @@ router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 �
 
     }catch(err){
         next(err);
-    } })
+    } });
 
+router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+
+    const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+    
+    try {
+        const delete_todoId = req.body.todo_id;
+        await Todo.deleteOne({user_id: res.locals.user._id, _id:delete_todoId});
+        //console.log('삭제된 것의 id는'+ delete_todoId);
+        const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
+        //console.log('남은 것은 이제 '+todo.todo_content);
+        res.render('../views/mainframe.ejs',
+        { title : 'study Tight', todolist:todo, timetable:timetable});
+    }catch(err){
+        next(err);
+    }
+})
 router.get('/', isNotLoggedIn, (req, res) => {
     try {
         // res.send('Hello, Express'); // 테스트용
