@@ -126,9 +126,9 @@
                     var type, tmptime, day, st, sh, sm, et, eh, em;
                     var date = new Date();
                     //현재 시간
-                    var curday = date.getDay();
-                    var curhour = date.getHours();
-                    var curmin = date.getMinutes();
+                    // var curday = date.getDay();
+                    // var curhour = date.getHours();
+                    // var curmin = date.getMinutes();
 
                     // 오프라인 - 테스트용
                     // var curday = 4;
@@ -136,9 +136,9 @@
                     // var curmin = 13;
 
                     //온라인 - 테스트용 
-                    // var curday = 1; //월요일
-                    // var curhour = 11;  // 오전 11시
-                    // var curmin = 46; //46분
+                    var curday = 1; //월요일
+                    var curhour = 11;  // 오전 11시
+                    var curmin = 46; //46분
 
                     var cur = (curhour * 3600) + (curmin * 60); //현재시간 초단위로 변환
                     for (var i = 0; i < course.schedules.length; i++) {
@@ -481,8 +481,13 @@
                             <% for(var i=0;i<todolist.length; i++) { %>
                             
                                 <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/>
-                                <!-- <form>  -->
-                                <label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>')" class="checkbox"><p class="p_p"><%= todolist[i].todo_content %></p></label>
+                                <% if(todolist[i].todo_finished) {%>
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= todolist[i].todo_finished%>')" class="checkbox">
+                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= todolist[i].todo_content %>')">&times;</span></div>
+                                <%} else{ %>
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= todolist[i].todo_finished%>')" class="checkbox">
+                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= todolist[i].todo_content %>')">&times;</span></div>
+                                    <% } %>
                                 <% } %>
                                 <!-- </form> -->
                                 <!-- if문을 통해서 해당 todolist[i].todo_finished값이 true라면 checkbox에 checked로 띄워지게! -->
@@ -493,10 +498,8 @@
                         <script>
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
-                            function onCheckedHandler(todo_id){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
-                                var link='/todo/'; //
+                            function onCheckedHandler(todo_id, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
                                 var checkedIndex;
-                                //console.log(todo_id); 제대로 나온다.
                                 var checkedBox=document.getElementsByClassName('checkbox');
                                 var hidden_input=document.getElementsByClassName('todolist-id');
                                 for(var i=0;i<hidden_input.length;i++){
@@ -504,12 +507,15 @@
                                         checkedIndex=i;
                                     }
                                 }
-                                var currentState=false;
+                                var currentState=boolValue;
+                                console.log('현재 checked여부는 '+currentState);
+                                if(currentState==false){
+                                    checked_toggle++;
+                                }
                                 var content=document.getElementsByClassName('p_p');
                                 if(checked_toggle%2==1){ //check된 상태
                                     content[checkedIndex].style.textDecoration='line-through';
                                     currentState=true;
-                                    //content[checkedIndex].setAttribute('checked',true);
                                     link+=todo_id;
                                     fetch('/',{
                                         method:'PATCH',
@@ -536,31 +542,24 @@
                                         //.then(res => res.json())  
                                     });
 
-                                }
-                                //console.log(JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:currentState}));
+                                }      
                                     checked_toggle++;
-                                    //console.log(link);
-
-                                    //$(this).attr('../routes/todo',link); 하이퍼 링크의 href변경하는 것
-                                    
-                                    
-                                    //console.log(checkedIndex); 제대로 나온다.
-
-                                var todolists=document.getElementById('todaylists');
-                                
-                                
-                                //for(var i=0;i<todolists.childNodes.length;i++){
-                                    //if($input[name=checked].)
-                                    //if($(todolists.lastChild[i]).prop('checked')==true){//checkbox가 true면 log찍기. style해서 중간에 줄 긋기
-                                    //      todolists.lastChild[i].style.textDecoration="line-through";}
-                                    //console,log(todolists.lastChild[i]);
-                                   //console.log($('input.checkbox').prop);
-                                //}
-                                //$('input[name=checked').each(function(){
-                                    //var checking=$(this).val();
-                                    //console.log(checking);
-                                //})
                                                        }
+                            
+                            function onDeleteTodo(todo_id,todo_content){
+                                
+                                //db에 삭제되도록 하기
+                                fetch('/',{
+                                        method:'DELETE',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id})
+                                        //.then(res => res.json())   
+                                    });
+                                    alert(todo_content+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                            }
                         </script>
 
                         
@@ -576,7 +575,7 @@
         <div class="modal-content-todo">
         <span class="close_button close_todo_button">&times;</span>
         <h1 class="title">오늘 할 일 추가히기</h1>
-        <form action='/todo' method="POST">
+        <form action='/' method="POST">
             <div>
                 <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
                 <input type="hidden">
@@ -640,7 +639,7 @@
     closeTodoButton.addEventListener('click',toggleTodoModal);
     storeDayButton.addEventListener('click',toggleDayModal);
     storeTodoButton.addEventListener('click',toggleTodoModal);
-    window.addEventListener("click", windowOnClick);
+    //window.addEventListener("click", windowOnClick);
 
     // todo_value=storeTodoButton.form.todo_content.value;
     // console.log(todo_value);

@@ -63,7 +63,7 @@ app.use('/signup', signupRouter);
 app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
-app.use('/todo',todoRouter);
+// app.use('/todo',todoRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {

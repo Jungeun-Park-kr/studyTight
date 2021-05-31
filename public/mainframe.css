@@ -95,7 +95,7 @@ html, body {
     line-height: 140%;
 }
 
-.aside .todaylists > label {
+.aside .todaylists > .wrap_label {
     font-size:small;
     margin: 0px;
     text-align: left;
@@ -108,9 +108,9 @@ html, body {
     display: inline-block;
     font-size:11px;
 }
-.todaylists > label {
+/* .todaylists > label {
     display:block;
-}
+} */
 
 .btnplusTodo {
     border-radius: 10px; 
@@ -248,10 +248,29 @@ html, body {
     cursor: pointer; 
     border-radius: 0.5rem; 
     background-color: lightgray; 
-} 
+}
 .close_button:hover { 
     background-color: darkgray; 
 }
+.delete_todo{
+    float:right;
+    width: 15px;
+    line-height: 1.5rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    opacity: 0; 
+} 
+.delete_todo:hover{
+    float:right;
+    width: 15px;
+    line-height: 1.5rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    opacity: 1;
+    background-color: lightblue; 
+} 
 #d-day-plus{
     cursor:pointer;
 }
