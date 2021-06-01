@@ -241,7 +241,7 @@ router.put('/course/modify', isLoggedIn, async (req, res, next) => {
         }
 
         // mongoDB에 과목 수정
-        await Course.update({ user_id: res.locals.user._id, _id: id }, { 
+        await Course.updateOne({ user_id: res.locals.user._id, _id: id }, { 
             user_id : req.user._id, // 해당 과목의 사용자 obj_id (email 아님! mongodb id값임!)
             course_name : name,
             professor_name : professor,
