@@ -9,7 +9,7 @@ const path = require('path'); // 현재 프로젝트의 경로
 var appDir = path.dirname(require.main.filename);
 const Auth = require('../models/auth');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
-const User = require('../models/user');
+const Users = require('../models/user');
 const router = express.Router();
 
 const Todo=require('../models/todo_list');
@@ -87,7 +87,7 @@ router.get('/logout', isLoggedIn, (req, res) => {
 router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
     const { email } = req.body;
     try {
-        const user = await User.findOne( { email: email }); // 1. 유저가 존재하면 유저 정보를 가져옴
+        const user = await Users.findOne( { email: email }); // 1. 유저가 존재하면 유저 정보를 가져옴
         if (user) { // 2. 유저가 있다면?
             console.log('가입된 회원');
             const token = crypto.randomBytes(20).toString('hex'); // 3. token 생성(인증코드)
@@ -95,7 +95,6 @@ router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
             // 4. 인증코드 테이블에 넣을 데이터 정리
                 token : token,
                 user_id: user._id,
-                ttl: 300, // ttl 값 설정 (5분)
                 createdAt : getCurrentDate(),
             };
             await Auth.create(data); // 5. 인증 코드 테이블에 데이터 입력
@@ -148,11 +147,24 @@ router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
 });
 
 // GET 비밀번호 초기화 페이지
-router.get('/resetpw/:id', isNotLoggedIn, (req, res, next) => {
+router.get('/resetpw/:id', isNotLoggedIn, async(req, res, next) => {
     try {
-        res.render('../views/reset_pw.ejs', {
-            token_id : req.params.id
-        });
+        //토큰이 유효할때만 페이지 열어주기
+        const token_id = req.params.id
+        // 토큰이 최대 5분 유효함
+        const auth = await Auth.findOne({ token:token_id, createdAt:{ $gt : new Date(getCurrentDate().getTime()-(1000*60*5)) } }).sort({'createdAt':-1}).populate('user_id'); // ttl 빼기 안됨
+        console.log(auth);
+
+        if (auth == null) { //토큰이 없는 경우 (검색 안됨)
+            console.log('조건에 만족하는 토큰이 없음 token이 만료됨.')
+            return res.status(403).send('Error - 만료된 페이지입니다.');
+        }
+        else {
+            res.render('../views/reset_pw.ejs', {
+                token_id : req.params.id
+            });
+        }
+        
     } catch(err) {
         return res.status(403).send('Error');
     }
@@ -162,56 +174,64 @@ router.get('/resetpw/:id', isNotLoggedIn, (req, res, next) => {
 router.patch('/resetpw/:id', async(req, res) => {
     try {
         const token_id = req.params.id
-        // console.log(token_id);
-        const auth = await Auth.findOne({ token:token_id }).populate('user_id');
-        // const auth2 = Auth.findOne({ token:req.params.id, createdAt:{ $gt : getCurrentDate()- auth.ttl} }).sort({'createdAt':-1}); // ttl 빼기 안됨
-        console.log(auth);
-        console.log('---------')
-        console.log('토큰의 유저:'+auth.user_id.name);
-        
-        const user = await User.findOne( { _id : auth.user_id._id });
-        console.log(user);
-        console.log(auth.user_id._id);
-
-
-
         const password = req.body.password;
-        const hash = bcrypt.hash(password, 12);
-        //const result = await User.updateOne( {_id : auth.user_id._id}, {$set : { password : hash } } );
-        const userresult = await User.updateOne({ 
-            _id: auth.user_id._id 
-        }, { 
-            $set:{ 
-                password : hash
-            }
-        });
+        const hash = await bcrypt.hash(password, 12);
 
+        // 토큰이 최대 5분 유효함
+        const auth = await Auth.findOne({ token:token_id, createdAt:{ $gt : new Date(getCurrentDate().getTime()-(1000*60*5)) } }).sort({'createdAt':-1}).populate('user_id'); // ttl 빼기 안됨
+        console.log(auth);
 
-        //업데이트 확인
-        console.log('----------------변경후-----------------')
-        console.log(userresult);
-        const user2 = await User.findOne( { _id : auth.user_id._id });
-        console.log(user2);
+        if (auth == null) { //토큰이 없는 경우 (검색 안됨)
+            console.log('조건에 만족하는 토큰이 없음 token이 만료됨.')
+            res.send('token?expired');
 
-        // 입력받은 token 값이 Auth 테이블에 존재하며 아직 유효한지 확인
-        // Auth.findOne({ token:req.params.id, createdAt:{ $gt : getCurrentDate()-auth.ttl} }).sort({'createdAt':-1})
-        // await Auth.findOne({ token:token_id })  //ttl 빼기가 안됨
-        // .then((Auth) => { // 유저데이터 호출)
-        //     const user = User.findOne( { _id : Auth.user_id });
-        //     //console.log(user);
-        //     return user;
-        // })
-        // .then((User) => { // 유저 비밀번호 업데이트
-        //     const password = req.body.password;
-        //     const hash = bcrypt.hash(password, 12);
-        //     User.updateOne( {_id : User._id}, {$set : { password : hash } });
-        //     console.log('성공');
-        // })
-        // .catch((err) => {
-        //     console.error(err);
-        // });
+            // 인증 시간 만료된 쓰레기 토큰들 삭제
+            await Auth.deleteMany( { createdAt : { $lt : new Date(getCurrentDate().getTime()-(1000*60*5)) }} );
+        } else { // 아직 토큰이 만료되지 않은 경우
+            await Users.updateOne({ 
+                "_id": auth.user_id._id 
+            }, { 
+                $set:{ 
+                    password : hash
+                }
+            }, (err, results) => {
+                if (err) {
+                    console.log('error:'+err);
+                    throw err;
+                }
+                res.send(results);
+            });
+            //업데이트 확인
+            /*console.log('----------------변경후-----------------')
+            console.log(userresult);
+            const user2 = await Users.findOne( { _id : auth.user_id._id });
+            console.log(user2);*/
+
+            // 인증 완료된 토큰은 삭제
+            await Auth.deleteOne(auth);
+
+            // 인증 시간 만료된 쓰레기 토큰들도 삭제
+            // await Auth.deleteMany( { createdAt : { $lt : new Date(getCurrentDate().getTime()-(1000*60*5)) }} );
+            const delres = await Auth.remove( { createdAt : { $lt : new Date(getCurrentDate().getTime()-(1000*60*5)) }} );
+            console.log(`${delres.matchedCount} document(s) matched the filter, deleted ${delres.nRemoved} document(s)`);
+        }
         
-        res.send('success');
+        //입력받은 token 값이 Auth 테이블에 존재하며 아직 유효한지 확인
+        // Auth.findOne({ token:req.params.id, createdAt:{ $gt : getCurrentDate()-auth.ttl} }).sort({'createdAt':-1})
+        /* Auth.findOne({ token:token_id }).populate('user_id')  //ttl 빼기가 안됨
+        .then((Auth) => { // 유저데이터 호출)
+            return Users.findOne( { _id : Auth.user_id });
+        })
+        .then((User) => { // 유저 비밀번호 업데이트 
+            const result = Users.updateOne({ _id: User._id }, { $set:{ password : hash } });
+            console.log('성공??');
+            console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
+        })
+        .catch((err) => {
+            console.error(err);
+        }); 
+        res.send(userresult); */
+        
     } 
     catch(err) {
         return res.status(403).send('Error');
