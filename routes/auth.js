@@ -16,8 +16,6 @@ const Todo=require('../models/todo_list');
 
 const fs=require('fs');
 
-
-
 // GET /auth 라우터 (auth 왔을때의 root)
 router.get('/login', (req, res) => {
     res.render(path.join(__dirname, '../views/login.ejs'));
@@ -150,32 +148,72 @@ router.post('/findpw', isNotLoggedIn, async (req, res, next) => {
 });
 
 // GET 비밀번호 초기화 페이지
-router.get('/resetpw:id', isNotLoggedIn, (req, res) => {
-    // const token_id : req.params.id;
+router.get('/resetpw/:id', isNotLoggedIn, (req, res, next) => {
     try {
-        res.render('../views/reset_pw.ejs');
+        res.render('../views/reset_pw.ejs', {
+            token_id : req.params.id
+        });
     } catch(err) {
         return res.status(403).send('Error');
     }
 });
 
 // POST 비밀번호 초기화 하기
-router.post('/resetpw', async (req, res) => {
+router.patch('/resetpw/:id', async(req, res) => {
     try {
-        console.log('token:'+token_id);
+        const token_id = req.params.id
+        // console.log(token_id);
+        const auth = await Auth.findOne({ token:token_id }).populate('user_id');
+        // const auth2 = Auth.findOne({ token:req.params.id, createdAt:{ $gt : getCurrentDate()- auth.ttl} }).sort({'createdAt':-1}); // ttl 빼기 안됨
+        console.log(auth);
+        console.log('---------')
+        console.log('토큰의 유저:'+auth.user_id.name);
+        
+        const user = await User.findOne( { _id : auth.user_id._id });
+        console.log(user);
+        console.log(auth.user_id._id);
+
+
+
+        const password = req.body.password;
+        const hash = bcrypt.hash(password, 12);
+        //const result = await User.updateOne( {_id : auth.user_id._id}, {$set : { password : hash } } );
+        const userresult = await User.updateOne({ 
+            _id: auth.user_id._id 
+        }, { 
+            $set:{ 
+                password : hash
+            }
+        });
+
+
+        //업데이트 확인
+        console.log('----------------변경후-----------------')
+        console.log(userresult);
+        const user2 = await User.findOne( { _id : auth.user_id._id });
+        console.log(user2);
+
         // 입력받은 token 값이 Auth 테이블에 존재하며 아직 유효한지 확인
-        Auth.findOne({ token:req.body.token, createdAt:{$gt:getCurrentDate()-ttl}
-        }).exec()
-        // .then((Auth) => { // 유저데이터 호출
-        //     //User.find(...)
-        //     console.log(user);
-        // }).then(user) => { // 유저 비밀번호 업데이트
-        //     //User.update(...)
+        // Auth.findOne({ token:req.params.id, createdAt:{ $gt : getCurrentDate()-auth.ttl} }).sort({'createdAt':-1})
+        // await Auth.findOne({ token:token_id })  //ttl 빼기가 안됨
+        // .then((Auth) => { // 유저데이터 호출)
+        //     const user = User.findOne( { _id : Auth.user_id });
+        //     //console.log(user);
+        //     return user;
+        // })
+        // .then((User) => { // 유저 비밀번호 업데이트
+        //     const password = req.body.password;
+        //     const hash = bcrypt.hash(password, 12);
+        //     User.updateOne( {_id : User._id}, {$set : { password : hash } });
+        //     console.log('성공');
         // })
         // .catch((err) => {
         //     console.error(err);
-        // })
-    } catch(err) {
+        // });
+        
+        res.send('success');
+    } 
+    catch(err) {
         return res.status(403).send('Error');
     }
     
