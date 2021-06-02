@@ -34,7 +34,15 @@
                         <div class="join_content">
                             <!-- 비밀번호 영역 -->
                             <div class="join_row join_pw" id="pwDiv">
-                                <h2 style="margin: auto 0; text-align: center;" >비밀번호 초기화</h2>
+                                <h2 style="margin: auto 0; text-align: center;" >비밀번호 변경</h2>
+                                <div class="join_label">현재 비밀번호</div>
+                                <div class="pw_input_area">
+                                    <span class="join_form">
+                                        <input type="password" id="cur_password" name="cur_password" placeholder="현재 사용중인 비밀번호" maxlength="32" minlength="6" />
+                                    </span>
+                                </div>
+
+                                <div class="join_label">새로운 비밀번호</div>
                                 <div class="pw_input_area">
                                     <span class="join_form">
                                         <input type="password" id="password" name="password" placeholder="새로운 비밀번호 (6자리 ~ 32자리)" maxlength="32" minlength="6"/>
@@ -116,18 +124,23 @@
             }
 
             function passwordCheck(event) {
+                var curpass = $('#cur_password').val();
                 var pass1 = $('#password').val();
                 var pass2 = $('#password_verify').val();
                 if (pass1.trim() === '') {
                     alert('비밀번호를 입력해주세요');
                 } else if (pass2.trim() === '') {
                     alert('재확인 비밀번호를 입력해주세요');
+                } else if (curpass.trim() ==='') {
+                    alert('현재 비밀번호를 입력해주세요');
+                } else if (pass1 !== pass2) {
+                    alert('비밀번호가 일치하지 않습니다.\n비밀번호를 확인 후 재시도해주세요.');
                 }
                 else if (pass1 === pass2) { // 비밀번호 확인 성공
                     isPassChecked = true;
                     togglePasswordModal();
-                } else {
-                    alert('비밀번호가 일치하지 않습니다.\n비밀번호를 확인 후 재시도해주세요.');
+                } else if (pass1 === curpass) {
+                    alert('현재 비밀번호와 바꿀 비밀번호는 일치할 수 없습니다.');
                 }
             }
 
@@ -141,20 +154,20 @@
                     $.ajax({
                         type:"PATCH",
                         async : true,
-                        url:'/auth/resetpw/'+JSON.parse('<%- JSON.stringify(token_id) %>') ,
+                        url:'/auth/changepw' ,
                         data : {
+                            cur_password : $('#cur_password').val(),
                             password: $('#password').val(),
                         },
                         success:function(data){ // 비밀번호 변경 성공한 경우, 만료된 경우
-                            if (data == 'token?expired') {
-                                alert('인증 시간(5분)이 초과되었습니다. 비밀번호 찾기를 다시 진행해주세요.');
-                                location.href='/auth/findpw';
+                            if (data == '/changepw?error=notmatch') {
+                                alert('현재 비밀번호가 사용자 정보와 일치하지 않습니다.\n확인 후 다시 시도해주세요.');
                             }
-                            else 
+                            else // 성공
                                 toggleRegisterModal();
                         }, 
                         error: function(err) { // POST 요청 실패시
-                            console.log('가입 실패' + err);
+                            console.log('변경 실패' + err);
                         }
                     });
                     
@@ -162,7 +175,8 @@
             }
 
             function succeededRegister() { // 성공 팝업에서 [확인],[X]버튼 클릭시 로그인 페이지로 이동
-                location.href = '/auth/login';
+                
+                location.href = '/auth/logout'; // 자동 로그아웃 하기
             }
 
             trigger_register.addEventListener("click", registerCheck);
