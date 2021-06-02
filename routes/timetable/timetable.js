@@ -87,7 +87,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 router.get('/edit', isLoggedIn, async (req, res, next) => {
 
     try {
-        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':1});
         //console.info(timetable);
         res.render('../views/timetable/timetable_edit.ejs', {
             title: '시간표 관리',

@@ -7,9 +7,10 @@ exports.isLoggedIn = (req, res, next) => {
         // res.status(403).send('로그인 필요');
         res.render(path.join(__dirname, '../views/login.ejs'),
             {title : 'studyTight 로그인',
+            loginFailed: req.session.loginFailed
             }
         );
-        
+        req.session.destroy(function(err){})
     }
 };
 

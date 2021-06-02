@@ -22,6 +22,9 @@
             <div class="login">
                 <form id="login-form" action="/auth/login" method="POST">
                     <div class="login_section">
+                        <% if(loginFailed) { %>
+                            <div style="margin-bottom:10px; color: #ff1616; text-align: center;">가입되지 않은 이메일이거나, 비밀번호가 올바르지 않습니다.</div>
+                        <% } %>
                         <div class="login_form">
                             <input type="text" name="email" id="email" placeholder="이메일" required autofocus/>
                         </div>

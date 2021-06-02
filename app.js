@@ -42,9 +42,9 @@ app.use(express.static(__dirname));
 app.use(express.static('public'));
 
 app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
+    resave: false, //세션 항상 저장 여부
+    saveUninitialized: false, //초기화되지 않은채 스토어에 저장되는 세션
+    secret: process.env.COOKIE_SECRET, //세션 암호화
     cookie: {
         httpOnly: true,
         secure: false,
