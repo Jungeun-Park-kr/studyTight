@@ -311,9 +311,9 @@
         
                     <div class="folder_">
                         
-                        <!-- <div id="wrap_folder" class="wrap_folder"> -->
+                        <div id="wrap_folder" class="wrap_folder">
         
-                            <div id="folder_0" class="folder">
+                            <!-- <div id="folder_0" class="folder">
                                 <img src="media/plus_folder_yellow.png" class="folder_img"/>
                                 <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
                                 <p class="main_folder_name">알고리즘</p>
@@ -364,7 +364,7 @@
                                 <button role="menuitem" class="dropdown_choice" id="delete_folder4" onclick="deleteFolderClicked(4);"></button>
                                 </div>
                         </div>
-                            <!-- <script>
+                            <script>
                                 var username = localStorage.getItem('username');
                                 activeUser = getActiveUser(username);
                                 var folder_list = activeUser.folder;
@@ -412,9 +412,9 @@
                                 }
                             </script> -->
                         <!-- </div> -->
-                        <div id="folder_plus" ;>
+                        <div id="folder_plus">
                             <img src="media/plus_folder_gray.png"/><p>추가하기</p>
-        
+                        </div>
                             <!-- <script>
                                 var username = localStorage.getItem('username');
                                 activeUser = getActiveUser(username);
@@ -458,7 +458,6 @@
                                     console.info(activeUser.folder)
                                 }
                             </script> -->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -480,10 +479,10 @@
                             
                                 <input type="hidden" value="<%=todolist[i]._id%>" class="todolist-id"/>
                                 <% if(todolist[i].todo_finished) {%>
-                                    <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= todolist[i].todo_finished%>')" class="checkbox">
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>',true)" class="checkbox">
                                         <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= todolist[i].todo_content %>')">&times;</span></div>
                                 <%} else{ %>
-                                    <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= todolist[i].todo_finished%>')" class="checkbox">
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>',false)" class="checkbox">
                                         <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= todolist[i].todo_content %>')">&times;</span></div>
                                     <% } %>
                                 <% } %>
@@ -506,15 +505,15 @@
                                     }
                                 }
                                 var currentState=boolValue;
-                                console.log('현재 checked여부는 '+currentState);
-                                if(currentState==false){
+                                console.log(currentState+'->'+!(currentState));
+                                if(currentState==trie){
                                     checked_toggle++;
                                 }
                                 var content=document.getElementsByClassName('p_p');
-                                if(checked_toggle%2==1){ //check된 상태
+                                if(checked_toggle%2==1){ //unchecked -> checked
                                     content[checkedIndex].style.textDecoration='line-through';
                                     currentState=true;
-                                    link+=todo_id;
+                                    
                                     fetch('/',{
                                         method:'PATCH',
                                         headers:{
@@ -522,13 +521,13 @@
                                             'Content-Type':'application/json'
                                         },
                                         body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:true})
-                                        //.then(res => res.json())   
+                                        //.then(res => res.json( ))  
                                     });
                                     
-                                }else{   //check되지 않은 상태
+                                }else{   //checked -> unchecked
                                     content[checkedIndex].style.textDecoration='none';
                                     content[checkedIndex].setAttribute('checked',false);
-                                    link+=todo_id;
+                                    
                                     currentState=false;
                                     fetch('/',{
                                         method:'PATCH',
@@ -608,15 +607,49 @@
         </div>
     </div>
 
+<!-- folder 추가하기 -->
+    <div id="modal" class="modal modal_folder">
+        <div class="modal-content-folder">
+        <span class="close_button close_folder_button">&times;</span>
+            <h1 class="title">폴더를 만들어보세요</h1>
+                <div>
+                    <input type="text" id="modal-folder-name" name="folder_name" maxlength="10" placeholder="과목의 이름을 작성하세요.">
+                    <div value="폴더의 색을 선택하세요.">
+                        <select name="folder_color">
+                        <!-- <option value='#f29b34' selected><input type='color' value=' #f29b34'></option>
+                        <option value='#97ce68'><input type='color' value='#97ce68'></option>
+                        <option value='#fcd341'><input type='color' value='#fcd341'></option>
+                        <option value='#e36363'><input type='color' value='#e36363'></option>
+                        <option value='#4dbdc2'><input type='color' value='#4dbdc2'></option> -->
+
+                        <option value='#f29b34' selected>주황색</option>
+                        <option value='#97ce68'>연두색</option>
+                        <option value='#fcd341'>노란색</option>
+                        <option value='#e36363'>다홍색</option>
+                        <option value='#4dbdc2'>하늘색</option>
+                        </select>
+                    </div>
+                <div>
+                    <input type="button" class="modal-folder-plus" value="확인"></input>
+                </div>
+                </div>
+        </div>
+    </div>
+
     <script>
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
+    var modal_folder=document.querySelector('.modal_folder')
     var trigger_todo=document.querySelector(".btnplusTodo"); //todo 추가하기 버튼
     var trigger_day = document.querySelector("#d-day-plus"); // d-day 추가하기 버튼
+    var trigger_folder=document.querySelector('#folder_plus');
     var closeTodoButton=document.querySelector('.close_todo_button');
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
+    var closeFolderButton=document.querySelector('.close_folder_button');
     var storeTodoButton=document.querySelector('.modal-todo-plus');
     var storeDayButton=document.querySelector('.modal-d-plus');
+    var storeFolderButton=document.querySelector('.modal-folder-plus');
+
 
     function toggleDayModal() {
         modal_day.classList.toggle("show_modal");
@@ -624,46 +657,68 @@
     function toggleTodoModal(){
         modal_todo.classList.toggle("show_modal");
     }
+    function toggleFolderModal(){
+        modal_folder.classList.toggle('show_modal');
+    }
+
     function windowOnClick(event) {
         if (event.target === modal_day) {
             toggleDayModal();
         }else if(event.target===modal_todo){
             toggleTodoModal();
+        }else if(event.target===modal_folder){
+            toggleFolderModal();
         }
     }
     trigger_day.addEventListener("click", toggleDayModal);
     trigger_todo.addEventListener("click",toggleTodoModal);
+    trigger_folder.addEventListener('click',toggleFolderModal);
     closeDayButton.addEventListener("click", toggleDayModal);
     closeTodoButton.addEventListener('click',toggleTodoModal);
+    closeFolderButton.addEventListener('click',toggleFolderModal);
     storeDayButton.addEventListener('click',toggleDayModal);
     storeTodoButton.addEventListener('click',toggleTodoModal);
+    storeFolderButton.addEventListener('click',toggleFolderModal);
     //window.addEventListener("click", windowOnClick);
 
-    // todo_value=storeTodoButton.form.todo_content.value;
-    // console.log(todo_value);
-    // storeTodoButton.onclick=function(event){
-    //     var content=$('#modal-todo').val();
+    $('.modal-todo-plus').click(function(event){
+        var new_content=$('#modal-todo').val();
+        if(new_content.trim()===''){ //내용을 입력하지 않은 경우
+            alert("내용을 입력해주세요.");}
+        else{
+            $.ajax({
+                type:'POST',
+                async:true,
+                url:'/todo',
+                data:{
+                    todo_content:new_content,
+                    todo_finished:false
+                },
+                success:function(data){
+                    console.log(data);
+                    //var div_class='wrap_label';
+                    //var label_class='label';
+                    //var checkbox_name='checkbox';
+                    //동적 추가를 위해서 
 
-    //     if(content.trim()===''){
-    //         alert('내용을 입력해주세요.');
-    //     }else{
-    //         $.ajax({
-    //             type:"POST",
-    //             async:true,
-    //             url:'/'
-    //         })
-                //       }
-    // }
+                },error:function(err){
+                    console.log('todo 저장 실패');
+                }
+            })
 
-    // function storeDday(){
-    //     alert("추가했습니다~"); //날짜랑 내용이 다 입력되게!
-    // }
+        }
+    });
 
-    // function plusTodo(value){
-    //     //중복인지 확인하면 좋겠음.
-    //     console.log(value+"가 추가되었습니다");
-        
-    // }
+    $('.modal-folder-plus').click(function(event){
+        //추가되면 mongodb에 저장되도록
+        var new_folder=$('#modal-folder').val();
+        if(new_folder.trim()===''){
+            alert('폴더 이름을 입력하세요');
+        }else{
+            //폴더 이름이 된 경우 넣기
+        }
+    });
+    
     </script>
 
     </div>

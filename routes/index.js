@@ -3,6 +3,7 @@ const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router = express.Router();
 const Todo=require('../models/todo_list');
 const Course = require('../models/course');
+//const Folder=require('../models/folder');
 
 var objectId=require('mongodb').ObjectID; 
 //Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
@@ -13,20 +14,21 @@ router.use((req, res, next) => {
     next();
 });
 
-
+//console.log(getCurrentDate().year, getCurrentDate().month, getCurrentDate().day);
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-        
+        //const folder = await Folder.find({user_id:res.user._id}).populate('user_id');
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-        // r
+        // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist : todolist,
-            timetable : timetable
+            timetable : timetable,
+            //folder : folder
         });
     }
     catch (err) {
@@ -70,6 +72,10 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
         register_date:getCurrentDate(),
         todo_finished:false
     });
+
+    res.render('../views/mainframe.ejs',
+        { title : 'study Tight', todolist:todo, timetable:timetable}
+    );
 
     //로그인 된 유저 : console.log('로그인:'+req.user.email);
     // console.log(todo.length);
