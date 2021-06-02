@@ -83,7 +83,6 @@ router.get('/findemail', isNotLoggedIn, async(req, res, next) => {
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {
-    console.log('로그아웃 버튼');
     req.logout();
     req.session.destroy();
     res.redirect('/');
@@ -243,6 +242,45 @@ router.patch('/resetpw/:id', async(req, res) => {
         return res.status(403).send('Error');
     }
     
+});
+
+
+router.get('/changepw', isLoggedIn, async(req, res, next) => {
+    try {
+        res.render('../views/change_pw.ejs', {
+        });
+    } catch(err) {
+        return res.status(403).send('Error');
+    }
+});
+
+router.patch('/changepw', isLoggedIn, async(req, res, next) => {
+    try {
+        const { cur_password, password }= req.body;
+        const hash = await bcrypt.hash(password, 12);
+
+        const result = await bcrypt.compare(cur_password, req.user.password);
+        if (result) { // 현재 비밀번호 맞음
+            await Users.updateOne({ 
+                "_id": req.user._id
+            }, { 
+                $set:{ 
+                    password : hash
+                }
+            }, (err, results) => {
+                if (err) {
+                    console.log('error:'+err);
+                    throw err;
+                }
+                res.send(results);
+            });
+        } else { // 현재 비밀번호 틀림
+            return res.send('/changepw?error=notmatch');
+        }
+        
+    } catch(err) {
+        return res.status(403).send('Error');
+    }
 });
 
 function getCurrentDate(){
