@@ -417,6 +417,21 @@
             showCourse(tmp.course_name, tmp.schedules); //제목, 시간리스트로 시간표에 출력하기
         }
 
+        function numToDay(day) {
+            switch(day) {
+                case '1':
+                    return "mon";
+                case '2':
+                    return "tue";
+                case '3':
+                    return "wed";
+                case '4':
+                    return "thu";
+                case '5':
+                    return "fri";
+            }
+        }
+
         function showCourse(title, timelist) {
             //입력받은 정보로 시간표 출력하기
             var tdid, st, et, sh, sm, eh, em;
@@ -435,8 +450,8 @@
                 eh = parseInt(et[0]);
                 em = getMinuteId(parseInt(et[1]));
                 //시작시간 id만들기 및 속성적용
-                tdid = tmptime.day+sh+'.'+sm;
-                //console.log(title+tdid);
+                tdid = numToDay(tmptime.day)+sh+'.'+sm;
+                console.log(title+tdid);
                 tmpvar = window.document.getElementById(tdid);
                 tmpvar.innerHTML=title; //첫줄에는 과목이름
                 tmpvar.style.backgroundColor=color;
@@ -459,7 +474,7 @@
                         }
                     }
                     //console.log(tmptime.day);
-                    tdid = tmptime.day+sh+'.'+sm;
+                    tdid = numToDay(tmptime.day)+sh+'.'+sm;
                     //console.log(title+tdid);
                     tmpvar = window.document.getElementById(tdid);
                     if(sm==4) { //border 없애기
@@ -517,15 +532,15 @@
         }
         function getDayColor(day) {
             switch(day) {
-                case 'mon':
+                case '1':
                     return "lightpink";
-                case 'tue':
+                case '2':
                     return"lightsalmon";
-                case 'wed':
+                case '3':
                     return "lightsteelblue";
-                case 'thu':
+                case '4':
                     return "lightyellow";
-                case 'fri':
+                case '5':
                     return "lightseagreen";
                 default :
                 return "lightgray";
