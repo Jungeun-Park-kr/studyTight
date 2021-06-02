@@ -506,8 +506,14 @@
                 tdid = numToDay(tmptime.day)+sh+'.'+sm;
                 //console.log(title+tdid);
                 tmpvar = window.document.getElementById(tdid);
-                tmpvar.innerHTML=title; //첫줄에는 과목이름
+                //첫줄에는 과목이름 (강의실)
+                if (tmptime.course_type === 'offline')
+                    tmpvar.innerHTML=title+' ('+tmptime.classroom+')'; 
+                else
+                    tmpvar.innerHTML=title+' (온라인)';
                 tmpvar.style.backgroundColor=color;
+                tmpvar.style.paddingTop = '3px';
+                tmpvar.style.paddingLeft = '3px';
                 
                 //시간 더해가면서 id 만들기 및 속성적용
                 while(1) {
