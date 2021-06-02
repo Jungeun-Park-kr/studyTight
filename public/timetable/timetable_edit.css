@@ -9,16 +9,18 @@
 }
 
 .background-box {
-    background-color: azure;
+    /* background-color: azure; */
+    background-color: rgba(255, 255, 255, 0.5);
     align-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 10px;
 }
 
 .timetable_edit_header {
     width: 100%;
     float: left;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #timetable-line {
@@ -28,31 +30,39 @@
 
 .timetable_edit_header>div {
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 .timetable_edit_header .title_msg {
-    float: left;
-    text-align: left;
-    font-size: 15px;
+    font-size: 20px;
+    line-height: 40px;
     font-weight: bold;
     width: 70%;
-    margin: 10px;
     margin-left: 20px;
 }
 
 .timetable_edit_header .btn_add_course {
-    float: right;
+    /* float: right;
     width: 130px;
     margin: 10px;
     margin-right:20px;
-    text-align: center;
+    text-align: center; */
+    width : 15%;
+    float:right;
+    margin-right:15px;
 }
 
 .timetable_edit_header .btn_add_course>input {
-    width: 130px;
+    /* width: 130px;
     height: 30px;
     background-color: #6ED4D8;
     border: none;
+    border-radius: 10px;
+    cursor: pointer; */
+    width: 100%;
+    height: 35px;
+    background-color: #6ED4D8;
+    border:none;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -65,7 +75,7 @@
 .course_list {
     margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     /* width : 100%; */
 }
 

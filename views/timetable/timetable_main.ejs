@@ -37,7 +37,7 @@
                 <script type="text/javascript">   
                     $(document).ready( function() {
                         const location = window.location.pathname;
-                        console.log('현재 url:'+location);
+                        //onsole.log('현재 url:'+location);
                         if (location == '/') {
                             // $('#menu_home').css({'outline': 'none', 'color':'#6ED4D8', 'text-decoration-color': '#6ED4D8', 'font-weight': '700' });
                             $('#menu_home').addClass('menu_active');
@@ -94,7 +94,7 @@
             </div>
             <div class="timetable_section">
                 <div class="background_box">
-                    <div class="timetable_wrap">
+                    <div class="timetable_table_wrap">
                         <div class="table_head_wrap">
                             <table class="table_head">
                                 <tbody>
@@ -105,7 +105,7 @@
                                         <td>수</td>
                                         <td>목</td>
                                         <td>금</td>
-                                        <td style="display:none;">토</td>
+                                        <td>토</td>
                                         <td style="display:none;">일</td>
                                         <!-- <th  style="padding:0px;"></th> -->
                                     </tr>
@@ -113,6 +113,7 @@
                             </table>
                         </div>
                         <div class="table_body">
+                            <div class="table_body_wrap">
                             <table class="table_body">
                                 <tbody>
                                     <tr>
@@ -398,10 +399,60 @@
                                             <div id ="fri20.3"></div>
                                             <div id ="fri20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
                                         </td>
+                                        <td class="sat" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="sat9.1"></div>
+                                            <div id ="sat9.2"></div>
+                                            <div id ="sat9.3"></div>
+                                            <div id ="sat9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat10.1"></div>
+                                            <div id ="sat10.2"></div>
+                                            <div id ="sat10.3"></div>
+                                            <div id ="sat10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat11.1"></div>
+                                            <div id ="sat11.2"></div>
+                                            <div id ="sat11.3"></div>
+                                            <div id ="sat11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat12.1"></div>
+                                            <div id ="sat12.2"></div>
+                                            <div id ="sat12.3"></div>
+                                            <div id ="sat12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat13.1"></div>
+                                            <div id ="sat13.2"></div>
+                                            <div id ="sat13.3"></div>
+                                            <div id ="sat13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat14.1"></div>
+                                            <div id ="sat14.2"></div>
+                                            <div id ="sat14.3"></div>
+                                            <div id ="sat14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat15.1"></div>
+                                            <div id ="sat15.2"></div>
+                                            <div id ="sat15.3"></div>
+                                            <div id ="sat15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat16.1"></div>
+                                            <div id ="sat16.2"></div>
+                                            <div id ="sat16.3"></div>
+                                            <div id ="sat16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat17.1"></div>
+                                            <div id ="sat17.2"></div>
+                                            <div id ="sat17.3"></div>
+                                            <div id ="sat17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat18.1"></div>
+                                            <div id ="sat18.2"></div>
+                                            <div id ="sat18.3"></div>
+                                            <div id ="sat18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat19.1"></div>
+                                            <div id ="sat19.2"></div>
+                                            <div id ="sat19.3"></div>
+                                            <div id ="sat19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat20.1"></div>
+                                            <div id ="sat20.2"></div>
+                                            <div id ="sat20.3"></div>
+                                            <div id ="sat20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -410,7 +461,7 @@
     </div>
     <script type="text/javascript">
         var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
-        console.log(timetable);
+        //console.log(timetable);
         for (var i=0; i<timetable.length; i++) {
             var tmp = timetable[i];
             //console.log(tmp.title, tmp.time);
@@ -451,7 +502,7 @@
                 em = getMinuteId(parseInt(et[1]));
                 //시작시간 id만들기 및 속성적용
                 tdid = numToDay(tmptime.day)+sh+'.'+sm;
-                console.log(title+tdid);
+                //console.log(title+tdid);
                 tmpvar = window.document.getElementById(tdid);
                 tmpvar.innerHTML=title; //첫줄에는 과목이름
                 tmpvar.style.backgroundColor=color;
@@ -484,7 +535,8 @@
                 }
             }
         }
-        function getColor() {
+
+        function getColorOld() {
             // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
             // return color;
             var rand = Math.random();
@@ -530,23 +582,26 @@
                     return "palevioletred";
             }
         }
-        function getDayColor(day) {
-            switch(day) {
-                case '1':
-                    return "lightpink";
-                case '2':
-                    return"lightsalmon";
-                case '3':
-                    return "lightsteelblue";
-                case '4':
-                    return "lightyellow";
-                case '5':
-                    return "lightseagreen";
-                default :
-                return "lightgray";
+        function getColor() {
+            // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
+            // return color;
+            var rand = Math.random();
+            rand = Math.floor(rand*5);
+            switch(rand) {
+                case 0:
+                    return "#f29b34";
+                case 1:
+                    return"#97ce68";
+                case 2:
+                    return "#fcd341";
+                case 3:
+                    return "#e36363";
+                case 4:
+                    return "#4dbdc2";
+                // case 5:
+                //     return "#bebebe";
             }
         }
-
         function getMinuteId(min) { //분은 케이스 나누기
             switch (min) { 
                 case 0:
