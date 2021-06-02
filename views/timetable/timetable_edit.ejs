@@ -169,7 +169,7 @@
                                 <option value=3>수요일</option>
                                 <option value=4>목요일</option>
                                 <option value=5>금요일</option>
-                                <!-- <option value="sat">토요일</option> -->
+                                <option value=6>토요일</option>
                             </select>
                             <input type="time" class="course_time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
                             <p>&nbsp;~&nbsp;</p>
@@ -227,7 +227,7 @@
                                 <option value=3>수요일</option>
                                 <option value=4>목요일</option>
                                 <option value=5>금요일</option>
-                                <!-- <option value="sat">토요일</option> -->
+                                <option value=6>토요일</option>
                             </select>
                             <input type="time" class="course_time" id="course_start_time_modify" value="09:00" min="09:00" max="21:00"/>
                             <p>&nbsp;~&nbsp;</p>
@@ -505,44 +505,47 @@
                                     target : num, // 삭제 버튼 을 위해 num 함께 저장
                                 },
                                 success:function( data ){ // POST요청 성공한 경우
-                                    // 시간 목록 띄우기
-                                    //console.log(data);
-                                    $('.course_times').append('<p id="course_time'+num+'"> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp;</p>  <span class="time_sub_button" id="time_sub_button'+num+'">-</span><input class="time" type="hidden" value="'+num+'"/><br id="time_br'+num+'">');
-                                    // $('#course_add_form').after('<input class="time" type="hidden" value='+num+'/> <p id="course_time'+num+'> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp; </p><span class="time_sub_button" id="time_sub_button'+num+'>-&nbsp;</span>');
-                                    $('#time_sub_button'+num).click(function (event) { // 해당 시간 삭제 버튼
-                                        var target_num = $(this).next().val();
-                                        //var target_num = $(this).parent('.course_times').children('#time_hidden'+).val;
-                                        
-                                        //console.log(target_num+'이 시간 삭제해야 합니다');
-                                        $.ajax({
-                                            type:"DELETE",
-                                            async : true,
-                                            url:'/timetable/course/time/delete',
-                                            data : {
-                                                target : target_num, //클릭한 [-]버튼이 담긴 시간 리스트의 num 값
-                                            },
-                                            success:function( data ){ // POST요청 성공한 경우
-                                                //console.log('삭제성공',data.index);
-                                                $('#time_sub_button'+data.index).remove(); // p태그 삭제
-                                                $('#course_time'+data.index).remove(); // 버튼 삭제
-                                                $('#time_hidden'+data.index).remove();
-                                                $('#time_br'+data.index).remove(); // 개행 삭제
-                                                count--;
-                                            },
-                                            error: function(err) { // POST 요청 실패시
-                                                console.log('시간 삭제 실패' + err);
-                                            }
+                                    if (data.message === '/course/time/add?error=exist') {
+                                        alert("'"+data.course+"' 수업과 시간이 겹칩니다.")
+                                    } else { // 시간 목록 띄우기
+                                        $('.course_times').append('<p id="course_time'+num+'"> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp;</p>  <span class="time_sub_button" id="time_sub_button'+num+'">-</span><input class="time" type="hidden" value="'+num+'"/><br id="time_br'+num+'">');
+                                        // $('#course_add_form').after('<input class="time" type="hidden" value='+num+'/> <p id="course_time'+num+'> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp; </p><span class="time_sub_button" id="time_sub_button'+num+'>-&nbsp;</span>');
+                                        $('#time_sub_button'+num).click(function (event) { // 해당 시간 삭제 버튼
+                                            var target_num = $(this).next().val();
+                                            //var target_num = $(this).parent('.course_times').children('#time_hidden'+).val;
+                                            
+                                            //console.log(target_num+'이 시간 삭제해야 합니다');
+                                            $.ajax({
+                                                type:"DELETE",
+                                                async : true,
+                                                url:'/timetable/course/time/delete',
+                                                data : {
+                                                    target : target_num, //클릭한 [-]버튼이 담긴 시간 리스트의 num 값
+                                                },
+                                                success:function( data ){ // POST요청 성공한 경우
+                                                    //console.log('삭제성공',data.index);
+                                                    $('#time_sub_button'+data.index).remove(); // p태그 삭제
+                                                    $('#course_time'+data.index).remove(); // 버튼 삭제
+                                                    $('#time_hidden'+data.index).remove();
+                                                    $('#time_br'+data.index).remove(); // 개행 삭제
+                                                    count--;
+                                                },
+                                                error: function(err) { // POST 요청 실패시
+                                                    console.log('시간 삭제 실패' + err);
+                                                }
+                                            });
                                         });
-                                    });
-                                    num++;
-                                    count++;
+                                        num++;
+                                        count++;
 
-                                    // 성공후 입력칸 초기화
-                                    $('input[name="course_type"][value="offline"]').attr('checked', true);
-                                    $('#course_day').val('default').prop('selected', true);
-                                    $('#course_start_time').val('09:00');
-                                    $('#course_end_time').val('09:15');
-                                    $('#course_location').val(''); 
+                                        // 성공후 입력칸 초기화
+                                        $('input[name="course_type"][value="offline"]').attr('checked', true);
+                                        $('#course_day').val('default').prop('selected', true);
+                                        $('#course_start_time').val('09:00');
+                                        $('#course_end_time').val('09:15');
+                                        $('#course_location').val(''); 
+                                    }
+                                    
                                 }, 
                                 error: function(err) { // POST 요청 실패시
                                     console.log('시간 추가 실패' + err);
@@ -575,6 +578,7 @@
                             professor : professor
                         },
                         success:function(data){ // POST요청 성공한 경우
+                            
                             //console.log('과목 추가 성공');
                             toggleModal();
                             getCourse(data); // 동적으로 추가
@@ -632,8 +636,11 @@
                                     target : num, // 삭제 버튼 을 위해 num 함께 저장
                                 },
                                 success:function( data ){ // POST요청 성공한 경우
+                                    if (data.message === '/course/time/add?error=exist') {
+                                        alert("'"+data.course+"' 수업과 시간이 겹칩니다.")
+                                    } else {
                                     // 시간 목록 띄우기
-                                    //console.log(data);
+                                    
                                     $('.course_times').append('<p id="course_time'+num+'"> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp;</p>  <span class="time_sub_button" id="time_sub_button'+num+'">-</span><input class="time" type="hidden" value="'+num+'"/><br id="time_br'+num+'">');
                                     // $('#course_add_form').after('<input class="time" type="hidden" value='+num+'/> <p id="course_time'+num+'> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp; </p><span class="time_sub_button" id="time_sub_button'+num+'>-&nbsp;</span>');
                                     $('#time_sub_button'+num).click(function (event) { // 해당 시간 삭제 버튼
@@ -668,6 +675,7 @@
                                     $('#course_start_time_modify').val('09:00');
                                     $('#course_end_time_modify').val('09:15');
                                     $('#course_location_modify').val(''); 
+                                }
                                 }, 
                                 error: function(err) { // POST 요청 실패시
                                     console.log('시간 추가 실패' + err);
