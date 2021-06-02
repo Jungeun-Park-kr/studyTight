@@ -14,16 +14,31 @@ router.use((req, res, next) => {
 
 function courseDay(day) {
     switch(day) {
-        case 'mon':
+        case '1':
             return "월요일";
-        case 'tue':
+        case '2':
             return "화요일";
-        case 'wed':
+        case '3':
             return "수요일";
-        case 'thu':
+        case '4':
             return "목요일";
-        case 'fri':
+        case '5':
             return "금요일";
+    }
+}
+
+function courseDayToNumber(day) {
+    switch(day) {
+        case 'mon':
+            return 1;
+        case 'tue':
+            return 2;
+        case 'wed':
+            return 3;
+        case 'thu':
+            return 4;
+        case 'fri':
+            return 5;
     }
 }
 
@@ -54,7 +69,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 
     try {
         //console.log('현재 로그인:'+res.locals.user.email);
-        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':1});
         // console.log('---------------------로그인된사람의시간표---------------------');
         // console.info(timetable);
         res.render( '../views/timetable/timetable_main.ejs', {
@@ -87,7 +102,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 router.get('/edit', isLoggedIn, async (req, res, next) => {
 
     try {
-        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':1});
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
         //console.info(timetable);
         res.render('../views/timetable/timetable_edit.ejs', {
             title: '시간표 관리',
@@ -112,7 +127,7 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
     try {
         var time = {
             type : type,
-            day : day, //mon, tue, ... 저장
+            day : day, //mon, tue, ... 저장 -> 1, 2, 3 ... 저장
             stime : stime, //시작시간
             etime : etime, //종료시간
             classroom : classroom, // 링크or강의실
@@ -170,6 +185,14 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
         //     return res.redirect('/course/add?error=exist');
         // }
 
+        //timeList (과목 스케줄) 정렬
+        timeList.sort(function (a,b) { // 시작 시간순 정렬
+            return parseFloat(a.stime) - parseFloat(b.stime);
+        });
+        timeList.sort(function (a,b) { // 요일순 정렬
+            return parseFloat(a.day) - parseFloat(b.day);
+        });
+
 
         // mongoDB에 과목 시간 추가
         var courseIdList = new Array();
@@ -211,7 +234,8 @@ router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
     try {
         const deleteId = req.params.id;
         await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId});
-        res.render('../views/timetable/timetable_main.ejs', {
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
+        return res.render('../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
             timetable : timetable

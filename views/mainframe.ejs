@@ -124,9 +124,9 @@
                     var type, tmptime, day, st, sh, sm, et, eh, em;
                     var date = new Date();
                     //현재 시간
-                    // var curday = date.getDay();
-                    // var curhour = date.getHours();
-                    // var curmin = date.getMinutes();
+                    var curday = date.getDay();
+                    var curhour = date.getHours();
+                    var curmin = date.getMinutes();
 
                     // 오프라인 - 테스트용
                     // var curday = 4;
@@ -134,9 +134,9 @@
                     // var curmin = 13;
 
                     //온라인 - 테스트용 
-                    var curday = 1; //월요일
-                    var curhour = 11;  // 오전 11시
-                    var curmin = 46; //46분
+                    // var curday = 1; //월요일
+                    // var curhour = 11;  // 오전 11시
+                    // var curmin = 46; //46분
 
                     var cur = (curhour * 3600) + (curmin * 60); //현재시간 초단위로 변환
                     for (var i = 0; i < course.schedules.length; i++) {

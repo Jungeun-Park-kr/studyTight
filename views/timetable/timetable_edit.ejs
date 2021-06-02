@@ -164,11 +164,11 @@
                         <div class="course_time_bundle">
                             <select id="course_day" class="course_day">
                                 <option value="default">요일</option>
-                                <option value="mon">월요일</option>
-                                <option value="tue">화요일</option>
-                                <option value="wed">수요일</option>
-                                <option value="thu">목요일</option>
-                                <option value="fri">금요일</option>
+                                <option value=1>월요일</option>
+                                <option value=2>화요일</option>
+                                <option value=3>수요일</option>
+                                <option value=4>목요일</option>
+                                <option value=5>금요일</option>
                                 <!-- <option value="sat">토요일</option> -->
                             </select>
                             <input type="time" class="course_time" id="course_start_time" value="09:00" min="09:00" max="21:00"/>
@@ -222,11 +222,11 @@
                         <div class="course_time_bundle">
                             <select id="course_day_modify" class="course_day">
                                 <option value="default">요일</option>
-                                <option value="mon">월요일</option>
-                                <option value="tue">화요일</option>
-                                <option value="wed">수요일</option>
-                                <option value="thu">목요일</option>
-                                <option value="fri">금요일</option>
+                                <option value=1>월요일</option>
+                                <option value=2>화요일</option>
+                                <option value=3>수요일</option>
+                                <option value=4>목요일</option>
+                                <option value=5>금요일</option>
                                 <!-- <option value="sat">토요일</option> -->
                             </select>
                             <input type="time" class="course_time" id="course_start_time_modify" value="09:00" min="09:00" max="21:00"/>
@@ -280,17 +280,17 @@
             }
             function courseDay(day) {
                 switch(day) {
-                    case 'mon':
+                    case '1':
                         return "월요일";
-                    case 'tue':
+                    case '2':
                         return "화요일";
-                    case 'wed':
+                    case '3':
                         return "수요일";
-                    case 'thu':
+                    case '4':
                         return "목요일";
-                    case 'fri':
+                    case '5':
                         return "금요일";
-                    case 'sat':
+                    case '6':
                         return "토요일";
                 }
             }
@@ -360,6 +360,7 @@
                                 url:'/timetable/course/delete'+id+'', 
                             success:function( data ){ // POST요청 성공한 경우
                                 console.log('성공');
+                                location.href='/timetable/edit'
                             },
                             error : function(err) {
                                 alert('과목 삭제를 실패했습니다. \n다시 시도해주세요.');
