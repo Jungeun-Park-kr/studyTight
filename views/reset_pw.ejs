@@ -145,8 +145,13 @@
                         data : {
                             password: $('#password').val(),
                         },
-                        success:function(data){ // 비밀번호 변경 성공한 경우
-                            toggleRegisterModal();
+                        success:function(data){ // 비밀번호 변경 성공한 경우, 만료된 경우
+                            if (data == 'token?expired') {
+                                alert('인증 시간(5분)이 초과되었습니다. 비밀번호 찾기를 다시 진행해주세요.');
+                                location.href='/auth/findpw';
+                            }
+                            else 
+                                toggleRegisterModal();
                         }, 
                         error: function(err) { // POST 요청 실패시
                             console.log('가입 실패' + err);
