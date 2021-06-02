@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
+const course = require('../../models/course');
 const router = express.Router();
 
 var timeList = new Array();
@@ -24,6 +25,8 @@ function courseDay(day) {
             return "목요일";
         case '5':
             return "금요일";
+        case '6':
+            return "토요일";
     }
 }
 
@@ -54,7 +57,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 
     try {
         //console.log('현재 로그인:'+res.locals.user.email);
-        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':1});
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
         // console.log('---------------------로그인된사람의시간표---------------------');
         // console.info(timetable);
         res.render( '../views/timetable/timetable_main.ejs', {
@@ -72,16 +75,6 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
-
-// router.get('/main/courses', isLoggedIn, async (req, res, next) => {
-//     try {
-//         console.log(res.locals.user);
-//     } catch (err) {
-//         console.error(err);
-//         next(err);
-//     }
-// });
-
 
 
 router.get('/edit', isLoggedIn, async (req, res, next) => {
@@ -103,11 +96,8 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
 });
 
 
-
-
-
 router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
-    console.log(req.body);
+    //console.log(req.body);
     const { type, day, stime, etime, classroom, target } = req.body;
     try {
         var time = {
@@ -119,8 +109,19 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
             target : target // 삭제할 애의 num
         }
         // 시간 중복 확인
-        // in here
-
+        const checkCourse = await Course.find({user_id: res.locals.user._id}).populate('schedules');
+        if (checkCourse != null) {
+            for (var i = 0; i < checkCourse.length; i++) {
+                var course = checkCourse[i];
+                for (var j=0; j<course.schedules.length; j++) {
+                    var schedule = course.schedules[j];
+                    if ((schedule.day === day) && (stime <= schedule.end_time || etime <= schedule.start_time )) {
+                        return res.send( {message : '/course/time/add?error=exist', course : course.course_name });
+                    }
+                }
+            }
+        }
+        
 
         timeList.push(time); // 시간 추가
 
@@ -163,11 +164,12 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
     const {name, professor} = req.body;
 
     try {
-        // 과목 중복 확인
-        // const extimetable = await User.findOne( { email: req.user.email}, {courses: 1}); 
-        // if (extimetable에 name이 있는 경우) {
+        // 과목 이름 중복 확인 => 필요없음 (이름이 중복될 수도 있으니까..)
+        // const check = await Course.findOne({user_id:req.user._id, course_name:name});
+        // if (check != null) {
         //     console.log('이미 추가한 과목입니다.');
-        //     return res.redirect('/course/add?error=exist');
+        //     // return res.redirect('/course/add?error=exist');
+        //     return res.send('/course/add?error=exist');
         // }
 
         //timeList (과목 스케줄) 정렬
