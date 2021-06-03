@@ -42,23 +42,12 @@
 }
 
 .timetable_edit_header .btn_add_course {
-    /* float: right;
-    width: 130px;
-    margin: 10px;
-    margin-right:20px;
-    text-align: center; */
     width : 15%;
     float:right;
     margin-right:15px;
 }
 
 .timetable_edit_header .btn_add_course>input {
-    /* width: 130px;
-    height: 30px;
-    background-color: #6ED4D8;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer; */
     width: 100%;
     height: 35px;
     background-color: #6ED4D8;
@@ -66,6 +55,12 @@
     border-radius: 10px;
     cursor: pointer;
 }
+
+.timetable_edit_header .btn_add_course>input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
 
 .timetable_edit_section {
     display: inline-block;
@@ -150,32 +145,36 @@ table tr:last-child td:last-child {
 
 .course_list>table>tbody>tr {
     font-size: 12px;
+    height:14px;
     border-bottom: 1px solid gray;
 }
 
 .course_list table .btn_modify_course {
-    align-content: center;
-    /* width: 32px;
-    height: 32px; */
-    width:20px;
-    height:20px;
+    background: url("media/pencil.svg") no-repeat;
+    width: 24px;;
+    height:24px;
     border: none;
-    /* background: url("media/edit.png") no-repeat; */
-    background: url("media/edit_20.png") no-repeat;
+    border-radius: 5px;
     cursor: pointer;
     margin-left : 6.5px;
     margin-right:6.5px;
 }
 
+.course_list table .btn_modify_course:hover {
+    background-color: #bebebe;
+}
+
 .course_list table .btn_delete_course {
-    /* background: url("media/delete.png") no-repeat; */
-    background: url("media/delete_20.png") no-repeat;
-    /* width: 32px;
-    height: 32px; */
-    width:20px;
-    height:20px;
+    background: url("media/trash-can.svg") no-repeat;
+    width: 24px;;
+    height:24px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin-left : 6.5px;
     margin-right:6.5px;
+}
+
+.course_list table .btn_delete_course:hover {
+    background-color: #bebebe;
 }

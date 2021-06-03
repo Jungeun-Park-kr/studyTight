@@ -12,16 +12,15 @@ const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const Users = require('../models/user');
 const router = express.Router();
 
-
 const Todo=require('../models/todo_list');
 
 const fs=require('fs');
 
-// // GET /auth 라우터 (auth 왔을때의 root) - middlewares.js 에서 로그인 처리해주기 때문에 필요X
-// router.get('/login', (req, res) => {
-//     res.render('../views/login.ejs', {loginFailed : req.session.loginFailed});
-//     console.log('get요청옴');
-// })
+// GET /auth 라우터 (auth 왔을때의 root) - middlewares.js 에서 로그인 처리해주기 때문에 필요X
+router.get('/login', (req, res) => {
+    res.render('../views/login.ejs', {loginFailed : req.session.loginFailed});
+    console.log('get요청옴');
+})
 
 // POST /auth/login 라우터 
 router.post('/login', isNotLoggedIn, (req, res, next) => {

@@ -14,9 +14,6 @@
         @import url(/login/register.css);
         @import url(/login/register_agree.css);
     </style>
-    <!-- <script src="/user/users.js"></script>
-    <script src="/login/register.js"></script>
-    <script src="/login/login.js"></script> -->
     
 </head>
 <body>
@@ -24,7 +21,7 @@
         <div class="register_header"> 
             <!-- 여기는 왼쪽 메뉴 (로고) -->
             <div class ="logo_area"> 
-                <img src="/public/media/logo_big.png" onclick="location.href='/login'">
+                <img src="/public/media/logo_big.png" onclick="location.href='/auth/login'">
             </div>
         </div>
         <div class="section">
@@ -113,7 +110,7 @@
                                 promotion : promotion,
                             },
                             success:function(data){ // POST 요청 성공
-                                console.log('promotion in ejs :'+promotion);
+                                //console.log('promotion in ejs :'+promotion);
                                 $(location).attr('href', '/signup'); 
                             }, 
                             error: function(err) { // POST 요청 실패시
@@ -128,22 +125,17 @@
             $('#termsPromotion').click(function() {
                 var email = $(this).is(':checked');
                 if (email) {
-                    console.log('프로모션 수신 체크됨');
                     promotion = true;
                     
-
                 } else {
-                    console.log('프로모션 수신 체크 해제됨');
                     promotion = false;
                 }
             });
-
             // 전체선택 체크박스
             $("#chk_all").click(function() {
                 var chkAll = $(this).is(":checked");
                 
                 if (chkAll) {
-                    console.log('chk_all(전체체크박스)가 체크되었습니다.');
                     $("#dynamicUL input:checkbox").prop("checked", true);
                     chk_service.checked = true;
                     chk_privacy.checked = true;
@@ -151,7 +143,6 @@
                     promotion = true;
                 } else {
                     $("#dynamicUL input:checkbox").prop("checked", false);
-                    console.log('chk_all(전체체크박스)가 체크 해제되었습니다.');
                     chk_service.checked = false;
                     chk_privacy.checked = false;
                     chk_promotion.checked = false;

@@ -14,12 +14,15 @@
 
 p , div{
     font-family : Open Sans;
+    color: #202020;
 }
 
 input, label, span {
     font-family : Open Sans;
+    color: #202020;
 }
 
 li, ul, ol {
     font-family: Open Sans;
+    color: #202020;
 }

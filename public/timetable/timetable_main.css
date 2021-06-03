@@ -37,6 +37,12 @@
     cursor: pointer;
     margin-bottom : 10px;
 }
+.page-header .edit_btn > input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
+
 .table_head_wrap {
     align-items: center;
     padding : 0px 50px;

@@ -99,10 +99,10 @@ form {
     text-align: center; 
     cursor: pointer; 
     border-radius: 0.5rem; 
-    background-color: lightgray; 
+    background-color: #dedede; 
 } 
 .close_button:hover { 
-    background-color: darkgray; 
+    background-color: #8e8e8e; 
 }
 
 /* 버튼 클릭시 이벤트 */
@@ -121,7 +121,7 @@ form {
     line-height: 13px; 
     text-align: center; 
     border-radius: 0.5rem; 
-    background-color: lightgray; 
+    background-color: #dedede; 
     color: #000;
     border: solid 1px rgba(0,0,0,.08);
     cursor: pointer;
@@ -129,7 +129,7 @@ form {
     float:right;
 }
 .btn_day_add:hover{ 
-    background-color: darkgray; 
+    background-color: #8e8e8e;
 }
 
 /* 강의 방식 및 시간 부분 */
@@ -174,10 +174,10 @@ p {
     text-align: center; 
     cursor: pointer; 
     border-radius: 0.25rem; 
-    background-color: lightgray; 
+    background-color: #dedede; 
 } 
 .time_sub_button:hover{ 
-    background-color: darkgray; 
+    background-color: #8e8e8e; 
 }
 
 /* 강의링크/강의실 입력 부분 */
