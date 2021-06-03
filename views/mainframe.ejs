@@ -12,7 +12,7 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">   
 
-    console.log(new Date());
+    //console.log(new Date());
     // $(document).ready( function() {
     //     // $("#header").load('/views/header.html');
     //     $("#header").render('/views/header.html');
@@ -312,7 +312,30 @@
                     <div class="folder_">
                         
                         <div id="wrap_folder" class="wrap_folder">
-        
+                            <% for(var i=0;i<folder.length; i++) { %>
+                                
+                                <div id="folder_"+i class="folder">
+                                    
+
+                                <% if(folder[i].folder_fixed) {%>
+                                    <img src='media/folder_orange.svg' class='folder_img'/>
+                                    <p class='main_folder_name'><%= folder[i].folder_name %></p>
+                                    <img class="folder_button" src="media/three_button.png">
+                                <div id="dropdown-folder"+i class="dropdown_folder" onclick="showFolderMenu(i);">
+                                    <button role="menuitem" class="dropdown_choice" id="revise_folder"+i ></button>
+                                    <button role="menuitem" class="dropdown_choice" id="delete_folder"+i></button>
+                                    
+                                <%} else{ %>
+                                    <img src='media/folder_orange.svg' class='folder_img'/>
+                                    <p class='main_folder_name'><%= folder[i].folder_name %></p>
+                                    <img class="folder_button" src="media/three_button.png">
+                                <div id="dropdown-folder"+i class="dropdown_folder" onclick="showFolderMenu(i);">
+                                    <button role="menuitem" class="dropdown_choice" id="revise_folder"+i ></button>
+                                    <button role="menuitem" class="dropdown_choice" id="delete_folder"+i></button>
+                                    <% } %>
+                                </div>
+                                <% } %>
+                            
                             <!-- <div id="folder_0" class="folder">
                                 <img src="media/plus_folder_yellow.png" class="folder_img"/>
                                 <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
@@ -412,6 +435,25 @@
                                 }
                             </script> -->
                         <!-- </div> -->
+
+                        <script>
+                    function showPostMenu(index){
+                    //나중에 index로 받아서 처리하기
+                    var dropdown=document.getElementsByClassName('dropdown_content')[index];
+
+                    $(`#dropdown-content${index}`).show();
+                    
+                    $(`#revise_post${index}`).text("수정하기");
+                    $(`#revise_post${index}`).show();
+                    $(`#delete_post${index}`).text("삭제하기");
+                    $(`#delete_post${index}`).show();
+
+                    dropdown.setAttribute('data-value','open')
+                    var value=dropdown.getAttribute('data-value');
+                    console.log("지금 클릭된 것의 index:"+index+", value="+value);
+                }
+                            </script>
+
                         <div id="folder_plus">
                             <img src="media/plus_folder_gray.png"/><p>추가하기</p>
                         </div>
@@ -506,7 +548,7 @@
                                 }
                                 var currentState=boolValue;
                                 console.log(currentState+'->'+!(currentState));
-                                if(currentState==trie){
+                                if(currentState==true){
                                     checked_toggle++;
                                 }
                                 var content=document.getElementsByClassName('p_p');
@@ -567,20 +609,21 @@
                         </div>
                 </div>
             </div>
+
         <!-- todo-list 추가하기 모달 팝업 -->
     <div id="modal" class="modal modal_todo">
         <div class="modal-content-todo">
         <span class="close_button close_todo_button">&times;</span>
         <h1 class="title">오늘 할 일 추가히기</h1>
-        <form action='/' method="POST">
+        <!-- <form action='/' method="POST"> -->
             <div>
                 <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
                 <input type="hidden">
             </div>
             <div>
-                <input type="submit" class="modal-todo-plus" value="확인"></input>
+                <input type="button" class="modal-todo-plus" value="확인"></input>
             </div>
-        </form>
+        <!-- </form> -->
         </div>
     </div>
         <!-- d-day 추가하기 모달 팝업 -->
@@ -608,29 +651,31 @@
     </div>
 
 <!-- folder 추가하기 -->
-    <div id="modal" class="modal modal_folder">
-        <div class="modal-content-folder">
-        <span class="close_button close_folder_button">&times;</span>
-            <h1 class="title">폴더를 만들어보세요</h1>
+    <div id="modal" class="modal modal_folder">
+        <div class="modal-content-folder">
+            <span class="close_button close_folder_button">&times;</span>
+            <h1 class="title">폴더 추가하기</h1>
                 <div>
-                    <input type="text" id="modal-folder-name" name="folder_name" maxlength="10" placeholder="과목의 이름을 작성하세요.">
-                    <div value="폴더의 색을 선택하세요.">
-                        <select name="folder_color">
-                        <!-- <option value='#f29b34' selected><input type='color' value=' #f29b34'></option>
+                    <input type="text" id="modal-folder-name" name="folder_name" maxlength="10" placeholder="폴더 이름을 입력하세요.">
+                    <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
+                        <select id="folder_color" name="folder_color">
+                        <!-- <option value='#f29b34' selected><input type='color' value=' #f29b34'></option>
                         <option value='#97ce68'><input type='color' value='#97ce68'></option>
                         <option value='#fcd341'><input type='color' value='#fcd341'></option>
                         <option value='#e36363'><input type='color' value='#e36363'></option>
-                        <option value='#4dbdc2'><input type='color' value='#4dbdc2'></option> -->
+                        <option value='#4dbdc2'><input type='color' value='#4dbdc2'></option> -->
+                        
+                        <option value='#f29b34' style="background-color: #f29b34;">주황색</option>
+                        <option value='#97ce68' style='background-color: #97ce68;'>연두색</option>
+                        <option value='#fcd341' style='background-color: #fcd341;'>노란색</option>
+                        <option value='#e36363' style='background-color: #e36363;'>다홍색</option>
+                        <option value='#4dbdc2' style='background-color: #4dbdc2;'>하늘색</option>
 
-                        <option value='#f29b34' selected>주황색</option>
-                        <option value='#97ce68'>연두색</option>
-                        <option value='#fcd341'>노란색</option>
-                        <option value='#e36363'>다홍색</option>
-                        <option value='#4dbdc2'>하늘색</option>
+                    
                         </select>
                     </div>
                 <div>
-                    <input type="button" class="modal-folder-plus" value="확인"></input>
+                    <input type="button" class="modal-folder-plus" value="확인"></input>
                 </div>
                 </div>
         </div>
@@ -650,7 +695,6 @@
     var storeDayButton=document.querySelector('.modal-d-plus');
     var storeFolderButton=document.querySelector('.modal-folder-plus');
 
-
     function toggleDayModal() {
         modal_day.classList.toggle("show_modal");
     }
@@ -666,7 +710,8 @@
             toggleDayModal();
         }else if(event.target===modal_todo){
             toggleTodoModal();
-        }else if(event.target===modal_folder){
+        }
+        else if(event.target===modal_folder){
             toggleFolderModal();
         }
     }
@@ -679,7 +724,7 @@
     storeDayButton.addEventListener('click',toggleDayModal);
     storeTodoButton.addEventListener('click',toggleTodoModal);
     storeFolderButton.addEventListener('click',toggleFolderModal);
-    //window.addEventListener("click", windowOnClick);
+    window.addEventListener("click", windowOnClick);
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
@@ -695,32 +740,45 @@
                     todo_finished:false
                 },
                 success:function(data){
-                    console.log(data);
+                    //console.log(data);
                     //var div_class='wrap_label';
                     //var label_class='label';
                     //var checkbox_name='checkbox';
                     //동적 추가를 위해서 
-
                 },error:function(err){
                     console.log('todo 저장 실패');
                 }
             })
-
         }
     });
 
     $('.modal-folder-plus').click(function(event){
         //추가되면 mongodb에 저장되도록
-        var new_folder=$('#modal-folder').val();
-        if(new_folder.trim()===''){
+        var new_folder_name=$('#modal-folder-name').val();
+        var new_folder_color=$('#folder_color option:selected').val(); //폴더 색
+        console.log(new_folder_color);
+        if(new_folder_name.trim()===''){
             alert('폴더 이름을 입력하세요');
         }else{
-            //폴더 이름이 된 경우 넣기
+            $.ajax({
+                type:'POST',
+                async:true,
+                url:'/folder',
+                data:{
+                    folder_name:new_folder_name,
+                    //folder_fixed:false,
+                    folder_color:new_folder_color
+                },
+                success:function(data){
+                    //동적 추가 시 피룡함
+                },error:function(err){
+                    console.log('folder 추가 실패');
+                }
+            })
         }
     });
     
     </script>
-
     </div>
         
     </div>

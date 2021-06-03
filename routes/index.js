@@ -3,7 +3,7 @@ const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const router = express.Router();
 const Todo=require('../models/todo_list');
 const Course = require('../models/course');
-//const Folder=require('../models/folder');
+const Folder=require('../models/folder');
 
 var objectId=require('mongodb').ObjectID; 
 //Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-        //const folder = await Folder.find({user_id:res.user._id}).populate('user_id');
+        const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
             title: 'StudyTight 메인화면',
             todolist : todolist,
             timetable : timetable,
-            //folder : folder
+            folder : folder
         });
     }
     catch (err) {
@@ -57,6 +57,36 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
     }
 });
 
+router.post('/folder',isLoggedIn, async(req,res,next) => {
+    var folder_name=req.body.folder_name;
+    var folder_color=req.body.folder_color;
+    const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+    const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+
+    //console.log(JSON.stringify(content)); //추가된 todo값
+    
+    try{
+    //몽고db에 저장
+    const folder=await Folder.create({
+        user_id:req.user._id,
+        folder_name: folder_name,
+        folder_color: folder_color,
+        folder_fixed:false
+    });
+
+    res.render('../views/mainframe.ejs',
+        { title : 'study Tight', todolist:todolist, timetable:timetable, folder:folder}
+    );
+
+    //로그인 된 유저 : console.log('로그인:'+req.user.email);
+    // console.log(todo.length);
+    // res.redirect('/')
+    
+    //res.send(todo);
+}catch(err){
+    next(err);
+}
+});
 
 router.post('/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
