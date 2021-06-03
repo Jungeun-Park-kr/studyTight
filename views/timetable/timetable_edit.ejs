@@ -41,7 +41,6 @@
                 <script type="text/javascript">   
                     $(document).ready( function() {
                         const location = window.location.pathname;
-                        console.log('현재 url:'+location);
                         if (location == '/') {
                             $('#menu_home').addClass('menu_active');
                             $('#menu_guestbook').removeClass('menu_active');
@@ -279,7 +278,7 @@
                     var title = course.course_name; //과목 이름 가져오기
                     var id = course._id;
                     modify_id = id;
-                    console.log('수정할과목:'+title, '수정할 DB _id:'+id); 
+                    //console.log('수정할과목:'+title, '수정할 DB _id:'+id); 
                     toggleModifyModal();
                 });
                 
@@ -287,7 +286,7 @@
                 ncell6.addEventListener('click', function() { //삭제 버튼 리스너 추가
                     var title = course.course_name; //과목 이름 가져오기
                     var id = course._id;
-                    console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
+                    //console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
                     var ret = confirm("정말로 삭제하시겠습니까?");
                     if (ret) { //삭제 수행
                         $.ajax({
@@ -322,7 +321,7 @@
                         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
                         var id = $(this).next().val();
                         modify_id = id;
-                        console.log('수정할과목:'+title, '수정할 DB _id:'+id); 
+                        //console.log('수정할과목:'+title, '수정할 DB _id:'+id); 
                         toggleModifyModal();
                     });
                 }
@@ -331,7 +330,7 @@
                     target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
                         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
                         var id = $(this).next().val();
-                        console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
+                        //console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
                         var ret = confirm("정말로 삭제하시겠습니까?");
                         if (ret) { //삭제 수행
                             $.ajax({

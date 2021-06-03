@@ -169,14 +169,24 @@ li {
 
 .btn_default {
     color: #fff;
-    background-color: #8e8e8e;
+    background-color: #bebebe;
+    /* background-color: #8e8e8e; */
     border-radius: 10px;
+}
+.btn_default:hover {
+    font-weight: bolder;
+    background-color: #8e8e8e;
+
 }
 .btn_primary {
     color: #fff;
     border: solid 1px rgba(0,0,0,.08);
     border-radius: 10px;
     background-color: #6ED4D8;
+}
+.btn_primary:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 
 .btn_area.double a {

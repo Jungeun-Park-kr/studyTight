@@ -109,9 +109,14 @@ ul {
 }
 .btn_logout {
     background-color: rgba(190, 190, 190,0.5);
+    /* background-color: #bebebe; */
     border-radius: 10px;
     border:none;
     cursor:pointer;
     font-size:12px;
     display:inline;
+}
+.btn_logout:hover {
+    /* background-color: #8e8e8e; */
+    background-color: darkgray;
 }

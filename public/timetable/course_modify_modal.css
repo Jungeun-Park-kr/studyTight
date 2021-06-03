@@ -43,8 +43,8 @@
     text-align: center; 
     cursor: pointer; 
     border-radius: 0.5rem; 
-    background-color: lightgray; 
+    background-color: #bebebe; 
 } 
 .close_button_modify:hover { 
-    background-color: darkgray; 
+    background-color: #8e8e8e; 
 }
