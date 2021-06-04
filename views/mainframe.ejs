@@ -320,7 +320,7 @@
                                 <% if(folder[i].folder_fixed) {%>
                                     <img src='media/folder/<%= folder[i].folder_color %>.svg' class='folder_img'/>
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
-                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu();"/>
+                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu('<%= i %>');"/>
                                 <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked(i);"></button>
                                     <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="reviseFolderClicked(i);"></button></div>
@@ -328,7 +328,7 @@
                                 <%} else{ %>
                                     <img src='media/folder/<%= folder[i].folder_color %>.svg' class='folder_img'/>
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
-                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu(i);"/>
+                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu('<%= i %>');"/>
                                 <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked(i);"></button>
                                     <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="deleteFolderClicked(i);"></button></div>
@@ -342,8 +342,8 @@
                                 var dropdown_toggle=1;
                             function showFolderMenu(index){
                                 //나중에 index로 받아서 처리하기
-                                var dropdown=document.getElementsByClassName('dropdown_folder')[index];
-                                console.log(index,dropdown);
+                                //var dropdown=document.getElementsByClassName('dropdown_folder')[index];
+                                console.log(index);
                                 $(`#dropdown-folder${index}`).show();
                                 
                                 $(`#revise_folder${index}`).text("수정하기");

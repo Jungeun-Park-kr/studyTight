@@ -21,9 +21,16 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
-        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        //const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
+        //삭제 성공!
+        await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
+        //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
+        await Todo.updateMany({user_id:res.locals.user._id, todo_finished:false, register_date:getCurrentDate()})
+        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        
+        //남은 애들은 register_date를 하나 추가하기
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist : todolist,
@@ -177,11 +184,12 @@ function getCurrentDate(){
     var year = date.getFullYear();
     var month = date.getMonth();
     var today = date.getDate();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var milliseconds = date.getMilliseconds();
-    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+    // var hours = date.getHours();
+    // var minutes = date.getMinutes();
+    // var seconds = date.getSeconds();
+    // var milliseconds = date.getMilliseconds();
+   
+    return new Date(Date.UTC(year,month, today));
 }
 
 module.exports = router;
