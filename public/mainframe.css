@@ -191,6 +191,7 @@ html, body {
     position:fixed;
     bottom:10px;
     right:10px;
+    cursor:pointer;
 }
 /* .plus-part{
     display:flex;
@@ -238,7 +239,18 @@ html, body {
     margin-bottom:20px;
     letter-spacing: 2px; 
 } 
-
+#modal-folder-name{
+    width:80%;
+    vertical-align: middle;
+    margin:10px;
+}
+.folder_color_wrap{
+    width:100%;
+}
+.folder_color_wrap > select {
+    vertical-align: middle;
+    margin:10px;
+}
 /* 닫기 버튼 */
 .close_button { 
     float: right; 
@@ -334,9 +346,9 @@ html, body {
 #folder_plus{
     margin:17px;
     width: 102px;
-    height: 65px;
-    vertical-align: middle;
-    position:relative;
+    height: 81px;
+    /* vertical-align: middle;
+    position:relative; */
    /* 참고하기: https://today-myday.tistory.com/8 */
     display:inline-block;
 }
@@ -347,7 +359,7 @@ html, body {
 #folder_plus > p {
     text-align: center;
 	position: relative;
-	top: -80%;
+	top: -70%;
 	left: 50%;
 	transform: translate( -50%, -50% );
     cursor: pointer;
@@ -357,23 +369,21 @@ html, body {
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
     display:inline-block;
-    margin:17px;
+    margin:17px; 
     width: 102px;
-    height: 65px;
+    height: 81px;
     /* padding-bottom:10%; */
-
-    vertical-align: middle;
 
 } 
 .folder_img {
     width:100%;
     height:auto;
-
 }
 .main_folder_name{
     text-align: center;
 	position: relative;
-	top: -80%;
+    cursor:pointer;
+	top: -70%;
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
@@ -382,7 +392,7 @@ html, body {
 }
 .wrap_folder {
     display: inline;
-
+    /* margin:17px; */
     
 }
 .fixed {
@@ -421,7 +431,19 @@ html, body {
 .d-dayBtn:hover{
     opacity:1;
 } */
-.dropdown_day{
+.three_button{
+    position:relative;
+    z-index:1;
+    margin-top:-107px;
+    width:15px;
+    float:right;
+    opacity:0;
+    cursor:pointer;
+}
+.three_button:hover{
+    opacity:1;
+}
+.dropdown_folder{
     display:none;
 
     position:relative;
@@ -431,7 +453,7 @@ html, body {
     width:auto;
     float:right;
 }
-.dropdown_day > button{
+.dropdown_folder > button{
     margin:0 auto;
     background-color: rgba(255,255,255,0.8);
     border:white; 

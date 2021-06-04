@@ -42,12 +42,14 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
     try {
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist : todolist,
-            timetable : timetable
+            timetable : timetable,
+            folder : folder
         });
     }
     catch (err) {
@@ -91,7 +93,7 @@ router.post('/folder',isLoggedIn, async(req,res,next) => {
 router.post('/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-
+    const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     //console.log(JSON.stringify(content)); //추가된 todo값
     
     try{
@@ -104,7 +106,7 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
     });
 
     res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable}
+        { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder}
     );
 
     //로그인 된 유저 : console.log('로그인:'+req.user.email);
@@ -119,6 +121,7 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
 
 router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+    const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     try{
     const todo=await Todo.updateOne({
         user_id:req.user._id, //필터링 하는 것
@@ -131,7 +134,7 @@ router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 �
     //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
     res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable}
+        { title : 'study Tight', todolist:todo, timetable:timetable, folder:folder}
     );
     //res.redirect('/');
 
@@ -142,7 +145,7 @@ router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 �
 router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
 
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-    
+    const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     try {
         const delete_todoId = req.body.todo_id;
         await Todo.deleteOne({user_id: res.locals.user._id, _id:delete_todoId});
@@ -150,7 +153,7 @@ router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 �
         const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.log('남은 것은 이제 '+todo.todo_content);
         res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable});
+        { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder});
     }catch(err){
         next(err);
     }

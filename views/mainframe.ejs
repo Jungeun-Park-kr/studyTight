@@ -314,28 +314,48 @@
                         <div id="wrap_folder" class="wrap_folder">
                             <% for(var i=0;i<folder.length; i++) { %>
                                 
-                                <div id="folder_"+i class="folder">
+                                <div class="folder">
                                     
 
                                 <% if(folder[i].folder_fixed) {%>
-                                    <img src='media/folder_orange.svg' class='folder_img'/>
+                                    <img src='media/folder/<%= folder[i].folder_color %>.svg' class='folder_img'/>
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
-                                    <img class="folder_button" src="media/three_button.png">
-                                <div id="dropdown-folder"+i class="dropdown_folder" onclick="showFolderMenu(i);">
-                                    <button role="menuitem" class="dropdown_choice" id="revise_folder"+i ></button>
-                                    <button role="menuitem" class="dropdown_choice" id="delete_folder"+i></button>
+                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu();"/>
+                                <div id="dropdown-folder" class="dropdown_folder">
+                                    <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked(i);"></button>
+                                    <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="reviseFolderClicked(i);"></button></div>
                                     
                                 <%} else{ %>
-                                    <img src='media/folder_orange.svg' class='folder_img'/>
+                                    <img src='media/folder/<%= folder[i].folder_color %>.svg' class='folder_img'/>
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
-                                    <img class="folder_button" src="media/three_button.png">
-                                <div id="dropdown-folder"+i class="dropdown_folder" onclick="showFolderMenu(i);">
-                                    <button role="menuitem" class="dropdown_choice" id="revise_folder"+i ></button>
-                                    <button role="menuitem" class="dropdown_choice" id="delete_folder"+i></button>
+                                    <img class="three_button" src="media/three_button.png" onclick="showFolderMenu(i);"/>
+                                <div id="dropdown-folder" class="dropdown_folder">
+                                    <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked(i);"></button>
+                                    <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="deleteFolderClicked(i);"></button></div>
                                     <% } %>
+                                
                                 </div>
+
                                 <% } %>
-                            
+                            </div>  
+                            <script>
+                                var dropdown_toggle=1;
+                            function showFolderMenu(index){
+                                //나중에 index로 받아서 처리하기
+                                var dropdown=document.getElementsByClassName('dropdown_folder')[index];
+                                console.log(index,dropdown);
+                                $(`#dropdown-folder${index}`).show();
+                                
+                                $(`#revise_folder${index}`).text("수정하기");
+                                $(`#revise_folder${index}`).show();
+                                $(`#delete_folder${index}`).text("삭제하기");
+                                $(`#delete_folder${index}`).show();
+                                    
+                                // dropdown.setAttribute('data-value','open')
+                                // var value=dropdown.getAttribute('data-value');
+                                // console.log("지금 클릭된 것의 index:"+index+", value="+value);
+                            }
+                            </script> 
                             <!-- <div id="folder_0" class="folder">
                                 <img src="media/plus_folder_yellow.png" class="folder_img"/>
                                 <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
@@ -436,23 +456,6 @@
                             </script> -->
                         <!-- </div> -->
 
-                        <script>
-                    function showPostMenu(index){
-                    //나중에 index로 받아서 처리하기
-                    var dropdown=document.getElementsByClassName('dropdown_content')[index];
-
-                    $(`#dropdown-content${index}`).show();
-                    
-                    $(`#revise_post${index}`).text("수정하기");
-                    $(`#revise_post${index}`).show();
-                    $(`#delete_post${index}`).text("삭제하기");
-                    $(`#delete_post${index}`).show();
-
-                    dropdown.setAttribute('data-value','open')
-                    var value=dropdown.getAttribute('data-value');
-                    console.log("지금 클릭된 것의 index:"+index+", value="+value);
-                }
-                            </script>
 
                         <div id="folder_plus">
                             <img src="media/plus_folder_gray.png"/><p>추가하기</p>
@@ -500,8 +503,9 @@
                                     console.info(activeUser.folder)
                                 }
                             </script> -->
-                    </div>
+
                 </div>
+            </div>
             </div>
             <div id="MAIN_RIGHT" class="column_right">
                 <div class="aside">
@@ -515,7 +519,7 @@
                             <label><input type="checkbox" class="checkbox"><p class="p_p">채플 듣기</p></label>
                             <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> -->
                             
-                            <div class="todaylists">
+                            <div class="todaylists" id='todaylists'>
                                 <!-- todolist 뿌려주기 -->
                             <% for(var i=0;i<todolist.length; i++) { %>
                             
@@ -728,6 +732,7 @@
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
+        //var new_todo_id=todolist._id;
         if(new_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else{
@@ -740,17 +745,44 @@
                     todo_finished:false
                 },
                 success:function(data){
-                    //console.log(data);
-                    //var div_class='wrap_label';
-                    //var label_class='label';
-                    //var checkbox_name='checkbox';
-                    //동적 추가를 위해서 
+                    //console.log(new_todo_id);
+                    console.log()
+                    addNewTodo(new_content);
                 },error:function(err){
                     console.log('todo 저장 실패');
                 }
             })
         }
     });
+
+    function addNewTodo(new_content){
+        var content=new_content;
+        var parent_todolist=document.getElementById('todaylists');
+        
+        var new_div=document.createElement('div');
+        new_div.setAttribute('class','wrap_label');
+        var new_label=document.createElement('label');
+        new_label.setAttribute('class','label');
+        var new_checkbox=document.createElement('input');
+        new_checkbox.setAttribute('type','checkbox');
+        new_checkbox.setAttribute('name','checkbox');
+        new_checkbox.setAttribute('class','class');
+        //new_checkbox.setAttribute('onclick','onCheckedHandler('+todo_id+')')
+        // 이 값을 함수 호출하는 곳에서 가져와야 함...
+        var new_p=document.createElement('p');
+        new_p.setAttribute('class','p_p');
+        new_p.innerHTML=content;
+        var new_span=document.createElement('span');
+        new_span.setAttribute('class','delete_todo');
+        //new_span.setAttribute('onclick','onDeleteTodo('+todo_id+')')
+        new_span.innerHTML='&times;'
+
+        parent_todolist.append(new_div);
+        new_div.append(new_label);
+        new_label.append(new_checkbox);
+        new_label.append(new_p);
+        new_div.append(new_span);
+    }
 
     $('.modal-folder-plus').click(function(event){
         //추가되면 mongodb에 저장되도록
@@ -780,8 +812,7 @@
     
     </script>
     </div>
-        
-    </div>
+
     </div>
 </body>
 
