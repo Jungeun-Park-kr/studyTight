@@ -18,16 +18,16 @@ router.use((req, res, next) => {
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-        const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+        const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id').sort({'createdAt':-1});
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
         //const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         //삭제 성공!
-        await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
+        //await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
         //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
-        await Todo.updateMany({user_id:res.locals.user._id, todo_finished:false, register_date:getCurrentDate()})
+        //await Todo.updateMany({user_id:res.locals.user._id, todo_finished:false, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         
         //남은 애들은 register_date를 하나 추가하기

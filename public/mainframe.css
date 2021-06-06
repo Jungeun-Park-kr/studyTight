@@ -434,7 +434,7 @@ html, body {
 .three_button{
     position:relative;
     z-index:1;
-    margin-top:-107px;
+    margin-top:-69%;
     width:15px;
     float:right;
     opacity:0;
