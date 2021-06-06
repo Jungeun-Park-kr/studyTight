@@ -25,9 +25,9 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
         //삭제 성공!
-        //await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
+        await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
         //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
-        //await Todo.updateMany({user_id:res.locals.user._id, todo_finished:false, register_date:getCurrentDate()})
+        await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         
         //남은 애들은 register_date를 하나 추가하기
@@ -154,8 +154,8 @@ router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 �
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     try {
-        const delete_todoId = req.body.todo_id;
-        await Todo.deleteOne({user_id: res.locals.user._id, _id:delete_todoId});
+        const delete_todoContent = req.body.todo_content;
+        await Todo.deleteOne({user_id: res.locals.user._id, todo_content:delete_todoContent});
         //console.log('삭제된 것의 id는'+ delete_todoId);
         const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.log('남은 것은 이제 '+todo.todo_content);
