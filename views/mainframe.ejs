@@ -768,33 +768,42 @@
         }
     });
 
-    function addNewTodo(todo_content){
+    function addNewTodo(todolist){
     
-        var content=todo_content;
-        //console.log(content);
-        //var id=todolist._id;
-        //console.log(id);
-        //var checked=todolist.todo_finished;
-        //console.log(checked);
+        var content=todolist.todo_content;
 
         var parent_todolist=document.getElementById('todaylists');
         
         var new_div=document.createElement('div');
         new_div.setAttribute('class','wrap_label');
+        var new_input=document.createElement('input');
+        new_input.setAttribute('type','hidden');
+        new_input.setAttribute('value',content);
+        new_input.setAttribute('class','todolist-id')
         var new_label=document.createElement('label');
         new_label.setAttribute('class','label');
         var new_checkbox=document.createElement('input');
         new_checkbox.setAttribute('type','checkbox');
         new_checkbox.setAttribute('name','checkbox');
         new_checkbox.setAttribute('class','class');
-        new_checkbox.setAttribute('onclick','onCheckedHandler('+content+','+false+')')
+        //new_checkbox.setAttribute('onclick','onCheckedHandler('+content+','+false+')')
         // 이 값을 함수 호출하는 곳에서 가져와야 함...
+        new_checkbox.addEventListener('click',function(){
+            var check_content=todolist.todo_content;
+            var check_value=todolist.todo_finished;
+            onCheckedHandler(content,check_value);
+        });
         var new_p=document.createElement('p');
         new_p.setAttribute('class','p_p');
         new_p.innerHTML=content;
         var new_span=document.createElement('span');
         new_span.setAttribute('class','delete_todo');
-        new_span.setAttribute('onclick','onDeleteTodo('+content+')')
+        //new_span.setAttribute('onclick','onDeleteTodo('+content+')')
+        new_span.addEventListener('click',function(){
+            //삭제했을 때 바뀌도록 ... delete함수 사용
+            var delete_content=todolist.todo_content;
+            onDeleteTodo(delete_content);
+        })
         new_span.innerHTML='&times;'
 
         parent_todolist.append(new_div);
@@ -818,7 +827,6 @@
                 url:'/folder',
                 data:{
                     folder_name:new_folder_name,
-                    //folder_fixed:false,
                     folder_color:new_folder_color
                 },
                 success:function(data){

@@ -83,15 +83,12 @@ router.post('/folder',isLoggedIn, async(req,res,next) => {
         folder_fixed:false
     });
 
-    res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todolist, timetable:timetable, folder:folder}
-    );
+    // res.render('../views/mainframe.ejs',
+    //     { title : 'study Tight', todolist:todolist, timetable:timetable, folder:folder}
+    // );
 
-    //로그인 된 유저 : console.log('로그인:'+req.user.email);
-    // console.log(todo.length);
-    // res.redirect('/')
-    
-    //res.send(todo);
+    res.send(folder);
+
 }catch(err){
     next(err);
 }
@@ -112,15 +109,16 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
         todo_finished:false
     });
 
-    res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder}
-    );
+    res.send({
+        _id:todo._id,
+        user_id: req.user._id,
+        todo_content: todo.todo_content,
+        todo_finished: todo.todo_finished
+    });
+    // res.render('../views/mainframe.ejs',
+    //     { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder}
+    // );
 
-    //로그인 된 유저 : console.log('로그인:'+req.user.email);
-    // console.log(todo.length);
-    // res.redirect('/')
-    
-    //res.send(todo);
 }catch(err){
     next(err);
 }
