@@ -286,7 +286,8 @@
                 ncell6.addEventListener('click', function() { //삭제 버튼 리스너 추가
                     var title = course.course_name; //과목 이름 가져오기
                     var id = course._id;
-                    //console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
+                    // console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
+                    var rowindex = $(this).closest("tr").index();
                     var ret = confirm("정말로 삭제하시겠습니까?");
                     if (ret) { //삭제 수행
                         $.ajax({
@@ -297,13 +298,13 @@
                             // location.href='/timetable/edit'
                             if (data == 'delete_succeeded') { // 삭제한 칸 삭제
                                 var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
-                                var rowindex = $(this).closest("tr").index();
-                                //console.log(rowindex);
                                 tbody.deleteRow(rowindex);
+                            } else {
+                                alert('과목 삭제를 실패했습니다.\n페이지 새로고침 후 다시 시도해주세요.');
                             }
                         },
                         error : function(err) {
-                            alert('과목 삭제를 실패했습니다. \n다시 시도해주세요.');
+                            alert('과목 삭제를 실패했습니다. \n페이지 새로고침 후 다시 시도해주세요.');
                         }});
                         /* var parent = document.getElementById('course_table_body');
                         deleteCourse(title);
@@ -331,6 +332,7 @@
                         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
                         var id = $(this).next().val();
                         //console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
+                        var rowindex = $(this).closest("tr").index();
                         var ret = confirm("정말로 삭제하시겠습니까?");
                         if (ret) { //삭제 수행
                             $.ajax({
@@ -341,8 +343,6 @@
                                 // location.href='/timetable/edit'
                                 if (data == 'delete_succeeded') { // 삭제한 테이블의 행 삭제
                                     var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
-                                    var rowindex = $(this).closest("tr").index();
-                                    //console.log(rowindex);
                                     tbody.deleteRow(rowindex);
                                 }
                             },
@@ -504,8 +504,12 @@
                                     target : num, // 삭제 버튼 을 위해 num 함께 저장
                                 },
                                 success:function( data ){ // POST요청 성공한 경우
-                                    if (data.message === '/course/time/add?error=exist') {
-                                        alert("'"+data.course+"' 수업과 시간이 겹칩니다.")
+                                    if (data.message === '/course/time/add?error=exist') { 
+                                        if (data.course === 'this') // 기존에 추가한 과목과 겹칠 경우
+                                            alert("이미 추가한 강의 일정과 시간이 겹칩니다.");
+                                        else //지금 추가중인 과목의 시간과 겹칠 경우
+                                            alert("'"+data.course+"' 수업과 시간이 겹칩니다.");    
+                                        
                                     } else { // 시간 목록 띄우기
                                         $('.course_times').append('<p id="course_time'+num+'"> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp;</p>  <span class="time_sub_button" id="time_sub_button'+num+'">-</span><input class="time" type="hidden" value="'+num+'"/><br id="time_br'+num+'">');
                                         // $('#course_add_form').after('<input class="time" type="hidden" value='+num+'/> <p id="course_time'+num+'> '+data.type+', '+data.day+', '+data.stime+' ~ '+data.etime+'&emsp; </p><span class="time_sub_button" id="time_sub_button'+num+'>-&nbsp;</span>');
@@ -557,8 +561,13 @@
                     }
                 });
 
+                $('#course_save').bind('click', function() {
+                    saveCourse(this);
+                });
 
-                $('#course_save').click(function (event) {
+                var saveCourse = function(event) {
+                    $('#course_save').unbind('click');
+
                     var name = $('#course_title').val();
                     var professor = $('#course_professor').val();
                     if (name.trim() === '') {
@@ -577,20 +586,31 @@
                             professor : professor
                         },
                         success:function(data){ // POST요청 성공한 경우
-                            
-                            //console.log('과목 추가 성공');
-                            toggleModal();
-                            getCourse(data); // 동적으로 추가
+                            // 버튼 더이상 클릭되지 않게 하기
+                            //$(this).attr('disabled', true); // 안됨
+                            $('#course_save').bind('click', function() {
+                                saveCourse(this);
+                            });
+
+                            // 입력된 정보들 지우기
+                            $('#course_title').val('');
+                            $('#course_professor').val('');
                             // 모달에 있던 시간 리스트 삭제
                             $('.course_times').children().remove();
+
+                            toggleModal();
+                            getCourse(data); // 동적으로 추가
+                            
                         },
                         error: function(err) { // POST 요청 실패시
                             console.log('과목 추가 실패' + err);
+                            alert('과목 추가를 실패했습니다. 다시 시도해주세요.');
+                            toggleModal();
                         }
                         });
                     }
                     
-                });
+                };
 
                 $("input:radio[name=course_type_modify]").click(function () {
                 // getter (선택된 강의종류 가져오기)
@@ -687,8 +707,13 @@
                     }
                 });
 
+                $('#course_modify').bind('click', function() {
+                    modifyCourse(this);
+                });
 
-                $('#course_modify').click(function (event) {
+                var modifyCourse = function(event) {
+                    $('#course_modify').unbind('click');
+
                     var name = $('#course_title_modify').val();
                     var professor = $('#course_professor_modify').val();
                     if (name.trim() === '') {
@@ -708,16 +733,21 @@
                             id : modify_id // 수정할 과목의 _id
                         },
                         success:function(data){ // PUT 요청 성공한 경우
+                            // 수정하기 버튼 2번 이상 클릭되지 않도록 bind
+                            $('#course_modify').bind('click', function() {
+                                modifyCourse(this);
+                            });
                             toggleModifyModal();
                             location.href = '/timetable/edit';
                         },
                         error: function(err) { // PUT 요청 실패시
                             console.log('과목 수정 실패' + err);
+                            alert('과목 수정을 실패했습니다.\n다시 시도해주세요.');
                         }
                         });
                     }
                     
-                });
+                };
                 
 
             });
