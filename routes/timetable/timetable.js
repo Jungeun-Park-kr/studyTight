@@ -2,7 +2,6 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
-const course = require('../../models/course');
 const router = express.Router();
 
 var timeList = new Array();
@@ -57,7 +56,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
 
     try {
         //console.log('현재 로그인:'+res.locals.user.email);
-        const timetable = await Course.find({user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
+        const timetable = await Course.find( {user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
         // console.log('---------------------로그인된사람의시간표---------------------');
         // console.info(timetable);
         res.render( '../views/timetable/timetable_main.ejs', {
@@ -108,16 +107,25 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
             classroom : classroom, // 링크or강의실
             target : target // 삭제할 애의 num
         }
-        // 시간 중복 확인
+        // 시간 중복 확인 in DB
         const checkCourse = await Course.find({user_id: res.locals.user._id}).populate('schedules');
         if (checkCourse != null) {
             for (var i = 0; i < checkCourse.length; i++) {
                 var course = checkCourse[i];
                 for (var j=0; j<course.schedules.length; j++) {
                     var schedule = course.schedules[j];
-                    if ((schedule.day === day) && (stime <= schedule.end_time || etime <= schedule.start_time )) {
+                    if ((schedule.day === day) && (stime <= schedule.start_time && schedule.start_time <= etime)) {
                         return res.send( {message : '/course/time/add?error=exist', course : course.course_name });
                     }
+                    
+                }
+            }
+        }
+        // 시간 중복 확인 in timeList
+        if (timeList.length > 0) {
+            for(var i = 0; i < timeList.length; i++) {
+                if ((timeList[i].day === day) && (stime <= timeList[i].stime && timeList[i].stime <= etime)) {
+                    return res.send( {message : '/course/time/add?error=exist', course : 'this' });
                 }
             }
         }

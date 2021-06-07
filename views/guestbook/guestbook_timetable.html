@@ -86,10 +86,7 @@
             <div class="timetable_wrap">
             <!-- 여기는 본문 들어갈 메인 섹션 -->
             <div class="page-header" role="banner" class>
-                <div class="timetable_title"><%=user.name%>의 시간표 </div>
-                <div class="edit_btn">
-                    <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표 관리" onclick="location.href='/timetable/edit'"></input>
-                </div>
+                <div class="timetable_title"><%=방명록주인.name%>의 시간표 </div>
                 <p style="clear:both;">&nbsp;</p>
             </div>
             <div class="timetable_section">
@@ -465,7 +462,7 @@
         for (var i=0; i<timetable.length; i++) {
             var tmp = timetable[i];
             //console.log(tmp.title, tmp.time);
-            showCourse(tmp.course_name, tmp.schedules, i); //제목, 시간리스트로 시간표에 출력하기
+            showCourse(tmp.course_name, tmp.schedules); //제목, 시간리스트로 시간표에 출력하기
         }
 
         function numToDay(day) {
@@ -485,11 +482,11 @@
             }
         }
 
-        function showCourse(title, timelist, number) {
+        function showCourse(title, timelist) {
             //입력받은 정보로 시간표 출력하기
             var tdid, st, et, sh, sm, eh, em;
             var color, tmpvar;
-            color = getColor(number%4);
+            color = getColor();
             for(var i=0; i<timelist.length; i++) {
                 tmptime = timelist[i];
                 //요일 및 색깔지정
@@ -590,10 +587,12 @@
                     return "palevioletred";
             }
         }
-        function getColor(num) {
-            // var rand = Math.random();
-            // rand = Math.floor(rand*5);
-            switch(num) {
+        function getColor() {
+            // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
+            // return color;
+            var rand = Math.random();
+            rand = Math.floor(rand*5);
+            switch(rand) {
                 case 0:
                     return "#f29b34";
                 case 1:
