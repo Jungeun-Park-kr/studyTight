@@ -327,7 +327,7 @@
                                     
                                 <%} else{ %>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
-                                    <p class='main_folder_name'><%= folder[i].folder_name %></p>
+                                    <p class='main_folder_name' onclick="location.href='/folder'"><%= folder[i].folder_name %></p>
                                     <img class="three_button" src="/media/three_button.png" onclick="showFolderMenu('<%= i %>');"/>
                                 <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
@@ -341,15 +341,16 @@
                             <script>
                                 var dropdown_toggle=1;
                             function showFolderMenu(index){
+                                console.log(index);
                                 // console.log(index);
                                 // var new_index=parseInt(index);
                                 // console.log(new_index);
                                 //나중에 index로 받아서 처리하기
                                 var dropdown=document.getElementsByClassName('dropdown_folder')[index];
-                                var revise_button=document.getElementById('drop')[index];
-                                var delete_button=document.getElementById('delete_folder')[index];
-
-                                dropdown.style.display='inline-block';
+                                document.getElementsByClassName('dropdown_folder')[index].style.display='block';
+                                //var revise_button=document.getElementById('drop')[index];
+                                //var delete_button=document.getElementById('delete_folder')[index];
+                                //dropdown.style.display='inline-block';
                                 
                                 console.log('보여라 얍');
 
@@ -533,6 +534,11 @@
                             
                             <div class="todaylists" id='todaylists'>
                                 <!-- todolist 뿌려주기 -->
+                                <!-- <script>
+                                    $(document).ready(function(){
+                                        var todolist=JSON.parse('<%- JSON.stringify(todolist) %>')
+                                    })
+                                </script> -->
                             <% for(var i=0;i<todolist.length; i++) { %>
                             
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
@@ -551,6 +557,7 @@
                         </div>
                         
                         <script>
+                        
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
                             function onCheckedHandler(todo_content, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
@@ -615,6 +622,7 @@
                                     });
                                     alert(todo_content+'이(가) 오늘 할 일에서 삭제되었습니다.');
                             }
+                        
                         </script>
 
                         
@@ -697,6 +705,7 @@
         </div>
     </div>
 
+
     <script type='text/javascript'>
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
@@ -759,14 +768,17 @@
                 },
         
                 success:function(data){
-    
-                    addNewTodo(new_content);
+                    var new_todo = {
+                        todo_content : new_content,
+                        todo_finished : false
+                    }
+                    addNewTodo(new_todo);
                 },error:function(err){
                     console.log('todo 저장 실패');
                 }
-            })
+            });
         }
-    });
+    })
 
     function addNewTodo(todolist){
     
@@ -837,7 +849,6 @@
             })
         }
     });
-    
     </script>
     </div>
 

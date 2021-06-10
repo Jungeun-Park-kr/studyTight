@@ -608,10 +608,10 @@ textarea{
     border: 1px solid #ebebeb;
     border-bottom-color: #e2e2e2;
     border-radius: .25em;
-  }
-  
+}
+
   /* named upload */
-  .filebox .upload-name {
+.filebox .upload-name {
     display: inline-block;
     /* padding: .5em .75em;  label의 패딩값과 일치 */
     font-size: 11px;
