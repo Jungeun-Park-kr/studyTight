@@ -58,6 +58,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
             timetable : timetable,
             folder : folder
         });
+        //res.send(todolist);
     }
     catch (err) {
         console.error('routes/index.js 에서 에러');
