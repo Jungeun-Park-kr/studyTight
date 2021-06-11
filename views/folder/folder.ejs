@@ -16,7 +16,7 @@
     });
     </script>
 <script src="new_folder.js"></script>
-<style>@import url(new_folder.css);</style>
+<style>@import url(/public/folder/folder.css);</style>
 </head>
 
 <body>
@@ -28,11 +28,11 @@
             <div id="MAIN_LEFT">
                 <div class="section">
                     <p class="folder_name">
-                        study Tight!
+                        <%=title%>
                     </p>
                     
                     <div id="wrap_postit" class="wrap_postit">
-                    <div  id="postIt_0" class="postIt">
+                    <!-- <div  id="postIt_0" class="postIt">
                         <img id="wow"class="post_img" src="media/Post_yellow.png"><p class="post">pid란?</p>
                         <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
                         <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
@@ -77,7 +77,7 @@
                             <button role="menuitem" class="dropdown_choice" id="revise_post4" onclick="revisePostClicked(4);"></button>
                             <button role="menuitem" class="dropdown_choice" id="delete_post4" onclick="deletePostClicked(4);"></button>
                             </div>
-                    </div>
+                    </div> -->
                     <script>
                         var star=document.getElementsByClassName('fixed_star');
 for(i=0;i<star.length;i++){
@@ -247,10 +247,10 @@ for(i=0;i<star.length;i++){
                     <p class="wrap_Todolist">오늘 할 일</p>
                     
                     <div class="Todolist" id="Todolist">
-                        <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
+                        <!-- <label><input type="checkbox"><p>웹프로그래밍 수업 듣기</p></label>
                         <label><input type="checkbox"><p>DB 강의 듣기</p></label>
                         <label><input type="checkbox"><p>채플 듣기</p></label>
-                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label>
+                        <label><input type="checkbox"><p>OS 보고서 쓰기</p></label> -->
                     </div>
                     <!--<input type="button" class="btnplusTodo" value="추가하기"></input>--> <!--+부분 이미지로 넣기-->
                         <a data-toggle="modal" href="#plusTodoModal" class="plusTodoBtn" id="openTodoBtn">오늘 할 일 추가하기</a>

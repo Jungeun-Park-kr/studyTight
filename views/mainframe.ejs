@@ -327,7 +327,7 @@
                                     
                                 <%} else{ %>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
-                                    <p class='main_folder_name' onclick="location.href='/folder'"><%= folder[i].folder_name %></p>
+                                    <p class='main_folder_name' onclick="location.href='/folder/?folder=<%=folder[i].folder_name %>'"><%= folder[i].folder_name %></p>
                                     <img class="three_button" src="/media/three_button.png" onclick="showFolderMenu('<%= i %>');"/>
                                 <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
