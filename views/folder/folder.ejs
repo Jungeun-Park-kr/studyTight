@@ -23,12 +23,11 @@
     <div id="wrap">
             <!-- <div id="header">
             </div>  -->
-            
         <div id="container">
             <div id="MAIN_LEFT">
                 <div class="section">
                     <p class="folder_name">
-                        <%=title%>
+                        <%= folder_title%>
                     </p>
                     
                     <div id="wrap_postit" class="wrap_postit">
@@ -170,16 +169,25 @@ for(i=0;i<star.length;i++){
             <h4 class="modal-title">글 작성하기</h4>
             </div><div class="container-content"></div>
             <div class="modal-body">
-                <form action='' method='POST'>
                 <p>제목</p>
                 <input type="text" id="input_content_title" name="title" class="input_text" placeholder="제목을 입력하세요">
                 <br>
                 <br>
                 <p>내용</p>
                 <textarea id="input_content" name="content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
-            </form>
             </div>
             <div class="modal-footer">
+                <div class="content_color_wrap" value="포스트잇의 색을 선택하세요.">
+                    <select id="content_color" name="content_color"> 
+                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+
+                
+                    </select>
+                </div>
             <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked();">취소</a>
             <a href="#" class="btn uploadBtn" onclick="uploadContent();">완료</a>
             </div>
@@ -187,6 +195,41 @@ for(i=0;i<star.length;i++){
         </div>
     </div>
     
+    <script>
+        function uploadContent(){
+            const folder_name=JSON.parse('<%- JSON.stringify(folder_title) %>');
+            console.log(folder_name);
+            const title=$('#input_content_title').val();
+            const content=$('#input_content').val();
+            const color=$('#content_color option:selected').val();
+            if(title.trim()==''){
+                alert("제목을 입력해주세요.");
+            }else if(content.trim()==''){
+                alert("내용을 입력해주세요.");
+            }else{
+                var new_post;
+                $.ajax({
+                    type:'POST',
+                    async:true,
+                    url:'/add',
+                    data:{
+                        folder_name:folder_name,
+                        postIt_name:title,
+                        postIt_type:content,
+                        postIt_star:false,
+                        postIt_color:color
+
+                    },
+                    success:function(data){
+                        console.log('포스트잇 글 저장 완료');
+                    },error:function(err){
+                        console.log('포스트잇 글 저장 실패');
+                    }
+                })
+            }
+        }
+    </script>
+
     <div class="modal" id="choice_link" data-backdrop="static">
         <div class="modal-dialog modal-writing2">
         <div class="modal-content writing-inside2">
@@ -321,6 +364,12 @@ for(i=0;i<star.length;i++){
                 </div>
 
     </div>
+
+    <script>
+        function cancelClicked(){
+            alert("포스트잇 작성이 취소되었습니다.");
+        }
+    </script>
 
         <!-- 종류 선택하기 -->
     <!-- <div id="modal" class="modal_postIt">

@@ -13,7 +13,7 @@ const folder_schema=new Schema({
     folder_name:{type:String, unique:true, required:true}, //중복된 내용이 들어가지 않도록
     folder_fixed:{type:Boolean, required:true},
     folder_color:{type:String, required:true},
-    postIts: [{type:ObjectId, ref:'Postit'}]
+    postIt_name: [{type:String, ref:'PostIt'}]
 });
 
 module.exports = mongoose.model('Folder',folder_schema);
