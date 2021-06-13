@@ -139,7 +139,7 @@ html, body {
     vertical-align: middle;
     font-size:12px;
     font-family: 'Open Sans' !important;
-
+    padding-left : 10px;
 }
 .d-date {
     /* 세로 정렬 필요 */
