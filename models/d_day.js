@@ -8,8 +8,8 @@ const day_schema=new Schema({
         ref: 'User'
     }, 
     dday_content:{type:String, unique:true, required:true},
-    final_date:{type:Date, required:true}, //선택한 날짜
-    start_date:{type:Date, required:true} //오늘 날짜
+    final_date:{type:String, required:true}, //선택한 날짜
+    start_date:{type:String, required:true} //오늘 날짜
 });
 
 module.exports = mongoose.model('D_Day',day_schema); 

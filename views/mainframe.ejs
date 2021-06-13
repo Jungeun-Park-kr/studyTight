@@ -236,77 +236,43 @@
                 <div class="section">
                     <!-- 여기는 본문 들어갈 메인 섹션 -->
                     <div class="D-day" id="D-day">
-                        <!-- 디데이 설정한 부분 -->
-                        <div class="d-day" id="d-day0"><span class="d-date" id="d-date0">D-100</span>완투쓰리포오육칠
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(0);">
-                            <div id="dropdown-day0" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day0" onclick="reviseDayClicked(0);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day0" onclick="deleteDayClicked(0);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day1"><span class="d-date" id="d-date1">D-2</span>유세인트 학인하기
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(1);">
-                            <div id="dropdown-day1" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day1" onclick="reviseDayClicked(1);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day1" onclick="deleteDayClicked(1);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day2"><span class="d-date" id="d-date2" >D-3</span>보고서 제출하기
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(2);">
-                            <div id="dropdown-day2" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day2" onclick="reviseDayClicked(2);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day2" onclick="deleteDayClicked(2);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day3"><span class="d-date" id="d-date3" >D-4</span>책 찾아보기
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(3);">
-                            <div id="dropdown-day3" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day3" onclick="reviseDayClicked(3);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day3" onclick="deleteDayClicked(3);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day4"><span class="d-date" id="d-date4" >D-5</span>예제 찾아보기
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(4);">
-                            <div id="dropdown-day4" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day4" onclick="reviseDayClicked(4);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day4" onclick="deleteDayClicked(4);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day5"><span class="d-date" id="d-date5" >D-6</span>문제 풀기
-                            <img class="day_button" src="media/three_button.png" onclick="showDayMenu(5);">
-                            <div id="dropdown-day5" class="dropdown_day">
-                            <button role="menuitem" class="dropdown_choice" id="revise_day5" onclick="reviseDayClicked(5);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_day5" onclick="deleteDayClicked(5);"></button>
-                            </div></div>
-                        <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
-                        <!-- <script>
-                            var username = localStorage.getItem('username');
-                            activeUser = getActiveUser(username);
-        
+                        <script>
                             var parentDiv = document.getElementById("D-day")
-        
-                            var d_daylist = activeUser.d_day;
+                            var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
+                            
                             for (var i = 0; i < d_daylist.length; i++) {
                                 var show_day = document.createElement("div");
                                 var show_content = document.createElement("span");
                                 show_day.setAttribute("class", "d-day")
                                 show_content.setAttribute("class", "d-date")
                                 var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
-                                show_content.innerHTML = tmp.content
+                                show_content.innerHTML = tmp.dday_content
         
-                                show_day.innerHTML="D-"+tmp.day //현재 날짜
+                                // 디데이 계산하기
+                                var date1 = new Date(tmp.start_date);
+                                var date2 = new Date(tmp.final_date);
+                                var gap = date2.getTime() - date1.getTime();
+                                var ddayResult = Math.ceil(gap/(1000*60*60*24));
+
+
+                                show_day.innerHTML="D-"+ddayResult
                                 //show_day.innerHTML = "D-" + --tmp.day;
         
                                 show_day.appendChild(show_content)
-                                parentDiv.appendChild(show_day)
+                                parentDiv.appendChild(show_day);
                                 show_day.style.fontWeight = "bold"
                                 show_content.style.color = "black"
-                                if (tmp.day < '4') {
+                                if (ddayResult < '4') {
                                     show_day.style.color = "red"
         
-                                } else if (tmp.day < '8') {
+                                } else if (ddayResult < '8') {
                                     show_day.style.color = "blue"
                                 } else {
                                     show_day.style.color = "black"
                                 }
                             }
-                        </script> -->
-                    
+                        </script>
+                        <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
                     </div>
         
                     <div class="folder_">
@@ -711,13 +677,13 @@
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
     var modal_folder=document.querySelector('.modal_folder')
     var trigger_todo=document.querySelector(".btnplusTodo"); //todo 추가하기 버튼
-    var trigger_day = document.querySelector("#d-day-plus"); // d-day 추가하기 버튼
+    var trigger_day = document.querySelector("#d-day-plus"); // 새로운 d-day 추가하기 버튼
     var trigger_folder=document.querySelector('#folder_plus');
     var closeTodoButton=document.querySelector('.close_todo_button');
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
     var closeFolderButton=document.querySelector('.close_folder_button');
     var storeTodoButton=document.querySelector('.modal-todo-plus');
-    var storeDayButton=document.querySelector('.modal-d-plus');
+    // var storeDayButton=document.querySelector('.modal-d-plus');
     var storeFolderButton=document.querySelector('.modal-folder-plus');
 
     function toggleDayModal() {
@@ -740,16 +706,16 @@
             toggleFolderModal();
         }
     }
-    trigger_day.addEventListener("click", toggleDayModal);
+    trigger_day.addEventListener("click", toggleDayModal); // 디데이 추가하기 버튼
     trigger_todo.addEventListener("click",toggleTodoModal);
     trigger_folder.addEventListener('click',toggleFolderModal);
     closeDayButton.addEventListener("click", toggleDayModal);
     closeTodoButton.addEventListener('click',toggleTodoModal);
     closeFolderButton.addEventListener('click',toggleFolderModal);
-    storeDayButton.addEventListener('click',toggleDayModal);
+    // storeDayButton.addEventListener('click',toggleDayModal);
     storeTodoButton.addEventListener('click',toggleTodoModal);
     storeFolderButton.addEventListener('click',toggleFolderModal);
-    window.addEventListener("click", windowOnClick);
+    //window.addEventListener("click", windowOnClick);
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
@@ -848,6 +814,108 @@
                 }
             })
         }
+    });
+
+
+    // 디데이 동적으로 추가
+    $(document).ready(function () {
+
+        $('.modal-d-plus').bind('click', function() {
+            saveDday(this);
+        });
+
+        var saveDday = function(event) { // 디데이 저장하기 버튼
+            $('.modal-d-plus').unbind('click');
+
+            var date = $('#modal-d-date').val();
+            var content = $('#modal-d-content').val();
+            console.log('날짜: ',date);
+            console.log('내용: ',content);
+            
+            // 오늘 날짜
+            var today = new Date();
+            var curyear = today.getFullYear();
+            var curmon = today.getMonth()+1;
+            if (curmon < 10) {
+                curmon = '0'+curmon;
+            }
+            var curdate = today.getDate();
+            var todayDate = curyear+'-'+curmon+'-'+curdate;
+            console.log('오늘:', todayDate);
+
+            if (date.trim() === '') {
+                alert('디데이 마감 날짜를 선택해주세요.');
+            } else if (content.trim() === '') {
+                alert('디데이 내용을 입력해주세요.');
+            } else if (new Date(date) < new Date(todayDate)) { // 오늘 날짜 이전이면 에러 처리
+                alert('디데이 날짜는 금일('+todayDate+') 보다 이전일 수 없습니다.');
+            } else { // 저장하기
+                $.ajax({
+                    type:"POST",
+                    async : true,
+                    url:'/d-day',
+                    data : {
+                        date : date,
+                        content : content,
+                        today : todayDate,
+                    },
+                    success:function(data){ // POST요청 성공한 경우
+                        
+                        // 버튼 더이상 클릭되지 않게 하기
+                        $('.modal-d-plus').bind('click', function() {
+                            saveDday(this);
+                        });
+                        // 입력된 정보들 지우기
+                        $('#modal-d-date').val('');
+                        $('#modal-d-content').val('');
+
+
+                        toggleDayModal(); // 모달 닫기
+
+                        // 동적으로 추가
+                        // in here d-day-plus
+                        var show_day = document.createElement("div");
+                        var show_content = document.createElement("span");
+                        show_day.setAttribute("class", "d-day")
+                        show_content.setAttribute("class", "d-date")
+                        var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
+                        show_content.innerHTML = content;
+
+                        // 디데이 계산하기
+                        var date1 = new Date(today);
+                        var date2 = new Date(date);
+                        var gap = date2.getTime() - date1.getTime();
+                        var ddayResult = Math.ceil(gap/(1000*60*60*24));
+
+
+                        show_day.innerHTML="D-"+ddayResult
+
+                        show_day.appendChild(show_content);
+                        parentDiv.prepend(show_day);
+                        show_day.style.fontWeight = "bold"
+                        show_content.style.color = "black"
+                        if (ddayResult < '4') {
+                            show_day.style.color = "red"
+
+                        } else if (ddayResult < '8') {
+                            show_day.style.color = "blue"
+                        } else {
+                            show_day.style.color = "black"
+                        }
+                    },
+                    error: function(err) { // POST 요청 실패시
+                        console.log('디데이 추가 실패' + err);
+                        alert('디데이 추가를 실패했습니다. 다시 시도해주세요.');
+                        toggleDayModal(); 
+                    }
+                });
+                
+                
+            }
+
+
+        };
+
     });
     </script>
     </div>

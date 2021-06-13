@@ -32,6 +32,7 @@ const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 const todoRouter=require('./routes/todo');
 const folderRouter=require('./routes/folder');
+const DdayRouter = require('./routes/d-day'); // D-day 라우터
 
 connect(); // mongoDB connection start
 app.use(cors());
@@ -64,7 +65,9 @@ app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
 app.use('/folder',folderRouter);
+app.use('/d-day', DdayRouter);
 // app.use('/todo',todoRouter);
+
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
