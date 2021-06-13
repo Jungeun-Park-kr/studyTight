@@ -4,6 +4,7 @@ const router = express.Router();
 const Todo=require('../models/todo_list');
 const Course = require('../models/course');
 const Folder=require('../models/folder');
+const Dday = require('../models/d_day');
 
 var objectId=require('mongodb').ObjectID; 
 //Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
@@ -29,13 +30,16 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
         await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
-        
+
+        const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+
         //남은 애들은 register_date를 하나 추가하기
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist : todolist,
             timetable : timetable,
-            folder : folder
+            folder : folder,
+            d_day : dDay,
         });
     }
     catch (err) {
@@ -177,6 +181,28 @@ router.get('/', isNotLoggedIn, (req, res) => {
         next(err);
     }
 })
+
+router.post('/d-day',isLoggedIn, async(req, res, next) => {
+    console.log('post 요청옴 in index', req.body);
+    const {date, content, today} = req.body;
+
+    try {
+        // mongoDB에 과목 추가
+        const dday = await Dday.create({
+            user_id : req.user._id,
+            dday_content : content,
+            final_date : date,
+            start_date : today,
+        });
+        console.log(dday);
+        res.send('success');
+
+    } catch(err) {
+        next(err);
+    }
+    
+});
+
 
 function getCurrentDate(){
     var date = new Date();
