@@ -99,11 +99,29 @@ body {
     color:black;
 }
 /* 여기부터 오늘 할 일 */
- .wrap_Todolist{
-    text-align:center;
-    width:100%;
-    font-size:13px;
+.aside_wrap {
+    margin-left:40px;
+    width: 210px;
+}
 
+.aside  {
+    background-color:white;
+    width: 210px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size:large;
+    align-items: center;
+}
+
+.aside_wrap > p {
+    margin: 10px 0px;
+    font-size:13px;
+    font-weight: bolder;
+}
+.todaylists > label > input,p {
+    display: inline-block;
+    font-size:11px;
 }
 
 label > input {
@@ -124,7 +142,7 @@ label{
     text-align: left;
     
 }
-.Todolist{
+.todaylists{
     width:100%;
     margin:0 auto;
     background-color:white;
@@ -135,9 +153,9 @@ label{
     background-color:#6ED4D8;
     display:table-cell;
     vertical-align: middle;
-    margin-bottom:10px;
-    width:250px;
-    height:40px;
+    width: 100%;
+    margin-bottom : 5px;
+    height:30px;
     border:10px;
     cursor: pointer;
 }

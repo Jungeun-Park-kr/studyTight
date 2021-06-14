@@ -31,7 +31,9 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
+        
         const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+        //await dDay.deleteMany({user_id:res.locals.user._id, final_date:});
 
         //남은 애들은 register_date를 하나 추가하기
         res.render('../views/mainframe.ejs', {
@@ -71,7 +73,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
     }
 });
 
-router.post('/folder',isLoggedIn, async(req,res,next) => {
+router.post('/folder_add',isLoggedIn, async(req,res,next) => {
     var folder_name=req.body.folder_name;
     var folder_color=req.body.folder_color;
     const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');

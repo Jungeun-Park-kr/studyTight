@@ -31,7 +31,7 @@ const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라우터
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 const todoRouter=require('./routes/todo');
-const folderRouter=require('./routes/folder');
+const folderRouter=require('./routes/folder/folder');
 const DdayRouter = require('./routes/d-day'); // D-day 라우터
 
 connect(); // mongoDB connection start
