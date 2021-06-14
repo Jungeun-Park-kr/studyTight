@@ -1,10 +1,11 @@
 const express = require('express');
-const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
-const Folder = require('../models/folder');
-const PostIt = require('../models/postit');
-const Todo=require('../models/todo_list');
+const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
+const Folder = require('../../models/folder');
+const PostIt = require('../../models/postit');
+const Todo=require('../../models/todo_list');
 const router = express.Router();
 const url=require('url');
+const { urlencoded } = require('body-parser');
 //const path=require('path');
 
 router.use((req, res, next) => {
@@ -12,19 +13,21 @@ router.use((req, res, next) => {
     next();
 })
 
-router.get('/', isLoggedIn, async( req, res, next) => {
+router.get('/:id', isLoggedIn, async( req, res, next) => {
+    
     try{
         const _url=req.url;
         //const paramDecoded=decodedURIComponent(_url);
         
-        const title=_url.split('=');
+        const title=_url.split('/');
         const t_length=title.length;
         const folder_title=title[t_length-1];
         //console.log(_url);
         //const folder = await Folder.find({user_id:res.locals.user._id}).find({folder_name:_folder});  
         //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
         const folder = await Folder.find({user_id:res.locals.user._id});
-        const postIt=await PostIt.find({folder_name:folder_title}).populate('postIts');
+        //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
+        const postIt=await PostIt.find({folder_name:folder_title}).populate('postIt');
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
             folder_title: folder_title,
@@ -40,18 +43,19 @@ router.get('/', isLoggedIn, async( req, res, next) => {
 });
 router.post('/add',isLoggedIn, async(req,res,next) => {
     var postItList=new Array();
-
+    
     const folder_name=req.body.folder_name;
     const postIt_name=req.body.postIt_name;
+    const postIt_content=req.body.postIt_content;
     const postIt_type=req.body.postIt_type;
     const postIt_star=req.body.postIt_star;
     const postIt_color=req.body.postIt_color;
 
-    try{
+    try{ 
         const postIt=await PostIt.create({
-            folder_name:folder_name,
             postIt_name:postIt_name,
             postIt_type:postIt_type,
+            postIt_content:postIt_content,
             postIt_star:postIt_star,
             postIt_color:postIt_color
 
@@ -62,7 +66,7 @@ router.post('/add',isLoggedIn, async(req,res,next) => {
 
         await Folder.updateOne({user_id:res.locals.user._id, folder_name:req.body.folder_name},{
             $set:{
-                postIt_name:postItList
+                postIt:postItList
             }
         });
 
@@ -70,6 +74,7 @@ router.post('/add',isLoggedIn, async(req,res,next) => {
             color:postIt.postIt_color,
             star:postIt.postIt_star,
             name:postIt.postIt_name,
+            content:postIt.postIt_content,
             type:postIt.postIt_type});
     }catch(err){
         next(err);
