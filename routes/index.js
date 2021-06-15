@@ -78,7 +78,7 @@ router.post('/folder_add',isLoggedIn, async(req,res,next) => {
     var folder_color=req.body.folder_color;
     const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-
+    const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
     //console.log(JSON.stringify(content)); //추가된 todo값
     
     try{
@@ -105,6 +105,7 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    
     //console.log(JSON.stringify(content)); //추가된 todo값
     
     try{
@@ -134,6 +135,8 @@ router.post('/todo',isLoggedIn, async(req,res,next) => {
 router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+    
     try{
     const todo=await Todo.updateOne({
         user_id:req.user._id, //필터링 하는 것
@@ -146,7 +149,7 @@ router.patch('/',isLoggedIn, async(req,res,next) => { //update할 데이터의 �
     //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
     res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable, folder:folder}
+        { title : 'study Tight', todolist:todo, timetable:timetable, folder:folder, d_day : dDay}
     );
     //res.redirect('/');
 
@@ -158,6 +161,7 @@ router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 �
 
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
     try {
         const delete_todoContent = req.body.todo_content;
         await Todo.deleteOne({user_id: res.locals.user._id, todo_content:delete_todoContent});
@@ -165,7 +169,7 @@ router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 �
         const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.log('남은 것은 이제 '+todo.todo_content);
         res.render('../views/mainframe.ejs',
-        { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder});
+        { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder, d_day : dDay,});
     }catch(err){
         next(err);
     }

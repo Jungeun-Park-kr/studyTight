@@ -510,10 +510,10 @@
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
-                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>')">&times;</span></div>
+                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
                                 <%} else{ %>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
-                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>')">&times;</span></div>
+                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
                                     <% } %>
                                 <% } %>
                                 <!-- </form> -->
@@ -536,7 +536,7 @@
                                     }
                                 }
                                 var currentState=boolValue;
-                                console.log(currentState+'->'+!(currentState));
+                                //console.log(currentState+'->'+!(currentState));
                                 if(currentState==true){
                                     checked_toggle++;
                                 }
@@ -574,8 +574,12 @@
                                     checked_toggle++;
                                                        }
                             
-                            function onDeleteTodo(todo_content){
+                            function onDeleteTodo(todo_content,delete_index){
+                                var parent=document.getElementById('todaylists');
                                 
+                                var delete_div=document.getElementsByClassName('wrap_label')[delete_index];
+                                //console.log(delete_index);
+                            
                                 //db에 삭제되도록 하기
                                 fetch('/',{
                                         method:'DELETE',
@@ -586,6 +590,7 @@
                                         body:JSON.stringify({user_id:'<%= user.name %>',todo_content:todo_content})
                                         //.then(res => res.json())   
                                     });
+                                    parent.removeChild(delete_div);
                                     alert(todo_content+'이(가) 오늘 할 일에서 삭제되었습니다.');
                             }
                         
@@ -766,22 +771,53 @@
         new_checkbox.setAttribute('class','class');
         //new_checkbox.setAttribute('onclick','onCheckedHandler('+content+','+false+')')
         // 이 값을 함수 호출하는 곳에서 가져와야 함...
-        new_checkbox.addEventListener('click',function(){
-            var check_content=todolist.todo_content;
-            var check_value=todolist.todo_finished;
-            onCheckedHandler(content,check_value);
-        });
         var new_p=document.createElement('p');
         new_p.setAttribute('class','p_p');
         new_p.innerHTML=content;
         var new_span=document.createElement('span');
         new_span.setAttribute('class','delete_todo');
         //new_span.setAttribute('onclick','onDeleteTodo('+content+')')
-        new_span.addEventListener('click',function(){
-            //삭제했을 때 바뀌도록 ... delete함수 사용
-            var delete_content=todolist.todo_content;
-            onDeleteTodo(delete_content);
-        })
+        
+        var new_ck_toggle=1;
+        new_checkbox.addEventListener('click',function(){
+            
+            var check_content=todolist.todo_content;
+            console.log(check_content);
+            var check_value=todolist.todo_finished;
+            //onCheckedHandler(content,check_value);
+            //console.log(check_value+'->'+!(check_value));
+            if(check_value==true){
+                new_ck_toggle++;
+            }
+            if(new_ck_toggle%2==1){
+                new_p.style.textDecoration='line-through';
+                check_value=true;
+
+                fetch('/',{
+                    method:'PATCH',
+                    headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:true})
+                //.then(res => res.json( ))  
+                });
+            }else{
+                new_p.style.textDecoration='none';
+                check_value=false;
+                fetch('/',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                        },
+                    body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:false})
+                    //.then(res => res.json())  
+                    });
+            }
+            new_ck_toggle++;
+        });
+
         new_span.innerHTML='&times;'
 
         parent_todolist.append(new_div);
@@ -789,6 +825,21 @@
         new_label.append(new_checkbox);
         new_label.append(new_p);
         new_div.append(new_span);
+
+        new_span.addEventListener('click',function(){
+            //삭제했을 때 바뀌도록 ... delete함수 사용
+            fetch('/',{
+                method:'DELETE',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                    },
+                body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML})
+                //.then(res => res.json())   
+                });
+                alert(new_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                parent_todolist.removeChild(new_div);
+        });
     }
 
     $('.modal-folder-plus').click(function(event){
