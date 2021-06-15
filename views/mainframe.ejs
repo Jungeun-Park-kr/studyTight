@@ -288,8 +288,8 @@
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
                                     <img class="three_button" src="/media/three_button.png" onclick="showFolderMenu('<%= i %>');">
                                 <div id="dropdown-folder" class="dropdown_folder">
-                                    <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
-                                    <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="reviseFolderClicked('<%= i %>');"></button></div>
+                                    <button role="menuitem" class="dropdown_choice revise_folder" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
+                                    <button role="menuitem" class="dropdown_choice delete_folder" id="delete_folder" onclick="reviseFolderClicked('<%= i %>');"></button></div>
                                     
                                 <%} else{ %>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
@@ -493,18 +493,11 @@
                         <p>오늘 할 일</p>
                         
                         <div class="todaylist" id="todaylist">
-                            <!-- <label><input type="checkbox"class="checkbox"><p class="p_p"></p></label> -->
-                            <!-- <label><input type="checkbox" class="checkbox"><p class="p_p">DB 강의 듣기</p></label>
-                            <label><input type="checkbox" class="checkbox"><p class="p_p">채플 듣기</p></label>
-                            <label><input type="checkbox" class="checkbox"><p class="p_p">OS 보고서 쓰기</p></label> -->
+                            
                             
                             <div class="todaylists" id='todaylists'>
                                 <!-- todolist 뿌려주기 -->
-                                <!-- <script>
-                                    $(document).ready(function(){
-                                        var todolist=JSON.parse('<%- JSON.stringify(todolist) %>')
-                                    })
-                                </script> -->
+                                
                             <% for(var i=0;i<todolist.length; i++) { %>
                             
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
@@ -859,6 +852,12 @@
                     folder_color:new_folder_color
                 },
                 success:function(data){
+                    var new_folder={
+                        folder_name: new_folder_name,
+                        folder_fixed:false
+                    }
+                    //console.log(new_folder_color);
+                    addNewFolder(new_folder,new_folder_color);
                     //동적 추가 시 피룡함
                 },error:function(err){
                     console.log('folder 추가 실패');
@@ -867,6 +866,58 @@
         }
     });
 
+    function addNewFolder(folder,folder_color){
+        var name=folder.folder_name;
+        var color;
+        var fixed=folder.folder_fixed;
+        //console.log(JSON.stringify(color));
+
+        //console.log(JSON.stringify(color));
+        //console.log(name, color, fixed);
+        
+        var wrap=document.createElement('div');
+        wrap.setAttribute('class','folder');
+
+        var img_folder=document.createElement('img');
+        //img_folder.setAttribute('src',color); //이거 때문에 계속 get 404에러가 난다! 이거를 그냥 if문을 사용해서 src에 넣어야겠다
+        //console.log(img_folder.getAttribute('src'));
+        img_folder.setAttribute('class','folder_img');
+        var p=document.createElement('p');
+        p.setAttribute('class','main_folder_name');
+        p.innerHTML=name;
+        var img_button=document.createElement('img');
+        img_button.setAttribute('class','three_button');
+        img_button.setAttribute('src','/media/three_button.png');
+        // img_button.addEventListener('click',function(){ //dropdown버튼들 보이게
+
+        // });
+        var drop=document.createElement('div');
+        drop.setAttribute('id','dropdown-folder');
+        drop.setAttribute('class','dropdown_folder');
+        // var bt1=document.createElement('button');
+        // btn1.setAttribute('role','menuitem');
+        // btn1.setAttribute('class','dropdown_choice');
+        //btn1.setAttribute('id','revise_folder');
+        // btn1.addEventListener('click',function(){ //수정하는 버튼 눌렀을 때
+
+        // });
+        // var bt2=document.createElement('button');
+        // btn2.setAttribute('role','menuitem');
+        // btn2.setAttribute('class','dropdown_choice');
+        //btn2.setAttribute('id','delete_folder');
+        // btn2.addEventListener('click',function(){ //삭제하는 버튼 눌렀을 때
+
+        // });
+
+        // drop.appendChild(btn1);
+        // drop.appendChild(btn2);
+        wrap.appendChild(img_folder);
+        wrap.appendChild(p);
+        wrap.appendChild(img_button);
+        wrap.appendChild(drop);
+
+
+    }
 
     // 디데이 동적으로 추가
     $(document).ready(function () {

@@ -62,7 +62,8 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
             title: 'StudyTight 메인화면',
             todolist : todolist,
             timetable : timetable,
-            folder : folder
+            folder : folder,
+            d_day : dDay,
         });
         //res.send(todolist);
     }
@@ -94,13 +95,34 @@ router.post('/folder_add',isLoggedIn, async(req,res,next) => {
     //     { title : 'study Tight', todolist:todolist, timetable:timetable, folder:folder}
     // );
 
-    res.send(folder);
+    res.send(folder.folder_color);
 
 }catch(err){
     next(err);
 }
 });
+router.get('/folder_add',isLoggedIn, async(req,res,next) => {
+    try {
+        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
+        const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+        const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+        res.render('../views/mainframe.ejs', {
+            title: 'StudyTight 메인화면',
+            todolist : todolist,
+            timetable : timetable,
+            folder : folder,
+            d_day : dDay,
 
+        });
+        //res.send(todolist);
+    }
+    catch (err) {
+        console.error('routes/index.js 에서 에러');
+        console.error(err);
+        next(err);
+    }
+});
 router.post('/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
     const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
