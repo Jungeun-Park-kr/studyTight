@@ -286,6 +286,30 @@ html, body {
 #d-day-plus{
     cursor:pointer;
 }
+.delete_day{
+    float:right;
+    width: 15px;
+    line-height: 1.4rem; 
+    margin-right:10px;
+    margin-top: 10px;
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    opacity: 0; 
+} 
+.delete_day:hover{
+    float:right;
+    width: 15px;
+    line-height: 1.4rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    opacity: 1;
+    margin-right:10px;
+    margin-top:10px;
+    background-color: lightgray;
+    
+} 
 .uploadBtn{
     cursor:pointer;
     padding:10px;

@@ -237,29 +237,63 @@
                     <!-- 여기는 본문 들어갈 메인 섹션 -->
                     <div class="D-day" id="D-day">
                         <script>
+                            function deleteDay(content,index){
+                                //console.log(content,index);
+                            
+                                var parent_day=document.getElementById('D-day')
+                                var delete_day=document.getElementsByClassName('d-day')[index];
+
+                                //DB에서 삭제되도록
+                                fetch('/day',{
+                                        method:'DELETE',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
+                                        //.then(res => res.json())   
+                                    });
+                                    parent_day.removeChild(delete_day);
+                                    alert(content+'이(가) d-day에서 삭제되었습니다.');
+                            }
+                        </script>
+                        <script>
                             var parentDiv = document.getElementById("D-day")
                             var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
                             
                             for (var i = 0; i < d_daylist.length; i++) {
+                                
+                                
                                 var show_day = document.createElement("div");
                                 var show_content = document.createElement("span");
+                                var delete_day=document.createElement('span');
+                                delete_day.setAttribute('class','delete_day');
+                                
+                                delete_day.innerHTML= '&times;';
                                 show_day.setAttribute("class", "d-day")
                                 show_content.setAttribute("class", "d-date")
                                 var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
                                 show_content.innerHTML = tmp.dday_content
-        
+                                //console.log(show_content.innerHTML);
                                 // 디데이 계산하기
                                 var date1 = new Date(tmp.start_date);
                                 var date2 = new Date(tmp.final_date);
                                 var gap = date2.getTime() - date1.getTime();
                                 var ddayResult = Math.ceil(gap/(1000*60*60*24));
 
-
+                                delete_day.setAttribute('value',tmp.dday_content);
+                                const content=delete_day.getAttribute('value');
+                                const index=i;
+                                //console.log(content);
+                                delete_day.addEventListener('click',function(){
+                                    
+                                    deleteDay(content,index);
+                                })
                                 show_day.innerHTML="D-"+ddayResult
-                                //show_day.innerHTML = "D-" + --tmp.day;
-        
-                                show_day.appendChild(show_content)
-                                parentDiv.appendChild(show_day);
+                                //showrs_day.innerHTML = "D-" + --tmp.day;
+                                show_day.append(delete_day);
+                                show_day.append(show_content);
+                                parentDiv.append(show_day);
                                 show_day.style.fontWeight = "bold"
                                 show_content.style.color = "black"
                                 if (ddayResult < '4') {
@@ -271,10 +305,11 @@
                                     show_day.style.color = "black"
                                 }
                             }
+                            
                         </script>
                         <div class="d-day" id="d-day-plus"><span class="d-date" id="d-date-plus">+</span>디데이 추가하기</div>
                     </div>
-        
+                    
                     <div class="folder_">
                         
                         <div id="wrap_folder" class="wrap_folder">
@@ -867,6 +902,7 @@
     });
 
     function addNewFolder(folder,folder_color){
+        console.log(folder_color);
         var name=folder.folder_name;
         var color;
         var fixed=folder.folder_fixed;
@@ -878,8 +914,11 @@
         var wrap=document.createElement('div');
         wrap.setAttribute('class','folder');
 
+        var parent_folder=document.getElementById('wrap_folder');
+
+
         var img_folder=document.createElement('img');
-        //img_folder.setAttribute('src',color); //이거 때문에 계속 get 404에러가 난다! 이거를 그냥 if문을 사용해서 src에 넣어야겠다
+        img_folder.setAttribute('src',folder_color); //이거 때문에 계속 get 404에러가 난다! 이거를 그냥 if문을 사용해서 src에 넣어야겠다
         //console.log(img_folder.getAttribute('src'));
         img_folder.setAttribute('class','folder_img');
         var p=document.createElement('p');
@@ -911,15 +950,33 @@
 
         // drop.appendChild(btn1);
         // drop.appendChild(btn2);
-        wrap.appendChild(img_folder);
-        wrap.appendChild(p);
-        wrap.appendChild(img_button);
-        wrap.appendChild(drop);
+        wrap.append(img_folder);
+        wrap.append(p);
+        wrap.append(img_button);
+        wrap.append(drop);
 
-
+            parent_folder.append(wrap);
     }
 
     // 디데이 동적으로 추가
+    function newDeleteDay(content){
+        var parent_day=document.getElementById('D-day');
+        var delete_day=document.getElementsByClassName('d-day');
+
+        //DB에서 삭제되도록
+        fetch('/day',{
+            method:'DELETE',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+                    },
+            body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
+            //.then(res => res.json())   
+                    });
+            parent_day.removeChild(delete_day);
+            alert(content+'이(가) d-day에서 삭제되었습니다.');
+    }
+
     $(document).ready(function () {
 
         $('.modal-d-plus').bind('click', function() {
@@ -983,17 +1040,37 @@
                         var tmp = d_daylist[i]; //해당 나온 날짜와 내용을 tmp에 넣음
                         show_content.innerHTML = content;
 
+                        var delete_day=document.createElement('span');
+                        delete_day.setAttribute('class','delete_day');
+                                
+                        delete_day.innerHTML= '&times;';
+                        
                         // 디데이 계산하기
                         var date1 = new Date(today);
                         var date2 = new Date(date);
                         var gap = date2.getTime() - date1.getTime();
                         var ddayResult = Math.ceil(gap/(1000*60*60*24));
 
-
                         show_day.innerHTML="D-"+ddayResult
 
+                        show_day.append(delete_day);
                         show_day.appendChild(show_content);
                         parentDiv.prepend(show_day);
+                        delete_day.addEventListener('click',function(){
+                            //DB에서 삭제되도록
+                            fetch('/day',{
+                                method:'DELETE',
+                                headers:{
+                                    'Accept':'application/json',
+                                    'Content-Type':'application/json'
+                                        },
+                                body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
+                                //.then(res => res.json())   
+                                        });
+                            parentDiv.removeChild(show_day);
+                            alert(content+'이(가) d-day에서 삭제되었습니다.');          
+                        });
+
                         show_day.style.fontWeight = "bold"
                         show_content.style.color = "black"
                         if (ddayResult < '4') {
@@ -1019,6 +1096,7 @@
         };
 
     });
+    
     </script>
     </div>
 
