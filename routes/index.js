@@ -31,9 +31,9 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
-        
+        await Dday.deleteMany({user_id:res.locals.user._id, final_date:{$gt:getCurrentDate()}});
         const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
-        //await dDay.deleteMany({user_id:res.locals.user._id, final_date:});
+        
 
         //남은 애들은 register_date를 하나 추가하기
         res.render('../views/mainframe.ejs', {
@@ -195,7 +195,25 @@ router.delete('/',isLoggedIn, async(req,res,next) => { //할 일 목록에서 �
     }catch(err){
         next(err);
     }
-})
+});
+router.delete('/day',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+
+    //const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+    //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+    try {
+        const delete_day = req.body.dday_content;
+        await Dday.deleteOne({user_id: res.locals.user._id, dday_content:delete_day});
+        
+        const dDay = await Todo.find({user_id: req.user._id}).sort({'final_date':1});
+        //console.log('남은 것은 이제 '+todo.todo_content);
+        //res.render('../views/mainframe.ejs',
+        //{ title : 'study Tight', todolist:todo, timetable:timetable, folder: folder, d_day : dDay,});
+        res.send('디데이 삭제 성공!')
+    }catch(err){
+        next(err);
+    }
+});
 router.get('/', isNotLoggedIn, (req, res) => {
     try {
         // res.send('Hello, Express'); // 테스트용
@@ -211,7 +229,7 @@ router.get('/', isNotLoggedIn, (req, res) => {
 })
 
 router.post('/d-day',isLoggedIn, async(req, res, next) => {
-    console.log('post 요청옴 in index', req.body);
+    //console.log('post 요청옴 in index', req.body);
     const {date, content, today} = req.body;
 
     try {
@@ -222,7 +240,7 @@ router.post('/d-day',isLoggedIn, async(req, res, next) => {
             final_date : date,
             start_date : today,
         });
-        console.log(dday);
+        //console.log(dday);
         res.send('success');
 
     } catch(err) {
