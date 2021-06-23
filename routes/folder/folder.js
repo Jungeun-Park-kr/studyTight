@@ -45,7 +45,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         next(err);
     }
 });
-router.post('/id:/add',isLoggedIn, async(req,res,next) => {
+router.post('/:id/add',isLoggedIn, async(req,res,next) => {
     var postItList=new Array();
     
     const folder_name=req.body.folder_name;
@@ -64,11 +64,11 @@ router.post('/id:/add',isLoggedIn, async(req,res,next) => {
             postIt_color:postIt_color
 
         }); //포스트잇 만들기
-        postItList.push(postIt.postIt_name);
+        postItList.push(postIt._id);
 
         //폴더에 정보 추가하기
 
-        await Folder.updateOne({user_id:res.locals.user._id, folder_name:req.body.folder_name},{
+        await Folder.updateOne({user_id:res.locals.user._id, folder_name:folder_name},{
             $set:{
                 postIt:postItList
             }
