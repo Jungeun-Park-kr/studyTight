@@ -25,7 +25,8 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         //console.log(_url);
         //const folder = await Folder.find({user_id:res.locals.user._id}).find({folder_name:_folder});  
         //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
-        const folder = await Folder.find({user_id:res.locals.user._id});
+        const folder = await Folder.find({user_id:res.locals.user._id, _id:folder_title}).populate('folder_name');
+        console.log(folder);
         //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
         //const postIt=await PostIt.find({folder_name:folder_title}).populate('postIt');
         
@@ -34,7 +35,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         //await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
-            folder_title: folder_title,
+            folder_title: folder,
             //folder : folder,
             //postIt: postIt,
             todolist: todolist
@@ -48,7 +49,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
 router.post('/:id/add',isLoggedIn, async(req,res,next) => {
     var postItList=new Array();
     
-    const folder_name=req.body.folder_name;
+    const folder_id=req.body.folder_id;
     const postIt_name=req.body.postIt_name;
     const postIt_content=req.body.postIt_content;
     const postIt_type=req.body.postIt_type;
@@ -68,7 +69,7 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
 
         //폴더에 정보 추가하기
 
-        await Folder.updateOne({user_id:res.locals.user._id, folder_name:folder_name},{
+        await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
             $set:{
                 postIt:postItList
             }
