@@ -126,6 +126,9 @@ html, body {
 .D-day {
     text-align:left;
 }
+.wrap_day{
+    display:inline;
+}
 .d-day { 
     /* d-day표시 */
     display: inline-block;
