@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
+const { mongo, Mongoose } = require('mongoose');
 const router = express.Router();
 
 var timeList = new Array();
@@ -59,6 +60,7 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
         const timetable = await Course.find( {user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
         // console.log('---------------------로그인된사람의시간표---------------------');
         // console.info(timetable);
+        timeList=[]; // 초기화 시켜주기
         res.render( '../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
@@ -231,9 +233,23 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
 });
 
 router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
+    // userSchema.pre("remove", function(next) {
+    //     // 'this' is the user being removed. Provide callbacks here if you want
+    //     // to be notified of the calls' result.
+    //     scanModel.remove({ user: this._id }).exec();
+    //     categoryModel.remove({ user: this._id }).exec();
+    //     next();
+    // });
+
     try {
         const deleteId = req.params.id;
-        await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId});
+        const target = await Course.findOne({user_id: res.locals.user._id, _id:deleteId}).populate('schedules');
+        //console.log('삭제할 과목:'+target);
+        for (var i=0; i<target.schedules.length; i++) { // 과목 시간 먼저 삭제
+            await CourseSchedule.deleteOne({_id:target.schedules[i]._id});
+            //console.log('삭제한 시간:'+target.schedules[i].classroom);
+        }
+        await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId}); // 과목 삭제
         return res.send('delete_succeeded'); //삭제한 과목 리턴
     }
     catch (err) {
