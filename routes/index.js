@@ -31,7 +31,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
-        await Dday.deleteMany({user_id:res.locals.user._id, final_date:{$gte:getCurrentDate()}});
+        await Dday.deleteMany({user_id:res.locals.user._id, final_date:{$lte:getCurrentDate()}});
         
         const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
         
@@ -211,6 +211,19 @@ router.delete('/day',isLoggedIn, async(req,res,next) => { //할 일 목록에서
         //res.render('../views/mainframe.ejs',
         //{ title : 'study Tight', todolist:todo, timetable:timetable, folder: folder, d_day : dDay,});
         res.send('디데이 삭제 성공!')
+    }catch(err){
+        next(err);
+    }
+});
+router.delete('/folder',isLoggedIn, async(req,res,next) => { 
+    //폴더를 삭제할 경우
+    try {
+        const delete_folder = req.body.folder_name;
+        await Folder.deleteOne({user_id: res.locals.user._id, folder_name:delete_folder});
+        
+        const folder =await Folder.find({user_id:res.locals.user._id});
+        
+        res.send('폴더 삭제 성공!')
     }catch(err){
         next(err);
     }

@@ -470,7 +470,28 @@ html, body {
 .three_button:hover{
     opacity:1;
 }
-.dropdown_folder{
+.folder_menu {
+    opacity: 1;
+
+    
+    position:relative;
+    margin-top:-69%;
+    margin-left:10px;
+    float:right;
+}
+/* .three_button:active .folder_menu{ 
+    
+    opacity: 1;
+    visibility: visible; 
+
+} */
+.folder_menu > li {
+    padding:5px 12px;
+    background-color: rgba(255,255,255,0.8);
+    list-style-type: none;
+    cursor:pointer;
+}
+/* .dropdown_folder{
     display:none;
 
     position:relative;
@@ -501,7 +522,7 @@ html, body {
     text-align:start;
     user-select:none;
     width:100%;
-}
+} */
 .day_button{ 
     position:relative;
     z-index:1;
