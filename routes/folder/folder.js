@@ -8,25 +8,31 @@ const url=require('url');
 const { urlencoded } = require('body-parser');
 //const path=require('path');
 
+//const ObjectId=require('mongodb').ObjectID; 
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 router.use((req, res, next) => {
     res.locals.user=req.user;
     next();
 })
 
 router.get('/:id', isLoggedIn, async( req, res, next) => {
-    
+        // const _url=req.url;
+        // const title=_url.split('/');
+        // const t_length=title.length;
+        // const folder_title=title[t_length-1];
+        const id_obj=req.params.id;
     try{
-        const _url=req.url;
+        
         //const paramDecoded=decodedURIComponent(_url);
         
-        const title=_url.split('/');
-        const t_length=title.length;
-        const folder_title=title[t_length-1];
+        
         //console.log(_url);
         //const folder = await Folder.find({user_id:res.locals.user._id}).find({folder_name:_folder});  
         //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
-        const folder = await Folder.find({user_id:res.locals.user._id, _id:folder_title}).populate('folder_name');
-        console.log(folder);
+        const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj});
+        
+        
         //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
         //const postIt=await PostIt.find({folder_name:folder_title}).populate('postIt');
         
