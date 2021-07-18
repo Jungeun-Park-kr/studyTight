@@ -361,7 +361,33 @@
 
 
                                 <% } %>
-                            </div>  
+                            </div>
+
+                            <!-- folder 수정하기 -->
+                            <div id="modal" class="modal modal_revise_folder">
+                                <div class="modal-content-revise-folder">
+                                    <span class="close_button close_revise_folder">&times;</span>
+                                    <h1 class="title">폴더 수정하기</h1>
+                                        <div>
+                                            <input type="text" id="new-folder-name" name="new_folder_name" maxlength="7" value="">
+                                            <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
+                                                <select id="new_folder_color" name="new_folder_color">
+                                                
+                                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        
+                                            
+                                                </select>
+                                            </div>
+                                        <div>
+                                            <input type="button" class="modal-folder-revise" value="확인"></input>
+                                        </div>
+                                        </div>
+                                </div>
+                            </div>
                             <script>
                                 var dropdown_toggle=1;
                             function showFolderMenu(index){
@@ -377,14 +403,26 @@
                                 //dropdownButton.style.display='block';
                             
                             }
-                            
+                            var modal_revise_folder=document.querySelector('.modal_reivse_folder')
+                            // var trigger_revise_folder=document.querySelector('.');
+                            var close_revise_folder=document.querySelector('.close_revise_folder');
+                            var store_revise_folder=document.querySelector('.modal-folder-revise');
                             function reviseFolderClicked(index){
                                 var revise_folder=document.getElementsByClassName('folder')[index];
                                 var revise_name=document.getElementsByClassName('main_folder_name')[index].innerHTML;
+                                $('input[name=new_folder_name]').attr('value',revise_name);
                                 var revise_color=document.getElementsByClassName('folder_img')[index].getAttribute('src');
-                                
+                                $('#new_folder_color').val(revise_color).prop('selected',true);
                                 //모달을 다시 보여줘서 폴더 수정하기를 해서 기존의 값을 넣게 만들기.
                                 //기존의 값이 selected로 설정된
+
+                                toggleReviseFolderModal();
+
+                                close_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                                store_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                            }
+                            function toggleReviseFolderModal(){
+                                modal_revise_folder.toggle("show_modal");
                             }
                             function deleteFolderClicked(index){
                                 var parent=document.getElementById('wrap_folder');
@@ -410,6 +448,7 @@
                             }
                         }
                             </script> 
+                            
                             <!-- <div id="folder_0" class="folder">
                                 <img src="media/plus_folder_yellow.png" class="folder_img"/>
                                 <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
@@ -658,6 +697,7 @@
     </div>
 
 
+
     <script type='text/javascript'>
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
@@ -731,7 +771,7 @@
             });
         }
     })
-
+    
     function addNewTodo(todolist){
     
         var content=todolist.todo_content;
