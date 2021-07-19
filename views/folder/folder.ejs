@@ -139,11 +139,15 @@ for(i=0;i<star.length;i++){
                 </script>
 
 
-    <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
+    <!-- <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
         <img class="post_img" src="media/post_gray.svg" value="추가하기">
-    </a>
+    </a> -->
 
-    <div class="modal" id="choiceTypeModal" data-backdrop="static">
+    <div id="postIt_plus">
+        <img src="/media/folder_black.svg"/><p>추가하기</p>
+    </div>
+
+    <!-- <div class="modal" id="choiceTypeModal" data-backdrop="static">
         <div id="choice-modal"class="modal-dialog modal-choice">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,14 +166,29 @@ for(i=0;i<star.length;i++){
             </div>
         </div>
         </div>
+    </div> -->
+
+    <div id="modal" class="modal modal_choice" data-backdrop="static">
+        <div class="modal-content-choice">
+            
+            <span  class="close_button close_choice_button" data-dismiss="modal" aria-hidden="true">&times;</span>
+            <h4 class="title">포스트잇 추가하기</h4>
+            <div class="container-choice"></div>
+            <div class="modal-body">작성할 종류를 선택하세요.
+            <br>
+            <br>
+            <div class="choice_content">
+                <img src="media/content.png" ><p>글</p></div>
+            <div class="choice_link">
+                <img src="media/link.png"><p>링크</p></div>
+            <div class="choice_file">
+            <img src="media/file.png"><p>파일</p></div>
+            </div>
+        </div>
     </div>
 
-    <!-- <script>
-        $('')
-    </script> -->
 
-
-    <div class="modal" id="choice_content" data-backdrop="static">
+    <!-- <div class="modal" id="choice_content" data-backdrop="static">
         <div class="modal-dialog modal-writing1">
         <div class="modal-content writing-inside1">
             <div class="modal-header">
@@ -201,9 +220,27 @@ for(i=0;i<star.length;i++){
             </div>
         </div>
         </div>
-    </div>
+    </div> -->
     
     <script>
+        var modal_choice=document.querySelector('.modal_choice');
+        var modal_content=document.querySelector('.modal_content');
+        var trigger_choice_button=document.querySelector('#postIt_plus');
+        var close_choice_button=document.querySelector('.close_choice_button');
+
+        function toggleChoiceModal(){
+            modal_choice.classList.toggle('show_modal');
+        }
+        function windowOnClick(event){
+            if(event.target===modal_choice){
+                toggleChoiceModal();
+            }
+
+        }
+
+        trigger_choice_button.addEventListener('click',toggleChoiceModal);
+        close_choice_button.addEventListener('click',toggleChoiceModal);
+
         function uploadContent(){
             const folder_name=JSON.parse('<%- JSON.stringify(folder_title) %>');
             console.log(folder_name);
@@ -239,7 +276,7 @@ for(i=0;i<star.length;i++){
         }
     </script>
 
-    <div class="modal" id="choice_link" data-backdrop="static">
+    <!-- <div class="modal" id="choice_link" data-backdrop="static">
         <div class="modal-dialog modal-writing2">
         <div class="modal-content writing-inside2">
             <div class="modal-header">
@@ -270,7 +307,7 @@ for(i=0;i<star.length;i++){
             </div>
         </div>
         </div>
-    </div> 
+    </div>  -->
 
     <script>
         function uploadLink(){

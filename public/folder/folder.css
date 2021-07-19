@@ -265,14 +265,13 @@ a:link {
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-img svg{
-    width:100%;
-    height:90px;
-    background-image:url(media/transparent.jpg);
-    background-color: #6ED4D8;
-    background-size: contain;
-    
-} 
+#postIt_plus{
+    display:inline-block;
+    margin:20px 35px 20px 20px;
+    width: 90px; 
+    height: 90px;
+}
+
 .post_img{
     width:100%;
     height:90px;
@@ -387,20 +386,8 @@ img svg{
 
 /****** 레이어(모달) 팝업 ******/
 /* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
-/* .modal_postIt{ 
-    position: fixed; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    opacity: 0; 
-    z-index:1;
-    visibility: hidden; 
-    transform: scale(1.1); 
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-}  */
-.modal_todo{ 
+
+.modal_todo, .modal_choice{ 
     position: fixed; 
     left: 0; 
     top: 0; 
@@ -413,7 +400,7 @@ img svg{
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 } 
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-postIt-content, .modal-content-todo { 
+.modal-content-choice, .modal-content-todo { 
     position: absolute; 
     top: 50%; 
     left: 50%; 

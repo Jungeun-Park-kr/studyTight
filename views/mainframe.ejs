@@ -336,7 +336,7 @@
                                     <p class='main_folder_name'><%= folder[i].folder_name %></p>
                                     <img class="three_button" src="/media/three_button.png">
                                     <ul class="folder_menu">
-                                        <li><div id="revise_folder" onclick="reviseFolderClicked('<%= i %>');">수정</div></li>
+                                        <li><div id="revise_folder" class="revise_folder">수정</div></li>
                                         <li><div id="delete_folder" onclick="deleteFolderClicked('<%= i %>');">삭제</div></li>    
                                     </ul>
                                 <!-- <div id="dropdown-folder" class="dropdown_folder">
@@ -348,7 +348,7 @@
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
                                     <img class="three_button" src="/media/three_button.png">
                                     <ul class="folder_menu">
-                                        <li><div id="revise_folder" onclick="reviseFolderClicked('<%= i %>');">수정</div></li>
+                                        <li><div id="revise_folder" class="reivse_folder">수정</div></li>
                                         <li><div id="delete_folder" onclick="deleteFolderClicked('<%= i %>');">삭제</div></li>    
                                     </ul>
                                     <!-- dialog로 보여줄 지 고민해보기 -->
@@ -388,7 +388,7 @@
                                         </div>
                                 </div>
                             </div>
-                            <script>
+                            <script type='text/javascript'>
                                 var dropdown_toggle=1;
                             function showFolderMenu(index){
                                 console.log(index);
@@ -403,27 +403,49 @@
                                 //dropdownButton.style.display='block';
                             
                             }
-                            var modal_revise_folder=document.querySelector('.modal_reivse_folder')
-                            // var trigger_revise_folder=document.querySelector('.');
+
+                            var modal_revise_folder=document.querySelector('.modal_reivse_folder');
+                            var trigger_revise_folder=document.querySelector('#revise_folder');
                             var close_revise_folder=document.querySelector('.close_revise_folder');
                             var store_revise_folder=document.querySelector('.modal-folder-revise');
-                            function reviseFolderClicked(index){
-                                var revise_folder=document.getElementsByClassName('folder')[index];
-                                var revise_name=document.getElementsByClassName('main_folder_name')[index].innerHTML;
-                                $('input[name=new_folder_name]').attr('value',revise_name);
-                                var revise_color=document.getElementsByClassName('folder_img')[index].getAttribute('src');
-                                $('#new_folder_color').val(revise_color).prop('selected',true);
-                                //모달을 다시 보여줘서 폴더 수정하기를 해서 기존의 값을 넣게 만들기.
-                                //기존의 값이 selected로 설정된
 
-                                toggleReviseFolderModal();
+                            // function showReviseModal(name, color){ 
+                                
+                            //     toggleReviseFolderModal();
 
-                                close_revise_folder.addEventListener('click',toggleReviseFolderModal);
-                                store_revise_folder.addEventListener('click',toggleReviseFolderModal);
-                            }
+                                
+                            //     var close_revise_folder=document.querySelector('.close_revise_folder');
+                            //     var store_revise_folder=document.querySelector('.modal-folder-revise');
+                                
+                                
+                            //     close_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                            //     store_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                            // }
+                        
+                            // function reviseFolderClicked(index){
+                            //     var revise_folder=document.getElementsByClassName('folder')[index];
+                            //     var revise_name=document.getElementsByClassName('main_folder_name')[index].innerHTML;
+                            //     //$('input[name=new_folder_name]').attr('value',revise_name);
+                            //     var revise_color=document.getElementsByClassName('folder_img')[index].getAttribute('src');
+                            //     //$('#new_folder_color').val(revise_color).prop('selected',true);
+                            //     //모달을 다시 보여줘서 폴더 수정하기를 해서 기존의 값을 넣게 만들기.
+                            //     //기존의 값이 selected로 설정된
+
+                            //     showReviseModal(revise_name,revise_color);
+                                
+                            // }
                             function toggleReviseFolderModal(){
-                                modal_revise_folder.toggle("show_modal");
+                                modal_revise_folder.classList.toggle("show_modal");
                             }
+                            function windowOnClick(event){
+                                if(event.target===modal_revise_folder){
+                                    toggleReviseFolderModal();
+                                }
+                            }
+                            
+                            trigger_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                            close_revise_folder.addEventListener('click',toggleReviseFolderModal);
+                            store_revise_folder.addEventListener('click',toggleReviseFolderModal);
                             function deleteFolderClicked(index){
                                 var parent=document.getElementById('wrap_folder');
                                 
@@ -473,7 +495,6 @@
                                 function newFolder() {
                                     var new_name = prompt("폴더 이름을 입력하세요", "");
                                     var new_div = document.createElement('div');
-        
                                     var origin_div = document.getElementById('wrap_folder');
                                     //append로 안함
                                     var before_div = document.getElementById('folder_1');
