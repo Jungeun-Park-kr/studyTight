@@ -42,6 +42,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
             folder_title: folder,
+            folder_id:id_obj,
             //folder : folder,
             //postIt: postIt,
             todolist: todolist
@@ -74,12 +75,14 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         postItList.push(postIt._id);
 
         //폴더에 정보 추가하기
-
+        //console.log("folder내에 배열에 접근 전");
         await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
             $set:{
                 postIt:postItList
             }
         });
+
+        //console.log("folder내에 배열에 접근 완료");
 
         res.send({
             color:postIt.postIt_color,
@@ -91,7 +94,7 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         next(err);
     }
 });
-router.post('/todo',isLoggedIn, async(req,res,next) => {
+router.post('/:id/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
    // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
     //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');

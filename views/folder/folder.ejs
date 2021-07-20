@@ -87,15 +87,15 @@
                     </div> -->
                     <script>
                         var star=document.getElementsByClassName('fixed_star');
-for(i=0;i<star.length;i++){
-    if(star[i].src=="media/empty_star.png" && star[i].style.opacity==0){
-        console.log(i+"번째가 빈 별이다.");
-        star[i].hover(function(){
-            star[i].style.opacity=1;
-            console.log("수정했다");
-        })
-    }
-}
+                        for(i=0;i<star.length;i++){
+                            if(star[i].src=="media/empty_star.png" && star[i].style.opacity==0){
+                                console.log(i+"번째가 빈 별이다.");
+                                star[i].hover(function(){
+                                    star[i].style.opacity=1;
+                                    console.log("수정했다");
+                                })
+                            }
+                        }
                         </script>
                     <!-- <div id="postIt_plus" class="postIt">
                         <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div> -->
@@ -173,15 +173,15 @@ for(i=0;i<star.length;i++){
             
             <span  class="close_button close_choice_button" data-dismiss="modal" aria-hidden="true">&times;</span>
             <h4 class="title">포스트잇 추가하기</h4>
-            <div class="container-choice"></div>
+            
             <div class="modal-body">작성할 종류를 선택하세요.
             <br>
-            <br>
-            <div class="choice_content">
+            
+            <div class="choice choice_content">
                 <img src="media/content.png" ><p>글</p></div>
-            <div class="choice_link">
+            <div class="choice choice_link">
                 <img src="media/link.png"><p>링크</p></div>
-            <div class="choice_file">
+            <div class="choice choice_file">
             <img src="media/file.png"><p>파일</p></div>
             </div>
         </div>
@@ -222,18 +222,105 @@ for(i=0;i<star.length;i++){
         </div>
     </div> -->
     
+    <!-- 글 저장하기 -->
+    <div id="modal" class="modal modal_content" data-backdrop="static">
+        <div class="modal-content-content">
+            
+            <span  class="close_button close_content_button" data-dismiss="modal" aria-hidden="true">&times;</span>
+            <h4 class="title">글 작성하기</h4>
+        
+            <div class="modal-body">
+                <p>제목</p>
+                <input type="text" id="input_content_title" name="title" class="input_text" placeholder="제목을 입력하세요">
+                <br>
+                <br>
+                <p>내용</p>
+                <textarea id="input_content" name="content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="content_color_wrap" value="포스트잇의 색을 선택하세요.">
+                    <select id="content_color" name="content_color"> 
+                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+
+                
+                    </select>
+                </div>
+            <!-- <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked();">취소</a>
+            <a href="#" class="btn uploadBtn" onclick="uploadContent();">완료</a> -->
+                <div data-dismiss="modal" class="btn cancelBtn cancel_content_button" onclick="cancelClicked();">취소</div>
+                <div class="btn uploadBtn store_content_button" onclick="uploadContent();">완료</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 링크 저장하기 -->
+    <div id="modal" class="modal modal_link" data-backdrop="static">
+        <div class="modal-content-link">
+        
+            <span  class="close_button close_link_button" data-dismiss="modal" aria-hidden="true">&times;</span>
+            <h4 class="modal-title">링크 작성하기</h4>
+            
+            <div class="modal-body">               
+                <p>제목</p>
+                <input type="text" id="input_link_title" class="input_text" placeholder="제목을 입력하세요">
+                <br>
+                <br>
+                <p>링크</p>
+                <input type="url" id="input_link" class="input_link" placeholder="링크를 입력하세요">
+            </div>
+            <div class="modal-footer">
+                <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
+                    <select id="link_color" name="link_color"> 
+                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                
+                </select>
+                </div>
+                <div data-dismiss="modal" class="btn cancelBtn cancel_link_button" onclick="cancelClicked();">취소</div>
+                <div class="btn uploadBtn store_link_button" onclick="uploadLink();">완료</div>
+            </div>
+        
+        </div>
+    </div>
+
     <script>
         var modal_choice=document.querySelector('.modal_choice');
         var modal_content=document.querySelector('.modal_content');
+        var modal_link=document.querySelector('.modal_link');
         var trigger_choice_button=document.querySelector('#postIt_plus');
+        var trigger_content_button=document.querySelector('.choice_content');
+        var trigger_link_button=document.querySelector('.choice_link');
         var close_choice_button=document.querySelector('.close_choice_button');
+        var close_content_button=document.querySelector('.close_content_button');
+        var close_link_button=document.querySelector('.close_link_button');
+        var store_content_button=document.querySelector('.store_content_button');
+        var store_link_button=document.querySelector('.store_link_button');
+        var cancel_content_button=document.querySelector('.cancel_content_button');
+        var cancel_link_button=document.querySelector('.cancel_link_button');
 
         function toggleChoiceModal(){
             modal_choice.classList.toggle('show_modal');
         }
+        function toggleContentModal(){
+            modal_content.classList.toggle('show_modal');
+        }
+        function toggleLinkModal(){
+            modal_link.classList.toggle('show_modal');
+        }
         function windowOnClick(event){
             if(event.target===modal_choice){
                 toggleChoiceModal();
+            }else if(event.target===modal_content){
+                toggleContentModal();
+            }else if(event.target===modal_link){
+                toggleLinkModal();
             }
 
         }
@@ -241,9 +328,22 @@ for(i=0;i<star.length;i++){
         trigger_choice_button.addEventListener('click',toggleChoiceModal);
         close_choice_button.addEventListener('click',toggleChoiceModal);
 
+        trigger_content_button.addEventListener('click',toggleContentModal);
+        trigger_content_button.addEventListener('click',toggleChoiceModal);
+        close_content_button.addEventListener('click',toggleContentModal);
+        cancel_content_button.addEventListener('click',toggleContentModal);
+        store_content_button.addEventListener('click',toggleContentModal);
+
+        trigger_link_button.addEventListener('click',toggleLinkModal);
+        trigger_link_button.addEventListener('click',toggleChoiceModal);
+        close_link_button.addEventListener('click',toggleLinkModal);
+        cancel_link_button.addEventListener('click',toggleLinkModal);
+        store_link_button.addEventListener('click',toggleLinkModal);
+        
+
         function uploadContent(){
-            const folder_name=JSON.parse('<%- JSON.stringify(folder_title) %>');
-            console.log(folder_name);
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            //console.log(folder_name);
             const title=$('#input_content_title').val();
             const content=$('#input_content').val();
             const color=$('#content_color option:selected').val();
@@ -256,9 +356,9 @@ for(i=0;i<star.length;i++){
                 $.ajax({
                     type:'POST',
                     async:true,
-                    url:'/add',
+                    url:''+folder_id+'/add',
                     data:{
-                        folder_name:folder_name,
+                        folder_id:folder_id,
                         postIt_name:title,
                         postIt_content:content,
                         postIt_type:'content',
@@ -311,9 +411,9 @@ for(i=0;i<star.length;i++){
 
     <script>
         function uploadLink(){
-            var folder_name=JSON.parse('<%- JSON.stringify(folder_title) %>');
-            console.log(folder_name);
-            const title=$('#input_link_text').val();
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            //console.log(folder_name);
+            const title=$('#input_link_title').val();
             const link=$('#input_link').val();
             const color=$('#link_color option:selected').val();
             if(title.trim()==''){
@@ -326,9 +426,9 @@ for(i=0;i<star.length;i++){
                 $.ajax({
                     type:'POST',
                     async:true,
-                    url:''+folder_name+'/add',
+                    url:''+folder_id+'/add',
                     data:{
-                        folder_id:folder_name,
+                        folder_id:folder_id,
                         postIt_name:title,
                         postIt_type:'link',
                         postIt_content:link,
@@ -337,9 +437,9 @@ for(i=0;i<star.length;i++){
 
                     },
                     success:function(data){
-                        console.log('포스트잇 글 저장 완료');
+                        console.log('포스트잇 링크 저장 완료');
                     },error:function(err){
-                        console.log('포스트잇 글 저장 실패');
+                        console.log('포스트잇 링크 저장 실패');
                     }
                 })
             }
@@ -525,6 +625,7 @@ for(i=0;i<star.length;i++){
                 storeTodoButton.addEventListener('click',toggleTodoModal);
 
                 $('.modal-todo-plus').click(function(event){
+                    const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>')
                     var new_content=$('#modal-todo').val();
                     //var new_todo_id=todolist._id;
                     if(new_content.trim()===''){ //내용을 입력하지 않은 경우
@@ -534,7 +635,7 @@ for(i=0;i<star.length;i++){
                         $.ajax({
                             type:'POST',
                             async:true,
-                            url:'/:id/todo',
+                            url:''+folder_id+'/todo',
                             data:{
                                 todo_content:new_content,
                                 todo_finished:false
