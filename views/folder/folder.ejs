@@ -39,52 +39,22 @@
                     </p>
                     
                     <div id="wrap_postit" class="wrap_postit">
-                    <!-- <div  id="postIt_0" class="postIt">
-                        <img id="wow"class="post_img" src="media/Post_yellow.png"><p class="post">pid란?</p>
-                        <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
-                        <img class="three_button" src="media/three_button.png" onclick="showPostMenu(0);">
-                        <div id="dropdown-content0" class="dropdown_content"> 
-                        <button role="menuitem" class="dropdown_choice" id="revise_post0" onclick="revisePostClicked(0);"></button>
-                        <button role="menuitem" class="dropdown_choice" id="delete_post0" onclick="deletePostClicked(0);"></button>
-                        </div>
-                        
-                    </div>
-                    <div id="postIt_1" class="postIt">
-                        <img id="wow2" class="post_img"src="media/post_yellow.svg"><p class="post">shell이란?</p>
-                        <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(1);">
-                        <img class="three_button" src="media/three_button.png" onclick="showPostMenu(1);">
-                        <div id="dropdown-content1" class="dropdown_content">
-                            <button role="menuitem" class="dropdown_choice" id="revise_post1" onclick="revisePostClicked(1);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_post1" onclick="deletePostClicked(1);"></button>
+                        <% for(var i=0;i<postIt.length; i++) { %>
+                            <div class="postIt">
+                                <% if(postIt[i].fixed) { %>
+                                    <img class="post_img" src=<%= postIt[i].postIt_color%>>
+                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
+                                    <img class="three_button" src="media/three_button.png">
+                                <% }else { %>
+                                    <img class="post_img" src=<%= postIt[i].postIt_color%>>
+                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(0);">
+                                    <img class="three_button" src="media/three_button.png">
+                                <% } %>
                             </div>
-                    </div>
-                    <div id="postIt_2" class="postIt">
-                        <img class="post_img" src="media/post_red.svg"><p class="post">scheduler란?</p>
-                        <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(2);">
-                        <img class="three_button" src="media/three_button.png" onclick="showPostMenu(2);">
-                        <div id="dropdown-content2" class="dropdown_content">
-                            <button role="menuitem" class="dropdown_choice" id="revise_post2" onclick="revisePostClicked(2);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_post2" onclick="deletePostClicked(2);"></button>
-                            </div>
-                    </div>
-                    <div id="postIt_3" class="postIt">
-                        <img class="post_img" src="media/post_orange.svg"><p class="post">chap1 정리</p>
-                        <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(3);">
-                        <img class="three_button" src="media/three_button.png" onclick="showPostMenu(3);">
-                        <div id="dropdown-content3" class="dropdown_content">
-                            <button role="menuitem" class="dropdown_choice" id="revise_post3" onclick="revisePostClicked(3);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_post3" onclick="deletePostClicked(3);"></button>
-                            </div>
-                    </div>
-                    <div id="postIt_4" class="postIt">
-                        <img class="post_img" src="media/post_green.svg"><p class="post">ssu_shell.c</p>
-                        <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked(4);">
-                        <img class="three_button" src="media/three_button.png" onclick="showPostMenu(4);">
-                        <div id="dropdown-content4 " class="dropdown_content" data-value='close'>
-                            <button role="menuitem" class="dropdown_choice" id="revise_post4" onclick="revisePostClicked(4);"></button>
-                            <button role="menuitem" class="dropdown_choice" id="delete_post4" onclick="deletePostClicked(4);"></button>
-                            </div>
-                    </div> -->
+                            <% } %>
+                    
                     <script>
                         var star=document.getElementsByClassName('fixed_star');
                         for(i=0;i<star.length;i++){
@@ -97,31 +67,20 @@
                             }
                         }
                         </script>
-                    <!-- <div id="postIt_plus" class="postIt">
-                        <img class="post_img" src="media/post_it_orange.png"><p class="post">추가하기</p></div> -->
-                    <!-- <a data-toggle="modal" href="#choiceTypeModal" id="openBtn" class="btn btn-primary">추가하기</a> -->
-                <!-- </div> -->
-            
-                <!-- <div class="postIt" id="openBtn"></div>
-                <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
-                    <img class="post_img" src="media/post_it_orange.png">
-                    
-                </a>
-                <p>포스트잇 추가하기</p>
-                </div> -->
+                
 
                 <script>
-                    $(document).click(function(e){
-                        var dropdown=document.getElementsByClassName('dropdown_content');
-                        for(i=0;i<dropdown.length;i++){
-                        var value=dropdown[i].getAttribute('data-value');
-                            if(!(e.target.closest('.dropdown_content'))){
-                                if(value=='open'){
-                            console.log("닫는 중");
+                    // $(document).click(function(e){
+                    //     var dropdown=document.getElementsByClassName('dropdown_content');
+                    //     for(i=0;i<dropdown.length;i++){
+                    //     var value=dropdown[i].getAttribute('data-value');
+                    //         if(!(e.target.closest('.dropdown_content'))){
+                    //             if(value=='open'){
+                    //         console.log("닫는 중");
                             
-                                }
-                        }}
-                    })
+                    //             }
+                    //     }}
+                    // })
 
                     // document.addEventListener('click',function(e){
                     //     var classList=document.getElementsByClassName('dropdown_content')
@@ -136,12 +95,57 @@
                     //         console.log("그 곳을 클릭함")
                     //     }
                     // })
+
+        function addNewPost(type,post, post_color){ //동적 추가용
+            var post_name=post.post_name;
+            var post_content=post.post_content;
+            var post_star=post.post_star;
+
+            var parent_post=document.getElementById('wrap_postit');
+
+            var wrap=document.createElement('div');
+            wrap.setAttribute('class','postIt');
+
+            var post_img=document.createElement('img');
+            post_img.setAttribute('class','post_img');
+            post_img.setAttribute('src',post_color);
+
+            var post_p=document.createElement('p');
+            post_p.setAttribute('class','post');
+            post_p.innerHTML=post_name;
+            console.log(post_p.innerHTML);
+            var star_img=document.createElement('img');
+            star_img.setAttribute('class','fixed_star');
+            star_img.setAttribute('src','/media/empty_star.png');
+            star_img.addEventListener('click',function(){
+
+            }); 
+
+            
+
+            post_img.append(post_p);
+            wrap.append(post_img);
+            wrap.append(star_img);
+            
+            parent_post.append(wrap);
+
+            if(type=='content'){
+            post_p.addEventListener('click',function(){
+                ; //modal로 제목, 내용, 삭제버튼 띄우기
+            });
+            }else if(type=='link'){
+                post_p.addEventListener('click',function(){
+                    var link=window.open();
+                    link.location=post_content;
+            })
+            }else{ //type=='file'
+                ;
+            }
+
+        }
+
                 </script>
 
-
-    <!-- <a data-toggle="modal" href="#choiceTypeModal" class="postIt" id="openBtn">
-        <img class="post_img" src="media/post_gray.svg" value="추가하기">
-    </a> -->
 
     <div id="postIt_plus">
         <img src="/media/folder_black.svg"/><p>추가하기</p>
@@ -367,12 +371,74 @@
 
                     },
                     success:function(data){
-                        console.log('포스트잇 글 저장 완료');
+                        //console.log('포스트잇 글 저장 완료');
+                        var new_post={
+                            post_name:title,
+                            post_content:content,
+                            post_star:false
+                        }
+                        addNewPost('content',new_post,color);
                     },error:function(err){
                         console.log('포스트잇 글 저장 실패');
                     }
                 })
             }
+        }
+
+
+
+
+        function uploadLink(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            //console.log(folder_name);
+            const title=$('#input_link_title').val();
+            const link=$('#input_link').val();
+            const color=$('#link_color option:selected').val();
+            if(title.trim()==''){
+                alert("제목을 입력해주세요.");
+            }else if(link.trim()==''){
+                alert("링크를 입력해주세요.");
+            }else{
+                var new_post;
+                
+                $.ajax({
+                    type:'POST',
+                    async:true,
+                    url:''+folder_id+'/add',
+                    data:{
+                        folder_id:folder_id,
+                        postIt_name:title,
+                        postIt_type:'link',
+                        postIt_content:link,
+                        postIt_star:false,
+                        postIt_color:color
+
+                    },
+                    success:function(data){
+                        //console.log('포스트잇 링크 저장 완료');
+                        var new_post={
+                            post_name:title,
+                            post_content:link,
+                            post_star:false
+                        }
+                        addNewPost('link',new_post,color);
+                    },error:function(err){
+                        //console.log('포스트잇 링크 저장 실패');
+                    }
+                })
+            }
+        }
+
+        function showContent(type, title, content){
+            if(type=='link'){
+                var link=window.open();
+                link.location=content;
+            }else if(type=='content'){
+                ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
+            }else { //type=='file'
+                ;
+            }
+
         }
     </script>
 
@@ -409,42 +475,6 @@
         </div>
     </div>  -->
 
-    <script>
-        function uploadLink(){
-            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
-            //console.log(folder_name);
-            const title=$('#input_link_title').val();
-            const link=$('#input_link').val();
-            const color=$('#link_color option:selected').val();
-            if(title.trim()==''){
-                alert("제목을 입력해주세요.");
-            }else if(link.trim()==''){
-                alert("링크를 입력해주세요.");
-            }else{
-                var new_post;
-                
-                $.ajax({
-                    type:'POST',
-                    async:true,
-                    url:''+folder_id+'/add',
-                    data:{
-                        folder_id:folder_id,
-                        postIt_name:title,
-                        postIt_type:'link',
-                        postIt_content:link,
-                        postIt_star:false,
-                        postIt_color:color
-
-                    },
-                    success:function(data){
-                        console.log('포스트잇 링크 저장 완료');
-                    },error:function(err){
-                        console.log('포스트잇 링크 저장 실패');
-                    }
-                })
-            }
-        }
-    </script>
 
     <!-- <div class="modal" id="choice_file" data-backdrop="static">
         <div class="modal-dialog modal-writing3">
