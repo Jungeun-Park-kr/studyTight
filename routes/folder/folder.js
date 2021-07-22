@@ -32,7 +32,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
         const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj});
         
-        
+        const postIt=await PostIt.find({folder_id:id_obj});
         //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
         //const postIt=await PostIt.find({folder_name:folder_title}).populate('postIt');
         
@@ -45,6 +45,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
             folder_id:id_obj,
             //folder : folder,
             //postIt: postIt,
+            postIt: postIt,
             todolist: todolist
 
         });
@@ -69,7 +70,8 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
             postIt_type:postIt_type,
             postIt_content:postIt_content,
             postIt_star:postIt_star,
-            postIt_color:postIt_color
+            postIt_color:postIt_color,
+            folder_id:folder_id
 
         }); //포스트잇 만들기
         postItList.push(postIt._id);
@@ -77,7 +79,7 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         //폴더에 정보 추가하기
         //console.log("folder내에 배열에 접근 전");
         await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
-            $set:{
+            $push:{
                 postIt:postItList
             }
         });
@@ -85,11 +87,11 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         //console.log("folder내에 배열에 접근 완료");
 
         res.send({
-            color:postIt.postIt_color,
-            star:postIt.postIt_star,
-            name:postIt.postIt_name,
-            content:postIt.postIt_content,
-            type:postIt.postIt_type});
+            postIt_color:postIt.postIt_color,
+            postIt_star:postIt.postIt_star,
+            postIt_name:postIt.postIt_name,
+            postIt_content:postIt.postIt_content,
+            postIt_type:postIt.postIt_type});
     }catch(err){
         next(err);
     }

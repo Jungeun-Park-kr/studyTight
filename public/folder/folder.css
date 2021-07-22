@@ -265,19 +265,17 @@ a:link {
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-#postIt_plus{
+/* #postIt_plus{
     display:inline-block;
     margin:20px 35px 20px 20px;
     width: 90px; 
     height: 90px;
-}
+} */
 
 .post_img{
     width:100%;
     height:90px;
-    background-image:url(media/transparent.jpg);
-    background-color: #6ED4D8;
-    background-size: contain;
+
  }   
 .postIt > p {
     font-size:12px;
