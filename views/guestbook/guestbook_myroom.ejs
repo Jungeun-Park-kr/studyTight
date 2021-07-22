@@ -19,19 +19,12 @@
 
     <link rel="stylesheet" type="text/css" href="/public/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/component.css" />
-    <link rel="stylesheet" type="text/css" href="/public/timetable/timetable_main.css" />
 
-    <style>
-        @import url(/guestbook/guestbook_myroom.css);
-        @import url(/guestbook/index.css);
-        @import url(/guestbook/reply.css);
-        @import url(/guestbook/add_popup.css);
-        @import url(/new_mainframe.css);
-        @import url(/font.css);
-        @import url(mainframe_shortcuts.css);
-        @import url(/guestbook/friends_edit.css);
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/add_popup.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/index.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/reply.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/guestbook_myroom.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/friends_edit.css" />
 </head>
 
 <div id="header" role="banner">
@@ -97,84 +90,15 @@
 
     <div id="container" role="main">
         <div class="information-menu">
+            <!-- <img id="MyUserimg" src=<%=user.profile_image %> -->
             <div class="left-menus-book" id=leftmenu>
+                <li class="grade">
+                    <img id="MyUserimg" src="/public/media/calendar.png">
+                </li>
                 <li class="edit-profile">
                     <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
                 </li>
             </div>
-            <script>
-                function showprofile() {
-                    var username = localStorage.getItem('username');
-                    activeUser = getActiveUser(username);
-                    myprofile = activeUser.guestbook.profile;
-                    var parent_table = document.getElementById("leftmenu"); //부모테이블
-                    var profile = document.createElement("div");
-                    var new_td1 = document.createElement("li");
-                    var userimage = document.createElement('img');
-                    userimage.src = activeUser.userImage; // 이미지 경로 설정
-                    //userimage.innerHTML = "&nbsp" + activeUser.name;
-
-
-                    //여섯번째 li , 테스트에서는 공개되지 않음.
-                    if (myprofile.grade_secret == false) {
-                        var Fifth = document.createElement("li");
-                        Fifth.setAttribute("class", "grade");
-                        var Fifthimage = document.createElement('img');
-                        Fifthimage.src = "media/calendar.png";
-                        Fifth.innerHTML = "&nbsp" + myprofile.grade + "학년";
-                        Fifth.prepend(Fifthimage);
-                        parent_table.prepend(Fifth);
-                    }
-
-                    //네번째 li
-                    if (myprofile.major_secret == false) {
-                        var fourth = document.createElement("li");
-                        fourth.setAttribute("class", "major");
-                        var fourthimage = document.createElement('img');
-                        fourthimage.src = "media/mortarboard.png";
-                        fourth.innerHTML = "&nbsp" + myprofile.major;
-                        fourth.prepend(fourthimage);
-                        parent_table.prepend(fourth);
-                    }
-
-                    //여기부턴 공개여부에 따라 달라짐
-                    //세번째 li
-                    //console.log(myprofile.school_secret); _데이터테스트
-                    if (myprofile.school_secret == false) {
-                        var third = document.createElement("li");
-                        third.setAttribute("class", "school");
-                        var thirdimage = document.createElement('img');
-                        thirdimage.src = "media/office-building.png";
-                        third.innerHTML = "&nbsp" + myprofile.school;
-                        third.prepend(thirdimage);
-                        parent_table.prepend(third);
-                    }
-
-
-                    //두번째 li
-                    var second = document.createElement("li");
-                    second.setAttribute("class", "menu_contact");
-                    var secondimage = document.createElement('img');
-                    secondimage.src = "media/user.png";
-                    second.innerHTML = "&nbsp" + activeUser.name;
-                    second.prepend(secondimage);
-                    parent_table.prepend(second);
-
-                    //첫번째 profile.
-                    new_td1.setAttribute("class", "profile");
-                    new_td1.appendChild(userimage);
-                    profile.appendChild(new_td1);
-                    parent_table.prepend(profile);
-
-                }
-            </script>
-            <script>
-                showprofile();
-                var username = localStorage.getItem('username');
-                activeUser = getActiveUser(username);
-                myprofile = activeUser.guestbook.profile;
-                console.log(myprofile);
-            </script>
 
         </div>
         <div class="section">
@@ -200,47 +124,94 @@
 
                             <!-- 4번째 모달팝업.-->
                             <div class="modal4">
-                                <div class="modal-content">
+                                <div class="modal-content4">
                                     <span class="close-button4">&times;</span>
-                                    <h1 class="title">친구 추가하기</h1>
+                                    <h1 class="title">프로필 수정하기</h1>
                                     <!-- 여기부터 직접 들어갈 Edit 1 파일-->
                                     <div class="course_add_list">
                                         <div class="course_section">
                                             <div class="secret_section">
-                                                <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                                <div class="course_secret_label">공개여부</div>
                                             </div>
                                             <div class="course_title_section">
-
+                                                <div class="course_title_label">이름</div>
                                                 <div class="course_title_form">
-                                                    <input type="text" id="course_title" placeholder="ex) StudyTight@naver.com" />
+                                                    <input type="text" id="course_title" placeholder="내용을 입력해주세요" />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
 
                                                 </div>
-                                                <div class="search_btn">
-                                                    <input id="search_course" type="button" title="검색하기" value="검색" onclick="addprofile();"></input>
+                                            </div>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">학교(소속)</div>
+                                                <div class="professor_name_form">
+                                                    <input type="text" id="school" placeholder="내용을 입력해주세요" />
+                                                </div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime"id="school_secret"   checked>공개</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video"  >비공개</label>
+                                                    </form>
                                                 </div>
                                             </div>
-
-
-                                        </div>
-                                        <hr>
-                                        <div class="professor_name_section">
-                                            <div class="professor_name_label">양지영</div>
-                                            <div class="professor_name_form">
-                                                sefsef@nate.com
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">학과</div>
+                                                <div class="professor_name_form">
+                                                    <input type="text" id="major" placeholder="내용을 입력해주세요" />
+                                                </div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="major_secret"  checked>공개</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video" >비공개</label>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <input type="checkbox" name="select_friend" value="select" checked>
-                                        </div>
-                                        <div class="professor_name_section">
-                                            <div class="professor_name_label">최시언</div>
-                                            <div class="professor_name_form">
-                                                noino0819@naver.com
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">학년</div>
+                                                <div class="professor_name_form">
+                                                    <input type="text" id="grade" placeholder="내용을 입력해주세요" />
+                                                </div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="grade_secret"  checked>공개</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video" >비공개</label>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <input type="checkbox" name="select_friend" value="select" checked>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">나이</div>
+                                                <div class="professor_name_form">
+                                                    <input type="text" id="age" placeholder="내용을 입력해주세요" />
+                                                </div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="age_secret"   checked>공개</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video"  >비공개</label>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="course_type_section">
+                                                <div class="course_type_lable">성별</div>
+                                                <div class="course_type_form" id="gender">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="XY"  checked>남자</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video"  id="XX">여자</label>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="course_type_section">
+                                                <div class="course_type_lable">시간표</div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <form>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="secret"   checked>공개</label>
+                                                        <label><input type="radio" name="course_type" size="20" value="online_video" id="notsecret" >비공개</label>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="add_btn">
-                                            <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="선택하기" onclick="addprofile();"></input>
+                                            <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
                                         </div>
                                     </div>
                         </form>
