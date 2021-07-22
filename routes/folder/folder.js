@@ -31,14 +31,11 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         //const folder = await Folder.find({user_id:res.locals.user._id}).find({folder_name:_folder});  
         //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
         const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj});
-        
         const postIt=await PostIt.find({folder_id:id_obj});
+        //const postIt=await PostIt.find({folder_id:id_obj}).sort({postIt_star:true}); 
+        //위에처럼 했더니 invalid sort value라고 에러났음!
         //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
-        //const postIt=await PostIt.find({folder_name:folder_title}).populate('postIt');
         
-        //await Todo.deleteMany({user_id:res.locals.user._id, todo_finished:true, register_date:{$ne:getCurrentDate()}})
-        //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
-        //await Todo.updateMany({user_id:res.locals.user._id, register_date:getCurrentDate()})
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
             folder_title: folder,
