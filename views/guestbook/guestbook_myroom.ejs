@@ -91,10 +91,36 @@
     <div id="container" role="main">
         <div class="information-menu">
             <!-- <img id="MyUserimg" src=<%=user.profile_image %> -->
+
             <div class="left-menus-book" id=leftmenu>
-                <li class="grade">
-                    <img id="MyUserimg" src="/public/media/calendar.png">
+
+                <li class="profile">
+                    <img id="MyUserimg" src=<%=user.profile_image %>>
                 </li>
+
+                <li class="school">
+                    <% if (profile.school_private) { %>
+                        <img id="school-card" src="/public/media/office-building.png">
+                        <%=profile.school+'소속'%>
+                            <% } %>
+                </li>
+                <li class="grade">
+                    <% if (profile.grade_private) { %>
+                        <img id="grade-card" src="/public/media/calendar.png">
+                        <%=profile.grade+'학년'%>
+                            <% } %>
+                </li>
+                <li class="major">
+                    <% if (profile.major_private) { %>
+                        <img id="mahor-card" src="/public/media/books.png">
+                        <%=profile.major+'전공'%>
+                            <% } %>
+                </li>
+                <!-- <li class="grade">
+                    <img id="grade-card" src="/public/media/mortarboard.png">
+                    <%=profile.grade+'학년'%>
+                </li> -->
+
                 <li class="edit-profile">
                     <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
                 </li>
@@ -294,7 +320,7 @@
                                         <div class="course_title_section">
 
                                             <div class="course_title_form">
-                                                <input type="text" id="search_email" placeholder="ex) StudyTight@naver.com" />
+                                                <input type="text" id="search_email" name="search_email" placeholder="ex) StudyTight@naver.com" />
                                             </div>
                                             <div class="course_type_form" id="course_type_radio">
 
@@ -509,9 +535,20 @@
                     <div class="friends_list_box">
                         <table id="course_table">
                             <tbody id="course_body">
-                                <script>
-                                    showfriendlist();
-                                </script>
+
+                                <% for(var i = 0; i < friend.length; i++){ %>
+                                    <tr>
+                                        <td>
+                                            <%=friend[i].Friend_ID %>
+                                        </td>
+                                        <td>
+                                            <%=friend[i].Friend_Name %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+
+
+
                             </tbody>
                         </table>
                     </div>
@@ -801,7 +838,7 @@
                                 //다 나와있으면
                                 console.log(school_private);
                                 $.ajax({
-                                    type: "POST",
+                                    type: "PATCH",
                                     async: true,
                                     url: '/guestbook/editprofile',
                                     data: {
@@ -823,13 +860,60 @@
                                     error: function(err) { // POST 요청 실패시
                                         console.log('프로필 수정 실패' + err);
                                         alert('프로필 수정을 실패했습니다. 다시 시도해주세요.');
-                                        toggleModal();
+                                        //toggleModal4();
                                     }
                                 });
                                 //사라지게 하는거 추가.
                             }
 
                         };
+
+                        // 친구추가
+
+                        // $('#btn_add_course????').bind('click', function() {
+                        //     saveCourse(this);
+                        // });
+
+                        // var saveCourse = function(event) {
+                        //     $('#btn_add_course2').unbind('click');
+                        //     var user_id = user_id;
+                        //     var search_email = $('#search_email').val();
+
+                        //     if (search_email.trim() === '') {
+                        //         alert('이메일을 입력해주세요.');
+                        //     } else {
+                        //         //다 나와있으면
+                        //         console.log(search_email);
+                        //         $.ajax({
+                        //             type: "GET",
+                        //             async: true,
+                        //             url: '/guestbook/searchemail',
+                        //             data: {
+                        //                 name: name,
+                        //                 school: school,
+                        //                 school_private: school_private,
+                        //                 major: major,
+                        //                 major_private: major_private,
+                        //                 grade: grade,
+                        //                 grade_private: grade_private,
+                        //                 age: age,
+
+                        //             },
+                        //             success: function(data) { // POST요청 성공한 경우
+                        //                 // 버튼 더이상 클릭되지 않게 하기
+
+
+                        //             },
+                        //             error: function(err) { // POST 요청 실패시
+                        //                 console.log('프로필 수정 실패' + err);
+                        //                 alert('프로필 수정을 실패했습니다. 다시 시도해주세요.');
+                        //                 toggleModal();
+                        //             }
+                        //         });
+                        //         //사라지게 하는거 추가.
+                        //     }
+
+                        // };
                     </script>
 
                     <script>

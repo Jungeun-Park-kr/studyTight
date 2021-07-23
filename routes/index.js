@@ -6,6 +6,8 @@ const Course = require('../models/course');
 const Folder = require('../models/folder');
 const Dday = require('../models/d_day');
 const Profile = require('../models/profile');
+const Friends = require('../models/friend');
+// const Email = require('../models/searchemail');
 
 var objectId = require('mongodb').ObjectID;
 //Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
@@ -323,5 +325,38 @@ router.post('/eidtprofile', isLoggedIn, async(req, res, next) => {
     }
 
 });
+
+// router.get('/searchemail', isLoggedIn, async(req, res, next) => {
+//     const { school, school_private, major, major_private, grade, grade_private, timetable_private, age, gender } = req.body;
+
+//     try {
+//         // mongoDB에 프로파일 추가
+//         const profile = await Profile.create({
+
+//             user_id: req.user._id,
+//             school: school,
+//             school_private: school_private,
+//             major: major,
+//             major_private: major_private,
+//             grade: grade,
+//             grade_private: grade_private,
+//             age: age,
+
+//         });
+
+//         res.send({
+//             _id: course._id,
+//             user_id: req.user._id, // 해당 과목의 사용자 obj_id (email 아님! mongodb id값임!)
+//             course_name: name,
+//             professor_name: professor,
+//             schedules: timeList, // 과목 시간 리스트
+//             createdAt: getCurrentDate(), // 과목 추가 날짜
+//         });
+
+//     } catch (err) {
+//         next(err);
+//     }
+
+// });
 
 module.exports = router;
