@@ -107,7 +107,7 @@
                 <div class="friends">
                     <div class="friends_add">
                         <div class="title_msg">Friends</div>
-                        <form>
+                        <div>
                             <select name="group-dropdown">
                             <option value="none">=== 선택 ===</option>
                             <option value="korean" selected>기본그룹</option>
@@ -133,48 +133,58 @@
                                             <div class="secret_section">
                                                 <div class="course_secret_label">공개여부</div>
                                             </div>
-                                            <form>
+                                            <form action="/guestbook/editprofile" method="post">
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">이름</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" id="course_title" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="name" id="name" placeholder=<%=user.name %> />
                                                     </div>
                                                     <div class="course_type_form1" id="course_type_radio">
-                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime"id="school_secret"   checked>공개</label>
-                                                        <label><input type="radio" name="course_type" size="20" value="online_video"  >비공개</label>
+                                                        <label><input type="radio" name="name_private"  size="20" value='true' id="names"   checked>공개</label>
+                                                        <label><input type="radio" name="name_private"  size="20" value='flase'  >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학교</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" id="school" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="school" id="school" placeholder="내용을 입력해주세요" />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
-                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime"id="school_secret"   checked>공개</label>
-                                                        <label><input type="radio" name="course_type" size="20" value="online_video"  >비공개</label>
+                                                        <label><input type="radio" name="school_private" size="20" value='true' id="school_secret"   checked>공개</label>
+                                                        <label><input type="radio" name="school_private" size="20" value='flase'  >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학과</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" id="major" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="major" id="major" placeholder="내용을 입력해주세요" />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
-                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="major_secret"  checked>공개</label>
-                                                        <label><input type="radio" name="course_type" size="20" value="online_video" >비공개</label>
+                                                        <label><input type="radio" name="major_private" size="20" value='true' id="major_secret"  checked>공개</label>
+                                                        <label><input type="radio" name="major_private" size="20" value='flase' >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학년</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" id="grade" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="grade" id="grade" placeholder="내용을 입력해주세요" />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
-                                                        <label><input type="radio" name="course_type" size="20" value="online_realtime" id="grade_secret"  checked>공개</label>
-                                                        <label><input type="radio" name="course_type" size="20" value="online_video" >비공개</label>
+                                                        <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
+                                                        <label><input type="radio" name="grade_private" size="20" value='flase' >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
+                                                    <div class="professor_name_label">나이</div>
+                                                    <div class="professor_name_form">
+                                                        <input type="text" id="age" name="age" placeholder="내용을 입력해주세요" />
+                                                    </div>
+                                                    <div class="course_type_form" id="course_type_radio">
+                                                        <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
+                                                        <label><input type="radio" name="age_private" size="20" value='flase' >비공개</label>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="professor_name_section">
                                                     <div class="professor_name_label">나이</div>
                                                     <div class="professor_name_form">
                                                         <input type="text" id="age" placeholder="내용을 입력해주세요" />
@@ -183,32 +193,35 @@
                                                         <label><input type="radio" name="course_type" size="20" value="online_realtime" id="age_secret"   checked>공개</label>
                                                         <label><input type="radio" name="course_type" size="20" value="online_video"  >비공개</label>
                                                     </div>
-                                                </div>
-                                                <div class="course_type_section">
+                                                </div> -->
+                                                <!-- <div class="course_type_section">
                                                     <div class="course_type_lable">성별</div>
                                                     <div class="course_type_form" id="gender">
                                                         <label><input type="radio" name="course_type" size="20" value="online_realtime" id="XY"  checked>남자</label>
                                                         <label><input type="radio" name="course_type" size="20" value="online_video"  id="XX">여자</label>
 
                                                     </div>
-                                                </div>
-                                                <div class="course_type_section">
+                                                </div> -->
+                                                <!-- <div class="course_type_section">
                                                     <div class="course_type_lable">시간표</div>
                                                     <div class="course_type_form" id="course_type_radio">
 
                                                         <label><input type="radio" name="course_type" size="20" value="online_realtime" id="secret"   checked>공개</label>
                                                         <label><input type="radio" name="course_type" size="20" value="online_video" id="notsecret" >비공개</label>
                                                     </div>
+                                                </div> -->
+                                                <div class="add_btn">
+                                                    <input id="btn_add_course" type="submit" title="저장하기" value="저장하기"></input>
                                                 </div>
                                             </form>
                                         </div>
 
-                                        <div class="add_btn">
-                                            <input id="btn_add_course" type="submit" title="저장하기" value="저장하기" onclick="addprofile();"></input>
-                                        </div>
+                                        <!-- <div class="add_btn">
+                                            <input id="btn_add_course" type="submit" title="저장하기" value="저장하기"></input>
+                                        </div> -->
                                     </div>
-                        </form>
-                        </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!--친구 수정을 위합 모달 팝업-->
@@ -258,7 +271,7 @@
                                         친구 삭제하기
                                     </div>
                                     <div class="add_btn">
-                                        <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
+                                        <input id="btn_add_course" type="button" title="저장하기" value="저장하기"></input>
                                     </div>
                                 </div>
                                 </form>
@@ -281,13 +294,13 @@
                                         <div class="course_title_section">
 
                                             <div class="course_title_form">
-                                                <input type="text" id="course_title" placeholder="ex) StudyTight@naver.com" />
+                                                <input type="text" id="search_email" placeholder="ex) StudyTight@naver.com" />
                                             </div>
                                             <div class="course_type_form" id="course_type_radio">
 
                                             </div>
                                             <div class="search_btn">
-                                                <input id="search_course" type="button" title="검색하기" value="검색" onclick="addprofile();"></input>
+                                                <input id="search_course" type="button" title="검색하기" value="검색"></input>
                                             </div>
                                         </div>
 
@@ -309,7 +322,7 @@
                                         <input type="checkbox" name="select_friend" value="select" checked>
                                     </div>
                                     <div class="add_btn">
-                                        <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="선택하기" onclick="addprofile();"></input>
+                                        <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="선택하기"></input>
                                     </div>
                                 </div>
                                 </form>
@@ -357,21 +370,24 @@
                                         <div class="course_title_section">
 
                                             <div class="course_title_form">
-                                                <input type="text" id="course_title" placeholder="추가할 그룹의 이름을 적어주세요" />
+                                                <input type="text" id="group" placeholder="추가할 그룹의 이름을 적어주세요" />
                                             </div>
                                             <div class="course_type_form" id="course_type_radio">
 
                                             </div>
                                             <div class="search_btn">
-                                                <input id="search_course" type="button" title="추가하기" value="그룹추가" onclick="addprofile();"></input>
+                                                <input id="search_course" type="button" title="추가하기" value="그룹추가"></input>
                                             </div>
                                         </div>
 
 
                                     </div>
                                     <div class="add_btn">
-                                        <input id="btn_add_course" type="button" title="저장하기" value="저장하기" onclick="addprofile();"></input>
+                                        <input id="btn_add_course" class="trigger3" type="button" title="저장하기" value="저장하기"></input>
                                     </div>
+
+
+
                                 </div>
 
                                 <script type="text/javascript">
@@ -507,7 +523,7 @@
                     </div>
                     <div class="writing-button-secret">
                         <div class="writing-button">
-                            <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup1();"></input>
+                            <input type="button" id="submit" value="글쓰기"></input>
                         </div>
                         <div class="secret-checkbox">
                             <input type="checkbox" name="비밀글" id=mysecretbox> 비밀글
@@ -766,11 +782,11 @@
                     <div class="reply-place" id=replyplace1>
                         <div class="writing-box">
                             <!--행(row)선언-->
-                            <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                            <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
                         </div>
                         <div class="writing-button-secret">
                             <div class="writing-button">
-                                <input type="button" id="submit" value="글쓰기" onclick="showwritingPopup();"></input>
+                                <input type="button" id="submit" value="글쓰기"></input>
                             </div>
                             <div class="secret-checkbox">
                                 <input type="checkbox" name="비밀글"> 비밀글

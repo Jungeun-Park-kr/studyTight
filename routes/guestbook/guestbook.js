@@ -26,8 +26,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             major_private: req.body.major_private,
             grade: req.body.grade,
             grade_private: req.body.grade_private,
-            // timetable_private: timetable_private,
-            birth_private: req.body.birth_private
+            age_private: req.body.birth_private
         });
 
 
@@ -39,33 +38,54 @@ router.get('/', isLoggedIn, async(req, res, next) => {
     }
 });
 
-router.post('/', isLoggedIn, async(req, res, next) => {
-    var content = req.body.todo_content;
 
+router.post('/editprofile', isLoggedIn, async(req, res, next) => {
+    const { school, school_private, major, major_private, grade, grade_private, timetable_private, age, gender } = req.body;
 
     try {
-        //몽고db에 저장
-        const todo = await Todo.create({
+        // mongoDB에 프로파일 추가
+        const profile = await Profile.create({
             user_id: req.user._id,
-            todo_content: content,
-            register_date: getCurrentDate(),
-            todo_finished: false
+            school: school,
+            school_private: school_private,
+            major: major,
+            major_private: major_private,
+            grade: grade,
+            grade_private: grade_private,
+            age: age,
+
+        });
+
+        console.log({
+            user_id: req.user._id,
+            school: school,
+            school_private: school_private,
+            major: major,
+            major_private: major_private,
+            grade: grade,
+            grade_private: grade_private,
+            age: age,
         });
 
         res.send({
-            _id: todo._id,
-            user_id: req.user._id,
-            todo_content: todo.todo_content,
-            todo_finished: todo.todo_finished
+            user_id: req.user._id, //박정은의 오브젝트 아이디.
+            school: profile.school,
+            school_private: profile.school_private,
+            major: profile.major,
+            major_private: profile.major_private,
+            grade: profile.grade,
+            grade_private: profile.grade_private,
+            age: profile.age_private,
         });
-        // res.render('../views/mainframe.ejs',
-        //     { title : 'study Tight', todolist:todo, timetable:timetable, folder: folder}
-        // );
 
     } catch (err) {
+        console.log('에러난듯');
         next(err);
     }
+
 });
+
+module.exports = router;
 
 module.exports = router;
 
