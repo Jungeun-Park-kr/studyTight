@@ -1,7 +1,7 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const Profile = require('../../models/profile');
-const CourseSchedule = require('../../models/course_schedule');
+const { mongo, Mongoose } = require('mongoose');
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -17,18 +17,14 @@ router.get('/', isLoggedIn, async(req, res, next) => {
 
     try {
 
-        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
-
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+            // .select('major')
+            //첫번째 . 까진 id똑같은걸로 찾는거
         res.render('../views/guestbook/guestbook_myroom.ejs', {
-            school: req.body.school,
-            school_private: req.body.school_privat,
-            major: req.body.major,
-            major_private: req.body.major_private,
-            grade: req.body.grade,
-            grade_private: req.body.grade_private,
-            age_private: req.body.birth_private
+            profile: profile[0]
         });
 
+        console.log(profile[0]);
 
 
     } catch (err) {
@@ -40,7 +36,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
 
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
-    const { school, school_private, major, major_private, grade, grade_private, timetable_private, age, gender } = req.body;
+    const { school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
 
     try {
         // mongoDB에 프로파일 추가
@@ -56,36 +52,44 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
         });
 
-        console.log({
-            user_id: req.user._id,
-            school: school,
-            school_private: school_private,
-            major: major,
-            major_private: major_private,
-            grade: grade,
-            grade_private: grade_private,
-            age: age,
-        });
+        //console.log(profile);
 
-        res.send({
-            user_id: req.user._id, //박정은의 오브젝트 아이디.
-            school: profile.school,
-            school_private: profile.school_private,
-            major: profile.major,
-            major_private: profile.major_private,
-            grade: profile.grade,
-            grade_private: profile.grade_private,
-            age: profile.age_private,
-        });
+        // res.send({
+        //     user_id: req.user._id, //박정은의 오브젝트 아이디.
+        //     school: profile.school,
+        //     school_private: profile.school_private,
+        //     major: profile.major,
+        //     major_private: profile.major_private,
+        //     grade: profile.grade,
+        //     grade_private: profile.grade_private,
+        //     age: profile.age_private,
+        // });
 
     } catch (err) {
-        console.log('에러난듯');
+        console.log('guestbookedit error');
         next(err);
     }
 
 });
 
-module.exports = router;
+router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
+
+    const user = await User.fine({ user_id: res.locals.user._id }).populate('user_id');
+
+    try {
+        const user = await User.updateOne({
+            name: name
+        }, {
+            $set: {
+                //
+            }
+        });
+
+
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;
 

@@ -133,7 +133,7 @@
                                             <div class="secret_section">
                                                 <div class="course_secret_label">공개여부</div>
                                             </div>
-                                            <form action="/guestbook/editprofile" method="post">
+                                            <form>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">이름</div>
                                                     <div class="professor_name_form">
@@ -141,37 +141,37 @@
                                                     </div>
                                                     <div class="course_type_form1" id="course_type_radio">
                                                         <label><input type="radio" name="name_private"  size="20" value='true' id="names"   checked>공개</label>
-                                                        <label><input type="radio" name="name_private"  size="20" value='flase'  >비공개</label>
+                                                        <label><input type="radio" name="name_private"  size="20" value='false'  >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학교</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" name="school" id="school" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="school" id="school" placeholder=<%=profile.school%> />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
                                                         <label><input type="radio" name="school_private" size="20" value='true' id="school_secret"   checked>공개</label>
-                                                        <label><input type="radio" name="school_private" size="20" value='flase'  >비공개</label>
+                                                        <label><input type="radio" name="school_private" size="20" value='false'  >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학과</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" name="major" id="major" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="major" id="major" placeholder=<%=profile.major%> />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
                                                         <label><input type="radio" name="major_private" size="20" value='true' id="major_secret"  checked>공개</label>
-                                                        <label><input type="radio" name="major_private" size="20" value='flase' >비공개</label>
+                                                        <label><input type="radio" name="major_private" size="20" value='false' >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
                                                     <div class="professor_name_label">학년</div>
                                                     <div class="professor_name_form">
-                                                        <input type="text" name="grade" id="grade" placeholder="내용을 입력해주세요" />
+                                                        <input type="text" name="grade" id="grade" placeholder=<%=profile.grade%> />
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
                                                         <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
-                                                        <label><input type="radio" name="grade_private" size="20" value='flase' >비공개</label>
+                                                        <label><input type="radio" name="grade_private" size="20" value='false' >비공개</label>
                                                     </div>
                                                 </div>
                                                 <div class="professor_name_section">
@@ -181,7 +181,7 @@
                                                     </div>
                                                     <div class="course_type_form" id="course_type_radio">
                                                         <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
-                                                        <label><input type="radio" name="age_private" size="20" value='flase' >비공개</label>
+                                                        <label><input type="radio" name="age_private" size="20" value='false' >비공개</label>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="professor_name_section">
@@ -211,7 +211,7 @@
                                                     </div>
                                                 </div> -->
                                                 <div class="add_btn">
-                                                    <input id="btn_add_course" type="submit" title="저장하기" value="저장하기"></input>
+                                                    <input id="btn_add_course1" type="submit" title="저장하기" value="저장하기"></input>
                                                 </div>
                                             </form>
                                         </div>
@@ -734,7 +734,6 @@
                                             div1.appendChild(div2);
                                             div1.appendChild(div3);
 
-                                            //console.log(div9);
                                             var mycommentlist = {
                                                 Author: activeUser.name,
                                                 mycommnet: btn.parentNode.parentNode.previousSibling.firstChild.value,
@@ -773,7 +772,64 @@
 
                             }
 
+
                         }
+
+                        $('#btn_add_course1').bind('click', function() {
+                            saveCourse(this);
+                        });
+
+                        var saveCourse = function(event) {
+                            $('#btn_add_course1').unbind('click');
+                            var user_id = user_id;
+                            var school = $('#school').val();
+                            var school_private = $('input[name="school_private"]:checked').val();
+                            var major = $('#major').val();
+                            var major_private = $('input[name="major_private"]:checked').val();
+                            var grade = $('#grade').val();
+                            var grade_private = $('input[name="grade_private"]:checked').val();
+                            var age = $('#age').val();
+                            if (school.trim() === '') {
+                                alert('학교를 입력해주세요.');
+                            } else if (major.trim() === '') {
+                                alert('전공을 입력해주세요.');
+                            } else if (grade.trim() === '') {
+                                alert('학년을 입력해주세요.');
+                            } else if (age.trim() === '') {
+                                alert('나이를 입력해주세요.');
+                            } else {
+                                //다 나와있으면
+                                console.log(school_private);
+                                $.ajax({
+                                    type: "POST",
+                                    async: true,
+                                    url: '/guestbook/editprofile',
+                                    data: {
+                                        name: name,
+                                        school: school,
+                                        school_private: school_private,
+                                        major: major,
+                                        major_private: major_private,
+                                        grade: grade,
+                                        grade_private: grade_private,
+                                        age: age,
+
+                                    },
+                                    success: function(data) { // POST요청 성공한 경우
+                                        // 버튼 더이상 클릭되지 않게 하기
+
+
+                                    },
+                                    error: function(err) { // POST 요청 실패시
+                                        console.log('프로필 수정 실패' + err);
+                                        alert('프로필 수정을 실패했습니다. 다시 시도해주세요.');
+                                        toggleModal();
+                                    }
+                                });
+                                //사라지게 하는거 추가.
+                            }
+
+                        };
                     </script>
 
                     <script>

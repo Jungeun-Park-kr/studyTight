@@ -7,12 +7,12 @@ const profile_schema = new Schema({
 
         ref: 'User'
     },
-    school: { type: String },
+    school: { type: String, required: true },
     school_private: { type: Boolean },
-    major: { type: String },
+    major: { type: String, required: true },
     major_private: { type: Boolean },
-    grade: { type: Number },
-    grade_private: { type: Boolean },
+    grade: { type: Number, required: true },
+    grade_private: { type: Boolean, },
     age_private: { type: Boolean }
 
 });

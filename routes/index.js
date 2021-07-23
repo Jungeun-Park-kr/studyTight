@@ -272,6 +272,25 @@ function getCurrentDate() {
     return new Date(Date.UTC(year, month, today));
 }
 
+router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
+
+    const user = await User.fine({ user_id: res.locals.user._id }).populate('user_id');
+
+    try {
+        const user = await User.updateOne({
+            name: name
+        }, {
+            $set: {
+                //
+            }
+        });
+
+
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.post('/eidtprofile', isLoggedIn, async(req, res, next) => {
     const { school, school_private, major, major_private, grade, grade_private, timetable_private, age, gender } = req.body;
 
@@ -289,7 +308,6 @@ router.post('/eidtprofile', isLoggedIn, async(req, res, next) => {
             age: age,
 
         });
-        console.log('에디트됨.');
 
         res.send({
             _id: course._id,
