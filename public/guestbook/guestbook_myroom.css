@@ -88,6 +88,11 @@ body {
     font-size: 12px;
 }
 
+.edit-profile>#edit-button-id:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
 .information-menu .left-menus-book>li>img {
     width: 18px;
     height: 18px;
@@ -228,6 +233,12 @@ select::-ms-expand {
     height: 30px;
     border: 10px;
     font-size: 12px;
+    cursor: pointer;
+}
+
+.my-room .friends_add .btn_add_course>input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 
 .writing-box {
@@ -260,6 +271,12 @@ select::-ms-expand {
     margin-bottom: 10px;
     border: 10px;
     font-size: 12px;
+    cursor: pointer;
+}
+
+.my-room .writing-button-secret .writing-button>input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 
 .secret-checkbox {
@@ -357,7 +374,15 @@ select::-ms-expand {
     margin-bottom: 10px;
     border: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
+
+.user-small-talking .reply-button:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
+.user-small-talking .reply-button
 
 .my-room .talking-palce {
     display: inline-block;

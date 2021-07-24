@@ -1,5 +1,5 @@
+
 body, button, input, select, table, textarea {
-    background-color: #e7eff0;
     font-size: 12px;
     line-height: 16px;
     color: #202020;
@@ -7,6 +7,7 @@ body, button, input, select, table, textarea {
     src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 body {
+    background-color: #e7eff0;
     /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
     따라서 명시적으로 margin:0px로 지정해줌! */
     margin : 0px;
@@ -122,6 +123,10 @@ html, body {
     height:30px;
     border:10px;
     cursor: pointer;
+}
+.btnplusTodo:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 .D-day {
     text-align:left;
