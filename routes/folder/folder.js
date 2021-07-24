@@ -17,28 +17,16 @@ router.use((req, res, next) => {
 })
 
 router.get('/:id', isLoggedIn, async( req, res, next) => {
-        // const _url=req.url;
-        // const title=_url.split('/');
-        // const t_length=title.length;
-        // const folder_title=title[t_length-1];
         const id_obj=req.params.id;
     try{
-        
-        //const paramDecoded=decodedURIComponent(_url);
-        
-        
-        //console.log(_url);
-        //const folder = await Folder.find({user_id:res.locals.user._id}).find({folder_name:_folder});  
-        //const postIt= await PostIt.find({user_id:res.locals.user._id},{folder_name:_folder}).populate('folder');
-        const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj});
+    
+        const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+    
         const postIt=await PostIt.find({folder_id:id_obj});
-        //const postIt=await PostIt.find({folder_id:id_obj}).sort({postIt_star:true}); 
-        //위에처럼 했더니 invalid sort value라고 에러났음!
-        //const folder_title=await Folder.find({_id:req.params.id}).populate('folder_title');
         
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
-            folder_title: folder,
+            folder_title: folder[0],
             folder_id:id_obj,
             //folder : folder,
             //postIt: postIt,
@@ -141,7 +129,7 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
     //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
     res.render('../views/folder/folder.ejs',
-        { title : 'study Tight', todolist:todo, folder:folder}
+        { title : 'study Tight', folder_title:folder, todolist:todo, folder:folder}
     );
     //res.redirect('/');
 
@@ -149,6 +137,32 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
         next(err);
     } });
 
+//postIt star바꾸기
+router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
+        //const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
+        //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+        //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+        
+        try{
+        const postIt=await PostIt.updateOne({
+            user_id:req.user._id, //필터링 하는 것
+            postIt_name:req.body.postIt_name,
+
+        },{
+            $set:{
+                postIt_star:req.body.postIt_star
+            }
+        });
+        //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
+        //console.log(todo_finished);
+        res.render('../views/folder/folder.ejs',
+            { title : 'study Tight', postIt:postIt}
+        );
+        //res.redirect('/');
+    
+        }catch(err){
+            next(err);
+        } });
 router.delete('/:id',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
 
    // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
