@@ -2,22 +2,10 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-    $('#openBtn').click(function(){
-	$('#choiceTypeModal').modal({show:true})
-});
-    $('#plusTodoBtn').click(function(){
-        $('#modal_todo').modal({show:true})
-    });
-</script>
-<!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+
+
 <script type="text/javascript">   
     $(document).ready( function() {
         $("#header").load("/views/header.html");  
@@ -25,17 +13,81 @@
     </script>
 
 <style>@import url(/public/folder/folder.css);</style>
+<link rel="stylesheet" href="/public/mainframe_shortcuts.css">
+    <link rel="stylesheet" href="/public/mainframe.css">
+    <link rel="stylesheet" href="/public/font.css">
+
+    <link rel="stylesheet" type="text/css" href="/public/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/component.css"/>
 </head>
 
 <body>
     <div id="wrap">
-            <!-- <div id="header">
-            </div>  -->
+        <div class="header" role="banner">
+            <link rel="stylesheet" type="text/css" href="/public/header.css"/>
+            <link rel="stylesheet" type="text/css" href="/public/component.css"/>
+            <link rel="stylesheet" type="text/css" href="/public/font.css"/>
+            <div class="main_header">
+                <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+                <div class="logo_area">
+                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt=""/></a>
+                    <section class="group_menu">
+                        <nav class="menu_effect" id="menu_nav">
+                            <a href="/" class="menu" id="menu_home">내 공부방</a>
+                            <a href="/guestbook" class="menu" id="menu_guestbook">방명록</a>
+                            <a href="/timetable/main" class="menu" id="menu_timetable">시간표</a>
+                        </nav>
+                    </section>
+                </div>
+                <script type="text/javascript">   
+                    $(document).ready( function() {
+                        const location = window.location.pathname;
+                        if (location == '/') {
+                            $('#menu_home').addClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                            $('#menu_timetable').removeClass('menu_active');
+                        } else if (location == '/guestbook') {
+                            $('#menu_guestbook').addClass('menu_active');
+                            $('#menu_home').removeClass('menu_active');;
+                            $('#menu_timetable').removeClass('menu_active');
+                        } else if (location == '/timetable/main' || location == '/timetable/edit') {
+                            $('#menu_timetable').addClass('menu_active');
+                            $('#menu_home').removeClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                        } else {
+                            $('#menu_home').removeClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                            $('#menu_timetable').removeClass('menu_active');
+                        }
+                        
+                    });
+                    
+                </script>
+                <div class="login">
+                        <div class="profile_section">
+                            <% if (user) { %> <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %> 
+                            <div class="alarm_bell">
+                                <img id="alarm_bell_img" src="/public/media/bell_pure.png">
+                            </div>
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">
+                                <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
+                            </div>
+                            <div class="logout">
+                                <input type="submit" class="btn_logout" title="로그아웃" value="로그아웃" onClick="location.href='/auth/logout'"/>    
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="container">
             <div id="MAIN_LEFT">
                 <div class="section">
                     <p class="folder_name">
-                        <%= folder_title%>
+                        <%= folder_title.folder_name%>
                     </p>
                     
                     <div id="wrap_postit" class="wrap_postit">
@@ -64,6 +116,7 @@
                             <% } %>
                         </div>
                     <script>
+                        const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
                         var star_toggle=1;
                         function starPostClicked(index,title, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
@@ -84,31 +137,30 @@
 
                                     //star_img를 full로 바꾸기
 
-                                    // fetch('/',{
-                                    //     method:'PATCH',
-                                    //     headers:{
-                                    //         'Accept':'application/json',
-                                    //         'Content-Type':'application/json'
-                                    //     },
-                                    //     body:JSON.stringify({user_id:'<%= user.name %>',postIt_name:title, postIt_star:true})
-                                    //     //.then(res => res.json( ))  
-                                    // });
+                                    fetch(''+folder_id+'/star',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        //.then(res => res.json( ))  
+                                    });
                                     //fetch주소 바꾸기!
                                 }else{
                                     currentValue=false;
                                     star_img.src='/media/empty_star.png';
                                     star_img.style.opacity=0;
 
-                                    // fetch('/',{
-                                    //     method:'PATCH',
-                                    //     headers:{
-                                    //         'Accept':'application/json',
-                                    //         'Content-Type':'application/json'
-                                    //     },
-                                    //     body:JSON.stringify({user_id:'<%= user.name %>',postIt_name:title, postIt_star:false})
-                                    //     //.then(res => res.json( ))  
-                                    // });
-                                    //fetch주소 바꾸기!
+                                    fetch(''+folder_id+'/star',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        //.then(res => res.json( ))  
+                                    });
                                 }
                             star_toggle++;
                         }
@@ -118,10 +170,10 @@
                     <div class="modal-content-content">
                         
                         <span  class="close_button close_show_button" data-dismiss="modal" aria-hidden="true">&times;</span>
-                        <h4 class="show_title"></h4> 
+                        <h4 id='show_title' class="show_title" name="show_title"></h4> 
                         <!-- 여기에 CONTENT의 TITLE넣기 -->
 
-                        <div class="modal-body">
+                        <div class="modal-body" name="modal_show_body">
                             <p id="show_content" name="content" class="show_content"></textarea>
                             <!-- 여기에 CONTENT의 CONTENT넣기 -->
                         </div>
@@ -129,31 +181,6 @@
                     </div>
                 </div>
     <script>
-                    // $(document).click(function(e){
-                    //     var dropdown=document.getElementsByClassName('dropdown_content');
-                    //     for(i=0;i<dropdown.length;i++){
-                    //     var value=dropdown[i].getAttribute('data-value');
-                    //         if(!(e.target.closest('.dropdown_content'))){
-                    //             if(value=='open'){
-                    //         console.log("닫는 중");
-                            
-                    //             }
-                    //     }}
-                    // })
-
-                    // document.addEventListener('click',function(e){
-                    //     var classList=document.getElementsByClassName('dropdown_content')
-                    //     if(e.target.className!='dropdown_content'){
-                    //         for(i=0;i<classList.length;i++){
-                    //             var value=classList[i].getAttribute('data-value');
-                    //             if(value=='open')
-                    //                 console.log("닫힘");    
-                    //             //hidePostMenu(i);
-                    //         }
-                    //     }else{
-                    //         console.log("그 곳을 클릭함")
-                    //     }
-                    // })
 
         function addNewPost(type,post, post_color){ //동적 추가용
             var post_name=post.post_name;
@@ -190,7 +217,7 @@
 
             if(type=='content'){
             post_p.addEventListener('click',function(){
-                ; //modal로 제목, 내용, 삭제버튼 띄우기
+                toggleShowModal();
             });
             }else if(type=='link'){
                 post_p.addEventListener('click',function(){
@@ -299,20 +326,68 @@
         </div>
     </div>
 
+        <!-- 파일 저장하기 -->
+        <div id="modal" class="modal modal_file" data-backdrop="static">
+            <div class="modal-content-file">
+            
+                <span  class="close_button close_file_button" data-dismiss="modal" aria-hidden="true">&times;</span>
+                <h4 class="modal-title">파일 작성하기</h4>
+    
+                
+                
+                <div class="modal-body">
+                        <p>제목</p>
+                        <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요">
+                        <br>
+                        <br>
+                        <div class="filebox"> 
+                            <input class="upload-name" value="파일선택" disabled="disabled">
+                            <label for="ex_filename">업로드</label> 
+                            <input type="file" id="ex_filename" class="upload-hidden">
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="file_color_wrap" value="포스트잇의 색을 선택하세요.">
+                                <select id="file_color" name="file_color"> 
+                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                            
+                            </select>
+                            </div>
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_file_button" onclick="cancelClicked();">취소</div>
+                            <div class="btn uploadBtn store_file_button" onclick="uploadFile();">완료</div>
+                        </div>
+                    
+                
+            </div>
+            </div>
+    
     <script>
         var modal_choice=document.querySelector('.modal_choice');
         var modal_content=document.querySelector('.modal_content');
         var modal_link=document.querySelector('.modal_link');
+        var modal_file=document.querySelector('.modal_file');
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
         var trigger_link_button=document.querySelector('.choice_link');
+        var trigger_file_button=document.querySelector('.choice_file')
         var close_choice_button=document.querySelector('.close_choice_button');
         var close_content_button=document.querySelector('.close_content_button');
         var close_link_button=document.querySelector('.close_link_button');
+        var close_file_button=document.querySelector('.close_file_button');
         var store_content_button=document.querySelector('.store_content_button');
         var store_link_button=document.querySelector('.store_link_button');
+        var store_file_button=document.querySelector('.store_file_button');
         var cancel_content_button=document.querySelector('.cancel_content_button');
         var cancel_link_button=document.querySelector('.cancel_link_button');
+        var cancel_file_button=document.querySelector('.cancel_file_button');
+
+        var modal_show_content=document.querySelector('.modal_show_content');
+        var close_show_button=document.querySelector('.close_show_button');
+
 
         function toggleChoiceModal(){
             modal_choice.classList.toggle('show_modal');
@@ -323,6 +398,13 @@
         function toggleLinkModal(){
             modal_link.classList.toggle('show_modal');
         }
+        function toggleFileModal(){
+            modal_file.classList.toggle('show_modal');
+        }
+        function toggleShowModal(){
+            modal_show_content.classList.toggle('show_modal');
+        }
+        
         function windowOnClick(event){
             if(event.target===modal_choice){
                 toggleChoiceModal();
@@ -330,6 +412,10 @@
                 toggleContentModal();
             }else if(event.target===modal_link){
                 toggleLinkModal();
+            }else if(event.target===modal_file){
+                toggleFileModal();
+            }else if(event.target===modal_show_content){
+                toggleShowModal();
             }
 
         }
@@ -348,7 +434,14 @@
         close_link_button.addEventListener('click',toggleLinkModal);
         cancel_link_button.addEventListener('click',toggleLinkModal);
         store_link_button.addEventListener('click',toggleLinkModal);
+
+        trigger_file_button.addEventListener('click',toggleFileModal);
+        trigger_file_button.addEventListener('click',toggleChoiceModal);
+        close_file_button.addEventListener('click',toggleFileModal);
+        cancel_file_button.addEventListener('click',toggleFileModal);
+        store_file_button.addEventListener('click',toggleFileModal);
         
+        close_show_button.addEventListener('click',toggleShowModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -433,6 +526,8 @@
                 })
             }
         }
+        
+
 
         function showContent(type, title, content){
             if(type=='link'){
@@ -440,75 +535,19 @@
                 link.location=content;
             }else if(type=='content'){
                 ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
+                var show_title=title;
+                var show_content=content;
+                document.getElementById('show_title').value=show_title;
+                document.getElementById('show_content').value=show_content;
+                toggleShowModal();
             }else { //type=='file'
                 ;
             }
 
         }
+
     </script>
 
-    <!-- <div class="modal" id="choice_link" data-backdrop="static">
-        <div class="modal-dialog modal-writing2">
-        <div class="modal-content writing-inside2">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">링크 작성하기</h4>
-            </div><div class="container-link"></div>
-            <div class="modal-body">               
-                <p>제목</p>
-                <input type="text" id="input_link_text" class="input_text" placeholder="제목을 입력하세요">
-                <br>
-                <br>
-                <p>링크</p>
-                <input type="url" id="input_link" class="input_link" placeholder="링크를 입력하세요">
-            </div>
-            <div class="modal-footer">
-                <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
-                    <select id="link_color" name="link_color"> 
-                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
-                
-                </select>
-                </div>
-                <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked()">취소</a>
-                <button class="btn uploadBtn" onclick="uploadLink();">완료</a>
-            </div>
-        </div>
-        </div>
-    </div>  -->
-
-
-    <!-- <div class="modal" id="choice_file" data-backdrop="static">
-        <div class="modal-dialog modal-writing3">
-        <div class="modal-content writing-inside3">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">파일 작성하기</h4>
-
-            </div>
-            <div class="container-file"></div>
-            <div class="modal-body">
-                    <p>제목</p>
-                    <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요">
-                    <br>
-                    <br>
-                    <div class="filebox"> 
-                        <input class="upload-name" value="파일선택" disabled="disabled">
-                        <label for="ex_filename">업로드</label> 
-                        <input type="file" id="ex_filename" class="upload-hidden">
-                    </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" onclick="cancelClicked();" class="btn cancelBtn">취소</a>
-                        <a href="#" class="btn uploadBtn" onclick="uploadFile();">완료</a>
-                    </div>
-                </div>
-            
-        </div>
-        </div> -->
     
             </div>
         </div>
@@ -627,7 +666,6 @@
                         <div class="modal-content-todo">
                         <span class="close_button close_todo_button">&times;</span>
                         <h1 class="title">오늘 할 일 추가히기</h1>
-                        <!-- <form action='/' method="POST"> -->
                             <div>
                                 <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
                                 <input type="hidden">
@@ -635,7 +673,7 @@
                             <div>
                                 <input type="button" class="modal-todo-plus" value="확인"></input>
                             </div>
-                        <!-- </form> -->
+                        
                         </div>
                     </div>
                 
@@ -791,6 +829,6 @@
         }
     </script>
 
-    </div>
+    <!-- </div> -->
     </body>
 </html>

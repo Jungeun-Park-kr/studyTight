@@ -34,8 +34,8 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         await Todo.updateMany({ user_id: res.locals.user._id, register_date: getCurrentDate() })
         const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
 
-        await Dday.deleteMany({ user_id: res.locals.user._id, final_date: { $lte: getCurrentDate() } });
-
+        await Dday.deleteMany({ user_id: res.locals.user._id, final_date: { $gt: getCurrentDate() } });
+        //$gt, $gte, $lt, $lte
         const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
 
 
