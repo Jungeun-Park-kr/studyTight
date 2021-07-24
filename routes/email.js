@@ -24,8 +24,8 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             //next(error);
         }
         const emailAry = email.split('@');
-        const id = emailAry[0];
-        const exUserId = await User.findOne( {id: id}); // id 중복 확인
+        const email_id = emailAry[0];
+        const exUserId = await User.findOne( {email_id: email_id}); // id 중복 확인
         if (exUserId) {
             console.log('입력한 이메일의 id부분이 사용 불가합니다.');
             return res.send('email_error=existid');
