@@ -5,6 +5,7 @@ const {Schema} = mongoose;
 const { Types: {ObjectId}} = Schema;
 const userSchema = new Schema( {
     email: { type: String, unique: true, required: true },
+    id : {type: String, unique: true, required : true}, // 방명록용 id
     password: { type: String, required: true },
     name :{ type: String, required: true },
     birth : {type: String, required: true},
