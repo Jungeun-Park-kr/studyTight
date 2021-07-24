@@ -7,7 +7,7 @@ const day_schema=new Schema({
         required:true,
         ref: 'User'
     }, 
-    dday_content:{type:String, unique:true, required:true},
+    dday_content:{type:String, required:true},
     final_date:{type:String, required:true}, //선택한 날짜
     start_date:{type:String, required:true} //오늘 날짜
 });

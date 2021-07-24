@@ -254,8 +254,31 @@
                                         body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
                                         //.then(res => res.json())   
                                     });
-                                    parent_day.removeChild(delete_day);
-                                    alert(content+'이(가) d-day에서 삭제되었습니다.');
+                                parent_day.removeChild(delete_day);
+                                alert(content+'이(가) d-day에서 삭제되었습니다.');
+                            
+                                // 디데이 개수 체크
+                                var parent_day=document.getElementById('wrap_day');
+                                var childCnt = parent_day.childElementCount;
+                                console.log('자식 개수:'+childCnt);
+                                var invisible_plus=document.getElementById('d-day-plus');
+                                if (childCnt > 9) { // <script>2개, d-day 8개 => 총 10개
+                                    invisible_plus.style.display='none';
+                                } 
+                                // else if (childCnt == 9 && invisible_plus.style.display=='none') {
+                                //     invisible_plus.style.display= 'none';
+                                // } 
+                                else {
+                                    invisible_plus.style.display='inline-block';
+                                }
+                                // var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
+                                // var invisible_plus=document.getElementById('d-day-plus');
+                                // if(d_daylist.length>=8){
+                                    
+                                //     invisible_plus.style.display='none';
+                                // }else{
+                                //     invisible_plus.style.display='inline-block';
+                                // } 
                             }
                         </script>
                         <script>
@@ -786,10 +809,26 @@
                         todo_finished : false
                     }
                     addNewTodo(new_todo);
+                
                 },error:function(err){
                     console.log('todo 저장 실패');
                 }
             });
+
+            // 디데이 개수 체크
+            var parent_day=document.getElementById('wrap_day');
+            var childCnt = parent_day.childElementCount;
+            console.log('자식 개수:'+childCnt);
+            //var invisible_plus=document.getElementById('d-day-plus');
+            if (childCnt > 9 && ($('#d-day-plus').css('display') == 'inline-block')) { // <script>2개, d-day 8개 => 총 10개
+                $('#d-day-plus').css('display', 'none');
+                //invisible_plus.style.display='none';
+            } else if (childCnt == 9 && ($('#d-day-plus').css('display') == 'none')) {
+                $('#d-day-plus').css('display', 'none');
+            } else {
+                $('#d-day-plus').css('display', 'inline-block');
+                //invisible_plus.style.display='inline-block';
+            }
         }
     })
     
@@ -1034,10 +1073,13 @@
 
             if (date.trim() === '') {
                 alert('디데이 마감 날짜를 선택해주세요.');
+                $('.modal-d-plus').bind('click', function() { saveDday(this); });
             } else if (content.trim() === '') {
                 alert('디데이 내용을 입력해주세요.');
+                $('.modal-d-plus').bind('click', function() { saveDday(this); });
             } else if (new Date(date) < new Date(todayDate)) { // 오늘 날짜 이전이면 에러 처리
                 alert('디데이 날짜는 금일('+todayDate+') 보다 이전일 수 없습니다.');
+                $('.modal-d-plus').bind('click', function() { saveDday(this); });
             } else { // 저장하기
                 $.ajax({
                     type:"POST",
@@ -1110,6 +1152,21 @@
                             show_day.style.color = "blue"
                         } else {
                             show_day.style.color = "black"
+                        }
+
+                        // 디데이 개수 체크
+                        var parent_day=document.getElementById('wrap_day');
+                        var childCnt = parent_day.childElementCount;
+                        console.log('자식 개수2:'+childCnt);
+                        //var invisible_plus=document.getElementById('d-day-plus');
+                        if (childCnt > 9 && ($('#d-day-plus').css('display') == 'inline-block')) { // <script>2개, d-day 8개 => 총 10개
+                            $('#d-day-plus').css('display', 'none');
+                            //invisible_plus.style.display='none';
+                        } else if (childCnt == 9 && ($('#d-day-plus').css('display') == 'none')) {
+                            $('#d-day-plus').css('display', 'none');
+                        } else {
+                            $('#d-day-plus').css('display', 'inline-block');
+                            //invisible_plus.style.display='inline-block';
                         }
                     },
                     error: function(err) { // POST 요청 실패시
