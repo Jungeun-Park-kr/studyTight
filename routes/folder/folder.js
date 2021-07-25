@@ -145,16 +145,16 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
 //postIt star바꾸기
 router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     const id_obj=req.params.id;
+    const id_post=req.body.postIt_id;
     const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
     
     const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
-        console.log(req.body.postIt_id);
-        console.log(req.body.postIt_star);
+        
         try{
         const postIt=await PostIt.updateOne({
-            user_id:req.user._id, //필터링 하는 것
+            //user_id:req.user._id, //필터링 하는 것
             
-            _id:req.body.postIt_id,
+            _id:req.body.postIt_id
 
         },{
             $set:{
@@ -162,7 +162,7 @@ router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이
             }
         });
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
-        //console.log(todo_finished);
+        //console.log("try문이 끝나고 업데이트 되었을 것!"+req.body.postIt_id+", "+req.body.postIt_star);
         res.render('../views/folder/folder.ejs',
             { title : 'study Tight', postIt:postIt, folder_title:folder_title[0], todolist:todo, folder_id:id_obj}
         );
@@ -171,6 +171,7 @@ router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이
         }catch(err){
             next(err);
         } });
+
 router.delete('/:id',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
 
    // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});

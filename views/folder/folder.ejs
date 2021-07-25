@@ -126,6 +126,7 @@
                             
 
                                 var currentValue=boolValue;
+                                console.log("현재의 상태는 "+currentValue);
                                 if(currentValue==true){
                                     star_toggle++;
                                 }
@@ -147,6 +148,7 @@
                                         //.then(res => res.json( ))  
                                     });
                                     //fetch주소 바꾸기!
+                                    //console.log("false에서 true로");
                                 }else{
                                     currentValue=false;
                                     star_img.src='/media/empty_star.png';
@@ -161,6 +163,7 @@
                                         body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
+                                    console.log('true에서 false로!');
                                 }
                             star_toggle++;
                         }
