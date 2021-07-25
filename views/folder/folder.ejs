@@ -105,7 +105,7 @@
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
@@ -118,7 +118,7 @@
                     <script>
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
                         var star_toggle=1;
-                        function starPostClicked(index,title, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
+                        function starPostClicked(index,id, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
                                 
                                 var clickedPost=document.getElementsByClassName('postit')[index];
@@ -143,7 +143,7 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        body:JSON.stringify({postIt_id:id,postIt_star:true})
                                         //.then(res => res.json( ))  
                                     });
                                     //fetch주소 바꾸기!
@@ -158,7 +158,7 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
                                 }
@@ -216,7 +216,10 @@
             parent_post.append(wrap);
 
             if(type=='content'){
-            post_p.addEventListener('click',function(){
+                post_p.addEventListener('click',function(){
+                
+                document.getElementById('show_title').innerHTML=post_name;
+                document.getElementById('show_content').innerHTML=post_content;
                 toggleShowModal();
             });
             }else if(type=='link'){
@@ -537,8 +540,8 @@
                 ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
                 var show_title=title;
                 var show_content=content;
-                document.getElementById('show_title').value=show_title;
-                document.getElementById('show_content').value=show_content;
+                document.getElementById('show_title').innerHTML=show_title;
+                document.getElementById('show_content').innerHTML=show_content;
                 toggleShowModal();
             }else { //type=='file'
                 ;
