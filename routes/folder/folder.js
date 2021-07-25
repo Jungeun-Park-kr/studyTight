@@ -19,14 +19,14 @@ router.use((req, res, next) => {
 router.get('/:id', isLoggedIn, async( req, res, next) => {
         const id_obj=req.params.id;
     try{
-    
-        const folder = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
-    
+        const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+        const folder=await Folder.find({user_id:res.locals.user._id, _id:id_obj});
         const postIt=await PostIt.find({folder_id:id_obj});
         
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
-            folder_title: folder[0],
+            folder_title: folder_title[0],
+            folder:folder,
             folder_id:id_obj,
             //folder : folder,
             //postIt: postIt,
@@ -114,9 +114,14 @@ router.post('/:id/todo',isLoggedIn, async(req,res,next) => {
 
 router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     //const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-    const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
+    const id_obj=req.params.id;
+    const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+    const folder=await Folder.find({user_id:res.locals.user._id, _id:id_obj});
+
     
+    const postIt=await PostIt.find({folder_id:id_obj});
     try{
     const todo=await Todo.updateOne({
         user_id:req.user._id, //필터링 하는 것
@@ -129,7 +134,7 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
     //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
     res.render('../views/folder/folder.ejs',
-        { title : 'study Tight', folder_title:folder, todolist:todo, folder:folder}
+        { title : 'study Tight', folder_title:folder_title[0], todolist:todo, folder:folder}
     );
     //res.redirect('/');
 
@@ -139,14 +144,17 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
 
 //postIt star바꾸기
 router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
-        //const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-        //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
-        //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
-        
+    const id_obj=req.params.id;
+    const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+    
+    const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
+        console.log(req.body.postIt_id);
+        console.log(req.body.postIt_star);
         try{
         const postIt=await PostIt.updateOne({
             user_id:req.user._id, //필터링 하는 것
-            postIt_name:req.body.postIt_name,
+            
+            _id:req.body.postIt_id,
 
         },{
             $set:{
@@ -156,7 +164,7 @@ router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
         //console.log(todo_finished);
         res.render('../views/folder/folder.ejs',
-            { title : 'study Tight', postIt:postIt}
+            { title : 'study Tight', postIt:postIt, folder_title:folder_title[0], todolist:todo, folder_id:id_obj}
         );
         //res.redirect('/');
     
