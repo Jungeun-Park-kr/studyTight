@@ -72,11 +72,13 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         //console.log("folder내에 배열에 접근 완료");
 
         res.send({
+            new_post_id:postIt._id,
             postIt_color:postIt.postIt_color,
             postIt_star:postIt.postIt_star,
             postIt_name:postIt.postIt_name,
             postIt_content:postIt.postIt_content,
             postIt_type:postIt.postIt_type});
+
     }catch(err){
         next(err);
     }

@@ -95,7 +95,7 @@
                             <div class="postIt postit">
                                 <% if(postIt[i].fixed) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
@@ -104,7 +104,7 @@
                                     </ul>
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
@@ -124,6 +124,7 @@
                                 var clickedPost=document.getElementsByClassName('postit')[index];
                                 var star_img=document.getElementsByClassName('fixed_star')[index];
                             
+                                var star_hover=$('.fixed_star').index(index);
 
                                 var currentValue=boolValue;
                                 console.log("현재의 상태는 "+currentValue);
@@ -153,7 +154,7 @@
                                     currentValue=false;
                                     star_img.src='/media/empty_star.png';
                                     star_img.style.opacity=0;
-
+                                    
                                     fetch(''+folder_id+'/star',{
                                         method:'PATCH',
                                         headers:{
@@ -163,7 +164,17 @@
                                         body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
-                                    console.log('true에서 false로!');
+                                    // $('.fixed_star').hover(function(){
+                                    //     $(this).index(index).css('opacity',1);
+                                    // }, function(){
+                                    //     $(this).index(index).css('opacity',0);
+                                    // })
+                                    star_img.onmouseenter=function(){
+                                        this.style.opacity=1;
+                                    }
+                                    star_img.onmouseover=function(){
+                                        this.style.opacity=0;
+                                    }
                                 }
                             star_toggle++;
                         }
@@ -211,10 +222,33 @@
 
             }); 
 
-            
+            var ul_button=document.createElement('ul');
+            ul_button.setAttribute('class','postIt_menu');
+
+            var li_re=document.createElement('li');
+            var div_re=document.createElement('div');
+            div_re.setAttribute('id','revise_postIt');
+            div_re.setAttribute('class','revise_postIt');
+            div_re.innerHTML="수정";
+
+            var li_del=document.createElement('li');
+            var div_del=document.createElement('div');
+            div_del.setAttribute('id','delete_postIt');
+            div_del.innerHTML="삭제";
+            div_del.addEventListener('click',function(){
+                //삭제하기
+            });
+
+            li_re.append(div_re);
+            li_del.append(div_del);
+
+            ul_button.append(li_re);
+            ul_button.append(li_del);
+
             wrap.append(post_img);
             wrap.append(post_p);
             wrap.append(star_img);
+            wrap.append(ul_button);
             
             parent_post.append(wrap);
 
@@ -482,6 +516,7 @@
                             post_star:false
                         }
                         addNewPost('content',new_post,color);
+                        console.log(new_post_id);
                     },error:function(err){
                         console.log('포스트잇 글 저장 실패');
                     }
