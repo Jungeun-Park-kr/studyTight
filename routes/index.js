@@ -61,6 +61,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
         const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
+    
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist: todolist,
@@ -97,8 +98,8 @@ router.post('/folder_add', isLoggedIn, async(req, res, next) => {
         //     { title : 'study Tight', todolist:todolist, timetable:timetable, folder:folder}
         // );
 
-        res.send(folder.folder_color);
-
+        res.send({folder_id:folder._id});
+        
     } catch (err) {
         next(err);
     }
@@ -109,13 +110,16 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
         const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
         const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
         const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
+        const folder_id=req.query.folder_id;
+        console.log("get에서 받은 "+folder_id);
+        res.send(folder_id);
+        
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist: todolist,
             timetable: timetable,
             folder: folder,
             d_day: dDay,
-
         });
         //res.send(todolist);
     } catch (err) {
