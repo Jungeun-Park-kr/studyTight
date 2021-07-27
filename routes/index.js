@@ -182,7 +182,32 @@ router.patch('/', isLoggedIn, async(req, res, next) => { //update할 데이터�
         next(err);
     }
 });
+router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
+    // const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
+    // const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
+    // const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
+    // const todo=await Todo.find()
+    try {
+        const folder = await Folder.updateOne({
+            user_id: req.user._id, //필터링 하는 것
+            _id:req.body.folder_id,
+            
+        }, {
+            $set: {
+                folder_name:req.body.revise_folder_name,
+                folder_color:req.body.revise_folder_color
+            }
+        });
+        //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
+        //console.log(todo_finished);
+        //res.render('../views/mainframe.ejs', { title: 'study Tight', todolist: todo, timetable: timetable, folder: folder, d_day: dDay });
+        //res.redirect('/');
+        res.send(folder);
 
+    } catch (err) {
+        next(err);
+    }
+});
 router.delete('/', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
 
     const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
@@ -220,8 +245,8 @@ router.delete('/day', isLoggedIn, async(req, res, next) => { //할 일 목록에
 router.delete('/folder', isLoggedIn, async(req, res, next) => {
     //폴더를 삭제할 경우
     try {
-        const delete_folder = req.body.folder_name;
-        await Folder.deleteOne({ user_id: res.locals.user._id, folder_name: delete_folder });
+        const delete_folder_name = req.body.folder_name;
+        await Folder.deleteOne({ user_id: res.locals.user._id, folder_name: delete_folder_name });
 
         const folder = await Folder.find({ user_id: res.locals.user._id });
 
