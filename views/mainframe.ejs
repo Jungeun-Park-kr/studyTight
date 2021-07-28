@@ -357,6 +357,7 @@
                                 <% if(folder[i].folder_fixed) {%>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
+                                    <img class="fixed_folder" src="/media/fixed_full.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img class="three_button" src="/media/three_button.png">
                                     <ul class="folder_menu">
                                         <li><div id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
@@ -369,6 +370,7 @@
                                 <%} else{ %>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
+                                    <img class="fixed_folder" src="/media/fixed_empty.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img class="three_button" src="/media/three_button.png">
                                     <ul class="folder_menu">
                                         <li><div id="revise_folder" class="reivse_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
@@ -436,6 +438,48 @@
                             </div>
 
                             <script type='text/javascript'>
+                            var fixed_toggle=1;
+                            function fixedFolderClicked(index, id, fixedBool){
+                                var fixed_img=document.getElementsByClassName('fixed_folder')[index];
+
+                                var currentFixed=fixedBool;
+                                console.log("현재의 상태는 "+currentFixed);
+
+                                if(currentFixed==true){
+                                    fixed_toggle++;
+                                }
+
+                                if(fixed_toggle%2==1){
+                                    currentFixed=true;
+                                    fixed_img.src="/media/fixed_full.png"
+                                    fixed_img.style.opacity=1;
+
+                                    fetch('/folder_fixed',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({folder_id:id,folder_fixed:true})
+                                    });
+                                    console.log("true로 변신!");
+                                }else{
+                                    currentFixed=false;
+                                    fixed_img.src="/media/fixed_empty.png"
+                                    fixed_img.style.opacity=1;
+
+                                    fetch('/folder_fixed',{
+                                        method:'PATCH',
+                                        headers:{
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body:JSON.stringify({folder_id:id,folder_fixed:false})
+                                    });
+                                    console.log("false로 변신!");
+                                }
+                                fixed_toggle++;
+                            }
                                 //var dropdown_toggle=1;
                             //function showFolderMenu(index){
                                // console.log(index);
@@ -1035,6 +1079,7 @@
         var name=folder.folder_name;
         var color;
         var fixed=folder.folder_fixed;
+        console.log("fixed의 값은 "+fixed);
         //console.log(JSON.stringify(color));
 
         //console.log(JSON.stringify(color));
@@ -1055,6 +1100,49 @@
         p.innerHTML=name;
         p.addEventListener('click',function(){
             location.href='/folder/'+folder_id;
+        });
+
+        var fixed_img=document.createElement('img');
+        fixed_img.setAttribute('class','fixed_folder');
+        fixed_img.setAttribute('src','/media/fixed_empty.png');
+        
+        new_fixed_toggle=1;
+        fixed_img.addEventListener('click',function(){
+            if(fixed==true){
+                new_fixed_toggle++;
+            }
+
+            if(new_fixed_toggle%2==1){
+                folder.fixed=true;
+                fixed_img.setAttribute('value',true);
+                fixed_img.setAttribute('src','/media/fixed_full.png');
+                fixed_img.style.opacity=1;
+                fetch('/folder_fixed',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({folder_id:folder_id,folder_fixed:true})
+                        });
+                
+            }else{
+                fixed=false;
+                folder.fixed=false;
+                fixed_img.setAttribute('src','/media/fixed_empty.png');
+                fetch('/folder_fixed',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({folder_id:folder_id,folder_fixed:false})
+                        });
+                
+            }
+            new_fixed_toggle++;
+
+            
         })
         var img_button=document.createElement('img');
         img_button.setAttribute('class','three_button');
@@ -1084,6 +1172,7 @@
 
         wrap.append(img_folder);
         wrap.append(p);
+        wrap.append(fixed_img);
         wrap.append(img_button);
         wrap.append(ul_menu);
 

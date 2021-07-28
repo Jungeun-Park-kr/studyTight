@@ -22,7 +22,7 @@ router.use((req, res, next) => {
 // 메인
 router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터) : GET 요청이 올때 할 동작
     try {
-        const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id').sort({ 'createdAt': -1 });
+        const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id').sort({ 'createdAt': -1 }).sort({'folder_fixed': -1});
         const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
         // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
         //const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
@@ -196,6 +196,31 @@ router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update�
             $set: {
                 folder_name:req.body.revise_folder_name,
                 folder_color:req.body.revise_folder_color
+            }
+        });
+        //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
+        //console.log(todo_finished);
+        //res.render('../views/mainframe.ejs', { title: 'study Tight', todolist: todo, timetable: timetable, folder: folder, d_day: dDay });
+        //res.redirect('/');
+        res.send(folder);
+
+    } catch (err) {
+        next(err);
+    }
+});
+router.patch('/folder_fixed', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
+    // const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
+    // const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
+    // const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
+    // const todo=await Todo.find()
+    try {
+        const folder = await Folder.updateOne({
+            user_id: req.user._id, //필터링 하는 것
+            _id:req.body.folder_id,
+            
+        }, {
+            $set: {
+                folder_fixed:req.body.folder_fixed
             }
         });
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..

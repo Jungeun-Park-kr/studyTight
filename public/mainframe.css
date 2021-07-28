@@ -434,7 +434,7 @@ html, body {
     /* margin:17px; */
     
 }
-.fixed {
+.fixed_folder {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
     position:relative;
