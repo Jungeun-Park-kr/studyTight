@@ -99,8 +99,8 @@
                                     <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
-                                        <li><div id="delete_postIt" onclick="deletePostClicked('<%= i %>');">삭제</div></li>    
+                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
+                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>    
                                     </ul>
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
@@ -108,8 +108,8 @@
                                     <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
-                                        <li><div id="delete_postIt" onclick="deletePostClicked('<%= i %>');">삭제</div></li>    
+                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
+                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>  
                                     </ul>
                                 <% } %>
                             </div>
@@ -118,6 +118,13 @@
                     <script>
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
                         var star_toggle=1;
+                        function revisePostClicked(id, type, index){
+                            //type이 content면 content 전용 modal을 띄워야 함.
+                        }
+
+                        function deletePostClicked(id, index){
+
+                        }
                         function starPostClicked(index,id, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
                                 
@@ -404,12 +411,64 @@
                 
             </div>
             </div>
+
+            <!-- 포스트잇 수정하기 -->
+            <!-- 따지자면 그 링크임.. -->
+            <div id="modal" class="modal modal_revise_post">
+                <div class="modal-content-revise-post">
+                    <span class="close_button close_revise_post">&times;</span>
+                    <h1 class="title">포스트잇 수정하기</h1>
+                    <div id="revise_post_id" postIt_id="id자리"></div>
+                        <div>
+                            <input type="text" id="new-post-name" name="new_post_name" maxlength="7">
+                            <div class="post_color_wrap" value="포스트잇의 색을 선택하세요.">
+                                <select id="new_post_color" name="new_post_color">
+                                
+                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+        
+                            
+                                </select>
+                            </div>
+                            <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
+                        <div>
+                            <input type="button" class="revise_post_button" value="확인"></input>
+                        </div>
+                        </div>
+                </div>
+            </div>
+
+            <!-- 포스트잇 삭제하기 -->
+            <div id="modal" class="modal modal_delete_post">
+                <div class="modal-content-delete-post">
+                    <!-- <h1 class="title">폴더 삭제하기</h1> -->
+                    <div id="delete_post_name" class="title"></div>
+                        <div id="delete_post_index"></div>
+                        
+                            
+                            
+                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
+                                그래도 삭제하시겠습니까?
+                            </p>
+                        <div class="buttons_wrap">
+                            
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_delete_post">취소</div>
+                            <div class="deleteBtn delete_delete_post">확인</div>
+                        </div>
+                        
+                </div>
+            </div>
     
     <script>
         var modal_choice=document.querySelector('.modal_choice');
         var modal_content=document.querySelector('.modal_content');
         var modal_link=document.querySelector('.modal_link');
         var modal_file=document.querySelector('.modal_file');
+        var modal_revise=document.querySelector('.modal_revise_post');
+        var modal_delete=document.querySelector('.modal_delete_post');
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
         var trigger_link_button=document.querySelector('.choice_link');
@@ -418,12 +477,19 @@
         var close_content_button=document.querySelector('.close_content_button');
         var close_link_button=document.querySelector('.close_link_button');
         var close_file_button=document.querySelector('.close_file_button');
+        var close_revise_button=document.querySelector('.close_revise_post');
+        
         var store_content_button=document.querySelector('.store_content_button');
         var store_link_button=document.querySelector('.store_link_button');
         var store_file_button=document.querySelector('.store_file_button');
+        
+        var revise_post_button=document.querySelector('.revise_post_button');
+        var delete_post_button=document.querySelector('.delete_delete_post');
+        
         var cancel_content_button=document.querySelector('.cancel_content_button');
         var cancel_link_button=document.querySelector('.cancel_link_button');
         var cancel_file_button=document.querySelector('.cancel_file_button');
+        var cancel_delete_button=document.querySelector('.cancel_delete_post');
 
         var modal_show_content=document.querySelector('.modal_show_content');
         var close_show_button=document.querySelector('.close_show_button');
@@ -444,7 +510,12 @@
         function toggleShowModal(){
             modal_show_content.classList.toggle('show_modal');
         }
-        
+        function toggleRevisePostModal(){
+            modal_revise.classList.toggle('show_modal');
+        }
+        function toggleDeletePostModal(){
+            modal_delete.classList.toggle('show_modal');
+        }
         function windowOnClick(event){
             if(event.target===modal_choice){
                 toggleChoiceModal();
@@ -456,6 +527,10 @@
                 toggleFileModal();
             }else if(event.target===modal_show_content){
                 toggleShowModal();
+            }else if(event.target===modal_revise){
+                toggleRevisePostModal();
+            }else if(event.target===modal_delete){
+                toggleDeletePostModal();
             }
 
         }
@@ -482,6 +557,12 @@
         store_file_button.addEventListener('click',toggleFileModal);
         
         close_show_button.addEventListener('click',toggleShowModal);
+
+        close_revise_button.addEventListener('click',toggleRevisePostModal);
+        revise_post_button.addEventListener('click',toggleRevisePostModal);
+
+        delete_post_button.addEventListener('click',toggleDeletePostModal);
+        cancel_delete_button.addEventListener('click',toggleDeletePostModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
