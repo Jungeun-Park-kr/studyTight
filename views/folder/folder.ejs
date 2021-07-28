@@ -96,7 +96,7 @@
                                 <% if(postIt[i].fixed) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
@@ -219,7 +219,7 @@
             star_img.setAttribute('class','fixed_star');
             star_img.setAttribute('src','/media/empty_star.png');
             star_img.addEventListener('click',function(){
-
+                
             }); 
 
             var ul_button=document.createElement('ul');
