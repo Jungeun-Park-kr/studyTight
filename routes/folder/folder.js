@@ -71,18 +71,45 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
 
         //console.log("folder내에 배열에 접근 완료");
 
-        res.send({
-            new_post_id:postIt._id,
-            postIt_color:postIt.postIt_color,
-            postIt_star:postIt.postIt_star,
-            postIt_name:postIt.postIt_name,
-            postIt_content:postIt.postIt_content,
-            postIt_type:postIt.postIt_type});
+        res.send({postIt});
+            
 
     }catch(err){
         next(err);
     }
 });
+//postIt star바꾸기
+router.patch('/:id/revise',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
+    const id_obj=req.params.id;
+    
+    
+    //const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
+        
+        try{
+        const postIt=await PostIt.updateOne({
+            //user_id:req.user._id, //필터링 하는 것
+            
+            _id:req.body.postIt_id
+
+        },{
+            $set:{
+                postIt_name:req.body.revise_postIt_name,
+                postIt_content:req.body.revise_postIt_content,
+                postIt_color:req.body.revise_postIt_color
+            }
+        });
+        //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
+        //console.log("try문이 끝나고 업데이트 되었을 것!"+req.body.postIt_id+", "+req.body.postIt_star);
+        // res.render('../views/folder/folder.ejs',
+        //     { title : 'study Tight', postIt:postIt, folder_title:folder_title[0], todolist:todo, folder_id:id_obj}
+        // );
+        res.send(postIt);
+        //res.redirect('/');
+    
+        }catch(err){
+            next(err);
+        } });
+
 router.post('/:id/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
    // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
