@@ -100,14 +100,14 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
 router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
 
-    const user = await User.find({ user_id: res.locals.user._id }).populate('user_id');
-    const { name, school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
     try {
-        //console.log(friend);
-        const user = await User.updateOne({
-            name: name
+        const user = await User.findOne({ _id: res.locals.user._id });
+        const { name, school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
+        console.info(user);
+        const users = await User.updateOne({ //해당하는 값을 필터링함
+            _id: name
         }, {
-            $set: {
+            $set: { //해당하는 값을 바꿈
                 //
             }
         });
