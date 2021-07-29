@@ -97,7 +97,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
@@ -146,6 +146,14 @@
                         }
 
                         function deletePostClicked(id, index){
+                            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+
+                            var delete_post=document.getElementsByClassName('postIt')[index];
+                            var delete_post_name=document.getElementsByClassName('post')[index].innerHTML;
+                            var delete_post_id=id;
+                                document.getElementById('delete_post_id').setAttribute('value',id);
+                                document.getElementById('delete_post_name').innerHTML=delete_post_name+" 삭제하기"
+                            //console.log(delete_post_name, delete_post_id);
                                 toggleDeletePostModal();
                         }
 
@@ -232,7 +240,9 @@
         function addNewPost(type,post_id, post, post_color){ //동적 추가용
             var post_name=post.post_name;
             var post_content=post.post_content;
-            var post_star=post.post_star;
+            var post_star=post.postIt_star;
+            
+            //console.log(type, post_id, post_name, post_content,post_star);
 
             var parent_post=document.getElementById('wrap_postit');
 
@@ -255,10 +265,40 @@
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
             star_img.setAttribute('src','/media/empty_star.png');
+            new_star_toggle=1;
             star_img.addEventListener('click',function(){
-                
-            }); 
-
+                if(post_star==true){
+                    new_star_toggle++;
+                }
+                if(new_star_toggle%2==1){
+                    post.postIt_star=true;
+                    star_img.style.src='/media/full_star.png';
+                    star_img.style.opacity=1;
+                    fetch(''+folder_id+'/star',{
+                        method:'PATCH',
+                        headers:{
+                            'Accept':'application/json',
+                            'Content-Type':'application/json'
+                                },
+                        body:JSON.stringify({postIt_id:post_id,postIt_star:true})
+                                        //.then(res => res.json( ))  
+                                    });
+            }else{
+                post.postIt_star=false;
+                    star_img.style.src='/media/empty_star.png';
+                    star_img.style.opacity=1;
+                    fetch(''+folder_id+'/star',{
+                        method:'PATCH',
+                        headers:{
+                            'Accept':'application/json',
+                            'Content-Type':'application/json'
+                                },
+                        body:JSON.stringify({postIt_id:post_id,postIt_star:false})
+                                        //.then(res => res.json( ))  
+                                    });
+            } 
+        });
+        
             var ul_button=document.createElement('ul');
             ul_button.setAttribute('class','postIt_menu');
 
@@ -268,10 +308,19 @@
             div_re.setAttribute('class','revise_postIt');
             div_re.innerHTML="수정";
             div_re.addEventListener('click',function(){
+                
                 if(type=='content'){
-                        
+                    document.getElementById('revise_content_title').setAttribute('value',post_name);
+                    document.getElementById('revise_post_id').setAttribute('postIt_id',post_id);
+                    $('textarea[name=revise_content]').text(post_content);
+                    $('#revise_content_color').val(post_color).prop('selected',true);
                         toggleReviseContentModal();
                 }else if(type=='link'){
+                    document.getElementById('revise_link_title').setAttribute('value',post_name);
+                    document.getElementById('revise_post_id').setAttribute('postIt_id',post_id);
+                    document.getElementById('revise_input_link').setAttribute('value',post_content);
+                    $('#revise_link_color').val(post_color).prop('selected',true);
+                    
                     toggleReviseLinkModal();
                 }
             })
@@ -361,11 +410,11 @@
             <div class="modal-footer">
                 <div class="content_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="content_color" name="content_color"> 
-                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                        <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                        <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                        <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
 
                 
                     </select>
@@ -396,11 +445,11 @@
             <div class="modal-footer">
                 <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="link_color" name="link_color"> 
-                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                        <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                        <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                        <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                 
                 </select>
                 </div>
@@ -434,11 +483,11 @@
                         <div class="modal-footer">
                             <div class="file_color_wrap" value="포스트잇의 색을 선택하세요.">
                                 <select id="file_color" name="file_color"> 
-                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                             
                             </select>
                             </div>
@@ -468,12 +517,11 @@
                     <div class="modal-footer">
                         <div class="revise_link_color_wrap" value="포스트잇의 색을 선택하세요.">
                             <select id="revise_link_color" name="revise_link_color"> 
-                            <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                            <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                            <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                            <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                            <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
-                        
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                         </select>
                         </div>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_link">취소</div>
@@ -500,12 +548,11 @@
                     <div class="modal-footer">
                         <div class="revise_content_color_wrap" value="포스트잇의 색을 선택하세요.">
                             <select id="revise_content_color" name="revise_content_color"> 
-                            <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                            <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                            <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                            <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                            <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
-
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                         
                             </select>
                         </div>
@@ -520,8 +567,9 @@
             <div id="modal" class="modal modal_delete_post">
                 <div class="modal-content-delete-post">
                     <!-- <h1 class="title">폴더 삭제하기</h1> -->
+                    
                     <div id="delete_post_name" class="title"></div>
-                        <div id="delete_post_index"></div>
+                        <div id="delete_post_id"></div>
                         
                             
                             
@@ -734,7 +782,7 @@
                             post_content:link,
                             post_star:false
                         }
-                        var new_post_id=data._id;
+                        var new_post_id=data.postIt._id;
                         addNewPost('link',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
@@ -808,6 +856,11 @@
 
         });
 
+        delete_post_button.addEventListener('click',function(){
+            //deletetoggle에서 정보 가져와
+            //폴더에 접근해서 postIt_array에서 해당 포스트잇 id 삭제해야 함.
+            //for문으로 찾아라.!
+        })
         
     </script>
 
