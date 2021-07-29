@@ -315,7 +315,7 @@ a:link {
     float:left;
     /* display: none; */
     cursor:pointer;
-    opacity: 0;
+    opacity: 1;
 }
 .fixed_star:hover{
     /* display:inline-block; */
@@ -434,7 +434,7 @@ a:link {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link, .modal-content-delete-post{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
