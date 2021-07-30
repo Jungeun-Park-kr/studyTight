@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        //console.log(friend.length);
+        //console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -50,7 +50,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        //console.log(friend.length);
+        //console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -100,14 +100,14 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
 router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
 
-    const user = await User.find({ user_id: res.locals.user._id }).populate('user_id');
-    const { name, school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
     try {
-        //console.log(friend);
-        const user = await User.updateOne({
-            name: name
+        const user = await User.findOne({ _id: res.locals.user._id });
+        const { name, school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
+        console.info(user);
+        const users = await User.updateOne({ //해당하는 값을 필터링함
+            _id: name
         }, {
-            $set: {
+            $set: { //해당하는 값을 바꿈
                 //
             }
         });
@@ -118,7 +118,19 @@ router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 
     }
 });
 
+router.get('/:id', isLoggedIn, async(req, res, next) => {
 
+    const id_obj = req.params.id; //내가 보내준 ID
+    try {
+        //일단 유저정보를 받아와서 페이지 먼저 띄우기.
+        const onefriend = await User.find({ user_id: id_obj });
+        res.render('../views/guestbook/guestbook_friendroom.ejs', {
+            friend_id: id_obj
+        });
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 module.exports = router;

@@ -107,6 +107,7 @@ body {
     margin-top:35px;
     margin-left:70px;
     color:black;
+    display:block;
 }
 /* 여기부터 오늘 할 일 */
 .aside_wrap {
@@ -285,6 +286,12 @@ a:link {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     cursor:pointer;
 }
+.postIt_menu > li {
+    padding:5px 12px;
+    background-color: rgba(255,255,255,0.8);
+    list-style-type: none;
+    cursor:pointer;
+}
 
 /* .post {
     position:absolute;
@@ -308,7 +315,7 @@ a:link {
     float:left;
     /* display: none; */
     cursor:pointer;
-    opacity: 0;
+    opacity: 1;
 }
 .fixed_star:hover{
     /* display:inline-block; */
@@ -402,7 +409,7 @@ a:link {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
-.modal_todo, .modal_choice, .modal_content, .modal_link, .modal_show_content, .modal_file{ 
+.modal{
     position: fixed; 
     left: 0; 
     top: 0; 
@@ -413,9 +420,21 @@ a:link {
     visibility: hidden; 
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-} 
+}
+/* .modal_todo, .modal_choice, .modal_content, .modal_link, .modal_show_content, .modal_file{ 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: scale(1.1); 
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+}  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link, .modal-content-delete-post{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -428,7 +447,7 @@ a:link {
     margin : 0 auto;
     /* z-index:500; */
 } 
-.modal-content-content { 
+.modal-content-content, .modal-content-revise-content { 
     position: absolute; 
     top: 50%; 
     left: 50%; 

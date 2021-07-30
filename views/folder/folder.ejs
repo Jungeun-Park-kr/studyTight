@@ -93,45 +93,90 @@
                     <div id="wrap_postit" class="wrap_postit">
                         <% for(var i=0;i<postIt.length; i++) { %>
                             <div class="postIt postit">
-                                <% if(postIt[i].fixed) { %>
+                                <% if(postIt[i].postIt_star) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <div class="hidden_content" value='<%= postIt[i].postIt_content %>'>
+                                    <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
-                                        <li><div id="delete_postIt" onclick="deletePostClicked('<%= i %>');">삭제</div></li>    
+                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
+                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>    
                                     </ul>
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
+                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt">수정</div></li>
-                                        <li><div id="delete_postIt" onclick="deletePostClicked('<%= i %>');">삭제</div></li>    
+                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
+                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>  
                                     </ul>
                                 <% } %>
                             </div>
                             <% } %>
                         </div>
+                    </div>
                     <script>
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+                        
+                        function revisePostClicked(id, type, index){
+                            //type이 content면 content 전용 modal을 띄워야 함.
+                            
+                            var revise_post_name=document.getElementsByClassName('post')[index].innerHTML;
+                            var revise_post_color=document.getElementsByClassName('post_img')[index].getAttribute('src');
+                            var revise_post_content=document.getElementsByClassName('hidden_content')[index].getAttribute('value');
+                            
+                            if(type=='content'){
+                                document.getElementById('revise_content_title').setAttribute('value',revise_post_name);
+                                document.getElementById('revise_post_id').setAttribute('postIt_id',id);
+                                //document.getElementById('revise_input_content').setAttribute('value',revise_post_content);
+                                $('textarea[name=revise_content]').text(revise_post_content);
+                                $('#revise_content_color').val(revise_post_color).prop('selected',true);
+                                toggleReviseContentModal();
+
+                            }else if(type=='link'){
+                                document.getElementById('revise_link_title').setAttribute('value',revise_post_name);
+                                document.getElementById('revise_post_id').setAttribute('postIt_id',id);
+                                document.getElementById('revise_input_link').setAttribute('value',revise_post_content);
+                                $('#revise_link_color').val(revise_post_color).prop('selected',true);
+                                toggleReviseLinkModal();
+                            }
+
+                        }
+
+                        function deletePostClicked(id, index){
+                            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+
+                            //var delete_post=document.getElementsByClassName('postIt')[index];
+                            var delete_post_name=document.getElementsByClassName('post')[index].innerHTML;
+                                document.getElementById('delete_post_index').setAttribute('value',index);
+                                document.getElementById('delete_post_id').setAttribute('value',id);
+                                document.getElementById('delete_post_name').innerHTML=delete_post_name+" 삭제하기"
+                            //console.log(delete_post_name, delete_post_id);
+                                toggleDeletePostModal();
+                        }
+
+                        
                         var star_toggle=1;
-                        function starPostClicked(index,title, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
+                        function starPostClicked(index,id, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
                                 
                                 var clickedPost=document.getElementsByClassName('postit')[index];
                                 var star_img=document.getElementsByClassName('fixed_star')[index];
                             
+                                var star_hover=$('.fixed_star').index(index);
 
                                 var currentValue=boolValue;
+                                console.log("현재의 상태는 "+currentValue);
                                 if(currentValue==true){
                                     star_toggle++;
                                 }
 
                                 if(star_toggle%2==1){
                                     currentValue=true;
+                                    booValue=true;
                                     star_img.src='/media/full_star.png';
                                     star_img.style.opacity=1;
 
@@ -143,24 +188,37 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        body:JSON.stringify({postIt_id:id,postIt_star:true})
                                         //.then(res => res.json( ))  
                                     });
                                     //fetch주소 바꾸기!
+                                    //console.log("false에서 true로");
                                 }else{
                                     currentValue=false;
-                                    star_img.src='/media/empty_star.png';
-                                    star_img.style.opacity=0;
-
+                                    boolValue=false;
+                                    star_img.src='/media/empty_star_old.png';
+                                    star_img.style.opacity=1;
+                                    
                                     fetch(''+folder_id+'/star',{
                                         method:'PATCH',
                                         headers:{
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({postIt_name:title, postIt_star:true})
+                                        body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
+                                    // $('.fixed_star').hover(function(){
+                                    //     $(this).index(index).css('opacity',1);
+                                    // }, function(){
+                                    //     $(this).index(index).css('opacity',0);
+                                    // })
+                                    star_img.onmouseenter=function(){
+                                        this.style.opacity=1;
+                                    }
+                                    star_img.onmouseover=function(){
+                                        this.style.opacity=0;
+                                    }
                                 }
                             star_toggle++;
                         }
@@ -182,10 +240,12 @@
                 </div>
     <script>
 
-        function addNewPost(type,post, post_color){ //동적 추가용
+        function addNewPost(type,post_id, post, post_color){ //동적 추가용
             var post_name=post.post_name;
             var post_content=post.post_content;
-            var post_star=post.post_star;
+            var post_star=post.postIt_star;
+            
+            //console.log(type, post_id, post_name, post_content,post_star);
 
             var parent_post=document.getElementById('wrap_postit');
 
@@ -201,22 +261,99 @@
             post_p.setAttribute('class','post');
             post_p.innerHTML=post_name;
         
+            var post_div=document.createElement('div');
+            post_div.setAttribute('class','hidden_content');
+            post_div.setAttribute('value',post_id);
+
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
             star_img.setAttribute('src','/media/empty_star.png');
+            new_star_toggle=1;
             star_img.addEventListener('click',function(){
+                if(post_star==true){
+                    new_star_toggle++;
+                }
+                if(new_star_toggle%2==1){
+                    post.postIt_star=true;
+                    star_img.style.src='/media/full_star.png';
+                    star_img.style.opacity=1;
+                    fetch(''+folder_id+'/star',{
+                        method:'PATCH',
+                        headers:{
+                            'Accept':'application/json',
+                            'Content-Type':'application/json'
+                                },
+                        body:JSON.stringify({postIt_id:post_id,postIt_star:true})
+                                        //.then(res => res.json( ))  
+                                    });
+            }else{
+                post.postIt_star=false;
+                    star_img.style.src='/media/empty_star.png';
+                    star_img.style.opacity=1;
+                    fetch(''+folder_id+'/star',{
+                        method:'PATCH',
+                        headers:{
+                            'Accept':'application/json',
+                            'Content-Type':'application/json'
+                                },
+                        body:JSON.stringify({postIt_id:post_id,postIt_star:false})
+                                        //.then(res => res.json( ))  
+                                    });
+            } 
+        });
+        
+            var ul_button=document.createElement('ul');
+            ul_button.setAttribute('class','postIt_menu');
 
-            }); 
+            var li_re=document.createElement('li');
+            var div_re=document.createElement('div');
+            div_re.setAttribute('id','revise_postIt');
+            div_re.setAttribute('class','revise_postIt');
+            div_re.innerHTML="수정";
+            div_re.addEventListener('click',function(){
+                
+                if(type=='content'){
+                    document.getElementById('revise_content_title').setAttribute('value',post_name);
+                    document.getElementById('revise_post_id').setAttribute('postIt_id',post_id);
+                    $('textarea[name=revise_content]').text(post_content);
+                    $('#revise_content_color').val(post_color).prop('selected',true);
+                        toggleReviseContentModal();
+                }else if(type=='link'){
+                    document.getElementById('revise_link_title').setAttribute('value',post_name);
+                    document.getElementById('revise_post_id').setAttribute('postIt_id',post_id);
+                    document.getElementById('revise_input_link').setAttribute('value',post_content);
+                    $('#revise_link_color').val(post_color).prop('selected',true);
+                    
+                    toggleReviseLinkModal();
+                }
+            })
+            var li_del=document.createElement('li');
+            var div_del=document.createElement('div');
+            div_del.setAttribute('id','delete_postIt');
+            div_del.setAttribute('class','delete_postIt');
+            div_del.innerHTML="삭제";
+            div_del.addEventListener('click',function(){
+                //삭제하기
+            });
 
-            
+            li_re.append(div_re);
+            li_del.append(div_del);
+
+            ul_button.append(li_re);
+            ul_button.append(li_del);
+
             wrap.append(post_img);
             wrap.append(post_p);
             wrap.append(star_img);
+            wrap.append(ul_button);
             
             parent_post.append(wrap);
 
             if(type=='content'){
-            post_p.addEventListener('click',function(){
+                post_p.addEventListener('click',function(){
+                
+                document.getElementById('show_title').innerHTML=post_name;
+                document.getElementById('show_content').innerHTML=post_content;
                 toggleShowModal();
             });
             }else if(type=='link'){
@@ -276,11 +413,11 @@
             <div class="modal-footer">
                 <div class="content_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="content_color" name="content_color"> 
-                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                        <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                        <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                        <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
 
                 
                     </select>
@@ -311,11 +448,11 @@
             <div class="modal-footer">
                 <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="link_color" name="link_color"> 
-                    <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                    <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                    <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                    <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                    <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                        <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                        <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                        <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                 
                 </select>
                 </div>
@@ -349,11 +486,11 @@
                         <div class="modal-footer">
                             <div class="file_color_wrap" value="포스트잇의 색을 선택하세요.">
                                 <select id="file_color" name="file_color"> 
-                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                             
                             </select>
                             </div>
@@ -364,26 +501,128 @@
                 
             </div>
             </div>
+
+            <!-- 포스트잇 수정하기 -->
+            <!-- 따지자면 그 링크임.. -->
+            <div id="modal" class="modal modal_revise_link">
+                <div class="modal-content-revise-link">
+                    <span class="close_button close_revise_link">&times;</span>
+                    <h1 class="title">링크 수정하기</h1>
+                    <div id="revise_post_id" postIt_id="id자리"></div>
+                    <div class="modal-body">               
+                        <p>제목</p>
+                        <input type="text" id="revise_link_title" class="input_text" >
+                        <br>
+                        <br>
+                        <p>링크</p>
+                        <input type="url" id="revise_input_link" class="input_link">
+                    </div>
+                    <div class="modal-footer">
+                        <div class="revise_link_color_wrap" value="포스트잇의 색을 선택하세요.">
+                            <select id="revise_link_color" name="revise_link_color"> 
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
+                        </select>
+                        </div>
+                        <div data-dismiss="modal" class="btn cancelBtn cancel_revise_link">취소</div>
+                        <div class="btn uploadBtn revise_link_button">완료</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 글 수정하기 -->
+            <div id="modal" class="modal modal_revise_content" data-backdrop="static">
+                <div class="modal-content-revise-content">
+                    
+                    <span  class="close_button close_revise_content" data-dismiss="modal" aria-hidden="true">&times;</span>
+                    <h4 class="title">글 수정하기</h4>
+                    <div id="revise_post_id" postIt_id="id자리"></div>
+                    <div class="modal-body">
+                        <p>제목</p>
+                        <input type="text" id="revise_content_title" name="title" class="input_text">
+                        <br>
+                        <br>
+                        <p>내용</p>
+                        <textarea id="revise_input_content" name="revise_content" class="input_content" row="38" cols="38" name="contents"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="revise_content_color_wrap" value="포스트잇의 색을 선택하세요.">
+                            <select id="revise_content_color" name="revise_content_color"> 
+                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
+                        
+                            </select>
+                        </div>
+                    
+                        <div data-dismiss="modal" class="btn cancelBtn cancel_revise_content">취소</div>
+                        <div class="btn uploadBtn revise_content_button">완료</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포스트잇 삭제하기 -->
+            <div id="modal" class="modal modal_delete_post">
+                <div class="modal-content-delete-post">
+                    <!-- <h1 class="title">폴더 삭제하기</h1> -->
+                    
+                    <div id="delete_post_name" class="title"></div>
+                        <div id="delete_post_id"></div>
+                        <div id="delete_post_index"></div>
+                            
+                            
+                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
+                                그래도 삭제하시겠습니까?
+                            </p>
+                        <div class="buttons_wrap">
+                            
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_delete_post">취소</div>
+                            <div class="deleteBtn delete_delete_post">확인</div>
+                        </div>
+                        
+                </div>
+            </div>
     
     <script>
         var modal_choice=document.querySelector('.modal_choice');
         var modal_content=document.querySelector('.modal_content');
         var modal_link=document.querySelector('.modal_link');
         var modal_file=document.querySelector('.modal_file');
+        var modal_revise_link=document.querySelector('.modal_revise_link');
+        var modal_revise_content=document.querySelector('.modal_revise_content')
+        var modal_delete=document.querySelector('.modal_delete_post');
+
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
         var trigger_link_button=document.querySelector('.choice_link');
         var trigger_file_button=document.querySelector('.choice_file')
+
         var close_choice_button=document.querySelector('.close_choice_button');
         var close_content_button=document.querySelector('.close_content_button');
         var close_link_button=document.querySelector('.close_link_button');
         var close_file_button=document.querySelector('.close_file_button');
+        var close_revise_link=document.querySelector('.close_revise_link');
+        var close_revise_content=document.querySelector('.close_revise_content');
+        
         var store_content_button=document.querySelector('.store_content_button');
         var store_link_button=document.querySelector('.store_link_button');
         var store_file_button=document.querySelector('.store_file_button');
+        
+        var revise_link_button=document.querySelector('.revise_link_button');
+        var revise_content_button=document.querySelector('.revise_content_button');
+        var delete_post_button=document.querySelector('.delete_delete_post');
+        
         var cancel_content_button=document.querySelector('.cancel_content_button');
         var cancel_link_button=document.querySelector('.cancel_link_button');
         var cancel_file_button=document.querySelector('.cancel_file_button');
+        var cancel_delete_button=document.querySelector('.cancel_delete_post');
+        var cancel_revise_link=document.querySelector('.cancel_revise_link');
+        var cancel_revise_content=document.querySelector('.cancel_revise_content');
 
         var modal_show_content=document.querySelector('.modal_show_content');
         var close_show_button=document.querySelector('.close_show_button');
@@ -404,7 +643,15 @@
         function toggleShowModal(){
             modal_show_content.classList.toggle('show_modal');
         }
-        
+        function toggleReviseLinkModal(){
+            modal_revise_link.classList.toggle('show_modal');
+        }
+        function toggleReviseContentModal(){
+            modal_revise_content.classList.toggle('show_modal');
+        }
+        function toggleDeletePostModal(){
+            modal_delete.classList.toggle('show_modal');
+        }
         function windowOnClick(event){
             if(event.target===modal_choice){
                 toggleChoiceModal();
@@ -416,6 +663,12 @@
                 toggleFileModal();
             }else if(event.target===modal_show_content){
                 toggleShowModal();
+            }else if(event.target===modal_revise_link){
+                toggleReviseLinkModal();
+            }else if(event.target===modal_revise_content){
+                toggleReviseContentModal();
+            }else if(event.target===modal_delete){
+                toggleDeletePostModal();
             }
 
         }
@@ -442,6 +695,15 @@
         store_file_button.addEventListener('click',toggleFileModal);
         
         close_show_button.addEventListener('click',toggleShowModal);
+
+        close_revise_link.addEventListener('click',toggleReviseLinkModal);
+        revise_link_button.addEventListener('click',toggleReviseLinkModal);
+
+        close_revise_content.addEventListener('click',toggleReviseContentModal);
+        revise_content_button.addEventListener('click',toggleReviseContentModal);
+
+        delete_post_button.addEventListener('click',toggleDeletePostModal);
+        cancel_delete_button.addEventListener('click',toggleDeletePostModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -475,7 +737,11 @@
                             post_content:content,
                             post_star:false
                         }
-                        addNewPost('content',new_post,color);
+                        var new_post_id=data.postIt._id;
+                        
+                        //console.log(new_post_id);
+                        addNewPost('content',new_post_id,new_post,color);
+                        
                     },error:function(err){
                         console.log('포스트잇 글 저장 실패');
                     }
@@ -519,15 +785,14 @@
                             post_content:link,
                             post_star:false
                         }
-                        addNewPost('link',new_post,color);
+                        var new_post_id=data.postIt._id;
+                        addNewPost('link',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
                     }
                 })
             }
         }
-        
-
 
         function showContent(type, title, content){
             if(type=='link'){
@@ -537,20 +802,98 @@
                 ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
                 var show_title=title;
                 var show_content=content;
-                document.getElementById('show_title').value=show_title;
-                document.getElementById('show_content').value=show_content;
+                document.getElementById('show_title').innerHTML=show_title;
+                document.getElementById('show_content').innerHTML=show_content;
                 toggleShowModal();
             }else { //type=='file'
                 ;
             }
 
         }
+        revise_link_button.addEventListener('click',function(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            var id=document.getElementById('revise_post_id').getAttribute('postIt_id');
+            var new_name=$('#revise_link_title').val();
+            var new_link=$('#revise_input_link').val();
+            var new_color=$('#revise_link_color:selected').val();
+            console.log(id, new_name,"link:"+ new_link, new_color);
 
+            if(new_name.trim()==''){
+                alert("수정할 이름을 입력하세요.");
+            }else if(new_link.trim()==''){
+                alert('수정할 링크를 입력하세요.');
+            }else{
+                fetch(''+folder_id+'/revise',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                            },
+                    body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_link, revise_postIt_color:new_color})
+                });  
+            }
+        });
+
+        revise_content_button.addEventListener('click',function(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            var id=document.getElementById('revise_post_id').getAttribute('postIt_id');
+            var new_name=$('#revise_content_title').val();
+            var new_content=$('#revise_input_content').val();
+            var new_color=$('#revise_content_color:selected').val();
+            console.log(id, new_name,"content:"+ new_content, new_color);
+
+            if(new_name.trim()==''){
+                alert("수정할 이름을 입력하세요.");
+            }else if(new_content.trim()==''){
+                alert('수정할 링크를 입력하세요.');
+            }else{
+                fetch(''+folder_id+'/revise',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
+                });  
+            }
+
+        });
+
+        delete_post_button.addEventListener('click',function(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            //deletetoggle에서 정보 가져와
+            //폴더에 접근해서 postIt_array에서 해당 포스트잇 id 삭제해야 함.
+            //for문으로 찾아라.!
+            //post id 
+            var delete_post_id=document.getElementById('delete_post_id').getAttribute('value');
+            //post index
+            var index=document.getElementById('delete_post_index').getAttribute('value');
+            //post 위치
+            console.log(index);
+            var delete_post=document.getElementsByClassName('postit')[index];
+            //parent post
+            var parent_post=document.getElementById('wrap_postit');
+
+            fetch(''+folder_id+'/post',{
+                method:'DELETE',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                        },
+                body:JSON.stringify({user_id:'<%= user.name %>',folder_id:folder_id, post_id:delete_post_id, index: index})
+                //.then(res => res.json())   
+                    });
+                
+                parent_post.removeChild(delete_post);
+        })
+        
     </script>
 
     
-            </div>
+            
         </div>
+        </div>
+
                 <div id="MAIN_RIGHT" class='column_right'>
                     <div class="aside">
                         <div class="aside_wrap">
