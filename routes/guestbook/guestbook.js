@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        //console.log(friend.length);
+        //console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -50,7 +50,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        //console.log(friend.length);
+        //console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -123,15 +123,9 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
     const id_obj = req.params.id; //내가 보내준 ID
     try {
         //일단 유저정보를 받아와서 페이지 먼저 띄우기.
-        const folder = await Folder.find({ user_id: res.locals.user._id, _id: id_obj });
-        const postIt = await PostIt.find({ folder_id: id_obj });
-        const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
+        const onefriend = await User.find({ user_id: id_obj });
         res.render('../views/guestbook/guestbook_friendroom.ejs', {
-            folder_title: folder,
-            folder_id: id_obj,
-            postIt: postIt,
-            todolist: todolist
-
+            friend_id: id_obj
         });
     } catch (err) {
         next(err);

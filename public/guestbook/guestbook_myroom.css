@@ -88,6 +88,20 @@ body {
     font-size: 12px;
 }
 
+.show-timetable>#table-button-id {
+    cursor: pointer;
+    background-color: #6ED4D8;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    height: 30px;
+    border: 10px;
+    font-size: 12px;
+}
+
 .information-menu .left-menus-book>li>img {
     width: 18px;
     height: 18px;
