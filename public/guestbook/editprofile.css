@@ -88,6 +88,11 @@ body {
     top:50%; */
 }
 
+.add_btn input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
 #add_table {
     margin-left: 20px;
 }

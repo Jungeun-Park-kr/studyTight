@@ -82,9 +82,8 @@ textarea {
 }
 
 #submit:hover {
-    color: #fff;
-    background-color: #216282;
-    opacity: 0.9;
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 
 #cancel {
@@ -157,7 +156,7 @@ textarea {
 }
 
 .close-button:hover,
-.close-button2:hovver,
+.close-button2:hover,
 .close-button3:hover {
     background-color: darkgray;
 }

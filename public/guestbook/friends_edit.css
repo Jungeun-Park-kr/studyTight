@@ -20,6 +20,10 @@ body {
     left:50%;
     top:50%; */
 }
+#search_course:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
 
 .course_title_section,
 .professor_name_section,
@@ -145,6 +149,11 @@ select {
         position: absolute; 
     left:50%;
     top:50%; */
+}
+
+.add_btn input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
 }
 
 #add_table {

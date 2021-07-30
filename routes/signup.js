@@ -65,14 +65,14 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
     console.log('회원가입 버튼 누름');
     console.log('email:'+email+', name:'+name+', password:'+password, 'promotion:', promotion);
     const emailAry = email.split('@');
-    const id = emailAry[0];
+    const email_id = emailAry[0];
     try {
         const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
         if (exUser) {
             console.log('이미 가입된 회원입니다.');
             return res.redirect('/signup?error=exist');
         }
-        const exUserId = await User.findOne( {id: id}); // id 중복 확인
+        const exUserId = await User.findOne( {email_id: email_id}); // id 중복 확인
         if (exUserId) {
             console.log('입력한 이메일의 id부분이 사용 불가합니다.');
             return res.redirect('/signup?error=existid');
