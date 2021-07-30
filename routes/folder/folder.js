@@ -265,14 +265,17 @@ router.delete('/:id/post',isLoggedIn, async(req,res,next) => { //할 일 목록�
             },{
                 $pull: {
                     postIt: {
-                        _id: {
+                        
                             $in:delete_post_id
-                        }
+                        
                     }
                 }
             }
             
-            )
+            );
+
+            console.log(delete_post_id+"가 폴더 내 포스트잇 배열에서 삭제됨.")
+
         await PostIt.deleteOne({ _id:delete_post_id});
     
         console.log("삭제완료!");

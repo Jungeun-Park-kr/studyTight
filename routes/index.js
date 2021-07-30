@@ -4,6 +4,7 @@ const router = express.Router();
 const Todo = require('../models/todo_list');
 const Course = require('../models/course');
 const Folder = require('../models/folder');
+const PostIt=require('../models/postit');
 const Dday = require('../models/d_day');
 const Profile = require('../models/profile');
 const Friends = require('../models/friend');
@@ -275,9 +276,13 @@ router.delete('/folder', isLoggedIn, async(req, res, next) => {
     //폴더를 삭제할 경우
     try {
         const delete_folder_name = req.body.folder_name;
+        
+        
+        await PostIt.deleteMany({folder_id:req.body.folder_id});
         await Folder.deleteOne({ user_id: res.locals.user._id, folder_name: delete_folder_name });
-
-        const folder = await Folder.find({ user_id: res.locals.user._id });
+        //console.log(req.body.folder_id);
+        
+       // const folder = await Folder.find({ user_id: res.locals.user._id });
 
         res.send('폴더 삭제 성공!')
     } catch (err) {
