@@ -89,14 +89,14 @@
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
                     </p>
-                    
+                    <div class="big_post">
                     <div id="wrap_postit" class="wrap_postit">
                         <% for(var i=0;i<postIt.length; i++) { %>
                             <div class="postIt postit">
                                 <% if(postIt[i].postIt_star) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
-                                    <div class="hidden_content" value='<%= postIt[i].postIt_content %>'>
+                                    <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
                                     <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
@@ -117,6 +117,11 @@
                             </div>
                             <% } %>
                         </div>
+                    
+                    <div id="postIt_plus" class="postIt">
+                        <img src="/media/folder_black.svg"/>
+                        <p class="post">추가하기</p>
+                    </div>
                     </div>
                     <script>
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -251,7 +256,7 @@
 
             var wrap=document.createElement('div');
             wrap.setAttribute('class','postIt');
-            wrap.setAttribute('class','postit')
+            wrap.setAttribute('class','postit');
 
             var post_img=document.createElement('img');
             post_img.setAttribute('class','post_img');
@@ -259,11 +264,12 @@
 
             var post_p=document.createElement('p');
             post_p.setAttribute('class','post');
+            post_p.setAttribute('value',post_id);
             post_p.innerHTML=post_name;
         
             var post_div=document.createElement('div');
             post_div.setAttribute('class','hidden_content');
-            post_div.setAttribute('value',post_id);
+            post_div.setAttribute('value',post_content);
 
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
@@ -334,6 +340,10 @@
             div_del.innerHTML="삭제";
             div_del.addEventListener('click',function(){
                 //삭제하기
+                // document.getElementById('delete_post_index').setAttribute('value',index);
+                //                 document.getElementById('delete_post_id').setAttribute('value',id);
+                //                 document.getElementById('delete_post_name').innerHTML=delete_post_name+" 삭제하기"
+                toggleDeletePostModal();
             });
 
             li_re.append(div_re);
@@ -369,10 +379,6 @@
 
                 </script>
 
-<div id="postIt_plus" class="postIt">
-    <img src="/media/folder_black.svg"/>
-    <p class="post">추가하기</p>
-</div>
 
 
     <div id="modal" class="modal modal_choice" data-backdrop="static">
@@ -408,12 +414,12 @@
                 <br>
                 <br>
                 <p>내용</p>
-                <textarea id="input_content" name="content" class="input_content" row="38" cols="38" name="contents" placeholder="내용을 입력하세요"></textarea>
+                <textarea id="input_content" name="content" class="input_content" row="38" cols="35" name="contents" placeholder="내용을 입력하세요"></textarea>
             </div>
             <div class="modal-footer">
                 <div class="content_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="content_color" name="content_color"> 
-                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                         <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                         <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                         <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -448,7 +454,7 @@
             <div class="modal-footer">
                 <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="link_color" name="link_color"> 
-                        <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_orange' style="background-color: #f29b34;">주황색</option>
                         <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                         <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                         <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -486,7 +492,7 @@
                         <div class="modal-footer">
                             <div class="file_color_wrap" value="포스트잇의 색을 선택하세요.">
                                 <select id="file_color" name="file_color"> 
-                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_orangepng' style="background-color: #f29b34;">주황색</option>
                                 <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                                 <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                                 <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -520,7 +526,7 @@
                     <div class="modal-footer">
                         <div class="revise_link_color_wrap" value="포스트잇의 색을 선택하세요.">
                             <select id="revise_link_color" name="revise_link_color"> 
-                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                                 <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                                 <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                                 <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -551,7 +557,7 @@
                     <div class="modal-footer">
                         <div class="revise_content_color_wrap" value="포스트잇의 색을 선택하세요.">
                             <select id="revise_content_color" name="revise_content_color"> 
-                                <option value='/public/media/post_blue.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                                 <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                                 <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                                 <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -1166,12 +1172,6 @@
 
     </div>
 
-    <script>
-        function cancelClicked(){
-            alert("포스트잇 작성이 취소되었습니다.");
-        }
-    </script>
-
-    <!-- </div> -->
+    </div>
     </body>
 </html>

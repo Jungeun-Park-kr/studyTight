@@ -422,7 +422,7 @@
                                     <!-- <h1 class="title">폴더 삭제하기</h1> -->
                                     <div id="delete_folder_name" class="title"></div>
                                         <div id="delete_folder_index"></div>
-                                        
+                                        <div id='delete_folder_id'></div>
                                             
                                             
                                             <p>※폴더 내 포스트잇 정보도 삭제됩니다.
@@ -584,6 +584,7 @@
                                 document.getElementById('delete_folder_name').innerHTML=delete_folder_name+" 삭제하기"
                                 document.getElementById('delete_folder_name').setAttribute('value',delete_folder_name);
                                 document.getElementById('delete_folder_index').setAttribute('value',index);
+                                document.getElementById('delete_folder_id').setAttribute('value',id);
                                 toggleDeleteFolderModal();
 
                         }
@@ -593,14 +594,16 @@
                             var delete_folder_name=document.getElementById('delete_folder_name').getAttribute('value');
                             var index=document.getElementById('delete_folder_index').getAttribute('value');
                             var delete_folder=document.getElementsByClassName('folder')[index];
-                            console.log(delete_folder_name,index);
+                            var delete_folder_id=document.getElementById('delete_folder_id').getAttribute('value');
+
+                            //console.log(delete_folder_name,index);
                             fetch('/folder',{
                                     method:'DELETE',
                                     headers:{
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({user_id:'<%= user.name %>',folder_name:delete_folder_name})
+                                        body:JSON.stringify({user_id:'<%= user.name %>',folder_name:delete_folder_name, folder_id:delete_folder_id})
                                         //.then(res => res.json())   
                                     });
                                     parent.removeChild(delete_folder);

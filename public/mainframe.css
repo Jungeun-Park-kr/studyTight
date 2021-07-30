@@ -188,7 +188,7 @@ html, body {
 
 .modal-d-plus, .modal-todo-plus, .modal-folder-plus, .modal-folder-revise, .modal-{
     /* 저장 버튼 */
-    width: 100px;
+    width: 50px;
     height:45px; 
     padding:5px;
     margin: 5px;
