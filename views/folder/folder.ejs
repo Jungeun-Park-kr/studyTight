@@ -93,11 +93,11 @@
                     <div id="wrap_postit" class="wrap_postit">
                         <% for(var i=0;i<postIt.length; i++) { %>
                             <div class="postIt postit">
-                                <% if(postIt[i].fixed) { %>
+                                <% if(postIt[i].postIt_star) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'>
-                                    <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i].postIt_name%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
@@ -107,7 +107,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
@@ -117,9 +117,10 @@
                             </div>
                             <% } %>
                         </div>
+                    </div>
                     <script>
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
-                        var star_toggle=1;
+                        
                         function revisePostClicked(id, type, index){
                             //type이 content면 content 전용 modal을 띄워야 함.
                             
@@ -148,17 +149,17 @@
                         function deletePostClicked(id, index){
                             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
 
-                            var delete_post=document.getElementsByClassName('postIt')[index];
+                            //var delete_post=document.getElementsByClassName('postIt')[index];
                             var delete_post_name=document.getElementsByClassName('post')[index].innerHTML;
-                            var delete_post_id=id;
+                                document.getElementById('delete_post_index').setAttribute('value',index);
                                 document.getElementById('delete_post_id').setAttribute('value',id);
                                 document.getElementById('delete_post_name').innerHTML=delete_post_name+" 삭제하기"
                             //console.log(delete_post_name, delete_post_id);
                                 toggleDeletePostModal();
                         }
 
-                        //삭제모달에서 확인 버튼을눌렀을 때! 
-
+                        
+                        var star_toggle=1;
                         function starPostClicked(index,id, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
                                 
@@ -175,6 +176,7 @@
 
                                 if(star_toggle%2==1){
                                     currentValue=true;
+                                    booValue=true;
                                     star_img.src='/media/full_star.png';
                                     star_img.style.opacity=1;
 
@@ -193,8 +195,9 @@
                                     //console.log("false에서 true로");
                                 }else{
                                     currentValue=false;
-                                    star_img.src='/media/empty_star.png';
-                                    star_img.style.opacity=0;
+                                    boolValue=false;
+                                    star_img.src='/media/empty_star_old.png';
+                                    star_img.style.opacity=1;
                                     
                                     fetch(''+folder_id+'/star',{
                                         method:'PATCH',
@@ -570,7 +573,7 @@
                     
                     <div id="delete_post_name" class="title"></div>
                         <div id="delete_post_id"></div>
-                        
+                        <div id="delete_post_index"></div>
                             
                             
                             <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
@@ -857,16 +860,40 @@
         });
 
         delete_post_button.addEventListener('click',function(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
             //deletetoggle에서 정보 가져와
             //폴더에 접근해서 postIt_array에서 해당 포스트잇 id 삭제해야 함.
             //for문으로 찾아라.!
+            //post id 
+            var delete_post_id=document.getElementById('delete_post_id').getAttribute('value');
+            //post index
+            var index=document.getElementById('delete_post_index').getAttribute('value');
+            //post 위치
+            console.log(index);
+            var delete_post=document.getElementsByClassName('postit')[index];
+            //parent post
+            var parent_post=document.getElementById('wrap_postit');
+
+            fetch(''+folder_id+'/post',{
+                method:'DELETE',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                        },
+                body:JSON.stringify({user_id:'<%= user.name %>',folder_id:folder_id, post_id:delete_post_id, index: index})
+                //.then(res => res.json())   
+                    });
+                
+                parent_post.removeChild(delete_post);
         })
         
     </script>
 
     
-            </div>
+            
         </div>
+        </div>
+
                 <div id="MAIN_RIGHT" class='column_right'>
                     <div class="aside">
                         <div class="aside_wrap">
