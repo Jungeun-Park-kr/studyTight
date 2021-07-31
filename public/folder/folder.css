@@ -344,7 +344,8 @@ body {
     top: 0; 
     width: 100%; 
     height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index:1; 
     opacity: 0; 
     visibility: hidden; 
     transform: scale(1.1); 
@@ -363,7 +364,7 @@ body {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link, .modal-content-delete-post{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link, .modal-content-delete-post, .modal-content-delete-new-post{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 

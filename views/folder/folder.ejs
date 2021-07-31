@@ -341,9 +341,27 @@
             div_del.addEventListener('click',function(){
                 //삭제하기
                 // document.getElementById('delete_post_index').setAttribute('value',index);
-                //                 document.getElementById('delete_post_id').setAttribute('value',id);
-                //                 document.getElementById('delete_post_name').innerHTML=delete_post_name+" 삭제하기"
-                toggleDeletePostModal();
+                document.getElementById('delete_new_post_id').setAttribute('value',post_id);
+                document.getElementById('delete_new_post_name').innerHTML=post_name+" 삭제하기"
+                toggleNewDeletePostModal();
+
+                delete_new_post_button.addEventListener('click',function(){
+                    const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            
+                var delete_post_id=document.getElementById('delete_new_post_id').getAttribute('value');
+        
+                    
+            fetch(''+folder_id+'/post',{
+                method:'DELETE',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                        },
+                body:JSON.stringify({user_id:'<%= user.name %>',folder_id:folder_id, post_id:delete_post_id})
+                //.then(res => res.json())   
+                    });
+                    parent_post.removeChild(wrap);
+                })
             });
 
             li_re.append(div_re);
@@ -593,6 +611,28 @@
                         
                 </div>
             </div>
+
+            <!-- 동적 포스트잇 삭제하기 -->
+            <div id="modal" class="modal modal_delete_new_post">
+                <div class="modal-content-delete-new-post">
+                    <!-- <h1 class="title">폴더 삭제하기</h1> -->
+                    
+                    <div id="delete_new_post_name" class="title"></div>
+                        <div id="delete_new_post_id"></div>
+                        
+                            
+                            
+                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
+                                그래도 삭제하시겠습니까?
+                            </p>
+                        <div class="buttons_wrap">
+                            
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_delete_new_post">취소</div>
+                            <div class="deleteBtn delete_new_post">확인</div>
+                        </div>
+                        
+                </div>
+            </div>
     
     <script>
         var modal_choice=document.querySelector('.modal_choice');
@@ -602,6 +642,7 @@
         var modal_revise_link=document.querySelector('.modal_revise_link');
         var modal_revise_content=document.querySelector('.modal_revise_content')
         var modal_delete=document.querySelector('.modal_delete_post');
+        var modal_delete_new=document.querySelector('.modal_delete_new_post');
 
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
@@ -622,14 +663,16 @@
         var revise_link_button=document.querySelector('.revise_link_button');
         var revise_content_button=document.querySelector('.revise_content_button');
         var delete_post_button=document.querySelector('.delete_delete_post');
-        
+        var delete_new_post_button=document.querySelector('.delete_new_post');
+
         var cancel_content_button=document.querySelector('.cancel_content_button');
         var cancel_link_button=document.querySelector('.cancel_link_button');
         var cancel_file_button=document.querySelector('.cancel_file_button');
         var cancel_delete_button=document.querySelector('.cancel_delete_post');
         var cancel_revise_link=document.querySelector('.cancel_revise_link');
         var cancel_revise_content=document.querySelector('.cancel_revise_content');
-
+        var cancel_delete_new_button=document.querySelector('.cancel_delete_new_post');
+        
         var modal_show_content=document.querySelector('.modal_show_content');
         var close_show_button=document.querySelector('.close_show_button');
 
@@ -658,6 +701,10 @@
         function toggleDeletePostModal(){
             modal_delete.classList.toggle('show_modal');
         }
+        function toggleNewDeletePostModal(){
+            modal_delete_new.classList.toggle('show_modal');
+        }
+
         function windowOnClick(event){
             if(event.target===modal_choice){
                 toggleChoiceModal();
@@ -675,6 +722,8 @@
                 toggleReviseContentModal();
             }else if(event.target===modal_delete){
                 toggleDeletePostModal();
+            }else if(event.target===modal_delete_new){
+                toggleNewDeletePostModal();
             }
 
         }
@@ -710,6 +759,9 @@
 
         delete_post_button.addEventListener('click',toggleDeletePostModal);
         cancel_delete_button.addEventListener('click',toggleDeletePostModal);
+
+        delete_new_post_button.addEventListener('click',toggleNewDeletePostModal);
+        cancel_delete_new_button.addEventListener('click',toggleNewDeletePostModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -891,7 +943,9 @@
                     });
                 
                 parent_post.removeChild(delete_post);
-        })
+        });
+
+        
         
     </script>
 
