@@ -437,6 +437,25 @@
                                 </div>
                             </div>
 
+                            <!-- 동적 폴더 삭제하기 -->
+            <div id="modal" class="modal modal_delete_new_folder">
+                <div class="modal-content-delete-new-folder">
+                    <!-- <h1 class="title">폴더 삭제하기</h1> -->
+                    
+                    <div id="delete_new_folder_name" class="title"></div>
+                        <div id="delete_new_folder_id"></div>
+                        <p>※폴더 내 포스트잇 정보도 삭제됩니다.
+                            그래도 삭제하시겠습니까?
+                        </p>
+                        <div class="buttons_wrap">
+                            
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_delete_new_folder">취소</div>
+                            <div class="deleteBtn delete_new_folder">확인</div>
+                        </div>
+                        
+                </div>
+            </div>
+
                             <script type='text/javascript'>
                             var fixed_toggle=1;
                             function fixedFolderClicked(index, id, fixedBool){
@@ -503,6 +522,10 @@
                             var modal_delete_folder=document.querySelector('.modal_delete_folder');
                             var cancel_delete_folder=document.querySelector('.cancel_delete_folder');
                             var delete_delete_folder=document.querySelector('.delete_delete_folder');
+
+                            var modal_delete_new_folder=document.querySelector('.modal_delete_new_folder');
+                            var cancel_delete_new_folder=document.querySelector('.cancel_delete_new_folder');
+                            var delete_new_folder=document.querySelector('.delete_new_folder');
                             // function showReviseModal(name, color){ 
                                 
                             //     toggleReviseFolderModal();
@@ -523,11 +546,16 @@
                             function toggleDeleteFolderModal(){
                                 modal_delete_folder.classList.toggle('show_modal');
                             }
+                            function toggleDeleteNewFolderModal(){
+                                modal_delete_new_folder.classList.toggle('show_modal');
+                            }
                             function windowOnClick(event){
                                 if(event.target===modal_revise_folder){
                                     toggleReviseFolderModal();
-                                }else if(event.target===modal_revise_folder){
+                                }else if(event.target===modal_delete_folder){
                                     toggleDeleteFolderModal();
+                                }else if(event.target===modal_delete_new_folder){
+                                    toggleDeleteNewFolderModal();
                                 }
                             }
                             
@@ -538,14 +566,15 @@
                             cancel_delete_folder.addEventListener('click',toggleDeleteFolderModal);
                             delete_delete_folder.addEventListener('click',toggleDeleteFolderModal);
 
+                            cancel_delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
+                            delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
+
                             function reviseFolderClicked(id, index){
                                 var revise_folder=document.getElementsByClassName('folder')[index];
                                 var revise_name=document.getElementsByClassName('main_folder_name')[index].innerHTML;
                                 //$('input[name=new_folder_name]').attr('value',revise_name);
                                 var revise_color=document.getElementsByClassName('folder_img')[index].getAttribute('src');
-                                //$('#new_folder_color').val(revise_color).prop('selected',true);
-                                //모달을 다시 보여줘서 폴더 수정하기를 해서 기존의 값을 넣게 만들기.
-                                //기존의 값이 selec
+                                
                                 
                                 document.getElementById('new-folder-name').setAttribute('value',revise_name);
                                 var hidden_id=document.getElementById('revise_folder_id');
@@ -596,7 +625,6 @@
                             var delete_folder=document.getElementsByClassName('folder')[index];
                             var delete_folder_id=document.getElementById('delete_folder_id').getAttribute('value');
 
-                            //console.log(delete_folder_name,index);
                             fetch('/folder',{
                                     method:'DELETE',
                                     headers:{
@@ -612,65 +640,10 @@
                                 
                             </script> 
                             
-                            <!-- <div id="folder_0" class="folder">
-                                <img src="media/plus_folder_yellow.png" class="folder_img"/>
-                                <img src="media/fixed_empty.png" class="fixed" onclick="fixedClicked(0)" />
-                                <p class="main_folder_name">알고리즘</p>
-                                <img class="folder_button" src="media/three_button.png" onclick="showFolderMenu(0);">
-                                <div id="dropdown-folder0" class="dropdown_folder">
-                                <button role="menuitem" class="dropdown_choice" id="revise_folder0" onclick="reviseFolderClicked(0);"></button>
-                                <button role="menuitem" class="dropdown_choice" id="delete_folder0" onclick="deleteFolderClicked(0);"></button>
-                                </div>
-                        </div>
-                        -->
-                        <!-- </div> -->
-
 
                         <div id="folder_plus">
                             <img src="media/plus_folder_gray.png"/><p>추가하기</p>
                         </div>
-                            <!-- <script>
-                                var username = localStorage.getItem('username');
-                                activeUser = getActiveUser(username);
-        
-                                function newFolder() {
-                                    var new_name = prompt("폴더 이름을 입력하세요", "");
-                                    var new_div = document.createElement('div');
-                                    var origin_div = document.getElementById('wrap_folder');
-                                    //append로 안함
-                                    var before_div = document.getElementById('folder_1');
-        
-                                    //별 넣기
-                                    new_star = document.createElement('img');
-                                    new_star.setAttribute('id', 'new_star');
-                                    new_star.src = "media/empty_star.png"
-                                    new_star.style.float = "left";
-                                    new_star.style.margin = "5px";
-                                    new_star.style.width = "25px";
-                                    new_star.style.height = "auto";
-                                    new_star.style.dispaly = "inline";
-                                    new_star.setAttribute('onclick', "newClicked();")
-        
-                                    var new_p = document.createElement('p');
-                                    new_p.innerHTML = new_name;
-                                    new_p.setAttribute("onclick", "toNextPage(" + 6 + ")")
-                                    new_div.setAttribute('class', 'new_div');
-                                    new_div.append(new_star);
-                                    new_div.append(new_p);
-        
-                                    origin_div.insertBefore(new_div, before_div);
-        
-                                    var new_folder = {
-                                        title: new_p.innerHTML,
-                                        star: "false",
-                                        postIt: []
-        
-                                    }
-                                    activeUser.folder.push(new_folder);
-        
-                                    console.info(activeUser.folder)
-                                }
-                            </script> -->
 
                 </div>
             </div>
@@ -1182,21 +1155,22 @@
             parent_folder.append(wrap);
 
             li_del.addEventListener('click',function(){
-            if(confirm('정말 삭제하시겠습니까?')==true){
-            //동적 삭제
-            fetch('/folder',{
+                document.getElementById('delete_new_folder_name').getAttribute('value',name);
+                document.getElementById('delete_new_folder_name').innerHTML=name+" 삭제하기";
+                toggleDeleteNewFolderModal();
+                delete_new_folder.addEventListener('click',function(){
+                    fetch('/folder',{
                 method:'DELETE',
                 headers:{
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                     },
-                body:JSON.stringify({user_id:'<%= user.name %>',folder_name:p.innerHTML})
+                body:JSON.stringify({user_id:'<%= user.name %>',folder_name:name})
                 //.then(res => res.json())   
                 });
                 parent_folder.removeChild(wrap);
-            }else{
-                alert(p.innerHTML+'이(가) 삭제를 취소합니다.')
-            }
+                });
+            
         }); 
     }
 
