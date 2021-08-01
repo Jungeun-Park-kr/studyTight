@@ -338,6 +338,7 @@ function getToday() {
     var month = date.getMonth();
     month = ("0" + (month + 1)).slice(-2);
     var today = date.getDate();
+    today = ("0" + today).slice(-2);
     // 테스트용
     // var year = "2021";
     // var month = "07";
