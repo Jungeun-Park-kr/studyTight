@@ -12,7 +12,8 @@
     });
     </script>
 
-<style>@import url(/public/folder/folder.css);</style>
+<style>@import url(/public/folder/folder.css);
+</style>
 <link rel="stylesheet" href="/public/mainframe_shortcuts.css">
     <link rel="stylesheet" href="/public/mainframe.css">
     <link rel="stylesheet" href="/public/font.css">
@@ -85,41 +86,45 @@
         </div>
         <div id="container">
             <div id="MAIN_LEFT">
-                <div class="section">
+                <div class="section" style="background-image: url('<%= folder_color.folder_color%>');">
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
                     </p>
                     <div class="big_post">
                     <div id="wrap_postit" class="wrap_postit">
                         <% for(var i=0;i<postIt.length; i++) { %>
-                            <div class="postIt postit">
+                            <div class="postIt">
                                 <% if(postIt[i].postIt_star) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
                                     <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
-                                    <img class="three_button" src="media/three_button.png">
+                                    <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
+                                    <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
+                                    <!-- <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
                                         <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>    
-                                    </ul>
+                                    </ul> -->
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
                                     <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
-                                    <img class="three_button" src="media/three_button.png">
+                                    <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
+                                    <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
+                                    <!-- <img class="three_button" src="media/three_button.png">
                                     <ul class="postIt_menu">
                                         <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
                                         <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>  
-                                    </ul>
+                                    </ul> -->
                                 <% } %>
                             </div>
                             <% } %>
                         </div>
                     
                     <div id="postIt_plus" class="postIt">
-                        <img src="/media/folder_black.svg"/>
+                        <img class="post_img" src="/public/media/post_gray.png"/>
                         <p class="post">추가하기</p>
                     </div>
                     </div>
@@ -168,7 +173,7 @@
                         function starPostClicked(index,id, boolValue){ //제목으로 해야 mongodb에서 수정이 편리함
                                 var clickedIndex;
                                 
-                                var clickedPost=document.getElementsByClassName('postit')[index];
+                                var clickedPost=document.getElementsByClassName('postIt')[index];
                                 var star_img=document.getElementsByClassName('fixed_star')[index];
                             
                                 var star_hover=$('.fixed_star').index(index);
@@ -256,7 +261,7 @@
 
             var wrap=document.createElement('div');
             wrap.setAttribute('class','postIt');
-            wrap.setAttribute('class','postit');
+            
 
             var post_img=document.createElement('img');
             post_img.setAttribute('class','post_img');
@@ -308,15 +313,14 @@
             } 
         });
         
-            var ul_button=document.createElement('ul');
-            ul_button.setAttribute('class','postIt_menu');
+            
 
-            var li_re=document.createElement('li');
-            var div_re=document.createElement('div');
-            div_re.setAttribute('id','revise_postIt');
-            div_re.setAttribute('class','revise_postIt');
-            div_re.innerHTML="수정";
-            div_re.addEventListener('click',function(){
+            
+            var img_re=document.createElement('img');
+            img_re.setAttribute('id','revise_postIt');
+            img_re.setAttribute('class','revise_postIt');
+            img_re.setAttribute('src','/public/media/edit.png');
+            img_re.addEventListener('click',function(){
                 
                 if(type=='content'){
                     document.getElementById('revise_content_title').setAttribute('value',post_name);
@@ -333,12 +337,12 @@
                     toggleReviseLinkModal();
                 }
             })
-            var li_del=document.createElement('li');
-            var div_del=document.createElement('div');
-            div_del.setAttribute('id','delete_postIt');
-            div_del.setAttribute('class','delete_postIt');
-            div_del.innerHTML="삭제";
-            div_del.addEventListener('click',function(){
+           
+            var img_del=document.createElement('img');
+            img_del.setAttribute('id','delete_postIt');
+            img_del.setAttribute('class','delete_postIt');
+            img_del.setAttribute('src','/public/media/delete.png');
+            img_del.addEventListener('click',function(){
                 //삭제하기
                 // document.getElementById('delete_post_index').setAttribute('value',index);
                 document.getElementById('delete_new_post_id').setAttribute('value',post_id);
@@ -364,16 +368,15 @@
                 })
             });
 
-            li_re.append(div_re);
-            li_del.append(div_del);
+            
 
-            ul_button.append(li_re);
-            ul_button.append(li_del);
+            
 
             wrap.append(post_img);
             wrap.append(post_p);
             wrap.append(star_img);
-            wrap.append(ul_button);
+            wrap.append(img_re);
+            wrap.append(img_del);
             
             parent_post.append(wrap);
 
@@ -912,7 +915,7 @@
                         'Content-Type':'application/json'
                             },
                             body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
-                });  
+                }).then(data => console.log(data));  
             }
 
         });
@@ -928,7 +931,7 @@
             var index=document.getElementById('delete_post_index').getAttribute('value');
             //post 위치
             console.log(index);
-            var delete_post=document.getElementsByClassName('postit')[index];
+            var delete_post=document.getElementsByClassName('postIt')[index];
             //parent post
             var parent_post=document.getElementById('wrap_postit');
 

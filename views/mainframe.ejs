@@ -46,7 +46,7 @@
                 <script type="text/javascript">   
                     $(document).ready( function() {
                         const location = window.location.pathname;
-                        console.log('현재 url:'+location);
+                       // console.log('현재 url:'+location);
                         if (location == '/') {
                             // $('#menu_home').css({'outline': 'none', 'color':'#6ED4D8', 'text-decoration-color': '#6ED4D8', 'font-weight': '700' });
                             $('#menu_home').addClass('menu_active');
@@ -358,11 +358,18 @@
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
                                     <img class="fixed_folder" src="/media/fixed_full.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
-                                    <img class="three_button" src="/media/three_button.png">
-                                    <ul class="folder_menu">
+                                    <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
+                                        <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
+                                    <!-- <img class="three_button" src="/media/three_button.png"> -->
+                                    <!-- <div class="modal_menu"><ul class="folder_menu">
                                         <li><div id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
                                         <li><div id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');">삭제</div></li>    
                                     </ul>
+                                    </div> -->
+                                    <!-- <div class="folder_menu">
+                                        <div src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')"></div>
+                                        <div src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"></div>   
+                                    </div> -->
                                 <!-- <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice revise_folder" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
                                     <button role="menuitem" class="dropdown_choice delete_folder" id="delete_folder" onclick="reviseFolderClicked('<%= i %>');"></button></div> -->
@@ -371,11 +378,16 @@
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
                                     <img class="fixed_folder" src="/media/fixed_empty.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
-                                    <img class="three_button" src="/media/three_button.png">
-                                    <ul class="folder_menu">
+                                    <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
+                                        <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
+                                    <!-- <img class="three_button" src="/media/three_button.png"> -->
+                                    <!-- <div class="modal_menu"><ul class="folder_menu">
                                         <li><div id="revise_folder" class="reivse_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
                                         <li><div id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id %>','<%= i %>');">삭제</div></li>    
-                                    </ul>
+                                    </ul></div> -->
+                                    
+                                          
+                                    
                                     <!-- dialog로 보여줄 지 고민해보기 -->
                                 <!-- <div id="dropdown-folder" class="dropdown_folder">
                                     <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
@@ -499,23 +511,13 @@
                                 }
                                 fixed_toggle++;
                             }
-                                //var dropdown_toggle=1;
-                            //function showFolderMenu(index){
-                               // console.log(index);
-                                // console.log(index);
-                                // var new_index=parseInt(index);
-                                // console.log(new_index);
-                                //나중에 index로 받아서 처리하기
-                                //var dropdownButton=document.getElementsByClassName('dropdown_folder')[index];
-                                //document.getElementsByClassName('dropdown_folder')[index].style.display='block';
-                                //var revise_button=document.getElementById('drop')[index];
-                                //var delete_button=document.getElementById('delete_folder')[index];
-                                //dropdownButton.style.display='block';
                             
-                            //}
+                            //var modal_menu=document.querySelector('.modal_menu');
+                            //var trigger_menu=document.querySelector('.three_button');
+
 
                             var modal_revise_folder=document.querySelector('.modal_revise_folder');
-                            //var trigger_revise_folder=document.querySelector('#revise_folder');
+                            
                             var close_revise_folder=document.querySelector('.close_revise_folder');
                             var store_revise_folder=document.querySelector('.modal-folder-revise');
 
@@ -526,19 +528,7 @@
                             var modal_delete_new_folder=document.querySelector('.modal_delete_new_folder');
                             var cancel_delete_new_folder=document.querySelector('.cancel_delete_new_folder');
                             var delete_new_folder=document.querySelector('.delete_new_folder');
-                            // function showReviseModal(name, color){ 
-                                
-                            //     toggleReviseFolderModal();
-
-                                
-                            //     var close_revise_folder=document.querySelector('.close_revise_folder');
-                            //     var store_revise_folder=document.querySelector('.modal-folder-revise');
-                                
-                                
-                            //     close_revise_folder.addEventListener('click',toggleReviseFolderModal);
-                            //     store_revise_folder.addEventListener('click',toggleReviseFolderModal);
-                            // }
-                        
+                            
                         
                             function toggleReviseFolderModal(){
                                 modal_revise_folder.classList.toggle("show_modal");
@@ -549,6 +539,10 @@
                             function toggleDeleteNewFolderModal(){
                                 modal_delete_new_folder.classList.toggle('show_modal');
                             }
+                            // function toggleShowMenuModal(){
+                            //     modal_menu.classList.toggle('show_modal');
+                            // }
+
                             function windowOnClick(event){
                                 if(event.target===modal_revise_folder){
                                     toggleReviseFolderModal();
@@ -557,6 +551,9 @@
                                 }else if(event.target===modal_delete_new_folder){
                                     toggleDeleteNewFolderModal();
                                 }
+                                // else if(event.target===modal_menu){
+                                //     toggleShowMenuModal();
+                                // }
                             }
                             
                             
@@ -568,6 +565,8 @@
 
                             cancel_delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
                             delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
+
+                            //trigger_menu.addEventListener('click',toggleShowMenuModal);
 
                             function reviseFolderClicked(id, index){
                                 var revise_folder=document.getElementsByClassName('folder')[index];
@@ -586,11 +585,12 @@
                             }
 
                         store_revise_folder.addEventListener('click',function(){
+                                    
                                     var id=document.getElementById('revise_folder_id').getAttribute('folder_id');
                                     var revise_folder_name=$('#new-folder-name').val();
 
                                     var revise_folder_color=$('#new_folder_color:selected').val();
-
+                                    
                                     if(revise_folder_name.trim()==''){
                                         alert("수정할 이름을 입력하세요");
                                     }else{
@@ -601,10 +601,11 @@
                                                 'Content-Type':'application/json'
                                                 },
                                             body:JSON.stringify({folder_id:id, revise_folder_name:revise_folder_name, revise_folder_color:revise_folder_color})
-                                            });                                       
+                                            })
+                                            //.then((Response) => console.log(Response));                                   
                                         }
                             });
-
+                            
                             function deleteFolderClicked(id,index){
                                 
                                 var delete_folder=document.getElementsByClassName('folder')[index];
@@ -786,14 +787,9 @@
                 <!-- 추가할 때의 부분 -->
                 
                 <div><input type="date" id="modal-d-date" class="d-date" value="날짜"></input>
-                <!-- <script> $(document).ready(function() {
-                    $("#modal-d-date").datepicker(); });
-                    </script> -->
-                <!-- <input type="text" id="d-date" class="d-date" placeholder="날짜"> -->
+                
                 <input type="text" id="modal-d-content" class="d-content" placeholder="내용 (최대 7자)"></div>
-                <!-- <input type="button" id="d-date" class="d-date" onclick="sayPrompt()" value="날짜"></input> -->
-                <!-- <input type="button" id="d-content"class="d-content" onclick="sayPrompt()" value="내용"></input> -->
-                <!-- 버튼을 클릭하면 edittext로 만드는 방법 고민해보기 일단 이렇게 했다-->
+               
                 <div><input type="button" class="modal-d-plus" value="디데이 추가"></input></div>
             </div> 
         <!-- </form> -->
@@ -809,11 +805,6 @@
                     <input type="text" id="modal-folder-name" name="folder_name" maxlength="7" placeholder="폴더 이름을 입력하세요.">
                     <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
                         <select id="folder_color" name="folder_color">
-                        <!-- <option value='#f29b34' selected><input type='color' value=' #f29b34'></option>
-                        <option value='#97ce68'><input type='color' value='#97ce68'></option>
-                        <option value='#fcd341'><input type='color' value='#fcd341'></option>
-                        <option value='#e36363'><input type='color' value='#e36363'></option>
-                        <option value='#4dbdc2'><input type='color' value='#4dbdc2'></option> -->
                         
                         <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
                         <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
@@ -941,8 +932,7 @@
         new_checkbox.setAttribute('type','checkbox');
         new_checkbox.setAttribute('name','checkbox');
         new_checkbox.setAttribute('class','class');
-        //new_checkbox.setAttribute('onclick','onCheckedHandler('+content+','+false+')')
-        // 이 값을 함수 호출하는 곳에서 가져와야 함...
+        
         var new_p=document.createElement('p');
         new_p.setAttribute('class','p_p');
         new_p.innerHTML=content;
@@ -956,8 +946,7 @@
             var check_content=todolist.todo_content;
             //console.log(check_content);
             var check_value=todolist.todo_finished;
-            //onCheckedHandler(content,check_value);
-            //console.log(check_value+'->'+!(check_value));
+            
             if(check_value==true){
                 new_ck_toggle++;
             }
@@ -1051,15 +1040,11 @@
 
     function addNewFolder(folder,folder_id,folder_color){
         
-        //console.log(folder_color);
         var name=folder.folder_name;
         var color;
         var fixed=folder.folder_fixed;
         console.log("fixed의 값은 "+fixed);
-        //console.log(JSON.stringify(color));
-
-        //console.log(JSON.stringify(color));
-        //console.log(name, color, fixed);
+        
         
         var wrap=document.createElement('div');
         wrap.setAttribute('class','folder');
@@ -1068,8 +1053,8 @@
 
 
         var img_folder=document.createElement('img');
-        img_folder.setAttribute('src',folder_color); //이거 때문에 계속 get 404에러가 난다! 이거를 그냥 if문을 사용해서 src에 넣어야겠다
-        //console.log(img_folder.getAttribute('src'));
+        img_folder.setAttribute('src',folder_color); 
+        
         img_folder.setAttribute('class','folder_img');
         var p=document.createElement('p');
         p.setAttribute('class','main_folder_name');
@@ -1120,41 +1105,40 @@
 
             
         })
-        var img_button=document.createElement('img');
-        img_button.setAttribute('class','three_button');
-        img_button.setAttribute('src','/media/three_button.png');
+        // var img_button=document.createElement('img');
+        // img_button.setAttribute('class','three_button');
+        // img_button.setAttribute('src','/media/three_button.png');
         
-        var ul_menu=document.createElement('ul');
-        ul_menu.setAttribute('class','folder_menu');
-        var li_1=document.createElement('li');
-        var li_re=document.createElement('div');
-        li_re.addEventListener('click',function(){
+        
+        var img_re=document.createElement('img');
+        img_re.setAttribute('class','revise_folder');
+        img_re.setAttribute('id','revise_folder');
+        img_re.setAttribute('src','/public/media/edit.png');
+        img_re.addEventListener('click',function(){
             document.getElementById('new-folder-name').setAttribute('value',name);
             $('#new_folder_color').val(folder_color).prop('selected',true);
                 toggleReviseFolderModal();
         })
-        li_re.setAttribute('id','revise_folder');
-        li_re.innerHTML='수정';
-        var li_2=document.createElement('li');
-        var li_del=document.createElement('div');
-        li_del.innerHTML="삭제";
-        li_del.setAttribute('id','delete_folder');
         
         
-        li_1.append(li_re);
-        li_2.append(li_del);
-        ul_menu.append(li_1);
-        ul_menu.append(li_2);
+        var img_del=document.createElement('img');
+        img_del.setAttribute('class','delete_folder');
+        img_del.setAttribute('id','delete_folder');
+        img_del.setAttribute('src','/public/media/delete.png');
+        
+        
+        
 
         wrap.append(img_folder);
         wrap.append(p);
         wrap.append(fixed_img);
-        wrap.append(img_button);
-        wrap.append(ul_menu);
+        
+        wrap.append(img_re);
+        wrap.append(img_del);
 
             parent_folder.append(wrap);
 
-            li_del.addEventListener('click',function(){
+            img_del.addEventListener('click',function(){
                 document.getElementById('delete_new_folder_name').getAttribute('value',name);
                 document.getElementById('delete_new_folder_name').innerHTML=name+" 삭제하기";
                 toggleDeleteNewFolderModal();
