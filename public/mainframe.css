@@ -357,7 +357,7 @@ html, body {
         border:none;
         font-size:12px;
         font-weight:bold;
-        margin:10px;
+        margin:0 10px;
 }
 
 .cancelBtn{
@@ -371,7 +371,7 @@ html, body {
     border-width:1px;
     font-size:12px;
     font-weight:bold;
-    margin:10px;
+    margin:0 10px;
 }
 .buttons_wrap{
     position:fixed;
