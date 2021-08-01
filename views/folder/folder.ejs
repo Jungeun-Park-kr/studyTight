@@ -98,7 +98,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/media/full_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/public/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     <!-- <img class="three_button" src="media/three_button.png">
@@ -110,7 +110,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/public/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     <!-- <img class="three_button" src="media/three_button.png">
@@ -152,6 +152,12 @@
                                 document.getElementById('revise_input_link').setAttribute('value',revise_post_content);
                                 $('#revise_link_color').val(revise_post_color).prop('selected',true);
                                 toggleReviseLinkModal();
+                            }else {
+                                document.getElementById('revise_file_text').setAttribute('value',revise_post_name);
+                                document.getElementById('revise_post_id').setAttribute('postIt_id',id);
+                                //document.getElementsByClassName('revise-upload-name').setAttribute('value',revise_post_content);
+                                $('#revise_file_color').val(revise_post_color).prop('selected',true);
+                                toggleReviseFileModal();
                             }
 
                         }
@@ -278,7 +284,7 @@
 
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
-            star_img.setAttribute('src','/media/empty_star.png');
+            star_img.setAttribute('src','/public/media/empty_star.png');
             new_star_toggle=1;
             star_img.addEventListener('click',function(){
                 if(post_star==true){
@@ -286,7 +292,7 @@
                 }
                 if(new_star_toggle%2==1){
                     post.postIt_star=true;
-                    star_img.style.src='/media/full_star.png';
+                    star_img.style.src='/public/media/black_star.png';
                     star_img.style.opacity=1;
                     fetch(''+folder_id+'/star',{
                         method:'PATCH',
@@ -299,7 +305,7 @@
                                     });
             }else{
                 post.postIt_star=false;
-                    star_img.style.src='/media/empty_star.png';
+                    star_img.style.src='/public/media/empty_star.png';
                     star_img.style.opacity=1;
                     fetch(''+folder_id+'/star',{
                         method:'PATCH',
@@ -335,9 +341,16 @@
                     $('#revise_link_color').val(post_color).prop('selected',true);
                     
                     toggleReviseLinkModal();
+                }else{
+                    document.getElementById('revise_file_text').setAttribute('value',post_name);
+                    document.getElementById('revise_post_id').setAttribute('postIt_id',post_id);
+                    //document.getElementsByClassName('revise-upload-name').setAttribute('value',post_content);
+                    $('#revise_file_color').val(post_color).prop('selected',true);
+                    
+                    toggleReviseFileModal();
                 }
             })
-           
+        
             var img_del=document.createElement('img');
             img_del.setAttribute('id','delete_postIt');
             img_del.setAttribute('class','delete_postIt');
@@ -393,7 +406,9 @@
                     link.location=post_content;
             })
             }else{ //type=='file'
-                ;
+                post_p.addEventListener('click',function(){
+                    alert(post_p);
+                });
             }
 
         }
@@ -513,7 +528,7 @@
                         <div class="modal-footer">
                             <div class="file_color_wrap" value="포스트잇의 색을 선택하세요.">
                                 <select id="file_color" name="file_color"> 
-                                <option value='/public/media/post_orangepng' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                                 <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                                 <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                                 <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -554,6 +569,7 @@
                                 <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                         </select>
                         </div>
+                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_link">취소</div>
                         <div class="btn uploadBtn revise_link_button">완료</div>
                     </div>
@@ -586,11 +602,50 @@
                         
                             </select>
                         </div>
-                    
+                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_content">취소</div>
                         <div class="btn uploadBtn revise_content_button">완료</div>
                     </div>
                 </div>
+            </div>
+
+            <!-- 파일 수정하기 -->
+        <div id="modal" class="modal modal_revise_file" data-backdrop="static">
+            <div class="modal-content-file">
+            
+                <span  class="close_button close_revise_file_button" data-dismiss="modal" aria-hidden="true">&times;</span>
+                <h4 class="modal-title">파일 수정하기</h4>
+                <div id="revise_post_id" postIt_id="id자리"></div>
+                
+                
+                <div class="modal-body">
+                        <p>제목</p>
+                        <input type="text" id="revise_file_text" class="input_text" >
+                        <br>
+                        <br>
+                        <div class="filebox"> 
+                            <input class="revise-upload-name" value="파일선택" disabled="disabled">
+                            <label for="ex_filename">업로드</label> 
+                            <input type="file" id="ex_filename" class="upload-hidden">
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="revise_file_color_wrap" value="포스트잇의 색을 선택하세요.">
+                                <select id="revise_file_color" name="file_color"> 
+                                <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
+                                <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
+                                <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
+                                <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
+                                <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
+                            
+                            </select>
+                            </div>
+                            <div data-dismiss="modal" class="btn cancelBtn cancel_revise_file_button" onclick="cancelClicked();">취소</div>
+                            <div class="btn uploadBtn revise_file_button">완료</div>
+                        </div>
+                    
+                
+            </div>
             </div>
 
             <!-- 포스트잇 삭제하기 -->
@@ -615,6 +670,8 @@
                 </div>
             </div>
 
+            
+
             <!-- 동적 포스트잇 삭제하기 -->
             <div id="modal" class="modal modal_delete_new_post">
                 <div class="modal-content-delete-new-post">
@@ -638,12 +695,28 @@
             </div>
     
     <script>
+        $(document).ready(function(){
+            var fileTarget = $('.filebox .upload-hidden');
+        fileTarget.on('change', function(){
+             // 값이 변경되면 
+             if(window.FileReader){ // modern browser 
+                var filename = $(this)[0].files[0].name; 
+            } else { // old IE 
+                var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+            } // 추출한 파일명 삽입 
+            
+            $(this).siblings('.upload-name').val(filename); 
+        });
+    });
+
+
         var modal_choice=document.querySelector('.modal_choice');
         var modal_content=document.querySelector('.modal_content');
         var modal_link=document.querySelector('.modal_link');
         var modal_file=document.querySelector('.modal_file');
         var modal_revise_link=document.querySelector('.modal_revise_link');
         var modal_revise_content=document.querySelector('.modal_revise_content')
+        var modal_revise_file=document.querySelector('.modal_revise_file');
         var modal_delete=document.querySelector('.modal_delete_post');
         var modal_delete_new=document.querySelector('.modal_delete_new_post');
 
@@ -658,13 +731,16 @@
         var close_file_button=document.querySelector('.close_file_button');
         var close_revise_link=document.querySelector('.close_revise_link');
         var close_revise_content=document.querySelector('.close_revise_content');
-        
+        var close_revise_file=document.querySelector('.close_revise_file_button');
+
         var store_content_button=document.querySelector('.store_content_button');
         var store_link_button=document.querySelector('.store_link_button');
         var store_file_button=document.querySelector('.store_file_button');
         
         var revise_link_button=document.querySelector('.revise_link_button');
         var revise_content_button=document.querySelector('.revise_content_button');
+        var revise_file_button=document.querySelector('.revise_file_button');
+
         var delete_post_button=document.querySelector('.delete_delete_post');
         var delete_new_post_button=document.querySelector('.delete_new_post');
 
@@ -674,6 +750,7 @@
         var cancel_delete_button=document.querySelector('.cancel_delete_post');
         var cancel_revise_link=document.querySelector('.cancel_revise_link');
         var cancel_revise_content=document.querySelector('.cancel_revise_content');
+        var cancel_revise_file=document.querySelector('.cancel_revise_file_button');
         var cancel_delete_new_button=document.querySelector('.cancel_delete_new_post');
         
         var modal_show_content=document.querySelector('.modal_show_content');
@@ -701,6 +778,9 @@
         function toggleReviseContentModal(){
             modal_revise_content.classList.toggle('show_modal');
         }
+        function toggleReviseFileModal(){
+            modal_revise_file.classList.toggle('show_modal');
+        }
         function toggleDeletePostModal(){
             modal_delete.classList.toggle('show_modal');
         }
@@ -723,6 +803,8 @@
                 toggleReviseLinkModal();
             }else if(event.target===modal_revise_content){
                 toggleReviseContentModal();
+            }else if(event.target===modal_revise_file){
+                toggleReviseFileModal();
             }else if(event.target===modal_delete){
                 toggleDeletePostModal();
             }else if(event.target===modal_delete_new){
@@ -765,6 +847,10 @@
 
         delete_new_post_button.addEventListener('click',toggleNewDeletePostModal);
         cancel_delete_new_button.addEventListener('click',toggleNewDeletePostModal);
+
+        close_revise_file.addEventListener('click',toggleReviseFileModal);
+        cancel_revise_file.addEventListener('click',toggleReviseFileModal);
+        revise_file_button.addEventListener('click',toggleReviseFileModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -854,7 +940,47 @@
                 })
             }
         }
+        function uploadFile(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            //console.log(folder_name);
+            const title=$('#input_file_text').val();
+            const file=$('.upload-name').val();
+            const color=$('#file_color option:selected').val();
+            if(title.trim()==''){
+                alert("제목을 입력해주세요.");
+            }else if(file.trim()==''){
+                alert("파일을 선택해주세요.");
+            }else{
+                var new_post;
+                
+                $.ajax({
+                    type:'POST',
+                    async:true,
+                    url:''+folder_id+'/add',
+                    data:{
+                        folder_id:folder_id,
+                        postIt_name:title,
+                        postIt_type:'file',
+                        postIt_content:file,
+                        postIt_star:false,
+                        postIt_color:color
 
+                    },
+                    success:function(data){
+                        //console.log('포스트잇 링크 저장 완료');
+                        var new_post={
+                            post_name:title,
+                            post_content:file,
+                            post_star:false
+                        }
+                        var new_post_id=data.postIt._id;
+                        addNewPost('file',new_post_id,new_post,color);
+                    },error:function(err){
+                        //console.log('포스트잇 링크 저장 실패');
+                    }
+                })
+            }
+        }
         function showContent(type, title, content){
             if(type=='link'){
                 var link=window.open();
@@ -867,7 +993,9 @@
                 document.getElementById('show_content').innerHTML=show_content;
                 toggleShowModal();
             }else { //type=='file'
-                ;
+                // var link=window.open();
+                // link.location=content;
+                alert(content);
             }
 
         }
@@ -900,13 +1028,13 @@
             var id=document.getElementById('revise_post_id').getAttribute('postIt_id');
             var new_name=$('#revise_content_title').val();
             var new_content=$('#revise_input_content').val();
-            var new_color=$('#revise_content_color:selected').val();
+            var new_color=$('#revise_file_color:selected').val();
             console.log(id, new_name,"content:"+ new_content, new_color);
 
             if(new_name.trim()==''){
                 alert("수정할 이름을 입력하세요.");
             }else if(new_content.trim()==''){
-                alert('수정할 링크를 입력하세요.');
+                alert('수정할 내용을 입력하세요.');
             }else{
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
@@ -918,6 +1046,30 @@
                 }).then(data => console.log(data));  
             }
 
+        });
+
+        revise_file_button.addEventListener('click',function(){
+            const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
+            var id=document.getElementById('revise_post_id').getAttribute('postIt_id');
+            var new_name=$('#revise_file_text').val();
+            var new_content=$('.revise-upload-name').val();
+            var new_color=$('#revise_file_color:selected').val();
+            console.log(id, new_name,"file"+ new_content, new_color);
+
+            if(new_name.trim()==''){
+                alert("수정할 이름을 입력하세요.");
+            }else if(new_content.trim()==''){
+                alert('수정할 파일을 선택하세요.');
+            }else{
+                fetch(''+folder_id+'/revise',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
+                }).then(data => console.log(data));  
+            }
         });
 
         delete_post_button.addEventListener('click',function(){

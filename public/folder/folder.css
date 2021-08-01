@@ -50,18 +50,14 @@ body {
     background-size:cover;
 
 }
-/* .section::before{
+.section::before{
     content:"";
     opacity:0.5;
-    position:absolute;
-    
-    top:0px;
-    left:0px;
-    right:0px;
-    bottom:0px;
+    /* position:absolute; */
+    z-index: -1;
     
 
-}  */
+} 
 .section::after{
     content:"";
     
@@ -81,7 +77,7 @@ body {
 }
 .wrap_postit{
 
-    display:inline-block;
+    display:inline;
 }
 .postIt
 {
@@ -356,9 +352,13 @@ body {
     align-content: center;  
 }
 .choice > p{
+    text-align: center;
+	position: relative;
     font-size:11px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+    left:-50%;
+    top:10px;
+    margin-top: 15px;
 }
 .modal{
     position: fixed; 
@@ -386,7 +386,7 @@ body {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-revise-link, .modal-content-delete-post, .modal-content-delete-new-post{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-delete-post, .modal-content-delete-new-post{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -395,6 +395,19 @@ body {
     padding: 1rem 30px; 
     width: 400px; 
     height: 230px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+    /* z-index:500; */
+} 
+.modal-content-revise-link{ 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 400px; 
+    height: 270px; 
     border-radius: 0.5rem; 
     margin : 0 auto;
     /* z-index:500; */
@@ -676,7 +689,7 @@ textarea{
     border:none;
     font-size:12px;
     font-weight:bold;
-    margin:10px;
+    margin:0 10px;
 }
 .cancelBtn{
     float:right;
@@ -686,10 +699,10 @@ textarea{
     border-color: #6ED4D8;
     border-style:solid;
     background-color: white;
-    border-width:1px;
+    border-width:10px;
     font-size:12px;
     font-weight:bold;
-    margin:10px;
+    margin:0 10px;
 }
 .input_text{
     width:90%;

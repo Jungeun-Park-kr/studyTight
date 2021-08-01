@@ -167,9 +167,10 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
     });
     //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
     //console.log(todo_finished);
-    res.render('../views/folder/folder.ejs',
-        { title : 'study Tight', folder_title:folder_title[0], todolist:todo, folder:folder}
-    );
+    // res.render('../views/folder/folder.ejs',
+    //     { title : 'study Tight', folder_title:folder_title[0], todolist:todo, folder:folder}
+    // );
+    res.send(todo);
     //res.redirect('/');
 
     }catch(err){
@@ -218,8 +219,9 @@ router.delete('/:id',isLoggedIn, async(req,res,next) => { //할 일 목록에서
         //console.log('삭제된 것의 id는'+ delete_todoId);
         const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.log('남은 것은 이제 '+todo.todo_content);
-        res.render('../views/folder/folder.ejs',
-        { title : 'study Tight', todolist:todo, folder: folder});
+        // res.render('../views/folder/folder.ejs',
+        // { title : 'study Tight', todolist:todo, folder: folder});
+        res.send(todo);
     }catch(err){
         next(err);
     }
@@ -238,13 +240,14 @@ router.get('/:id/add', isLoggedIn, async(req, res) => {
         const folder = await Folder.find({user_id:res.locals.user._id});
         const postIt=await PostIt.find({folder_name:title}).populate('postIts');
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
-        res.render('../views/folder/folder.ejs', {
-            folder_title: _url,
-            //folder : folder,
-            postIt: postIt,
-            todolist: todolist
+        // res.render('../views/folder/folder.ejs', {
+        //     folder_title: _url,
+        //     //folder : folder,
+        //     postIt: postIt,
+        //     todolist: todolist
 
-        });
+        // });
+        
     }catch(err){
         console.log('routes/folder.js에서 에러');
         console.error(err);
