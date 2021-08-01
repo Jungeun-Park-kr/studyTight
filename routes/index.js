@@ -32,8 +32,17 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         //삭제 성공!
         await Todo.deleteMany({ user_id: res.locals.user._id, todo_finished: true, register_date: { $ne: getCurrentDate() } })
             //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
-        await Todo.updateMany({ user_id: res.locals.user._id, register_date: getCurrentDate() })
-        const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
+        //await Todo.updateMany({ user_id: res.locals.user._id, register_date: getCurrentDate() })
+        const todo = await Todo.updateMany({
+            user_id: req.user._id, //필터링 하는 것
+            
+        }, {
+            $set: {
+                register_date: getCurrentDate()
+            }
+        });
+        
+        const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
         // 디데이 날짜지난 것 삭제
         //console.log('getToday()'+getToday());
@@ -55,7 +64,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
     } catch (err) {
         console.error('routes/index.js 에서 에러');
         console.error(err);
-        next(err);
+        
     }
 });
 
