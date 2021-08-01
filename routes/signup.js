@@ -83,7 +83,7 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         
         const user = await User.create({
             email : email,
-            id : id,
+            email_id : email_id,
             name : name,
             password: hash,
             birth : birth,
