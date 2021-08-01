@@ -29,6 +29,13 @@
     color: #999;
 }
 
+.modal7 {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #999;
+}
+
 h1 {
     font-family: 'Oswald', sans-serif;
     font-size: 30px;
@@ -104,7 +111,8 @@ textarea {
 .modal,
 .modal2,
 .modal3,
-.modal4 {
+.modal4,
+.modal7 {
     position: fixed;
     left: 0;
     top: 0;
@@ -145,7 +153,8 @@ textarea {
 .close-button,
 .close-button2,
 .close-button3,
-.close-button4 {
+.close-button4,
+.close-button7 {
     float: right;
     width: 1.5rem;
     line-height: 1.5rem;
@@ -157,7 +166,8 @@ textarea {
 
 .close-button:hover,
 .close-button2:hover,
-.close-button3:hover {
+.close-button3:hover,
+.close-button7:hover {
     background-color: darkgray;
 }
 
