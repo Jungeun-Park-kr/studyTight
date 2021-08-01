@@ -28,7 +28,6 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        // console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -49,8 +48,6 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             profile: profile[0],
             friend: friend
         });
-
-        //console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -78,7 +75,6 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
         });
 
-        //console.log(profile);
 
         // res.send({
         //     user_id: req.user._id, //박정은의 오브젝트 아이디.
@@ -129,7 +125,6 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
             friend_id: id_obj,
             profile: profile
         });
-        console.log(profile);
     } catch (err) {
         next(err);
     }
