@@ -239,7 +239,7 @@
                         <div class="wrap_day" id="wrap_day">
                         <script>
                             function deleteDay(content,index){
-                                //console.log(content,index);
+                                console.log('삭제될 애:',content,index);
                             
                                 var parent_day=document.getElementById('wrap_day')
                                 var delete_day=document.getElementsByClassName('d-day')[index];
@@ -263,12 +263,14 @@
                                 console.log('자식 개수:'+childCnt);
                                 var invisible_plus=document.getElementById('d-day-plus');
                                 if (childCnt > 9) { // <script>2개, d-day 8개 => 총 10개
+                                    console.log('가리기 after delete');
                                     invisible_plus.style.display='none';
                                 } 
                                 // else if (childCnt == 9 && invisible_plus.style.display=='none') {
                                 //     invisible_plus.style.display= 'none';
                                 // } 
                                 else {
+                                    console.log('보이기 after delete');
                                     invisible_plus.style.display='inline-block';
                                 }
                                 // var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
@@ -338,9 +340,10 @@
                             var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
                             var invisible_plus=document.getElementById('d-day-plus');
                             if(d_daylist.length>=8){
-                                
+                                //console.log('메인 페이지 로딩 - 숨기기')
                                 invisible_plus.style.display='none';
                             }else{
+                                //console.log('메인 페이지 로딩 - 보이기');
                                 invisible_plus.style.display='inline-block';
                             }
                         </script>
@@ -903,11 +906,14 @@
             console.log('자식 개수:'+childCnt);
             //var invisible_plus=document.getElementById('d-day-plus');
             if (childCnt > 9 && ($('#d-day-plus').css('display') == 'inline-block')) { // <script>2개, d-day 8개 => 총 10개
+                console.log('가리기1');
                 $('#d-day-plus').css('display', 'none');
                 //invisible_plus.style.display='none';
             } else if (childCnt == 9 && ($('#d-day-plus').css('display') == 'none')) {
+                console.log('가리기2');
                 $('#d-day-plus').css('display', 'none');
             } else {
+                console.log('보이기');
                 $('#d-day-plus').css('display', 'inline-block');
                 //invisible_plus.style.display='inline-block';
             }
