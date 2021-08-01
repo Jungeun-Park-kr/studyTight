@@ -91,8 +91,6 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         });
         console.log('추가된 user:'+ user);
         res.send('success');
-        next();
-        
         // return res.redirect('/login');
     } catch (error) {
         console.log('회원가입 에러');
