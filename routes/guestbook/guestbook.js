@@ -48,7 +48,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             profile: profile[0],
             friend: friend
         });
-
+        console.log(1);
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
