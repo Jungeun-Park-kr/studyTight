@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             friend: friend
         });
 
-        //console.log(friend);
+        // console.log(friend);
 
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -123,10 +123,13 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
     const id_obj = req.params.id; //내가 보내준 ID
     try {
         //일단 유저정보를 받아와서 페이지 먼저 띄우기.
-        const onefriend = await User.find({ user_id: id_obj });
+        const user = await User.findOne({ email_id: id_obj });
+        const profile = await Profile.findOne({ user_id: user._id });
         res.render('../views/guestbook/guestbook_friendroom.ejs', {
-            friend_id: id_obj
+            friend_id: id_obj,
+            profile: profile
         });
+        console.log(profile);
     } catch (err) {
         next(err);
     }

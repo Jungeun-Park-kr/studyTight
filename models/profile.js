@@ -12,9 +12,9 @@ const profile_schema = new Schema({
     major: { type: String, required: true },
     major_private: { type: Boolean },
     grade: { type: Number, required: true },
-    grade_private: { type: Boolean, },
-    age_private: { type: Boolean }
-
+    grade_private: { type: Boolean },
+    age_private: { type: Boolean },
+    timetable_private: { type: Boolean }
 });
 
 module.exports = mongoose.model('Profile', profile_schema);

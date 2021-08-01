@@ -124,10 +124,6 @@
                 <li class="edit-profile">
                     <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
                 </li>
-
-                <li class="show-timetable">
-                    <input type="button" id="table-button-id" value="시간표 보기"></input>
-                </li>
             </div>
 
         </div>
@@ -514,7 +510,7 @@
                             <tbody id="course_body">
 
                                 <% for(var i = 0; i < friend.length; i++){ %>
-                                    <tr onclick="location.href='/guestbook/id:<%=friend[i].Friend_ID %>'">
+                                    <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
                                         <td>
                                             <%=friend[i].Friend_ID %>
                                         </td>
