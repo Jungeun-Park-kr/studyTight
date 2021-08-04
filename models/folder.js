@@ -10,7 +10,7 @@ const folder_schema=new Schema({
         required:true,
         ref: 'User'
     },  
-    folder_name:{type:String, unique:true, required:true}, //중복된 내용이 들어가지 않도록
+    folder_name:{type:String, required:true}, //중복된 내용이 들어가지 않도록
     folder_fixed:{type:Boolean, required:true},
     folder_color:{type:String, required:true},
     postIt: [{type:ObjectId, ref:'PostIt'}]

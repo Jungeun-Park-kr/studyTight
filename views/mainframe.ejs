@@ -635,7 +635,7 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({user_id:'<%= user.name %>',folder_name:delete_folder_name, folder_id:delete_folder_id})
+                                        body:JSON.stringify({user_id:'<%= user.name %>', folder_id:delete_folder_id})
                                         //.then(res => res.json())   
                                     });
                                     parent.removeChild(delete_folder);
@@ -669,10 +669,10 @@
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
-                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
+                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                 <%} else{ %>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
-                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
+                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                     <% } %>
                                 <% } %>
                                 <!-- </form> -->
@@ -733,12 +733,13 @@
                                     checked_toggle++;
                                                        }
                             
-                            function onDeleteTodo(todo_content,delete_index){
+                            function onDeleteTodo(todo_id,delete_index){
                                 var parent=document.getElementById('todaylists');
                                 
                                 var delete_div=document.getElementsByClassName('wrap_label')[delete_index];
+                                var delete_p=document.getElementsByClassName('p_p')[index];
                                 //console.log(delete_index);
-                            
+                                //delete_div.innerHTML
                                 //db에 삭제되도록 하기
                                 fetch('/',{
                                         method:'DELETE',
@@ -746,11 +747,11 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_content:todo_content})
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id})
                                         //.then(res => res.json())   
                                     });
                                     parent.removeChild(delete_div);
-                                    alert(todo_content+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                                    alert(delete_.innerHTML.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
                             }
                         
                         </script>
@@ -769,7 +770,7 @@
         <div class="modal-content-todo">
         <span class="close_button close_todo_button">&times;</span>
         <h1 class="title">오늘 할 일 추가히기</h1>
-        <!-- <form action='/' method="POST"> -->
+        
             <div>
                 <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
                 <input type="hidden">
@@ -777,7 +778,7 @@
             <div>
                 <input type="button" class="modal-todo-plus" value="확인"></input>
             </div>
-        <!-- </form> -->
+        
         </div>
     </div>
         <!-- d-day 추가하기 모달 팝업 -->
@@ -785,17 +786,14 @@
         <div class="modal-content-day">
         <span class="close_button close_day_button">&times;</span>
         <h1 class="title">디데이 추가하기</h1>
-        <!-- <form action="#post.js" method="POST"> -->
+        
             <div class="plus-part">
-                <!-- 추가할 때의 부분 -->
-                
                 <div><input type="date" id="modal-d-date" class="d-date" value="날짜"></input>
                 
-                <input type="text" id="modal-d-content" class="d-content" placeholder="내용 (최대 7자)"></div>
-               
+                <input type="text" id="modal-d-content" class="d-content" placeholder="내용 (최대 7자)"></div>          
                 <div><input type="button" class="modal-d-plus" value="추가"></input></div>
             </div> 
-        <!-- </form> -->
+        
         </div>
     </div>
 
@@ -838,7 +836,7 @@
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
     var closeFolderButton=document.querySelector('.close_folder_button');
     var storeTodoButton=document.querySelector('.modal-todo-plus');
-    // var storeDayButton=document.querySelector('.modal-d-plus');
+    
     var storeFolderButton=document.querySelector('.modal-folder-plus');
 
     function toggleDayModal() {
@@ -867,10 +865,10 @@
     closeDayButton.addEventListener("click", toggleDayModal);
     closeTodoButton.addEventListener('click',toggleTodoModal);
     closeFolderButton.addEventListener('click',toggleFolderModal);
-    // storeDayButton.addEventListener('click',toggleDayModal);
+    
     storeTodoButton.addEventListener('click',toggleTodoModal);
     storeFolderButton.addEventListener('click',toggleFolderModal);
-    //window.addEventListener("click", windowOnClick);
+    
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
@@ -893,7 +891,7 @@
                         todo_content : new_content,
                         todo_finished : false
                     }
-                    addNewTodo(new_todo);
+                    addNewTodo(new_todo, data);
                 
                 },error:function(err){
                     console.log('todo 저장 실패');
@@ -920,8 +918,8 @@
         }
     })
     
-    function addNewTodo(todolist){
-    
+    function addNewTodo(todolist, data){
+        //console.log(data);
         var content=todolist.todo_content;
 
         var parent_todolist=document.getElementById('todaylists');
@@ -944,13 +942,13 @@
         new_p.innerHTML=content;
         var new_span=document.createElement('span');
         new_span.setAttribute('class','delete_todo');
-        //new_span.setAttribute('onclick','onDeleteTodo('+content+')')
+        
         
         var new_ck_toggle=1;
         new_checkbox.addEventListener('click',function(){
             
             var check_content=todolist.todo_content;
-            //console.log(check_content);
+            
             var check_value=todolist.todo_finished;
             
             if(check_value==true){
@@ -994,14 +992,14 @@
         new_div.append(new_span);
 
         new_span.addEventListener('click',function(){
-            //삭제했을 때 바뀌도록 ... delete함수 사용
+            
             fetch('/',{
                 method:'DELETE',
                 headers:{
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                     },
-                body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML})
+                body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id})
                 //.then(res => res.json())   
                 });
                 alert(new_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
@@ -1013,7 +1011,7 @@
         //추가되면 mongodb에 저장되도록
         var new_folder_name=$('#modal-folder-name').val();
         var new_folder_color=$('#folder_color option:selected').val(); //폴더 색 위치
-        //console.log(new_folder_color);
+        
         if(new_folder_name.trim()===''){
             alert('폴더 이름을 입력하세요');
         }else{
@@ -1030,8 +1028,7 @@
                         folder_name: new_folder_name,
                         folder_fixed:false
                     }
-                    //console.log(new_folder_color);
-                    //console.log(data.folder_id);
+                    
                     var new_folder_id=data.folder_id;
                     addNewFolder(new_folder,new_folder_id,new_folder_color);
                     
@@ -1155,7 +1152,7 @@
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                     },
-                body:JSON.stringify({user_id:'<%= user.name %>',folder_name:name})
+                body:JSON.stringify({user_id:'<%= user.name %>',folder_id:folder_id})
                 //.then(res => res.json())   
                 });
                 parent_folder.removeChild(wrap);
