@@ -1125,10 +1125,10 @@
                                     <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                     <% if(todolist[i].todo_finished) {%>
                                         <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
-                                            <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
+                                            <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                     <%} else{ %>
                                         <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
-                                            <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i].todo_content %>','<%= i %>')">&times;</span></div>
+                                            <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                         <% } %>
                                     <% } %>
                                     <!-- </form> -->
@@ -1189,10 +1189,11 @@
                                         checked_toggle++;
                                                            }
                                 
-                                function onDeleteTodo(todo_content,delete_index){
+                                function onDeleteTodo(todo_id,delete_index){
                                     var parent=document.getElementById('todaylists');
                                     
                                     var delete_div=document.getElementsByClassName('wrap_label')[delete_index];
+                                    var delete_p=document.getElementsByClassName('p_p')[delete_index];
                                     //console.log(delete_index);
                                 
                                     //db에 삭제되도록 하기
@@ -1202,11 +1203,11 @@
                                                 'Accept':'application/json',
                                                 'Content-Type':'application/json'
                                             },
-                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_content:todo_content})
+                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id})
                                             //.then(res => res.json())   
                                         });
                                         parent.removeChild(delete_div);
-                                        alert(todo_content+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                                        alert(delete_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
                                 }
                             
                             </script>
@@ -1277,7 +1278,7 @@
                                     todo_content : new_content,
                                     todo_finished : false
                                 }
-                                addNewTodo(new_todo);
+                                addNewTodo(new_todo, data);
                             },error:function(err){
                                 console.log('todo 저장 실패');
                             }
@@ -1285,7 +1286,7 @@
                     }
                 })
 
-                function addNewTodo(todolist){
+                function addNewTodo(todolist, data){
     
     var content=todolist.todo_content;
 
@@ -1368,7 +1369,7 @@
                 'Accept':'application/json',
                 'Content-Type':'application/json'
                 },
-            body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML})
+            body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id})
             //.then(res => res.json())   
             });
             alert(new_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');

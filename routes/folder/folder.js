@@ -33,14 +33,13 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
             folder_title: folder_title[0],
             folder:folder,
             folder_id:id_obj,
-            //folder : folder,
-            //postIt: postIt,
             postIt: postIt,
             todolist: todolist
 
         });
     }
     catch(err){
+        console.error('routes/folder/folder.js 에서 에러');
         next(err);
     }
 });
@@ -66,20 +65,19 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
         }); //포스트잇 만들기
         postItList.push(postIt._id);
 
-        //폴더에 정보 추가하기
-        //console.log("folder내에 배열에 접근 전");
+        
         await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
             $push:{
                 postIt:postItList
             }
         });
 
-        //console.log("folder내에 배열에 접근 완료");
-
-        res.send({postIt});
+        
+        res.send(postIt);
             
 
     }catch(err){
+        console.error('routes/folder/folder.js 에서 포스트잇 추가 과정에러');
         next(err);
     }
 });
@@ -87,12 +85,9 @@ router.post('/:id/add',isLoggedIn, async(req,res,next) => {
 router.patch('/:id/revise',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
     const id_obj=req.params.id;
     
-    
-    //const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
-        
         try{
         const postIt=await PostIt.updateOne({
-            //user_id:req.user._id, //필터링 하는 것
+            
             
             _id:req.body.postIt_id
 
@@ -103,25 +98,18 @@ router.patch('/:id/revise',isLoggedIn, async(req,res,next) => { //update할 데�
                 postIt_color:req.body.revise_postIt_color
             }
         });
-        //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
-        //console.log("try문이 끝나고 업데이트 되었을 것!"+req.body.postIt_id+", "+req.body.postIt_star);
-        // res.render('../views/folder/folder.ejs',
-        //     { title : 'study Tight', postIt:postIt, folder_title:folder_title[0], todolist:todo, folder_id:id_obj}
-        // );
+        
         res.send(postIt);
-        //res.redirect('/');
+        
     
         }catch(err){
+            console.error('routes/folder/folder.js 포스트잇 수정과정에서 에러');
             next(err);
         } });
 
 router.post('/:id/todo',isLoggedIn, async(req,res,next) => {
     var content=req.body.todo_content;
-   // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-    //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
-    
-    //console.log(JSON.stringify(content)); //추가된 todo값
-    
+
     try{
     //몽고db에 저장
     const todo=await Todo.create({
@@ -142,20 +130,19 @@ router.post('/:id/todo',isLoggedIn, async(req,res,next) => {
     // );
 
 }catch(err){
+    console.error('routes/folder/folder.js 할일목록 추가과정에서 에러');
     next(err);
 }
 });
 
 router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
-    //const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-    //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
-    //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
-    const id_obj=req.params.id;
-    const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
-    const folder=await Folder.find({user_id:res.locals.user._id, _id:id_obj});
+    
+    // const id_obj=req.params.id;
+    // const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+    // const folder=await Folder.find({user_id:res.locals.user._id, _id:id_obj});
 
     
-    const postIt=await PostIt.find({folder_id:id_obj});
+    // const postIt=await PostIt.find({folder_id:id_obj});
     try{
     const todo=await Todo.updateOne({
         user_id:req.user._id, //필터링 하는 것
@@ -179,11 +166,11 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
 
 //postIt star바꾸기
 router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이터의 구분자: id
-    const id_obj=req.params.id;
-    const id_post=req.body.postIt_id;
-    const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
+    // const id_obj=req.params.id;
+    // const id_post=req.body.postIt_id;
+    // const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
     
-    const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
+    // const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         
         try{
         const postIt=await PostIt.updateOne({
@@ -211,11 +198,11 @@ router.patch('/:id/star',isLoggedIn, async(req,res,next) => { //update할 데이
 router.delete('/:id',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
 
    // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-    const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
+    //const folder = await Folder.find({user_id:res.locals.user._id}).populate('user_id');
     //const dDay = await Dday.find({user_id: res.locals.user._id}).sort({'final_date':1});
     try {
-        const delete_todoContent = req.body.todo_content;
-        await Todo.deleteOne({user_id: res.locals.user._id, todo_content:delete_todoContent});
+        const delete_todoId = req.body.todo_id;
+        await Todo.deleteOne({user_id: res.locals.user._id, _id:delete_todoId});
         //console.log('삭제된 것의 id는'+ delete_todoId);
         const todo = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.log('남은 것은 이제 '+todo.todo_content);
@@ -255,17 +242,13 @@ router.get('/:id/add', isLoggedIn, async(req, res) => {
     }
 });
 router.delete('/:id/post',isLoggedIn, async(req,res,next) => { //할 일 목록에서 삭제 버튼을 누른 경우
-    var postItList=new Array();
 
-    //console.log("delete안으로 접근");
     try {
         const delete_post_id=req.body.post_id;
         const folder_id=req.body.folder_id;
         const post_index=req.body.index;
-        console.log(delete_post_id, folder_id, post_index);
+        //console.log(delete_post_id, folder_id, post_index);
     
-
-        // postIt.splice(index, 1);
         const folder= await Folder.updateOne({
             
             _id:folder_id
@@ -281,7 +264,6 @@ router.delete('/:id/post',isLoggedIn, async(req,res,next) => { //할 일 목록�
             
             );
 
-            //console.log(delete_post_id+"가 폴더 내 포스트잇 배열에서 삭제됨.")
 
         await PostIt.deleteOne({ _id:delete_post_id});
     
