@@ -186,7 +186,7 @@ html, body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-.modal-d-plus, .modal-todo-plus, .modal-folder-plus, .modal-folder-revise{
+.modal-d-plus, .modal-todo-plus, .modal-folder-plus, .modal-folder-revise, .modal-alert-button{
     /* 저장 버튼 */
     width: 50px;
     height:45px; 
@@ -251,6 +251,19 @@ html, body {
     padding: 1rem 30px; 
     width: 400px; 
     height: 200px; 
+    border-radius: 0.5rem; 
+    z-index:500;
+    margin : 0 auto;
+} 
+.modal-content-alert { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 150px; 
     border-radius: 0.5rem; 
     z-index:500;
     margin : 0 auto;
@@ -394,28 +407,13 @@ html, body {
     background-color:rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     margin-top:20px;
-    /* margin-left:40px;
-    justify-content: center;
-    background-color:white;
-    height:100%;
-    text-align: center;
-    vertical-align: middle;
-    border-radius:5px;
-    align-items: center; */
 
 }
-/* .container .folder > div > span{
-    /* 폴더 추가할 때 플러스 버튼 */
-    /* //font-weight:bold;
-    font-size:1.5em; */
-/* } */
+
 #folder_plus{
     margin:17px;
     width: 102px;
     height: 81px;
-    /* vertical-align: middle;
-    position:relative; */
-   /* 참고하기: https://today-myday.tistory.com/8 */
     display:inline-block;
 }
 #folder_plus > img {
@@ -439,7 +437,7 @@ html, body {
     margin:17px; 
     width: 102px;
     height: 81px;
-    /* padding-bottom:10%; */
+
 
 } 
 .folder_img {
@@ -459,7 +457,7 @@ html, body {
 }
 .wrap_folder {
     display: inline;
-    /* margin:17px; */
+    
     
 }
 .fixed_folder {
@@ -543,5 +541,13 @@ html, body {
     vertical-align: middle;
     width:80%;
     height:20px;
+    position:relative;
+    top:25px;
     font-size:15px;
+}
+#alert_title{
+    position:relative;
+    top:30px;
+    font-size: 12px;
+    
 }

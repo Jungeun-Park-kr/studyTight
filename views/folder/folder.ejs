@@ -1206,8 +1206,10 @@
                                             body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id})
                                             //.then(res => res.json())   
                                         });
+                                        document.getElementById('alert_title').innerHTML=delete_p.innerHTML+"이(가) 오늘 할 일에서 삭제되었습니다.";
+                                    toggleAlertModal();
                                         parent.removeChild(delete_div);
-                                        alert(delete_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                                        
                                 }
                             
                             </script>
@@ -1236,25 +1238,48 @@
                         </div>
                     </div>
                 
+                    <div id="modal" class="modal modal_alert">
+                        <div class="modal-content-alert">
+                        
+                        <div id="alert_title"></div>
+                        
+                            
+                            <div>
+                                <input type="button" class="modal-alert-button" value="확인"></input>
+                            </div>
+                        
+                        </div>
+                    </div>
+
                 <script type='text/javascript'>
                     var modal_todo=document.querySelector(".modal_todo");
                     var trigger_todo=document.querySelector(".btnplusTodo"); //todo 추가하기 버튼
                     var closeTodoButton=document.querySelector('.close_todo_button');
                     var storeTodoButton=document.querySelector('.modal-todo-plus');
 
-                function toggleTodoModal(){
+                    var modal_alert=document.querySelector('.modal_alert');
+                    var alertButton=document.querySelector('.modal-alert-button');
+                
+                    function toggleTodoModal(){
                     modal_todo.classList.toggle("show_modal");
                 }
+                    function toggleAlertModal(){
+                        modal_alert.classList.toggle('show_modal');
+                    }
 
                 function windowOnClick(event){
                     if(event.target===modal_todo){
                         toggleTodoModal();
+                    }else if(event.target===modal_alert){
+                        toggleAlertModal();
                     }
                 }
 
                 trigger_todo.addEventListener("click",toggleTodoModal);
                 closeTodoButton.addEventListener('click',toggleTodoModal);
                 storeTodoButton.addEventListener('click',toggleTodoModal);
+
+                alertButton.addEventListener('click',toggleAlertModal);
 
                 $('.modal-todo-plus').click(function(event){
                     const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>')
@@ -1372,7 +1397,8 @@
             body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id})
             //.then(res => res.json())   
             });
-            alert(new_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
+            document.getElementById('alert_title').innerHTML=content+"이(가) 오늘 할 일에서 삭제되었습니다."
+                toggleAlertModal();
             parent_todolist.removeChild(new_div);
     });
 }

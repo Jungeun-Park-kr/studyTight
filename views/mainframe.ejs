@@ -383,18 +383,7 @@
                                     <img class="fixed_folder" src="/media/fixed_empty.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
                                         <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
-                                    <!-- <img class="three_button" src="/media/three_button.png"> -->
-                                    <!-- <div class="modal_menu"><ul class="folder_menu">
-                                        <li><div id="revise_folder" class="reivse_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
-                                        <li><div id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id %>','<%= i %>');">삭제</div></li>    
-                                    </ul></div> -->
-                                    
-                                          
-                                    
-                                    <!-- dialog로 보여줄 지 고민해보기 -->
-                                <!-- <div id="dropdown-folder" class="dropdown_folder">
-                                    <button role="menuitem" class="dropdown_choice" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
-                                    <button role="menuitem" class="dropdown_choice" id="delete_folder" onclick="deleteFolderClicked('<%= i %>');"></button></div> -->
+                            
                                     <% } %>
                                 
                                 </div>
@@ -670,7 +659,7 @@
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
                                         <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
-                                <%} else{ %>
+                                <%} else{ %> 
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
                                         <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                     <% } %>
@@ -737,10 +726,8 @@
                                 var parent=document.getElementById('todaylists');
                                 
                                 var delete_div=document.getElementsByClassName('wrap_label')[delete_index];
-                                var delete_p=document.getElementsByClassName('p_p')[index];
-                                //console.log(delete_index);
-                                //delete_div.innerHTML
-                                //db에 삭제되도록 하기
+                                var delete_p=document.getElementsByClassName('p_p')[delete_index];
+                                
                                 fetch('/',{
                                         method:'DELETE',
                                         headers:{
@@ -750,8 +737,10 @@
                                         body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id})
                                         //.then(res => res.json())   
                                     });
+                                    document.getElementById('alert_title').innerHTML=delete_p.innerHTML+"이(가) 오늘 할 일에서 삭제되었습니다.";
+                                    toggleAlertModal();
                                     parent.removeChild(delete_div);
-                                    alert(delete_.innerHTML.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                                    
                             }
                         
                         </script>
@@ -823,12 +812,25 @@
         </div>
     </div>
 
-
+    <div id="modal" class="modal modal_alert">
+        <div class="modal-content-alert">
+        
+        <div id="alert_title"></div>
+        
+            
+            <div>
+                <input type="button" class="modal-alert-button" value="확인"></input>
+            </div>
+        
+        </div>
+    </div>
 
     <script type='text/javascript'>
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
-    var modal_folder=document.querySelector('.modal_folder')
+    var modal_folder=document.querySelector('.modal_folder');
+    var modal_delete_alert=document.querySelector('.modal_alert');
+
     var trigger_todo=document.querySelector(".btnplusTodo"); //todo 추가하기 버튼
     var trigger_day = document.querySelector("#d-day-plus"); // 새로운 d-day 추가하기 버튼
     var trigger_folder=document.querySelector('#folder_plus');
@@ -836,8 +838,8 @@
     var closeDayButton = document.querySelector(".close_day_button");  // 우측 상단 닫기 버튼
     var closeFolderButton=document.querySelector('.close_folder_button');
     var storeTodoButton=document.querySelector('.modal-todo-plus');
-    
     var storeFolderButton=document.querySelector('.modal-folder-plus');
+    var alertButton=document.querySelector('.modal-alert-button');
 
     function toggleDayModal() {
         modal_day.classList.toggle("show_modal");
@@ -848,6 +850,9 @@
     function toggleFolderModal(){
         modal_folder.classList.toggle('show_modal');
     }
+    function toggleAlertModal(){
+        modal_delete_alert.classList.toggle('show_modal');
+    }
 
     function windowOnClick(event) {
         if (event.target === modal_day) {
@@ -857,6 +862,8 @@
         }
         else if(event.target===modal_folder){
             toggleFolderModal();
+        }else if(event.target===modal_delete_alert){
+            toggleAlertModal();
         }
     }
     trigger_day.addEventListener("click", toggleDayModal); // 디데이 추가하기 버튼
@@ -868,7 +875,7 @@
     
     storeTodoButton.addEventListener('click',toggleTodoModal);
     storeFolderButton.addEventListener('click',toggleFolderModal);
-    
+    alertButton.addEventListener('click',toggleAlertModal);
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
@@ -1002,7 +1009,9 @@
                 body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id})
                 //.then(res => res.json())   
                 });
-                alert(new_p.innerHTML+'이(가) 오늘 할 일에서 삭제되었습니다.');
+                
+                document.getElementById('alert_title').innerHTML=content+"이(가) 오늘 할 일에서 삭제되었습니다."
+                toggleAlertModal();
                 parent_todolist.removeChild(new_div);
         });
     }
