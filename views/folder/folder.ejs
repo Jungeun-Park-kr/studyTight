@@ -86,7 +86,8 @@
         </div>
         <div id="container">
             <div id="MAIN_LEFT">
-                <div class="section" style="background-image: url('<%= folder_color.folder_color%>');">
+                <div class="section" style="background-image: url('/public/media/yellow_50.png');">
+                
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
                     </p>
@@ -98,7 +99,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/public/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     <!-- <img class="three_button" src="media/three_button.png">
@@ -110,14 +111,10 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/public/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
-                                    <!-- <img class="three_button" src="media/three_button.png">
-                                    <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
-                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>  
-                                    </ul> -->
+                                    
                                 <% } %>
                             </div>
                             <% } %>
@@ -129,11 +126,11 @@
                     </div>
                     </div>
                     <script>
+                    
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
                         
                         function revisePostClicked(id, type, index){
-                            //type이 content면 content 전용 modal을 띄워야 함.
-                            
+                    
                             var revise_post_name=document.getElementsByClassName('post')[index].innerHTML;
                             var revise_post_color=document.getElementsByClassName('post_img')[index].getAttribute('src');
                             var revise_post_content=document.getElementsByClassName('hidden_content')[index].getAttribute('value');
@@ -207,8 +204,7 @@
                                         body:JSON.stringify({postIt_id:id,postIt_star:true})
                                         //.then(res => res.json( ))  
                                     });
-                                    //fetch주소 바꾸기!
-                                    //console.log("false에서 true로");
+                                    
                                 }else{
                                     currentValue=false;
                                     boolValue=false;
@@ -224,11 +220,7 @@
                                         body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
-                                    // $('.fixed_star').hover(function(){
-                                    //     $(this).index(index).css('opacity',1);
-                                    // }, function(){
-                                    //     $(this).index(index).css('opacity',0);
-                                    // })
+                                
                                     star_img.onmouseenter=function(){
                                         this.style.opacity=1;
                                     }
@@ -261,7 +253,7 @@
             var post_content=post.post_content;
             var post_star=post.postIt_star;
             
-            //console.log(type, post_id, post_name, post_content,post_star);
+            
 
             var parent_post=document.getElementById('wrap_postit');
 
@@ -284,7 +276,7 @@
 
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
-            star_img.setAttribute('src','/public/media/empty_star.png');
+            star_img.setAttribute('src','/media/empty_star_old.png');
             new_star_toggle=1;
             star_img.addEventListener('click',function(){
                 if(post_star==true){
@@ -305,7 +297,7 @@
                                     });
             }else{
                 post.postIt_star=false;
-                    star_img.style.src='/public/media/empty_star.png';
+                    star_img.style.src='/media/empty_star_old.png';
                     star_img.style.opacity=1;
                     fetch(''+folder_id+'/star',{
                         method:'PATCH',
@@ -356,8 +348,7 @@
             img_del.setAttribute('class','delete_postIt');
             img_del.setAttribute('src','/public/media/delete.png');
             img_del.addEventListener('click',function(){
-                //삭제하기
-                // document.getElementById('delete_post_index').setAttribute('value',index);
+                
                 document.getElementById('delete_new_post_id').setAttribute('value',post_id);
                 document.getElementById('delete_new_post_name').innerHTML=post_name+" 삭제하기"
                 toggleNewDeletePostModal();
@@ -464,8 +455,7 @@
                 
                     </select>
                 </div>
-            <!-- <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked();">취소</a>
-            <a href="#" class="btn uploadBtn" onclick="uploadContent();">완료</a> -->
+            
                 <div data-dismiss="modal" class="btn cancelBtn cancel_content_button" onclick="cancelClicked();">취소</div>
                 <div class="btn uploadBtn store_content_button" onclick="uploadContent();">완료</div>
             </div>
@@ -1344,8 +1334,7 @@
         var check_content=todolist.todo_content;
         console.log(check_content);
         var check_value=todolist.todo_finished;
-        //onCheckedHandler(content,check_value);
-        //console.log(check_value+'->'+!(check_value));
+        
         if(check_value==true){
             new_ck_toggle++;
         }
