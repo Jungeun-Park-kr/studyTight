@@ -1,0 +1,98 @@
+/****** 레이어(모달) 팝업 ******/
+/* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
+.modal { 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: scale(1.1); 
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+} 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
+.modal-content { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 180px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+} 
+/* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 작은 버전 */
+.modal-content-small {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 150px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+}
+
+/****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
+/* 버튼 클릭시 보이기+애니메이션 */
+.show_modal { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: scale(1.0); 
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
+} 
+
+/****** 모달 팝업에 보일 콘텐츠들 ******/
+/* 타이틀 */
+.title{ 
+    font-size:13px;
+    margin-bottom:20px;
+    letter-spacing: 2px; 
+} 
+/* 본문 내용 */
+.content {
+    font-size : 11px;
+    letter-spacing : 2px;
+}
+
+/* 닫기 버튼 */
+.close_button { 
+    float: right; 
+    width: 1.5rem; 
+    line-height: 1.5rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    background-color: #dedede; 
+} 
+.close_button:hover { 
+    background-color: #8e8e8e; 
+}
+
+/* 확인 버튼 */
+.btn_confirm {
+    color: #000;
+    border: solid 1px rgba(0,0,0,.08);
+    background-color: #6ED4D8;
+    width:200px;
+    height:40px;
+    cursor: pointer;
+    border-radius: 10px;
+    /* margin : 30px 50px 20px; */
+    /* 마진 대신 버튼을 제일 아래에 고정시키기 */
+    position: absolute;
+    bottom:20px;
+    left:20%;
+} 
+/* 확인 버튼 hover 색깔 (아직 확정X) */
+.btn_confirm:hover {
+    color: #fff;
+    background-color: #4b9194;
+    opacity: 0.9;
+}
