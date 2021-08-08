@@ -123,7 +123,7 @@
 
                 <!-- 시간표 공개여부에 따라 -->
                 <li class="show-timetable">
-                    <% if (!profile.timetable_private || profile.timetable_private) { %>
+                    <% if (!profile.timetable_private) { %>
                         <input type="button" id="table-button-id" value="시간표 보기" onclick="showTimetable('<%=friend_id%>')"></input>
                         <% } %>
                 </li>
@@ -137,7 +137,6 @@
                             console.log('성공!');
                             if (data.includes('error=notfriend')) { // 친구가 아님
                                 alert('친구가 아니어서 시간표 열람이 불가합니다.');
-                                
                             } else if (data.includes('error=private')) { // 친구가 아님
                                 alert('친구가 시간표 열람을 비공개로 설정했습니다.');
                             } else { // 성공 data : 친구의 _id가 넘어옴
