@@ -158,24 +158,6 @@ router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해�
     }
 });
 
-// router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표 보기 (페이지 이동) <- 링크 쳐서 입력하면 볼 수 있으므로 사용불가
-//     try {
-//         const friendUser = await User.findOne({email_id:req.params.id}); // 클릭한 친구
-//         const timetable = await Course.find({user_id:friendUser._id}).populate('schedules').sort({'createdAt':1}); // 클릭한 친구의 시간표
-//         return res.render( '../views/guestbook/guestbook_timetable.ejs', {
-//             title: friendUser.name+'의 시간표',
-//             user : res.locals.user,
-//             friend : friendUser,
-//             timetable : timetable
-//         });
-//     }
-//     catch (err) {
-//         console.error('/views/guestbook/guestbook.js 에서 에러');
-//         console.error(err);
-//         return (err);
-//     }
-// });
-
 
 router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표 보기 (페이지 이동)
     try {
@@ -202,7 +184,7 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
 
     }
     catch (err) {
-        console.error('/views/timetable/timetable.js 에서 에러');
+        console.error('/views/guestbook/guestbook.js 에서 에러');
         console.error(err);
         return (err);
     }
