@@ -86,7 +86,7 @@
         </div>
         <div id="container">
             <div id="MAIN_LEFT">
-                <div class="section" style="background-image: url('/public/media/yellow_50.png');">
+                <div class="section"style="background-image: url('<%= folder_img.folder_img%>');">
                 
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
@@ -480,7 +480,7 @@
             <div class="modal-footer">
                 <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="link_color" name="link_color"> 
-                        <option value='/public/media/post_orange' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                         <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                         <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                         <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -874,8 +874,8 @@
                             post_content:content,
                             post_star:false
                         }
-                        var new_post_id=data.postIt._id;
-                        
+                        var new_post_id=data._id;
+                        //console.log(new_post_id);
                         //console.log(new_post_id);
                         addNewPost('content',new_post_id,new_post,color);
                         
@@ -922,7 +922,9 @@
                             post_content:link,
                             post_star:false
                         }
-                        var new_post_id=data.postIt._id;
+                        //console.log(data._id);
+                        var new_post_id=data._id;
+                        
                         addNewPost('link',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
