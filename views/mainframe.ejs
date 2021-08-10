@@ -399,7 +399,7 @@
                                     <h1 class="title">폴더 수정하기</h1>
                                     <div id="revise_folder_id" folder_id="id자리"></div>
                                         <div>
-                                            <input type="text" id="new-folder-name" name="new_folder_name" maxlength="7">
+                                            <input type="text" id="new-folder-name" name="new_folder_name" maxlength="7" placeholder="폴더 이름을 입력하세요. (최대 7자)">
                                             <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
                                                 <select id="new_folder_color" name="new_folder_color">
                                                 
@@ -465,7 +465,7 @@
                                 var fixed_img=document.getElementsByClassName('fixed_folder')[index];
 
                                 var currentFixed=fixedBool;
-                                console.log("현재의 상태는 "+currentFixed);
+                                //console.log("현재의 상태는 "+currentFixed);
 
                                 if(currentFixed==true){
                                     fixed_toggle++;
@@ -484,7 +484,7 @@
                                         },
                                         body:JSON.stringify({folder_id:id,folder_fixed:true})
                                     });
-                                    console.log("true로 변신!");
+                                    //console.log("true로 변신!");
                                 }else{
                                     currentFixed=false;
                                     fixed_img.src="/media/fixed_empty.png"
@@ -498,7 +498,7 @@
                                         },
                                         body:JSON.stringify({folder_id:id,folder_fixed:false})
                                     });
-                                    console.log("false로 변신!");
+                                    //console.log("false로 변신!");
                                 }
                                 fixed_toggle++;
                             }
@@ -580,8 +580,9 @@
                                     var id=document.getElementById('revise_folder_id').getAttribute('folder_id');
                                     var revise_folder_name=$('#new-folder-name').val();
 
-                                    var revise_folder_color=$('#new_folder_color:selected').val();
-                                    var revise_folder_img=$('#new_folder_color:selected').attr('data-tag');
+                                    var revise_folder_color=$('#new_folder_color option:selected').val();
+                                    var revise_folder_img=$('#new_folder_color option:selected').attr('data-tag');
+                                    console.log(revise_folder_img);
                                     if(revise_folder_name.trim()==''){
                                         alert("수정할 이름을 입력하세요");
                                     }else{

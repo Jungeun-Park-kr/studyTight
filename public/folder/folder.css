@@ -56,7 +56,7 @@ body {
 }
 .wrap_postit{
 
-    display:inline;
+    display:inline-flex;
 }
 .postIt
 {
@@ -163,17 +163,11 @@ body {
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-/* #postIt_plus{
-    display:inline-block;
-    margin:20px 35px 20px 20px;
-    width: 90px; 
-    height: 90px;
-} */
 
 .post_img{
     width:100%;
     height:90px;
-
+    display: -webkit-box;
  }   
 /* .postIt > p {
     font-size:12px;
@@ -184,8 +178,9 @@ body {
     text-align: center;
     position: relative;
     cursor: pointer;
-    top: -70%;
+    top: -65%;
     left: 50%;
+    width:50px;
     transform: translate( -50%, -50% );
 }
 .postIt_menu > li {
@@ -241,7 +236,7 @@ body {
 .revise_postIt, .delete_postIt{
     width:15px;
     height: auto;
-    margin:5px 0 5px 5px;
+    margin:3px 0 3px 3px;
     position: relative;
     top:-100%;
     left:-8%;
