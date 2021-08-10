@@ -414,7 +414,7 @@ html, body {
     margin:17px;
     width: 102px;
     height: 81px;
-    display:inline-block;
+    display:-webkit-inline-box;
 }
 #folder_plus > img {
     width:100%;
@@ -423,7 +423,7 @@ html, body {
 #folder_plus > p {
     text-align: center;
 	position: relative;
-	top: -70%;
+	top: -65%;
 	left: 50%;
 	transform: translate( -50%, -50% );
     cursor: pointer;
@@ -448,15 +448,16 @@ html, body {
     text-align: center;
 	position: relative;
     cursor:pointer;
-	top: -70%;
+	top: -65%;
 	left: 50%;
+    width:50px;
 	transform: translate( -50%, -50% );
 }
 .folder_course {
     display:block;
 }
 .wrap_folder {
-    display: inline;
+    display: inline-flex;
     
     
 }
@@ -500,6 +501,7 @@ html, body {
     margin:0 0 5px 5px;
     position: relative;
     top:-90%;
+    right:5px;
     float:right;
     opacity: 0;
 } 

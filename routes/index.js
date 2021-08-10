@@ -94,6 +94,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
 router.post('/folder_add', isLoggedIn, async(req, res, next) => {
     var folder_name = req.body.folder_name;
     var folder_color = req.body.folder_color;
+    var folder_img=req.body.folder_img;
     const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
     const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
     const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
@@ -105,6 +106,7 @@ router.post('/folder_add', isLoggedIn, async(req, res, next) => {
             user_id: req.user._id,
             folder_name: folder_name,
             folder_color: folder_color,
+            folder_img: folder_img,
             folder_fixed: false
         });
 
@@ -209,7 +211,8 @@ router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update�
         }, {
             $set: {
                 folder_name:req.body.revise_folder_name,
-                folder_color:req.body.revise_folder_color
+                folder_color:req.body.revise_folder_color,
+                folder_img:req.body.revise_folder_img
             }
         });
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
