@@ -418,11 +418,11 @@
             <br>
             
             <div class="choice choice_content">
-                <img src="media/content.png" ><p>글</p></div>
+                <img src="/public/media/content.png" ><p>글</p></div>
             <div class="choice choice_link">
-                <img src="media/link.png"><p>링크</p></div>
-            <div class="choice choice_file">
-            <img src="media/file.png"><p>파일</p></div>
+                <img src="/public/media/link.png"><p>링크</p></div>
+            <!-- <div class="choice choice_file">
+            <img src="media/file.png"><p>파일</p></div> -->
             </div>
         </div>
     </div>
@@ -439,7 +439,7 @@
                 <p>제목</p>
                 <input type="text" id="input_content_title" name="title" class="input_text" maxlength="7" placeholder="제목을 입력하세요 (최대 7자)">
                 <br>
-                <br>
+                
                 <p>내용</p>
                 <textarea id="input_content" name="content" class="input_content" row="38" cols="35" name="contents" placeholder="내용을 입력하세요"></textarea>
             </div>
@@ -472,7 +472,7 @@
             <div class="modal-body">               
                 <p>제목</p>
                 <input type="text" id="input_link_title" class="input_text" placeholder="제목을 입력하세요 (최대 7자)" maxlength="7">
-                <br>
+                
                 <br>
                 <p>링크</p>
                 <input type="url" id="input_link" class="input_link" placeholder="링크를 입력하세요">
@@ -508,7 +508,7 @@
                         <p>제목</p>
                         <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요 (최대 7자)" maxlength="7">
                         <br>
-                        <br>
+                        
                         <div class="filebox"> 
                             <input class="upload-name" value="파일선택" disabled="disabled">
                             <label for="ex_filename">업로드</label> 
@@ -545,7 +545,7 @@
                         <p>제목</p>
                         <input type="text" id="revise_link_title" class="input_text" >
                         <br>
-                        <br>
+                        
                         <p>링크</p>
                         <input type="url" id="revise_input_link" class="input_link">
                     </div>
@@ -559,7 +559,7 @@
                                 <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                         </select>
                         </div>
-                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
+                        <p>※ 새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_link">취소</div>
                         <div class="btn uploadBtn revise_link_button">완료</div>
                     </div>
@@ -576,7 +576,7 @@
                     <div class="modal-body">
                         <p>제목</p>
                         <input type="text" id="revise_content_title" name="title" class="input_text">
-                        <br>
+                    
                         <br>
                         <p>내용</p>
                         <textarea id="revise_input_content" name="revise_content" class="input_content" row="38" cols="38" name="contents"></textarea>
@@ -592,7 +592,7 @@
                         
                             </select>
                         </div>
-                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
+                        <p>※ 새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_content">취소</div>
                         <div class="btn uploadBtn revise_content_button">완료</div>
                     </div>
@@ -611,7 +611,7 @@
                 <div class="modal-body">
                         <p>제목</p>
                         <input type="text" id="revise_file_text" class="input_text" >
-                        <br>
+                        
                         <br>
                         <div class="filebox"> 
                             <input class="revise-upload-name" value="파일선택" disabled="disabled">
@@ -648,9 +648,9 @@
                         <div id="delete_post_index"></div>
                             
                             
-                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
-                                그래도 삭제하시겠습니까?
-                            </p>
+                            <p>※ 삭제된 포스트잇 정보는 되돌릴 수 없습니다.</p>
+                            <p>그래도 삭제하시겠습니까?</p>
+                            
                         <div class="buttons_wrap">
                             
                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_post">취소</div>
@@ -658,7 +658,7 @@
                         </div>
                         
                 </div>
-            </div>
+            </div> 
 
             
 
@@ -672,9 +672,9 @@
                         
                             
                             
-                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
-                                그래도 삭제하시겠습니까?
-                            </p>
+                            <p>※ 삭제된 포스트잇 정보는 되돌릴 수 없습니다.</p>
+                                <p>그래도 삭제하시겠습니까?</p>
+                            
                         <div class="buttons_wrap">
                             
                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_new_post">취소</div>
@@ -713,7 +713,7 @@
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
         var trigger_link_button=document.querySelector('.choice_link');
-        var trigger_file_button=document.querySelector('.choice_file')
+        //var trigger_file_button=document.querySelector('.choice_file')
 
         var close_choice_button=document.querySelector('.close_choice_button');
         var close_content_button=document.querySelector('.close_content_button');
@@ -818,8 +818,8 @@
         cancel_link_button.addEventListener('click',toggleLinkModal);
         store_link_button.addEventListener('click',toggleLinkModal);
 
-        trigger_file_button.addEventListener('click',toggleFileModal);
-        trigger_file_button.addEventListener('click',toggleChoiceModal);
+        //trigger_file_button.addEventListener('click',toggleFileModal);
+        //trigger_file_button.addEventListener('click',toggleChoiceModal);
         close_file_button.addEventListener('click',toggleFileModal);
         cancel_file_button.addEventListener('click',toggleFileModal);
         store_file_button.addEventListener('click',toggleFileModal);
