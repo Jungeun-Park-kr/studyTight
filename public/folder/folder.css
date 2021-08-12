@@ -140,25 +140,7 @@ body {
     border:10px;
     cursor: pointer;
 }
-.delete_todo{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 0; 
-} 
-.delete_todo:hover{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 1;
-    background-color: lightblue; 
-} 
+
 
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
@@ -207,7 +189,7 @@ body {
     position:relative;
     
     width:15px;
-    margin-top:-100%;
+    margin-top:-98%;
     margin-left:3px;
     float:left;
     /* display: none; */
@@ -360,7 +342,7 @@ body {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-delete-post, .modal-content-delete-new-post{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -385,6 +367,19 @@ body {
     border-radius: 0.5rem; 
     margin : 0 auto;
     /* z-index:500; */
+}
+.modal-content-delete-post, .modal-content-delete-new-post{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 150px; 
+    border-radius: 0.5rem; 
+    z-index:500;
+    margin : 0 auto;
 } 
 .modal-content-content, .modal-content-revise-content { 
     position: absolute; 
@@ -414,7 +409,7 @@ ul {
 /* 타이틀 */
 .title{ 
     font-size:13px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     letter-spacing: 2px; 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 } 

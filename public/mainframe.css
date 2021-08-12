@@ -242,7 +242,7 @@ html, body {
     margin : 0 auto;
 }  
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-day, .modal-content-todo, .modal-content-folder, .modal-content-revise-folder, .modal-content-delete-folder, .modal-content-delete-new-folder { 
+.modal-content-day, .modal-content-todo, .modal-content-folder, .modal-content-revise-folder { 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -255,7 +255,7 @@ html, body {
     z-index:500;
     margin : 0 auto;
 } 
-.modal-content-alert { 
+.modal-content-alert, .modal-content-delete-folder, .modal-content-delete-new-folder { 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -281,7 +281,7 @@ html, body {
 .title{ 
     font-size:13px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-bottom:20px;
+    margin-bottom:10px;
     letter-spacing: 2px; 
 } 
 #modal-folder-name, #new-folder-name{
@@ -295,6 +295,9 @@ html, body {
 .folder_color_wrap > select {
     vertical-align: middle;
     margin:10px;
+}
+select > option {
+    height:5px;
 }
 /* 닫기 버튼 */
 .close_button { 
@@ -312,22 +315,29 @@ html, body {
 .delete_todo{
     float:right;
     width: 15px;
-    line-height: 1.5rem; 
+    /* line-height: 2rem;  */
     text-align: center; 
     cursor: pointer; 
-    border-radius: 0.5rem; 
+    position: relative;
+    top:10px;
+    border-radius: 0.5rem;
     opacity: 0; 
 } 
 .delete_todo:hover{
     float:right;
     width: 15px;
-    line-height: 1.5rem; 
+    position: relative;
+    top:10px;
     text-align: center; 
     cursor: pointer; 
     border-radius: 0.5rem; 
     opacity: 1;
     background-color: lightblue; 
-} 
+}
+.min_color{
+    width:3px;
+    height:3px;
+}
 #d-day-plus{
     cursor:pointer;
 }

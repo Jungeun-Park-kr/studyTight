@@ -254,8 +254,10 @@
                                         body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
                                         //.then(res => res.json())   
                                     });
+                                    document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                                toggleAlertModal();
                                 parent_day.removeChild(delete_day);
-                                alert(content+'이(가) d-day에서 삭제되었습니다.');
+                                
                             
                                 // 디데이 개수 체크
                                 var parent_day=document.getElementById('wrap_day');
@@ -411,7 +413,7 @@
                                             
                                                 </select>
                                             </div>
-                                            <p>※새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
+                                            <p>※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
                                         <div>
                                             <input type="button" class="modal-folder-revise" value="확인"></input>
                                         </div>
@@ -428,9 +430,9 @@
                                         <div id='delete_folder_id'></div>
                                             
                                             
-                                            <p>※폴더 내 포스트잇 정보도 삭제됩니다.
-                                                그래도 삭제하시겠습니까?
-                                            </p>
+                                            <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.</p>
+                                            <p>그래도 삭제하시겠습니까?</p>
+                                            
                                         <div class="buttons_wrap">
                                             
                                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_folder">취소</div>
@@ -447,7 +449,7 @@
                     
                     <div id="delete_new_folder_name" class="title"></div>
                         <div id="delete_new_folder_id"></div>
-                        <p>※폴더 내 포스트잇 정보도 삭제됩니다.
+                        <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.
                             그래도 삭제하시겠습니까?
                         </p>
                         <div class="buttons_wrap">
@@ -1188,8 +1190,10 @@
             body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
             //.then(res => res.json())   
                     });
-            parent_day.removeChild(delete_day);
-            alert(content+'이(가) d-day에서 삭제되었습니다.');
+                    document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                    toggleAlertModal();
+                    parent_day.removeChild(delete_day);
+            
     }
 
     $(document).ready(function () {
@@ -1285,8 +1289,10 @@
                                 body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
                                 //.then(res => res.json())   
                                         });
-                            parentDiv.removeChild(show_day);
-                            alert(content+'이(가) d-day에서 삭제되었습니다.');          
+                                        document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                                        toggleAlertModal();
+                                        parentDiv.removeChild(show_day);
+                            
                         });
 
                         show_day.style.fontWeight = "bold"
