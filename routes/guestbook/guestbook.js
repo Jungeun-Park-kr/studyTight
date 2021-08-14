@@ -131,7 +131,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
 });
 
 router.get('/:id/timetable', isLoggedIn, async(req, res, next) => {
-    
+
 });
 
 
