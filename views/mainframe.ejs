@@ -596,6 +596,7 @@
                                                 },
                                             body:JSON.stringify({folder_id:id, revise_folder_name:revise_folder_name, revise_folder_color:revise_folder_color, revise_folder_img:revise_folder_img})
                                             })
+                                            $('#new-folder-name').val('');
                                             //.then((Response) => console.log(Response));                                   
                                         }
                             });
@@ -659,10 +660,10 @@
                             
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                 <% if(todolist[i].todo_finished) {%>
-                                    <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',true)" class="checkbox">
                                         <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                 <%} else{ %> 
-                                    <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
+                                    <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
                                         <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                     <% } %>
                                 <% } %>
@@ -676,15 +677,15 @@
                         
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
-                            function onCheckedHandler(todo_content, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
+                            function onCheckedHandler(todo_id, index, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
                                 var checkedIndex;
                                 var checkedBox=document.getElementsByClassName('checkbox');
                                 var hidden_input=document.getElementsByClassName('todolist-id');
-                                for(var i=0;i<hidden_input.length;i++){
-                                    if(hidden_input[i].value==todo_content){
-                                        checkedIndex=i;
-                                    }
-                                }
+                                // for(var i=0;i<hidden_input.length;i++){
+                                //     if(hidden_input[i].value==todo_content){
+                                //         checkedIndex=i;
+                                //     }
+                                // }
                                 var currentState=boolValue;
                                 //console.log(currentState+'->'+!(currentState));
                                 if(currentState==true){
@@ -692,7 +693,7 @@
                                 }
                                 var content=document.getElementsByClassName('p_p');
                                 if(checked_toggle%2==1){ //unchecked -> checked
-                                    content[checkedIndex].style.textDecoration='line-through';
+                                    content[index].style.textDecoration='line-through';
                                     currentState=true;
                                     
                                     fetch('/',{
@@ -701,13 +702,13 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:true})
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id, todo_finished:true})
                                         //.then(res => res.json( ))  
                                     });
                                     
                                 }else{   //checked -> unchecked
-                                    content[checkedIndex].style.textDecoration='none';
-                                    content[checkedIndex].setAttribute('checked',false);
+                                    content[index].style.textDecoration='none';
+                                    content[index].setAttribute('checked',false);
                                     
                                     currentState=false;
                                     fetch('/',{
@@ -716,7 +717,7 @@
                                             'Accept':'application/json',
                                             'Content-Type':'application/json'
                                         },
-                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:false})
+                                        body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id, todo_finished:false})
                                         //.then(res => res.json())  
                                     });
 
@@ -900,6 +901,7 @@
                         todo_content : new_content,
                         todo_finished : false
                     }
+                    $('#modal-todo').val('');
                     addNewTodo(new_todo, data);
                 
                 },error:function(err){
@@ -957,7 +959,7 @@
         new_checkbox.addEventListener('click',function(){
             
             var check_content=todolist.todo_content;
-            
+            var check_id=data._id;
             var check_value=todolist.todo_finished;
             
             if(check_value==true){
@@ -973,7 +975,7 @@
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:true})
+                body:JSON.stringify({user_id:'<%= user.name %>',todo_id:check_id, todo_finished:true})
                 //.then(res => res.json( ))  
                 });
             }else{
@@ -985,7 +987,7 @@
                         'Accept':'application/json',
                         'Content-Type':'application/json'
                         },
-                    body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:false})
+                    body:JSON.stringify({user_id:'<%= user.name %>',todo_id:check_id, todo_finished:false})
                     //.then(res => res.json())  
                     });
             }
@@ -1044,6 +1046,7 @@
                     }
                     
                     var new_folder_id=data.folder_id;
+                    $('#modal-folder-name').val('');
                     addNewFolder(new_folder,new_folder_id,new_folder_color,new_folder_img);
                     
 

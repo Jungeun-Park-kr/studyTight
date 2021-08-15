@@ -176,14 +176,14 @@ router.post('/todo', isLoggedIn, async(req, res, next) => {
 });
 
 router.patch('/', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
-    const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
-    const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
-    const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
+    // const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
+    // const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
+    // const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
 
     try {
         const todo = await Todo.updateOne({
             user_id: req.user._id, //필터링 하는 것
-            todo_content: req.body.todo_content //내용에 따라서도 달라야하니까
+            _id: req.body.todo_id //내용에 따라서도 달라야하니까
         }, {
             $set: {
                 todo_finished: req.body.todo_finished
@@ -191,8 +191,9 @@ router.patch('/', isLoggedIn, async(req, res, next) => { //update할 데이터�
         });
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
         //console.log(todo_finished);
-        res.render('../views/mainframe.ejs', { title: 'study Tight', todolist: todo, timetable: timetable, folder: folder, d_day: dDay });
+        //res.render('../views/mainframe.ejs', { title: 'study Tight', todolist: todo, timetable: timetable, folder: folder, d_day: dDay });
         //res.redirect('/');
+        res.send("오늘 할 일 체크 완료");
 
     } catch (err) {
         next(err);

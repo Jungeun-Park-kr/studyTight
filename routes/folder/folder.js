@@ -146,7 +146,7 @@ router.patch('/:id',isLoggedIn, async(req,res,next) => { //update할 데이터�
     try{
     const todo=await Todo.updateOne({
         user_id:req.user._id, //필터링 하는 것
-        todo_content:req.body.todo_content //내용에 따라서도 달라야하니까
+        _id:req.body.todo_id //내용에 따라서도 달라야하니까
     },{
         $set:{
             todo_finished:req.body.todo_finished
