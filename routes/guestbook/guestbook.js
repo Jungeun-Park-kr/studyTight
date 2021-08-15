@@ -2,9 +2,12 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
+const Top_comment = require('../../models/top_comment');
+const Bottom_comment = require('../../models/bottom_comment');
 const Friend = require('../../models/friend'); //친구관리를 위함.
 const Course = require('../../models/course');
 const { mongo, Mongoose } = require('mongoose');
+const top_comment = require('../../models/top_comment');
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -22,14 +25,16 @@ router.get('/', isLoggedIn, async(req, res, next) => {
 
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email')
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
         res.render('../views/guestbook/guestbook_myroom.ejs', {
             profile: profile[0],
-            friend: friend
+            friend: friend,
+            top_comment: top_comment,
+            bottom_comment: bottom_comment
         });
-
-
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -57,7 +62,41 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
     }
 });
 
+router.post('/addcomment', isLoggedIn, async(req, res, next) => {
+    const { comment_input, mysecretbox } = req.body;
 
+    try {
+
+        const top_comment1 = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email')
+            // mongoDB에 프로파일 추가
+        const top_comment = await Top_comment.create({
+            commented_email: req.user._id,
+            comment_time: getCurrentDate(),
+            comment_secret: mysecretbox,
+            comment_count: "0",
+            post_id: top_comment1.length++,
+
+        });
+        console.log(comment_secret);
+
+
+        // res.send({
+        //     user_id: req.user._id, //박정은의 오브젝트 아이디.
+        //     school: profile.school,
+        //     school_private: profile.school_private,
+        //     major: profile.major,
+        //     major_private: profile.major_private,
+        //     grade: profile.grade,
+        //     grade_private: profile.grade_private,
+        //     age: profile.age_private,
+        // });
+
+    } catch (err) {
+        console.log('guestbookedit error');
+        next(err);
+    }
+
+});
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
     const { school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
@@ -188,6 +227,17 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
     }
 });
 
+function getCurrentDate() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var today = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var milliseconds = date.getMilliseconds();
+    return (year + "-" + month + "-" + today + " " + hours + ":" + minutes + ":" + seconds);
+}
 
 module.exports = router;
 
