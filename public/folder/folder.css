@@ -282,7 +282,12 @@ body {
     margin:20px 20px 0 20px;
     text-align: center;
 }
-.modal-body > img {
+.modal-choice-body{
+    width:100%;
+    height:auto;
+    text-align: center;
+}
+.modal-choice-body > img {
     height:50px;
     width:40px;
 
@@ -296,7 +301,7 @@ body {
 
 /****** 레이어(모달) 팝업 ******/
 /* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
-.modal_choice > .modal-body > .choice {
+.modal_choice > .modal-choice-body > .choice {
     display:inline-block;
 
 
@@ -328,6 +333,9 @@ body {
     visibility: hidden; 
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+}
+.modal-link-body{
+    margin-bottom: 10px;
 }
 /* .modal_todo, .modal_choice, .modal_content, .modal_link, .modal_show_content, .modal_file{ 
     position: fixed; 
