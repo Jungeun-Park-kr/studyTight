@@ -92,6 +92,7 @@ body {
     background-color: rgb(77, 189, 194);
     font-weight: bolder;
 }
+
 .show-timetable>#table-button-id {
     cursor: pointer;
     background-color: #6ED4D8;
@@ -395,9 +396,7 @@ select::-ms-expand {
     font-weight: bolder;
 }
 
-.user-small-talking .reply-button
-
-.my-room .talking-palce {
+.user-small-talking .reply-button .my-room .talking-palce {
     display: inline-block;
 }
 
