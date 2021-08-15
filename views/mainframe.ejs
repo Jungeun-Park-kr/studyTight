@@ -254,8 +254,10 @@
                                         body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
                                         //.then(res => res.json())   
                                     });
+                                    document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                                toggleAlertModal();
                                 parent_day.removeChild(delete_day);
-                                alert(content+'이(가) d-day에서 삭제되었습니다.');
+                                
                             
                                 // 디데이 개수 체크
                                 var parent_day=document.getElementById('wrap_day');
@@ -399,20 +401,19 @@
                                     <h1 class="title">폴더 수정하기</h1>
                                     <div id="revise_folder_id" folder_id="id자리"></div>
                                         <div>
-                                            <input type="text" id="new-folder-name" name="new_folder_name" maxlength="7">
+                                            <input type="text" id="new-folder-name" name="new_folder_name" maxlength="7" placeholder="폴더 이름을 입력하세요. (최대 7자)">
                                             <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
                                                 <select id="new_folder_color" name="new_folder_color">
                                                 
-                                                <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                                                <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                                                <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                                                <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                                                <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
-                        
+                                                    <option value='/public/media/folder_orange.svg' data-tag="/public/media/orange_30.png" style="background-color: #f29b34;">주황색</option>
+                                                    <option value='/public/media/folder_green.svg' data-tag="/public/media/green_30.png" style='background-color: #97ce68;'>연두색</option>
+                                                    <option value='/public/media/folder_yellow.svg' data-tag="/public/media/yellow_30.png" style='background-color: #fcd341;'>노란색</option>
+                                                    <option value='/public/media/folder_red.svg' data-tag="/public/media/red_30.png" style='background-color: #e36363;'>다홍색</option>
+                                                    <option value='/public/media/folder_mint.svg' data-tag="/public/media/mint_30.png" style='background-color: #4dbdc2;'>하늘색</option>
                                             
                                                 </select>
                                             </div>
-                                            <p>※새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
+                                            <p>※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
                                         <div>
                                             <input type="button" class="modal-folder-revise" value="확인"></input>
                                         </div>
@@ -429,9 +430,9 @@
                                         <div id='delete_folder_id'></div>
                                             
                                             
-                                            <p>※폴더 내 포스트잇 정보도 삭제됩니다.
-                                                그래도 삭제하시겠습니까?
-                                            </p>
+                                            <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.</p>
+                                            <p>그래도 삭제하시겠습니까?</p>
+                                            
                                         <div class="buttons_wrap">
                                             
                                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_folder">취소</div>
@@ -448,7 +449,7 @@
                     
                     <div id="delete_new_folder_name" class="title"></div>
                         <div id="delete_new_folder_id"></div>
-                        <p>※폴더 내 포스트잇 정보도 삭제됩니다.
+                        <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.
                             그래도 삭제하시겠습니까?
                         </p>
                         <div class="buttons_wrap">
@@ -466,7 +467,7 @@
                                 var fixed_img=document.getElementsByClassName('fixed_folder')[index];
 
                                 var currentFixed=fixedBool;
-                                console.log("현재의 상태는 "+currentFixed);
+                                //console.log("현재의 상태는 "+currentFixed);
 
                                 if(currentFixed==true){
                                     fixed_toggle++;
@@ -485,7 +486,7 @@
                                         },
                                         body:JSON.stringify({folder_id:id,folder_fixed:true})
                                     });
-                                    console.log("true로 변신!");
+                                    //console.log("true로 변신!");
                                 }else{
                                     currentFixed=false;
                                     fixed_img.src="/media/fixed_empty.png"
@@ -499,7 +500,7 @@
                                         },
                                         body:JSON.stringify({folder_id:id,folder_fixed:false})
                                     });
-                                    console.log("false로 변신!");
+                                    //console.log("false로 변신!");
                                 }
                                 fixed_toggle++;
                             }
@@ -581,8 +582,9 @@
                                     var id=document.getElementById('revise_folder_id').getAttribute('folder_id');
                                     var revise_folder_name=$('#new-folder-name').val();
 
-                                    var revise_folder_color=$('#new_folder_color:selected').val();
-                                    
+                                    var revise_folder_color=$('#new_folder_color option:selected').val();
+                                    var revise_folder_img=$('#new_folder_color option:selected').attr('data-tag');
+                                    console.log(revise_folder_img);
                                     if(revise_folder_name.trim()==''){
                                         alert("수정할 이름을 입력하세요");
                                     }else{
@@ -592,7 +594,7 @@
                                                 'Accept':'application/json',
                                                 'Content-Type':'application/json'
                                                 },
-                                            body:JSON.stringify({folder_id:id, revise_folder_name:revise_folder_name, revise_folder_color:revise_folder_color})
+                                            body:JSON.stringify({folder_id:id, revise_folder_name:revise_folder_name, revise_folder_color:revise_folder_color, revise_folder_img:revise_folder_img})
                                             })
                                             //.then((Response) => console.log(Response));                                   
                                         }
@@ -792,15 +794,15 @@
             <span class="close_button close_folder_button">&times;</span>
             <h1 class="title">폴더 추가하기</h1>
                 <div>
-                    <input type="text" id="modal-folder-name" name="folder_name" maxlength="7" placeholder="폴더 이름을 입력하세요.">
+                    <input type="text" id="modal-folder-name" name="folder_name" maxlength="7" placeholder="폴더 이름을 입력하세요. (최대 7자)">
                     <div class="folder_color_wrap" value="폴더의 색을 선택하세요.">
                         <select id="folder_color" name="folder_color">
                         
-                        <option value='/public/media/folder_orange.svg' style="background-color: #f29b34;">주황색</option>
-                        <option value='/public/media/folder_green.svg' style='background-color: #97ce68;'>연두색</option>
-                        <option value='/public/media/folder_yellow.svg' style='background-color: #fcd341;'>노란색</option>
-                        <option value='/public/media/folder_red.svg' style='background-color: #e36363;'>다홍색</option>
-                        <option value='/public/media/folder_mint.svg' style='background-color: #4dbdc2;'>하늘색</option>
+                        <option value='/public/media/folder_orange.svg' data-tag="/public/media/orange_30.png" style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/folder_green.svg' data-tag="/public/media/green_30.png" style='background-color: #97ce68;'>연두색</option>
+                        <option value='/public/media/folder_yellow.svg' data-tag="/public/media/yellow_30.png" style='background-color: #fcd341;'>노란색</option>
+                        <option value='/public/media/folder_red.svg' data-tag="/public/media/red_30.png" style='background-color: #e36363;'>다홍색</option>
+                        <option value='/public/media/folder_mint.svg' data-tag="/public/media/mint_30.png" style='background-color: #4dbdc2;'>하늘색</option>
 
                     
                         </select>
@@ -1020,7 +1022,9 @@
         //추가되면 mongodb에 저장되도록
         var new_folder_name=$('#modal-folder-name').val();
         var new_folder_color=$('#folder_color option:selected').val(); //폴더 색 위치
-        
+        console.log(new_folder_color)
+        var new_folder_img=$('#folder_color option:selected').attr('data-tag');
+        console.log(new_folder_img);
         if(new_folder_name.trim()===''){
             alert('폴더 이름을 입력하세요');
         }else{
@@ -1030,7 +1034,8 @@
                 url:'/folder_add',
                 data:{
                     folder_name:new_folder_name,
-                    folder_color:new_folder_color
+                    folder_color:new_folder_color,
+                    folder_img:new_folder_img
                 },
                 success:function(data){
                     var new_folder={
@@ -1039,7 +1044,7 @@
                     }
                     
                     var new_folder_id=data.folder_id;
-                    addNewFolder(new_folder,new_folder_id,new_folder_color);
+                    addNewFolder(new_folder,new_folder_id,new_folder_color,new_folder_img);
                     
 
                     //동적 추가 시 피룡함
@@ -1050,7 +1055,7 @@
         }
     });
 
-    function addNewFolder(folder,folder_id,folder_color){
+    function addNewFolder(folder,folder_id,folder_color,folder_img){
         
         var name=folder.folder_name;
         var color;
@@ -1185,8 +1190,10 @@
             body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
             //.then(res => res.json())   
                     });
-            parent_day.removeChild(delete_day);
-            alert(content+'이(가) d-day에서 삭제되었습니다.');
+                    document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                    toggleAlertModal();
+                    parent_day.removeChild(delete_day);
+            
     }
 
     $(document).ready(function () {
@@ -1282,8 +1289,10 @@
                                 body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
                                 //.then(res => res.json())   
                                         });
-                            parentDiv.removeChild(show_day);
-                            alert(content+'이(가) d-day에서 삭제되었습니다.');          
+                                        document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
+                                        toggleAlertModal();
+                                        parentDiv.removeChild(show_day);
+                            
                         });
 
                         show_day.style.fontWeight = "bold"

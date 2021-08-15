@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/public/guestbook/reply.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/guestbook_myroom.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/friends_edit.css" />
+    <link rel="stylesheet" type="text/css" href="/public/login/register_modal.css" />
 </head>
 
 <div id="header" role="banner">
@@ -123,10 +124,90 @@
 
                 <!-- 시간표 공개여부에 따라 -->
                 <li class="show-timetable">
-                    <% if (profile.timetable_private) { %>
-                        <input type="button" id="table-button-id" value="시간표 보기"></input>
+                    <% if (!profile.timetable_private) { %>
+                        <input type="button" id="table-button-id" value="시간표 보기" onclick="showTimetable('<%=friend_id%>')"></input>
                         <% } %>
                 </li>
+                <div id="modal" class="modal modal_timetable_notfriend">
+                    <div class="modal-content">
+                        <span class="close_button close_timetable_notfriend_button">&times;</span>
+                        <h1 class="title">시간표 보기 실패</h1>
+                        <!-- 내용 띄울 부분 -->
+                        <div class="content">
+                            친구가 아니기 때문에 시간표 열람이 불가합니다.
+                        </div>
+                        <!-- 확인 버튼 -->
+                        <input type="button" id="confirm_timetable_notfriend" class="btn_confirm" value="확인"> 
+                    </div>
+                </div>
+                <div id="modal" class="modal modal_timetable_private">
+                    <div class="modal-content">
+                        <span class="close_button close_timetable_private_button">&times;</span>
+                        <h1 class="title">시간표 보기 실패</h1>
+                        <!-- 내용 띄울 부분 -->
+                        <div class="content">
+                            친구가 시간표 열람을 비공개로 설정했습니다.
+                        </div>
+                        <!-- 확인 버튼 -->
+                        <input type="button" id="confirm_timetable_private" class="btn_confirm" value="확인"> 
+                    </div>
+                </div>
+                <script type="text/javascript"> 
+                //$(document).ready(function() {
+                    var trigger_timetable = document.querySelector("#table-button-id"); // 시간표 보기 버튼
+                    var modal_notfriend = document.querySelector(".modal_timetable_notfriend"); // 팝업 될 레이어 class명
+                    var closeNotFriendButton = document.querySelector(".close_timetable_notfriend_button"); // 우측 상단 닫기 버튼
+                    var confirmNotFriendButton = document.querySelector("#confirm_timetable_notfriend"); // <- 확인 버튼 (취소 버튼 용으로 씀)
+                    var modal_private = document.querySelector(".modal_timetable_private"); // 팝업 될 레이어 class명
+                    var closePrivateButton = document.querySelector(".close_timetable_private_button"); // 우측 상단 닫기 버튼
+                    var confirmPrivateButton = document.querySelector("#confirm_timetable_private"); // <- 확인 버튼 (취소 버튼 용으로 씀)
+                    
+                    function toggleNotFriendModal() {
+                        modal_notfriend.classList.toggle("show_modal");
+                    }
+                    function togglePrivateModal() {
+                        modal_private.classList.toggle("show_modal");
+                    }
+
+                    function windowOnClick(event) {
+                        if (event.target === modal_notfriend) {
+                            toggleNotFriendModal();
+                        }
+                        else if (event.target === modal_private) {
+                            togglePrivateModal();
+                        } 
+                    }
+
+                    confirmNotFriendButton.addEventListener("click", toggleNotFriendModal);
+                    closeNotFriendButton.addEventListener("click", toggleNotFriendModal);
+                    confirmPrivateButton.addEventListener("click", togglePrivateModal);
+                    closePrivateButton.addEventListener("click", togglePrivateModal);
+
+                    window.addEventListener("click", windowOnClick); // 모달 바깥쪽 클릭해도 모달 팝업 닫힘
+                //});
+
+                function showTimetable(friend_id) {
+                    $.ajax({
+                            type:"GET",
+                            async : true,
+                            url:'/guestbook/'+friend_id+'/timetable/auth', 
+                        success:function( data ){ // POST요청 성공한 경우
+                            if (data.includes('error=notfriend')) { // 친구가 아님
+                                //alert('친구가 아니어서 시간표 열람이 불가합니다.');
+                                toggleNotFriendModal();
+                            } else if (data.includes('error=private')) { // 친구가 아님
+                                //alert('친구가 시간표 열람을 비공개로 설정했습니다.');
+                                togglePrivateModal();
+                            } else { // 성공 data : 친구의 _id가 넘어옴
+                                location.href = '/guestbook/'+data+'/timetable';
+                            }
+                        },
+                        error : function(err) {
+                            alert('오류가 발생했습니다. \n다시 시도해주세요.');
+                        }});
+                }
+                </script>
+
             </div>
 
         </div>

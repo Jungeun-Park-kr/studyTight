@@ -3,6 +3,7 @@ const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
 const Friend = require('../../models/friend'); //친구관리를 위함.
+const Course = require('../../models/course');
 const { mongo, Mongoose } = require('mongoose');
 const router = express.Router();
 
@@ -48,7 +49,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             profile: profile[0],
             friend: friend
         });
-        console.log(1);
+
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -130,8 +131,61 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
     }
 });
 
-router.get('/:id/timetable', isLoggedIn, async(req, res, next) => {
+router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표를 볼 수 있는지 확인 (권한 확인용)
+    try {
+        const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
+        //console.log('-------------친구-----------');
+        //console.info(friendUser);
+        // 클릭한 친구와 내가 친구가 되어있는지 확인 및 시간표 보기 권한 있는지 확인
+        const friend = await Friend.findOne({ user_id: res.locals.user._id, friend_id: friendUser._id, received: true, send: true }); // 친구 데이터 가져오기
+        const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
+        //console.log('---------------------친구 프로필---------------------');
+        //console.info(profile);
+        if (friend == null) { // 친구가 아닌 경우
+            //console.log('친구가 아님');
+            return res.send('/' + req.params.id + '/timetable?error=notfriend');
+        }
+        if (profile.timetable_private) { // 시간표 비공개 한 경우
+            //console.log('친구가 시간표 비공개함');
+            return res.send('/' + req.params.id + '/timetable?error=private');
+        }
+        return res.send(req.params.id);
+    } catch (err) {
+        console.error('/views/guestbook/guestbook.js 에서 에러');
+        console.error(err);
+        return (err);
+    }
+});
 
+
+router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표 보기 (페이지 이동)
+    try {
+        const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
+        const timetable = await Course.find({ user_id: friendUser._id }).populate('schedules').sort({ 'createdAt': 1 }); // 클릭한 친구의 시간표
+        // 클릭한 친구와 내가 친구가 되어있는지 확인 및 시간표 보기 권한 있는지 확인
+        const friend = await Friend.findOne({ user_id: res.locals.user._id, friend_id: friendUser._id, received: true, send: true }); // 친구 데이터 가져오기
+        const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
+        if (friend == null) { // 친구가 아닌 경우
+            return res.send('/' + req.params.id + '/timetable?error=notfriend');
+        }
+        if (profile.timetable_private) { // 시간표 비공개 한 경우
+            return res.send('/' + req.params.id + '/timetable?error=private');
+        }
+        // console.log('---------------------친구 시간표---------------------');
+        // console.info(timetable);
+
+        res.render('../views/guestbook/guestbook_timetable.ejs', {
+            title: friendUser.name + '의 시간표',
+            user: res.locals.user,
+            friend: friendUser,
+            timetable: timetable
+        });
+
+    } catch (err) {
+        console.error('/views/guestbook/guestbook.js 에서 에러');
+        console.error(err);
+        return (err);
+    }
 });
 
 

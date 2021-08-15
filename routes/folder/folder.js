@@ -20,7 +20,7 @@ router.use((req, res, next) => {
 
 router.get('/:id', isLoggedIn, async( req, res, next) => {
         const id_obj=req.params.id;
-        const folder_color=await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_color');
+        const folder_img=await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_img');
         //console.log(folder_color);
         try{
         const folder_title = await Folder.find({user_id:res.locals.user._id, _id:id_obj}).select('folder_name');
@@ -29,7 +29,7 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
         
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         res.render('../views/folder/folder.ejs', {
-            folder_color:folder_color[0],
+            folder_img:folder_img[0],
             folder_title: folder_title[0],
             folder:folder,
             folder_id:id_obj,

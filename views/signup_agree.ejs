@@ -110,7 +110,6 @@
                                 promotion : promotion,
                             },
                             success:function(data){ // POST 요청 성공
-                                //console.log('promotion in ejs :'+promotion);
                                 $(location).attr('href', '/signup'); 
                             }, 
                             error: function(err) { // POST 요청 실패시
@@ -149,10 +148,6 @@
                     promotion = false;
                 }
             });
-            // // 동적으로 추가된 체크박스 체크여부 확인
-            // $("#dynamicUL").on("click", 'input:checkbox', function() {
-            //     $("#log").prepend( $(this).val() + " / " + $(this).is(":checked") + " 체크박스가 클릭되었습니다.<br/>");
-            // });
         })
     </script>
 </body>

@@ -86,7 +86,8 @@
         </div>
         <div id="container">
             <div id="MAIN_LEFT">
-                <div class="section" style="background-image: url('<%= folder_color.folder_color%>');">
+                <div class="section"style="background-image: url('<%= folder_img.folder_img%>');">
+                
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
                     </p>
@@ -98,7 +99,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/public/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     <!-- <img class="three_button" src="media/three_button.png">
@@ -110,14 +111,10 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/public/media/empty_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
-                                    <!-- <img class="three_button" src="media/three_button.png">
-                                    <ul class="postIt_menu">
-                                        <li><div id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">수정</div></li>
-                                        <li><div id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">삭제</div></li>  
-                                    </ul> -->
+                                    
                                 <% } %>
                             </div>
                             <% } %>
@@ -129,11 +126,11 @@
                     </div>
                     </div>
                     <script>
+                    
                         const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
                         
                         function revisePostClicked(id, type, index){
-                            //type이 content면 content 전용 modal을 띄워야 함.
-                            
+                    
                             var revise_post_name=document.getElementsByClassName('post')[index].innerHTML;
                             var revise_post_color=document.getElementsByClassName('post_img')[index].getAttribute('src');
                             var revise_post_content=document.getElementsByClassName('hidden_content')[index].getAttribute('value');
@@ -207,8 +204,7 @@
                                         body:JSON.stringify({postIt_id:id,postIt_star:true})
                                         //.then(res => res.json( ))  
                                     });
-                                    //fetch주소 바꾸기!
-                                    //console.log("false에서 true로");
+                                    
                                 }else{
                                     currentValue=false;
                                     boolValue=false;
@@ -224,11 +220,7 @@
                                         body:JSON.stringify({postIt_id:id, postIt_star:false})
                                         //.then(res => res.json( ))  
                                     });
-                                    // $('.fixed_star').hover(function(){
-                                    //     $(this).index(index).css('opacity',1);
-                                    // }, function(){
-                                    //     $(this).index(index).css('opacity',0);
-                                    // })
+                                
                                     star_img.onmouseenter=function(){
                                         this.style.opacity=1;
                                     }
@@ -261,7 +253,7 @@
             var post_content=post.post_content;
             var post_star=post.postIt_star;
             
-            //console.log(type, post_id, post_name, post_content,post_star);
+            
 
             var parent_post=document.getElementById('wrap_postit');
 
@@ -284,7 +276,7 @@
 
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
-            star_img.setAttribute('src','/public/media/empty_star.png');
+            star_img.setAttribute('src','/media/empty_star_old.png');
             new_star_toggle=1;
             star_img.addEventListener('click',function(){
                 if(post_star==true){
@@ -305,7 +297,7 @@
                                     });
             }else{
                 post.postIt_star=false;
-                    star_img.style.src='/public/media/empty_star.png';
+                    star_img.style.src='/media/empty_star_old.png';
                     star_img.style.opacity=1;
                     fetch(''+folder_id+'/star',{
                         method:'PATCH',
@@ -356,8 +348,7 @@
             img_del.setAttribute('class','delete_postIt');
             img_del.setAttribute('src','/public/media/delete.png');
             img_del.addEventListener('click',function(){
-                //삭제하기
-                // document.getElementById('delete_post_index').setAttribute('value',index);
+                
                 document.getElementById('delete_new_post_id').setAttribute('value',post_id);
                 document.getElementById('delete_new_post_name').innerHTML=post_name+" 삭제하기"
                 toggleNewDeletePostModal();
@@ -427,11 +418,11 @@
             <br>
             
             <div class="choice choice_content">
-                <img src="media/content.png" ><p>글</p></div>
+                <img src="/public/media/content.png" ><p>글</p></div>
             <div class="choice choice_link">
-                <img src="media/link.png"><p>링크</p></div>
-            <div class="choice choice_file">
-            <img src="media/file.png"><p>파일</p></div>
+                <img src="/public/media/link.png"><p>링크</p></div>
+            <!-- <div class="choice choice_file">
+            <img src="media/file.png"><p>파일</p></div> -->
             </div>
         </div>
     </div>
@@ -446,9 +437,9 @@
         
             <div class="modal-body">
                 <p>제목</p>
-                <input type="text" id="input_content_title" name="title" class="input_text" placeholder="제목을 입력하세요">
+                <input type="text" id="input_content_title" name="title" class="input_text" maxlength="7" placeholder="제목을 입력하세요 (최대 7자)">
                 <br>
-                <br>
+                
                 <p>내용</p>
                 <textarea id="input_content" name="content" class="input_content" row="38" cols="35" name="contents" placeholder="내용을 입력하세요"></textarea>
             </div>
@@ -464,8 +455,7 @@
                 
                     </select>
                 </div>
-            <!-- <a href="#" data-dismiss="modal" class="btn cancelBtn" onclick="cancelClicked();">취소</a>
-            <a href="#" class="btn uploadBtn" onclick="uploadContent();">완료</a> -->
+            
                 <div data-dismiss="modal" class="btn cancelBtn cancel_content_button" onclick="cancelClicked();">취소</div>
                 <div class="btn uploadBtn store_content_button" onclick="uploadContent();">완료</div>
             </div>
@@ -481,8 +471,8 @@
             
             <div class="modal-body">               
                 <p>제목</p>
-                <input type="text" id="input_link_title" class="input_text" placeholder="제목을 입력하세요">
-                <br>
+                <input type="text" id="input_link_title" class="input_text" placeholder="제목을 입력하세요 (최대 7자)" maxlength="7">
+                
                 <br>
                 <p>링크</p>
                 <input type="url" id="input_link" class="input_link" placeholder="링크를 입력하세요">
@@ -490,7 +480,7 @@
             <div class="modal-footer">
                 <div class="link_color_wrap" value="포스트잇의 색을 선택하세요.">
                     <select id="link_color" name="link_color"> 
-                        <option value='/public/media/post_orange' style="background-color: #f29b34;">주황색</option>
+                        <option value='/public/media/post_orange.png' style="background-color: #f29b34;">주황색</option>
                         <option value='/public/media/post_green.png' style='background-color: #97ce68;'>연두색</option>
                         <option value='/public/media/post_yellow.png' style='background-color: #fcd341;'>노란색</option>
                         <option value='/public/media/post_red.png' style='background-color: #e36363;'>다홍색</option>
@@ -516,9 +506,9 @@
                 
                 <div class="modal-body">
                         <p>제목</p>
-                        <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요">
+                        <input type="text" id="input_file_text" class="input_text" placeholder="제목을 입력하세요 (최대 7자)" maxlength="7">
                         <br>
-                        <br>
+                        
                         <div class="filebox"> 
                             <input class="upload-name" value="파일선택" disabled="disabled">
                             <label for="ex_filename">업로드</label> 
@@ -555,7 +545,7 @@
                         <p>제목</p>
                         <input type="text" id="revise_link_title" class="input_text" >
                         <br>
-                        <br>
+                        
                         <p>링크</p>
                         <input type="url" id="revise_input_link" class="input_link">
                     </div>
@@ -569,7 +559,7 @@
                                 <option value='/public/media/post_blue.png' style='background-color: #4dbdc2;'>하늘색</option>
                         </select>
                         </div>
-                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
+                        <p>※ 새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_link">취소</div>
                         <div class="btn uploadBtn revise_link_button">완료</div>
                     </div>
@@ -586,7 +576,7 @@
                     <div class="modal-body">
                         <p>제목</p>
                         <input type="text" id="revise_content_title" name="title" class="input_text">
-                        <br>
+                    
                         <br>
                         <p>내용</p>
                         <textarea id="revise_input_content" name="revise_content" class="input_content" row="38" cols="38" name="contents"></textarea>
@@ -602,7 +592,7 @@
                         
                             </select>
                         </div>
-                        <p>※새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
+                        <p>※ 새로고침을 하여 수정된 포스트잇 정보를 확인할 수 있습니다.</p>
                         <div data-dismiss="modal" class="btn cancelBtn cancel_revise_content">취소</div>
                         <div class="btn uploadBtn revise_content_button">완료</div>
                     </div>
@@ -621,7 +611,7 @@
                 <div class="modal-body">
                         <p>제목</p>
                         <input type="text" id="revise_file_text" class="input_text" >
-                        <br>
+                        
                         <br>
                         <div class="filebox"> 
                             <input class="revise-upload-name" value="파일선택" disabled="disabled">
@@ -658,9 +648,9 @@
                         <div id="delete_post_index"></div>
                             
                             
-                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
-                                그래도 삭제하시겠습니까?
-                            </p>
+                            <p>※ 삭제된 포스트잇 정보는 되돌릴 수 없습니다.</p>
+                            <p>그래도 삭제하시겠습니까?</p>
+                            
                         <div class="buttons_wrap">
                             
                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_post">취소</div>
@@ -668,7 +658,7 @@
                         </div>
                         
                 </div>
-            </div>
+            </div> 
 
             
 
@@ -682,9 +672,9 @@
                         
                             
                             
-                            <p>※삭제된 포스트잇 정보는 되돌릴 수 없습니다.
-                                그래도 삭제하시겠습니까?
-                            </p>
+                            <p>※ 삭제된 포스트잇 정보는 되돌릴 수 없습니다.</p>
+                                <p>그래도 삭제하시겠습니까?</p>
+                            
                         <div class="buttons_wrap">
                             
                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_new_post">취소</div>
@@ -723,7 +713,7 @@
         var trigger_choice_button=document.querySelector('#postIt_plus');
         var trigger_content_button=document.querySelector('.choice_content');
         var trigger_link_button=document.querySelector('.choice_link');
-        var trigger_file_button=document.querySelector('.choice_file')
+        //var trigger_file_button=document.querySelector('.choice_file')
 
         var close_choice_button=document.querySelector('.close_choice_button');
         var close_content_button=document.querySelector('.close_content_button');
@@ -828,8 +818,8 @@
         cancel_link_button.addEventListener('click',toggleLinkModal);
         store_link_button.addEventListener('click',toggleLinkModal);
 
-        trigger_file_button.addEventListener('click',toggleFileModal);
-        trigger_file_button.addEventListener('click',toggleChoiceModal);
+        //trigger_file_button.addEventListener('click',toggleFileModal);
+        //trigger_file_button.addEventListener('click',toggleChoiceModal);
         close_file_button.addEventListener('click',toggleFileModal);
         cancel_file_button.addEventListener('click',toggleFileModal);
         store_file_button.addEventListener('click',toggleFileModal);
@@ -884,8 +874,8 @@
                             post_content:content,
                             post_star:false
                         }
-                        var new_post_id=data.postIt._id;
-                        
+                        var new_post_id=data._id;
+                        //console.log(new_post_id);
                         //console.log(new_post_id);
                         addNewPost('content',new_post_id,new_post,color);
                         
@@ -932,7 +922,9 @@
                             post_content:link,
                             post_star:false
                         }
-                        var new_post_id=data.postIt._id;
+                        //console.log(data._id);
+                        var new_post_id=data._id;
+                        
                         addNewPost('link',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
@@ -1344,8 +1336,7 @@
         var check_content=todolist.todo_content;
         console.log(check_content);
         var check_value=todolist.todo_finished;
-        //onCheckedHandler(content,check_value);
-        //console.log(check_value+'->'+!(check_value));
+        
         if(check_value==true){
             new_ck_toggle++;
         }

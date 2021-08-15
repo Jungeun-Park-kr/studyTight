@@ -29,7 +29,6 @@ const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로�
 const signupRouter = require('./routes/signup'); // 회원가입 라우터
 const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라우터
-const guestbookTimetableRouter = require('./routes/guestbook/timetable'); // 방명록 라우터 (친구 시간표 라우터)
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 const todoRouter = require('./routes/todo');
 const folderRouter = require('./routes/folder/folder');
@@ -65,7 +64,6 @@ app.use('/signup', signupRouter);
 app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
-app.use('/guestbook/timetable', guestbookTimetableRouter);
 app.use('/folder', folderRouter);
 app.use('/d-day', DdayRouter);
 // app.use('/todo',todoRouter);
@@ -73,8 +71,9 @@ app.use('/d-day', DdayRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
-    // console.info(req);
-    res.status(404).send(req + ' Not Found (없는 라우터 요청)');
+    //console.info(req);
+    //res.status(404).send(req + ' Not Found (없는 라우터 요청)');
+    res.status(404).send(req + ' Not Found');
 })
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정

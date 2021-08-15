@@ -40,8 +40,8 @@ body {
 .section{
     /* min-width: 718px; */
     float:left;
-    width:750px; 
-    height:600px;
+    width:770px; 
+    height:615px;
     /* height:35vw;
     width:718px; */
     /* margin-right:10px;
@@ -50,34 +50,13 @@ body {
     background-size:cover;
 
 }
-.section::before{
-    content:"";
-    opacity:0.5;
-    /* position:absolute; */
-    z-index: -1;
-    
-
-} 
-.section::after{
-    content:"";
-    
-    opacity:0.5;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-1; 
-    
-    
-} 
 
 .big_post {
     margin-top: 15px;
 }
 .wrap_postit{
 
-    display:inline;
+    display:inline-flex;
 }
 .postIt
 {
@@ -161,40 +140,16 @@ body {
     border:10px;
     cursor: pointer;
 }
-.delete_todo{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 0; 
-} 
-.delete_todo:hover{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 1;
-    background-color: lightblue; 
-} 
+
 
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-/* #postIt_plus{
-    display:inline-block;
-    margin:20px 35px 20px 20px;
-    width: 90px; 
-    height: 90px;
-} */
 
 .post_img{
     width:100%;
     height:90px;
-
+    display: -webkit-box;
  }   
 /* .postIt > p {
     font-size:12px;
@@ -205,8 +160,9 @@ body {
     text-align: center;
     position: relative;
     cursor: pointer;
-    top: -70%;
+    top: -65%;
     left: 50%;
+    width:50px;
     transform: translate( -50%, -50% );
 }
 .postIt_menu > li {
@@ -233,7 +189,7 @@ body {
     position:relative;
     
     width:15px;
-    margin-top:-100%;
+    margin-top:-98%;
     margin-left:3px;
     float:left;
     /* display: none; */
@@ -262,7 +218,7 @@ body {
 .revise_postIt, .delete_postIt{
     width:15px;
     height: auto;
-    margin:5px 0 5px 5px;
+    margin:3px 0 3px 3px;
     position: relative;
     top:-100%;
     left:-8%;
@@ -386,7 +342,7 @@ body {
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file, .modal-content-delete-post, .modal-content-delete-new-post{ 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -411,6 +367,19 @@ body {
     border-radius: 0.5rem; 
     margin : 0 auto;
     /* z-index:500; */
+}
+.modal-content-delete-post, .modal-content-delete-new-post{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 150px; 
+    border-radius: 0.5rem; 
+    z-index:500;
+    margin : 0 auto;
 } 
 .modal-content-content, .modal-content-revise-content { 
     position: absolute; 
@@ -440,7 +409,7 @@ ul {
 /* 타이틀 */
 .title{ 
     font-size:13px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     letter-spacing: 2px; 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 } 

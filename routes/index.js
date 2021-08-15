@@ -35,13 +35,13 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         //await Todo.updateMany({ user_id: res.locals.user._id, register_date: getCurrentDate() })
         const todo = await Todo.updateMany({
             user_id: req.user._id, //필터링 하는 것
-            
+
         }, {
             $set: {
                 register_date: getCurrentDate()
             }
         });
-        
+
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
         // 디데이 날짜지난 것 삭제
@@ -64,7 +64,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
     } catch (err) {
         console.error('routes/index.js 에서 에러');
         console.error(err);
-        
+
     }
 });
 
@@ -75,7 +75,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
         const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
         //console.info(todolist);
         // res.send('Hello, Express'); // 테스트용
-    
+
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist: todolist,
@@ -94,6 +94,7 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
 router.post('/folder_add', isLoggedIn, async(req, res, next) => {
     var folder_name = req.body.folder_name;
     var folder_color = req.body.folder_color;
+    var folder_img=req.body.folder_img;
     const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
     const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
     const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
@@ -105,6 +106,7 @@ router.post('/folder_add', isLoggedIn, async(req, res, next) => {
             user_id: req.user._id,
             folder_name: folder_name,
             folder_color: folder_color,
+            folder_img: folder_img,
             folder_fixed: false
         });
 
@@ -113,7 +115,7 @@ router.post('/folder_add', isLoggedIn, async(req, res, next) => {
         // );
 
         res.send({folder_id:folder._id});
-        
+
     } catch (err) {
         next(err);
     }
@@ -127,7 +129,7 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
         const folder_id=req.query.folder_id;
         console.log("get에서 받은 "+folder_id);
         res.send(folder_id);
-        
+
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist: todolist,
@@ -205,11 +207,12 @@ router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update�
         const folder = await Folder.updateOne({
             user_id: req.user._id, //필터링 하는 것
             _id:req.body.folder_id,
-            
+
         }, {
             $set: {
                 folder_name:req.body.revise_folder_name,
-                folder_color:req.body.revise_folder_color
+                folder_color:req.body.revise_folder_color,
+                folder_img:req.body.revise_folder_img
             }
         });
         //console.log(req.body.todo_content+"의 값: "+req.body.todo_finished); //undefined: undefined라고 뜬다..
@@ -223,18 +226,18 @@ router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update�
     }
 });
 router.patch('/folder_fixed', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
-    
+
     try {
         const folder = await Folder.updateOne({
             user_id: req.user._id, //필터링 하는 것
             _id:req.body.folder_id,
-            
+
         }, {
             $set: {
                 folder_fixed:req.body.folder_fixed
             }
         });
-        
+
         res.send(folder);
 
     } catch (err) {
@@ -279,11 +282,11 @@ router.delete('/day', isLoggedIn, async(req, res, next) => { //할 일 목록에
 router.delete('/folder', isLoggedIn, async(req, res, next) => {
     //폴더를 삭제할 경우
     try {
-        
+
         await PostIt.deleteMany({folder_id:req.body.folder_id});
         await Folder.deleteOne({ user_id: res.locals.user._id, _id: req.body.folder_id });
         //console.log(req.body.folder_id);
-        
+
        // const folder = await Folder.find({ user_id: res.locals.user._id });
 
         res.send('폴더 삭제 성공!')
