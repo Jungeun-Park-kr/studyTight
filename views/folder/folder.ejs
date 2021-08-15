@@ -414,8 +414,10 @@
             <span  class="close_button close_choice_button" data-dismiss="modal" aria-hidden="true">&times;</span>
             <h4 class="title">포스트잇 추가하기</h4>
             
-            <div class="modal-body">작성할 종류를 선택하세요.
-            <br>
+            <p>작성할 종류를 선택하세요.</p>
+
+            <div class="modal-choice-body">
+            
             
             <div class="choice choice_content">
                 <img src="/public/media/content.png" ><p>글</p></div>
@@ -469,7 +471,7 @@
             <span  class="close_button close_link_button" data-dismiss="modal" aria-hidden="true">&times;</span>
             <h4 class="modal-title">링크 작성하기</h4>
             
-            <div class="modal-body">               
+            <div class="modal-link-body">               
                 <p>제목</p>
                 <input type="text" id="input_link_title" class="input_text" placeholder="제목을 입력하세요 (최대 7자)" maxlength="7">
                 
@@ -877,6 +879,8 @@
                         var new_post_id=data._id;
                         //console.log(new_post_id);
                         //console.log(new_post_id);
+                        $('#input_content_title').val('');
+                        $('#input_content').val('');
                         addNewPost('content',new_post_id,new_post,color);
                         
                     },error:function(err){
@@ -923,6 +927,8 @@
                             post_star:false
                         }
                         //console.log(data._id);
+                        $('#input_link_title').val('');
+                        $('#input_link').val('');
                         var new_post_id=data._id;
                         
                         addNewPost('link',new_post_id,new_post,color);
@@ -966,6 +972,8 @@
                             post_star:false
                         }
                         var new_post_id=data.postIt._id;
+                        $('#input_file_text').val('');
+                        $('.upload-name').val('');
                         addNewPost('file',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
@@ -997,7 +1005,7 @@
             var new_name=$('#revise_link_title').val();
             var new_link=$('#revise_input_link').val();
             var new_color=$('#revise_link_color:selected').val();
-            console.log(id, new_name,"link:"+ new_link, new_color);
+            //console.log(id, new_name,"link:"+ new_link, new_color);
 
             if(new_name.trim()==''){
                 alert("수정할 이름을 입력하세요.");
@@ -1011,7 +1019,10 @@
                         'Content-Type':'application/json'
                             },
                     body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_link, revise_postIt_color:new_color})
-                });  
+                            
+                });
+                $('#revise_link_title').val('');
+                $('#revise_input_link').val('');
             }
         });
 
@@ -1021,7 +1032,7 @@
             var new_name=$('#revise_content_title').val();
             var new_content=$('#revise_input_content').val();
             var new_color=$('#revise_file_color:selected').val();
-            console.log(id, new_name,"content:"+ new_content, new_color);
+            //console.log(id, new_name,"content:"+ new_content, new_color);
 
             if(new_name.trim()==''){
                 alert("수정할 이름을 입력하세요.");
@@ -1035,7 +1046,9 @@
                         'Content-Type':'application/json'
                             },
                             body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
-                }).then(data => console.log(data));  
+                })
+                $('#revise_content_title').val('');
+                $('#revise_input_content').val('');
             }
 
         });
@@ -1046,7 +1059,7 @@
             var new_name=$('#revise_file_text').val();
             var new_content=$('.revise-upload-name').val();
             var new_color=$('#revise_file_color:selected').val();
-            console.log(id, new_name,"file"+ new_content, new_color);
+            //console.log(id, new_name,"file"+ new_content, new_color);
 
             if(new_name.trim()==''){
                 alert("수정할 이름을 입력하세요.");
@@ -1060,7 +1073,7 @@
                         'Content-Type':'application/json'
                             },
                             body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
-                }).then(data => console.log(data));  
+                }) 
             }
         });
 
@@ -1074,7 +1087,7 @@
             //post index
             var index=document.getElementById('delete_post_index').getAttribute('value');
             //post 위치
-            console.log(index);
+            //console.log(index);
             var delete_post=document.getElementsByClassName('postIt')[index];
             //parent post
             var parent_post=document.getElementById('wrap_postit');
@@ -1116,10 +1129,10 @@
                                 
                                     <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                     <% if(todolist[i].todo_finished) {%>
-                                        <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',true)" class="checkbox">
+                                        <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',true)" class="checkbox">
                                             <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                     <%} else{ %>
-                                        <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i].todo_content %>',false)" class="checkbox">
+                                        <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
                                             <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
                                         <% } %>
                                     <% } %>
@@ -1133,15 +1146,15 @@
                             
                                 var checked_toggle=1;
                                 //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
-                                function onCheckedHandler(todo_content, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
+                                function onCheckedHandler(todo_id, index, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
                                     var checkedIndex;
                                     var checkedBox=document.getElementsByClassName('checkbox');
                                     var hidden_input=document.getElementsByClassName('todolist-id');
-                                    for(var i=0;i<hidden_input.length;i++){
-                                        if(hidden_input[i].value==todo_content){
-                                            checkedIndex=i;
-                                        }
-                                    }
+                                    // for(var i=0;i<hidden_input.length;i++){
+                                    //     if(hidden_input[i].value==todo_content){
+                                    //         checkedIndex=i;
+                                    //     }
+                                    // }
                                     var currentState=boolValue;
                                     //console.log(currentState+'->'+!(currentState));
                                     if(currentState==true){
@@ -1149,7 +1162,7 @@
                                     }
                                     var content=document.getElementsByClassName('p_p');
                                     if(checked_toggle%2==1){ //unchecked -> checked
-                                        content[checkedIndex].style.textDecoration='line-through';
+                                        content[index].style.textDecoration='line-through';
                                         currentState=true;
                                         
                                         fetch('/',{
@@ -1158,13 +1171,13 @@
                                                 'Accept':'application/json',
                                                 'Content-Type':'application/json'
                                             },
-                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:true})
+                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id, todo_finished:true})
                                             //.then(res => res.json( ))  
                                         });
                                         
                                     }else{   //checked -> unchecked
-                                        content[checkedIndex].style.textDecoration='none';
-                                        content[checkedIndex].setAttribute('checked',false);
+                                        content[index].style.textDecoration='none';
+                                        content[index].setAttribute('checked',false);
                                         
                                         currentState=false;
                                         fetch('/',{
@@ -1173,7 +1186,7 @@
                                                 'Accept':'application/json',
                                                 'Content-Type':'application/json'
                                             },
-                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_content:content[checkedIndex].innerHTML, todo_finished:false})
+                                            body:JSON.stringify({user_id:'<%= user.name %>',todo_id:todo_id, todo_finished:false})
                                             //.then(res => res.json())  
                                         });
     
@@ -1334,7 +1347,7 @@
     new_checkbox.addEventListener('click',function(){
         
         var check_content=todolist.todo_content;
-        console.log(check_content);
+        //console.log(check_content);
         var check_value=todolist.todo_finished;
         
         if(check_value==true){
@@ -1350,7 +1363,7 @@
                 'Accept':'application/json',
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:true})
+            body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id, todo_finished:true})
             //.then(res => res.json( ))  
             });
         }else{
@@ -1362,7 +1375,7 @@
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                     },
-                body:JSON.stringify({user_id:'<%= user.name %>',todo_content:new_p.innerHTML, todo_finished:false})
+                body:JSON.stringify({user_id:'<%= user.name %>',todo_id:data._id, todo_finished:false})
                 //.then(res => res.json())  
                 });
         }
