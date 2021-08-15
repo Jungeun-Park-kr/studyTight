@@ -560,9 +560,6 @@
                         }
                     </script>
 
-                    <script>
-                    </script>
-
                     <div class="friends_list_box">
                         <table id="course_table">
                             <tbody id="course_body">
@@ -583,15 +580,16 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
                 <div class="writing-place" id=wBOX>
                     <div class="writing-box">
                         <!--행(row)선언-->
-                        <input type="text" id=comment-input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                        <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
                     </div>
                     <div class="writing-button-secret">
                         <div class="writing-button">
-                            <input type="button" id="submit" value="글쓰기"></input>
+                            <input type="button" id="submit" value="글쓰기" onclick="location.href='/guestbook/addcomment'"></input>
                         </div>
                         <div class="secret-checkbox">
                             <input type="checkbox" name="비밀글" id=mysecretbox> 비밀글
@@ -599,388 +597,77 @@
 
                     </div>
 
-
+                    <!-- index.jsdml 33번째줄 참고-->
                 </div>
                 <hr id="myroom-line">
                 <div id=comments> </div>
                 <div class="talking-place" id="talking-place">
 
-
-                    <!-- <div class="talking">
-                    <div class="mini-profile">
-                        <img src="media/person_gray.png"></img>
-                    </div>
-                    <div class="user-small-talking">
-                        <div class="user-name">
-                            최시언
-                        </div>
-                        <div class="user-talking-list">
-                            이번 웹프로그래밍 문제 이해했어?
-                        </div>
-                        <div class="today-button">
-                            <div class="today">
-                                2020-10-16 12:13:11
+                    <% for(var i = 0; i < top_comment.length; i++){ %>
+                        <div class="talking">
+                            <div class="mini-profile">
+                                <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                             </div>
-                            <div class="reply-button">
-                                <input type="button" value="답글쓰기"></input>
+                            <div class="user-small-talking">
+                                <div class="user-name">
+                                    <%=top_comment[i].commenter_email.name %>
+                                </div>
+                                <div class="user-talking-list">
+                                    <%=top_comment[i].text %>
+                                </div>
+                                <div class="today-button">
+                                    <div class="today">
+                                        <%=top_comment[i].comment_time %>
+                                    </div>
+                                    <div class="reply-button">
+                                        <input type="button" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> -->
 
-                    <script>
-                        // function makebox(event) {
-                        //     const btn = event.target;
-                        //     const list = btn.parentNode.parentNode.ParentNode;
-
-
-                        // list.appendchild(list);
-                        // var div1 = document.createElement("div");
-                        // div1.setAttribute("class", "writing-place");
-                        // var div2 = document.createElement("div");
-                        // div2.setAttribute("class", "writing-box");
-                        // var input = document.createElement("input");
-                        // input.type = "text";
-                        // input.id = "comment-input"
-                        // input.name="writing";
-
-                        // }
-
-                        showlist = 1;
-
-                        function showtalkinglist() {
-                            myfriends = activeUser.guestbook.friendslist;
-                            var username = localStorage.getItem('username');
-                            activeUser = getActiveUser(username);
-                            mytalking = activeUser.guestbook.commentlist;
-                            var parent_table = document.getElementById("talking-place"); //부모테이블
-
-                            for (i = 0; i < 5; i++) {
-                                var div1 = document.createElement("div");
-                                div1.setAttribute("class", "talking");
-                                var div2 = document.createElement("div");
-                                div2.setAttribute("class", "mini-profile");
-                                var img = document.createElement("img");
-                                //img.src = myfriends[0].profileimage;
-                                //해당 친구에 맞게 프로필출력
-                                cehckprofile = 1;
-                                for (j = 0; j < 5; j++) {
-                                    //console.log(myfriends[j].guestbookowner);
-
-
-                                    if (mytalking[i].Author == myfriends[j].guestbookowner) {
-                                        img.src = myfriends[j].profileimage;
-                                        cehckprofile = 0;
-                                        //console.log("get");
-                                        break;
-                                    }
-                                }
-                                if (cehckprofile != 0)
-                                    img.src = "media/profile.png";
-                                var div3 = document.createElement("div");
-                                div3.setAttribute("class", "user-small-talking");
-                                var div4 = document.createElement("div");
-                                div4.setAttribute("class", "user-name");
-                                div4.innerHTML = mytalking[i].Author;
-                                var div5 = document.createElement("div");
-                                div5.setAttribute("class", "user-talking-list");
-                                div5.innerHTML = mytalking[i].mycommnet;
-                                var div6 = document.createElement("div");
-                                div6.setAttribute("class", "today-button");
-                                var div7 = document.createElement("div");
-                                div7.setAttribute("class", "today");
-                                div7.innerHTML = mytalking[i].today;
-                                var div8 = document.createElement("div");
-                                div8.setAttribute("class", "reply-button");
-                                var div9 = document.createElement("input");
-                                div9.type = "button";
-                                div9.value = "답글쓰기";
-                                //리스너 추가
-                                div9.addEventListener('click', function(event) {
-                                        //location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
-                                        var div1 = document.createElement("div");
-                                        div1.setAttribute("class", "writing-place");
-                                        var div2 = document.createElement("div");
-                                        div2.setAttribute("class", "writing-box");
-                                        var input = document.createElement("input");
-                                        input.type = "text";
-                                        input.id = "comment-input"
-                                        input.name = "writing";
-                                        input.style = "width:100%;height:100%;"
-                                        var div3 = document.createElement("div");
-                                        div3.setAttribute("class", "writing-button-secret");
-                                        var div4 = document.createElement("div");
-                                        div4.setAttribute("class", "writing-button");
-                                        var input2 = document.createElement("input");
-                                        input2.type = "button";
-                                        input2.id = "submit";
-                                        input2.value = "글쓰기";
-                                        var div5 = document.createElement("div");
-                                        div5.innerHTML = " 비밀글";
-                                        div5.setAttribute("class", "secret-checkbox");
-                                        var input3 = document.createElement("input");
-                                        input3.type = "checkbox";
-                                        input3.name = "비밀글";
-
-                                        var checked = input3.checked;
-
-                                        div5.prepend(input3);
-                                        div4.appendChild(input2);
-                                        div3.appendChild(div4);
-                                        div3.appendChild(div5);
-                                        div2.appendChild(input);
-                                        div1.appendChild(div2);
-                                        div1.appendChild(div3);
-
-                                        var btn = event.target;
-                                        btn.parentNode.parentNode.parentNode.parentNode.after(div1);
-                                        // btn.appendchild(div1);
-                                        //console.log(btn.parentNode.parentNode.parentNode.parentNode);
-                                        div4.addEventListener('click', function(event) {
-                                            //만들기
-
-                                            var btn = event.target;
-                                            btn.parentNode.parentNode.parentNode;
-                                            //console.log(btn.parentNode.parentNode.parentNode); 이건 내가 찾던거
-                                            //console.log(btn.parentNode.parentNode.parentNode.previousSibling);
-                                            //댓글생성먼저.
-                                            var username = localStorage.getItem('username');
-                                            activeUser = getActiveUser(username);
-
-                                            var div1 = document.createElement("div");
-                                            div1.setAttribute("class", "talking");
-                                            div1.style = "margin-left:10%;"
-                                            var div2 = document.createElement("div");
-                                            div2.setAttribute("class", "mini-profile");
-                                            var img = document.createElement("img");
-                                            img.src = activeUser.userImage;
-                                            //액티브 유저의 프로필을 출력
-                                            var div3 = document.createElement("div");
-                                            div3.setAttribute("class", "user-small-talking");
-                                            var div4 = document.createElement("div");
-                                            div4.setAttribute("class", "user-name");
-                                            div4.innerHTML = username;
-                                            var div5 = document.createElement("div");
-                                            div5.setAttribute("class", "user-talking-list");
-                                            div5.innerHTML = btn.parentNode.parentNode.previousSibling.firstChild.value; //내가 박스에 작성한 코멘트
-                                            //btn.parentNode.parentNode.previousSibling.firstChild.value = '';
-                                            //console.log(btn.parentNode.nextSibling.firstChild.checked); //입력한 댓글.
-
-                                            //아래에다가 넣어줄commnetlist를 만들어줄거임.
-
-                                            //위에 있는 식이 내가 입력할 박스의 값.
-                                            var div6 = document.createElement("div");
-                                            div6.setAttribute("class", "today-button");
-                                            var div7 = document.createElement("div");
-                                            div7.setAttribute("class", "today");
-
-                                            function generateTime() {
-                                                const date = new Date();
-                                                const year = date.getFullYear();
-                                                const month = date.getMonth() + 1;
-                                                const wDate = date.getDate();
-                                                const hour = date.getHours();
-                                                const min = date.getMinutes();
-                                                const sec = date.getSeconds();
-                                                const time = year + '-' + month + '-' + wDate + ' ' + hour + ':' + min + ':' + sec;
-                                                return time;
-                                            }
-                                            div7.innerHTML = generateTime();
-                                            var div8 = document.createElement("div");
-                                            div8.setAttribute("class", "reply-button");
-                                            var div9 = document.createElement("input");
-                                            div9.type = "button";
-                                            div9.value = "답글쓰기";
-
-                                            div8.appendChild(div9);
-                                            div6.appendChild(div7);
-                                            div6.appendChild(div8);
-                                            div3.appendChild(div4);
-                                            div3.appendChild(div5);
-                                            div3.appendChild(div6);
-                                            div2.appendChild(img);
-                                            div1.appendChild(div2);
-                                            div1.appendChild(div3);
-
-                                            var mycommentlist = {
-                                                Author: activeUser.name,
-                                                mycommnet: btn.parentNode.parentNode.previousSibling.firstChild.value,
-                                                today: generateTime(),
-                                                commnetsecret: btn.parentNode.nextSibling.firstChild.checked
-                                                    //공개여부에 따라 달라져야됨.
-                                            }
-                                            activeUser.guestbook.commentlist.push(mycommentlist);
-                                            console.log(activeUser.guestbook.commentlist);
-
-                                            btn.parentNode.parentNode.parentNode.previousSibling.after(div1);
-
-
-                                            //삭제
-                                            var btn = event.target;
-                                            btn.parentNode.parentNode.parentNode;
-                                            btn.parentNode.parentNode.parentNode.remove();
-                                        })
-
-                                    })
-                                    //넣기
-                                div8.appendChild(div9);
-                                div6.appendChild(div7);
-                                div6.appendChild(div8);
-                                div3.appendChild(div4);
-                                div3.appendChild(div5);
-                                div3.appendChild(div6);
-                                div2.appendChild(img);
-                                div1.appendChild(div2);
-                                div1.appendChild(div3);
-                                parent_table.appendChild(div1);
-
-                                var hr = document.createElement("hr");
-                                hr.id = "myroom-line";
-                                parent_table.append(hr);
-
+                        <!-- 자신의 아래있는 내용을 클릭시 안보이게 해주는 버튼 -->
+                        <script>
+                            function test(id) {
+                                var my_table = document.getElementById(id);
+                                var bottom = my_table.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                                console.log(bottom);
+                                bottom.style.display = 'block';
+                                bottom.style.visibility = 'visible';
                             }
+                        </script>
 
-
-                        }
-
-                        $('#btn_add_course1').bind('click', function() {
-                            saveCourse(this);
-                        });
-
-                        var saveCourse = function(event) {
-                            $('#btn_add_course1').unbind('click');
-                            var user_id = user_id;
-                            var school = $('#school').val();
-                            var school_private = $('input[name="school_private"]:checked').val();
-                            var major = $('#major').val();
-                            var major_private = $('input[name="major_private"]:checked').val();
-                            var grade = $('#grade').val();
-                            var grade_private = $('input[name="grade_private"]:checked').val();
-                            var age = $('#age').val();
-                            if (school.trim() === '') {
-                                alert('학교를 입력해주세요.');
-                            } else if (major.trim() === '') {
-                                alert('전공을 입력해주세요.');
-                            } else if (grade.trim() === '') {
-                                alert('학년을 입력해주세요.');
-                            } else if (age.trim() === '') {
-                                alert('나이를 입력해주세요.');
-                            } else {
-                                //다 나와있으면
-                                console.log(school_private);
-                                $.ajax({
-                                    type: "PATCH",
-                                    async: true,
-                                    url: '/guestbook/editprofile',
-                                    data: {
-                                        name: name,
-                                        school: school,
-                                        school_private: school_private,
-                                        major: major,
-                                        major_private: major_private,
-                                        grade: grade,
-                                        grade_private: grade_private,
-                                        age: age,
-
-                                    },
-                                    success: function(data) { // POST요청 성공한 경우
-                                        // 버튼 더이상 클릭되지 않게 하기
-
-
-                                    },
-                                    error: function(err) { // POST 요청 실패시
-                                        console.log('프로필 수정 실패' + err);
-                                        alert('프로필 수정을 실패했습니다. 다시 시도해주세요.');
-                                        //toggleModal4();
-                                    }
-                                });
-                                //사라지게 하는거 추가.
-                            }
-
-                        };
-
-                        // 친구추가
-
-                        // $('#btn_add_course????').bind('click', function() {
-                        //     saveCourse(this);
-                        // });
-
-                        // var saveCourse = function(event) {
-                        //     $('#btn_add_course2').unbind('click');
-                        //     var user_id = user_id;
-                        //     var search_email = $('#search_email').val();
-
-                        //     if (search_email.trim() === '') {
-                        //         alert('이메일을 입력해주세요.');
-                        //     } else {
-                        //         //다 나와있으면
-                        //         console.log(search_email);
-                        //         $.ajax({
-                        //             type: "GET",
-                        //             async: true,
-                        //             url: '/guestbook/searchemail',
-                        //             data: {
-                        //                 name: name,
-                        //                 school: school,
-                        //                 school_private: school_private,
-                        //                 major: major,
-                        //                 major_private: major_private,
-                        //                 grade: grade,
-                        //                 grade_private: grade_private,
-                        //                 age: age,
-
-                        //             },
-                        //             success: function(data) { // POST요청 성공한 경우
-                        //                 // 버튼 더이상 클릭되지 않게 하기
-
-
-                        //             },
-                        //             error: function(err) { // POST 요청 실패시
-                        //                 console.log('프로필 수정 실패' + err);
-                        //                 alert('프로필 수정을 실패했습니다. 다시 시도해주세요.');
-                        //                 toggleModal();
-                        //             }
-                        //         });
-                        //         //사라지게 하는거 추가.
-                        //     }
-
-                        // };
-                    </script>
-
-                    <script>
-                        showtalkinglist();
-                    </script>
-                    <div class="reply-place" id=replyplace1>
-                        <div class="writing-box">
-                            <!--행(row)선언-->
-                            <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
-                        </div>
-                        <div class="writing-button-secret">
-                            <div class="writing-button">
-                                <input type="button" id="submit" value="글쓰기"></input>
+                        <div class="reply-place" id=replyplace<%i %>>
+                            <div class="writing-box">
+                                <!--행(row)선언-->
+                                <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
                             </div>
-                            <div class="secret-checkbox">
-                                <input type="checkbox" name="비밀글"> 비밀글
+                            <div class="writing-button-secret">
+                                <div class="writing-button">
+                                    <input type="button" id="submit" value="글쓰기"></input>
+                                </div>
+                                <div class="secret-checkbox">
+                                    <input type="checkbox" name="비밀글"> 비밀글
+                                </div>
+
                             </div>
 
                         </div>
 
-                    </div>
-
-                    <script src="index.js "></script>
-
-                    <tr>
-                        <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                        <td colspan="6 ">
-                            <center>
-                                <a href="#">1</a>
-                                <a href="/guestbook/guestbook_myroom2.html">2</a>
-                                <a href="# "></a>
-                                <a href="# "></a>
-                                <a href="# "></a>
-                            </center>
-                        </td>
-                    </tr>
+                        <script src="index.js "></script>
+                        <% } %>
+                            <tr>
+                                <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                                <!-- <td colspan="6 ">
+                                    <center>
+                                        <a href="#">1</a>
+                                        <a href="#">2</a>
+                                        <a href="# "></a>
+                                        <a href="# "></a>
+                                        <a href="# "></a>
+                                    </center>
+                                </td> -->
+                            </tr>
 
                 </div>
             </div>
