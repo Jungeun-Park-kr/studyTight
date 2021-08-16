@@ -764,7 +764,7 @@
         <h1 class="title">오늘 할 일 추가히기</h1>
         
             <div>
-                <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요.">
+                <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요. (최대 10자)">
                 <input type="hidden">
             </div>
             <div>
@@ -1024,9 +1024,9 @@
         //추가되면 mongodb에 저장되도록
         var new_folder_name=$('#modal-folder-name').val();
         var new_folder_color=$('#folder_color option:selected').val(); //폴더 색 위치
-        console.log(new_folder_color)
+        //console.log(new_folder_color)
         var new_folder_img=$('#folder_color option:selected').attr('data-tag');
-        console.log(new_folder_img);
+        //console.log(new_folder_img);
         if(new_folder_name.trim()===''){
             alert('폴더 이름을 입력하세요');
         }else{
@@ -1063,7 +1063,7 @@
         var name=folder.folder_name;
         var color;
         var fixed=folder.folder_fixed;
-        console.log("fixed의 값은 "+fixed);
+        //console.log("fixed의 값은 "+fixed);
         
         
         var wrap=document.createElement('div');

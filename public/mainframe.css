@@ -417,9 +417,8 @@ select > option {
     background-color:rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     margin-top:20px;
-
+    margin-left:10px;
 }
-
 #folder_plus{
     margin:17px;
     width: 102px;
@@ -443,7 +442,7 @@ select > option {
     /* 각 폴더에 대해서 */
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
-    display:inline-block;
+    display:-webkit-inline-box;
     margin:17px; 
     width: 102px;
     height: 81px;
@@ -467,10 +466,10 @@ select > option {
     display:block;
 }
 .wrap_folder {
-    display: inline-flex;
-    
-    
+    display: inline;
+    flex-wrap: wrap;
 }
+
 .fixed_folder {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
     float:left;
