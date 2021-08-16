@@ -9,7 +9,7 @@ const top_schema = new Schema({
     comment_secret: { type: Boolean, default: 'false' },
     comment_count: { type: String },
     post_id: { type: String },
-    text: { type: String }
+    text: { type: String, required: true }
 
 });
 

@@ -8,6 +8,7 @@ const Friend = require('../../models/friend'); //친구관리를 위함.
 const Course = require('../../models/course');
 const { mongo, Mongoose } = require('mongoose');
 const top_comment = require('../../models/top_comment');
+const { hasUserDefinedProperty } = require('mongoose/lib/utils');
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -82,10 +83,8 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
 
         });
 
-    } catch (err) {
-        console.log('guestbookedit error');
-        next(err);
-    }
+
+    } catch (err) {}
 
 });
 

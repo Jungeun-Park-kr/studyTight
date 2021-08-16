@@ -33,15 +33,14 @@ function deleteComments(event) {
 
 //이게 마지막에 다 더한 리스트를 추가하는것.
 
-// function pressBtn() {
-//     const currentVal = inputBar.value;
-//     if (!currentVal.length) { alert("댓글을 입력해주세요!"); } else {
-//         href = '/guestbook/addcomment';
-//         inputBar.value = '';
-//     }
+function pressBtn() {
+    const currentVal = inputBar.value;
+    if (!currentVal.length) { alert("댓글을 입력해주세요!"); } else {
+        // inputBar.value = '';
+    }
 
-// }
+}
 
 
-// btn.onclick = pressBtn;
+btn.onclick = pressBtn;
 //index.jsdml 33번째줄 참고
