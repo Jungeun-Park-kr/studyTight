@@ -3,13 +3,13 @@ const { Schema } = mongoose;
 const { Types: { ObjectId } } = Schema;
 
 const top_schema = new Schema({
-    commented_email: { type: ObjectId, required: true },
-    commenter_email: { type: ObjectId, required: true, ref: 'User' },
-    comment_time: { type: String, required: true },
-    comment_secret: { type: Boolean, required: true },
-    comment_count: { type: String, required: true },
-    post_id: { type: String, required: true },
-    text: { type: String, required: true }
+    commented_email: { type: ObjectId, ref: 'User' },
+    commenter_email: { type: ObjectId, ref: 'User' },
+    comment_time: { type: String },
+    comment_secret: { type: Boolean, default: 'false' },
+    comment_count: { type: String },
+    post_id: { type: String },
+    text: { type: String }
 
 });
 
