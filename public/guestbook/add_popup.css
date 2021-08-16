@@ -48,10 +48,11 @@ label {
     letter-spacing: 2px;
 }
 
-form {
+
+/* form {
     margin: 0 auto;
     width: 459px;
-}
+} */
 
 .course_type_form1 {
     visibility: hidden;
