@@ -46,7 +46,9 @@ router.get('/:id', isLoggedIn, async( req, res, next) => {
 router.post('/:id/add',isLoggedIn, async(req,res,next) => {
     var postItList=new Array();
     
-    const folder_id=req.body.folder_id;
+    //const folder_id=req.body.folder_id;
+    const folder_id=req.params.id;
+    //console.log('folder_id는 '+folder_id);
     const postIt_name=req.body.postIt_name;
     const postIt_content=req.body.postIt_content;
     const postIt_type=req.body.postIt_type;
