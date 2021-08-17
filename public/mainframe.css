@@ -1,37 +1,49 @@
-
-body, button, input, select, table, textarea {
+body,
+button,
+input,
+select,
+table,
+textarea {
     font-size: 12px;
     line-height: 16px;
     color: #202020;
     font-family: 'Open Sans';
     src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
+
 body {
     background-color: #e7eff0;
     /* 브라우저에서 body 요소를 로드할때 수정사항이 없으면 display:block, margin : 8px로 처리함. 
     따라서 명시적으로 margin:0px로 지정해줌! */
-    margin : 0px;
+    margin: 0px;
 }
 
-html, body {
+html,
+body {
     /* wrap으로 감싸는 영역의 height가 0으로 떠서 상위 영역인 body의 height:100%으로 함*/
-    height : 100%;
+    height: 100%;
 }
+
 
 /* wrap 부분 : html의 <body>태그 전체를 감싸는 부분 */
+
 #wrap {
     overflow: hidden;
     min-width: 1190px;
 }
 
+
 /* header부분 : 로고,메뉴,로그인 표시 영역 */
+
 #header {
     position: relative;
     background-color: #fff;
     /* z-index: 1; */
 }
 
+
 /* 메인 영역 : 헤더 아래 메인 콘텐츠들 표시 영역 */
+
 #container {
     position: relative;
     width: 1190px;
@@ -40,172 +52,197 @@ html, body {
     letter-spacing: -.2px;
 }
 
+
 /* 자식이 float속성을 사용해도 wrap으로 감싸기 위해 아래 코드 사용 */
+
 #container:after {
     content: "";
     display: block;
     clear: both;
 }
 
+
 /* 메인의 좌측 영역 : 폴더, d-day를 감싸는 영역 */
+
 .column_left {
     /* 네이버 : 750 */
     /* float:left; */
     width: 850px;
-    display:inline-block;
+    display: inline-block;
 }
 
 
 /* 메인의 우측 영역: 오늘 할 일 영역 */
+
 .column_right {
     /* 네이버 : 350 */
-    float:right;
+    float: right;
     width: 250px;
 }
-
 
 
 /* @@@@아래부터는 원래 있던 코드 : 기존의 코드 영역을 위에 추가한 새로운 태그들로 감쌌음!@@@ */
 
 .aside_wrap {
-    margin-left:40px;
+    margin-left: 40px;
     width: 210px;
 }
 
 .aside .todaylist {
-    background-color:white;
+    background-color: white;
     width: 210px;
     padding: 10px 20px;
     border-radius: 10px;
     text-align: center;
-    font-size:large;
+    font-size: large;
     align-items: center;
 }
 
-.aside_wrap > p {
+.aside_wrap>p {
     margin: 10px 0px;
-    font-size:13px;
+    font-size: 13px;
     font-weight: bolder;
 }
 
 .caution {
     width: 210px;
-    margin : 5px 5px;
+    margin: 5px 5px;
     padding: 0px 5px;
     font-size: 10px;
     line-height: 140%;
 }
 
-.aside .todaylists > .wrap_label {
-    font-size:small;
+.aside .todaylists>.wrap_label {
+    font-size: small;
     margin: 0px;
     text-align: left;
 }
+
 .new_todo {
-    padding:10px;
-    font-size:small;
+    padding: 10px;
+    font-size: small;
 }
-.todaylists > label > input,p {
+
+.todaylists>label>input,
+p {
     display: inline-block;
-    font-size:11px;
+    font-size: 11px;
 }
+
+
 /* .todaylists > label {
     display:block;
 } */
 
 .btnplusTodo {
-    border-radius: 10px; 
-    background-color:#6ED4D8;
-    display:table-cell;
+    border-radius: 10px;
+    background-color: #6ED4D8;
+    display: table-cell;
     vertical-align: middle;
     width: 100%;
-    margin-bottom : 5px;
-    height:30px;
-    border:10px;
+    margin-bottom: 5px;
+    height: 30px;
+    border: 10px;
     cursor: pointer;
 }
+
 .btnplusTodo:hover {
     background-color: rgb(77, 189, 194);
     font-weight: bolder;
 }
+
 .D-day {
-    text-align:left;
+    text-align: left;
 }
-.wrap_day{
-    display:inline;
+
+.wrap_day {
+    display: inline;
 }
-.d-day { 
+
+.d-day {
     /* d-day표시 */
     display: inline-block;
     margin: 10px;
     /* width: 170px; */
-    width : 190px;
+    width: 190px;
     height: 40px;
     background: white;
     border-radius: 3px;
     box-shadow: 2px 2px 2px rgb(128, 128, 128);
     vertical-align: middle;
-    font-size:12px;
+    font-size: 12px;
     font-family: 'Open Sans' !important;
-    padding-left : 10px;
+    padding-left: 10px;
 }
+
 .d-date {
     /* 세로 정렬 필요 */
     display: inline-block;
-    padding-left:10px;
-    margin-top:10px;
+    padding-left: 10px;
+    margin-top: 10px;
     margin-right: 10px;
-    font-size:13px;
-    font-weight:bold;
+    font-size: 13px;
+    font-weight: bold;
     font-family: 'Open Sans' !important;
-
     /* color:red; */
 }
-/* d-day 모달 팝업 안 */
-#modal-d-date{ 
-    /* 날짜 선택하는 부분 */
-    width:130px;
-    height:45px; 
-    padding:5px;
-    margin: 10px;
-    background-color:#e7eff0;
-    border-radius:10px;
-    border:none;
-    font:bold;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-#modal-d-content{
-        width: 130px;
-        height:45px; 
-        padding:5px;
-        margin: 10px;
-        background-color:#e7eff0;
-        border-radius:10px;
-        border: none;
-        font:bold;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
 
-.modal-d-plus, .modal-todo-plus, .modal-folder-plus, .modal-folder-revise, .modal-alert-button{
+
+/* d-day 모달 팝업 안 */
+
+#modal-d-date {
+    /* 날짜 선택하는 부분 */
+    width: 130px;
+    height: 45px;
+    padding: 5px;
+    margin: 10px;
+    background-color: #e7eff0;
+    border-radius: 10px;
+    border: none;
+    font: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#modal-d-content {
+    width: 130px;
+    height: 45px;
+    padding: 5px;
+    margin: 10px;
+    background-color: #e7eff0;
+    border-radius: 10px;
+    border: none;
+    font: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.modal-d-plus,
+.modal-todo-plus,
+.modal-folder-plus,
+.modal-folder-revise,
+.modal-alert-button {
     /* 저장 버튼 */
     width: 50px;
-    height:45px; 
-    padding:5px;
+    height: 45px;
+    padding: 5px;
     margin: 5px;
-    background-color:#6ed4d8;
-    border-radius:10px;
-    border:none;
-    font:bold;
-    position:fixed;
-    bottom:10px;
-    right:10px;
-    cursor:pointer;
+    background-color: #6ed4d8;
+    border-radius: 10px;
+    border: none;
+    font: bold;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
 }
+
+
 /* .plus-part{
     display:flex;
     justify-content: center;
     align-items: center;
 } */
+
+
 /* .modal_day, .modal_todo, .modal_folder, .modal_revise_folder, .modal_delete_folder { 
     position: fixed; 
     left: 0; 
@@ -218,253 +255,299 @@ html, body {
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
-.modal{ 
-    position: fixed; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    opacity: 0; 
-    z-index:1;
-    visibility: hidden; 
-    transform: scale(1.1); 
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 1;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
-.modal_menu{
+
+.modal_menu {
     opacity: 0;
     visibility: hidden;
-    transform: scale(1.1); 
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
-.folder_menu{
-    z-index:500;
-    margin : 0 auto;
-}  
+
+.folder_menu {
+    z-index: 500;
+    margin: 0 auto;
+}
+
+
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-content-day, .modal-content-todo, .modal-content-folder, .modal-content-revise-folder { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    background-color: white; 
-    padding: 1rem 30px; 
-    width: 400px; 
-    height: 200px; 
-    border-radius: 0.5rem; 
-    z-index:500;
-    margin : 0 auto;
-} 
-.modal-content-alert, .modal-content-delete-folder, .modal-content-delete-new-folder { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    background-color: white; 
-    padding: 1rem 30px; 
-    width: 300px; 
-    height: 150px; 
-    border-radius: 0.5rem; 
-    z-index:500;
-    margin : 0 auto;
-} 
+
+.modal-content-day,
+.modal-content-todo,
+.modal-content-folder,
+.modal-content-revise-folder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 30px;
+    width: 400px;
+    height: 200px;
+    border-radius: 0.5rem;
+    z-index: 500;
+    margin: 0 auto;
+}
+
+.modal-content-alert,
+.modal-content-delete-folder,
+.modal-content-delete-new-folder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 30px;
+    width: 300px;
+    height: 150px;
+    border-radius: 0.5rem;
+    z-index: 500;
+    margin: 0 auto;
+}
+
+
 /****** 버튼 클릭시 이벤트 + 모달 팝업 띄우기 ******/
+
+
 /* 버튼 클릭시 보이기+애니메이션 */
-.show_modal { 
-    opacity: 1; 
-    visibility: visible; 
-    transform: scale(1.0); 
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
-} 
+
+.show_modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
 /****** 모달 팝업에 보일 콘텐츠들 ******/
+
+
 /* 타이틀 */
-.title{ 
-    font-size:13px;
+
+.title {
+    font-size: 13px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-bottom:10px;
-    letter-spacing: 2px; 
-} 
-#modal-folder-name, #new-folder-name{
-    width:80%;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+#modal-folder-name,
+#new-folder-name {
+    width: 80%;
     vertical-align: middle;
-    margin:10px;
+    margin: 10px;
 }
-.folder_color_wrap{
-    width:100%;
+
+.folder_color_wrap {
+    width: 100%;
 }
-.folder_color_wrap > select {
+
+.folder_color_wrap>select {
     vertical-align: middle;
-    margin:10px;
+    margin: 10px;
 }
-select > option {
-    height:5px;
+
+select>option {
+    height: 5px;
 }
+
+
 /* 닫기 버튼 */
-.close_button { 
-    float: right; 
-    width: 1.5rem; 
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    background-color: lightgray; 
+
+.close_button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    background-color: lightgray;
 }
-.close_button:hover { 
-    background-color: darkgray; 
+
+.close_button:hover {
+    background-color: darkgray;
 }
-.delete_todo{
-    float:right;
+
+.delete_todo {
+    float: right;
     width: 15px;
     /* line-height: 2rem;  */
-    text-align: center; 
-    cursor: pointer; 
+    text-align: center;
+    cursor: pointer;
     position: relative;
-    top:10px;
+    top: 10px;
     border-radius: 0.5rem;
-    opacity: 0; 
-} 
-.delete_todo:hover{
-    float:right;
+    opacity: 0;
+}
+
+.delete_todo:hover {
+    float: right;
     width: 15px;
     position: relative;
-    top:10px;
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
+    top: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
     opacity: 1;
-    background-color: lightblue; 
+    background-color: lightblue;
 }
-.min_color{
-    width:3px;
-    height:3px;
+
+.min_color {
+    width: 3px;
+    height: 3px;
 }
-#d-day-plus{
-    cursor:pointer;
+
+#d-day-plus {
+    cursor: pointer;
 }
-.delete_day{
-    float:right;
+
+.delete_day {
+    float: right;
     width: 15px;
-    line-height: 1.4rem; 
-    margin-right:10px;
+    line-height: 1.4rem;
+    margin-right: 10px;
     margin-top: 10px;
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 0; 
-} 
-.delete_day:hover{
-    float:right;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    opacity: 0;
+}
+
+.delete_day:hover {
+    float: right;
     width: 15px;
-    line-height: 1.4rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
+    line-height: 1.4rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
     opacity: 1;
-    margin-right:10px;
-    margin-top:10px;
+    margin-right: 10px;
+    margin-top: 10px;
     background-color: lightgray;
-    
-} 
-.buttons_wrap{
-    position:fixed;
-    bottom:10px;
-    right:10px;
-
-}
-.deleteBtn{
-        float:right;
-        cursor:pointer;
-        padding:10px;
-        background-color:#6ED4D8;
-        border-radius:10px;
-        border:none;
-        font-size:12px;
-        font-weight:bold;
-        margin:0 10px;
 }
 
-.cancelBtn{
-    float:right;
-    cursor:pointer;
-    padding:10px;
-    border-radius:10px;
+.buttons_wrap {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.deleteBtn {
+    float: right;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #6ED4D8;
+    border-radius: 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.cancelBtn {
+    float: right;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
     border-color: #6ED4D8;
-    border-style:solid;
+    border-style: solid;
     background-color: white;
-    border-width:1px;
-    font-size:12px;
-    font-weight:bold;
-    margin:0 10px;
+    border-width: 1px;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 10px;
 }
-.buttons_wrap{
-    position:fixed;
-    bottom:10px;
-    right:10px;
 
+.buttons_wrap {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
 }
-.input_todo{
-    height:24px;
-    width:80%;
-    margin:20px auto;
+
+.input_todo {
+    height: 24px;
+    width: 80%;
+    margin: 20px auto;
     padding-top: 2px;
     text-align: center;
 }
+
+
 /*  */
+
 .section .folder_ {
     /* 폴더를 감싸는 흰 div */
-    width:850px; 
+    width: 850px;
     min-height: 450px;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
-    margin-top:20px;
-    margin-left:10px;
+    margin-top: 20px;
+    margin-left: 10px;
 }
-#folder_plus{
-    margin:17px;
+
+#folder_plus {
+    margin: 17px;
     width: 102px;
     height: 81px;
-    display:-webkit-inline-box;
+    display: -webkit-inline-box;
 }
-#folder_plus > img {
-    width:100%;
-    height:auto;
+
+#folder_plus>img {
+    width: 100%;
+    height: auto;
 }
-#folder_plus > p {
+
+#folder_plus>p {
     text-align: center;
-	position: relative;
-	top: -65%;
-	left: 50%;
-	transform: translate( -50%, -50% );
+    position: relative;
+    top: -65%;
+    left: 50%;
+    transform: translate( -50%, -50%);
     cursor: pointer;
-    
 }
+
 .folder {
     /* 각 폴더에 대해서 */
     /* 각 폴더에 대한 색 지정은 3을 기준으로 나머지 조절해서 설정하기. 일단은 하나의 색으로 설정함. */
     /* 글씨 부분에 세로 정렬 필요 . 현재 크기나 위치가 자기 맘대로임..*/
-    display:-webkit-inline-box;
-    margin:17px; 
+    display: -webkit-inline-box;
+    margin: 17px;
     width: 102px;
     height: 81px;
+}
 
-
-} 
 .folder_img {
-    width:100%;
-    height:auto;
+    width: 100%;
+    height: auto;
 }
-.main_folder_name{
+
+.main_folder_name {
     text-align: center;
-	position: relative;
-    cursor:pointer;
-	top: -65%;
-	left: 50%;
-    width:50px;
-	transform: translate( -50%, -50% );
+    position: relative;
+    cursor: pointer;
+    top: -65%;
+    left: 50%;
+    width: 50px;
+    transform: translate( -50%, -50%);
 }
+
 .folder_course {
-    display:block;
+    display: block;
 }
+
 .wrap_folder {
     display: inline;
     flex-wrap: wrap;
@@ -472,12 +555,14 @@ select > option {
 
 .fixed_folder {
     /* 각 폴더에 있는 별 위치와 크기 설정 */
-    float:left;
-    position:relative;
-    margin-top:-85%; 
-    width: 15px; 
+    float: left;
+    position: relative;
+    margin-top: -85%;
+    width: 15px;
     height: auto;
 }
+
+
 /* 
 .three_button{
     position:relative;
@@ -492,6 +577,7 @@ select > option {
     opacity:1;
 } */
 
+
 /* .folder_menu {
     display:inline;
     position:relative;
@@ -504,61 +590,68 @@ select > option {
     height: auto;
     margin:10px;
 } */
-.revise_folder, .delete_folder{
-    width:15px;
+
+.revise_folder,
+.delete_folder {
+    width: 15px;
     height: auto;
-    margin:0 0 3px 3px;
+    margin: 0 0 3px 3px;
     position: relative;
-    top:-90%;
-    right:5px;
-    float:right;
+    top: -90%;
+    right: 5px;
+    float: right;
     opacity: 0;
-} 
-.revise_folder:hover {
-    opacity: 1;
-    cursor:pointer;
-}
-.delete_folder:hover{
-    opacity: 1;
-    cursor:pointer;
-}
-.day_button{ 
-    position:relative;
-    z-index:1;
-    top:10px;
-    right:5px;
-    width:20px;
-    float:right;
-    
-    opacity:0;
-}
-.day_button:hover{
-    opacity:1;
 }
 
-.folder_button{ 
-    position:relative;
-    z-index:1;
-    top:-70px;
+.revise_folder:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.delete_folder:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.day_button {
+    position: relative;
+    z-index: 1;
+    top: 10px;
+    right: 5px;
+    width: 20px;
+    float: right;
+    opacity: 0;
+}
+
+.day_button:hover {
+    opacity: 1;
+}
+
+.folder_button {
+    position: relative;
+    z-index: 1;
+    top: -70px;
     /* right:5px; */
-    width:15px;
-    float:right;
-    opacity:0;
+    width: 15px;
+    float: right;
+    opacity: 0;
 }
-.folder_button:hover{
-    opacity:1;
+
+.folder_button:hover {
+    opacity: 1;
 }
-#modal-todo{
+
+#modal-todo {
     vertical-align: middle;
-    width:80%;
-    height:20px;
-    position:relative;
-    top:25px;
-    font-size:15px;
+    width: 80%;
+    height: 20px;
+    position: relative;
+    top: 25px;
+    font-size: 15px;
 }
-#alert_title{
-    position:relative;
-    top:30px;
+
+#alert_title {
+    position: relative;
+    top: 30px;
     font-size: 12px;
-    
 }

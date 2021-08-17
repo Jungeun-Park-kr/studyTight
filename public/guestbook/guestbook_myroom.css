@@ -11,6 +11,7 @@
 .section {
     float: left;
     width: 930px;
+    background-color: #e7eff0;
 }
 
 #container {
@@ -18,12 +19,16 @@
     width: 1190px;
     padding: 20px 30px;
     margin: 0 auto;
+    margin-top: 5px;
     letter-spacing: -.2px;
-}
-
-body {
     background-color: #e7eff0;
 }
+
+
+/* 
+body {
+    background-color: #e7eff0;
+} */
 
 #MyUserimg {
     width: 100px;
@@ -134,7 +139,7 @@ body {
     height: 100%;
     padding-bottom: 20px;
     margin-bottom: 40px;
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .friends {
@@ -143,7 +148,7 @@ body {
     /* margin-top: 50px; */
     /* margin-left: 1%; */
     margin-right: 2%;
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 #friend_edit {

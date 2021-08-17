@@ -582,7 +582,7 @@
                     </div>
 
                 </div>
-                <form action="/guestbook/addcomment" method="post">
+                <form action="/guestbook/addcomment" name='submittext' id='submittext' method="post">
                     <div class="writing-place" id=wBOX>
                         <div class="writing-box">
                             <!--행(row)선언-->
@@ -590,7 +590,7 @@
                         </div>
                         <div class="writing-button-secret">
                             <div class="writing-button">
-                                <input type="submit" id="submit" value="글쓰기"></input>
+                                <input type="button" id="submit" value="글쓰기"></input>
                             </div>
                             <div class="secret-checkbox">
                                 <input type="checkbox" name="checkbox" id=checkbox value='true'> 비밀글
