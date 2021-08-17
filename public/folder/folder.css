@@ -58,7 +58,7 @@ body {
 
     display:inline;
     flex-wrap: wrap;
-    margin-left:10px;
+    
 }
 .postIt
 {
@@ -151,7 +151,7 @@ body {
 .post_img{
     width:100%;
     height:90px;
-    display: -webkit-box;
+
  }   
 /* .postIt > p {
     font-size:12px;
