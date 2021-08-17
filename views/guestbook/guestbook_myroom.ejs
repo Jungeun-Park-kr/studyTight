@@ -279,7 +279,7 @@
 
                         <div class="modal">
                             <div class="modal-content">
-                                <span class="close-button">&times;</span>
+                                <span class="close-button" id="close-button">&times;</span>
                                 <h1 class="title">친구 추가하기</h1>
                                 <!-- 여기부터 직접 들어갈 Edit 1 파일-->
                                 <div class="course_add_list">
@@ -453,6 +453,7 @@
                                         modal.classList.toggle("show-modal");
                                     }
 
+
                                     function toggleModal2() {
                                         modal2.classList.toggle("show-modal");
                                         modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
@@ -504,12 +505,12 @@
                                     trigger2.addEventListener("click", toggleModal2);
                                     trigger3.addEventListener("click", toggleModal3);
                                     trigger4.addEventListener("click", toggleModal4);
-                                    trigger7.addEventListener("click", toggleModal7);
+                                    // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
                                     closeButton.addEventListener("click", toggleModal);
                                     closeButton2.addEventListener("click", toggleModal2_close);
                                     closeButton3.addEventListener("click", toggleModal3);
                                     closeButton4.addEventListener("click", toggleModal4);
-                                    closeButton7.addEventListener("click", toggleModal7);
+                                    // closeButton7.addEventListener("click", toggleModal7);
                                     cancel.addEventListener("click", toggleModal);
                                     window.addEventListener("click", windowOnClick);
                                 </script>
