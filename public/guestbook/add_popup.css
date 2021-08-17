@@ -167,7 +167,8 @@ textarea {
 .close-button:hover,
 .close-button2:hover,
 .close-button3:hover,
-.close-button7:hover {
+.close-button7:hover,
+.close-button4:hover {
     background-color: darkgray;
 }
 
