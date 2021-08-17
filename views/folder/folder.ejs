@@ -99,7 +99,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/public/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     <!-- <img class="three_button" src="media/three_button.png">
@@ -111,7 +111,7 @@
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
                                     <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
-                                    <img class="fixed_star" src="/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
+                                    <img class="fixed_star" src="/public/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
                                     <img src="/public/media/delete.png" id="delete_postIt" class="delete_postIt" onclick="deletePostClicked('<%= postIt[i]._id%>', '<%= i %>');">  
                                     
@@ -190,7 +190,7 @@
                                 if(star_toggle%2==1){
                                     currentValue=true;
                                     booValue=true;
-                                    star_img.src='/media/full_star.png';
+                                    star_img.src='/public/media/black_star.png';
                                     star_img.style.opacity=1;
 
                                     //star_img를 full로 바꾸기
@@ -208,7 +208,7 @@
                                 }else{
                                     currentValue=false;
                                     boolValue=false;
-                                    star_img.src='/media/empty_star_old.png';
+                                    star_img.src='/public/media/empty_star_old.png';
                                     star_img.style.opacity=1;
                                     
                                     fetch(''+folder_id+'/star',{
@@ -276,7 +276,7 @@
 
             var star_img=document.createElement('img');
             star_img.setAttribute('class','fixed_star');
-            star_img.setAttribute('src','/media/empty_star_old.png');
+            star_img.setAttribute('src','/public/media/empty_star_old.png');
             new_star_toggle=1;
             star_img.addEventListener('click',function(){
                 if(post_star==true){
@@ -297,7 +297,7 @@
                                     });
             }else{
                 post.postIt_star=false;
-                    star_img.style.src='/media/empty_star_old.png';
+                    star_img.style.src='/public/media/empty_star_old.png';
                     star_img.style.opacity=1;
                     fetch(''+folder_id+'/star',{
                         method:'PATCH',
@@ -812,28 +812,28 @@
         trigger_content_button.addEventListener('click',toggleChoiceModal);
         close_content_button.addEventListener('click',toggleContentModal);
         cancel_content_button.addEventListener('click',toggleContentModal);
-        store_content_button.addEventListener('click',toggleContentModal);
+        //store_content_button.addEventListener('click',toggleContentModal);
 
         trigger_link_button.addEventListener('click',toggleLinkModal);
         trigger_link_button.addEventListener('click',toggleChoiceModal);
         close_link_button.addEventListener('click',toggleLinkModal);
         cancel_link_button.addEventListener('click',toggleLinkModal);
-        store_link_button.addEventListener('click',toggleLinkModal);
+        //store_link_button.addEventListener('click',toggleLinkModal);
 
         //trigger_file_button.addEventListener('click',toggleFileModal);
         //trigger_file_button.addEventListener('click',toggleChoiceModal);
         close_file_button.addEventListener('click',toggleFileModal);
         cancel_file_button.addEventListener('click',toggleFileModal);
-        store_file_button.addEventListener('click',toggleFileModal);
+        //store_file_button.addEventListener('click',toggleFileModal);
         
         close_show_button.addEventListener('click',toggleShowModal);
 
         close_revise_link.addEventListener('click',toggleReviseLinkModal);
-        revise_link_button.addEventListener('click',toggleReviseLinkModal);
+        //revise_link_button.addEventListener('click',toggleReviseLinkModal);
         cancel_revise_link.addEventListener('click',toggleReviseLinkModal);
 
         close_revise_content.addEventListener('click',toggleReviseContentModal);
-        revise_content_button.addEventListener('click',toggleReviseContentModal);
+        //revise_content_button.addEventListener('click',toggleReviseContentModal);
         cancel_revise_content.addEventListener('click',toggleReviseContentModal);
 
         delete_post_button.addEventListener('click',toggleDeletePostModal);
@@ -844,7 +844,7 @@
 
         close_revise_file.addEventListener('click',toggleReviseFileModal);
         cancel_revise_file.addEventListener('click',toggleReviseFileModal);
-        revise_file_button.addEventListener('click',toggleReviseFileModal);
+        //revise_file_button.addEventListener('click',toggleReviseFileModal);
 
         function uploadContent(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -883,6 +883,7 @@
                         //console.log(new_post_id);
                         $('#input_content_title').val('');
                         $('#input_content').val('');
+                        toggleContentModal();
                         addNewPost('content',new_post_id,new_post,color);
                         
                     },error:function(err){
@@ -893,7 +894,11 @@
         }
 
 
-
+        function validPage(url){
+            var regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;     
+            
+            return regex.test(url);
+        }
 
         function uploadLink(){
             const folder_id=JSON.parse('<%- JSON.stringify(folder_id) %>');
@@ -905,6 +910,8 @@
                 alert("제목을 입력해주세요.");
             }else if(link.trim()==''){
                 alert("링크를 입력해주세요.");
+            }else if(validPage(link)==false){
+                alert("올바른 링크를 입력하세요.");
             }else{
                 var new_post;
                 
@@ -932,7 +939,7 @@
                         $('#input_link_title').val('');
                         $('#input_link').val('');
                         var new_post_id=data._id;
-                        
+                        toggleLinkModal();
                         addNewPost('link',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
@@ -976,6 +983,7 @@
                         var new_post_id=data.postIt._id;
                         $('#input_file_text').val('');
                         $('.upload-name').val('');
+                        toggleFileModal();
                         addNewPost('file',new_post_id,new_post,color);
                     },error:function(err){
                         //console.log('포스트잇 링크 저장 실패');
@@ -1030,6 +1038,7 @@
                     body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_link, revise_postIt_color:new_color})
                             
                 });
+                toggleReviseLinkModal();
                 $('#revise_link_title').val('');
                 $('#revise_input_link').val('');
             }
@@ -1056,6 +1065,7 @@
                             },
                             body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
                 })
+                toggleReviseContentModal();
                 $('#revise_content_title').val('');
                 $('#revise_input_content').val('');
             }
@@ -1083,6 +1093,7 @@
                             },
                             body:JSON.stringify({postIt_id:id, revise_postIt_name:new_name, revise_postIt_content:new_content, revise_postIt_color:new_color})
                 }) 
+                toggleReviseFileModal();
             }
         });
 
@@ -1291,7 +1302,7 @@
 
                 trigger_todo.addEventListener("click",toggleTodoModal);
                 closeTodoButton.addEventListener('click',toggleTodoModal);
-                storeTodoButton.addEventListener('click',toggleTodoModal);
+                //storeTodoButton.addEventListener('click',toggleTodoModal);
 
                 alertButton.addEventListener('click',toggleAlertModal);
 
@@ -1317,6 +1328,7 @@
                                     todo_content : new_content,
                                     todo_finished : false
                                 }
+                                toggleTodoModal();
                                 addNewTodo(new_todo, data);
                             },error:function(err){
                                 console.log('todo 저장 실패');
