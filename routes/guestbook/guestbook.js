@@ -36,6 +36,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             top_comment: top_comment,
             bottom_comment: bottom_comment
         });
+
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -49,11 +50,15 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
         const { searchemail } = req.body;
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email')
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
-        res.render('../views/guestbook/guestbook_myroom.ejs', {
+        res.render('../views/guestbook/guestbook_myroom_search.ejs', {
             profile: profile[0],
-            friend: friend
+            friend: friend,
+            top_comment: top_comment,
+            bottom_comment: bottom_comment
         });
 
     } catch (err) {
