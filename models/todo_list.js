@@ -7,7 +7,7 @@ const todo_schema=new Schema({
         required:true,
         ref: 'User'
     }, 
-    todo_content:{type:String, unique:true, required:true}, //중복된 내용이 들어가지 않도록
+    todo_content:{type:String,required:true}, //중복된 내용이 들어가지 않도록
     register_date:{type:Date, required:true},
     todo_finished:{type:Boolean, required:true}
 });

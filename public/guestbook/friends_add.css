@@ -1,0 +1,62 @@
+body {
+    background-color: #e7eff0;
+}
+
+.add_title {
+    font-size: 20;
+    font-weight: bold;
+    margin: 10px;
+}
+
+
+/* .add_btn {
+    float:right;
+    width: 10%;
+} */
+
+.add_btn>input {
+    width: 130px;
+    height: 40px;
+    background-color: #6ED4D8;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    /* 부모의 기준으로 위치를 맞춘다는 뜻 */
+    left: 40%;
+    top: 50%;
+}
+
+.add_btn>input:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+
+#add_table {
+    margin-left: 20px;
+}
+
+.course_add_list>table {
+    width: 100%;
+    border-collapse: collapse;
+    /* -moz-border-radius: 15px;
+    border:3px solid  6ED4D8;
+    border-radius: 15px; */
+}
+
+.course_add_list td,
+th {
+    text-align: left;
+    padding: 12px;
+}
+
+.course_add_list th {
+    width: 70px;
+}
+
+.course_add_list .btn_add_time {
+    width: 32px;
+    height: 32px;
+    /* border : none; */
+    background: url("media/plus.png") no-repeat;
+    cursor: pointer;
+}

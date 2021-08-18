@@ -22,7 +22,8 @@ body {
 #container{
     position: relative;
     width: 1190px;
-    padding: 20px 30px;
+    
+    padding: 40px 30px;
     margin: 0 auto;
     letter-spacing: -.2px;
 }
@@ -39,55 +40,29 @@ body {
 .section{
     /* min-width: 718px; */
     float:left;
-    width:750px; 
-    height:550px;
+    width:770px; 
+    height:615px;
     /* height:35vw;
     width:718px; */
     /* margin-right:10px;
     margin-top:15px; */
-    background-image:url("/media/folder_grey.svg");
+    z-index:1;
     background-size:cover;
 
 }
-/* .section::before{
-    content:"";
-    opacity:0.5;
-    min-width: 718px;
-    position:absolute;
-    margin-left:20%;
-    margin-top:8%;
-    width:718px;
-    margin-right:10px;
-    height:550px;
-    top:0px;
-    left:0px;
-    right:0px;
-    bottom:0px;
-    background-image:url("/media/plus_folder_gray.png");
-    background-size:cover;
 
-}   */
-/* .section:after{
-    content:"";
-    background-image:url(/media/plus_folder_gray.png);
-    opacity:1;
-    position:absolute;
-    top:0;
-    left:0;
-    width:48%;
-    background-size:cover;
-    
-    
-}  */
-/* .wrap > div {
-    display:inline-block;
-} */
+.big_post {
+    margin-top: 15px;
+}
 .wrap_postit{
-    margin-top: 30px;
+
+    display:inline;
+    flex-wrap: wrap;
+    
 }
-.wrap_postit > .postIt
+.postIt
 {
-    display:inline-block;
+    display:-webkit-inline-box;
     margin:20px 35px 20px 20px;
     width: 90px; 
 
@@ -97,6 +72,7 @@ body {
     float:right;
     width:250px;
     display:inline;
+    padding-top:60px;
 }
 .folder_name{
     font-size:15px;
@@ -104,6 +80,7 @@ body {
     margin-top:35px;
     margin-left:70px;
     color:black;
+    display:block;
 }
 /* 여기부터 오늘 할 일 */
 .aside_wrap {
@@ -165,128 +142,39 @@ body {
     border:10px;
     cursor: pointer;
 }
-.delete_todo{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 0; 
-} 
-.delete_todo:hover{
-    float:right;
-    width: 15px;
-    line-height: 1.5rem; 
-    text-align: center; 
-    cursor: pointer; 
-    border-radius: 0.5rem; 
-    opacity: 1;
-    background-color: lightblue; 
-} 
 
-/* .aside_wrap {
-    margin-left:40px;
-    width: 210px;
-}
-
-.aside  {
-    background-color:white;
-    width: 210px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size:large;
-    align-items: center;
-}
-
-.aside_wrap > p {
-    margin: 10px 0px;
-    font-size:13px;
-    font-weight: bolder;
-}
-.todaylists > label > input,p {
-    display: inline-block;
-    font-size:11px;
-}
-
-label > input {
-    font-size:11px;
-    display:inline-block;
-    margin: 3px 3px 3px 4px;
-}
-label > p{
-    font-size:11px;
-    display:inline-block;
-    font-weight:normal;
-    margin:11px 1px;
-}
-label{
-    display:block;
-    margin:10px;
-    font-size:small;
-    text-align: left;
-    
-}
-.todaylists{
-    width:100%;
-    margin:0 auto;
-    background-color:white;
-    border-radius: 10px;
-}
-.plusTodoBtn{
-    border-radius: 10px; 
-    background-color:#6ED4D8;
-    display:table-cell;
-    vertical-align: middle;
-    width: 100%;
-    margin-bottom : 5px;
-    height:30px;
-    border:10px;
-    cursor: pointer;
-}
-.plusTodoBtn > a {
-    text-decoration: none;
-    color:#000;
-}
-a:link {
-    text-decoration: none!important;
-    color:#000;
-    text-align: center;
-}
-.caution{
-    width:100%;
-    padding:5px; 
-    height:auto;
-    margin-top:10px;
-    font-size: 9px;
-}  */
 
 /* 오늘 할 일 부분 나중에 mainframe의 것과 이름 동일하게 설정하기 */
 
 /* 포스트잇 내부 설정 */
-img svg{
-    width:100%;
-    height:90px;
-    background-image:url(media/transparent.jpg);
-    background-color: #6ED4D8;
-    background-size: contain;
-    
-} 
+
 .post_img{
     width:100%;
     height:90px;
-    background-image:url(media/transparent.jpg);
-    background-color: #6ED4D8;
-    background-size: contain;
+
  }   
-.postIt > p {
+/* .postIt > p {
     font-size:12px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     cursor:pointer;
+} */
+.post{
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    top: -65%;
+    left: 50%;
+    width:50px;
+    transform: translate( -50%, -50% );
+}
+.postIt_menu > li {
+    padding:5px 12px;
+    background-color: rgba(255,255,255,0.8);
+    list-style-type: none;
+    cursor:pointer;
 }
 
-.post {
+/* .post {
     position:absolute;
     z-index:1;
     top:40%;
@@ -294,27 +182,30 @@ img svg{
     margin:0 auto;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-.postIt{
+} */
+/* .postIt{
     position:relative;
-}
+} */
 /* hover하면 3버튼 나오게,별표시 넣기*/
 .fixed_star{
     position:relative;
-    z-index:1;
+    
     width:15px;
-    margin-top:-87px;
+    margin-top:-98%;
     margin-left:3px;
     float:left;
     /* display: none; */
     cursor:pointer;
-    opacity: 0;
+    opacity: 1;
 }
 .fixed_star:hover{
     /* display:inline-block; */
     opacity: 1;
 }
-.three_button{
+.hidden_content{
+    display:none;
+}
+/* .three_button{
     position:relative;
     z-index:1;
     margin-top:-87px;
@@ -325,6 +216,24 @@ img svg{
 }
 .three_button:hover{
     opacity:1;
+} */
+.revise_postIt, .delete_postIt{
+    width:15px;
+    height: auto;
+    margin:3px 0 3px 3px;
+    position: relative;
+    top:-100%;
+    left:-8%;
+    float:right;
+    opacity: 0;
+} 
+.revise_postIt:hover {
+    opacity: 1;
+    cursor:pointer;
+}
+.delete_postIt:hover{
+    opacity: 1;
+    cursor:pointer;
 }
 .dropdown_content{
     display:none;
@@ -372,8 +281,15 @@ img svg{
 
 .choice{
     display:inline-block;
+    margin:20px 20px 0 20px;
+    text-align: center;
 }
-.modal-body > img {
+.modal-choice-body{
+    width:100%;
+    height:auto;
+    text-align: center;
+}
+.modal-choice-body > img {
     height:50px;
     width:40px;
 
@@ -387,7 +303,43 @@ img svg{
 
 /****** 레이어(모달) 팝업 ******/
 /* modal 팝업을 감싸주는 부분 (모달 팝업 영역을 잡아주는 틀) */
-/* .modal_postIt{ 
+.modal_choice > .modal-choice-body > .choice {
+    display:inline-block;
+
+
+}
+.choice > img {
+    height:50px;
+    width:40px;
+    margin:10px 0;
+    align-content: center;  
+}
+.choice > p{
+    text-align: center;
+	position: relative;
+    font-size:11px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    left:-50%;
+    top:10px;
+    margin-top: 15px;
+}
+.modal{
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index:1; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: scale(1.1); 
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
+}
+.modal-link-body{
+    margin-bottom: 10px;
+}
+/* .modal_todo, .modal_choice, .modal_content, .modal_link, .modal_show_content, .modal_file{ 
     position: fixed; 
     left: 0; 
     top: 0; 
@@ -395,25 +347,12 @@ img svg{
     height: 100%; 
     background-color: rgba(0, 0, 0, 0.5); 
     opacity: 0; 
-    z-index:1;
     visibility: hidden; 
     transform: scale(1.1); 
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
 }  */
-.modal_todo{ 
-    position: fixed; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    opacity: 0; 
-    visibility: hidden; 
-    transform: scale(1.1); 
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-} 
 /* 모달 팝업 내의 실제 콘텐츠를 담는 부분(팝업 크기 등) - 큰 버전 */
-.modal-postIt-content, .modal-content-todo { 
+.modal-content-choice, .modal-content-todo, .modal-content-link, .modal-content-file{ 
     position: absolute; 
     top: 50%; 
     left: 50%; 
@@ -421,10 +360,49 @@ img svg{
     background-color: white; 
     padding: 1rem 30px; 
     width: 400px; 
-    height: 200px; 
+    height: 230px; 
     border-radius: 0.5rem; 
     margin : 0 auto;
     /* z-index:500; */
+} 
+.modal-content-revise-link{ 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 400px; 
+    height: 230px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+    /* z-index:500; */
+}
+.modal-content-delete-post, .modal-content-delete-new-post{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 300px; 
+    height: 150px; 
+    border-radius: 0.5rem; 
+    z-index:500;
+    margin : 0 auto;
+} 
+.modal-content-content, .modal-content-revise-content { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 1rem 30px; 
+    width: 600px; 
+    height: 690px; 
+    border-radius: 0.5rem; 
+    margin : 0 auto;
+    z-index:551;
 } 
 ul {
     padding:0
@@ -441,7 +419,7 @@ ul {
 /* 타이틀 */
 .title{ 
     font-size:13px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     letter-spacing: 2px; 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 } 
@@ -457,6 +435,21 @@ ul {
 } 
 .close_button:hover { 
     background-color: darkgray; 
+}
+.modal-todo-plus{
+    /* 모달 내 저장 버튼 */
+    width: 100px;
+    height:45px; 
+    padding:5px;
+    margin: 5px;
+    background-color:#6ed4d8;
+    border-radius:10px;
+    border:none;
+    font:bold;
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    cursor:pointer;
 }
 #choiceTypeModal > img {
     margin:10px;
@@ -667,6 +660,7 @@ textarea{
     text-align: center;
 }
 .uploadBtn{
+    float:right;
     cursor:pointer;
     padding:10px;
     background-color:#6ED4D8;
@@ -674,18 +668,20 @@ textarea{
     border:none;
     font-size:12px;
     font-weight:bold;
+    margin:0 10px;
 }
 .cancelBtn{
+    float:right;
     cursor:pointer;
     padding:10px;
     border-radius:10px;
     border-color: #6ED4D8;
     border-style:solid;
     background-color: white;
-    border-width:1px;
+    border-width:10px;
     font-size:12px;
     font-weight:bold;
-    margin-right:10px;
+    margin:0 10px;
 }
 .input_text{
     width:90%;
@@ -695,7 +691,7 @@ textarea{
 }
 .input_content{
     width:90%;
-    height:500px;
+    height:480px;
 
 }
 .filebox{

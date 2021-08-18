@@ -131,19 +131,6 @@
                                                 <div class="hour2">(18:00)</div>
                                                 <div class="hour">(19:00)</div>
                                                 <div class="hour2">(20:00)</div>
-                                                <!-- <div class="hour2" style="border-bottom: none">(20:00)</div> -->
-
-                                                <!-- width:50 -->
-                                                <!-- <div class="hour">1교시(9:00)</div>
-                                                <div class="hour">2교시(10:30)</div>
-                                                <div class="hour">3교시(12:00)</div>
-                                                <div class="hour">4교시(13:30)</div>
-                                                <div class="hour">5교시(15:00)</div>
-                                                <div class="hour">6교시(16:30)</div>
-                                                <div class="hour">7교시(18:00)</div>
-                                                <div class="hour">8교시(19:30)</div>
-                                                <div class="hour">9교시(21:00)</div> -->
-                                                <!-- <div class="hour"></div> -->
                                             </div>
                                         </th>
                                         <!-- 들어갈 요일별 과목정보 -->
@@ -545,8 +532,6 @@
         }
 
         function getColorOld() {
-            // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
-            // return color;
             var rand = Math.random();
             rand = Math.floor(rand*19);
             switch(rand) {
@@ -591,8 +576,6 @@
             }
         }
         function getColor(num) {
-            // var rand = Math.random();
-            // rand = Math.floor(rand*5);
             switch(num) {
                 case 0:
                     return "#f29b34";

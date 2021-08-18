@@ -54,12 +54,8 @@ function getCurrentDate(){
 }
 
 router.get('/main', isLoggedIn, async (req, res, next) => {
-
     try {
-        //console.log('현재 로그인:'+res.locals.user.email);
         const timetable = await Course.find( {user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
-        // console.log('---------------------로그인된사람의시간표---------------------');
-        // console.info(timetable);
         timeList=[]; // 초기화 시켜주기
         res.render( '../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
@@ -82,7 +78,7 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
 
     try {
         const timetable = await Course.find({user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
-        //console.info(timetable);
+        timeList=[]; // 초기화 시켜주기
         res.render('../views/timetable/timetable_edit.ejs', {
             title: '시간표 관리',
             user : res.locals.user,
@@ -98,7 +94,6 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
 
 
 router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
-    //console.log(req.body);
     const { type, day, stime, etime, classroom, target } = req.body;
     try {
         var time = {
@@ -132,7 +127,6 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
             }
         }
         
-
         timeList.push(time); // 시간 추가
 
         var returnTime = {
@@ -149,7 +143,6 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
 
 
 router.delete('/course/time/delete', isLoggedIn, async (req, res) => {
-    console.log(req.body);
     var targetNum = req.body.target;
     try {
         const index = timeList.findIndex(function(item) {
@@ -170,18 +163,9 @@ router.delete('/course/time/delete', isLoggedIn, async (req, res) => {
 
 
 router.post('/course/add', isLoggedIn, async (req, res, next) => {
-    console.log(req.body);
     const {name, professor} = req.body;
 
     try {
-        // 과목 이름 중복 확인 => 필요없음 (이름이 중복될 수도 있으니까..)
-        // const check = await Course.findOne({user_id:req.user._id, course_name:name});
-        // if (check != null) {
-        //     console.log('이미 추가한 과목입니다.');
-        //     // return res.redirect('/course/add?error=exist');
-        //     return res.send('/course/add?error=exist');
-        // }
-
         //timeList (과목 스케줄) 정렬
         timeList.sort(function (a,b) { // 시작 시간순 정렬
             return parseFloat(a.stime) - parseFloat(b.stime);
@@ -203,8 +187,6 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
             });
             courseIdList.push(courseSchedule._id); // course_id 넣기 (과목 1개의 mongodb id값)
         }
-
-        console.log('user:'+req.user._id);
 
         // mongoDB에 과목 추가
         const course = await Course.create({ 
@@ -233,14 +215,6 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
 });
 
 router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
-    // userSchema.pre("remove", function(next) {
-    //     // 'this' is the user being removed. Provide callbacks here if you want
-    //     // to be notified of the calls' result.
-    //     scanModel.remove({ user: this._id }).exec();
-    //     categoryModel.remove({ user: this._id }).exec();
-    //     next();
-    // });
-
     try {
         const deleteId = req.params.id;
         const target = await Course.findOne({user_id: res.locals.user._id, _id:deleteId}).populate('schedules');
@@ -283,13 +257,6 @@ router.put('/course/modify', isLoggedIn, async (req, res, next) => {
         });
         timeList = []; // 저장 완료 후 배열 초기화
 
-        // // 수정된 timetable 렌더링 위해서 가져오기
-        // const timetable = await Course.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
-        // res.render('../views/timetable/timetable_edit.ejs', {
-        //     title: '내 시간표',
-        //     user : res.locals.user,
-        //     timetable : timetable
-        // });
         res.send('success');
         
     } catch (err) {

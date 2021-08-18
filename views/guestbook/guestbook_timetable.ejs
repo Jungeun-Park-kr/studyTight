@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <link rel="stylesheet" href="/public/mainframe_shortcuts.css">
+    <link rel="stylesheet" href="/public/mainframe.css">
+    <link rel="stylesheet" href="/public/font.css">
+
+    <link rel="stylesheet" type="text/css" href="/public/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/component.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/timetable/timetable_main.css"/>
+
+</head>
+<body>
+    <div id="wrap">
+        <div id="header" role="banner">
+            <div class="main_header">
+                <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+                <div class="logo_area">
+                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt=""/></a>
+                    <section class="group_menu">
+                        <nav class="menu_effect" id="menu_nav">
+                            <a href="/" class="menu" id="menu_home">내 공부방</a>
+                            <a href="/guestbook" class="menu" id="menu_guestbook">방명록</a>
+                            <a href="/timetable/main" class="menu" id="menu_timetable">시간표</a>
+                        </nav>
+                    </section>
+                </div>
+                <script type="text/javascript">   
+                    $(document).ready( function() {
+                        const location = window.location.pathname;
+                        //onsole.log('현재 url:'+location);
+                        if (location == '/') {
+                            // $('#menu_home').css({'outline': 'none', 'color':'#6ED4D8', 'text-decoration-color': '#6ED4D8', 'font-weight': '700' });
+                            $('#menu_home').addClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                            $('#menu_timetable').removeClass('menu_active');
+                        } else if (location == '/guestbook') {
+                            $('#menu_guestbook').addClass('menu_active');
+                            $('#menu_home').removeClass('menu_active');;
+                            $('#menu_timetable').removeClass('menu_active');
+                        } else if (location == '/timetable/main' || location == '/timetable/edit') {
+                            $('#menu_timetable').addClass('menu_active');
+                            $('#menu_home').removeClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                        } else {
+                            $('#menu_home').removeClass('menu_active');
+                            $('#menu_guestbook').removeClass('menu_active');
+                            $('#menu_timetable').removeClass('menu_active');
+                        }
+
+                        
+                    });
+                    
+                </script>
+                <div class="login">
+                        <div class="profile_section">
+                            <% if (user) { %> <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %> 
+                            <div class="alarm_bell">
+                                <img id="alarm_bell_img" src="/public/media/bell_pure.png">
+                            </div>
+                            <div class="profile">
+                                <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                                <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">
+                                <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
+                            </div>
+                            <div class="logout">
+                                <input type="submit" class="btn_logout" title="로그아웃" value="로그아웃" onClick="location.href='/auth/logout'"/>    
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="container" role="main">
+            <div class="timetable_wrap">
+            <!-- 여기는 본문 들어갈 메인 섹션 -->
+            <div class="page-header" role="banner" class>
+                <div class="timetable_title"><%=friend.name%>의 시간표 </div>
+                <p style="clear:both;">&nbsp;</p>
+            </div>
+            <div class="timetable_section">
+                <div class="background_box">
+                    <div class="timetable_table_wrap">
+                        <div class="table_head_wrap">
+                            <table class="table_head">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;"></th> 
+                                        <td>월</td>
+                                        <td>화</td>
+                                        <td>수</td>
+                                        <td>목</td>
+                                        <td>금</td>
+                                        <td>토</td>
+                                        <td style="display:none;">일</td>
+                                        <!-- <th  style="padding:0px;"></th> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table_body">
+                            <div class="table_body_wrap">
+                            <table class="table_body">
+                                <tbody>
+                                    <tr>
+                                        <th style="padding:0px;">
+                                            <div class="hours">
+                                                <div class="hour" >(9:00)</div>
+                                                <div class="hour2">(10:00)</div>
+                                                <div class="hour">(11:00)</div>
+                                                <div class="hour2">(12:00)</div>
+                                                <div class="hour">(13:00)</div>
+                                                <div class="hour2">(16:00)</div>
+                                                <div class="hour">(15:00)</div>
+                                                <div class="hour2">(16:00)</div>
+                                                <div class="hour">(17:00)</div>
+                                                <div class="hour2">(18:00)</div>
+                                                <div class="hour">(19:00)</div>
+                                                <div class="hour2">(20:00)</div>
+                                                <!-- <div class="hour2" style="border-bottom: none">(20:00)</div> -->
+                                                <!-- width:50 -->
+                                                <!-- <div class="hour">1교시(9:00)</div>
+                                                <div class="hour">2교시(10:30)</div>
+                                                <div class="hour">3교시(12:00)</div>
+                                                <div class="hour">4교시(13:30)</div>
+                                                <div class="hour">5교시(15:00)</div>
+                                                <div class="hour">6교시(16:30)</div>
+                                                <div class="hour">7교시(18:00)</div>
+                                                <div class="hour">8교시(19:30)</div>
+                                                <div class="hour">9교시(21:00)</div> -->
+                                                <!-- <div class="hour"></div> -->
+                                            </div>
+                                        </th>
+                                        <!-- 들어갈 요일별 과목정보 -->
+                                        <td class="mon" id="mon" style="height:15px; border-left: 0.1px solid #d6d6d6;">
+                                            <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
+                                            <div id ="mon9.1"></div>
+                                            <div id ="mon9.2"></div>
+                                            <div id ="mon9.3"></div>
+                                            <div id ="mon9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon10.1"></div>
+                                            <div id ="mon10.2"></div>
+                                            <div id ="mon10.3"></div>
+                                            <div id ="mon10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon11.1"></div>
+                                            <div id ="mon11.2"></div>
+                                            <div id ="mon11.3"></div>
+                                            <div id ="mon11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon12.1"></div>
+                                            <div id ="mon12.2"></div>
+                                            <div id ="mon12.3"></div>
+                                            <div id ="mon12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon13.1"></div>
+                                            <div id ="mon13.2"></div>
+                                            <div id ="mon13.3"></div>
+                                            <div id ="mon13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon14.1"></div>
+                                            <div id ="mon14.2"></div>
+                                            <div id ="mon14.3"></div>
+                                            <div id ="mon14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon15.1"></div>
+                                            <div id ="mon15.2"></div>
+                                            <div id ="mon15.3"></div>
+                                            <div id ="mon15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon16.1"></div>
+                                            <div id ="mon16.2"></div>
+                                            <div id ="mon16.3"></div>
+                                            <div id ="mon16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon17.1"></div>
+                                            <div id ="mon17.2"></div>
+                                            <div id ="mon17.3"></div>
+                                            <div id ="mon17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon18.1"></div>
+                                            <div id ="mon18.2"></div>
+                                            <div id ="mon18.3"></div>
+                                            <div id ="mon18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon19.1"></div>
+                                            <div id ="mon19.2"></div>
+                                            <div id ="mon19.3"></div>
+                                            <div id ="mon19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="mon20.1"></div>
+                                            <div id ="mon20.2"></div>
+                                            <div id ="mon20.3"></div>
+                                            <div id ="mon20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                        <td class="tue" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="tue9.1"></div>
+                                            <div id ="tue9.2"></div>
+                                            <div id ="tue9.3"></div>
+                                            <div id ="tue9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue10.1"></div>
+                                            <div id ="tue10.2"></div>
+                                            <div id ="tue10.3"></div>
+                                            <div id ="tue10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue11.1"></div>
+                                            <div id ="tue11.2"></div>
+                                            <div id ="tue11.3"></div>
+                                            <div id ="tue11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue12.1"></div>
+                                            <div id ="tue12.2"></div>
+                                            <div id ="tue12.3"></div>
+                                            <div id ="tue12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue13.1"></div>
+                                            <div id ="tue13.2"></div>
+                                            <div id ="tue13.3"></div>
+                                            <div id ="tue13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue14.1"></div>
+                                            <div id ="tue14.2"></div>
+                                            <div id ="tue14.3"></div>
+                                            <div id ="tue14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue15.1"></div>
+                                            <div id ="tue15.2"></div>
+                                            <div id ="tue15.3"></div>
+                                            <div id ="tue15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue16.1"></div>
+                                            <div id ="tue16.2"></div>
+                                            <div id ="tue16.3"></div>
+                                            <div id ="tue16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue17.1"></div>
+                                            <div id ="tue17.2"></div>
+                                            <div id ="tue17.3"></div>
+                                            <div id ="tue17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue18.1"></div>
+                                            <div id ="tue18.2"></div>
+                                            <div id ="tue18.3"></div>
+                                            <div id ="tue18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue19.1"></div>
+                                            <div id ="tue19.2"></div>
+                                            <div id ="tue19.3"></div>
+                                            <div id ="tue19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="tue20.1"></div>
+                                            <div id ="tue20.2"></div>
+                                            <div id ="tue20.3"></div>
+                                            <div id ="tue20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                        <td class="wed" style="border-left: 0.1px solid #d6d6d6;">
+                                            <!-- <p>wednesday section</p> -->
+                                            <div id ="wed9.1"></div>
+                                            <div id ="wed9.2"></div>
+                                            <div id ="wed9.3"></div>
+                                            <div id ="wed9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed10.1"></div>
+                                            <div id ="wed10.2"></div>
+                                            <div id ="wed10.3"></div>
+                                            <div id ="wed10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed11.1"></div>
+                                            <div id ="wed11.2"></div>
+                                            <div id ="wed11.3"></div>
+                                            <div id ="wed11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed12.1"></div>
+                                            <div id ="wed12.2"></div>
+                                            <div id ="wed12.3"></div>
+                                            <div id ="wed12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed13.1"></div>
+                                            <div id ="wed13.2"></div>
+                                            <div id ="wed13.3"></div>
+                                            <div id ="wed13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed14.1"></div>
+                                            <div id ="wed14.2"></div>
+                                            <div id ="wed14.3"></div>
+                                            <div id ="wed14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed15.1"></div>
+                                            <div id ="wed15.2"></div>
+                                            <div id ="wed15.3"></div>
+                                            <div id ="wed15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed16.1"></div>
+                                            <div id ="wed16.2"></div>
+                                            <div id ="wed16.3"></div>
+                                            <div id ="wed16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed17.1"></div>
+                                            <div id ="wed17.2"></div>
+                                            <div id ="wed17.3"></div>
+                                            <div id ="wed17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed18.1"></div>
+                                            <div id ="wed18.2"></div>
+                                            <div id ="wed18.3"></div>
+                                            <div id ="wed18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed19.1"></div>
+                                            <div id ="wed19.2"></div>
+                                            <div id ="wed19.3"></div>
+                                            <div id ="wed19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="wed20.1"></div>
+                                            <div id ="wed20.2"></div>
+                                            <div id ="wed20.3"></div>
+                                            <div id ="wed20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                        <td class="thr" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="thu9.1"></div>
+                                            <div id ="thu9.2"></div>
+                                            <div id ="thu9.3"></div>
+                                            <div id ="thu9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu10.1" ></div>
+                                            <div id ="thu10.2"></div>
+                                            <div id ="thu10.3"></div>
+                                            <div id ="thu10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu11.1"></div>
+                                            <div id ="thu11.2"></div>
+                                            <div id ="thu11.3"></div>
+                                            <div id ="thu11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu12.1"></div>
+                                            <div id ="thu12.2"></div>
+                                            <div id ="thu12.3"></div>
+                                            <div id ="thu12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu13.1"></div>
+                                            <div id ="thu13.2"></div>
+                                            <div id ="thu13.3"></div>
+                                            <div id ="thu13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu14.1"></div>
+                                            <div id ="thu14.2"></div>
+                                            <div id ="thu14.3"></div>
+                                            <div id ="thu14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu15.1"></div>
+                                            <div id ="thu15.2"></div>
+                                            <div id ="thu15.3"></div>
+                                            <div id ="thu15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu16.1"></div>
+                                            <div id ="thu16.2"></div>
+                                            <div id ="thu16.3"></div>
+                                            <div id ="thu16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu17.1"></div>
+                                            <div id ="thu17.2"></div>
+                                            <div id ="thu17.3"></div>
+                                            <div id ="thu17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu18.1"></div>
+                                            <div id ="thu18.2"></div>
+                                            <div id ="thu18.3"></div>
+                                            <div id ="thu18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu19.1"></div>
+                                            <div id ="thu19.2"></div>
+                                            <div id ="thu19.3"></div>
+                                            <div id ="thu19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="thu20.1"></div>
+                                            <div id ="thu20.2"></div>
+                                            <div id ="thu20.3"></div>
+                                            <div id ="thu20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                        <td class="fri" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="fri9.1"></div>
+                                            <div id ="fri9.2"></div>
+                                            <div id ="fri9.3"></div>
+                                            <div id ="fri9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri10.1"></div>
+                                            <div id ="fri10.2"></div>
+                                            <div id ="fri10.3"></div>
+                                            <div id ="fri10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri11.1"></div>
+                                            <div id ="fri11.2"></div>
+                                            <div id ="fri11.3"></div>
+                                            <div id ="fri11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri12.1"></div>
+                                            <div id ="fri12.2"></div>
+                                            <div id ="fri12.3"></div>
+                                            <div id ="fri12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri13.1"></div>
+                                            <div id ="fri13.2"></div>
+                                            <div id ="fri13.3"></div>
+                                            <div id ="fri13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri14.1"></div>
+                                            <div id ="fri14.2"></div>
+                                            <div id ="fri14.3"></div>
+                                            <div id ="fri14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri15.1"></div>
+                                            <div id ="fri15.2"></div>
+                                            <div id ="fri15.3"></div>
+                                            <div id ="fri15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri16.1"></div>
+                                            <div id ="fri16.2"></div>
+                                            <div id ="fri16.3"></div>
+                                            <div id ="fri16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri17.1"></div>
+                                            <div id ="fri17.2"></div>
+                                            <div id ="fri17.3"></div>
+                                            <div id ="fri17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri18.1"></div>
+                                            <div id ="fri18.2"></div>
+                                            <div id ="fri18.3"></div>
+                                            <div id ="fri18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri19.1"></div>
+                                            <div id ="fri19.2"></div>
+                                            <div id ="fri19.3"></div>
+                                            <div id ="fri19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="fri20.1"></div>
+                                            <div id ="fri20.2"></div>
+                                            <div id ="fri20.3"></div>
+                                            <div id ="fri20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                        <td class="sat" style="border-left: 0.1px solid #d6d6d6;">
+                                            <div id ="sat9.1"></div>
+                                            <div id ="sat9.2"></div>
+                                            <div id ="sat9.3"></div>
+                                            <div id ="sat9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat10.1"></div>
+                                            <div id ="sat10.2"></div>
+                                            <div id ="sat10.3"></div>
+                                            <div id ="sat10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat11.1"></div>
+                                            <div id ="sat11.2"></div>
+                                            <div id ="sat11.3"></div>
+                                            <div id ="sat11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat12.1"></div>
+                                            <div id ="sat12.2"></div>
+                                            <div id ="sat12.3"></div>
+                                            <div id ="sat12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat13.1"></div>
+                                            <div id ="sat13.2"></div>
+                                            <div id ="sat13.3"></div>
+                                            <div id ="sat13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat14.1"></div>
+                                            <div id ="sat14.2"></div>
+                                            <div id ="sat14.3"></div>
+                                            <div id ="sat14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat15.1"></div>
+                                            <div id ="sat15.2"></div>
+                                            <div id ="sat15.3"></div>
+                                            <div id ="sat15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat16.1"></div>
+                                            <div id ="sat16.2"></div>
+                                            <div id ="sat16.3"></div>
+                                            <div id ="sat16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat17.1"></div>
+                                            <div id ="sat17.2"></div>
+                                            <div id ="sat17.3"></div>
+                                            <div id ="sat17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat18.1"></div>
+                                            <div id ="sat18.2"></div>
+                                            <div id ="sat18.3"></div>
+                                            <div id ="sat18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat19.1"></div>
+                                            <div id ="sat19.2"></div>
+                                            <div id ="sat19.3"></div>
+                                            <div id ="sat19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            <div id ="sat20.1"></div>
+                                            <div id ="sat20.2"></div>
+                                            <div id ="sat20.3"></div>
+                                            <div id ="sat20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
+        console.log(timetable);
+        for (var i=0; i<timetable.length; i++) {
+            var tmp = timetable[i];
+            console.log(tmp.title, tmp.time);
+            showCourse(tmp.course_name, tmp.schedules, i); //제목, 시간리스트로 시간표에 출력하기
+        }
+
+        function numToDay(day) {
+            switch(day) {
+                case '1':
+                    return "mon";
+                case '2':
+                    return "tue";
+                case '3':
+                    return "wed";
+                case '4':
+                    return "thu";
+                case '5':
+                    return "fri";
+                case '6':
+                    return "sat";
+            }
+        }
+
+        function showCourse(title, timelist, number) {
+            //입력받은 정보로 시간표 출력하기
+            var tdid, st, et, sh, sm, eh, em;
+            var color, tmpvar;
+            color = getColor(number%4);
+            for(var i=0; i<timelist.length; i++) {
+                tmptime = timelist[i];
+                //요일 및 색깔지정
+                //color = getColor(tmptime.day);
+                //시작시간
+                st = tmptime.start_time.split(':');
+                sh = parseInt(st[0]); //시는 바로 입력
+                sm = getMinuteId(parseInt(st[1]));
+                //종료시간
+                et = tmptime.end_time.split(':');
+                eh = parseInt(et[0]);
+                em = getMinuteId(parseInt(et[1]));
+                //시작시간 id만들기 및 속성적용
+                tdid = numToDay(tmptime.day)+sh+'.'+sm;
+                //console.log(title+tdid);
+                tmpvar = window.document.getElementById(tdid);
+                //첫줄에는 과목이름 (강의실)
+                if (tmptime.course_type === 'offline')
+                    tmpvar.innerHTML=title+' ('+tmptime.classroom+')'; 
+                else
+                    tmpvar.innerHTML=title+' (온라인)';
+                tmpvar.style.backgroundColor=color;
+                tmpvar.style.paddingTop = '3px';
+                tmpvar.style.paddingLeft = '3px';
+                
+                //시간 더해가면서 id 만들기 및 속성적용
+                while(1) {
+                    sm++;
+                    if (sm == 5) {
+                        sh++;
+                        sm = 1;
+                    }
+                    if (sh > eh) { //종료조건 확인
+                        //console.log('종료조건1');
+                        break;
+                    }
+                    else if(sh == eh) {
+                        if (sm >= em) {
+                            //console.log('종료조건2');
+                            break;
+                        }
+                    }
+                    //console.log(tmptime.day);
+                    tdid = numToDay(tmptime.day)+sh+'.'+sm;
+                    //console.log(title+tdid);
+                    tmpvar = window.document.getElementById(tdid);
+                    if(sm==4) { //border 없애기
+                        tmpvar.style.borderStyle="";
+                    }
+                    tmpvar.style.backgroundColor = color;
+                }
+            }
+        }
+
+        function getColorOld() {
+            // var color = '#'+Math.round(Math.random()*0xffffff).toString(16);
+            // return color;
+            var rand = Math.random();
+            rand = Math.floor(rand*19);
+            switch(rand) {
+                case 0:
+                    return "lightpink";
+                case 1:
+                    return"lightsalmon";
+                case 2:
+                    return "lightsteelblue";
+                case 3:
+                    return "lightyellow";
+                case 4:
+                    return "mediumaquamarine";
+                case 5:
+                    return "lightgray";
+                case 6:
+                    return "thistle";
+                case 7:
+                    return "paleturquoise";
+                case 8:
+                    return "yellowgreen";
+                case 9:
+                    return "peachpuff";
+                case 10:
+                    return "wheat";
+                case 11:
+                    return "palegreen";
+                case 12:
+                    return "moccasin";
+                case 13:
+                    return "mistyrose";
+                case 14:
+                    return "oldlace";
+                case 15:
+                    return "palegoldenrod";
+                case 16:
+                    return "palegreen";
+                case 17:
+                    return "paleturquoise";
+                case 18:
+                    return "palevioletred";
+            }
+        }
+        function getColor(num) {
+            // var rand = Math.random();
+            // rand = Math.floor(rand*5);
+            switch(num) {
+                case 0:
+                    return "#f29b34";
+                case 1:
+                    return"#97ce68";
+                case 2:
+                    return "#fcd341";
+                case 3:
+                    return "#e36363";
+                case 4:
+                    return "#4dbdc2";
+                // case 5:
+                //     return "#bebebe";
+            }
+        }
+        function getMinuteId(min) { //분은 케이스 나누기
+            switch (min) { 
+                case 0:
+                    return 1;
+                case 15:
+                    return 2;
+                case 30:
+                    return 3;
+                case 45:
+                    return 4;
+                default :
+                    return 1;
+            }
+        }
+
+    </script>
+
+        <div class="aside">
+            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
+        </div>
+    </div>
+</body>
+</html>

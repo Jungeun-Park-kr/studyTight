@@ -64,12 +64,18 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
     
     console.log('회원가입 버튼 누름');
     console.log('email:'+email+', name:'+name+', password:'+password, 'promotion:', promotion);
-
+    const emailAry = email.split('@');
+    const email_id = emailAry[0];
     try {
         const exUser = await User.findOne( { email: email }); // 이메일 중복 확인
         if (exUser) {
             console.log('이미 가입된 회원입니다.');
             return res.redirect('/signup?error=exist');
+        }
+        const exUserId = await User.findOne( {email_id: email_id}); // id 중복 확인
+        if (exUserId) {
+            console.log('입력한 이메일의 id부분이 사용 불가합니다.');
+            return res.redirect('/signup?error=existid');
         }
         const hash = await bcrypt.hash(password, 12);
         
@@ -77,6 +83,7 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         
         const user = await User.create({
             email : email,
+            email_id : email_id,
             name : name,
             password: hash,
             birth : birth,
@@ -84,8 +91,6 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
         });
         console.log('추가된 user:'+ user);
         res.send('success');
-        next();
-        
         // return res.redirect('/login');
     } catch (error) {
         console.log('회원가입 에러');

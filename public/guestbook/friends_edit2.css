@@ -1,0 +1,204 @@
+body {
+    /* background-color: #e7eff0; */
+}
+
+.add_title {
+    font-size: 20;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.delete_section {
+    font-weight: bold;
+    color: red;
+    margin-left: 1%;
+    margin-top: 20px;
+}
+
+#search_course {
+    width: 80px;
+    height: 40px;
+    background-color: #6ED4D8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 200%;
+    /* 부모의 기준으로 위치를 맞춘다는 뜻
+        position: absolute; 
+    left:50%;
+    top:50%; */
+}
+
+.course_title_section,
+.professor_name_section,
+.course_time_section,
+.course_type_section,
+.course_link_section {
+    margin: 10px 0px 20px;
+}
+
+.search_box {
+    display: block;
+    float: left;
+    align-content: center;
+}
+
+.secret_section {
+    right: 20px;
+}
+
+.course_section {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.course_title_section div,
+.professor_name_section div,
+.course_time_section div,
+.course_type_section div,
+.course_link_section div,
+.course_location_section div {
+    display: inline-block;
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+button,
+input,
+select,
+table,
+textarea {
+    background-color: #e7eff0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    font-family: 'Open Sans';
+    src: local('Open Sans'), local('OpenSans'), url(//fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+select {
+    /* 원하는 너비설정 */
+    padding: .5em .3em;
+    /* 여백으로 높이 설정 */
+    font-family: inherit;
+    /* 폰트 상속 */
+    background: no-repeat 95% 50%;
+    /* 네이티브 화살표 대체 */
+    border: 1px solid #999;
+    border-radius: 0px;
+    /* iOS 둥근모서리 제거 */
+    -webkit-appearance: none;
+    /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    appearance: none;
+    margin-top: 40px;
+    margin-left: 3%;
+    background-image: url("media/dropdown.png");
+    background-size: 7px 7px;
+    background-position: calc(100% - 10px) calc(1em), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
+}
+
+.course_title_section div {
+    margin-left: 10%;
+}
+
+.course_title_label,
+.professor_name_label,
+.course_type_lable,
+.course_time_label,
+.course_link_label,
+.course_location_label {
+    font-size: 15px;
+    width: 100px;
+    margin: 10px 0px 5px;
+    padding: 0 10px;
+    color: #333333;
+    display: inline-block;
+}
+
+.course_secret_label {
+    font-size: 15px;
+    margin: 10px 0px 5px;
+    padding: 0 10px;
+    color: #333333;
+    display: inline-block;
+    margin-left: 1%;
+}
+
+.course_title_form,
+.professor_name_form,
+.course_type_form,
+.course_link_form,
+.course_location_form {
+    padding: 0 10px;
+}
+
+.course_title_form input,
+.professor_name_form input,
+.course_link_form input,
+.course_location_form input {
+    align-content: center;
+    height: 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.add_btn input {
+    width: 20%;
+    height: 40px;
+    background-color: #6ED4D8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 40%;
+    margin-right: 40%;
+    /* 부모의 기준으로 위치를 맞춘다는 뜻
+        position: absolute; 
+    left:50%;
+    top:50%; */
+}
+
+#add_table {
+    margin-left: 20px;
+}
+
+.course_add_list>table {
+    width: 100%;
+    border-collapse: collapse;
+    /* -moz-border-radius: 15px;
+    border:3px solid  6ED4D8;
+    border-radius: 15px; */
+}
+
+.course_add_list td,
+th {
+    text-align: left;
+    padding: 12px;
+}
+
+.course_add_list th {
+    width: 70px;
+}
+
+.course_add_list .btn_add_time {
+    /* align-content: center; */
+    width: 24px;
+    height: 24px;
+    /* border : none; */
+    background: url("../media/add_s.png") no-repeat;
+    border: 1px;
+    cursor: pointer;
+}

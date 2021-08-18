@@ -31,8 +31,6 @@
                 <!-- 여기는 본문 들어갈 메인 섹션 -->
                 
                 <div class="join_section">
-                    <!-- <form id="join_form" method="POST"> -->
-                    <!-- <form id="join_form"> -->
                         <div class="join_content">
                             <!-- 이메일 영역 -->
                             <div class="join_row join_email" id="emilDiv">
@@ -46,12 +44,6 @@
                                         <a  class="btn_verify btn_primary" id="btn_email_send" role='button'>
                                             <span class="send_verify">인증번호 받기</span>
                                         </a>
-                                        <script>
-                                            // const send_verify_btn = document.querySelector('send_verify');
-                                            // $.post('/email', function(data){
-                                            //     console.log(data);
-                                            // });
-                                        </script>
                                     
                                 </div>
                                 <!-- 인증번호 입력 영역 -->
@@ -172,14 +164,11 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- 가입하기 버튼 -->
                             <div class="btn_area">
                                 <button id="btnJoin" class="btn_type btn_primary"><span class="register">가입하기</span></button>
-                                <!-- <button id="btnJoin" class="btn_type btn_primary" formaction="/signup" ><span class="register">가입하기</span></button> -->
                             </div>
                         </div>
-                    <!-- </form> -->
                 </div>
             </div>
         
@@ -261,45 +250,6 @@
             </div>
         </div>
         <script type="text/javascript">
-            // $(document).ready(function() {
-            //     // 인증번호 전송 버튼
-            //     $('#btn_email_send').click(function() {
-            //         var email = $('#email').val(); // 입력받은 이메일
-            //         var inputBox = $('#email_verify'); // 인증번호 입력란
-            //         var verifyBtn = $('#btn_email_verify'); //인증번호 확인 버튼
-                    
-            //         // 이메일 전송
-            //         $.ajax({
-            //             type:"POST",
-            //             async : true,
-            //             url:'/email',
-            //             data : {
-            //                 email: email,
-            //             },
-            //             success:function( authNum ){ // 이메일 전송 성공한 경우
-            //                 console.log('인증번호 전송 성공');
-            //                 // 이메일 전송 성공 팝업 띄우기
-
-
-
-            //                 console.log("authNum : " + authNum);
-            //                 inputBox.removeAttr('disabled'); // disabled 속성 삭제
-            //             }, 
-            //             error: function(err) { // POST 요청 실패시
-            //                 console.log('인증번호 보내기 실패' + err);
-            //             }
-                                
-            //         });
-
-
-                    
-            //     });
-            // });
-
-        </script>
-
-
-        <script type="text/javascript">
         $(document).ready(function() {
             var modal_fail = document.querySelector(".modal_fail"); // 팝업 될 레이어 class명
             var modal_send = document.querySelector(".modal_send");
@@ -377,6 +327,8 @@
                     success:function( data ){ // 이메일 전송 성공한 경우
                         if (data === 'email_error=exist') { // 중복 이메일
                             alert('이미 가입된 이메일입니다.');
+                        } else if (data === 'email_error=existid') { // 중복 아이디
+                            alert('이메일 앞의 id부분은 고유해야 합니다.\n이미 사용중인 id입니다.');
                         } else {
                             console.log('인증번호 전송 성공');
                             toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
@@ -397,7 +349,6 @@
             }
 
             function emailCheck(event) {
-                //console.log('인증번호 확인');
                 if ( $('#email_verify').val() == authNum) {
                     console.log('인증번호 확인 성공');
                     isAuthChecked = true;
@@ -433,14 +384,6 @@
                 var birthD = $('#dd').val(); // 일 최대 2글자 입력
 
                 var isFilled = name.trim()!=='' && gender!=='성별' && birthY!=='' && birthM!=='월' && birthD!=='' ? true : false;
-
-                // console.log('name:',name);
-                // console.log('gender:',gender);
-                // console.log('birthY:',birthY);
-                // console.log('birthM:',birthM);
-                // console.log('birthD:',birthD);
-                // console.log('isFilled :', isFilled);
-
                 if (!isAuthChecked) { // 이메일 인증 확인
                         alert('이메일 인증을 해주세요.');
                 } else if (!isPassChecked) { // 비밀번호 입력 확인
@@ -458,7 +401,6 @@
                                 password: $('#password').val(),
                                 name : $('#name').val(),
                                 birth : birthY+'.'+birthM+'.'+birthD+'.',
-                                // promotion , // 이건 라우터에서 해줌
                             },
                             success:function(data){ // 이메일 전송 성공한 경우
                                 console.log('가입 성공');
@@ -475,9 +417,7 @@
             function succeededRegister() { // 로그인 성공 팝업에서 [확인],[X]버튼 클릭시 로그인 페이지로 이동
                 location.href = '/';
             }
-
             
-
             trigger_verify_fail.addEventListener("click", toggleFailModal);
             trigger_send_verify.addEventListener("click", sendAuthEmail);
             trigger_chk_verify.addEventListener("click", emailCheck);

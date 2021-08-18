@@ -1,4 +1,4 @@
-const inputBar = document.querySelector("#comment-input");
+const inputBar = document.querySelector("#comment_input");
 const rootDiv = document.querySelector("#comments");
 const btn = document.querySelector("#submit");
 const mainCommentCount = document.querySelector('#count');
@@ -31,74 +31,16 @@ function deleteComments(event) {
 
 }
 
-
-
-function showComment(comment) {
-    var username = localStorage.getItem('username');
-    activeUser = getActiveUser(username);
-    var userimage = document.createElement('img');
-    userimage.src = activeUser.userImage;
-    const inputBox = document.createElement('div');
-    var hzRule = document.createElement('hr'); // make a hr
-    const userName = document.createElement('div');
-    const inputValue = document.createElement('span');
-    const showTime = document.createElement('div');
-    const countSpan = document.createElement('span');
-    const commentList = document.createElement('div');
-    const onlycommend = document.createElement('div');
-    const delBtn = document.createElement('button'); //삭제버튼
-    const replybutton = document.createElement('button'); //답장버튼.
-    hzRule.id = "myroom-line";
-    delBtn.className = "deleteComment";
-    delBtn.innerHTML = "삭제";
-    replybutton.className = "reply-button";
-    replybutton.innerHTML = "답글쓰기";
-    inputBox.className = "inputbox";
-    commentList.className = "eachComment";
-    onlycommend.className = "onlycommend";
-    userName.className = "name";
-    userimage.className = "mini_image"
-    userimage.innerHTML = generateImage(); //이후 이미지 삽입.
-    inputValue.className = "inputValue";
-    showTime.className = "time";
-    userName.innerHTML = generateUserName(); //여기에 이후 유저네임 삽입.
-    userName.appendChild(delBtn);
-    inputValue.innerText = comment;
-    showTime.innerHTML = generateTime();
-    showTime.appendChild(replybutton); //답장하기 추가
-    countSpan.innerHTML = 0;
-    delBtn.addEventListener("click", deleteComments);
-    //replybutton.addEventListener("click", deleteComments); //이후 이벤트 변경.
-    commentList.appendChild(userimage);
-    commentList.appendChild(inputBox);
-    //commentList.after(hzRule); //댓글을 구분지어주는 코드
-    inputBox.appendChild(userName);
-    inputBox.appendChild(inputValue);
-    inputBox.appendChild(showTime);
-    rootDiv.prepend(hzRule);
-    rootDiv.prepend(commentList);
-}
 //이게 마지막에 다 더한 리스트를 추가하는것.
 
 function pressBtn() {
     const currentVal = inputBar.value;
     if (!currentVal.length) { alert("댓글을 입력해주세요!"); } else {
-        showComment(currentVal);
-
-        var mycommentlist = {
-                Author: activeUser.name,
-                mycommnet: document.getElementById('comment-input').value,
-                today: generateTime(),
-                commnetsecret: document.getElementById('mysecretbox').checked
-                    //공개여부에 따라 달라져야됨.
-            }
-            //console.log(document.getElementById('comment-input').value);
-        activeUser.guestbook.commentlist.push(mycommentlist);
-        console.log(activeUser.guestbook.commentlist);
-        inputBar.value = '';
+        // inputBar.value = '';
     }
 
 }
 
 
 btn.onclick = pressBtn;
+//index.jsdml 33번째줄 참고
