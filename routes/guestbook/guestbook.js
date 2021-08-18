@@ -20,7 +20,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
         const profile = await Profile.find({user_id: res.locals.user._id}).populate('user_id').populate('schedules').sort({'createdAt':-1});
         
         res.render( '../views/guestbook/guestbook_myroom.ejs', {
-            // user : res.locals.user,
+            // user : .locals.user,
             // school: school,
             // school_private: school_privat,
             // major: major,
