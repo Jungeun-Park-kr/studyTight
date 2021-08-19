@@ -23,20 +23,18 @@ router.use((req, res, next) => {
 router.get('/', isLoggedIn, async(req, res, next) => {
 
     try {
-
+        const testvar = new RegExp('naver')
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
-        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({_id:-1})
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
-            // .select('major')
-            //첫번째 . 까진 id똑같은걸로 찾는거
+            //검색을 위해서 new RegExp을 이용하여 해당 문자열이 포함되어있는지 검색.
         res.render('../views/guestbook/guestbook_myroom.ejs', {
             profile: profile[0],
             friend: friend,
             top_comment: top_comment,
             bottom_comment: bottom_comment
         });
-
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -47,21 +45,25 @@ router.get('/', isLoggedIn, async(req, res, next) => {
 router.get('/searchemail', isLoggedIn, async(req, res, next) => {
 
     try {
-        const { searchemail } = req.body;
+        const { search_email } = req.query; //get이라서 query해야됨.
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
-        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({_id:-1})
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const search_list = await User.find({ name: new RegExp(search_email) })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
         res.render('../views/guestbook/guestbook_myroom_search.ejs', {
             profile: profile[0],
             friend: friend,
             top_comment: top_comment,
-            bottom_comment: bottom_comment
+            bottom_comment: bottom_comment,
+            search_email: search_email,
+            search_list: search_list
         });
+        console.log(search_list);
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
+        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
         console.error(err);
         next(err);
     }

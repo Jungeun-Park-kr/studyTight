@@ -167,7 +167,7 @@
                                         <div class="course_title_section">
 
                                             <div class="course_title_form">
-                                                <input type="text" id="search_email" name="search_email" placeholder="ex) StudyTight@naver.com" />
+                                                <input type="text" id="search_email" name="search_email" placeholder=<%=search_email%> />
                                             </div>
                                             <div class="course_type_form" id="course_type_radio">
 
@@ -180,17 +180,20 @@
 
                                     </div>
                                     <hr>
-                                    <div class="professor_name_section">
-                                        <div class="professor_name_label">김준면</div>
-                                        <div class="professor_name_form">
-                                            suho@gmail.com
+                                    <% for(var i = 0; i < search_list.length; i++){ %>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">
+                                                <%=search_list[i].name%>
+                                            </div>
+                                            <div class="professor_name_form">
+                                                <%=search_list[i].email%>
+                                            </div>
+                                            <input type="checkbox" name="select_friend" value="select" checked>
                                         </div>
-                                        <input type="checkbox" name="select_friend" value="select" checked>
-                                    </div>
-
-                                    <div class="add_btn">
-                                        <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="추가하기"></input>
-                                    </div>
+                                        <% } %>
+                                            <div class="add_btn">
+                                                <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="추가하기"></input>
+                                            </div>
                                 </div>
                                 </form>
                             </div>
@@ -264,8 +267,7 @@
             <div class="writing-place" id=wBOX>
                 <div class="writing-box">
                     <!--행(row)선언-->
-                    <%= request.getParameter("foremailsearch") %>
-                    <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                    <input type="text" id=comment_input name="writing" value="" placeholder=<% search_email%> style="width:100%;height:100%;" />
                 </div>
                 <div class="writing-button-secret">
                     <div class="writing-button">
