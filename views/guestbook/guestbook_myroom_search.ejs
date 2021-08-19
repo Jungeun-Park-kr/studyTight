@@ -179,6 +179,23 @@
 
 
                                     </div>
+                                    <script type="text/javascript">
+                                        function oneCheckbox(a) {
+
+                                            var obj = document.getElementsByName("select_friend");
+
+                                            for (var i = 0; i < obj.length; i++) {
+
+                                                if (obj[i] != a) {
+
+                                                    obj[i].checked = false;
+
+                                                }
+
+                                            }
+
+                                        }
+                                    </script>
                                     <hr>
                                     <% for(var i = 0; i < search_list.length; i++){ %>
                                         <div class="professor_name_section">
@@ -188,7 +205,7 @@
                                             <div class="professor_name_form">
                                                 <%=search_list[i].email%>
                                             </div>
-                                            <input type="checkbox" name="select_friend" value="select" checked>
+                                            <input type="checkbox" name="select_friend" value="select" onclick="oneCheckbox(this)">
                                         </div>
                                         <% } %>
                                             <div class="add_btn">
@@ -267,7 +284,7 @@
             <div class="writing-place" id=wBOX>
                 <div class="writing-box">
                     <!--행(row)선언-->
-                    <input type="text" id=comment_input name="writing" value="" placeholder=<% search_email%> style="width:100%;height:100%;" />
+                    <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;">
                 </div>
                 <div class="writing-button-secret">
                     <div class="writing-button">

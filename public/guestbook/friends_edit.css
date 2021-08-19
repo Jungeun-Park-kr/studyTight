@@ -20,6 +20,7 @@ body {
     left:50%;
     top:50%; */
 }
+
 #search_course:hover {
     background-color: rgb(77, 189, 194);
     font-weight: bolder;
@@ -62,7 +63,7 @@ body {
 .course_time_label,
 .course_link_label,
 .course_location_label {
-    font-size: 15px;
+    /* font-size: 15px; */
     margin: 10px 0px 5px;
     padding: 0 10px;
     color: #333333;
@@ -86,7 +87,7 @@ body {
     padding: 0 10px;
 }
 
-.professor_name_form{
+.professor_name_form {
     width: 280px;
 }
 
@@ -124,7 +125,7 @@ select {
     line-height: 1.5em;
     padding: 0.5em 3.5em 0.5em 1em;
     appearance: none;
-    /* margin-top: 40px; // modal  팝업후 이상하여 수정함 */ 
+    /* margin-top: 40px; // modal  팝업후 이상하여 수정함 */
     margin-left: 3%;
     background-image: url("media/dropdown.png");
     background-size: 7px 7px;
