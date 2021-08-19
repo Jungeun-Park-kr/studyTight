@@ -146,7 +146,7 @@ textarea {
     background-color: white;
     padding: 1rem 1.5rem;
     width: 520px;
-    height: 700px;
+    /* height: 700px; */
     border-radius: 0.5rem;
 }
 
