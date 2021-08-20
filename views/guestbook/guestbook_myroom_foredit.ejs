@@ -136,12 +136,10 @@
                 <div class="friends_add">
                     <div class="title_msg">Friends</div>
                     <div>
-                        <select name="group-dropdown">
-                        <option value="none">=== 선택 ===</option>
-                        <option value="korean" selected>기본그룹</option>
-                        <option value="english">고등학교 친구들</option>
-                        <option value="chinese">대학교 친구들</option>
-                        <option value="spanish">연락XX</option>
+                        <select name="group_dropdown" id="group_dropdown">
+                            <% for(var i = 0; i < profile.group.length; i++){ %>
+                        <option value=<%='option'+i%>><%=profile.group[i]%></option>
+                        <% } %>
                         </select>
                         <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->

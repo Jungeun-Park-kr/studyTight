@@ -136,9 +136,9 @@
                 <div class="friends_add">
                     <div class="title_msg">Friends</div>
                     <div>
-                        <select name="group-dropdown">
+                        <select name="group_dropdown" id="group_dropdown">
                             <% for(var i = 0; i < profile.group.length; i++){ %>
-                        <option value=<%=profile.group[i]%>><%=profile.group[i]%></option>
+                        <option value=<%='option'+i%>><%=profile.group[i]%></option>
                         <% } %>
                         </select>
                         <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
