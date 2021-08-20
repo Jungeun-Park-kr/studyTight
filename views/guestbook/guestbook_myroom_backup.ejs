@@ -32,13 +32,11 @@
                 <hr>
                 <div class="professor_name_section">
                     <div class="professor_name_label">그룹변경</div>
-                    <select name="group-dropdown">
-                        <option value="none">=== 선택 ===</option>
-                        <option value="korean" selected>기본그룹</option>
-                        <option value="english">고등학교 친구들</option>
-                        <option value="chinese">대학교 친구들</option>
-                        <option value="spanish">연락XX</option>
-                      </select>
+                    <select name="group_dropdown" id="group_dropdown">
+                        <% for(var i = 0; i < profile.group.length; i++){ %>
+                    <option value=<%='option'+i%>><%=profile.group[i]%></option>
+                    <% } %>
+                    </select>
                 </div>
                 <hr>
                 <div class="delete_section">

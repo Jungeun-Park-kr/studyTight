@@ -317,6 +317,37 @@
                         </form>
                     </div>
 
+                    <div class="modal6">
+                        <form action='/guestbook/deletegroup' method='post'>
+                            <div class="modal-content">
+                                <span class="close-button6" id="close-button6">&times;</span>
+                                <h1 class="title">그룹 삭제하기</h1>
+                                <div class="course_add_list">
+                                    <div class="course_section">
+                                        <div class="secret_section">
+                                            <div class="course_secret_label" name='foremailsearch'>삭제할 그룹의 선택해주세요</div>
+                                        </div>
+                                        <div class="course_title_section">
+
+                                            <select name="group_dropdown" id="group_dropdown">
+                                                <% for(var i = 0; i < profile.group.length; i++){ %>
+                                            <option value=<%=profile.group[i]%>><%=profile.group[i]%></option>
+                                            <% } %>
+                                            </select>
+                                            <div class="course_type_form" id="course_type_radio">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="add_btn">
+                                        <input id="btn_add_course" class="isnottrigger" type="submit" title="저장하기" value="삭제하기"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                     <!--친구 수정을 위합 모달 팝업-->
                     <div class="modal3">
                         <form action='/guestbook/searfriend' method="get">
@@ -684,6 +715,7 @@
     var modal3 = document.querySelector(".modal3");
     var modal4 = document.querySelector(".modal4");
     var modal5 = document.querySelector(".modal5");
+    var modal6 = document.querySelector(".modal6");
     var modal7 = document.querySelector(".modal7");
     // var modal77 = document.querySelector(".modal77");
     var trigger = document.querySelector(".trigger");
@@ -691,6 +723,7 @@
     var trigger3 = document.querySelector(".trigger3");
     var trigger4 = document.querySelector(".trigger4");
     var trigger5 = document.querySelector(".trigger5");
+    var trigger6 = document.querySelector(".trigger6");
     var trigger7 = document.querySelector(".trigger7");
     // var trigger77 = document.querySelector(".trigger77");
     var closeButton = document.querySelector(".close-button");
@@ -698,6 +731,7 @@
     var closeButton3 = document.querySelector(".close-button3");
     var closeButton4 = document.querySelector(".close-button4");
     var closeButton5 = document.querySelector(".close-button5");
+    var closeButton6 = document.querySelector(".close-button6");
     var closeButton7 = document.querySelector(".close-button7");
     // var closeButton77 = document.querySelector(".close-button77");
     var cancelButton = document.querySelector("#cancel");
@@ -724,6 +758,10 @@
 
     function toggleModal5() {
         modal5.classList.toggle("show-modal");
+    }
+
+    function toggleModal6() {
+        modal6.classList.toggle("show-modal");
     }
 
     function toggleModal2_close() {
@@ -760,6 +798,12 @@
     }
 
     function windowOnClick(event) {
+        if (event.target === modal6) {
+            toggleModal6();
+        }
+    }
+
+    function windowOnClick(event) {
         if (event.target === modal7) {
             toggleModal7();
         }
@@ -776,6 +820,7 @@
     trigger3.addEventListener("click", toggleModal3);
     trigger4.addEventListener("click", toggleModal4);
     trigger5.addEventListener("click", toggleModal5);
+    trigger6.addEventListener("click", toggleModal6);
     // trigger77.addEventListener("click", toggleModal77);
     // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
     closeButton.addEventListener("click", toggleModal);
@@ -783,6 +828,7 @@
     closeButton3.addEventListener("click", toggleModal3);
     closeButton4.addEventListener("click", toggleModal4);
     closeButton5.addEventListener("click", toggleModal5);
+    closeButton6.addEventListener("click", toggleModal6);
     closeButton7.addEventListener("click", toggleModal7);
     // closeButton77.addEventListener("click", toggleModal77);
     cancel.addEventListener("click", toggleModal);

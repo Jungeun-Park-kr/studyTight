@@ -92,6 +92,32 @@ router.post('/addgroup', isLoggedIn, async(req, res, next) => {
 
 });
 
+router.post('/deletegroup', isLoggedIn, async(req, res, next) => {
+    const { group_dropdown } = req.body;
+
+    try {
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+
+        await Profile.updateOne({ user_id: res.locals.user._id }, {
+            $pull: {
+                group: {
+
+                    $in: group_dropdown
+
+                }
+            }
+        });
+        res.redirect("/guestbook");
+
+    } catch (err) {
+
+        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error(err);
+        next(err);
+    }
+
+});
+
 router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
 
     try {
