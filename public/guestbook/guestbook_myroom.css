@@ -386,7 +386,7 @@ select::-ms-expand {
     margin-left: 120px;
     margin-top: 10px;
     float: left;
-    background-color: #6ED4D8;
+    /* background-color: #6ED4D8; */
     border-radius: 10px;
     display: table-cell;
     vertical-align: middle;
@@ -396,9 +396,23 @@ select::-ms-expand {
     cursor: pointer;
 }
 
-.user-small-talking .reply-button:hover {
-    background-color: rgb(77, 189, 194);
-    font-weight: bolder;
+.user-small-talking .reply-button {
+    margin-left: 120px;
+    margin-top: 10px;
+    float: left;
+    /* background-color: #6ED4D8; */
+    border-radius: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user-small-talking .reply-button .delete:hover,
+.user-small-talking .reply-button .reply:hover {
+    background-color: #6ED4D8;
 }
 
 .user-small-talking .reply-button .my-room .talking-palce {
