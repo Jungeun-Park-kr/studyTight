@@ -42,6 +42,87 @@ router.get('/', isLoggedIn, async(req, res, next) => {
     }
 });
 
+router.get('/searfriend', isLoggedIn, async(req, res, next) => {
+
+    try {
+        const { search_email } = req.query; //get이라서 query해야됨.
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+        const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const myfriend = await Friend.find({ user_id: res.locals.user._id }).find({ Friend_Name: new RegExp(search_email) }) //내 전체 친구들 리스트.
+            // .select('major')
+            //첫번째 . 까진 id똑같은걸로 찾는거
+        res.render('../views/guestbook/guestbook_myroom_searchforedit.ejs', {
+            profile: profile[0],
+            friend: friend,
+            top_comment: top_comment,
+            bottom_comment: bottom_comment,
+            search_email: search_email,
+            search_list: myfriend
+        });
+    } catch (err) {
+        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
+
+    try {
+        const { select_friend } = req.query;
+        const { search_email } = req.query;
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+        const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const search_list = await User.find({ name: new RegExp(search_email) })
+        const select_info = await Friend.findOne({ Friend_ID: select_friend })
+            // .select('major')
+            //첫번째 . 까진 id똑같은걸로 찾는거
+        res.render('../views/guestbook/guestbook_myroom_foredit.ejs', {
+            profile: profile[0],
+            friend: friend,
+            top_comment: top_comment,
+            bottom_comment: bottom_comment,
+            search_list: search_list,
+            search_email: search_email,
+            select_friend: select_friend,
+            select_info: select_info
+        });
+    } catch (err) {
+        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => {
+    const { star_friend, group_dropdown } = req.body;
+    try {
+        const { select_friend } = req.query;
+        const { search_email } = req.query;
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+        const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const search_list = await User.find({ name: new RegExp(search_email) })
+        const select_info = await Friend.findOne({ Friend_ID: select_friend })
+        res.redirect("/guestbook");
+    } catch (err) {
+        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
+        console.error(err);
+        next(err);
+    }
+});
+
+// await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
+//     $push:{
+//         postIt:postItList
+//     }
+// });
+
 router.get('/searchemail', isLoggedIn, async(req, res, next) => {
 
     try {
@@ -123,14 +204,14 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
 });
 
 router.post('/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
-    const { id } = req.query;
+    const { id } = req.body;
     const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
     try {
-        console.log(req);
-        //await Top_comment.deleteOne({ _id: id });
+        await Top_comment.deleteOne({ _id: id });
     } catch (err) {
         next(err);
     }
+    res.redirect("/guestbook");
 });
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {

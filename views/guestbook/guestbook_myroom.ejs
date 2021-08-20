@@ -224,56 +224,37 @@
 
                     <!--친구 수정을 위합 모달 팝업-->
                     <div class="modal3">
-                        <div class="modal-content">
-                            <span class="close-button3">&times;</span>
-                            <h1 class="title">친구 관리하기</h1>
-                            <!-- 여기부터 직접 들어갈 Edit 1 파일-->
-                            <div class="course_add_list">
-                                <div class="course_section">
-                                    <div class="secret_section">
-                                        <div class="course_secret_label">선택된 친구</div>
-                                    </div>
-                                    <div class="course_title_section">
+                        <form action='/guestbook/searfriend' method="get">
+                            <div class="modal-content">
+                                <span class="close-button3" id="close-button3">&times;</span>
+                                <h1 class="title">친구 찾기</h1>
+                                <div class="course_add_list">
+                                    <div class="course_section">
+                                        <div class="secret_section">
+                                            <div class="course_secret_label" name='foremailsearch'>검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                        </div>
+                                        <div class="course_title_section">
 
+                                            <div class="course_title_form">
+                                                <input type="text" id="search_email" name="search_email" placeholder="ex) StudyTight@naver.com" />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
 
-                                        <div class="course_secret_label">양지영 ssdsdf@nate.com</div>
-
-                                        <div class="course_type_form" id="course_type_radio">
-
+                                            </div>
+                                            <div class="search_btn">
+                                                <!-- <div class="search_btn" onclick="location.href='/guestbook/searchemail'"> -->
+                                                <input id="search_course" class="triggerX" type="submit" title="검색하기" value="검색"></input>
+                                            </div>
                                         </div>
                                     </div>
-
-
-                                </div>
-                                <hr>
-                                <div class="professor_name_section">
-                                    <div class="professor_name_label">즐겨찾기 여부</div>
-                                    <input type="checkbox" name="select_friend" value="select" checked>
-                                    <div class="professor_name_form">
-                                        즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
+                                    <hr>
+                                    <div class="add_btn">
+                                        <!-- 원본: <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="추가하기"></input> -->
+                                        <input id="btn_add_course" class="isnottrigger" type="button" title="저장하기" value="추가하기"></input>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="professor_name_section">
-                                    <div class="professor_name_label">그룹변경</div>
-                                    <select name="group-dropdown">
-                                            <option value="none">=== 선택 ===</option>
-                                            <option value="korean" selected>기본그룹</option>
-                                            <option value="english">고등학교 친구들</option>
-                                            <option value="chinese">대학교 친구들</option>
-                                            <option value="spanish">연락XX</option>
-                                          </select>
-                                </div>
-                                <hr>
-                                <div class="delete_section">
-                                    친구 삭제하기
-                                </div>
-                                <div class="add_btn">
-                                    <input id="btn_add_course" type="button" title="저장하기" value="저장하기"></input>
-                                </div>
                             </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
 
                     <!-- 첫번째로 팝업될 친구 검색 레이어-->
@@ -468,11 +449,10 @@
             </form>
             <hr id="myroom-line">
 
-            <div class="modal77">
+            <!-- <div class="modal77">
                 <div class="modal-content">
                     <span class="close-button77">&times;</span>
                     <h1 class="title">친구 관리하기</h1>
-                    <!-- 여기부터 직접 들어갈 Edit 1 파일-->
                     <div class="course_add_list">
                         <div class="course_section">
                             <div class="secret_section">
@@ -519,7 +499,7 @@
                     </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
 
             <div class="talking-place" id="talking-place">
 
@@ -541,7 +521,9 @@
                                 </div>
                                 <div class="reply-button">
                                     <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
-                                    <input type="button" class="trigger77" value="삭제하기" id="<%= top_comment[i]._id %>"></input>
+                                    <% if(top_comment[i].commenter_email._id.equals (user._id)){ %>
+                                        <input type="button" class="delete" value="삭제하기" onclick="confirm_event(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                        <% } %>
                                 </div>
                             </div>
                         </div>
@@ -605,19 +587,19 @@
     var modal3 = document.querySelector(".modal3");
     var modal4 = document.querySelector(".modal4");
     var modal7 = document.querySelector(".modal7");
-    var modal77 = document.querySelector(".modal77");
+    // var modal77 = document.querySelector(".modal77");
     var trigger = document.querySelector(".trigger");
     var trigger2 = document.querySelector(".trigger2");
     var trigger3 = document.querySelector(".trigger3");
     var trigger4 = document.querySelector(".trigger4");
     var trigger7 = document.querySelector(".trigger7");
-    var trigger77 = document.querySelector(".trigger77");
+    // var trigger77 = document.querySelector(".trigger77");
     var closeButton = document.querySelector(".close-button");
     var closeButton2 = document.querySelector(".close-button2");
     var closeButton3 = document.querySelector(".close-button3");
     var closeButton4 = document.querySelector(".close-button4");
     var closeButton7 = document.querySelector(".close-button7");
-    var closeButton77 = document.querySelector(".close-button77");
+    // var closeButton77 = document.querySelector(".close-button77");
     var cancelButton = document.querySelector("#cancel");
 
     //console.log(modal);
@@ -640,9 +622,9 @@
         modal4.classList.toggle("show-modal");
     }
 
-    function toggleModal77() {
-        modal77.classList.toggle("show-modal");
-    }
+    // function toggleModal77() {
+    //     modal77.classList.toggle("show-modal");
+    // }
 
     function toggleModal2_close() {
         modal2.classList.toggle("show-modal");
@@ -678,23 +660,69 @@
         }
     }
 
-    function windowOnClick(event) {
-        if (event.target === modal77) {
-            toggleModal77();
-        }
-    }
+    // function windowOnClick(event) {
+    //     if (event.target === modal77) {
+    //         toggleModal77();
+    //     }
+    // }
 
     trigger.addEventListener("click", toggleModal);
     trigger2.addEventListener("click", toggleModal2);
     trigger3.addEventListener("click", toggleModal3);
     trigger4.addEventListener("click", toggleModal4);
-    trigger77.addEventListener("click", toggleModal77);
+    // trigger77.addEventListener("click", toggleModal77);
     // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
     closeButton.addEventListener("click", toggleModal);
     closeButton2.addEventListener("click", toggleModal2_close);
     closeButton3.addEventListener("click", toggleModal3);
     closeButton4.addEventListener("click", toggleModal4);
-    closeButton77.addEventListener("click", toggleModal77);
+    // closeButton77.addEventListener("click", toggleModal77);
     cancel.addEventListener("click", toggleModal);
     window.addEventListener("click", windowOnClick);
 </script>
+
+<script>
+    function confirm_event(id) {
+        if (confirm("정말 삭제하시겠습니까??")) {
+            alert("삭제 확인");
+            var form = document.createElement('form');
+            form.setAttribute('method', 'post'); //POST 메서드 적용
+            form.setAttribute('action', '/guestbook/deletecomment'); // 데이터를 전송할 url
+            document.charset = "utf-8";
+
+            var hiddenField = document.createElement('input');
+            hiddenField.setAttribute('type', 'hidden');
+            hiddenField.setAttribute('name', 'id');
+            hiddenField.setAttribute('value', id);
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            //console.log(form);
+            form.submit(); // 전송~
+        } else {
+            alert("삭제취소");
+        }
+    }
+</script>
+
+<!-- <script>
+    function confirm_event(id) {
+        if (confirm("정말 삭제하시겠습니까??")) {
+            alert("삭제 확인");
+            var form = document.createElement('form');
+            form.setAttribute('method', ''); //POST 메서드 적용
+            form.setAttribute('action', '/guestbook/deletecomment'); // 데이터를 전송할 url
+            document.charset = "utf-8";
+
+            var hiddenField = document.createElement('input');
+            hiddenField.setAttribute('id', id);
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            console.log(form);
+            form.submit(); // 전송~
+        } else {
+            alert("삭제취소");
+        }
+    }
+</script> -->
