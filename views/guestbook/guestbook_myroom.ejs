@@ -142,6 +142,8 @@
                         <% } %>
                         </select>
                         <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
+                        <img id="friend_edit" class="trigger5" src="/guestbook/media/add.png"></img>
+                        <img id="friend_edit" class="trigger6" src="/guestbook/media/minus.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->
                         <div class="btn_add_course">
                             <input type="button" class="trigger" value="+ 친구 추가하기"></input>
@@ -284,6 +286,35 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="modal5">
+                        <form action='/guestbook/addgroup' method='post'>
+                            <div class="modal-content">
+                                <span class="close-button5" id="close-button5">&times;</span>
+                                <h1 class="title">그룹 추가하기</h1>
+                                <div class="course_add_list">
+                                    <div class="course_section">
+                                        <div class="secret_section">
+                                            <div class="course_secret_label" name='foremailsearch'>추가할 그룹의 이름을 적어주세요</div>
+                                        </div>
+                                        <div class="course_title_section">
+
+                                            <div class="course_title_form">
+                                                <input type="text" id="search_email" name="search_email" placeholder="ex) Basic그룹" />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="add_btn">
+                                        <input id="btn_add_course" class="isnottrigger" type="submit" title="저장하기" value="추가하기"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <!--친구 수정을 위합 모달 팝업-->
@@ -652,18 +683,21 @@
     var modal2 = document.querySelector(".modal2");
     var modal3 = document.querySelector(".modal3");
     var modal4 = document.querySelector(".modal4");
+    var modal5 = document.querySelector(".modal5");
     var modal7 = document.querySelector(".modal7");
     // var modal77 = document.querySelector(".modal77");
     var trigger = document.querySelector(".trigger");
     var trigger2 = document.querySelector(".trigger2");
     var trigger3 = document.querySelector(".trigger3");
     var trigger4 = document.querySelector(".trigger4");
+    var trigger5 = document.querySelector(".trigger5");
     var trigger7 = document.querySelector(".trigger7");
     // var trigger77 = document.querySelector(".trigger77");
     var closeButton = document.querySelector(".close-button");
     var closeButton2 = document.querySelector(".close-button2");
     var closeButton3 = document.querySelector(".close-button3");
     var closeButton4 = document.querySelector(".close-button4");
+    var closeButton5 = document.querySelector(".close-button5");
     var closeButton7 = document.querySelector(".close-button7");
     // var closeButton77 = document.querySelector(".close-button77");
     var cancelButton = document.querySelector("#cancel");
@@ -688,9 +722,9 @@
         modal4.classList.toggle("show-modal");
     }
 
-    // function toggleModal77() {
-    //     modal77.classList.toggle("show-modal");
-    // }
+    function toggleModal5() {
+        modal5.classList.toggle("show-modal");
+    }
 
     function toggleModal2_close() {
         modal2.classList.toggle("show-modal");
@@ -698,7 +732,6 @@
 
     function toggleModal7() {
         modal7.classList.toggle("show-modal");
-        modal.classList.toggle("show-modal");
     }
 
 
@@ -721,6 +754,12 @@
     }
 
     function windowOnClick(event) {
+        if (event.target === modal5) {
+            toggleModal5();
+        }
+    }
+
+    function windowOnClick(event) {
         if (event.target === modal7) {
             toggleModal7();
         }
@@ -736,12 +775,15 @@
     trigger2.addEventListener("click", toggleModal2);
     trigger3.addEventListener("click", toggleModal3);
     trigger4.addEventListener("click", toggleModal4);
+    trigger5.addEventListener("click", toggleModal5);
     // trigger77.addEventListener("click", toggleModal77);
     // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
     closeButton.addEventListener("click", toggleModal);
     closeButton2.addEventListener("click", toggleModal2_close);
     closeButton3.addEventListener("click", toggleModal3);
     closeButton4.addEventListener("click", toggleModal4);
+    closeButton5.addEventListener("click", toggleModal5);
+    closeButton7.addEventListener("click", toggleModal7);
     // closeButton77.addEventListener("click", toggleModal77);
     cancel.addEventListener("click", toggleModal);
     window.addEventListener("click", windowOnClick);
