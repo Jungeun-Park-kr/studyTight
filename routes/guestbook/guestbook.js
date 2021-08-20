@@ -122,6 +122,17 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
 
 });
 
+router.post('/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+    const { id } = req.query;
+    const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+    try {
+        console.log(req);
+        //await Top_comment.deleteOne({ _id: id });
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
     const { school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
 

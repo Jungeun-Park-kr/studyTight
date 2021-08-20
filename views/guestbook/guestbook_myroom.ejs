@@ -417,91 +417,6 @@
 
                             </div>
 
-                            <script type="text/javascript">
-                                var modal = document.querySelector(".modal");
-                                var modal2 = document.querySelector(".modal2");
-                                var modal3 = document.querySelector(".modal3");
-                                var modal4 = document.querySelector(".modal4");
-                                var modal7 = document.querySelector(".modal7");
-                                var trigger = document.querySelector(".trigger");
-                                var trigger2 = document.querySelector(".trigger2");
-                                var trigger3 = document.querySelector(".trigger3");
-                                var trigger4 = document.querySelector(".trigger4");
-                                var trigger7 = document.querySelector(".trigger7");
-                                var closeButton = document.querySelector(".close-button");
-                                var closeButton2 = document.querySelector(".close-button2");
-                                var closeButton3 = document.querySelector(".close-button3");
-                                var closeButton4 = document.querySelector(".close-button4");
-                                var closeButton7 = document.querySelector(".close-button7");
-                                var cancelButton = document.querySelector("#cancel");
-
-                                //console.log(modal);
-
-                                function toggleModal() {
-                                    modal.classList.toggle("show-modal");
-                                }
-
-
-                                function toggleModal2() {
-                                    modal2.classList.toggle("show-modal");
-                                    modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
-                                }
-
-                                function toggleModal3() {
-                                    modal3.classList.toggle("show-modal");
-                                }
-
-                                function toggleModal4() {
-                                    modal4.classList.toggle("show-modal");
-                                }
-
-
-                                function toggleModal2_close() {
-                                    modal2.classList.toggle("show-modal");
-                                }
-
-                                function toggleModal7() {
-                                    modal7.classList.toggle("show-modal");
-                                    modal.classList.toggle("show-modal");
-                                }
-
-                                function windowOnClick(event) {
-                                    if (event.target === modal) {
-                                        toggleModal();
-                                    }
-                                }
-
-                                function windowOnClick(event) {
-                                    if (event.target === modal2) {
-                                        toggleModal2();
-                                    }
-                                }
-
-                                function windowOnClick(event) {
-                                    if (event.target === modal4) {
-                                        toggleModal4();
-                                    }
-                                }
-
-                                function windowOnClick(event) {
-                                    if (event.target === modal7) {
-                                        toggleModal7();
-                                    }
-                                }
-
-                                trigger.addEventListener("click", toggleModal);
-                                trigger2.addEventListener("click", toggleModal2);
-                                trigger3.addEventListener("click", toggleModal3);
-                                trigger4.addEventListener("click", toggleModal4);
-                                // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
-                                closeButton.addEventListener("click", toggleModal);
-                                closeButton2.addEventListener("click", toggleModal2_close);
-                                closeButton3.addEventListener("click", toggleModal3);
-                                closeButton4.addEventListener("click", toggleModal4);
-                                // closeButton7.addEventListener("click", toggleModal7);
-                                cancel.addEventListener("click", toggleModal);
-                                window.addEventListener("click", windowOnClick);
-                            </script>
 
                             </form>
                         </div>
@@ -552,7 +467,60 @@
                 </div>
             </form>
             <hr id="myroom-line">
-            <div id=comments> </div>
+
+            <div class="modal77">
+                <div class="modal-content">
+                    <span class="close-button77">&times;</span>
+                    <h1 class="title">친구 관리하기</h1>
+                    <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                    <div class="course_add_list">
+                        <div class="course_section">
+                            <div class="secret_section">
+                                <div class="course_secret_label">선택된 친구</div>
+                            </div>
+                            <div class="course_title_section">
+
+
+                                <div class="course_secret_label">양지영 ssdsdf@nate.com</div>
+
+                                <div class="course_type_form" id="course_type_radio">
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <hr>
+                        <div class="professor_name_section">
+                            <div class="professor_name_label">즐겨찾기 여부</div>
+                            <input type="checkbox" name="select_friend" value="select" checked>
+                            <div class="professor_name_form">
+                                즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="professor_name_section">
+                            <div class="professor_name_label">그룹변경</div>
+                            <select name="group-dropdown">
+                                    <option value="none">=== 선택 ===</option>
+                                    <option value="korean" selected>기본그룹</option>
+                                    <option value="english">고등학교 친구들</option>
+                                    <option value="chinese">대학교 친구들</option>
+                                    <option value="spanish">연락XX</option>
+                                  </select>
+                        </div>
+                        <hr>
+                        <div class="delete_section">
+                            친구 삭제하기
+                        </div>
+                        <div class="add_btn">
+                            <input id="btn_add_course" type="button" title="저장하기" value="저장하기"></input>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
@@ -572,7 +540,8 @@
                                     <%=top_comment[i].comment_time %>
                                 </div>
                                 <div class="reply-button">
-                                    <input type="button" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    <input type="button" class="trigger77" value="삭제하기" id="<%= top_comment[i]._id %>"></input>
                                 </div>
                             </div>
                         </div>
@@ -629,3 +598,103 @@
 </div>
 
 </html>
+
+<script type="text/javascript">
+    var modal = document.querySelector(".modal");
+    var modal2 = document.querySelector(".modal2");
+    var modal3 = document.querySelector(".modal3");
+    var modal4 = document.querySelector(".modal4");
+    var modal7 = document.querySelector(".modal7");
+    var modal77 = document.querySelector(".modal77");
+    var trigger = document.querySelector(".trigger");
+    var trigger2 = document.querySelector(".trigger2");
+    var trigger3 = document.querySelector(".trigger3");
+    var trigger4 = document.querySelector(".trigger4");
+    var trigger7 = document.querySelector(".trigger7");
+    var trigger77 = document.querySelector(".trigger77");
+    var closeButton = document.querySelector(".close-button");
+    var closeButton2 = document.querySelector(".close-button2");
+    var closeButton3 = document.querySelector(".close-button3");
+    var closeButton4 = document.querySelector(".close-button4");
+    var closeButton7 = document.querySelector(".close-button7");
+    var closeButton77 = document.querySelector(".close-button77");
+    var cancelButton = document.querySelector("#cancel");
+
+    //console.log(modal);
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+
+    function toggleModal2() {
+        modal2.classList.toggle("show-modal");
+        modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
+    }
+
+    function toggleModal3() {
+        modal3.classList.toggle("show-modal");
+    }
+
+    function toggleModal4() {
+        modal4.classList.toggle("show-modal");
+    }
+
+    function toggleModal77() {
+        modal77.classList.toggle("show-modal");
+    }
+
+    function toggleModal2_close() {
+        modal2.classList.toggle("show-modal");
+    }
+
+    function toggleModal7() {
+        modal7.classList.toggle("show-modal");
+        modal.classList.toggle("show-modal");
+    }
+
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal2) {
+            toggleModal2();
+        }
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal4) {
+            toggleModal4();
+        }
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal7) {
+            toggleModal7();
+        }
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal77) {
+            toggleModal77();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    trigger2.addEventListener("click", toggleModal2);
+    trigger3.addEventListener("click", toggleModal3);
+    trigger4.addEventListener("click", toggleModal4);
+    trigger77.addEventListener("click", toggleModal77);
+    // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
+    closeButton.addEventListener("click", toggleModal);
+    closeButton2.addEventListener("click", toggleModal2_close);
+    closeButton3.addEventListener("click", toggleModal3);
+    closeButton4.addEventListener("click", toggleModal4);
+    closeButton77.addEventListener("click", toggleModal77);
+    cancel.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+</script>
