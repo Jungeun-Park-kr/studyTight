@@ -10,7 +10,8 @@ const friend_schema = new Schema({
     Friend_Name: { type: String },
     received: { type: Boolean },
     send: { type: Boolean },
-    friend_link: { type: String }
+    friend_link: { type: String },
+    friend_group: { type: String },
 
 });
 

@@ -124,7 +124,7 @@
             </li> -->
 
             <li class="edit-profile">
-                <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
+                <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger14"></input>
             </li>
         </div>
 
@@ -197,26 +197,170 @@
                                         }
                                     </script>
                                     <hr>
-                                    <% for(var i = 0; i < search_list.length; i++){ %>
-                                        <div class="professor_name_section">
-                                            <div class="professor_name_label">
-                                                <%=search_list[i].name%>
+                                    <form action='/guestbook/searchemail/friendadd' method="post">
+                                        <% for(var i = 0; i < search_list.length; i++){ %>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">
+                                                    <%=search_list[i].name%>
+                                                </div>
+                                                <div class="professor_name_form">
+                                                    <%=search_list[i].email%>
+                                                </div>
+                                                <input type="checkbox" name="select_friend" id="checked" value="<%= search_list[i].email %>" onclick="oneCheckbox(this)">
                                             </div>
-                                            <div class="professor_name_form">
-                                                <%=search_list[i].email%>
-                                            </div>
-                                            <input type="checkbox" name="select_friend" value="select" onclick="oneCheckbox(this)">
-                                        </div>
-                                        <% } %>
-                                            <div class="add_btn">
-                                                <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="추가하기"></input>
-                                            </div>
+                                            <% } %>
+                                                <div class="add_btn">
+                                                    <input id="btn_add_course" class="trigger4" type="submit" title="저장하기" value="추가하기"></input>
+                                                </div>
+                                    </form>
                                 </div>
                                 </form>
                             </div>
                         </div>
                     </div>
 
+                    <!-- 수정중 -->
+
+                    <script type="text/javascript">
+                        var modal = document.querySelector(".modal");
+                        var modal2 = document.querySelector(".modal2");
+                        var modal3 = document.querySelector(".modal3");
+                        var modal4 = document.querySelector(".modal4");
+                        var trigger = document.querySelector(".trigger");
+                        var trigger2 = document.querySelector(".trigger2");
+                        var trigger3 = document.querySelector(".trigger3");
+                        var trigger4 = document.querySelector(".trigger4");
+                        var closeButton = document.querySelector(".close-button");
+                        var closeButton2 = document.querySelector(".close-button2");
+                        var closeButton3 = document.querySelector(".close-button3");
+                        var closeButton4 = document.querySelector(".close-button4");
+                        var cancelButton = document.querySelector("#cancel");
+
+                        //console.log(modal);
+
+                        function toggleModal() {
+                            modal.classList.toggle("show-modal");
+                        }
+
+                        function toggleModal2() {
+                            modal2.classList.toggle("show-modal");
+                            modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
+                        }
+
+                        function toggleModal3() {
+                            modal3.classList.toggle("show-modal");
+                        }
+
+                        function toggleModal4() {
+                            modal4.classList.toggle("show-modal");
+                        }
+
+
+                        function toggleModal2_close() {
+                            modal2.classList.toggle("show-modal");
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal) {
+                                toggleModal();
+                            }
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal2) {
+                                toggleModal2();
+                            }
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal4) {
+                                toggleModal4();
+                            }
+                        }
+
+                        trigger.addEventListener("click", toggleModal);
+                        trigger2.addEventListener("click", toggleModal2);
+                        trigger3.addEventListener("click", toggleModal3);
+                        trigger4.addEventListener("click", toggleModal4);
+                        closeButton.addEventListener("click", toggleModal);
+                        closeButton2.addEventListener("click", toggleModal2_close);
+                        closeButton3.addEventListener("click", toggleModal3);
+                        closeButton4.addEventListener("click", toggleModal4);
+                        cancel.addEventListener("click", toggleModal);
+                        window.addEventListener("click", windowOnClick);
+                    </script>
+
+                    <div class="modal4">
+                        <div class="modal-content4">
+                            <span class="close-button4">&times;</span>
+                            <h1 class="title">프로필 수정하기</h1>
+                            <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                            <div class="course_add_list">
+                                <div class="course_section">
+                                    <div class="secret_section">
+                                        <div class="course_secret_label">공개여부</div>
+                                    </div>
+                                    <form>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">이름</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="name" id="name" placeholder=<%=user.name %> />
+                                            </div>
+                                            <div class="course_type_form1" id="course_type_radio">
+                                                <label><input type="radio" name="name_private"  size="20" value='true' id="names"   checked>공개</label>
+                                                <label><input type="radio" name="name_private"  size="20" value='false'  >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학교</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="school" id="school" placeholder=<%=profile.school%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="school_private" size="20" value='true' id="school_secret"   checked>공개</label>
+                                                <label><input type="radio" name="school_private" size="20" value='false'  >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학과</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="major" id="major" placeholder=<%=profile.major%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="major_private" size="20" value='true' id="major_secret"  checked>공개</label>
+                                                <label><input type="radio" name="major_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학년</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="grade" id="grade" placeholder=<%=profile.grade%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
+                                                <label><input type="radio" name="grade_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">나이</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" id="age" name="age" placeholder="내용을 입력해주세요" />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
+                                                <label><input type="radio" name="age_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="add_btn">
+                                            <input id="btn_add_course1" type="submit" title="저장하기" value="저장하기"></input>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 수정끝 -->
 
                     </form>
                 </div>
