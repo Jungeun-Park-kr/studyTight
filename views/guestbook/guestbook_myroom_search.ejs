@@ -197,20 +197,22 @@
                                         }
                                     </script>
                                     <hr>
-                                    <% for(var i = 0; i < search_list.length; i++){ %>
-                                        <div class="professor_name_section">
-                                            <div class="professor_name_label">
-                                                <%=search_list[i].name%>
+                                    <form action='/guestbook/searchemail/friendadd' method="post">
+                                        <% for(var i = 0; i < search_list.length; i++){ %>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">
+                                                    <%=search_list[i].name%>
+                                                </div>
+                                                <div class="professor_name_form">
+                                                    <%=search_list[i].email%>
+                                                </div>
+                                                <input type="checkbox" name="select_friend" id="checked" value="<%= search_list[i].email %>" onclick="oneCheckbox(this)">
                                             </div>
-                                            <div class="professor_name_form">
-                                                <%=search_list[i].email%>
-                                            </div>
-                                            <input type="checkbox" name="select_friend" value="select" onclick="oneCheckbox(this)">
-                                        </div>
-                                        <% } %>
-                                            <div class="add_btn">
-                                                <input id="btn_add_course" class="trigger2" type="button" title="저장하기" value="추가하기"></input>
-                                            </div>
+                                            <% } %>
+                                                <div class="add_btn">
+                                                    <input id="btn_add_course" class="trigger2" type="submit" title="저장하기" value="추가하기"></input>
+                                                </div>
+                                    </form>
                                 </div>
                                 </form>
                             </div>

@@ -61,12 +61,38 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             search_email: search_email,
             search_list: search_list
         });
-        console.log(search_list);
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
         console.error(err);
         next(err);
     }
+});
+
+router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
+    const { select_friend } = req.body; //이렇게하면 체크된 값이 제대로 전달이 잘된다.
+
+    try {
+        const { search_email } = req.query; //get이라서 query해야됨.
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+        const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
+        const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const search_list = await User.find({ name: new RegExp(search_email) })
+        const OneUser = await User.findOne({ email: select_friend })
+        const pprofile = await Profile.findOne({ user_id: res.locals.user._id }).populate('profiles')
+            // mongoDB에 프로파일 추가
+        const addfriend = await Friend.create({
+            user_id: pprofile.user_id,
+            received: true,
+            send: true,
+            Friend_ID: select_friend,
+            Friend_Name: OneUser.name,
+            friend_link: OneUser.email_id,
+            friend_group: "basic"
+        })
+
+    } catch (err) {}
+
 });
 
 
@@ -88,7 +114,6 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
             post_id: top_comment1.length + 1,
 
         });
-
 
     } catch (err) {}
 
