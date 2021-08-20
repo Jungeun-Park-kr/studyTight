@@ -116,6 +116,7 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
             post_id: top_comment1.length + 1,
 
         });
+        res.redirect("/guestbook");
 
     } catch (err) {}
 
