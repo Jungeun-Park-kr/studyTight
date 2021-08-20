@@ -123,6 +123,52 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
 //     }
 // });
 
+
+
+
+
+
+// router.post('/:id/add',isLoggedIn, async(req,res,next) => {
+//     var postItList=new Array();
+
+//     //const folder_id=req.body.folder_id;
+//     const folder_id=req.params.id;
+//     //console.log('folder_id는 '+folder_id);
+//     const postIt_name=req.body.postIt_name;
+//     const postIt_content=req.body.postIt_content;
+//     const postIt_type=req.body.postIt_type;
+//     const postIt_star=req.body.postIt_star;
+//     const postIt_color=req.body.postIt_color;
+
+//     try{ 
+//         const postIt=await PostIt.create({
+//             postIt_name:postIt_name,
+//             postIt_type:postIt_type,
+//             postIt_content:postIt_content,
+//             postIt_star:postIt_star,
+//             postIt_color:postIt_color,
+//             folder_id:folder_id
+
+//         }); //포스트잇 만들기
+//         postItList.push(postIt._id);
+
+
+//         await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
+//             $push:{
+//                 postIt:postItList
+//             }
+//         });
+
+
+//         res.send(postIt);
+
+
+//     }catch(err){
+//         console.error('routes/folder/folder.js 에서 포스트잇 추가 과정에러');
+//         next(err);
+//     }
+// });
+
 router.get('/searchemail', isLoggedIn, async(req, res, next) => {
 
     try {
