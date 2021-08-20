@@ -335,6 +335,35 @@ select::-ms-expand {
     float: none;
 }
 
+.friends_list_box0,
+.friends_list_box1,
+.friends_list_box2,
+.friends_list_box3,
+.friends_list_box4,
+.friends_list_box5,
+.friends_list_box6,
+.friends_list_box7,
+.friends_list_box8,
+.friends_list_box9,
+.friends_list_box10 {
+    overflow: auto;
+    background-color: #d6d6d6;
+    align-content: center;
+    margin-top: 30px;
+    margin-left: 55px;
+    margin-right: 55px;
+    height: 0.5%;
+    width: 85.5%;
+    float: none;
+    display: none;
+    max-height: 100px;
+    min-height: 100px;
+}
+
+#course_body tr {
+    line-height: 1.1rem;
+}
+
 .user-small-talking {
     font-size: 12px;
 }

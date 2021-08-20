@@ -436,13 +436,24 @@
                                 <hr>
                                 <div class="professor_name_section">
                                     <div class="professor_name_label">그룹변경</div>
-                                    <select name="group-dropdown">
+                                    <select name="group_dropdown" id="group_dropdown">
                 <option value="none">=== 선택 ===</option>
                 <option value="korean" selected>기본그룹</option>
                 <option value="english">고등학교 친구들</option>
                 <option value="chinese">대학교 친구들</option>
                 <option value="spanish">연락XX</option>
             </select>
+
+                                    <script>
+                                        jQuery('#selectBox').change(function() {
+                                            var state = jQuery('#selectBox option:selected').val();
+                                            if (state == 'option2') {
+                                                jQuery('.layer').show();
+                                            } else {
+                                                jQuery('.layer').hide();
+                                            }
+                                        });
+                                    </script>
                                 </div>
                                 <div class="add_group_section">
                                     <img src="/media/plus.png" id=plus> 새로운 그룹 추가하기

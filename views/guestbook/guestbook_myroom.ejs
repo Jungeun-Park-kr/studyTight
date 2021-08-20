@@ -136,12 +136,10 @@
                 <div class="friends_add">
                     <div class="title_msg">Friends</div>
                     <div>
-                        <select name="group-dropdown">
-                        <option value="none">=== 선택 ===</option>
-                        <option value="korean" selected>기본그룹</option>
-                        <option value="english">고등학교 친구들</option>
-                        <option value="chinese">대학교 친구들</option>
-                        <option value="spanish">연락XX</option>
+                        <select name="group_dropdown" id="group_dropdown">
+                            <% for(var i = 0; i < profile.group.length; i++){ %>
+                        <option value=<%='option'+i%>><%=profile.group[i]%></option>
+                        <% } %>
                         </select>
                         <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->
@@ -149,6 +147,72 @@
                             <input type="button" class="trigger" value="+ 친구 추가하기"></input>
                             <!-- 위에 존재하던 onclick 메소드는 모달팝업을 이용하면서 삭제하게 되었습니다 -->
                         </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                jQuery('.friends_list_box0').show();
+                            });
+
+
+                            jQuery('#group_dropdown').change(function() {
+                                var state = jQuery('#group_dropdown option:selected').val();
+                                if (state == 'option0') {
+                                    jQuery('.friends_list_box0').show();
+                                } else {
+                                    jQuery('.friends_list_box0').hide();
+                                }
+                                if (state == 'option1') {
+                                    jQuery('.friends_list_box1').show();
+                                } else {
+                                    jQuery('.friends_list_box1').hide();
+                                }
+                                if (state == 'option2') {
+                                    jQuery('.friends_list_box2').show();
+                                } else {
+                                    jQuery('.friends_list_box2').hide();
+                                }
+                                if (state == 'option3') {
+                                    jQuery('.friends_list_box3').show();
+                                } else {
+                                    jQuery('.friends_list_box3').hide();
+                                }
+                                if (state == 'option4') {
+                                    jQuery('.friends_list_box4').show();
+                                } else {
+                                    jQuery('.friends_list_box4').hide();
+                                }
+                                if (state == 'option5') {
+                                    jQuery('.friends_list_box5').show();
+                                } else {
+                                    jQuery('.friends_list_box5').hide();
+                                }
+                                if (state == 'option6') {
+                                    jQuery('.friends_list_box6').show();
+                                } else {
+                                    jQuery('.friends_list_box6').hide();
+                                }
+                                if (state == 'option7') {
+                                    jQuery('.friends_list_box7').show();
+                                } else {
+                                    jQuery('.friends_list_box7').hide();
+                                }
+                                if (state == 'option8') {
+                                    jQuery('.friends_list_box8').show();
+                                } else {
+                                    jQuery('.friends_list_box8').hide();
+                                }
+                                if (state == 'option9') {
+                                    jQuery('.friends_list_box9').show();
+                                } else {
+                                    jQuery('.friends_list_box9').hide();
+                                }
+                                if (state == 'option10') {
+                                    jQuery('.friends_list_box10').show();
+                                } else {
+                                    jQuery('.friends_list_box10').hide();
+                                }
+                            });
+                        </script>
 
                         <!-- 4번째 모달팝업.-->
                         <div class="modal4">
@@ -406,28 +470,30 @@
 
                     </form>
                 </div>
+                <% for(var j = 0; j < profile.group.length; j++){ %>
+                    <div class=<%='friends_list_box' +j%>>
+                        <table id="course_table">
+                            <tbody id="course_body">
 
-                <div class="friends_list_box">
-                    <table id="course_table">
-                        <tbody id="course_body">
-
-                            <% for(var i = 0; i < friend.length; i++){ %>
-                                <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
-                                    <td>
-                                        <%=friend[i].Friend_ID %>
-                                    </td>
-                                    <td>
-                                        <%=friend[i].Friend_Name %>
-                                    </td>
-                                </tr>
-                                <% } %>
+                                <% for(var i = 0; i < friend.length; i++){ %>
+                                    <% if(profile.group[j]==(friend[i].friend_group)){ %>
+                                        <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
+                                            <td>
+                                                <%=friend[i].Friend_ID %>
+                                            </td>
+                                            <td>
+                                                <%=friend[i].Friend_Name %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% } %>
 
 
 
-                        </tbody>
-                    </table>
-                </div>
-
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
             </div>
             <form action="/guestbook/addcomment" method="post">
                 <div class="writing-place" id=wBOX>
