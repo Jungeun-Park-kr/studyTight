@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+    </title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <link rel="stylesheet" href="/public/mainframe_shortcuts.css">
+    <link rel="stylesheet" href="/public/mainframe.css">
+    <link rel="stylesheet" href="/public/font.css">
+
+    <link rel="stylesheet" type="text/css" href="/public/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/component.css" />
+
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/add_popup_search.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/index.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/reply.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/guestbook_myroom.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/friends_edit.css" />
+</head>
+
+<div id="header" role="banner">
+    <div class="main_header">
+        <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
+        <div class="logo_area">
+            <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt="" /></a>
+            <section class="group_menu">
+                <nav class="menu_effect" id="menu_nav">
+                    <a href="/" class="menu" id="menu_home">내 공부방</a>
+                    <a href="/guestbook" class="menu_active menu " id="menu_guestbook" style="color: #6ED4D8; font-weight: 700;">방명록</a>
+                    <a href="/timetable/main" class="menu" id="menu_timetable">시간표</a>
+                </nav>
+            </section>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                const location = window.location.pathname;
+                //onsole.log('현재 url:'+location);
+                if (location == '/') {
+                    // $('#menu_home').css({'outline': 'none', 'color':'#6ED4D8', 'text-decoration-color': '#6ED4D8', 'font-weight': '700' });
+                    $('#menu_home').addClass('menu_active');
+                    $('#menu_guestbook').removeClass('menu_active');
+                    $('#menu_timetable').removeClass('menu_active');
+                } else if (location == '/guestbook') {
+                    $('#menu_guestbook').addClass('menu_active');
+                    $('#menu_home').removeClass('menu_active');;
+                    $('#menu_timetable').removeClass('menu_active');
+                } else if (location == '/timetable/main' || location == '/timetable/edit') {
+                    $('#menu_timetable').addClass('menu_active');
+                    $('#menu_home').removeClass('menu_active');
+                    $('#menu_guestbook').removeClass('menu_active');
+                } else {
+                    $('#menu_home').removeClass('menu_active');
+                    $('#menu_guestbook').removeClass('menu_active');
+                    $('#menu_timetable').removeClass('menu_active');
+                }
+
+
+            });
+        </script>
+        <div class="login">
+            <div class="profile_section">
+                <% if (user) { %>
+                    <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %>
+                        <div class="alarm_bell">
+                            <img id="alarm_bell_img" src="/public/media/bell_pure.png">
+                        </div>
+                        <div class="profile">
+                            <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
+                            <img id="activeUserimg" src=<%=user.profile_image %> onclick="location.href='#프로필수정화면'">
+                            <div class="username" id="activeUsername">
+                                <%= user.name +'님'%>
+                            </div>
+                        </div>
+                        <div class="logout">
+                            <input type="submit" class="btn_logout" title="로그아웃" value="로그아웃" onClick="location.href='/auth/logout'" />
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="container" role="main">
+    <div class="information-menu">
+        <!-- <img id="MyUserimg" src=<%=user.profile_image %> -->
+
+        <div class="left-menus-book" id=leftmenu>
+
+            <li class="profile">
+                <img id="MyUserimg" src=<%=user.profile_image %>>
+            </li>
+
+            <li class="school">
+                <% if (profile.school_private) { %>
+                    <img id="school-card" src="/public/media/office-building.png">
+                    <%=profile.school+'소속'%>
+                        <% } %>
+            </li>
+            <li class="grade">
+                <% if (profile.grade_private) { %>
+                    <img id="grade-card" src="/public/media/calendar.png">
+                    <%=profile.grade+'학년'%>
+                        <% } %>
+            </li>
+            <li class="major">
+                <% if (profile.major_private) { %>
+                    <img id="mahor-card" src="/public/media/books.png">
+                    <%=profile.major+'전공'%>
+                        <% } %>
+            </li>
+            <!-- <li class="grade">
+                <img id="grade-card" src="/public/media/mortarboard.png">
+                <%=profile.grade+'학년'%>
+            </li> -->
+
+            <li class="edit-profile">
+                <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger14"></input>
+            </li>
+        </div>
+
+    </div>
+    <div class="section">
+        <div class="my-room">
+            <!-- 방명록 -->
+            <div class="friends">
+                <div class="friends_add">
+                    <div class="title_msg">Friends</div>
+                    <div>
+                        <select name="group-dropdown">
+                        <option value="none">=== 선택 ===</option>
+                        <option value="korean" selected>기본그룹</option>
+                        <option value="english">고등학교 친구들</option>
+                        <option value="chinese">대학교 친구들</option>
+                        <option value="spanish">연락XX</option>
+                        </select>
+                        <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
+                        <!-- 이후 모달 팝업으로 추가.-->
+                        <div class="btn_add_course">
+                            <input type="button" class="trigger" value="+ 친구 추가하기"></input>
+                            <!-- 위에 존재하던 onclick 메소드는 모달팝업을 이용하면서 삭제하게 되었습니다 -->
+                        </div>
+
+                    </div>
+
+                    <!-- 첫번째로 팝업될 친구 검색 레이어!!!!!!-->
+                    <div class="modal show-modal">
+                        <div class="modal7">
+                            <form action='/guestbook/searchemail/friendadd/edit' method="post">
+                                <div class="modal-content">
+                                    <span class="close-button3" onclick="location.href='/guestbook'">&times;</span>
+                                    <h1 class="title">친구 관리하기</h1>
+                                    <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                                    <div class="course_add_list">
+                                        <div class="course_section">
+                                            <div class="secret_section">
+                                                <div class="course_secret_label">선택된 친구</div>
+                                            </div>
+                                            <div class="course_title_section">
+
+
+                                                <div class="course_secret_label">
+                                                    <%=select_info.Friend_Name+'   '%>
+                                                        <%=select_info.Friend_ID %>
+                                                </div>
+
+                                                <div class="course_type_form" id="course_type_radio">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <hr>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">즐겨찾기 여부</div>
+                                            <input type="checkbox" name="star_friend" value='true' checked>
+                                            <div class="professor_name_form">
+                                                즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">그룹변경</div>
+                                            <select name="group_dropdown">
+                                            <option value="basic">=== 선택 ===</option>
+                                            <option value="korean" selected>기본그룹</option>
+                                            <option value="english">고등학교 친구들</option>
+                                            <option value="chinese">대학교 친구들</option>
+                                            <option value="spanish">연락XX</option>
+                                          </select>
+                                        </div>
+                                        <hr>
+                                        <div class="delete_section">
+                                            친구 삭제하기
+                                        </div>
+                                        <div class="add_btn">
+                                            <input id="btn_add_course" type="submit" title="저장하기" value="저장하기"></input>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 수정중 -->
+
+                    <script type="text/javascript">
+                        var modal = document.querySelector(".modal");
+                        var modal2 = document.querySelector(".modal2");
+                        var modal3 = document.querySelector(".modal3");
+                        var modal4 = document.querySelector(".modal4");
+                        var trigger = document.querySelector(".trigger");
+                        var trigger2 = document.querySelector(".trigger2");
+                        var trigger3 = document.querySelector(".trigger3");
+                        var trigger4 = document.querySelector(".trigger4");
+                        var closeButton = document.querySelector(".close-button");
+                        var closeButton2 = document.querySelector(".close-button2");
+                        var closeButton3 = document.querySelector(".close-button3");
+                        var closeButton4 = document.querySelector(".close-button4");
+                        var cancelButton = document.querySelector("#cancel");
+
+                        //console.log(modal);
+
+                        function toggleModal() {
+                            modal.classList.toggle("show-modal");
+                        }
+
+                        function toggleModal2() {
+                            modal2.classList.toggle("show-modal");
+                            modal.classList.toggle("show-modal"); //두번쨰와 첫번째가 겹치면 안됨으로 바로 첫번째 모달을 삭제.
+                        }
+
+                        function toggleModal3() {
+                            modal3.classList.toggle("show-modal");
+                        }
+
+                        function toggleModal4() {
+                            modal4.classList.toggle("show-modal");
+                        }
+
+
+                        function toggleModal2_close() {
+                            modal2.classList.toggle("show-modal");
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal) {
+                                toggleModal();
+                            }
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal2) {
+                                toggleModal2();
+                            }
+                        }
+
+                        function windowOnClick(event) {
+                            if (event.target === modal4) {
+                                toggleModal4();
+                            }
+                        }
+
+                        trigger.addEventListener("click", toggleModal);
+                        trigger2.addEventListener("click", toggleModal2);
+                        trigger3.addEventListener("click", toggleModal3);
+                        trigger4.addEventListener("click", toggleModal4);
+                        closeButton.addEventListener("click", toggleModal);
+                        closeButton2.addEventListener("click", toggleModal2_close);
+                        closeButton3.addEventListener("click", toggleModal3);
+                        closeButton4.addEventListener("click", toggleModal4);
+                        cancel.addEventListener("click", toggleModal);
+                        window.addEventListener("click", windowOnClick);
+                    </script>
+
+                    <div class="modal4">
+                        <div class="modal-content4">
+                            <span class="close-button4">&times;</span>
+                            <h1 class="title">프로필 수정하기</h1>
+                            <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                            <div class="course_add_list">
+                                <div class="course_section">
+                                    <div class="secret_section">
+                                        <div class="course_secret_label">공개여부</div>
+                                    </div>
+                                    <form>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">이름</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="name" id="name" placeholder=<%=user.name %> />
+                                            </div>
+                                            <div class="course_type_form1" id="course_type_radio">
+                                                <label><input type="radio" name="name_private"  size="20" value='true' id="names"   checked>공개</label>
+                                                <label><input type="radio" name="name_private"  size="20" value='false'  >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학교</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="school" id="school" placeholder=<%=profile.school%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="school_private" size="20" value='true' id="school_secret"   checked>공개</label>
+                                                <label><input type="radio" name="school_private" size="20" value='false'  >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학과</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="major" id="major" placeholder=<%=profile.major%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="major_private" size="20" value='true' id="major_secret"  checked>공개</label>
+                                                <label><input type="radio" name="major_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">학년</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" name="grade" id="grade" placeholder=<%=profile.grade%> />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
+                                                <label><input type="radio" name="grade_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">나이</div>
+                                            <div class="professor_name_form">
+                                                <input type="text" id="age" name="age" placeholder="내용을 입력해주세요" />
+                                            </div>
+                                            <div class="course_type_form" id="course_type_radio">
+                                                <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
+                                                <label><input type="radio" name="age_private" size="20" value='false' >비공개</label>
+                                            </div>
+                                        </div>
+                                        <div class="add_btn">
+                                            <input id="btn_add_course1" type="submit" title="저장하기" value="저장하기"></input>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 수정끝 -->
+
+                    </form>
+                </div>
+
+                <script>
+                    function showfriendlist() {
+                        var username = localStorage.getItem('username');
+                        activeUser = getActiveUser(username);
+                        myfriends = activeUser.guestbook.friendslist;
+                        var parent_table = document.getElementById("course_body"); //부모테이블
+
+
+                        for (i = 0; i < myfriends.length; i++) {
+                            var box = document.createElement("tr");
+                            var name = document.createElement("td");
+                            var email = document.createElement("td");
+                            box.addEventListener('click', function(e) {
+                                //console.info(this);
+                                var children = this.childNodes; //클릭한 객체의 자식 가져옴
+                                console.info(children);
+                                console.info(children[0]); //0번째 요소가 이름
+                                console.log('방명록 이동할 친구 이름:' + children[0].innerHTML);
+                                var fname = children[0].innerHTML;
+                                localStorage.setItem('friendName', fname); //localStorage에 방문하는 친구이름 저장  
+                                if (fname == '최시언')
+                                    location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
+                                if (fname == '양지영')
+                                    location.href = "/guestbook/guestbook_myroom_y.html"; //홈 주소 //뒤로가기가능
+                                if (fname == '김삿갓')
+                                    location.href = "/guestbook/guestbook_myroom_k.html"; //홈 주소 //뒤로가기가능
+                                if (fname == '김준면')
+                                    location.href = "/guestbook/guestbook_myroom_j.html"; //홈 주소 //뒤로가기가능
+                            })
+                            name.innerHTML = myfriends[i].guestbookowner;
+                            email.innerHTML = myfriends[i].email;
+                            box.appendChild(name);
+                            box.appendChild(email);
+                            parent_table.appendChild(box);
+                        }
+
+                    }
+                </script>
+
+                <div class="friends_list_box">
+                    <table id="course_table">
+                        <tbody id="course_body">
+
+                            <% for(var i = 0; i < friend.length; i++){ %>
+                                <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
+                                    <td>
+                                        <%=friend[i].Friend_ID %>
+                                    </td>
+                                    <td>
+                                        <%=friend[i].Friend_Name %>
+                                    </td>
+                                </tr>
+                                <% } %>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="writing-place" id=wBOX>
+                <div class="writing-box">
+                    <!--행(row)선언-->
+                    <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;">
+                </div>
+                <div class="writing-button-secret">
+                    <div class="writing-button">
+                        <input type="button" id="submit" value="글쓰기" onclick="location.href='/guestbook/addcomment'"></input>
+                    </div>
+                    <div class="secret-checkbox">
+                        <input type="checkbox" name="비밀글" id=mysecretbox> 비밀글
+                    </div>
+
+                </div>
+
+                <!-- index.jsdml 33번째줄 참고-->
+            </div>
+            <hr id="myroom-line">
+            <div id=comments> </div>
+            <div class="talking-place" id="talking-place">
+
+                <% for(var i = 0; i < top_comment.length; i++){ %>
+                    <div class="talking">
+                        <div class="mini-profile">
+                            <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
+                        </div>
+                        <div class="user-small-talking">
+                            <div class="user-name">
+                                <%=top_comment[i].commenter_email.name %>
+                            </div>
+                            <div class="user-talking-list">
+                                <%=top_comment[i].text %>
+                            </div>
+                            <div class="today-button">
+                                <div class="today">
+                                    <%=top_comment[i].comment_time %>
+                                </div>
+                                <div class="reply-button">
+                                    <input type="button" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 자신의 아래있는 내용을 클릭시 안보이게 해주는 버튼 -->
+                    <script>
+                        function test(id) {
+                            var my_table = document.getElementById(id);
+                            var bottom = my_table.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                            console.log(bottom);
+                            bottom.style.display = 'block';
+                            bottom.style.visibility = 'visible';
+                        }
+                    </script>
+
+                    <div class="reply-place" id=replyplace<%i %>>
+                        <div class="writing-box">
+                            <!--행(row)선언-->
+                            <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                        </div>
+                        <div class="writing-button-secret">
+                            <div class="writing-button">
+                                <input type="button" id="submit" value="글쓰기"></input>
+                            </div>
+                            <div class="secret-checkbox">
+                                <input type="checkbox" name="비밀글"> 비밀글
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <script src="index.js "></script>
+                    <% } %>
+                        <tr>
+                            <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                            <!-- <td colspan="6 ">
+                                <center>
+                                    <a href="#">1</a>
+                                    <a href="#">2</a>
+                                    <a href="# "></a>
+                                    <a href="# "></a>
+                                    <a href="# "></a>
+                                </center>
+                            </td> -->
+                        </tr>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+</html>
