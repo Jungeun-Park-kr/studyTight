@@ -91,6 +91,8 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
             friend_group: "basic"
         })
 
+        res.redirect("/guestbook");
+
     } catch (err) {}
 
 });
