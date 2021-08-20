@@ -174,7 +174,7 @@
                                                 </div>
 
                                                 <div class="course_type_form" id="course_type_radio">
-
+                                                    <input name="friend_id" type="hidden" value=<%=select_info.Friend_ID%>>
                                                 </div>
                                             </div>
 
@@ -191,7 +191,7 @@
                                         <hr>
                                         <div class="professor_name_section">
                                             <div class="professor_name_label">그룹변경</div>
-                                            <select name="group-dropdown">
+                                            <select name="group_dropdown">
                                                 <% for(var i = 0; i < profile.group.length; i++){ %>
                                             <option value=<%=profile.group[i]%>><%=profile.group[i]%></option>
                                             <% } %>

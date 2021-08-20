@@ -68,6 +68,30 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
     }
 });
 
+router.post('/addgroup', isLoggedIn, async(req, res, next) => {
+    const { search_email } = req.body;
+
+    try {
+
+        const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
+
+        await Profile.updateOne({ user_id: res.locals.user._id }, {
+            $push: {
+                group: search_email
+            }
+        });
+
+        res.redirect("/guestbook");
+
+    } catch (err) {
+
+        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error(err);
+        next(err);
+    }
+
+});
+
 router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
 
     try {
@@ -99,7 +123,7 @@ router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
 });
 
 router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => {
-    const { star_friend, group_dropdown } = req.body;
+    const { star_friend, group_dropdown, friend_id } = req.body;
     try {
         const { select_friend } = req.query;
         const { search_email } = req.query;
@@ -109,6 +133,11 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
         const search_list = await User.find({ name: new RegExp(search_email) })
         const select_info = await Friend.findOne({ Friend_ID: select_friend })
+
+        await Friend.updateOne({ user_id: res.locals.user._id, Friend_ID: friend_id }, {
+            friend_group: group_dropdown
+        });
+
         res.redirect("/guestbook");
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
