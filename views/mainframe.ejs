@@ -587,6 +587,8 @@
                                     //console.log(revise_folder_img);
                                     if(revise_folder_name.trim()==''){
                                         alert("수정할 이름을 입력하세요");
+                                    }else if(revise_folder_name.indexOf('<')!=-1 && revise_folder_name.indexOf('>')!=-1){
+                                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                                     }else{
                                         fetch('/folder_revise',{
                                             method:'PATCH',
@@ -649,7 +651,7 @@
                 <div class="aside">
                     <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
                     <div class="aside_wrap">
-                        <p>오늘 할 일</p>
+                        <p class="todo_name">오늘 할 일</p>
                         
                         <div class="todaylist" id="todaylist">
                             
@@ -886,7 +888,9 @@
         //var new_todo_id=todolist._id;
         if(new_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
-        else{
+        else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
+                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+        }else{
             var new_todolist;
             $.ajax({
                 type:'POST',
@@ -1032,6 +1036,8 @@
         //console.log(new_folder_img);
         if(new_folder_name.trim()===''){
             alert('폴더 이름을 입력하세요');
+        }else if(new_folder_name.indexOf('<')!=-1 && new_folder_name.indexOf('>')!=-1 ){
+            alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
             $.ajax({
                 type:'POST',
@@ -1237,6 +1243,9 @@
             } else if (new Date(date) < new Date(todayDate)) { // 오늘 날짜 이전이면 에러 처리
                 alert('디데이 날짜는 금일('+todayDate+') 보다 이전일 수 없습니다.');
                 $('.modal-d-plus').bind('click', function() { saveDday(this); });
+            } else if(content.indexOf('<')!=-1 && content.indexOf('>')!=-1){
+                alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+
             } else { // 저장하기
                 $.ajax({
                     type:"POST",
