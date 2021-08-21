@@ -452,6 +452,12 @@ select::-ms-expand {
     display: inline-block;
 }
 
+#talking{
+    display: inline-block;
+    width: 90%;
+    padding: 15px;
+}
+
 .talking {
     display: inline-block;
     width: 90%;

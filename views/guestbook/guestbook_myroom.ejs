@@ -629,10 +629,12 @@
                 </div>
             </div> -->
 
+
+            
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
-                    <div class="talking">
+                    <div id='talking' class=<%='talking' +i%>>
                         <div class="mini-profile">
                             <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                         </div>
@@ -689,18 +691,86 @@
                     <% } %>
                         <tr>
                             <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                            <!-- <td colspan="6 ">
+                            <td colspan="6 ">
                                 <center>
-                                    <a href="#">1</a>
-                                    <a href="#">2</a>
-                                    <a href="# "></a>
-                                    <a href="# "></a>
-                                    <a href="# "></a>
+                                    <% for(var i = 0; i < top_comment.length/5; i++){ %>
+                                    <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
+                                    <% } %>
                                 </center>
-                            </td> -->
+                            </td>
                         </tr>
 
             </div>
+
+            <script>
+                // $(document).ready(function() {
+                //     jQuery('.friends_list_box0').show();
+                // });
+            
+            
+                jQuery('#talkingc').click(function() {
+                    var state = jQuery('#talkingc').val();
+                    console.log(state);
+                    // if (state == 'option0') {
+                    //     jQuery('.friends_list_box0').show();
+                    // } else {
+                    //     jQuery('.friends_list_box0').hide();
+                    // }
+                    // if (state == 'option1') {
+                    //     jQuery('.friends_list_box1').show();
+                    // } else {
+                    //     jQuery('.friends_list_box1').hide();
+                    // }
+                    // if (state == 'option2') {
+                    //     jQuery('.friends_list_box2').show();
+                    // } else {
+                    //     jQuery('.friends_list_box2').hide();
+                    // }
+                    // if (state == 'option3') {
+                    //     jQuery('.friends_list_box3').show();
+                    // } else {
+                    //     jQuery('.friends_list_box3').hide();
+                    // }
+                    // if (state == 'option4') {
+                    //     jQuery('.friends_list_box4').show();
+                    // } else {
+                    //     jQuery('.friends_list_box4').hide();
+                    // }
+                    // if (state == 'option5') {
+                    //     jQuery('.friends_list_box5').show();
+                    // } else {
+                    //     jQuery('.friends_list_box5').hide();
+                    // }
+                    // if (state == 'option6') {
+                    //     jQuery('.friends_list_box6').show();
+                    // } else {
+                    //     jQuery('.friends_list_box6').hide();
+                    // }
+                    // if (state == 'option7') {
+                    //     jQuery('.friends_list_box7').show();
+                    // } else {
+                    //     jQuery('.friends_list_box7').hide();
+                    // }
+                    // if (state == 'option8') {
+                    //     jQuery('.friends_list_box8').show();
+                    // } else {
+                    //     jQuery('.friends_list_box8').hide();
+                    // }
+                    // if (state == 'option9') {
+                    //     jQuery('.friends_list_box9').show();
+                    // } else {
+                    //     jQuery('.friends_list_box9').hide();
+                    // }
+                    // if (state == 'option10') {
+                    //     jQuery('.friends_list_box10').show();
+                    // } else {
+                    //     jQuery('.friends_list_box10').hide();
+                    // }
+                });
+            </script>
+
+
+            
         </div>
     </div>
 
