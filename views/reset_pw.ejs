@@ -120,6 +120,8 @@
                 var pass2 = $('#password_verify').val();
                 if (pass1.trim() === '') {
                     alert('비밀번호를 입력해주세요');
+                } else if (name.indexOf('<')!=-1 && name.indexOf('>')!=-1 ){
+                    alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                 } else if (pass2.trim() === '') {
                     alert('재확인 비밀번호를 입력해주세요');
                 }

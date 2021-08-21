@@ -45,8 +45,10 @@
                             </label>
                         </span>
                         <div class="terms_box" tabindex="0" id="divService">
-                            <!-- study Tight 이용약관 동의 -->
-                            <div class="article">여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 여기 내용 블라블라 </div>
+                            <div class="article" id="terms_of_service"></div>
+                            <script type="javascript">
+                                
+                            </script>
                         </div>
                     </li>
                     <li class="terms_bx">
@@ -58,12 +60,24 @@
                             </label>
                         </span>
                         <div class="terms_box" tabindex="0" id="divPrivacy">
-                            <!-- 개인정보 수집 및 이용에 대한 안내 -->
                             <div class="policy_summary">
-                                <p class="policy_summary__text">개인정보보호법에 따라 study Tight에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+                                <p class="policy_summary__text">
                                 </p>
                             </div>
-                            <div class="article">여기 내용 블라블라</div>
+                            <div class="article" id="terms_of_privacy"></div>
+                            <script type="text/javascript"> 
+                                $(document).ready(function () {
+                                    $.get("/views/terms/terms_of_service.txt", function(data) {
+                                        console.log(data);
+                                        $("#terms_of_service").val(data);
+                                        document.getElementById("terms_of_service").innerHTML = data;
+                                    });
+                                    $.get("/views/terms/terms_of_privacy.txt", function(data) {
+                                        $("#terms_of_privacy").val(data);
+                                        document.getElementById("terms_of_privacy").innerHTML = data;
+                                    });
+                                });
+                            </script>
                         </div>
                     </li>
                     <li class="terms_bx">
