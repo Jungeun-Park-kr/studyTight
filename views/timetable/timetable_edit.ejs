@@ -286,9 +286,6 @@
                         error : function(err) {
                             alert('과목 삭제를 실패했습니다. \n페이지 새로고침 후 다시 시도해주세요.');
                         }});
-                        /* var parent = document.getElementById('course_table_body');
-                        deleteCourse(title);
-                        parent.removeChild(this.parentElement.parentElement); */
                     }else { //취소버튼 or 다이얼로그 닫은 경우
                         ;
                     }
@@ -302,7 +299,6 @@
                         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
                         var id = $(this).next().val();
                         modify_id = id;
-                        //console.log('수정할과목:'+title, '수정할 DB _id:'+id); 
                         toggleModifyModal();
                     });
                 }
@@ -311,7 +307,6 @@
                     target[i].addEventListener('click', function() { //삭제 버튼 리스너 추가
                         var title = this.parentElement.parentElement.firstElementChild.innerHTML; //과목 이름 가져오기
                         var id = $(this).next().val();
-                        //console.log('삭제할 과목:' + title, '삭제할 DB _id:'+id); //과목 이름 가져오기
                         var rowindex = $(this).closest("tr").index();
                         var ret = confirm("정말로 삭제하시겠습니까?");
                         if (ret) { //삭제 수행
@@ -320,7 +315,6 @@
                                 async : true,
                                 url:'/timetable/course/delete'+id+'', 
                             success:function( data ){ // POST요청 성공한 경우
-                                // location.href='/timetable/edit'
                                 if (data == 'delete_succeeded') { // 삭제한 테이블의 행 삭제
                                     var tbody = window.document.getElementById('course_table_body'); //table body 가져오기
                                     tbody.deleteRow(rowindex);
@@ -329,9 +323,6 @@
                             error : function(err) {
                                 alert('과목 삭제를 실패했습니다. \n다시 시도해주세요.');
                             }});
-                            /* var parent = document.getElementById('course_table_body');
-                            deleteCourse(title);
-                            parent.removeChild(this.parentElement.parentElement); */
                         }else { //취소버튼 or 다이얼로그 닫은 경우
                             ;
                         }
@@ -435,7 +426,6 @@
             closeButton.addEventListener("click", toggleModal);
             close_button_modify.addEventListener("click", toggleModifyModal);
             // window.addEventListener("click", windowOnClick); //모달 밖 클릭시 닫기 하는 함수
-
             
             // 강의 방식 라디오 버튼
             $(document).ready(function () {
@@ -469,7 +459,10 @@
                         alert('강의실을 입력해주세요.');
                     } else if (classroom.trim() === '') {
                         alert('강의 링크를 입력해주세요.');
-                    } else { // 모두 올바르게 입력
+                    }  else if (classroom.indexOf('<')!=-1 && classroom.indexOf('>')!=-1 ){
+                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+                    } 
+                    else { // 모두 올바르게 입력
                         if (count < 5) {
                             $.ajax({
                                 type:"POST",
@@ -554,12 +547,19 @@
                         alert('과목명을 입력해주세요.');
                         $('#course_save').bind('click', function() { saveCourse(this); });
                     } else if (professor.trim() === '') {
-                        alert('교수님 이름을 입력해주세요.');
+                        alert('교수명을 입력해주세요.');
                         $('#course_save').bind('click', function() { saveCourse(this); });
                     } else if (count < 1) {
                         alert('강의 방식 및 시간을 입력한 후 [추가하기]버튼을 눌러 과목 시간을 추가해주세요');
                         $('#course_save').bind('click', function() { saveCourse(this); });
-                    } else {
+                    } else if (professor.indexOf('<')!=-1 && professor.indexOf('>')!=-1 ){
+                        alert("교수명에 있는 '<', '>' 표시를 제거해주세요.")
+                        $('#course_save').bind('click', function() { saveCourse(this); });
+                    } else if (name.indexOf('<')!=-1 && name.indexOf('>')!=-1 ){
+                        alert("과목명에 있는 '<', '>' 표시를 제거해주세요.")
+                        $('#course_save').bind('click', function() { saveCourse(this); });
+                    } 
+                    else {
                         $.ajax({
                         type:"POST",
                         async : true,
@@ -623,6 +623,8 @@
                         alert('강의실을 입력해주세요.');
                     } else if (classroom.trim() === '') {
                         alert('강의 링크를 입력해주세요.');
+                    } else if (classroom.indexOf('<')!=-1 && classroom.indexOf('>')!=-1 ){
+                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                     } else { // 모두 올바르게 입력
                         if (count < 5) {
                             $.ajax({
@@ -701,10 +703,19 @@
                     var professor = $('#course_professor_modify').val();
                     if (name.trim() === '') {
                         alert('과목명을 입력해주세요.');
+                        $('#course_modify').bind('click', function() { saveCourse(this); });
                     } else if (professor.trim() === '') {
-                        alert('교수님 이름을 입력해주세요.');
+                        alert('교수명을 입력해주세요.');
+                        $('#course_modify').bind('click', function() { saveCourse(this); });
                     } else if (count < 1) {
                         alert('강의 방식 및 시간을 입력한 후 [추가하기]버튼을 눌러 과목 시간을 추가해주세요');
+                        $('#course_modify').bind('click', function() { saveCourse(this); });
+                    } else if (professor.indexOf('<')!=-1 && professor.indexOf('>')!=-1 ){
+                        alert("교수명에 있는 '<', '>' 표시를 제거해주세요.");
+                        $('#course_modify').bind('click', function() { saveCourse(this); });
+                    } else if (name.indexOf('<')!=-1 && name.indexOf('>')!=-1 ){
+                        alert("과목명에 있는 '<', '>' 표시를 제거해주세요.");
+                        $('#course_modify').bind('click', function() { saveCourse(this); });
                     } else {
                         $.ajax({
                         type:"PUT",

@@ -353,6 +353,8 @@
                     console.log('인증번호 확인 성공');
                     isAuthChecked = true;
                     toggleCheckModal();
+                } else if ($('#email_verify').val().indexOf('<')!=-1 && $('#email_verify').val().indexOf('>')!=-1 ){
+                    alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                 } else {
                     alert('인증번호가 일치하지 않습니다.\n다시한번 확인해주세요');
                 }   
@@ -366,8 +368,7 @@
                     alert('비밀번호를 입력해주세요');
                 } else if (pass2.trim() === '') {
                     alert('재확인 비밀번호를 입력해주세요');
-                }
-                else if (pass1 === pass2) { // 비밀번호 확인 성공
+                } else if (pass1 === pass2) { // 비밀번호 확인 성공
                     isPassChecked = true;
                     togglePasswordModal();
                 } else {
@@ -390,7 +391,13 @@
                     alert('비밀번호 재확인을 해주세요');
                 } else if (!isFilled) { // 모두 입력 되었는지 확인
                     alert('모든 회원가입 폼을 작성해주세요.');
-                } else { // 모든 조건 만족해야 가입 성공
+                } else if (name.indexOf('<')!=-1 && name.indexOf('>')!=-1 ){
+                    alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+                } else if (nabirthYme.indexOf('<')!=-1 && birthY.indexOf('>')!=-1 ){
+                    alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+                } else if (birthD.indexOf('<')!=-1 && birthD.indexOf('>')!=-1 ){
+                    alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+                }  else { // 모든 조건 만족해야 가입 성공
                     // 회원가입 양식 전송
                     $.ajax({
                             type:"POST",
