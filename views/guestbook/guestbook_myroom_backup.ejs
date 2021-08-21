@@ -1,52 +1,65 @@
-<div class="modal3">
-    <form action='/guestbook/searchemail' method="get">
-        <div class="modal-content">
-            <span class="close-button3">&times;</span>
-            <h1 class="title">친구 관리하기</h1>
-            <!-- 여기부터 직접 들어갈 Edit 1 파일-->
-            <div class="course_add_list">
-                <div class="course_section">
-                    <div class="secret_section">
-                        <div class="course_secret_label">선택된 친구</div>
-                    </div>
-                    <div class="course_title_section">
+<script>
+    $(document).ready(function() {
+        jQuery('.friends_list_box0').show();
+    });
 
 
-                        <div class="course_secret_label">양지영 ssdsdf@nate.com</div>
-
-                        <div class="course_type_form" id="course_type_radio">
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <hr>
-                <div class="professor_name_section">
-                    <div class="professor_name_label">즐겨찾기 여부</div>
-                    <input type="checkbox" name="select_friend" value="select" checked>
-                    <div class="professor_name_form">
-                        즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
-                    </div>
-                </div>
-                <hr>
-                <div class="professor_name_section">
-                    <div class="professor_name_label">그룹변경</div>
-                    <select name="group_dropdown" id="group_dropdown">
-                        <% for(var i = 0; i < profile.group.length; i++){ %>
-                    <option value=<%='option'+i%>><%=profile.group[i]%></option>
-                    <% } %>
-                    </select>
-                </div>
-                <hr>
-                <div class="delete_section">
-                    친구 삭제하기
-                </div>
-                <div class="add_btn">
-                    <input id="btn_add_course" type="button" title="저장하기" value="저장하기"></input>
-                </div>
-            </div>
-
-        </div>
-    </form>
-</div>
+    jQuery('#group_dropdown').change(function() {
+        var state = jQuery('#group_dropdown option:selected').val();
+        if (state == 'option0') {
+            jQuery('.friends_list_box0').show();
+        } else {
+            jQuery('.friends_list_box0').hide();
+        }
+        if (state == 'option1') {
+            jQuery('.friends_list_box1').show();
+        } else {
+            jQuery('.friends_list_box1').hide();
+        }
+        if (state == 'option2') {
+            jQuery('.friends_list_box2').show();
+        } else {
+            jQuery('.friends_list_box2').hide();
+        }
+        if (state == 'option3') {
+            jQuery('.friends_list_box3').show();
+        } else {
+            jQuery('.friends_list_box3').hide();
+        }
+        if (state == 'option4') {
+            jQuery('.friends_list_box4').show();
+        } else {
+            jQuery('.friends_list_box4').hide();
+        }
+        if (state == 'option5') {
+            jQuery('.friends_list_box5').show();
+        } else {
+            jQuery('.friends_list_box5').hide();
+        }
+        if (state == 'option6') {
+            jQuery('.friends_list_box6').show();
+        } else {
+            jQuery('.friends_list_box6').hide();
+        }
+        if (state == 'option7') {
+            jQuery('.friends_list_box7').show();
+        } else {
+            jQuery('.friends_list_box7').hide();
+        }
+        if (state == 'option8') {
+            jQuery('.friends_list_box8').show();
+        } else {
+            jQuery('.friends_list_box8').hide();
+        }
+        if (state == 'option9') {
+            jQuery('.friends_list_box9').show();
+        } else {
+            jQuery('.friends_list_box9').hide();
+        }
+        if (state == 'option10') {
+            jQuery('.friends_list_box10').show();
+        } else {
+            jQuery('.friends_list_box10').hide();
+        }
+    });
+</script>
