@@ -168,6 +168,9 @@ body {
     width:50px;
     transform: translate( -50%, -50% );
 }
+.post:hover{
+    font-weight: bolder;
+}
 .postIt_menu > li {
     padding:5px 12px;
     background-color: rgba(255,255,255,0.8);

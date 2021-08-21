@@ -1157,7 +1157,7 @@
                 <div id="MAIN_RIGHT" class='column_right'>
                     <div class="aside">
                         <div class="aside_wrap">
-                            <p>오늘 할 일</p>
+                            <p class="todo_name">오늘 할 일</p>
                             
                             <div class="todaylist" id="todaylist">
                                 
@@ -1332,7 +1332,9 @@
                     //var new_todo_id=todolist._id;
                     if(new_content.trim()===''){ //내용을 입력하지 않은 경우
                         alert("내용을 입력해주세요.");}
-                    else{
+                    else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
+                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+                    }else{
                         var new_todolist;
                         $.ajax({
                             type:'POST',
