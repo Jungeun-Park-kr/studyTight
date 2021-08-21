@@ -91,13 +91,19 @@
                     <p class="folder_name">
                         <%= folder_title.folder_name%>
                     </p>
+                    <script>
+                        var loc=document.querySelector('.folder_name');
+                        loc.addEventListener('click',function(){
+                            location.reload();
+                        })
+                    </script>
                     <div class="big_post">
                     <div id="wrap_postit" class="wrap_postit">
                         <% for(var i=0;i<postIt.length; i++) { %>
                             <div class="postIt">
                                 <% if(postIt[i].postIt_star) { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= i %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
                                     <img class="fixed_star" src="/public/media/black_star.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
@@ -109,7 +115,7 @@
                                     </ul> -->
                                 <% }else { %>
                                     <img class="post_img" src=<%= postIt[i].postIt_color%>>
-                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= postIt[i].postIt_content %>');"><%= postIt[i].postIt_name%></p>
+                                    <p class="post" value='<%= postIt[i]._id%>' onclick="showContent('<%= postIt[i].postIt_type %>','<%= postIt[i].postIt_name %>','<%= i %>');"><%= postIt[i].postIt_name%></p>
                                     <div class="hidden_content" value='<%= postIt[i].postIt_content %>'></div>
                                     <img class="fixed_star" src="/public/media/empty_star_old.png" onclick="starPostClicked('<%= i %>','<%= postIt[i]._id%>','<%= postIt[i].postIt_star %>');">
                                     <img src="/public/media/edit.png" id="revise_postIt" class="revise_postIt" onclick="revisePostClicked('<%= postIt[i]._id%>', '<%= postIt[i].postIt_type %>', '<%= i %>');">
@@ -134,7 +140,7 @@
                             var revise_post_name=document.getElementsByClassName('post')[index].innerHTML;
                             var revise_post_color=document.getElementsByClassName('post_img')[index].getAttribute('src');
                             var revise_post_content=document.getElementsByClassName('hidden_content')[index].getAttribute('value');
-                            console.log(revise_post_name,revise_post_content);
+                            //console.log(revise_post_name,revise_post_content);
                             if(type=='content'){
                                 document.getElementById('revise_content_title').setAttribute('value',revise_post_name);
                                 document.getElementById('revise_post_id').setAttribute('postIt_id',id);
@@ -240,7 +246,7 @@
                         <!-- 여기에 CONTENT의 TITLE넣기 -->
 
                         <div class="modal-body" name="modal_show_body">
-                            <p id="show_content" name="content" class="show_content"></textarea>
+                            <div id="show_content" style="white-space: pre;" name="content" class="show_content"></div>
                             <!-- 여기에 CONTENT의 CONTENT넣기 -->
                         </div>
                         
@@ -856,6 +862,8 @@
                 alert("제목을 입력해주세요.");
             }else if(content.trim()==''){
                 alert("내용을 입력해주세요.");
+            }else if(title.indexOf("<") != -1 || content.indexOf("<")!=-1 || title.indexOf(">")!=-1 || content.indexOf(">")!=-1){
+                alert("제목이나 내용에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
                 var new_post;
                 $.ajax({
@@ -910,6 +918,8 @@
                 alert("제목을 입력해주세요.");
             }else if(link.trim()==''){
                 alert("링크를 입력해주세요.");
+            }else if(title.indexOf("<") != -1 || link.indexOf("<")!=-1 || title.indexOf(">")!=-1 || link.indexOf(">")!=-1){
+                alert("제목이나 링크에 있는 '<', '>' 표시를 제거해주세요.");
             }else if(validPage(link)==false){
                 alert("올바른 링크를 입력하세요.");
             }else{
@@ -955,6 +965,8 @@
             const color=$('#file_color option:selected').val();
             if(title.trim()==''){
                 alert("제목을 입력해주세요.");
+            }else if(title.indexOf("<") != -1 || file.indexOf("<")!=-1 || title.indexOf(">")!=-1 || file.indexOf(">")!=-1){
+                alert("제목이나 파일에 있는 '<', '>' 표시를 제거해주세요.");
             }else if(file.trim()==''){
                 alert("파일을 선택해주세요.");
             }else{
@@ -991,15 +1003,17 @@
                 })
             }
         }
-        function showContent(type, title, content){
+        function showContent(type, title, index){
+            var content=document.getElementsByClassName('hidden_content')[index].getAttribute('value');
+            //console.log(content);
             if(type=='link'){
-                console.log(title, content);
-                //const link=window.open();
-                //link.location=content;
+                //console.log(title, content);
+                const link=window.open();
+                link.location=content;
                 //console.log(content.split('https://'));
                 // const loca=content.split('https://');
                 // console.log(loca[0], loca[1]);
-                window.open(content);
+               
                 //try catch문으로 일단 잡아보기!
             }else if(type=='content'){
                 ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
@@ -1025,9 +1039,11 @@
             //console.log(id, new_name,"link:"+ new_link, new_color);
 
             if(new_name.trim()==''){
-                alert("수정할 이름을 입력하세요.");
+                alert("수정할 제목을 입력하세요.");
             }else if(new_link.trim()==''){
                 alert('수정할 링크를 입력하세요.');
+            }else if(new_name.indexOf("<") != -1 || new_link.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_link.indexOf(">")!=-1){
+                alert("제목이나 링크에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
@@ -1053,9 +1069,11 @@
             //console.log(id, new_name,"content:"+ new_content, new_color);
 
             if(new_name.trim()==''){
-                alert("수정할 이름을 입력하세요.");
+                alert("수정할 제목을 입력하세요.");
             }else if(new_content.trim()==''){
                 alert('수정할 내용을 입력하세요.');
+            }else if(new_name.indexOf("<") != -1 || new_content.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_content.indexOf(">")!=-1){
+                alert("제목이나 내용에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
@@ -1081,9 +1099,11 @@
             //console.log(id, new_name,"file"+ new_content, new_color);
 
             if(new_name.trim()==''){
-                alert("수정할 이름을 입력하세요.");
+                alert("수정할 제목을 입력하세요.");
             }else if(new_content.trim()==''){
                 alert('수정할 파일을 선택하세요.');
+            }else if(new_name.indexOf("<") != -1 || new_content.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_content.indexOf(">")!=-1){
+                alert("제목이나 파일에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',

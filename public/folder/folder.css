@@ -81,6 +81,7 @@ body {
     margin-left:70px;
     color:black;
     display:block;
+    cursor:pointer;
 }
 /* 여기부터 오늘 할 일 */
 .aside_wrap {
