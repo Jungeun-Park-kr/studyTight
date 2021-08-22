@@ -52,9 +52,16 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
-        const myfriend = await Friend.find({ user_id: res.locals.user._id }).find({ Friend_Name: new RegExp(search_email) }) //내 전체 친구들 리스트.
-            // .select('major')
-            //첫번째 . 까진 id똑같은걸로 찾는거
+
+        if (search_email == '') {
+            myfriend = {}
+        } else {
+            const myfriend = await Friend.find({ user_id: res.locals.user._id }).find({ Friend_Name: new RegExp(search_email) })
+        }
+
+        //내 전체 친구들 리스트.
+        // .select('major')
+        //첫번째 . 까진 id똑같은걸로 찾는거
         res.render('../views/guestbook/guestbook_myroom_searchforedit.ejs', {
             profile: profile[0],
             friend: friend,
@@ -186,7 +193,12 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
-        const search_list = await User.find({ name: new RegExp(search_email) })
+        if (search_email == '') {
+            search_list = {}
+        } else {
+            const search_list = await User.find({ name: new RegExp(search_email) })
+        }
+        console.log(search_email);
         const OneUser = await User.findOne({ _id: res.locals.user._id })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
