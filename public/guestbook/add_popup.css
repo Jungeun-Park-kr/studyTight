@@ -63,7 +63,7 @@ h1 {
 }
 
 label {
-    display: block;
+    /* display: block; */
     margin-top: 20px;
     letter-spacing: 2px;
 }

@@ -85,6 +85,7 @@ body {
 .course_link_form,
 .course_location_form {
     padding: 0 10px;
+    vertical-align: middle;
 }
 
 .professor_name_form {
