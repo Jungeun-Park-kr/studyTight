@@ -99,7 +99,10 @@
             <li class="profile">
                 <img id="MyUserimg" src=<%=user.profile_image %>>
             </li>
-
+            <li class="myname">
+                <img id="school-card" src="/public/media/id-card.png">
+                <%=myname%>
+            </li>
             <li class="school">
                 <% if (profile.school_private) { %>
                     <img id="school-card" src="/public/media/office-building.png">
@@ -142,6 +145,8 @@
                         <% } %>
                         </select>
                         <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
+                        <img id="friend_edit" class="trigger5" src="/guestbook/media/add.png"></img>
+                        <img id="friend_edit" class="trigger6" src="/guestbook/media/minus.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->
                         <div class="btn_add_course">
                             <input type="button" class="trigger" value="+ 친구 추가하기"></input>
@@ -409,16 +414,17 @@
                         <tbody id="course_body">
 
                             <% for(var i = 0; i < friend.length; i++){ %>
-                                <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
-                                    <td>
-                                        <%=friend[i].Friend_ID %>
-                                    </td>
-                                    <td>
-                                        <%=friend[i].Friend_Name %>
-                                    </td>
-                                </tr>
-                                <% } %>
-
+                                <% if(profile.group[0]==(friend[i].friend_group)){ %>
+                                    <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
+                                        <td>
+                                            <%=friend[i].Friend_ID %>
+                                        </td>
+                                        <td>
+                                            <%=friend[i].Friend_Name %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
 
 
                         </tbody>

@@ -23,7 +23,7 @@ router.use((req, res, next) => {
 router.get('/', isLoggedIn, async(req, res, next) => {
 
     try {
-        const testvar = new RegExp('naver')
+        const OneUser = await User.findOne({ _id: res.locals.user._id })
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
@@ -33,7 +33,8 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             profile: profile[0],
             friend: friend,
             top_comment: top_comment,
-            bottom_comment: bottom_comment
+            bottom_comment: bottom_comment,
+            myname: OneUser.name
         });
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
@@ -45,6 +46,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
 router.get('/searfriend', isLoggedIn, async(req, res, next) => {
 
     try {
+        const OneUser = await User.findOne({ _id: res.locals.user._id })
         const { search_email } = req.query; //get이라서 query해야됨.
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
@@ -59,7 +61,8 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
             top_comment: top_comment,
             bottom_comment: bottom_comment,
             search_email: search_email,
-            search_list: myfriend
+            search_list: myfriend,
+            myname: OneUser.name
         });
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
@@ -121,6 +124,7 @@ router.post('/deletegroup', isLoggedIn, async(req, res, next) => {
 router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
 
     try {
+        const OneUser = await User.findOne({ _id: res.locals.user._id })
         const { select_friend } = req.query;
         const { search_email } = req.query;
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
@@ -139,7 +143,8 @@ router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
             search_list: search_list,
             search_email: search_email,
             select_friend: select_friend,
-            select_info: select_info
+            select_info: select_info,
+            myname: OneUser.name
         });
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
@@ -159,6 +164,7 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
         const search_list = await User.find({ name: new RegExp(search_email) })
         const select_info = await Friend.findOne({ Friend_ID: select_friend })
+        const OneUser = await User.findOne({ _id: res.locals.user._id })
 
         await Friend.updateOne({ user_id: res.locals.user._id, Friend_ID: friend_id }, {
             friend_group: group_dropdown
@@ -172,58 +178,6 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
     }
 });
 
-// await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
-//     $push:{
-//         postIt:postItList
-//     }
-// });
-
-
-
-
-
-
-// router.post('/:id/add',isLoggedIn, async(req,res,next) => {
-//     var postItList=new Array();
-
-//     //const folder_id=req.body.folder_id;
-//     const folder_id=req.params.id;
-//     //console.log('folder_id는 '+folder_id);
-//     const postIt_name=req.body.postIt_name;
-//     const postIt_content=req.body.postIt_content;
-//     const postIt_type=req.body.postIt_type;
-//     const postIt_star=req.body.postIt_star;
-//     const postIt_color=req.body.postIt_color;
-
-//     try{ 
-//         const postIt=await PostIt.create({
-//             postIt_name:postIt_name,
-//             postIt_type:postIt_type,
-//             postIt_content:postIt_content,
-//             postIt_star:postIt_star,
-//             postIt_color:postIt_color,
-//             folder_id:folder_id
-
-//         }); //포스트잇 만들기
-//         postItList.push(postIt._id);
-
-
-//         await Folder.updateOne({user_id:res.locals.user._id, _id:folder_id},{
-//             $push:{
-//                 postIt:postItList
-//             }
-//         });
-
-
-//         res.send(postIt);
-
-
-//     }catch(err){
-//         console.error('routes/folder/folder.js 에서 포스트잇 추가 과정에러');
-//         next(err);
-//     }
-// });
-
 router.get('/searchemail', isLoggedIn, async(req, res, next) => {
 
     try {
@@ -233,6 +187,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
         const search_list = await User.find({ name: new RegExp(search_email) })
+        const OneUser = await User.findOne({ _id: res.locals.user._id })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
         res.render('../views/guestbook/guestbook_myroom_search.ejs', {
@@ -241,7 +196,8 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             top_comment: top_comment,
             bottom_comment: bottom_comment,
             search_email: search_email,
-            search_list: search_list
+            search_list: search_list,
+            myname: OneUser.name
         });
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
@@ -332,18 +288,6 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
         });
 
-
-        // res.send({
-        //     user_id: req.user._id, //박정은의 오브젝트 아이디.
-        //     school: profile.school,
-        //     school_private: profile.school_private,
-        //     major: profile.major,
-        //     major_private: profile.major_private,
-        //     grade: profile.grade,
-        //     grade_private: profile.grade_private,
-        //     age: profile.age_private,
-        // });
-
     } catch (err) {
         console.log('guestbookedit error');
         next(err);
@@ -376,11 +320,13 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
     const id_obj = req.params.id; //내가 보내준 ID
     try {
         //일단 유저정보를 받아와서 페이지 먼저 띄우기.
+        const friendUser = await User.findOne({ email_id: req.params.id });
         const user = await User.findOne({ email_id: id_obj });
         const profile = await Profile.findOne({ user_id: user._id });
         res.render('../views/guestbook/guestbook_friendroom.ejs', {
             friend_id: id_obj,
-            profile: profile
+            profile: profile,
+            friendUser: friendUser
         });
     } catch (err) {
         next(err);

@@ -99,7 +99,10 @@
             <li class="profile">
                 <img id="MyUserimg" src=<%=user.profile_image %>>
             </li>
-
+            <li class="myname">
+                <img id="school-card" src="/public/media/id-card.png">
+                <%=myname%>
+            </li>
             <li class="school">
                 <% if (profile.school_private) { %>
                     <img id="school-card" src="/public/media/office-building.png">
@@ -630,7 +633,7 @@
             </div> -->
 
 
-            
+
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
@@ -694,8 +697,8 @@
                             <td colspan="6 ">
                                 <center>
                                     <% for(var i = 0; i < top_comment.length/5; i++){ %>
-                                    <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
-                                    <% } %>
+                                        <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
+                                        <% } %>
                                 </center>
                             </td>
                         </tr>
@@ -706,8 +709,8 @@
                 // $(document).ready(function() {
                 //     jQuery('.friends_list_box0').show();
                 // });
-            
-            
+
+
                 jQuery('#talkingc').click(function() {
                     var state = jQuery('#talkingc').val();
                     console.log(state);
@@ -770,7 +773,7 @@
             </script>
 
 
-            
+
         </div>
     </div>
 

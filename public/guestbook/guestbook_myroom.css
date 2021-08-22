@@ -333,6 +333,8 @@ select::-ms-expand {
     height: 0.5%;
     width: 85.5%;
     float: none;
+    max-height: 100px;
+    min-height: 100px;
 }
 
 .friends_list_box0,
@@ -368,10 +370,11 @@ select::-ms-expand {
     font-size: 12px;
 }
 
+
+/* 
 .friends_list_box #course_table {
     padding: 10px;
-    font-size: 13px;
-}
+} */
 
 .talking-palce {
     width: 100%;
@@ -452,7 +455,7 @@ select::-ms-expand {
     display: inline-block;
 }
 
-#talking{
+#talking {
     display: inline-block;
     width: 90%;
     padding: 15px;
