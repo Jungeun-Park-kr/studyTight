@@ -52,11 +52,10 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
-
         if (search_email == '') {
             myfriend = {}
         } else {
-            const myfriend = await Friend.find({ user_id: res.locals.user._id }).find({ Friend_Name: new RegExp(search_email) })
+            myfriend = await Friend.find({ user_id: res.locals.user._id }).find({ Friend_Name: new RegExp(search_email) })
         }
 
         //내 전체 친구들 리스트.
@@ -229,6 +228,7 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
         const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
         const search_list = await User.find({ name: new RegExp(search_email) })
         const OneUser = await User.findOne({ email: select_friend })
+        const MyUser = await User.findOne({ _id: res.locals.user._id })
         const pprofile = await Profile.findOne({ user_id: res.locals.user._id }).populate('profiles')
             // mongoDB에 프로파일 추가
         const addfriend = await Friend.create({
@@ -238,6 +238,18 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
             Friend_ID: select_friend,
             Friend_Name: OneUser.name,
             friend_link: OneUser.email_id,
+            friend_group: "basic"
+        })
+
+        //상대 친구에게도 등록
+
+        const addfriend2 = await Friend.create({
+            user_id: MyUser._id,
+            received: true,
+            send: true,
+            Friend_ID: MyUser.email,
+            Friend_Name: MyUser.name,
+            friend_link: MyUser.email_id,
             friend_group: "basic"
         })
 
