@@ -349,7 +349,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
         const user = await User.findOne({ email_id: id_obj });
         const profile = await Profile.findOne({ user_id: user._id });
         const top_comment = await Top_comment.find({ commented_email: User._id }).populate('commenter_email')
-        res.render('../views/guestbook/guestbook_friendroom.ejs', {
+        res.render('../views/guestbook/guestbook_friendroom.ejs', { 
             friend_id: id_obj,
             profile: profile,
             friendUser: friendUser,
