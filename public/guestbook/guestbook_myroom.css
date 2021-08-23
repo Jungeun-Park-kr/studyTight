@@ -364,6 +364,7 @@ select::-ms-expand {
 
 #course_body tr {
     line-height: 1.1rem;
+    cursor:pointer;
 }
 
 .user-small-talking {
