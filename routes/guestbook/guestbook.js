@@ -326,13 +326,18 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
         const friendUser = await User.findOne({ email_id: req.params.id });
         const user = await User.findOne({ email_id: id_obj });
         const profile = await Profile.findOne({ user_id: user._id });
-        const top_comment = await Top_comment.find({ commented_email: User._id }).populate('commenter_email')
+        const friend = await Friend.findOne({ user_id: res.locals.user._id }).populate('friends').findOne({friend_link: id_obj})
+    //내 친구중 프렌드 링크가 일치하는 사람. 즉, 내가 방문한 친구의 프렌드창.
+        const top_comment = await Top_comment.find({ commented_email: user._id }).populate('commenter_email')
+        const top_comment1 = await Top_comment.find({ commented_email: user._id }).populate('commenter_email')
+       // commented_email이 id오브젝트의 _id가 되어야함.
         res.render('../views/guestbook/guestbook_friendroom.ejs', { 
             friend_id: id_obj,
             profile: profile,
             friendUser: friendUser,
             top_comment : top_comment
         });
+        console.log(top_comment1)
     } catch (err) {
         next(err);
     }
@@ -341,14 +346,16 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
 router.post('/:id/addcomment', isLoggedIn, async(req, res, next) => {
     const { comment_input, checkbox } = req.body;
     const id_obj = req.params.id; //내가 보내준 ID
-    const friend = await Friend.findOne({ user_id: res.locals.user._id }).populate('friends').find({friend_link: id_obj})
+    const friend = await Friend.findOne({ user_id: res.locals.user._id }).populate('friends').findOne({friend_link: id_obj})
     //내 친구중 프렌드 링크가 일치하는 사람. 즉, 내가 방문한 친구의 프렌드창.
     try {
         //일단 유저정보를 받아와서 페이지 먼저 띄우기.
         const top_comment1 = await Top_comment.find({ commented_email: friend._id }).populate('commenter_email')
-            // 해당 방명록에 존재하는 모든 topcomment찾기
+        const friend_email = friend.Friend_ID //내가 추가한 친구의 이메일
+        const friend_email_object = await User.findOne({email:friend_email })
+        // 해당 방명록에 존재하는 모든 topcomment찾기
         const top_comment = await Top_comment.create({
-            commented_email: friend._id, //이것만 올라가는 상황.
+            commented_email: friend_email_object._id, //이것만 올라가는 상황.
             commenter_email: req.user._id,
             comment_time: getCurrentDate(),
             comment_secret: checkbox,
@@ -357,7 +364,6 @@ router.post('/:id/addcomment', isLoggedIn, async(req, res, next) => {
             post_id: top_comment1.length + 1,
 
         });
-        console.log(top_comment);
         res.redirect("/guestbook/"+id_obj);
     } catch (err) {
         next(err);
