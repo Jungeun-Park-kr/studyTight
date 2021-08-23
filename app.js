@@ -9,7 +9,10 @@ const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
 const store = require('store');
-
+const logger=require('./logger');
+const helmet=require('helmet');
+const hpp=require('hpp');
+const RedisStore=require('connect-redis')(session);
 
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
@@ -22,6 +25,8 @@ app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버�
 
 if(process.env.NODE_ENV ==='production'){
     app.use(morgan('combined'));
+    app.use(helmet());
+    app.use(hpp());
 }else{
     app.use(morgan('dev'));
 }
@@ -75,6 +80,12 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
+    store: new RedisStore({
+        host:process.env.REDIS_HOST,
+        port:process.env.REDIS_PORT,
+        pass:process.env.REDIS_PASSWORD,
+        logErrors:true,
+    }),
 }));
 
 app.use(passport.initialize());
@@ -96,9 +107,14 @@ app.use('/d-day', DdayRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
+    const err=new Error('Not Found');
+    err.status=404;
+    logger.info('hello');
+    logger.error(err.message);
     //console.info(req);
     //res.status(404).send(req + ' Not Found (없는 라우터 요청)');
-    res.status(404).send(req + ' Not Found');
+    //res.status(404).send( ' Not Found');
+
 })
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
