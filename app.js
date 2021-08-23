@@ -14,6 +14,9 @@ const helmet=require('helmet');
 const hpp=require('hpp');
 const RedisStore=require('connect-redis')(session);
 
+const redis = require("redis");
+
+
 dotenv.config();
 // const pageRouter = require('./routes/page'); // 라우터
 const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 정의
@@ -34,7 +37,17 @@ if(process.env.NODE_ENV ==='production'){
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs'); // 뷰엔진 세팅
 
+
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+const client = redis.createClient({ 
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+    logError: true });
+
+
+
 const sessionOption={
     resave:false,
     saveUninitialized:false,
@@ -42,7 +55,10 @@ const sessionOption={
     cookie: {
         httpOnly:true,
         secure: false
-    },
+    },store: new RedisStore({ client })
+
+
+    
 };
 
 if(process.env.NODE_ENV ==='production'){
@@ -72,6 +88,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static('public'));
 
+// var redisClinet = redis.createClient(port, host);
+
+// var redisConnectionResult = redisClinet.auth(password, err => {
+
+// if (err) console.log(err, " 에러 발생했습니다");
+
+// });
+
+// console.log("redis 연결 결과는? - ", redisConnectionResult);
+
+
 app.use(session({
     resave: false, //세션 항상 저장 여부
     saveUninitialized: false, //초기화되지 않은채 스토어에 저장되는 세션
@@ -80,12 +107,7 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
-    store: new RedisStore({
-        host:process.env.REDIS_HOST,
-        port:process.env.REDIS_PORT,
-        pass:process.env.REDIS_PASSWORD,
-        logErrors:true,
-    }),
+    
 }));
 
 app.use(passport.initialize());
