@@ -562,65 +562,94 @@
 
 
             </div>
+            <form action="/guestbook/<%=friendUser.email_id%>/addcomment" method="post">
             <div class="writing-place" id=wBOX>
                 <div class="writing-box">
                     <!--행(row)선언-->
-                    <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                    <input type="text" id=comment_input name="comment_input" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
                 </div>
                 <div class="writing-button-secret">
                     <div class="writing-button">
-                        <input type="button" id="submit" value="글쓰기"></input>
+                        <input type="submit" id="submit" value="글쓰기"></input>
                     </div>
                     <div class="secret-checkbox">
-                        <input type="checkbox" name="비밀글" id=mysecretbox> 비밀글
+                        <input type="checkbox" name="checkbox" id=mysecretbox> 비밀글
                     </div>
 
                 </div>
-
-
             </div>
-
+             </form>
 
             <hr id="myroom-line">
             <div id=comments> </div>
             <div class="talking-place" id="talking-place">
 
-                <div class="talking" id="talking">
-                    <div class="mini-profile" id="mini-profile"></div>
-                    <div class="user-small-talking" id="user-small-talking">
-
-                    </div>
-                </div>
-
-                <div class="reply-place" id=replyplace1>
-                    <div class="writing-box">
-                        <!--행(row)선언-->
-                        <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
-                    </div>
-                    <div class="writing-button-secret">
-                        <div class="writing-button">
-                            <input type="button" id="submit" value="글쓰기"></input>
+                <% for(var i = 0; i < top_comment.length; i++){ %>
+                    <div id='talking' class=<%='talking' +i%>>
+                        <div class="mini-profile">
+                            <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                         </div>
-                        <div class="secret-checkbox">
-                            <input type="checkbox" name="비밀글"> 비밀글
+                        <div class="user-small-talking">
+                            <div class="user-name">
+                                <%=top_comment[i].commenter_email.name %>
+                            </div>
+                            <div class="user-talking-list">
+                                <%=top_comment[i].text %>
+                            </div>
+                            <div class="today-button">
+                                <div class="today">
+                                    <%=top_comment[i].comment_time %>
+                                </div>
+                                <div class="reply-button">
+                                    <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    <% if(top_comment[i].commenter_email._id.equals (user._id)){ %>
+                                        <input type="button" class="delete" value="삭제하기" onclick="confirm_event(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                        <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 자신의 아래있는 내용을 클릭시 안보이게 해주는 버튼 -->
+                    <script>
+                        function test(id) {
+                            var my_table = document.getElementById(id);
+                            var bottom = my_table.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                            console.log(bottom);
+                            bottom.style.display = 'block';
+                            bottom.style.visibility = 'visible';
+                        }
+                    </script>
+
+                    <div class="reply-place" id=replyplace<%i %>>
+                        <div class="writing-box">
+                            <!--행(row)선언-->
+                            <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                        </div>
+                        <div class="writing-button-secret">
+                            <div class="writing-button">
+                                <input type="button" id="submit" value="글쓰기"></input>
+                            </div>
+                            <div class="secret-checkbox">
+                                <input type="checkbox" name="비밀글"> 비밀글
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
-
-                <tr>
-                    <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                    <!-- <td colspan="6 ">
-                        <center>
-                            <a href="#">1</a>
-                            <a href="/guestbook/guestbook_myroom2.html">2</a>
-                            <a href="# "></a>
-                            <a href="# "></a>
-                            <a href="# "></a>
-                        </center>
-                    </td> -->
-                </tr>
+                    <!-- <script src="index.js "></script> -->
+                    <% } %>
+                        <tr>
+                            <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                            <td colspan="6 ">
+                                <center>
+                                    <% for(var i = 0; i < top_comment.length/5; i++){ %>
+                                        <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
+                                        <% } %>
+                                </center>
+                            </td>
+                        </tr>
 
             </div>
         </div>
