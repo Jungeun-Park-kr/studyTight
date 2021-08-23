@@ -243,15 +243,15 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
 
         //상대 친구에게도 등록
 
-        const addfriend2 = await Friend.create({
-            user_id: MyUser._id,
-            received: true,
-            send: true,
-            Friend_ID: MyUser.email,
-            Friend_Name: MyUser.name,
-            friend_link: MyUser.email_id,
-            friend_group: "basic"
-        })
+        // const addfriend2 = await Friend.create({
+        //     user_id: MyUser._id,
+        //     received: true,
+        //     send: true,
+        //     Friend_ID: MyUser.email,
+        //     Friend_Name: MyUser.name,
+        //     friend_link: MyUser.email_id,
+        //     friend_group: "basic"
+        // })
 
         res.redirect("/guestbook");
 
