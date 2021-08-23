@@ -308,8 +308,9 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
             major_private: major_private,
             grade: grade,
             grade_private: grade_private,
+            timetable_private: true,
             age: age,
-
+            group: 'basic'
         });
 
     } catch (err) {
