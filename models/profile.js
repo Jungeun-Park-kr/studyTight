@@ -7,14 +7,14 @@ const profile_schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    school: { type: String, required: true },
-    school_private: { type: Boolean },
-    major: { type: String, required: true },
-    major_private: { type: Boolean },
-    grade: { type: Number, required: true },
-    grade_private: { type: Boolean },
-    age_private: { type: Boolean },
-    timetable_private: { type: Boolean },
+    school: { type: String, required: true, default:"" },
+    school_private: { type: Boolean, default : false },
+    major: { type: String, required: true, default:"" },
+    major_private: { type: Boolean, default : false },
+    grade: { type: Number, required: true, default:0 },
+    grade_private: { type: Boolean, default : false },
+    age_private: { type: Boolean, default : false },
+    timetable_private: { type: Boolean, default : false },
     group: [{ type: String }]
 
 });
