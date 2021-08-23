@@ -296,48 +296,26 @@ router.post('/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 �
 });
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
-    const { school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
-
+    const {  timetable_private, school, school_private, major, major_private, grade, grade_private, age } = req.body;
+    const profile = await Profile.findOne({ user_id: res.locals.user._id }); 
     try {
-        // mongoDB에 프로파일 추가
-        const profile = await Profile.create({
-            user_id: req.user._id,
+        await profile.updateOne({
             school: school,
             school_private: school_private,
             major: major,
             major_private: major_private,
             grade: grade,
             grade_private: grade_private,
-            timetable_private: true,
-            age: age,
-            group: 'basic'
+            timetable_private: timetable_private,
+            age: age
+            
         });
-
+        res.redirect("/guestbook");
     } catch (err) {
         console.log('guestbookedit error');
         next(err);
     }
 
-});
-
-router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
-
-    try {
-        const user = await User.findOne({ _id: res.locals.user._id });
-        const { name, school, school_private, major, major_private, grade, grade_private, age, gender } = req.body;
-        console.info(user);
-        const users = await User.updateOne({ //해당하는 값을 필터링함
-            _id: name
-        }, {
-            $set: { //해당하는 값을 바꿈
-                //
-            }
-        });
-
-
-    } catch (err) {
-        next(err);
-    }
 });
 
 router.get('/:id', isLoggedIn, async(req, res, next) => {
