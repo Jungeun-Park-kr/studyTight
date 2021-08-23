@@ -93,9 +93,9 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
 
         const profile = await Profile.create({
             user_id : user._id,
-            school : '',
+            school : 'initial_data',
             school_private : false,
-            major : '',
+            major : 'initial_data',
             major_private : false,
             grade : 0,
             grade_private : false,

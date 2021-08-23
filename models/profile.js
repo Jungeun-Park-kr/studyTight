@@ -7,9 +7,9 @@ const profile_schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    school: { type: String, required: true, default:"" },
+    school: { type: String, required: true, default:"initial_data" },
     school_private: { type: Boolean, default : false },
-    major: { type: String, required: true, default:"" },
+    major: { type: String, required: true, default:"initial_data" },
     major_private: { type: Boolean, default : false },
     grade: { type: Number, required: true, default:0 },
     grade_private: { type: Boolean, default : false },
