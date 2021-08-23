@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Profile = require('../models/profile');
 const multer = require('multer');
 const fs = require('fs');
 
@@ -88,6 +89,18 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
             password: hash,
             birth : birth,
             promotion : promotion,
+        });
+
+        const profile = await Profile.create({
+            user_id : user._id,
+            school : 'initial_data',
+            school_private : false,
+            major : 'initial_data',
+            major_private : false,
+            grade : 0,
+            grade_private : false,
+            age_private : false,
+            timetable_private : false
         });
         // console.log('추가된 user:'+ user);
         res.send('success');
