@@ -35,7 +35,7 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
         let authNum = Math.random().toString().substr(2,6);
         let emailTemplete;
 
-        ejs.renderFile(appDir+'/config/authemail.ejs', {authCode : authNum}, function (err, data) {
+        ejs.renderFile(appDir+'/email/authemail.ejs', {authCode : authNum}, function (err, data) {
             if(err){console.log(err)}
             emailTemplete = data;
         });
