@@ -4,6 +4,6 @@
 **/.DS_Store**/._.DS_Store
 uploads
 *.log
-# node_modules
+node_modules
 # package-lock.json
 
