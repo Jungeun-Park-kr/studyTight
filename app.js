@@ -19,8 +19,33 @@ const passportConfig = require('./passport');
 const app = express();
 passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
+
+if(process.env.NODE_ENV ==='production'){
+    app.use(morgan('combined'));
+}else{
+    app.use(morgan('dev'));
+}
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs'); // 뷰엔진 세팅
+
+app.use(cookieParser(process.env.COOKIE_SECRET));
+const sessionOption={
+    resave:false,
+    saveUninitialized:false,
+    secret:process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly:true,
+        secure: false
+    },
+};
+
+if(process.env.NODE_ENV ==='production'){
+    sessionOption.proxy=true;
+    //sessionOption.cookie.secret=true;
+}
+
+app.use(session(sessionOption));
 
 // router
 const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
