@@ -36,7 +36,6 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             bottom_comment: bottom_comment,
             myname: OneUser.name
         });
-        console.log(top_comment);
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -285,6 +284,29 @@ router.post('/addcomment', isLoggedIn, async(req, res, next) => {
 
 });
 
+router.post('/addbottom', isLoggedIn, async(req, res, next) => {
+    const { id, writing, secret } = req.body;
+
+    try {
+
+        // mongoDB에 프로파일 추가
+        const bottom_comment = await Bottom_comment.create({
+            commented_email: req.user._id, //이것만 올라가는 상황.
+            commenter_email: req.user._id,
+            comment_time: getCurrentDate(),
+            comment_secret: secret,
+            comment_parent_id: id,
+            text: writing,
+            post_id: 1,
+
+        });
+        console.log(bottom_comment);
+        res.redirect("/guestbook");
+
+    } catch (err) {}
+
+});
+
 router.post('/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
     const { id } = req.body;
     const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
@@ -293,6 +315,17 @@ router.post('/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 �
     } catch (err) {
         next(err);
     }
+    res.redirect("/guestbook");
+});
+
+router.post('/deletebottomcomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+    const { id } = req.body;
+    try {
+        await Bottom_comment.deleteOne({ _id: id });
+    } catch (err) {
+        next(req.body);
+    }
+    console.log(id);
     res.redirect("/guestbook");
 });
 
@@ -327,17 +360,18 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
         //일단 유저정보를 받아와서 페이지 먼저 띄우기.
         const friendUser = await User.findOne({ email_id: req.params.id });
         const user = await User.findOne({ email_id: id_obj });
-        const profile = await Profile.findOne({ user_id: user._id });
+        const profile = await Profile.findOne({ user_id: user._id }).populate('user_id');
         const friend = await Friend.findOne({ user_id: res.locals.user._id }).populate('friends').findOne({ friend_link: id_obj })
             //내 친구중 프렌드 링크가 일치하는 사람. 즉, 내가 방문한 친구의 프렌드창.
         const top_comment = await Top_comment.find({ commented_email: user._id }).populate('commenter_email').sort({ _id: -1 })
-        const top_comment1 = await Top_comment.find({ commented_email: user._id }).populate('commenter_email')
+        const bottom_comment = await Bottom_comment.find({ commented_email: user._id }).populate('commenter_email').sort({ _id: -1 })
             // commented_email이 id오브젝트의 _id가 되어야함.
         res.render('../views/guestbook/guestbook_friendroom.ejs', {
             friend_id: id_obj,
             profile: profile,
             friendUser: friendUser,
-            top_comment: top_comment
+            top_comment: top_comment,
+            bottom_comment: bottom_comment
         });
     } catch (err) {
         next(err);
@@ -369,6 +403,56 @@ router.post('/:id/addcomment', isLoggedIn, async(req, res, next) => {
     } catch (err) {
         next(err);
     }
+});
+
+router.post('/:id/addbottom', isLoggedIn, async(req, res, next) => {
+    const { id, writing, secret } = req.body;
+    const id_obj = req.params.id;
+    try {
+
+        // mongoDB에 프로파일 추가
+        const friend = await Friend.findOne({ user_id: res.locals.user._id }).populate('friends').findOne({ friend_link: id_obj })
+        const friend_email = friend.Friend_ID
+        const friend_email_object = await User.findOne({ email: friend_email })
+        const bottom_comment = await Bottom_comment.create({
+            commented_email: friend_email_object._id, //이것만 올라가는 상황.
+            commenter_email: req.user._id,
+            comment_time: getCurrentDate(),
+            comment_secret: secret,
+            comment_parent_id: id,
+            text: writing,
+            post_id: 1,
+
+        });
+        console.log(req.body);
+        res.redirect("/guestbook/" + id_obj);
+
+    } catch (err) {}
+
+});
+
+router.post('/:id/deletecomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+    const { id } = req.body;
+    const id_obj = req.params.id;
+    const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
+    try {
+        await Top_comment.deleteOne({ _id: id });
+    } catch (err) {
+        next(err);
+    }
+    res.redirect("/guestbook/" + id_obj);
+});
+
+router.post('/:id/deletebottomcomment', isLoggedIn, async(req, res, next) => { //할 일 목록에서 삭제 버튼을 누른 경우
+    const { id } = req.body;
+    const id_obj = req.params.id;
+    try {
+        await Bottom_comment.deleteOne({ _id: id });
+    } catch (err) {
+        next(req.body);
+    }
+    console.log(id);
+    res.redirect("/guestbook/" + id_obj);
 });
 
 router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표를 볼 수 있는지 확인 (권한 확인용)
