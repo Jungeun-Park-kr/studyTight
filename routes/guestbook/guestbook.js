@@ -51,7 +51,7 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
-        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         if (search_email == '') {
             myfriend = {}
         } else {
@@ -136,7 +136,7 @@ router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
-        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         const search_list = await User.find({ name: new RegExp(search_email) })
         const select_info = await Friend.findOne({ Friend_ID: select_friend })
             // .select('major')
@@ -191,7 +191,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
-        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
         if (search_email == '') {
             search_list = {}
         } else {

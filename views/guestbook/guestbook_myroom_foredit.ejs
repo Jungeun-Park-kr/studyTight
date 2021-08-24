@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="/public/guestbook/add_popup_search.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/index.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/reply.css" />
-    <link rel="stylesheet" type="text/css" href="/public/guestbook/guestbook_myroom.css" />
+    <link rel="stylesheet" type="text/css" href="/public/guestbook/guestbook_myroom1.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/friends_edit.css" />
 </head>
 
@@ -360,90 +360,53 @@
                     </form>
                 </div>
 
-                <script>
-                    function showfriendlist() {
-                        var username = localStorage.getItem('username');
-                        activeUser = getActiveUser(username);
-                        myfriends = activeUser.guestbook.friendslist;
-                        var parent_table = document.getElementById("course_body"); //부모테이블
+                <% for(var j = 0; j < profile.group.length; j++){ %>
+                    <div class=<%='friends_list_box' +j%>>
+                        <table id="course_table">
+                            <tbody id="course_body">
 
-
-                        for (i = 0; i < myfriends.length; i++) {
-                            var box = document.createElement("tr");
-                            var name = document.createElement("td");
-                            var email = document.createElement("td");
-                            box.addEventListener('click', function(e) {
-                                //console.info(this);
-                                var children = this.childNodes; //클릭한 객체의 자식 가져옴
-                                console.info(children);
-                                console.info(children[0]); //0번째 요소가 이름
-                                console.log('방명록 이동할 친구 이름:' + children[0].innerHTML);
-                                var fname = children[0].innerHTML;
-                                localStorage.setItem('friendName', fname); //localStorage에 방문하는 친구이름 저장  
-                                if (fname == '최시언')
-                                    location.href = "/guestbook/friends/friends_room.html"; //홈 주소 //뒤로가기가능
-                                if (fname == '양지영')
-                                    location.href = "/guestbook/guestbook_myroom_y.html"; //홈 주소 //뒤로가기가능
-                                if (fname == '김삿갓')
-                                    location.href = "/guestbook/guestbook_myroom_k.html"; //홈 주소 //뒤로가기가능
-                                if (fname == '김준면')
-                                    location.href = "/guestbook/guestbook_myroom_j.html"; //홈 주소 //뒤로가기가능
-                            })
-                            name.innerHTML = myfriends[i].guestbookowner;
-                            email.innerHTML = myfriends[i].email;
-                            box.appendChild(name);
-                            box.appendChild(email);
-                            parent_table.appendChild(box);
-                        }
-
-                    }
-                </script>
-
-                <div class="friends_list_box">
-                    <table id="course_table">
-                        <tbody id="course_body">
-
-                            <% for(var i = 0; i < friend.length; i++){ %>
-                                <% if(profile.group[0]==(friend[i].friend_group)){ %>
-                                    <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
-                                        <td>
-                                            <%=friend[i].Friend_ID %>
-                                        </td>
-                                        <td>
-                                            <%=friend[i].Friend_Name %>
-                                        </td>
-                                    </tr>
-                                    <% } %>
+                                <% for(var i = 0; i < friend.length; i++){ %>
+                                    <% if(profile.group[j]==(friend[i].friend_group)){ %>
+                                        <tr onclick="location.href='/guestbook/<%=friend[i].friend_link %>'">
+                                            <td>
+                                                <%=friend[i].Friend_ID %>
+                                            </td>
+                                            <td>
+                                                <%=friend[i].Friend_Name %>
+                                            </td>
+                                        </tr>
                                         <% } %>
+                                            <% } %>
 
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="writing-place" id=wBOX>
-                <div class="writing-box">
-                    <!--행(row)선언-->
-                    <input type="text" id=comment_input name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;">
-                </div>
-                <div class="writing-button-secret">
-                    <div class="writing-button">
-                        <input type="button" id="submit" value="글쓰기" onclick="location.href='/guestbook/addcomment'"></input>
+
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="secret-checkbox">
-                        <input type="checkbox" name="비밀글" id=mysecretbox> 비밀글
-                    </div>
-
-                </div>
-
-                <!-- index.jsdml 33번째줄 참고-->
+                    <% } %>
             </div>
+            <form action="/guestbook/addcomment" method="post">
+                <div class="writing-place" id=wBOX>
+                    <div class="writing-box">
+                        <!--행(row)선언-->
+                        <input type="text" id=comment_input name="comment_input" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                    </div>
+                    <div class="writing-button-secret">
+                        <div class="writing-button">
+                            <input type="submit" id="submit" value="글쓰기"></input>
+                        </div>
+                        <div class="secret-checkbox">
+                            <input type="checkbox" name="checkbox" id=checkbox value='true'> 비밀글
+                        </div>
+                    </div>
+                </div>
+            </form>
             <hr id="myroom-line">
-            <div id=comments> </div>
+
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
-                    <div class="talking">
+                    <div id='talking' class=<%='talking' +i%>>
                         <div class="mini-profile">
                             <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                         </div>
@@ -459,43 +422,77 @@
                                     <%=top_comment[i].comment_time %>
                                 </div>
                                 <div class="reply-button">
-                                    <input type="button" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                    <% if(top_comment[i].commenter_email._id.equals (user._id)){ %>
+                                        <input type="button" class="delete" value="삭제하기" onclick="confirm_event(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                        <% } %>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 자신의 아래있는 내용을 클릭시 안보이게 해주는 버튼 -->
-                    <script>
-                        function test(id) {
-                            var my_table = document.getElementById(id);
-                            var bottom = my_table.parentElement.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
-                            console.log(bottom);
-                            bottom.style.display = 'block';
-                            bottom.style.visibility = 'visible';
-                        }
-                    </script>
+                    <% for(var k = 0; k < bottom_comment.length; k++){ %>
+                        <% if(top_comment[i]._id.equals(bottom_comment[k].comment_parent_id)){ %>
+                            <div id='talking1' class=<%='reply' +k%>>
+                                <div class="mini-profile">
+                                    <img src=<%=bottom_comment[k].commenter_email.profile_image %>></img>
+                                </div>
+                                <div class="user-small-talking">
+                                    <div class="user-name">
+                                        <%=bottom_comment[k].commenter_email.name %>
+                                    </div>
+                                    <div class="user-talking-list">
+                                        <%=bottom_comment[k].text %>
+                                    </div>
+                                    <div class="today-button">
+                                        <div class="today">
+                                            <%=bottom_comment[k].comment_time %>
+                                        </div>
+                                        <div class="reply-button">
+                                            <% if(bottom_comment[k].commenter_email._id.equals(user._id)){ %>
+                                                <input type="button" class="delete" value="삭제하기" onclick="confirm_event1(this.id);" id="<%= bottom_comment[k]._id %>"></input>
+                                                <% } %>
+                                        </div>
+                                    </div>
 
-                    <div class="reply-place" id=replyplace<%i %>>
-                        <div class="writing-box">
-                            <!--행(row)선언-->
-                            <input type="text" id=comment-input2 name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
-                        </div>
-                        <div class="writing-button-secret">
-                            <div class="writing-button">
-                                <input type="button" id="submit" value="글쓰기"></input>
+                                </div>
                             </div>
-                            <div class="secret-checkbox">
-                                <input type="checkbox" name="비밀글"> 비밀글
-                            </div>
+                            <% } %>
+                                <% } %>
+                                    <script>
+                                        function test(id) {
+                                            var my_table = document.getElementById("reply" + id);
+                                            //console.log(my_table);
+                                            my_table.style.display = 'block';
+                                            my_table.style.visibility = 'visible';
+                                        }
+                                    </script>
 
-                        </div>
+                                    <div class="reply-place" id=<%="reply" +top_comment[i]._id %>>
+                                        <form action="/guestbook/<%= user.email_id%>/addbottom" method="post">
+                                            <div class="writing-box">
+                                                <!--행(row)선언-->
+                                                <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder=" 내용을 입력해주세요" style="width:100%;height:100%;" />
+                                            </div>
+                                            <div class="writing-button-secret">
+                                                <div class="writing-button">
+                                                    <input type="submit" id="submit" value="글쓰기"></input>
+                                                    <input style="display: none;" name="id" value=<%=top_comment[i]._id%>></input>
+                                                </div>
+                                                <div class="secret-checkbox">
+                                                    <input type="checkbox" name="secret" value='true'> 비밀글
+                                                </div>
 
-                    </div>
-                    <% } %>
-                        <tr>
-                            <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                            <!-- <td colspan="6 ">
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    <!-- <script src="index.js "></script> -->
+                                    <% } %>
+                                        <tr>
+                                            <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                                            <!-- <td colspan="6 ">
                                 <center>
                                     <a href="#">1</a>
                                     <a href="#">2</a>
@@ -504,7 +501,7 @@
                                     <a href="# "></a>
                                 </center>
                             </td> -->
-                        </tr>
+                                        </tr>
 
             </div>
         </div>
