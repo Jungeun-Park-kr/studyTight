@@ -7,7 +7,7 @@ const top_schema = new Schema({
     commenter_email: { type: ObjectId, ref: 'User' },
     comment_time: { type: String },
     comment_secret: { type: Boolean, default: 'false' },
-    comment_count: { type: String },
+    comment_count: { type: Number },
     post_id: { type: String },
     text: { type: String, required: true }
 

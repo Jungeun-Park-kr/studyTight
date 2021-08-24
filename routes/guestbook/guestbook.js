@@ -27,7 +27,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
         const profile = await Profile.find({ user_id: res.locals.user._id }).populate('profiles')
         const friend = await Friend.find({ user_id: res.locals.user._id }).populate('friends')
         const top_comment = await Top_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
-        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id })
+        const bottom_comment = await Bottom_comment.find({ commented_email: res.locals.user._id }).populate('commenter_email').sort({ _id: -1 })
             //검색을 위해서 new RegExp을 이용하여 해당 문자열이 포함되어있는지 검색.
         res.render('../views/guestbook/guestbook_myroom.ejs', {
             profile: profile[0],
@@ -36,6 +36,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             bottom_comment: bottom_comment,
             myname: OneUser.name
         });
+        console.log(top_comment);
     } catch (err) {
         console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
         console.error(err);
@@ -316,7 +317,6 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
         console.log('guestbookedit error');
         next(err);
     }
-    console.log(school);
 
 });
 
@@ -374,20 +374,13 @@ router.post('/:id/addcomment', isLoggedIn, async(req, res, next) => {
 router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해당 친구의 시간표를 볼 수 있는지 확인 (권한 확인용)
     try {
         const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
-        console.log('-------------친구-----------');
-        console.info(friendUser);
         // 클릭한 친구와 내가 친구가 되어있는지 확인 및 시간표 보기 권한 있는지 확인
         const friend = await Friend.findOne({ user_id: res.locals.user._id, Friend_ID: friendUser.email, received: true, send: true }); // 친구 데이터 가져오기
         const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
-        console.log('---------------------친구 프로필---------------------');
-        console.info(friend);
-        console.info(profile);
         if (friend == null) { // 친구가 아닌 경우
-            //console.log('친구가 아님');
             return res.send('/' + req.params.id + '/timetable?error=notfriend');
         }
         if (profile.timetable_private) { // 시간표 비공개 한 경우
-            //console.log('친구가 시간표 비공개함');
             return res.send('/' + req.params.id + '/timetable?error=private');
         }
         return res.send(req.params.id);
@@ -403,8 +396,6 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
     try {
         const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
         const timetable = await Course.find({ user_id: friendUser._id }).populate('schedules').sort({ 'createdAt': 1 }); // 클릭한 친구의 시간표
-        // console.log('---------------------친구 시간표---------------------');
-        // console.info(timetable);
 
         res.render('../views/guestbook/guestbook_timetable.ejs', {
             title: friendUser.name + '의 시간표',
