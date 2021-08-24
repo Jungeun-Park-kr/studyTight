@@ -462,6 +462,13 @@ select::-ms-expand {
     padding: 15px;
 }
 
+#talking1 {
+    display: inline-block;
+    width: 90%;
+    padding: 15px;
+    margin-left: 50px;
+}
+
 .talking {
     display: inline-block;
     width: 90%;
