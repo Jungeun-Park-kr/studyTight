@@ -2,8 +2,8 @@
 .DS_Store
 ._.DS_Store
 **/.DS_Store**/._.DS_Store
-node_modules
 uploads
 *.log
-# node_modules
+node_modules
 # package-lock.json
+
