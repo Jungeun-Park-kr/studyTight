@@ -231,11 +231,11 @@
                                         <div class="secret_section">
                                             <div class="course_secret_label">공개여부</div>
                                         </div>
-                                        <form>
+                                        <form action='/guestbook/editprofile' method='post'>
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">이름</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="name" id="name" placeholder=<%=user.name %> />
+                                                    <input type="text" name="name" id="nameforpost" placeholder=<%=user.name %> />
                                                 </div>
                                                 <div class="course_type_form1" id="course_type_radio">
                                                     <label><input type="radio" name="name_private"  size="20" value='true' id="names"   checked>공개</label>
@@ -245,7 +245,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">학교</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="school" id="school" placeholder=<%=profile.school%> />
+                                                    <input type="text" name="school" id="schoolforpost" placeholder=<%=profile.school%> />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="school_private" size="20" value='true' id="school_secret"   checked>공개</label>
@@ -255,7 +255,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">학과</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="major" id="major" placeholder=<%=profile.major%> />
+                                                    <input type="text" name="major" id="majorforpost" placeholder=<%=profile.major%> />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="major_private" size="20" value='true' id="major_secret"  checked>공개</label>
@@ -265,7 +265,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">학년</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="grade" id="grade" placeholder=<%=profile.grade%> />
+                                                    <input type="text" name="grade" id="gradeforpost" placeholder=<%=profile.grade%> />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
@@ -275,7 +275,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">나이</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" id="age" name="age" placeholder="내용을 입력해주세요" />
+                                                    <input type="text" id="ageforpost" name="age" placeholder="내용을 입력해주세요" />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
@@ -283,7 +283,7 @@
                                                 </div>
                                             </div>
                                             <div class="add_btn">
-                                                <input id="btn_add_course1" type="submit" title="저장하기" value="저장하기"></input>
+                                                <input id="btn_add_course1" title="저장하기" value="저장하기" onclick="confirm_event_profile(this.parentElement.parentElement)"></input>
                                             </div>
                                         </form>
                                     </div>
@@ -292,6 +292,23 @@
                         </div>
                     </div>
 
+                    <script>
+                        function confirm_event_profile(id) {
+
+                            const name = document.getElementById('nameforpost').value;
+                            const school = document.getElementById('schoolforpost').value;
+                            const major = document.getElementById('majorforpost').value;
+                            const grade = document.getElementById('gradeforpost').value;
+                            const age = document.getElementById('ageforpost').value;
+                            if (name == '' | school == '' | major == '' | grade == '' | age == '') {
+                                alert("모든 정보를 입력해주세요")
+
+                            } else {
+                                id.submit();
+                            }
+
+                        }
+                    </script>
                     <div class="modal5">
                         <form action='/guestbook/addgroup' method='post'>
                             <div class="modal-content">
@@ -373,7 +390,7 @@
                                             </div>
                                             <div class="search_btn">
                                                 <!-- <div class="search_btn" onclick="location.href='/guestbook/searchemail'"> -->
-                                                <input  class="triggerX search_course" type="submit" title="검색하기" value="검색"></input>
+                                                <input class="triggerX search_course" type="submit" title="검색하기" value="검색"></input>
                                             </div>
                                         </div>
                                     </div>
@@ -579,60 +596,6 @@
             </form>
             <hr id="myroom-line">
 
-            <!-- <div class="modal77">
-                <div class="modal-content">
-                    <span class="close-button77">&times;</span>
-                    <h1 class="title">친구 관리하기</h1>
-                    <div class="course_add_list">
-                        <div class="course_section">
-                            <div class="secret_section">
-                                <div class="course_secret_label">선택된 친구</div>
-                            </div>
-                            <div class="course_title_section">
-
-
-                                <div class="course_secret_label">양지영 ssdsdf@nate.com</div>
-
-                                <div class="course_type_form" id="course_type_radio">
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <hr>
-                        <div class="professor_name_section">
-                            <div class="professor_name_label">즐겨찾기 여부</div>
-                            <input type="checkbox" name="select_friend" value="select" checked>
-                            <div class="professor_name_form">
-                                즐겨찾기를 하시면, 이름순에 상관없이 항상 상단에 친구가 노출됩니다.
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="professor_name_section">
-                            <div class="professor_name_label">그룹변경</div>
-                            <select name="group-dropdown">
-                                    <option value="none">=== 선택 ===</option>
-                                    <option value="korean" selected>기본그룹</option>
-                                    <option value="english">고등학교 친구들</option>
-                                    <option value="chinese">대학교 친구들</option>
-                                    <option value="spanish">연락XX</option>
-                                  </select>
-                        </div>
-                        <hr>
-                        <div class="delete_section">
-                            친구 삭제하기
-                        </div>
-                        <div class="add_btn">
-                            <input id="btn_add_course" type="button" title="저장하기" value="저장하기"></input>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div> -->
-
-
-
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
@@ -675,7 +638,7 @@
                     <div class="reply-place" id=replyplace<%i %>>
                         <div class="writing-box">
                             <!--행(row)선언-->
-                            <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder="  내용을 입력해주세요" style="width:100%;height:100%;" />
+                            <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder=" 내용을 입력해주세요" style="width:100%;height:100%;" />
                         </div>
                         <div class="writing-button-secret">
                             <div class="writing-button">
