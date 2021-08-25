@@ -100,7 +100,7 @@
         <div class="left-menus-book" id=leftmenu>
 
             <li class="profile">
-                <img id="MyUserimg" src=<%=user.profile_image %>>
+                <img class="trigger8" id="MyUserimg" src=<%=user.profile_image %>>
             </li>
             <li class="myname">
                 <img id="school-card" src="/public/media/id-card.png">
@@ -296,6 +296,39 @@
                         </div>
                     </div>
 
+                    <div class="modal8">
+                        <div class="modal-content">
+                            <span class="close-button8">&times;</span>
+                            <h1 class="title">프로필 사진 수정하기</h1>
+                            <!-- 여기부터 직접 들어갈 Edit 1 파일-->
+                            <div class="course_add_list">
+                                <div class="course_section">
+                                    <form action='/guestbook/editprofile' method='post'>
+                                        <div class="professor_name_section">
+                                            <div class="professor_name_label">사진선택</div>
+                                            <input type="file" id="fileforpost" name="file" placeholder="내용을 입력해주세요" />
+                                        </div>
+                                        <div class="add_btn">
+                                            <input id="btn_add_course" title="저장하기" value="저장하기" onclick="confirm_event_profile_image(this.parentElement.parentElement)"></input>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function confirm_event_profile_image(imagevalue) {
+                            const file = document.getElementById('fileforpost').value;
+                            if (file == '') {
+                                alert("변경하고자 하는 프로필 사진을 선택해주세요")
+                            } else {
+                                //id.submit();
+                            }
+
+                        }
+                    </script>
+
                     <script>
                         function confirm_event_profile(id) {
 
@@ -316,6 +349,7 @@
 
                         }
                     </script>
+
                     <div class="modal5">
                         <form action='/guestbook/addgroup' method='post'>
                             <div class="modal-content">
@@ -796,6 +830,7 @@
     var modal5 = document.querySelector(".modal5");
     var modal6 = document.querySelector(".modal6");
     var modal7 = document.querySelector(".modal7");
+    var modal8 = document.querySelector(".modal8");
     // var modal77 = document.querySelector(".modal77");
     var trigger = document.querySelector(".trigger");
     var trigger2 = document.querySelector(".trigger2");
@@ -804,6 +839,7 @@
     var trigger5 = document.querySelector(".trigger5");
     var trigger6 = document.querySelector(".trigger6");
     var trigger7 = document.querySelector(".trigger7");
+    var trigger8 = document.querySelector(".trigger8");
     // var trigger77 = document.querySelector(".trigger77");
     var closeButton = document.querySelector(".close-button");
     var closeButton2 = document.querySelector(".close-button2");
@@ -812,6 +848,7 @@
     var closeButton5 = document.querySelector(".close-button5");
     var closeButton6 = document.querySelector(".close-button6");
     var closeButton7 = document.querySelector(".close-button7");
+    var closeButton8 = document.querySelector(".close-button8");
     // var closeButton77 = document.querySelector(".close-button77");
     //var cancelButton = document.querySelector("#cancel");
 
@@ -851,6 +888,10 @@
         modal7.classList.toggle("show-modal");
     }
 
+    function toggleModal8() {
+        modal8.classList.toggle("show-modal");
+    }
+
 
     function windowOnClick(event) {
         if (event.target === modal) {
@@ -888,6 +929,12 @@
         }
     }
 
+    function windowOnClick(event) {
+        if (event.target === modal8) {
+            toggleModal8();
+        }
+    }
+
     // function windowOnClick(event) {
     //     if (event.target === modal77) {
     //         toggleModal77();
@@ -900,6 +947,7 @@
     trigger4.addEventListener("click", toggleModal4);
     trigger5.addEventListener("click", toggleModal5);
     trigger6.addEventListener("click", toggleModal6);
+    trigger8.addEventListener("click", toggleModal8);
     // trigger77.addEventListener("click", toggleModal77);
     // trigger7.addEventListener("click", toggleModal7); 이게 문제인듯.
     closeButton.addEventListener("click", toggleModal);
@@ -909,6 +957,7 @@
     closeButton5.addEventListener("click", toggleModal5);
     closeButton6.addEventListener("click", toggleModal6);
     closeButton7.addEventListener("click", toggleModal7);
+    closeButton8.addEventListener("click", toggleModal8);
     // closeButton77.addEventListener("click", toggleModal77);
     //cancelButton.addEventListener("click", toggleModal);
     window.addEventListener("click", windowOnClick);
@@ -961,25 +1010,3 @@
         }
     }
 </script>
-
-<!-- <script>
-    function confirm_event(id) {
-        if (confirm("정말 삭제하시겠습니까??")) {
-            alert("삭제 확인");
-            var form = document.createElement('form');
-            form.setAttribute('method', ''); //POST 메서드 적용
-            form.setAttribute('action', '/guestbook/deletecomment'); // 데이터를 전송할 url
-            document.charset = "utf-8";
-
-            var hiddenField = document.createElement('input');
-            hiddenField.setAttribute('id', id);
-            form.appendChild(hiddenField);
-
-            document.body.appendChild(form);
-            console.log(form);
-            form.submit(); // 전송~
-        } else {
-            alert("삭제취소");
-        }
-    }
-</script> -->
