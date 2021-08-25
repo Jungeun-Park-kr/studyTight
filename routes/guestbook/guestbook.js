@@ -1,4 +1,8 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({
+    dset: 'uploads/'
+})
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
@@ -345,6 +349,32 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
         res.redirect("/guestbook");
     } catch (err) {
         console.log('guestbookedit error');
+        next(err);
+    }
+
+});
+
+router.post('/editprofileimage', isLoggedIn, async(req, res, next) => {
+    const { file } = req.body;
+    const profile = await Profile.findOne({ user_id: res.locals.user._id });
+    const profile1 = await Profile.findOne({ user_id: res.locals.user._id });
+    try {
+        // profile2 = await Profile.updateOne({ user_id: res.locals.user._id }, {
+        //     school: school,
+        //     school_private: school_private,
+        //     major: major,
+        //     major_private: major_private,
+        //     grade: grade,
+        //     grade_private: grade_private,
+        //     timetable_private: timetable_private,
+        //     age: age,
+        //     age_private: age_private
+        // });
+        console.log("===1===");
+        console.log(req.file);
+        res.redirect("/guestbook");
+    } catch (err) {
+        console.log('guestbookeprofileimage error');
         next(err);
     }
 
