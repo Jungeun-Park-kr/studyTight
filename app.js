@@ -46,7 +46,7 @@ if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start
     // }
     
     app.use(morgan('combined'));
-    // app.use(helmet());
+    app.use(helmet());
     app.use(hpp());
 }else{ // 개발 모드로 실행 (> npm run dev)
     app.use(morgan('dev'));
@@ -166,14 +166,6 @@ if(process.env.NODE_ENV ==='production'){ // 배포 모드
     HTTPS.createServer(option, app).listen(443, () => {
         console.log('HTTPS Server running on port 443');
     });  
-
-    // HTTP.createServer(app).listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
-    //     console.log(app.get('port'), '번 포트에서 HTTP대기 중');
-    // });
-    // HTTPS.createServer(option, app).listen(app.get('port'), () => {
-    //     console.log(app.get('port'), '번 포트에서 HTTPS 대기중');
-    // });   
-
 } else { // 개발 모드
     app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
         console.log(app.get('port'), '번 포트에서 대기 중');
