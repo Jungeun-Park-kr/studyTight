@@ -28,7 +28,7 @@ app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버�
 
 if(process.env.NODE_ENV ==='production'){
     app.use(morgan('combined'));
-    app.use(helmet());
+    //app.use(helmet());
     app.use(hpp());
 }else{
     app.use(morgan('dev'));
@@ -131,8 +131,10 @@ app.use('/d-day', DdayRouter);
 app.use((req, res, next) => {
     const err=new Error('Not Found');
     err.status=404;
-    logger.info('hello');
-    logger.error(err.message);
+    // logger.info('hello');
+    // logger.error(err.message);
+
+    
     //console.info(req);
     //res.status(404).send(req + ' Not Found (없는 라우터 요청)');
     //res.status(404).send( ' Not Found');
