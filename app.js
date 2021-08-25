@@ -15,6 +15,7 @@ const hpp=require('hpp');
 const RedisStore=require('connect-redis')(session);
 const fs = require('fs');
 const HTTPS = require('https');
+const HTTP = require('http');
 
 const redis = require("redis");
 
@@ -29,20 +30,26 @@ passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
 if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start)
-    try {
-    const option = {
+    // try {
+    // const option = {
+    //     ca: fs.readFileSync('/etc/letsencrypt/live/studytight.site/fullchain.pem'),
+    //     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
+    //     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
+    // };
+    
+    // HTTPS.createServer(option, app).listen(sslport, () => {
+    //     console.success(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
+    // });
+    // } catch (error) {
+    //     console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    //     console.warn(error);
+    // }
+    const option = { // SSL 인증서
         ca: fs.readFileSync('/etc/letsencrypt/live/studytight.site/fullchain.pem'),
         key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
         cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
     };
     
-    HTTPS.createServer(option, app).listen(sslport, () => {
-        console.success(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
-    });
-    } catch (error) {
-        console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-        console.warn(error);
-    }
     app.use(morgan('combined'));
     // app.use(helmet());
     app.use(hpp());
@@ -95,6 +102,7 @@ const timetableRouter = require('./routes/timetable/timetable'); // 시간표 �
 const todoRouter = require('./routes/todo');
 const folderRouter = require('./routes/folder/folder');
 const DdayRouter = require('./routes/d-day'); // D-day 라우터
+const { http } = require('./logger');
 
 connect(); // mongoDB connection start
 app.use(cors());
@@ -147,16 +155,20 @@ app.use('/d-day', DdayRouter);
 app.use((req, res, next) => {
     const err=new Error('Not Found');
     err.status=404;
-    // logger.info('hello');
-    // logger.error(err.message);
-
-    
-    //console.info(req);
-    //res.status(404).send(req + ' Not Found (없는 라우터 요청)');
-    //res.status(404).send( ' Not Found');
-
-})
-
-app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
-    console.log(app.get('port'), '번 포트에서 대기 중');
 });
+
+
+if(process.env.NODE_ENV ==='production'){
+    HTTP.createServer(app).listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
+        console.log(app.get('port'), '번 포트에서 HTTP대기 중');
+    });
+    
+    HTTPS.createServer(option, app).listen(app.get('port'), () => {
+        console.log(app.get('port'), '번 포트에서 HTTPS 대기중');
+    });   
+
+} else { // 개발 모드
+    app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
+        console.log(app.get('port'), '번 포트에서 대기 중');
+    });
+}
