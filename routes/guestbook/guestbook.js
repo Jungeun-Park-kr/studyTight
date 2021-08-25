@@ -1,8 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const upload = multer({
-    dset: 'uploads/'
-})
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
@@ -14,6 +11,7 @@ const { mongo, Mongoose } = require('mongoose');
 const top_comment = require('../../models/top_comment');
 const { hasUserDefinedProperty } = require('mongoose/lib/utils');
 const router = express.Router();
+var upload = multer({ dest: 'uploads/' })
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
@@ -354,31 +352,36 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
 });
 
-router.post('/editprofileimage', isLoggedIn, async(req, res, next) => {
-    const { file } = req.body;
-    const profile = await Profile.findOne({ user_id: res.locals.user._id });
-    const profile1 = await Profile.findOne({ user_id: res.locals.user._id });
-    try {
-        // profile2 = await Profile.updateOne({ user_id: res.locals.user._id }, {
-        //     school: school,
-        //     school_private: school_private,
-        //     major: major,
-        //     major_private: major_private,
-        //     grade: grade,
-        //     grade_private: grade_private,
-        //     timetable_private: timetable_private,
-        //     age: age,
-        //     age_private: age_private
-        // });
-        console.log("===1===");
-        console.log(req.file);
-        res.redirect("/guestbook");
-    } catch (err) {
-        console.log('guestbookeprofileimage error');
-        next(err);
-    }
+// router.post('/editprofileimage', isLoggedIn, upload.single('file'), async(req, res, next) => {
+//     const { file } = req.body;
+//     const profile = await Profile.findOne({ user_id: res.locals.user._id });
+//     const profile1 = await Profile.findOne({ user_id: res.locals.user._id });
+//     try {
+//         app.post('/upload', upload.single('file'), function(req, res) { //single뒤에는 내 파일의name
+//             res.send('Uploaded! : ' + req.file); // object를 리턴함
+//             console.log(req.file); // 콘솔(터미널)을 통해서 req.file Object 내용 확인 가능.
+//         });
 
+//         //res.redirect("/guestbook");
+//     } catch (err) {
+//         console.log('guestbookeprofileimage error');
+//         next(err);
+//     }
+
+// });
+
+router.post('/editprofileimage', upload.single("file"), function(req, res, next) {
+    let file = req.file
+    let result = {
+        originalName: file.originalname,
+        size: file.size,
+    }
+    console.log(req.file);
+    res.send('Uploaded! : ' + req.file);
+    //res.json(result);
 });
+
+
 
 router.get('/:id', isLoggedIn, async(req, res, next) => {
 
