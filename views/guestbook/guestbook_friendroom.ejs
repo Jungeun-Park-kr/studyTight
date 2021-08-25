@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/public/mainframe.css">
     <link rel="stylesheet" href="/public/font.css">
 
+    <link rel=" shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="/public/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/component.css" />
 
@@ -121,10 +124,12 @@
                     <%=profile.major+'전공'%>
                         <% } %>
             </li>
-            <!-- <li class="grade">
-                <img id="grade-card" src="/public/media/mortarboard.png">
-                <%=profile.grade+'학년'%>
-            </li> -->
+            <li class="age">
+                <% if (profile.age_private) { %>
+                    <img id="age-card" src="/public/media/age.png">
+                    <%=profile.age+'살'%>
+                        <% } %>
+            </li>
 
             <!-- 시간표 공개여부에 따라 -->
             <li class="show-timetable">
@@ -371,7 +376,7 @@
                             <div class="course_add_list">
                                 <div class="course_section">
                                     <div class="secret_section">
-                                        <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                        <div class="course_secret_label">검색은 이름으로 진행하여 주세요</div>
                                     </div>
                                     <div class="course_title_section">
 
@@ -573,7 +578,7 @@
                             <input type="submit" id="submit" value="글쓰기"></input>
                         </div>
                         <div class="secret-checkbox">
-                            <input type="checkbox" name="checkbox" id=mysecretbox> 비밀글
+                            <input type="checkbox" name="checkbox" value=true> 비밀글
                         </div>
 
                     </div>
@@ -583,102 +588,110 @@
             <hr id="myroom-line">
             <div id=comments> </div>
             <div class="talking-place" id="talking-place">
-
+                <!-- 즉, 사라져야될건 시크릿인데 내가쓴글이 아닌경우이다. -->
                 <% for(var i = 0; i < top_comment.length; i++){ %>
-                    <div id='talking' class=<%='talking' +i%>>
-                        <div class="mini-profile">
-                            <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
-                        </div>
-                        <div class="user-small-talking">
-                            <div class="user-name">
-                                <%=top_comment[i].commenter_email.name %>
+                    <% if(top_comment[i].comment_secret== false | top_comment[i].commenter_email._id.equals(user._id)) { %>
+                        <div id='talking' class=<%='talking' +i%>>
+                            <div class="mini-profile">
+                                <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                             </div>
-                            <div class="user-talking-list">
-                                <%=top_comment[i].text %>
-                            </div>
-                            <div class="today-button">
-                                <div class="today">
-                                    <%=top_comment[i].comment_time %>
-                                </div>
-                                <div class="reply-button">
-                                    <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
-                                    <% if(top_comment[i].commenter_email._id.equals (user._id)){ %>
-                                        <input type="button" class="delete" value="삭제하기" onclick="confirm_event(this.id);" id="<%= top_comment[i]._id %>"></input>
+                            <div class="user-small-talking">
+                                <div class="allign_lock">
+                                    <div class="user-name">
+                                        <%=top_comment[i].commenter_email.name %>
+                                    </div>
+                                    <% if(top_comment[i].comment_secret==true) { %>
+                                        <div class="mini_lock">
+                                            <img id="secret_lock" src="/public/media/lock.png">
+                                        </div>
                                         <% } %>
                                 </div>
+                                <div class="user-talking-list">
+                                    <%=top_comment[i].text %>
+                                </div>
+                                <div class="today-button">
+                                    <div class="today">
+                                        <%=top_comment[i].comment_time %>
+                                    </div>
+                                    <div class="reply-button">
+                                        <input type="button" class="reply" value="답글쓰기" onclick="test(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                        <% if(top_comment[i].commenter_email._id.equals (user._id)){ %>
+                                            <input type="button" class="delete" value="삭제하기" onclick="confirm_event(this.id);" id="<%= top_comment[i]._id %>"></input>
+                                            <% } %>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <% for(var k = 0; k < bottom_comment.length; k++){ %>
-                        <% if(top_comment[i]._id.equals(bottom_comment[k].comment_parent_id)){ %>
-                            <div id='talking1' class=<%='reply' +k%>>
-                                <div class="mini-profile">
-                                    <img src=<%=bottom_comment[k].commenter_email.profile_image %>></img>
-                                </div>
-                                <div class="user-small-talking">
-                                    <div class="user-name">
-                                        <%=bottom_comment[k].commenter_email.name %>
+                        <% for(var k = 0; k < bottom_comment.length; k++){ %>
+                            <% if(top_comment[i]._id.equals(bottom_comment[k].comment_parent_id)){ %>
+                                <div id='talking1' class=<%='reply' +k%>>
+                                    <div class="mini-profile">
+                                        <img src=<%=bottom_comment[k].commenter_email.profile_image %>></img>
                                     </div>
-                                    <div class="user-talking-list">
-                                        <%=bottom_comment[k].text %>
-                                    </div>
-                                    <div class="today-button">
-                                        <div class="today">
-                                            <%=bottom_comment[k].comment_time %>
+                                    <div class="user-small-talking">
+                                        <div class="user-name">
+                                            <%=bottom_comment[k].commenter_email.name %>
                                         </div>
-                                        <div class="reply-button">
-                                            <% if(bottom_comment[k].commenter_email._id.equals(user._id)){ %>
-                                                <input type="button" class="delete" value="삭제하기" onclick="confirm_event1(this.id);" id="<%= bottom_comment[k]._id %>"></input>
-                                                <% } %>
+                                        <div class="user-talking-list">
+                                            <%=bottom_comment[k].text %>
                                         </div>
-                                    </div>
+                                        <div class="today-button">
+                                            <div class="today">
+                                                <%=bottom_comment[k].comment_time %>
+                                            </div>
+                                            <div class="reply-button">
+                                                <% if(bottom_comment[k].commenter_email._id.equals(user._id)){ %>
+                                                    <input type="button" class="delete" value="삭제하기" onclick="confirm_event1(this.id);" id="<%= bottom_comment[k]._id %>"></input>
+                                                    <% } %>
+                                            </div>
+                                        </div>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <% } %>
                                 <% } %>
-                                    <script>
-                                        function test(id) {
-                                            var my_table = document.getElementById("reply" + id);
-                                            //console.log(my_table);
-                                            my_table.style.display = 'block';
-                                            my_table.style.visibility = 'visible';
-                                        }
-                                    </script>
-
-                                    <div class="reply-place" id=<%="reply" +top_comment[i]._id %>>
-                                        <form action="/guestbook/<%=profile.user_id.email_id%>/addbottom" method="post">
-                                            <div class="writing-box">
-                                                <!--행(row)선언-->
-                                                <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder=" 내용을 입력해주세요" style="width:100%;height:100%;" />
-                                            </div>
-                                            <div class="writing-button-secret">
-                                                <div class="writing-button">
-                                                    <input type="submit" id="submit" value="글쓰기"></input>
-                                                    <input style="display: none;" name="id" value=<%=top_comment[i]._id%>></input>
-                                                </div>
-                                                <div class="secret-checkbox">
-                                                    <input type="checkbox" name="secret" value='true'> 비밀글
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                    </div>
-
-
-                                    <!-- <script src="index.js "></script> -->
                                     <% } %>
-                                        <tr>
-                                            <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
-                                            <td colspan="6 ">
-                                                <center>
-                                                    <% for(var i = 0; i < top_comment.length/5; i++){ %>
-                                                        <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
-                                                        <% } %>
-                                                </center>
-                                            </td>
-                                        </tr>
+                                        <script>
+                                            function test(id) {
+                                                var my_table = document.getElementById("reply" + id);
+                                                //console.log(my_table);
+                                                my_table.style.display = 'block';
+                                                my_table.style.visibility = 'visible';
+                                            }
+                                        </script>
+
+                                        <div class="reply-place" id=<%="reply" +top_comment[i]._id %>>
+                                            <form action="/guestbook/<%=profile.user_id.email_id%>/addbottom" method="post">
+                                                <div class="writing-box">
+                                                    <!--행(row)선언-->
+                                                    <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder=" 내용을 입력해주세요" style="width:100%;height:100%;" />
+                                                </div>
+                                                <div class="writing-button-secret">
+                                                    <div class="writing-button">
+                                                        <input type="submit" id="submit" value="글쓰기"></input>
+                                                        <input style="display: none;" name="id" value=<%=top_comment[i]._id%>></input>
+                                                    </div>
+                                                    <!-- <div class="secret-checkbox">
+                                                        <input type="checkbox" name="secret" value='true'> 비밀글
+                                                    </div> -->
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <% } %>
+
+                                            <!-- <script src="index.js "></script> -->
+                                            <% } %>
+                                                <tr>
+                                                    <!-- 연결 주소가 현재는 현재페이지로 지정되어있음. 이후 데이터베이스 정리가 끝나면 수정바람. -->
+                                                    <td colspan="6 ">
+                                                        <center>
+                                                            <% for(var i = 0; i < top_comment.length/5; i++){ %>
+                                                                <a type="button" name='talkingc' id=<%='talking' +i%>><%=i+1%></a>
+                                                                <% } %>
+                                                        </center>
+                                                    </td>
+                                                </tr>
 
             </div>
         </div>

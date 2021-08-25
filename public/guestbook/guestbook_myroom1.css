@@ -390,6 +390,22 @@ select::-ms-expand {
     height: 40px;
 }
 
+.user-small-talking .allign_lock {
+    display: inline-block;
+}
+
+.user-small-talking .allign_lock .mini_lock,
+.user-small-talking .allign_lock .user-name {
+    float: left;
+}
+
+.mini_lock>img {
+    width: 15px;
+    height: 15px;
+    margin-top: 8px;
+    margin-left: 2px;
+}
+
 .user-small-talking {
     float: left;
     margin-left: 20px;

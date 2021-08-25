@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/public/mainframe.css">
     <link rel="stylesheet" href="/public/font.css">
 
+    <link rel="shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="/public/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/component.css" />
 
@@ -121,10 +124,12 @@
                     <%=profile.major+'전공'%>
                         <% } %>
             </li>
-            <!-- <li class="grade">
-                <img id="grade-card" src="/public/media/mortarboard.png">
-                <%=profile.grade+'학년'%>
-            </li> -->
+            <li class="age">
+                <% if (profile.age_private) { %>
+                    <img id="age-card" src="/public/media/age.png">
+                    <%=profile.age+'살'%>
+                        <% } %>
+            </li>
 
             <li class="edit-profile">
                 <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
@@ -144,9 +149,9 @@
                         <option value=<%='option'+i%>><%=profile.group[i]%></option>
                         <% } %>
                         </select>
-                        <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
-                        <img id="friend_edit" class="trigger5" src="/guestbook/media/add.png"></img>
-                        <img id="friend_edit" class="trigger6" src="/guestbook/media/minus.png"></img>
+                        <img id="friend_edit" class="trigger3" src="/public/media/gear.png"></img>
+                        <img id="friend_edit" class="trigger5" src="/public/media/add.png"></img>
+                        <img id="friend_edit" class="trigger6" src="/public/media/minus.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->
                         <div class="btn_add_course">
                             <input type="button" class="trigger" value="+ 친구 추가하기"></input>
@@ -264,7 +269,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">학년</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="grade" id="gradeforpost" placeholder=<%=profile.grade%> />
+                                                    <input type="number" name="grade" id="gradeforpost" placeholder=<%=profile.grade%> />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
@@ -274,7 +279,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">나이</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" id="ageforpost" name="age" placeholder="내용을 입력해주세요" />
+                                                    <input type="number" id="ageforpost" name="age" placeholder="내용을 입력해주세요" />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
@@ -299,6 +304,9 @@
                             const major = document.getElementById('majorforpost').value;
                             const grade = document.getElementById('gradeforpost').value;
                             const age = document.getElementById('ageforpost').value;
+                            var agetype = typeof(age);
+
+
                             if (name == '' | school == '' | major == '' | grade == '' | age == '') {
                                 alert("모든 정보를 입력해주세요")
 
@@ -377,7 +385,7 @@
                                 <div class="course_add_list">
                                     <div class="course_section">
                                         <div class="secret_section">
-                                            <div class="course_secret_label" name='foremailsearch'>검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                            <div class="course_secret_label" name='foremailsearch'>검색은 이름으로 진행하여 주세요</div>
                                         </div>
                                         <div class="course_title_section">
 
@@ -415,7 +423,7 @@
                                 <div class="course_add_list">
                                     <div class="course_section">
                                         <div class="secret_section">
-                                            <div class="course_secret_label" name='foremailsearch'>검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                            <div class="course_secret_label" name='foremailsearch'>검색은 이름으로 진행하여 주세요</div>
                                         </div>
                                         <div class="course_title_section">
 
@@ -449,7 +457,7 @@
                             <div class="course_add_list">
                                 <div class="course_section">
                                     <div class="secret_section">
-                                        <div class="course_secret_label">검색은 이메일 혹은 이름으로 진행하여 주세요</div>
+                                        <div class="course_secret_label">검색은 이름으로 진행하여 주세요</div>
                                     </div>
                                     <div class="course_title_section">
 
@@ -598,13 +606,21 @@
             <div class="talking-place" id="talking-place">
 
                 <% for(var i = 0; i < top_comment.length; i++){ %>
+
                     <div id='talking' class=<%='talking' +i%>>
                         <div class="mini-profile">
                             <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                         </div>
                         <div class="user-small-talking">
-                            <div class="user-name">
-                                <%=top_comment[i].commenter_email.name %>
+                            <div class="allign_lock">
+                                <div class="user-name">
+                                    <%=top_comment[i].commenter_email.name %>
+                                </div>
+                                <% if(top_comment[i].comment_secret==true) { %>
+                                    <div class="mini_lock">
+                                        <img id="secret_lock" src="/public/media/lock.png">
+                                    </div>
+                                    <% } %>
                             </div>
                             <div class="user-talking-list">
                                 <%=top_comment[i].text %>
@@ -671,9 +687,9 @@
                                                     <input type="submit" id="submit" value="글쓰기"></input>
                                                     <input style="display: none;" name="id" value=<%=top_comment[i]._id%>></input>
                                                 </div>
-                                                <div class="secret-checkbox">
+                                                <!-- <div class="secret-checkbox">
                                                     <input type="checkbox" name="secret" value='true'> 비밀글
-                                                </div>
+                                                </div> -->
 
                                             </div>
                                         </form>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <style>
         @import url(/font.css);
@@ -14,13 +15,17 @@
         @import url(/login/register.css);
         @import url(/login/register_agree.css);
     </style>
-    
+
+    <link rel="shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico">
+
 </head>
+
 <body>
     <div id="warp">
-        <div class="register_header"> 
+        <div class="register_header">
             <!-- 여기는 왼쪽 메뉴 (로고) -->
-            <div class ="logo_area"> 
+            <div class="logo_area">
                 <img src="/public/media/logo_big.png" onclick="location.href='/auth/login'">
             </div>
         </div>
@@ -32,7 +37,7 @@
                         <input type="checkbox" id="chk_all" name="chk_all">
                         <label for="chk_all">
                             <span class="chk_all_txt">study Tight 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.</span>
-                        </label>
+                    </label>
                     </span>
                 </p>
                 <ul class="terms_bx_list">
@@ -42,12 +47,12 @@
                             <label for="termsService">
                                 study Tight 이용약관 동의
                                 <span class="terms_necessary">(필수)</span>
-                            </label>
+                        </label>
                         </span>
                         <div class="terms_box" tabindex="0" id="divService">
                             <div class="article" id="terms_of_service"></div>
                             <script type="javascript">
-                                
+
                             </script>
                         </div>
                     </li>
@@ -57,7 +62,7 @@
                             <label for="termsPrivacy" class="collect_personal">
                                 개인정보 수집 및 이용 동의
                                 <span class="terms_necessary">(필수)</span>
-                            </label>
+                        </label>
                         </span>
                         <div class="terms_box" tabindex="0" id="divPrivacy">
                             <div class="policy_summary">
@@ -65,8 +70,8 @@
                                 </p>
                             </div>
                             <div class="article" id="terms_of_privacy"></div>
-                            <script type="text/javascript"> 
-                                $(document).ready(function () {
+                            <script type="text/javascript">
+                                $(document).ready(function() {
                                     $.get("/views/terms/terms_of_service.txt", function(data) {
                                         $("#terms_of_service").val(data);
                                         document.getElementById("terms_of_service").innerHTML = data;
@@ -85,14 +90,14 @@
                             <label for="termsPromotion">
                                 프로모션 정보 수신 동의
                                 <span class="terms_choice trems_no">(선택)</span>
-                            </label>
+                        </label>
                         </span>
                         <span class="event_message" style="display:block">study Tight에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(study Tight앱 알림 또는 문자), 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 study Tight 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</span>
                     </li>
                 </ul>
             </div>
-            
-            <div class="agree_bottom"> 
+
+            <div class="agree_bottom">
                 <div class="btn_area double">
                     <span><!-- tg-text=terms_button_cancel -->
                         <a href="/" id="btnCancel" class="btn_type btn_default" role="button">취소</a></span>
@@ -100,10 +105,10 @@
                         <a id="btnAgree" class="btn_type btn_primary" role="button">확인</a></span>
                 </div>
             </div>
-            
+
         </div>
     </div>
-    <script type="text/javascript" >
+    <script type="text/javascript">
         var chk_service = document.getElementById('termsService');
         var chk_privacy = document.getElementById('termsPrivacy');
         var chk_promotion = document.getElementById('termsPromotion');
@@ -112,22 +117,22 @@
 
         $(document).ready(function() {
             $('#btnAgree').click(function() {
-                var allchecked = chk_service.checked&&chk_privacy.checked ? true : false;
+                var allchecked = chk_service.checked && chk_privacy.checked ? true : false;
 
                 if (allchecked) {
                     $.ajax({
-                            type:"POST",
-                            async : true,
-                            url:'/signup/agree',
-                            data : {
-                                promotion : promotion,
-                            },
-                            success:function(data){ // POST 요청 성공
-                                $(location).attr('href', '/signup'); 
-                            }, 
-                            error: function(err) { // POST 요청 실패시
-                                alert('오류가 발생했습니다. 다시 시도해주세요.');
-                            }
+                        type: "POST",
+                        async: true,
+                        url: '/signup/agree',
+                        data: {
+                            promotion: promotion,
+                        },
+                        success: function(data) { // POST 요청 성공
+                            $(location).attr('href', '/signup');
+                        },
+                        error: function(err) { // POST 요청 실패시
+                            alert('오류가 발생했습니다. 다시 시도해주세요.');
+                        }
                     });
                 } else {
                     alert('studyTight 이용약관과 개인정보 수집 및 이용에 대한 안내를\n모두 동의해주세요.');
@@ -138,7 +143,7 @@
                 var email = $(this).is(':checked');
                 if (email) {
                     promotion = true;
-                    
+
                 } else {
                     promotion = false;
                 }
@@ -146,7 +151,7 @@
             // 전체선택 체크박스
             $("#chk_all").click(function() {
                 var chkAll = $(this).is(":checked");
-                
+
                 if (chkAll) {
                     $("#dynamicUL input:checkbox").prop("checked", true);
                     chk_service.checked = true;
@@ -164,4 +169,5 @@
         })
     </script>
 </body>
+
 </html>
