@@ -13,6 +13,7 @@ const logger=require('./logger');
 const helmet=require('helmet');
 const hpp=require('hpp');
 const RedisStore=require('connect-redis')(session);
+const fs = require('fs');
 const HTTPS = require('https');
 
 const redis = require("redis");
