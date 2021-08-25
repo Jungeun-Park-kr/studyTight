@@ -159,14 +159,20 @@ if(process.env.NODE_ENV ==='production'){ // 배포 모드
         key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
         cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
     };
-
-    HTTP.createServer(app).listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
-        console.log(app.get('port'), '번 포트에서 HTTP대기 중');
+    HTTP.createServer(app).listen(80, () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
+        console.log('HTTP Server running on port 80');
     });
     
-    HTTPS.createServer(option, app).listen(app.get('port'), () => {
-        console.log(app.get('port'), '번 포트에서 HTTPS 대기중');
-    });   
+    HTTPS.createServer(option, app).listen(443, () => {
+        console.log('HTTPS Server running on port 443');
+    });  
+
+    // HTTP.createServer(app).listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
+    //     console.log(app.get('port'), '번 포트에서 HTTP대기 중');
+    // });
+    // HTTPS.createServer(option, app).listen(app.get('port'), () => {
+    //     console.log(app.get('port'), '번 포트에서 HTTPS 대기중');
+    // });   
 
 } else { // 개발 모드
     app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
