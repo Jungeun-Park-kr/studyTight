@@ -661,7 +661,7 @@
                                     </script>
 
                                     <div class="reply-place" id=<%="reply" +top_comment[i]._id %>>
-                                        <form action="/guestbook/<%= user.email_id%>/addbottom" method="post">
+                                        <form action="/guestbook/addbottom" method="post">
                                             <div class="writing-box">
                                                 <!--행(row)선언-->
                                                 <input type="text" id=<%='comment-input' +i%> name="writing" value="" placeholder=" 내용을 입력해주세요" style="width:100%;height:100%;" />
