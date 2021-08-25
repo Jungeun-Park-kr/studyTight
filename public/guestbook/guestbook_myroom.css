@@ -33,6 +33,7 @@ body {
 #MyUserimg {
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
 .page-bottom {
@@ -365,7 +366,7 @@ select::-ms-expand {
 #course_body tr {
     cursor: pointer;
     line-height: 1.1rem;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .user-small-talking {

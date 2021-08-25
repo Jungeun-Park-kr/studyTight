@@ -29,6 +29,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
 
         const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
         res.render('../views/folder/folder.ejs', {
+            title : folder_title[0],
             folder_img: folder_img[0],
             folder_title: folder_title[0],
             folder: folder,

@@ -49,6 +49,13 @@
     color: #999;
 }
 
+.modal8 {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #999;
+}
+
 .modal77 {
     text-align: center;
     display: block;
@@ -135,6 +142,7 @@ textarea {
 .modal7,
 .modal5,
 .modal6,
+.modal8,
 .modal77 {
     position: fixed;
     left: 0;
@@ -192,7 +200,8 @@ textarea {
 .close-button7,
 .close-button77,
 .close-button5,
-.close-button6 {
+.close-button6,
+.close-button8 {
     float: right;
     width: 1.5rem;
     line-height: 1.5rem;
@@ -209,7 +218,8 @@ textarea {
 .close-button4:hover,
 .close-button77:hover,
 .close-button5:hover,
-.close-button6:hover {
+.close-button6:hover,
+.close-button8:hover {
     background-color: darkgray;
 }
 
