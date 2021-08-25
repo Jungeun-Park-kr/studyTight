@@ -197,7 +197,6 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
         } else {
             search_list = await User.find({ name: new RegExp(search_email) })
         }
-        console.log(search_email);
         const OneUser = await User.findOne({ _id: res.locals.user._id })
             // .select('major')
             //첫번째 . 까진 id똑같은걸로 찾는거
@@ -300,7 +299,6 @@ router.post('/addbottom', isLoggedIn, async(req, res, next) => {
             post_id: 1,
 
         });
-        console.log(bottom_comment);
         res.redirect("/guestbook");
 
     } catch (err) {}
@@ -325,12 +323,11 @@ router.post('/deletebottomcomment', isLoggedIn, async(req, res, next) => { //할
     } catch (err) {
         next(req.body);
     }
-    console.log(id);
     res.redirect("/guestbook");
 });
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
-    const { id, timetable_private, school, school_private, major, major_private, grade, grade_private, age } = req.body;
+    const { id, timetable_private, school, school_private, major, major_private, grade, grade_private, age, age_private } = req.body;
     const profile = await Profile.findOne({ user_id: res.locals.user._id });
     const profile1 = await Profile.findOne({ user_id: res.locals.user._id });
     try {
@@ -342,9 +339,9 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
             grade: grade,
             grade_private: grade_private,
             timetable_private: timetable_private,
-            age: age
+            age: age,
+            age_private: age_private
         });
-        console.log(id);
         res.redirect("/guestbook");
     } catch (err) {
         console.log('guestbookedit error');
@@ -424,7 +421,6 @@ router.post('/:id/addbottom', isLoggedIn, async(req, res, next) => {
             post_id: 1,
 
         });
-        console.log(req.body);
         res.redirect("/guestbook/" + id_obj);
 
     } catch (err) {}
@@ -451,7 +447,6 @@ router.post('/:id/deletebottomcomment', isLoggedIn, async(req, res, next) => { /
     } catch (err) {
         next(req.body);
     }
-    console.log(id);
     res.redirect("/guestbook/" + id_obj);
 });
 
@@ -499,7 +494,7 @@ function getCurrentDate() {
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
-    var today = date.getDate() + 1;
+    var today = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();

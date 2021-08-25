@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/public/mainframe.css">
     <link rel="stylesheet" href="/public/font.css">
 
+    <link rel="shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="/public/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/component.css" />
 
@@ -121,11 +124,12 @@
                     <%=profile.major+'전공'%>
                         <% } %>
             </li>
-            <!-- <li class="grade">
-                <img id="grade-card" src="/public/media/mortarboard.png">
-                <%=profile.grade+'학년'%>
-            </li> -->
-
+            <li class="age">
+                <% if (profile.age_private) { %>
+                    <img id="age-card" src="/public/media/age.png">
+                    <%=profile.age+'살'%>
+                        <% } %>
+            </li>
             <li class="edit-profile">
                 <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger14"></input>
             </li>
@@ -144,9 +148,9 @@
                         <option value=<%='option'+i%>><%=profile.group[i]%></option>
                         <% } %>
                         </select>
-                        <img id="friend_edit" class="trigger3" src="/guestbook/media/gear.png"></img>
-                        <img id="friend_edit" class="trigger5" src="/guestbook/media/add.png"></img>
-                        <img id="friend_edit" class="trigger6" src="/guestbook/media/minus.png"></img>
+                        <img id="friend_edit" class="trigger3" src="/public/media/gear.png"></img>
+                        <img id="friend_edit" class="trigger5" src="/public/media/add.png"></img>
+                        <img id="friend_edit" class="trigger6" src="/public/media/minus.png"></img>
                         <!-- 이후 모달 팝업으로 추가.-->
                         <div class="btn_add_course">
                             <input type="button" class="trigger" value="+ 친구 추가하기"></input>
