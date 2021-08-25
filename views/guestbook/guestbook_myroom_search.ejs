@@ -424,8 +424,15 @@
                             <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
                         </div>
                         <div class="user-small-talking">
-                            <div class="user-name">
-                                <%=top_comment[i].commenter_email.name %>
+                            <div class="allign_lock">
+                                <div class="user-name">
+                                    <%=top_comment[i].commenter_email.name %>
+                                </div>
+                                <% if(top_comment[i].comment_secret==true) { %>
+                                    <div class="mini_lock">
+                                        <img id="secret_lock" src="/public/media/lock.png">
+                                    </div>
+                                    <% } %>
                             </div>
                             <div class="user-talking-list">
                                 <%=top_comment[i].text %>

@@ -385,6 +385,22 @@ select::-ms-expand {
     float: left;
 }
 
+.user-small-talking .allign_lock {
+    display: inline-block;
+}
+
+.user-small-talking .allign_lock .mini_lock,
+.user-small-talking .allign_lock .user-name {
+    float: left;
+}
+
+.mini_lock>img {
+    width: 15px;
+    height: 15px;
+    margin-top: 8px;
+    margin-left: 2px;
+}
+
 .mini-profile>img {
     margin-left: 50px;
     margin-top: 20px;
