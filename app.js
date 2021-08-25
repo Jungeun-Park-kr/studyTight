@@ -9,15 +9,14 @@ const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
 const store = require('store');
-const logger=require('./logger');
-const helmet=require('helmet');
+const logger = require('./logger');
+const helmet = require('helmet');
 const csp = require('helmet-csp');
-const hpp=require('hpp');
-const RedisStore=require('connect-redis')(session);
+const hpp = require('hpp');
+const RedisStore = require('connect-redis')(session);
 const fs = require('fs');
 const HTTPS = require('https');
 const HTTP = require('http');
-
 const redis = require("redis");
 
 
@@ -27,10 +26,11 @@ const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 �
 const passportConfig = require('./passport');
 
 const app = express();
+app.use(express.static('uploads'));
 passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
-if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start)
+if (process.env.NODE_ENV === 'production') { // 배포모드로 실행 (> npm start)
     // app.use(morgan('combined'));
     // app.use(helmet());
     // app.use(
@@ -43,7 +43,7 @@ if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start
     //     })
     // );
     // app.use(hpp());
-}else{ // 개발 모드로 실행 (> npm run dev)
+} else { // 개발 모드로 실행 (> npm run dev)
     app.use(morgan('dev'));
 }
 
@@ -53,29 +53,31 @@ app.set('view engine', 'ejs'); // 뷰엔진 세팅
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-const client = redis.createClient({ 
+const client = redis.createClient({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
     password: process.env.REDIS_PASSWORD,
-    logError: true });
+    logError: true
+});
 
 
 
-const sessionOption={
-    resave:false,
-    saveUninitialized:false,
-    secret:process.env.COOKIE_SECRET,
+const sessionOption = {
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
     cookie: {
-        httpOnly:true,
+        httpOnly: true,
         secure: false
-    },store: new RedisStore({ client })
+    },
+    store: new RedisStore({ client })
 
 
-    
+
 };
 
-if(process.env.NODE_ENV ==='production'){
-    sessionOption.proxy=true;
+if (process.env.NODE_ENV === 'production') {
+    sessionOption.proxy = true;
     //sessionOption.cookie.secret=true;
 }
 
@@ -110,7 +112,7 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
-    
+
 }));
 
 app.use(passport.initialize());
@@ -132,12 +134,12 @@ app.use('/d-day', DdayRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
-    const err=new Error('Not Found');
-    err.status=404;
+    const err = new Error('Not Found');
+    err.status = 404;
 });
 
 
-if(process.env.NODE_ENV ==='production'){ // 배포 모드
+if (process.env.NODE_ENV === 'production') { // 배포 모드
     const option = { // SSL 인증서
         ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/chain.pem'),
         key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
@@ -146,10 +148,10 @@ if(process.env.NODE_ENV ==='production'){ // 배포 모드
     HTTP.createServer(app).listen(80, () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
         console.log('HTTP Server running on port 80');
     });
-    
+
     HTTPS.createServer(option, app).listen(443, () => {
         console.log('HTTPS Server running on port 443');
-    });  
+    });
 } else { // 개발 모드
     app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
         console.log(app.get('port'), '번 포트에서 대기 중');
