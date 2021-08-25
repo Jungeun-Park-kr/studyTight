@@ -9,6 +9,12 @@ const path = require('path'); // 현재 프로젝트의 경로
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
 const store = require('store');
+const logger=require('./logger');
+const helmet=require('helmet');
+const hpp=require('hpp');
+const RedisStore=require('connect-redis')(session);
+
+const redis = require("redis");
 
 
 dotenv.config();
@@ -19,8 +25,48 @@ const passportConfig = require('./passport');
 const app = express();
 passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
+
+if(process.env.NODE_ENV ==='production'){
+    app.use(morgan('combined'));
+    //app.use(helmet());
+    app.use(hpp());
+}else{
+    app.use(morgan('dev'));
+}
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs'); // 뷰엔진 세팅
+
+
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+const client = redis.createClient({ 
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+    logError: true });
+
+
+
+const sessionOption={
+    resave:false,
+    saveUninitialized:false,
+    secret:process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly:true,
+        secure: false
+    },store: new RedisStore({ client })
+
+
+    
+};
+
+if(process.env.NODE_ENV ==='production'){
+    sessionOption.proxy=true;
+    //sessionOption.cookie.secret=true;
+}
+
+app.use(session(sessionOption));
 
 // router
 const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
@@ -42,6 +88,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static('public'));
 
+// var redisClinet = redis.createClient(port, host);
+
+// var redisConnectionResult = redisClinet.auth(password, err => {
+
+// if (err) console.log(err, " 에러 발생했습니다");
+
+// });
+
+// console.log("redis 연결 결과는? - ", redisConnectionResult);
+
+
 app.use(session({
     resave: false, //세션 항상 저장 여부
     saveUninitialized: false, //초기화되지 않은채 스토어에 저장되는 세션
@@ -50,6 +107,7 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
+    
 }));
 
 app.use(passport.initialize());
@@ -71,9 +129,16 @@ app.use('/d-day', DdayRouter);
 
 // 상단에 없는 라우터 요청시 에러 처리
 app.use((req, res, next) => {
+    const err=new Error('Not Found');
+    err.status=404;
+    // logger.info('hello');
+    // logger.error(err.message);
+
+    
     //console.info(req);
     //res.status(404).send(req + ' Not Found (없는 라우터 요청)');
-    res.status(404).send(req + ' Not Found');
+    //res.status(404).send( ' Not Found');
+
 })
 
 app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
