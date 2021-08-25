@@ -370,15 +370,19 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 
 // });
 
-router.post('/editprofileimage', upload.single("file"), function(req, res, next) {
-    let file = req.file
-    let result = {
-        originalName: file.originalname,
-        size: file.size,
+router.post('/editprofileimage', upload.single("file"), async(req, res, next) => {
+
+    const linkforprofile = '/' + req.file.path;
+    try {
+        profile2 = await User.updateOne({ _id: res.locals.user._id }, {
+            $set: { profile_image: linkforprofile }
+        });
+        //console.log(typeof(linkforprofile));
+    } catch (err) {
+        console.log('guestbookedit error');
+        next(err);
     }
-    console.log(req.file);
-    res.send('Uploaded! : ' + req.file);
-    //res.json(result);
+    res.redirect("/guestbook");
 });
 
 

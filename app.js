@@ -26,6 +26,7 @@ const connect = require('./models'); // mongoDB를 위한 index.js, 스키마 �
 const passportConfig = require('./passport');
 
 const app = express();
+app.use(express.static('uploads'));
 passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
@@ -128,8 +129,7 @@ app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
 app.use('/folder', folderRouter);
 app.use('/d-day', DdayRouter);
-app.use('/uploads', express.static('uploads'))
-    // app.use('/todo',todoRouter);
+// app.use('/todo',todoRouter);
 
 
 // 상단에 없는 라우터 요청시 에러 처리
