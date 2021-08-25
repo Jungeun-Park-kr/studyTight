@@ -31,8 +31,8 @@ if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start
     try {
     const option = {
         ca: fs.readFileSync('/etc/letsencrypt/live/studytight.site/fullchain.pem'),
-        key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/studytight.site/privkey.pem'), 'utf8').toString(),
-        cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/studytight.site/cert.pem'), 'utf8').toString(),
+        key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
+        cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
     };
     
     HTTPS.createServer(option, app).listen(sslport, () => {
