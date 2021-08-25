@@ -1,4 +1,3 @@
-
 .add_title {
     font-size: 20;
     font-weight: bold;
@@ -85,7 +84,6 @@
     vertical-align: middle;
 }
 
-
 .course_title_form input,
 .professor_name_form input,
 .course_link_form input,
@@ -132,6 +130,7 @@ select {
 }
 
 .add_btn input {
+    text-align: center;
     width: 20%;
     height: 40px;
     background-color: #6ED4D8;

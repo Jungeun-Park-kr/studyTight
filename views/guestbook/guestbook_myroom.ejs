@@ -269,7 +269,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">학년</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" name="grade" id="gradeforpost" placeholder=<%=profile.grade%> />
+                                                    <input type="number" name="grade" id="gradeforpost" placeholder=<%=profile.grade%> />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="grade_private" size="20" value='true'  id="grade_secret"  checked>공개</label>
@@ -279,7 +279,7 @@
                                             <div class="professor_name_section">
                                                 <div class="professor_name_label">나이</div>
                                                 <div class="professor_name_form">
-                                                    <input type="text" id="ageforpost" name="age" placeholder="내용을 입력해주세요" />
+                                                    <input type="number" id="ageforpost" name="age" placeholder="내용을 입력해주세요" />
                                                 </div>
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
@@ -304,6 +304,9 @@
                             const major = document.getElementById('majorforpost').value;
                             const grade = document.getElementById('gradeforpost').value;
                             const age = document.getElementById('ageforpost').value;
+                            var agetype = typeof(age);
+
+
                             if (name == '' | school == '' | major == '' | grade == '' | age == '') {
                                 alert("모든 정보를 입력해주세요")
 
@@ -677,9 +680,9 @@
                                                     <input type="submit" id="submit" value="글쓰기"></input>
                                                     <input style="display: none;" name="id" value=<%=top_comment[i]._id%>></input>
                                                 </div>
-                                                <div class="secret-checkbox">
+                                                <!-- <div class="secret-checkbox">
                                                     <input type="checkbox" name="secret" value='true'> 비밀글
-                                                </div>
+                                                </div> -->
 
                                             </div>
                                         </form>
