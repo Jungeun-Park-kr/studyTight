@@ -30,23 +30,8 @@ passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
 if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start)
-    // try {
-    // const option = { // SSL 인증서
-    //     ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/fullchain.pem'),
-    //     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
-    //     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
-    // };
-    
-    // HTTPS.createServer(option, app).listen(sslport, () => {
-    //     console.success(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
-    // });
-    // } catch (error) {
-    //     console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-    //     console.warn(error);
-    // }
-    
     app.use(morgan('combined'));
-    app.use(helmet());
+    // app.use(helmet());
     app.use(hpp());
 }else{ // 개발 모드로 실행 (> npm run dev)
     app.use(morgan('dev'));
@@ -106,17 +91,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static('public'));
-
-// var redisClinet = redis.createClient(port, host);
-
-// var redisConnectionResult = redisClinet.auth(password, err => {
-
-// if (err) console.log(err, " 에러 발생했습니다");
-
-// });
-
-// console.log("redis 연결 결과는? - ", redisConnectionResult);
-
 
 app.use(session({
     resave: false, //세션 항상 저장 여부
