@@ -31,18 +31,18 @@ passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
 if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start)
-    app.use(morgan('combined'));
-    app.use(helmet());
-    app.use(
-        csp({
-            directives: {
-            defaultSrc: ["'self'"],
-            styleSrc: ["'self'"],
-            scriptSrc: ["'self'"],
-            },
-        })
-    );
-    app.use(hpp());
+    // app.use(morgan('combined'));
+    // app.use(helmet());
+    // app.use(
+    //     csp({
+    //         directives: {
+    //         defaultSrc: ["'self'"],
+    //         styleSrc: ["'self'"],
+    //         scriptSrc: ["'self'"],
+    //         },
+    //     })
+    // );
+    // app.use(hpp());
 }else{ // 개발 모드로 실행 (> npm run dev)
     app.use(morgan('dev'));
 }
