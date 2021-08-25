@@ -45,7 +45,7 @@ if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start
     //     console.warn(error);
     // }
     const option = { // SSL 인증서
-        ca: fs.readFileSync('/etc/letsencrypt/live/studytight.site/fullchain.pem'),
+        ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/fullchain.pem'),
         key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
         cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
     };
