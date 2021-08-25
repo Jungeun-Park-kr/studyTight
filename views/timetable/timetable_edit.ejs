@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico">
+
     <title><%= title %></title>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
@@ -29,7 +33,7 @@
             <div class="main_header">
                 <!-- 여기는 상단 헤더 (로고, 메뉴버튼들) -->
                 <div class="logo_area">
-                    <a href="#" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt=""/></a>
+                    <a href="/" class="logo_tight"><img src="/logo/logo_lower.png" class=img_logo onclick="location.href='/'" alt=""/></a>
                     <section class="group_menu">
                         <nav class="menu_effect" id="menu_nav">
                             <a href="/" class="menu" id="menu_home">내 공부방</a>

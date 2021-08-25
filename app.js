@@ -30,23 +30,8 @@ passportConfig();
 app.set('port', process.env.PORT || 3000); // app.set('port', 포트) : 서버가 실행될 포트
 
 if(process.env.NODE_ENV ==='production'){ // 배포모드로 실행 (> npm start)
-    // try {
-    // const option = { // SSL 인증서
-    //     ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/fullchain.pem'),
-    //     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
-    //     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
-    // };
-    
-    // HTTPS.createServer(option, app).listen(sslport, () => {
-    //     console.success(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
-    // });
-    // } catch (error) {
-    //     console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-    //     console.warn(error);
-    // }
-    
     app.use(morgan('combined'));
-    // app.use(helmet());
+    app.use(helmet());
     app.use(hpp());
 }else{ // 개발 모드로 실행 (> npm run dev)
     app.use(morgan('dev'));
@@ -107,17 +92,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 app.use(express.static('public'));
 
-// var redisClinet = redis.createClient(port, host);
-
-// var redisConnectionResult = redisClinet.auth(password, err => {
-
-// if (err) console.log(err, " 에러 발생했습니다");
-
-// });
-
-// console.log("redis 연결 결과는? - ", redisConnectionResult);
-
-
 app.use(session({
     resave: false, //세션 항상 저장 여부
     saveUninitialized: false, //초기화되지 않은채 스토어에 저장되는 세션
@@ -154,41 +128,18 @@ app.use((req, res, next) => {
 
 
 if(process.env.NODE_ENV ==='production'){ // 배포 모드
-    // const option = { // SSL 인증서
-    //     ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/fullchain.pem'),
-    //     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
-    //     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
-    // };
-
-    // HTTP.createServer(app).listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
-    //     console.log(app.get('port'), '번 포트에서 HTTP대기 중');
-    // });
+    const option = { // SSL 인증서
+        ca: fs.readFileSync('/etc/letsencrypt/live/www.studytight.site/chain.pem'),
+        key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/privkey.pem'), 'utf8').toString(),
+        cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/www.studytight.site/fullchain.pem'), 'utf8').toString(),
+    };
+    HTTP.createServer(app).listen(80, () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
+        console.log('HTTP Server running on port 80');
+    });
     
-    // HTTPS.createServer(option, app).listen(app.get('port'), () => {
-    //     console.log(app.get('port'), '번 포트에서 HTTPS 대기중');
-    // });   
-
-
-    // SSL 인증서 설정 객체 생성 (Let's Encrypt)
-const lex = require('greenlock-express').create({
-    version: 'draft-11', // 인증서 버전 (버전2)
-    configDir: '/etc/letsencrypt', // 인증서 pem 위치
-    server: 'https://acme-v02.api.letsencrypt.org/directory',
-    approveDomains: (opts, certs, cb) => {
-        if (certs) {
-            opts.domains = ['www.studytight.site', 'studytight.site']; // 도메인 및 서브 도메인까지 입력
-        }
-        else {
-            opts.email = 'studytight0922@gmail.com'; // 사용자 이메일 입력
-            opts.agreeTos = true;
-        }
-        cb(null, { options: opts, certs });
-    },
-    renewWithin: 81 * 24 * 60 * 60 * 1000,
-    renewBy: 80 * 24 * 60 * 60 * 1000,
-});
-    HTTPS.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PORT || 443);
-    HTTP.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
+    HTTPS.createServer(option, app).listen(443, () => {
+        console.log('HTTPS Server running on port 443');
+    });  
 } else { // 개발 모드
     app.listen(app.get('port'), () => { // app.listen('포트', 콜백) : 몇 번 포트에서 서버를 실행할지 지정
         console.log(app.get('port'), '번 포트에서 대기 중');
