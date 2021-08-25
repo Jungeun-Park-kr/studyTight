@@ -8,9 +8,13 @@
     <title>
 
     </title>
-    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/component.css" />
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <link rel="stylesheet" href="/public/mainframe_shortcuts.css">
@@ -19,9 +23,6 @@
 
     <link rel="shortcut icon" href="/public/media/favicon.ico">
     <link rel="icon" href="/public/media/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="/public/header.css" />
-    <link rel="stylesheet" type="text/css" href="/public/component.css" />
 
     <link rel="stylesheet" type="text/css" href="/public/guestbook/add_popup.css" />
     <link rel="stylesheet" type="text/css" href="/public/guestbook/index.css" />
@@ -303,13 +304,13 @@
                             <!-- 여기부터 직접 들어갈 Edit 1 파일-->
                             <div class="course_add_list">
                                 <div class="course_section">
-                                    <form action='/guestbook/editprofile' method='post'>
+                                    <form action='/guestbook/editprofileimage' method='post' enctype="multipart/form-data">
                                         <div class="professor_name_section">
                                             <div class="professor_name_label">사진선택</div>
                                             <input type="file" id="fileforpost" name="file" placeholder="내용을 입력해주세요" />
                                         </div>
                                         <div class="add_btn">
-                                            <input id="btn_add_course" title="저장하기" value="저장하기" onclick="confirm_event_profile_image(this.parentElement.parentElement)"></input>
+                                            <input id="btn_add_course" name="테스트용" title="저장하기" value="저장하기" onclick="confirm_event_profile_image(this.parentElement.parentElement)"></input>
                                         </div>
                                     </form>
                                 </div>
@@ -323,7 +324,7 @@
                             if (file == '') {
                                 alert("변경하고자 하는 프로필 사진을 선택해주세요")
                             } else {
-                                //id.submit();
+                                imagevalue.submit();
                             }
 
                         }
