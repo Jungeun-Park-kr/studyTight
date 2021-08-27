@@ -71,9 +71,6 @@ const sessionOption = {
         secure: false
     },
     store: new RedisStore({ client })
-
-
-
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -85,15 +82,12 @@ app.use(session(sessionOption));
 
 // router
 const indexRouter = require('./routes'); // routes/index (기본 디폴트 라우터)
-const userRouter = require('./routes/user'); // user 라우터
 const authRouter = require('./routes/auth'); // 로그인 정보 라우터 (로그인 처리, 회원가입 처리, 로그아웃 처리)
 const signupRouter = require('./routes/signup'); // 회원가입 라우터
 const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라우터
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
-const todoRouter = require('./routes/todo');
 const folderRouter = require('./routes/folder/folder');
-const DdayRouter = require('./routes/d-day'); // D-day 라우터
 const { http } = require('./logger');
 
 connect(); // mongoDB connection start
@@ -121,14 +115,12 @@ app.use(passport.session());
 
 // use routes
 app.use('/', indexRouter);
-app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
 app.use('/folder', folderRouter);
-app.use('/d-day', DdayRouter);
 // app.use('/todo',todoRouter);
 
 
