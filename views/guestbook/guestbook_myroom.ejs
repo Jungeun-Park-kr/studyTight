@@ -644,7 +644,7 @@
 
                     <div id='talking' class=<%='talking' +i%>>
                         <div class="mini-profile">
-                            <img src=<%=top_comment[i].commenter_email.profile_image %>></img>
+                            <img src=<%=top_comment[i].commenter_email.profile_image %> onclick=""></img>
                         </div>
                         <div class="user-small-talking">
                             <div class="allign_lock">
@@ -678,7 +678,7 @@
                         <% if(top_comment[i]._id.equals(bottom_comment[k].comment_parent_id)){ %>
                             <div id='talking1' class=<%='reply' +k%>>
                                 <div class="mini-profile">
-                                    <img src=<%=bottom_comment[k].commenter_email.profile_image %>></img>
+                                    <img src=<%=bottom_comment[k].commenter_email.profile_image %> ></img>
                                 </div>
                                 <div class="user-small-talking">
                                     <div class="user-name">

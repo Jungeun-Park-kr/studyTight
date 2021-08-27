@@ -421,11 +421,14 @@ select::-ms-expand {
 .user-small-talking .user-name {
     margin-top: 10px;
     margin-left: 20px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .user-small-talking .user-talking-list {
     margin-top: 10px;
     margin-left: 30px;
+    font-size: 13px;
 }
 
 .user-small-talking .today {
