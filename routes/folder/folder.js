@@ -39,7 +39,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
 
         });
     } catch (err) {
-        console.error('routes/folder/folder.js 에서 에러');
+        logger.error('routes/folder/folder.js 에서 에러');
         next(err);
     }
 });
@@ -79,7 +79,7 @@ router.post('/:id/add', isLoggedIn, async(req, res, next) => {
 
 
     } catch (err) {
-        console.error('routes/folder/folder.js 에서 포스트잇 추가 과정에러');
+        logger.error('routes/folder/folder.js 에서 포스트잇 추가 과정에러');
         next(err);
     }
 });
@@ -105,7 +105,7 @@ router.patch('/:id/revise', isLoggedIn, async(req, res, next) => { //update할 �
 
 
     } catch (err) {
-        console.error('routes/folder/folder.js 포스트잇 수정과정에서 에러');
+        logger.error('routes/folder/folder.js 포스트잇 수정과정에서 에러');
         next(err);
     }
 });
@@ -133,7 +133,7 @@ router.post('/:id/todo', isLoggedIn, async(req, res, next) => {
         // );
 
     } catch (err) {
-        console.error('routes/folder/folder.js 할일목록 추가과정에서 에러');
+        logger.error('routes/folder/folder.js 할일목록 추가과정에서 에러');
         next(err);
     }
 });
@@ -164,6 +164,7 @@ router.patch('/:id', isLoggedIn, async(req, res, next) => { //update할 데이�
         //res.redirect('/');
 
     } catch (err) {
+        logger.error('routes/folder/folder.js 오늘 할 일 체크과정에서 에러');
         next(err);
     }
 });
@@ -196,6 +197,7 @@ router.patch('/:id/star', isLoggedIn, async(req, res, next) => { //update할 데
         //res.redirect('/');
 
     } catch (err) {
+        logger.error('routes/folder/folder.js 포스트잇 별 클릭과정에서 에러');
         next(err);
     }
 });
@@ -215,6 +217,7 @@ router.delete('/:id', isLoggedIn, async(req, res, next) => { //할 일 목록에
         // { title : 'study Tight', todolist:todo, folder: folder});
         res.send(todo);
     } catch (err) {
+        logger.error('routes/folder/folder.js 오늘 할 일 삭제과정에서 에러');
         next(err);
     }
 });
@@ -241,8 +244,7 @@ router.get('/:id/add', isLoggedIn, async(req, res) => {
         // });
 
     } catch (err) {
-        console.log('routes/folder.js에서 에러');
-        console.error(err);
+        logger.error('routes/folder/folder.js 폴더 추가 get과정에서 에러');
         next(err);
     }
 });
@@ -276,6 +278,7 @@ router.delete('/:id/post', isLoggedIn, async(req, res, next) => { //할 일 목�
 
 
     } catch (err) {
+        logger.error('routes/folder/folder.js 폴더 삭제과정에서 에러');
         next(err);
     }
 });
