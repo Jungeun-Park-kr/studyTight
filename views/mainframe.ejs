@@ -258,37 +258,19 @@
                                 // 디데이 개수 체크
                                 var parent_day=document.getElementById('wrap_day');
                                 var childCnt = parent_day.childElementCount;
-                                console.log('자식 개수:'+childCnt);
                                 var invisible_plus=document.getElementById('d-day-plus');
                                 if (childCnt > 9) { // <script>2개, d-day 8개 => 총 10개
-                                    console.log('가리기 after delete');
                                     invisible_plus.style.display='none';
                                 } 
-                                // else if (childCnt == 9 && invisible_plus.style.display=='none') {
-                                //     invisible_plus.style.display= 'none';
-                                // } 
                                 else {
-                                    console.log('보이기 after delete');
                                     invisible_plus.style.display='inline-block';
                                 }
-                                // var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
-                                // var invisible_plus=document.getElementById('d-day-plus');
-                                // if(d_daylist.length>=8){
-                                    
-                                //     invisible_plus.style.display='none';
-                                // }else{
-                                //     invisible_plus.style.display='inline-block';
-                                // } 
                             }
                         </script>
                         <script>
                             var parentDiv = document.getElementById("wrap_day")
                             var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
-                            //console.log(d_daylist.length);
-                            
                             for (var i = 0; i < d_daylist.length; i++) {
-                                
-                                
                                 var show_day = document.createElement("div");
                                 var show_content = document.createElement("span");
                                 var delete_day=document.createElement('span');
@@ -323,7 +305,6 @@
                                 show_content.style.color = "black"
                                 if (ddayResult < '4') {
                                     show_day.style.color = "red"
-        
                                 } else if (ddayResult < '8') {
                                     show_day.style.color = "blue"
                                 } else {
@@ -338,10 +319,8 @@
                             var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
                             var invisible_plus=document.getElementById('d-day-plus');
                             if(d_daylist.length>=8){
-                                //console.log('메인 페이지 로딩 - 숨기기')
                                 invisible_plus.style.display='none';
                             }else{
-                                //console.log('메인 페이지 로딩 - 보이기');
                                 invisible_plus.style.display='inline-block';
                             }
                         </script>
@@ -354,27 +333,12 @@
                                 
                                 <div class="folder">
                                     
-
                                 <% if(folder[i].folder_fixed) {%>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
                                     <img class="fixed_folder" src="/media/fixed_full.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
                                         <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
-                                    <!-- <img class="three_button" src="/media/three_button.png"> -->
-                                    <!-- <div class="modal_menu"><ul class="folder_menu">
-                                        <li><div id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">수정</div></li>
-                                        <li><div id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');">삭제</div></li>    
-                                    </ul>
-                                    </div> -->
-                                    <!-- <div class="folder_menu">
-                                        <div src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')"></div>
-                                        <div src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"></div>   
-                                    </div> -->
-                                <!-- <div id="dropdown-folder" class="dropdown_folder">
-                                    <button role="menuitem" class="dropdown_choice revise_folder" id="revise_folder" onclick="reviseFolderClicked('<%= i %>');"></button>
-                                    <button role="menuitem" class="dropdown_choice delete_folder" id="delete_folder" onclick="reviseFolderClicked('<%= i %>');"></button></div> -->
-                                    
                                 <%} else{ %>
                                     <img src=<%= folder[i].folder_color %> class='folder_img'/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
@@ -424,13 +388,9 @@
                                     <div id="delete_folder_name" class="title"></div>
                                         <div id="delete_folder_index"></div>
                                         <div id='delete_folder_id'></div>
-                                            
-                                            
                                             <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.</p>
                                             <p>그래도 삭제하시겠습니까?</p>
-                                            
                                         <div class="buttons_wrap">
-                                            
                                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_folder">취소</div>
                                             <div class="deleteBtn delete_delete_folder">확인</div>
                                         </div>
@@ -540,22 +500,16 @@
                                 }else if(event.target===modal_delete_new_folder){
                                     toggleDeleteNewFolderModal();
                                 }
-                                // else if(event.target===modal_menu){
-                                //     toggleShowMenuModal();
-                                // }
                             }
                             
                             
                             close_revise_folder.addEventListener('click',toggleReviseFolderModal);
-                            //store_revise_folder.addEventListener('click',toggleReviseFolderModal);
 
                             cancel_delete_folder.addEventListener('click',toggleDeleteFolderModal);
                             delete_delete_folder.addEventListener('click',toggleDeleteFolderModal);
 
                             cancel_delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
                             delete_new_folder.addEventListener('click',toggleDeleteNewFolderModal);
-
-                            //trigger_menu.addEventListener('click',toggleShowMenuModal);
 
                             function reviseFolderClicked(id, index){
                                 var revise_folder=document.getElementsByClassName('folder')[index];
@@ -680,11 +634,6 @@
                                 var checkedIndex;
                                 var checkedBox=document.getElementsByClassName('checkbox');
                                 var hidden_input=document.getElementsByClassName('todolist-id');
-                                // for(var i=0;i<hidden_input.length;i++){
-                                //     if(hidden_input[i].value==todo_content){
-                                //         checkedIndex=i;
-                                //     }
-                                // }
                                 var currentState=boolValue;
                                 //console.log(currentState+'->'+!(currentState));
                                 if(currentState==true){
@@ -875,13 +824,11 @@
     closeTodoButton.addEventListener('click',toggleTodoModal);
     closeFolderButton.addEventListener('click',toggleFolderModal);
     
-    //storeTodoButton.addEventListener('click',toggleTodoModal);
-    //storFolderButton.addEventListener('click',toggleFolderModal);
     alertButton.addEventListener('click',toggleAlertModal);
 
     $('.modal-todo-plus').click(function(event){
         var new_content=$('#modal-todo').val();
-        //var new_todo_id=todolist._id;
+
         if(new_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
@@ -910,24 +857,6 @@
                     console.log('todo 저장 실패');
                 }
             });
-
-            // 디데이 개수 체크
-            var parent_day=document.getElementById('wrap_day');
-            var childCnt = parent_day.childElementCount;
-            console.log('자식 개수:'+childCnt);
-            //var invisible_plus=document.getElementById('d-day-plus');
-            if (childCnt > 9 && ($('#d-day-plus').css('display') == 'inline-block')) { // <script>2개, d-day 8개 => 총 10개
-                console.log('가리기1');
-                $('#d-day-plus').css('display', 'none');
-                //invisible_plus.style.display='none';
-            } else if (childCnt == 9 && ($('#d-day-plus').css('display') == 'none')) {
-                console.log('가리기2');
-                $('#d-day-plus').css('display', 'none');
-            } else {
-                console.log('보이기');
-                $('#d-day-plus').css('display', 'inline-block');
-                //invisible_plus.style.display='inline-block';
-            }
         }
     })
     
@@ -1206,18 +1135,14 @@
     }
 
     $(document).ready(function () {
-
         $('.modal-d-plus').bind('click', function() {
             saveDday(this);
         });
 
         var saveDday = function(event) { // 디데이 저장하기 버튼
             $('.modal-d-plus').unbind('click');
-
             var date = $('#modal-d-date').val();
             var content = $('#modal-d-content').val();
-            console.log('날짜: ',date);
-            console.log('내용: ',content);
             
             // 오늘 날짜
             var today = new Date();
@@ -1228,7 +1153,6 @@
             }
             var curdate = today.getDate();
             var todayDate = curyear+'-'+curmon+'-'+curdate;
-            console.log('오늘:', todayDate);
 
             if (date.trim() === '') {
                 alert('디데이 마감 날짜를 선택해주세요.');
@@ -1241,7 +1165,10 @@
                 $('.modal-d-plus').bind('click', function() { saveDday(this); });
             } else if(content.indexOf('<')!=-1 && content.indexOf('>')!=-1){
                 alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
-
+                $('.modal-d-plus').bind('click', function() { saveDday(this); });
+            } else if (content.length > 7) {
+                alert('디데이는 7글자 이내로 입력해주세요.');
+                $('.modal-d-plus').bind('click', function() { saveDday(this); });
             } else { // 저장하기
                 $.ajax({
                     type:"POST",
@@ -1262,11 +1189,9 @@
                         $('#modal-d-date').val('');
                         $('#modal-d-content').val('');
 
-
                         toggleDayModal(); // 모달 닫기
 
                         // 동적으로 추가
-                        // in here d-day-plus
                         var show_day = document.createElement("div");
                         var show_content = document.createElement("span");
                         show_day.setAttribute("class", "d-day")
@@ -1299,7 +1224,6 @@
                                     'Content-Type':'application/json'
                                         },
                                 body:JSON.stringify({user_id:'<%= user.name %>',dday_content:content})
-                                //.then(res => res.json())   
                                         });
                                         document.getElementById('alert_title').innerHTML=content+"이(가) D-day에서 삭제되었습니다."
                                         toggleAlertModal();
@@ -1321,20 +1245,15 @@
                         // 디데이 개수 체크
                         var parent_day=document.getElementById('wrap_day');
                         var childCnt = parent_day.childElementCount;
-                        console.log('자식 개수2:'+childCnt);
-                        //var invisible_plus=document.getElementById('d-day-plus');
                         if (childCnt > 9 && ($('#d-day-plus').css('display') == 'inline-block')) { // <script>2개, d-day 8개 => 총 10개
                             $('#d-day-plus').css('display', 'none');
-                            //invisible_plus.style.display='none';
                         } else if (childCnt == 9 && ($('#d-day-plus').css('display') == 'none')) {
                             $('#d-day-plus').css('display', 'none');
                         } else {
                             $('#d-day-plus').css('display', 'inline-block');
-                            //invisible_plus.style.display='inline-block';
                         }
                     },
                     error: function(err) { // POST 요청 실패시
-                        console.log('디데이 추가 실패' + err);
                         alert('디데이 추가를 실패했습니다. 다시 시도해주세요.');
                         toggleDayModal(); 
                     }
