@@ -62,8 +62,9 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
             d_day: dDay,
         });
     } catch (err) {
-        console.error('routes/index.js 에서 에러');
-        console.error(err);
+        //console.error('routes/index.js 에서 에러');
+        logger.error('routes/index.js 에서 에러');
+        logger.error(err);
 
     }
 });
@@ -85,8 +86,8 @@ router.get('/todo', isLoggedIn, async(req, res) => { // app.get('주소', 라우
         });
         //res.send(todolist);
     } catch (err) {
-        console.error('routes/index.js 에서 에러');
-        console.error(err);
+        logger.error('routes/index.js todo get에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -117,6 +118,7 @@ router.post('/folder_add', isLoggedIn, async(req, res, next) => {
         res.send({folder_id:folder._id});
 
     } catch (err) {
+        logger.error('routes/index.js 폴더 추가 과정에서 에러');
         next(err);
     }
 });
@@ -139,8 +141,8 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
         });
         //res.send(todolist);
     } catch (err) {
-        console.error('routes/index.js 에서 에러');
-        console.error(err);
+        logger.error('routes/index.js 폴더 추가  get과정에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -171,6 +173,7 @@ router.post('/todo', isLoggedIn, async(req, res, next) => {
         // );
 
     } catch (err) {
+        logger.error('routes/index.js 오늘 할 일 추가 과정에서 에러');
         next(err);
     }
 });
@@ -196,6 +199,7 @@ router.patch('/', isLoggedIn, async(req, res, next) => { //update할 데이터�
         res.send("오늘 할 일 체크 완료");
 
     } catch (err) {
+        logger.error('routes/index.js 오늘 할 일 체크 과정에서 에러');
         next(err);
     }
 });
@@ -223,6 +227,7 @@ router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update�
         res.send(folder);
 
     } catch (err) {
+        logger.error('routes/index.js 폴더 수정 과정에서 에러');
         next(err);
     }
 });
@@ -242,6 +247,7 @@ router.patch('/folder_fixed', isLoggedIn, async(req, res, next) => { //update할
         res.send(folder);
 
     } catch (err) {
+        logger.error('routes/index.js 폴더 체크 과정에서 에러');
         next(err);
     }
 });
@@ -259,6 +265,7 @@ router.delete('/', isLoggedIn, async(req, res, next) => { //할 일 목록에서
         //res.render('../views/mainframe.ejs', { title: 'study Tight', todolist: todo, timetable: timetable, folder: folder, d_day: dDay, });
         res.send("할 일 목록 삭제 성공");
     } catch (err) {
+        logger.error('routes/index.js 오늘 할 일 삭제 과정에서 에러');
         next(err);
     }
 });
@@ -277,6 +284,7 @@ router.delete('/day', isLoggedIn, async(req, res, next) => { //할 일 목록에
         //{ title : 'study Tight', todolist:todo, timetable:timetable, folder: folder, d_day : dDay,});
         res.send('디데이 삭제 성공!')
     } catch (err) {
+        logger.error('routes/index.js 디데이 삭제 과정에서 에러');
         next(err);
     }
 });
@@ -292,6 +300,7 @@ router.delete('/folder', isLoggedIn, async(req, res, next) => {
 
         res.send('폴더 삭제 성공!')
     } catch (err) {
+        logger.error('routes/index.js 폴더 삭제 과정에서 에러');
         next(err);
     }
 });
@@ -302,8 +311,8 @@ router.get('/', isNotLoggedIn, (req, res) => {
             title: 'StudyTight 메인화면',
         });
     } catch (err) {
-        console.error('routes/index.js 에서 에러');
-        console.error(err);
+        logger.error('routes/index.js 에서 에러');
+        logger.error(err);
         next(err);
     }
 })
@@ -324,6 +333,7 @@ router.post('/d-day', isLoggedIn, async(req, res, next) => {
         res.send('success');
 
     } catch (err) {
+        logger.error('routes/index.js d-day 추가 과정에서 에러');
         next(err);
     }
 
@@ -372,6 +382,7 @@ router.patch('/editprofile', isLoggedIn, async(req, res, next) => { //update할 
 
 
     } catch (err) {
+        logger.error('routes/index.js patch(editprofile) 과정에서 에러');
         next(err);
     }
 });
@@ -404,6 +415,7 @@ router.post('/eidtprofile', isLoggedIn, async(req, res, next) => {
         });
 
     } catch (err) {
+        logger.error('routes/index.js 프로필 생성 과정에서 에러');
         next(err);
     }
 
