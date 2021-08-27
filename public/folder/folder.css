@@ -343,6 +343,11 @@ body {
 .modal-link-body{
     margin-bottom: 10px;
 }
+#show_content{
+    word-break:break-all;
+    width:540px;
+    height:auto;
+}
 /* .modal_todo, .modal_choice, .modal_content, .modal_link, .modal_show_content, .modal_file{ 
     position: fixed; 
     left: 0; 

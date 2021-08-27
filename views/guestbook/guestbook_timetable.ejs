@@ -69,14 +69,13 @@
                 </script>
                 <div class="login">
                     <div class="profile_section">
-                        <% if (user) { %>
-                            <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %>
+                        <% if (user) { %> <%# 로그인 되어 있는 경우 (server에서 접속중인 user 정보 받아옴) %>
                                 <div class="alarm_bell">
                                     <img id="alarm_bell_img" src="/public/media/bell_pure.png">
                                 </div>
                                 <div class="profile">
                                     <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                    <img id="activeUserimg" src=<%=u ser.profile_image %> onclick="location.href='#프로필수정화면'">
+                                    <img id="activeUserimg" src=<%=user.profile_image %> onclick="location.href='#프로필수정화면'">
                                     <div class="username" id="activeUsername">
                                         <%= user.name +'님'%>
                                     </div>
@@ -84,7 +83,7 @@
                                 <div class="logout">
                                     <input type="submit" class="btn_logout" title="로그아웃" value="로그아웃" onClick="location.href='/auth/logout'" />
                                 </div>
-                                <% } %>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -138,18 +137,6 @@
                                                     <div class="hour2">(18:00)</div>
                                                     <div class="hour">(19:00)</div>
                                                     <div class="hour2">(20:00)</div>
-                                                    <!-- <div class="hour2" style="border-bottom: none">(20:00)</div> -->
-                                                    <!-- width:50 -->
-                                                    <!-- <div class="hour">1교시(9:00)</div>
-                                                <div class="hour">2교시(10:30)</div>
-                                                <div class="hour">3교시(12:00)</div>
-                                                <div class="hour">4교시(13:30)</div>
-                                                <div class="hour">5교시(15:00)</div>
-                                                <div class="hour">6교시(16:30)</div>
-                                                <div class="hour">7교시(18:00)</div>
-                                                <div class="hour">8교시(19:30)</div>
-                                                <div class="hour">9교시(21:00)</div> -->
-                                                    <!-- <div class="hour"></div> -->
                                                 </div>
                                             </th>
                                             <!-- 들어갈 요일별 과목정보 -->
@@ -467,12 +454,17 @@
     </div>
     <script type="text/javascript">
         var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
-        console.log(timetable);
-        for (var i = 0; i < timetable.length; i++) {
+        if (timetable != null) {
+            for (var i = 0; i < timetable.length; i++) {
             var tmp = timetable[i];
             console.log(tmp.title, tmp.time);
             showCourse(tmp.course_name, tmp.schedules, i); //제목, 시간리스트로 시간표에 출력하기
+            }
+        } else {
+            console.log('친구 시간표 없음');
+            alert('친구가 시간표를 아직 등록하지 않았습니다.');
         }
+        
 
         function numToDay(day) {
             switch (day) {
@@ -499,7 +491,6 @@
             for (var i = 0; i < timelist.length; i++) {
                 tmptime = timelist[i];
                 //요일 및 색깔지정
-                //color = getColor(tmptime.day);
                 //시작시간
                 st = tmptime.start_time.split(':');
                 sh = parseInt(st[0]); //시는 바로 입력
@@ -510,7 +501,6 @@
                 em = getMinuteId(parseInt(et[1]));
                 //시작시간 id만들기 및 속성적용
                 tdid = numToDay(tmptime.day) + sh + '.' + sm;
-                //console.log(title+tdid);
                 tmpvar = window.document.getElementById(tdid);
                 //첫줄에는 과목이름 (강의실)
                 if (tmptime.course_type === 'offline')
@@ -529,17 +519,13 @@
                         sm = 1;
                     }
                     if (sh > eh) { //종료조건 확인
-                        //console.log('종료조건1');
                         break;
                     } else if (sh == eh) {
                         if (sm >= em) {
-                            //console.log('종료조건2');
                             break;
                         }
                     }
-                    //console.log(tmptime.day);
                     tdid = numToDay(tmptime.day) + sh + '.' + sm;
-                    //console.log(title+tdid);
                     tmpvar = window.document.getElementById(tdid);
                     if (sm == 4) { //border 없애기
                         tmpvar.style.borderStyle = "";

@@ -251,7 +251,7 @@
                         <!-- 여기에 CONTENT의 TITLE넣기 -->
 
                         <div class="modal-body" name="modal_show_body">
-                            <div id="show_content" style="white-space: pre;" name="content" class="show_content"></div>
+                            <div id="show_content" style="white-space: pre-line;" row="20" cols="35" name="content" class="show_content"></div>
                             <!-- 여기에 CONTENT의 CONTENT넣기 -->
                         </div>
                         
@@ -556,7 +556,7 @@
                     <div id="revise_post_id" postIt_id="id자리"></div>
                     <div class="modal-body">               
                         <p>제목</p>
-                        <input type="text" id="revise_link_title" class="input_text" >
+                        <input type="text" id="revise_link_title" placeholder="제목을 입력하세요 (최대 7자)"  maxlength="7" class="input_text" >
                         <br>
                         
                         <p>링크</p>
@@ -588,7 +588,7 @@
                     <div id="revise_post_id" postIt_id="id자리"></div>
                     <div class="modal-body">
                         <p>제목</p>
-                        <input type="text" id="revise_content_title" name="title" class="input_text">
+                        <input type="text" id="revise_content_title"  placeholder="제목을 입력하세요 (최대 7자)"  maxlength="7" name="title" class="input_text">
                     
                         <br>
                         <p>내용</p>
@@ -623,7 +623,7 @@
                 
                 <div class="modal-body">
                         <p>제목</p>
-                        <input type="text" id="revise_file_text" class="input_text" >
+                        <input type="text" maxlength="7" id="revise_file_text" class="input_text" >
                         
                         <br>
                         <div class="filebox"> 
