@@ -7,6 +7,7 @@ const User = require('../models/user');
 var appDir = path.dirname(require.main.filename);
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const google = require('googleapis');
+const logger = require('../logger');
 const OAuth2 = google.auth;
 const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground';
 
