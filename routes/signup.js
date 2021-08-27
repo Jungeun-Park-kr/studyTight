@@ -99,7 +99,8 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             grade_private: false,
             age: 0,
             age_private: false,
-            timetable_private: false
+            timetable_private: false,
+            group: "basic"
         });
         // logger.info('추가된 user:'+ user);
         res.send('success');
