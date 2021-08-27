@@ -62,13 +62,11 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
             user : res.locals.user,
             timetable : timetable
         });
-
         
-
     }
     catch (err) {
-        console.error('/views/timetable/timetable.js 에서 에러');
-        console.error(err);
+        logger.error('/views/timetable/timetable.js 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -86,8 +84,9 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
         });
     }
     catch (err) {
-        console.error('/views/timetable/timetable.js 에서 에러');
-        console.error(err);
+        logger.error('/views/timetable/timetable.js 에서 에러');
+        logger.error(err);
+
         next(err);
     }
 });
@@ -137,6 +136,7 @@ router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
         }
         res.send(returnTime); // 추가된 시간 출력용으로 전달
     } catch(err) {
+        logger.error(err);
         return (err);
     }
 });
@@ -156,6 +156,7 @@ router.delete('/course/time/delete', isLoggedIn, async (req, res) => {
         res.send(data); //삭제될 태그들의 id 리턴
         
     } catch(err) {
+        logger.error(err);
         return (err);
     }
 });
@@ -210,6 +211,7 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
         timeList = []; // 저장 완료 후 배열 초기화
 
     } catch (err) {
+        logger.error(err);
         next(err);
     }
 });
@@ -218,15 +220,16 @@ router.delete('/course/delete:id', isLoggedIn, async (req, res, next) => {
     try {
         const deleteId = req.params.id;
         const target = await Course.findOne({user_id: res.locals.user._id, _id:deleteId}).populate('schedules');
-        //console.log('삭제할 과목:'+target);
+        //logger.info('삭제할 과목:'+target);
         for (var i=0; i<target.schedules.length; i++) { // 과목 시간 먼저 삭제
             await CourseSchedule.deleteOne({_id:target.schedules[i]._id});
-            //console.log('삭제한 시간:'+target.schedules[i].classroom);
+            //logger.info('삭제한 시간:'+target.schedules[i].classroom);
         }
         await Course.deleteOne({user_id: res.locals.user._id, _id:deleteId}); // 과목 삭제
         return res.send('delete_succeeded'); //삭제한 과목 리턴
     }
     catch (err) {
+        logger.error(err);
         next(err);
     }
 });
@@ -256,10 +259,10 @@ router.put('/course/modify', isLoggedIn, async (req, res, next) => {
             createdAt : getCurrentDate(), // 과목 수정 날짜
         });
         timeList = []; // 저장 완료 후 배열 초기화
-
         res.send('success');
         
     } catch (err) {
+        logger.error(err);
         next(err);
     }
 });
