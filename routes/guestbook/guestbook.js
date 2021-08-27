@@ -39,8 +39,8 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/guestbook/guestbook_myroom.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -73,8 +73,8 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -96,8 +96,8 @@ router.post('/addgroup', isLoggedIn, async(req, res, next) => {
 
     } catch (err) {
 
-        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 
@@ -122,8 +122,8 @@ router.post('/deletegroup', isLoggedIn, async(req, res, next) => {
 
     } catch (err) {
 
-        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 
@@ -155,8 +155,8 @@ router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -180,8 +180,8 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
 
         res.redirect("/guestbook");
     } catch (err) {
-        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -212,8 +212,8 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
+        logger.error(err);
         next(err);
     }
 });
@@ -351,7 +351,7 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
         });
         res.redirect("/guestbook");
     } catch (err) {
-        console.log('guestbookedit error');
+        logger.info('guestbookedit error');
         next(err);
     }
 
@@ -364,12 +364,12 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
 //     try {
 //         app.post('/upload', upload.single('file'), function(req, res) { //single뒤에는 내 파일의name
 //             res.send('Uploaded! : ' + req.file); // object를 리턴함
-//             console.log(req.file); // 콘솔(터미널)을 통해서 req.file Object 내용 확인 가능.
+//             logger.info(req.file); // 콘솔(터미널)을 통해서 req.file Object 내용 확인 가능.
 //         });
 
 //         //res.redirect("/guestbook");
 //     } catch (err) {
-//         console.log('guestbookeprofileimage error');
+//         logger.info('guestbookeprofileimage error');
 //         next(err);
 //     }
 
@@ -382,9 +382,9 @@ router.post('/editprofileimage', upload.single("file"), async(req, res, next) =>
         profile2 = await User.updateOne({ _id: res.locals.user._id }, {
             $set: { profile_image: linkforprofile }
         });
-        //console.log(typeof(linkforprofile));
+        //logger.info(typeof(linkforprofile));
     } catch (err) {
-        console.log('guestbookedit error');
+        logger.info('guestbookedit error');
         next(err);
     }
     res.redirect("/guestbook");
@@ -413,6 +413,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
             bottom_comment: bottom_comment
         });
     } catch (err) {
+        logger.error(err);
         next(err);
     }
 });
@@ -440,6 +441,7 @@ router.post('/:id/addcomment', isLoggedIn, async(req, res, next) => {
         });
         res.redirect("/guestbook/" + id_obj);
     } catch (err) {
+        logger.error(err);
         next(err);
     }
 });
@@ -465,7 +467,7 @@ router.post('/:id/addbottom', isLoggedIn, async(req, res, next) => {
         });
         res.redirect("/guestbook/" + id_obj);
 
-    } catch (err) {}
+    } catch (err) {logger.error(err);}
 
 });
 
@@ -487,6 +489,7 @@ router.post('/:id/deletebottomcomment', isLoggedIn, async(req, res, next) => { /
     try {
         await Bottom_comment.deleteOne({ _id: id });
     } catch (err) {
+        logger.error(err);
         next(req.body);
     }
     res.redirect("/guestbook/" + id_obj);
@@ -515,8 +518,8 @@ router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해�
         }
         return res.send(req.params.id);
     } catch (err) {
-        console.error('/views/guestbook/guestbook.js 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook.js 에서 에러');
+        logger.error(err);
         return (err);
     }
 });
@@ -547,8 +550,8 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
         });
 
     } catch (err) {
-        console.error('/views/guestbook/guestbook.js 에서 에러');
-        console.error(err);
+        logger.error('/views/guestbook/guestbook.js 에서 에러');
+        logger.error(err);
         return (err);
     }
 });
