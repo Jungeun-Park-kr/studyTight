@@ -354,7 +354,6 @@ function getCurrentDate() {
     // var seconds = date.getSeconds();
     // var milliseconds = date.getMilliseconds();
 
-    console.log('date in getCurrentDate() :'+date);
     return new Date(Date.UTC(year, month, today));
 }
 
