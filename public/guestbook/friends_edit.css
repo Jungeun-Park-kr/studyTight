@@ -84,11 +84,27 @@
     vertical-align: middle;
 }
 
+.professor_name_form1 {
+    padding: 0 10px;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
 .course_title_form input,
 .professor_name_form input,
 .course_link_form input,
 .course_location_form input {
     width: 230px;
+    align-content: center;
+    height: 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.professor_name_form1 input {
+    width: 220px;
     align-content: center;
     height: 30px;
     padding: 0 15px;
