@@ -329,10 +329,10 @@
                                 toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
                                 inputBox.removeAttr('disabled'); // disabled 속성 삭제
                             }
-
                         },
                         error: function(err) { // POST 요청 실패시
-                            alert('올바르지 않은 이메일입니다.\n확인 후 다시 시도해주세요.')
+                            console.log(err);
+                            alert('이메일 전송을 실패했습니다.\n확인 후 다시 시도해주세요.')
                         }
                     });
                 }
