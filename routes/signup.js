@@ -47,7 +47,6 @@ router.post('/agree', isNotLoggedIn, async(req, res, next) => {
     } catch (error) {
         return next(error);
     }
-
 });
 
 
@@ -55,8 +54,6 @@ router.post('/agree', isNotLoggedIn, async(req, res, next) => {
 router.get('/', (req, res) => {
     res.render(path.join(__dirname, '../views/signup.ejs'));
 });
-
-
 
 
 // POST /signup 라우터 
