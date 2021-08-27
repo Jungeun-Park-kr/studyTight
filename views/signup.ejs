@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <link rel=" shortcut icon" href="/public/media/favicon.ico">
     <link rel="icon" href="/public/media/favicon.ico">
     
@@ -326,6 +326,7 @@
                             } else if (data === 'email_error=existid') { // 중복 아이디
                                 alert('이메일 앞의 id부분은 고유해야 합니다.\n이미 사용중인 id입니다.');
                             } else {
+                                authNum = data; // 이메일 값 저장
                                 toggleSendModal(); // 이메일 전송 성공 팝업 띄우기
                                 inputBox.removeAttr('disabled'); // disabled 속성 삭제
                             }
@@ -337,10 +338,11 @@
                 }
 
                 function emailCheck(event) {
-                    if ($('#email_verify').val() == authNum) {
+                    var inputNum = $('#email_verify').val();
+                    if (inputNum == authNum) {
                         isAuthChecked = true;
                         toggleCheckModal();
-                    } else if ($('#email_verify').val().indexOf('<') != -1 && $('#email_verify').val().indexOf('>') != -1) {
+                    } else if (inputNum.indexOf('<') != -1 && inputNum.indexOf('>') != -1) {
                         alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                     } else {
                         alert('인증번호가 일치하지 않습니다.\n다시한번 확인해주세요');
@@ -431,6 +433,8 @@
 
                 window.addEventListener("click", windowOnClick);
             });
+
+    
         </script>
     </div>
 
