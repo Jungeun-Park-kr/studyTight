@@ -11,6 +11,7 @@ const Auth = require('../models/auth');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const Users = require('../models/user');
 const router = express.Router();
+const logger = require('../logger');
 
 const Todo=require('../models/todo_list');
 

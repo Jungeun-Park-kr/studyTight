@@ -12,6 +12,7 @@ const top_comment = require('../../models/top_comment');
 const { hasUserDefinedProperty } = require('mongoose/lib/utils');
 const router = express.Router();
 var upload = multer({ dest: 'uploads/' })
+const logger = require('../../logger');
 
 router.use((req, res, next) => {
     res.locals.user = req.user;

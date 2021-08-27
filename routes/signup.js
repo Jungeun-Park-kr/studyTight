@@ -5,6 +5,7 @@ const User = require('../models/user');
 const Profile = require('../models/profile');
 const multer = require('multer');
 const fs = require('fs');
+const logger = require('../logger');
 
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');

@@ -3,6 +3,7 @@ const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
 const { mongo, Mongoose } = require('mongoose');
+const logger = require('../../logger');
 const router = express.Router();
 
 var timeList = new Array();

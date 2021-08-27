@@ -121,7 +121,6 @@ app.use('/email', emailRouter);
 app.use('/timetable', timetableRouter);
 app.use('/guestbook', guestbookRouter);
 app.use('/folder', folderRouter);
-// app.use('/todo',todoRouter);
 
 
 // 상단에 없는 라우터 요청시 에러 처리
