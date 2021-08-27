@@ -329,11 +329,12 @@ router.post('/deletebottomcomment', isLoggedIn, async(req, res, next) => { //할
 });
 
 router.post('/editprofile', isLoggedIn, async(req, res, next) => {
-    const { id, timetable_private, school, school_private, major, major_private, grade, grade_private, age, age_private } = req.body;
+    const { name, timetable_private, school, school_private, major, major_private, grade, grade_private, age, age_private } = req.body;
     const profile = await Profile.findOne({ user_id: res.locals.user._id });
     const profile1 = await Profile.findOne({ user_id: res.locals.user._id });
     try {
         profile2 = await Profile.updateOne({ user_id: res.locals.user._id }, {
+            name: name,
             school: school,
             school_private: school_private,
             major: major,
@@ -343,6 +344,10 @@ router.post('/editprofile', isLoggedIn, async(req, res, next) => {
             timetable_private: timetable_private,
             age: age,
             age_private: age_private
+        })
+
+        profile3 = await User.updateOne({ _id: res.locals.user._id }, {
+            $set: { name: name }
         });
         res.redirect("/guestbook");
     } catch (err) {
@@ -495,18 +500,18 @@ router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해�
         const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
 
         const timetable = await Course.find({ user_id: friendUser._id }).populate('schedules').sort({ 'createdAt': 1 }); // 클릭한 친구의 시간표
-        
+
         if (timetable.length < 1) {
-            return res.send('/'+req.params.id+'/timetable?error=notexist');
+            return res.send('/' + req.params.id + '/timetable?error=notexist');
         }
 
         if (friend == null) { // 친구가 아닌 경우
             return res.send('/' + req.params.id + '/timetable?error=notfriend');
-            
+
         }
         if (profile.timetable_private) { // 시간표 비공개 한 경우
             return res.send('/' + req.params.id + '/timetable?error=private');
-            
+
         }
         return res.send(req.params.id);
     } catch (err) {

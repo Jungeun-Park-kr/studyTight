@@ -107,34 +107,34 @@
                 <img id="school-card" src="/public/media/id-card.png">
                 <%=myname%>
             </li>
-            <li class="school">
-                <% if (profile.school_private) { %>
+            <% if (profile.school_private) { %>
+                <li class="school">
                     <img id="school-card" src="/public/media/office-building.png">
                     <%=profile.school+'소속'%>
+                </li>
+                <% } %>
+                    <% if (profile.grade_private) { %>
+                        <li class="grade">
+                            <img id="grade-card" src="/public/media/calendar.png">
+                            <%=profile.grade+'학년'%>
+                        </li>
                         <% } %>
-            </li>
-            <li class="grade">
-                <% if (profile.grade_private) { %>
-                    <img id="grade-card" src="/public/media/calendar.png">
-                    <%=profile.grade+'학년'%>
-                        <% } %>
-            </li>
-            <li class="major">
-                <% if (profile.major_private) { %>
-                    <img id="mahor-card" src="/public/media/books.png">
-                    <%=profile.major+'전공'%>
-                        <% } %>
-            </li>
-            <li class="age">
-                <% if (profile.age_private) { %>
-                    <img id="age-card" src="/public/media/age.png">
-                    <%=profile.age+'살'%>
-                        <% } %>
-            </li>
+                            <% if (profile.major_private) { %>
+                                <li class="major">
+                                    <img id="mahor-card" src="/public/media/books.png">
+                                    <%=profile.major+'전공'%>
+                                </li>
+                                <% } %>
+                                    <% if (profile.age_private) { %>
+                                        <li class="age">
+                                            <img id="age-card" src="/public/media/age.png">
+                                            <%=profile.age+'살'%>
+                                        </li>
+                                        <% } %>
 
-            <li class="edit-profile">
-                <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
-            </li>
+                                            <li class="edit-profile">
+                                                <input type="button" id="edit-button-id" value="프로필 수정하기" class="trigger4"></input>
+                                            </li>
         </div>
 
     </div>
@@ -285,6 +285,13 @@
                                                 <div class="course_type_form" id="course_type_radio">
                                                     <label><input type="radio" name="age_private" size="20" value='true' id="age_secret"  checked>공개</label>
                                                     <label><input type="radio" name="age_private" size="20" value='false' >비공개</label>
+                                                </div>
+                                            </div>
+                                            <div class="professor_name_section">
+                                                <div class="professor_name_label">시간표 공개 유무</div>
+                                                <div class="course_type_form" id="course_type_radio">
+                                                    <label><input type="radio" name="timetable_private" size="20" value='true' id="timetable_secret"  checked>공개</label>
+                                                    <label><input type="radio" name="timetable_private" size="20" value='false' >비공개</label>
                                                 </div>
                                             </div>
                                             <div class="add_btn">
