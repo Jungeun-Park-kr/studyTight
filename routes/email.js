@@ -34,19 +34,14 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             return res.send('email_error=existid');
             //next(error);
         }
-        console.log('asdf-1');
+
         let authNum = Math.random().toString().substr(2,6);
         let emailTemplete;
-        console.log('asdf0');
 
         ejs.renderFile(appDir+'/email/authemail.ejs', {authCode : authNum}, function (err, data) {
             if(err){console.log(err)}
             emailTemplete = data;
         });
-        console.log('asdf0 render');
-
-        
-        console.log('asdf1');
         
         let mailOptions = ({
             from: 'study Tight <studytight0922@gmail.com>',
@@ -55,7 +50,6 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             html: emailTemplete,
         });
 
-        console.log('asdf2');
         // const oauth2Client = new OAuth2(
         //     process.env.GOOGLE_API_CLIENT_ID,
         //     process.env.GOOGLE_API_CLIENT_SECRET,
@@ -76,7 +70,6 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             auth: {
                 type : 'OAuth2',
                 user: process.env.NODEMAILER_USER,
-                //pass: process.env.NODEMAILER_PASS,
                 clientId: process.env.GOOGLE_API_CLIENT_ID,
                 clientSecret: process.env.GOOGLE_API_CLIENT_SECRET,
                 refreshToken:process.env.REFRESH_TOKEN,
