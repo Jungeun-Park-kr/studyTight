@@ -88,6 +88,7 @@ const emailRouter = require('./routes/email'); // 이메일 인증 라우터
 const guestbookRouter = require('./routes/guestbook/guestbook'); //방명록 라우터
 const timetableRouter = require('./routes/timetable/timetable'); // 시간표 라우터
 const folderRouter = require('./routes/folder/folder');
+const userRouter = require('./routes/user'); // user 라우터
 const { http } = require('./logger');
 
 connect(); // mongoDB connection start
@@ -115,6 +116,7 @@ app.use(passport.session());
 
 // use routes
 app.use('/', indexRouter);
+app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/email', emailRouter);
