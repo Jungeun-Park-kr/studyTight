@@ -68,12 +68,13 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-                type : 'OAuth2',
+                //type : 'OAuth2',
                 user: process.env.NODEMAILER_USER,
-                clientId: process.env.GOOGLE_API_CLIENT_ID,
-                clientSecret: process.env.GOOGLE_API_CLIENT_SECRET,
-                refreshToken:process.env.REFRESH_TOKEN,
-                accessToken : process.env.ACCESS_TOKEN,
+                pass : process.env.NODEMAILER_PASS,
+                // clientId: process.env.GOOGLE_API_CLIENT_ID,
+                // clientSecret: process.env.GOOGLE_API_CLIENT_SECRET,
+                // refreshToken:process.env.REFRESH_TOKEN,
+                // accessToken : process.env.ACCESS_TOKEN,
                 // accessToken:accessToken,
             },
         });
