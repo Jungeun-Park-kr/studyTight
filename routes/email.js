@@ -6,6 +6,9 @@ const path = require('path');
 const User = require('../models/user');
 var appDir = path.dirname(require.main.filename);
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
+const google = require('googleapis');
+const OAuth2 = google.auth;
+const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground';
 
 
 router.post('/', isNotLoggedIn, async(req, res, next) => {
@@ -31,39 +34,62 @@ router.post('/', isNotLoggedIn, async(req, res, next) => {
             return res.send('email_error=existid');
             //next(error);
         }
-
+        console.log('asdf-1');
         let authNum = Math.random().toString().substr(2,6);
         let emailTemplete;
+        console.log('asdf0');
 
         ejs.renderFile(appDir+'/email/authemail.ejs', {authCode : authNum}, function (err, data) {
             if(err){console.log(err)}
             emailTemplete = data;
         });
+        console.log('asdf0 render');
 
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            // host: 'smtp.gmail.com',
-            port: 465,
-            secure: true, // true for 465, false for other ports
-            auth: {
-                user: process.env.NODEMAILER_USER,
-                pass: process.env.NODEMAILER_PASS,
-            },
-        });
-
+        
+        console.log('asdf1');
+        
         let mailOptions = ({
-            from: 'study Tight',
+            from: 'study Tight <studytight0922@gmail.com>',
             to: email,
             subject: '회원가입을 위한 인증번호를 입력해주세요.',
             html: emailTemplete,
         });
 
+        console.log('asdf2');
+        // const oauth2Client = new OAuth2(
+        //     process.env.GOOGLE_API_CLIENT_ID,
+        //     process.env.GOOGLE_API_CLIENT_SECRET,
+        //     OAUTH_PLAYGROUND
+        // );
+        // console.info(oauth2Client);
+        // oauth2Client.setCredentials({
+        //     refresh_toekn : process.env.REFRESH_TOKEN,
+        // });
+        // const accessToken = oauth2Client.getAccessToken();
+        // console.log('accesstoken:'+accessToken);
+        
+        let transporter = nodemailer.createTransport({
+            // service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+                type : 'OAuth2',
+                user: process.env.NODEMAILER_USER,
+                //pass: process.env.NODEMAILER_PASS,
+                clientId: process.env.GOOGLE_API_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_API_CLIENT_SECRET,
+                refreshToken:process.env.REFRESH_TOKEN,
+                accessToken : process.env.ACCESS_TOKEN,
+                // accessToken:accessToken,
+            },
+        });
 
         transporter.sendMail(mailOptions, function(emailError, info) {
             if (emailError) {
                 console.log(emailError);
                 console.log('메일 보내기 실패 in /email');
-                next(emailError);
+                return(emailError);
             } else {
                 console.log("Finish sending email : " + info.response);
                 res.send(authNum); // 인증번호
