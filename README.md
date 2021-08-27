@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://user-images.githubusercontent.com/58364342/129522843-fd0096d5-d676-4b96-b888-cf62e7d926c4.png"></p>
 
-<h3 style="bold" align="center">:globe_with_meridians: www.studytight.site (2021.08.27 ~ )</h3> 
+<h3 style="bold" align="center">:globe_with_meridians: www.studytight.site (2021.08.27 ~ 2021.09.04)</h3> 
  
 
 <div align="center">
@@ -34,17 +34,20 @@ Latest ✔ |  10+ ✔ |
 ## Purpose
 - 코로나로 인해 온라인 수업을 진행하고 있는 학생들을 위한 학습관리 사이트
 - 학습 뿐만 아니라 친구와의 소통이 가능한 사이트
+- 등록된 시간표에 따라 실시간 수업 알림을 받는 사이트
+- 폴더와 포스트잇을 통해 배운 내용을 저장하며 학습하는 사이트
+
 -------------------
 
 ## Functions
 1. 로그인 
-2. 회원가입
-3. 방명록
-4. 시간표 
-5. 실시간 수업 알림 
-6. 오늘 할 일 
-7. 디데이
-8. 폴더 
+2. 회원가입 
+3. 방명록 💬
+4. 시간표 📚
+5. 실시간 수업 알림 🔔
+6. 오늘 할 일 📝
+7. 디데이 📅
+8. 폴더 📁
 ----------------
 
 
