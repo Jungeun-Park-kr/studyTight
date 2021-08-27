@@ -532,7 +532,6 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
             return res.status(500).send("timetable?error=notexist");
         }
         if (profile.timetable_private) { // 시간표 비공개 한 경우
-            console.log('시간표 비공개');
             return res.status(500).send("timetable?error=private");
         }
         res.render('../views/guestbook/guestbook_timetable.ejs', {
