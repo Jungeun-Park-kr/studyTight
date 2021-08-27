@@ -39,7 +39,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -73,7 +73,7 @@ router.get('/searfriend', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -96,7 +96,7 @@ router.post('/addgroup', isLoggedIn, async(req, res, next) => {
 
     } catch (err) {
 
-        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -122,7 +122,7 @@ router.post('/deletegroup', isLoggedIn, async(req, res, next) => {
 
     } catch (err) {
 
-        console.error('/views/timetable/guestbook_myroom_searchforeidt.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_searchforeidt.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -155,7 +155,7 @@ router.get('/searfriend/friendedit', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -180,7 +180,7 @@ router.post('/searchemail/friendadd/edit', isLoggedIn, async(req, res, next) => 
 
         res.redirect("/guestbook");
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -212,7 +212,7 @@ router.get('/searchemail', isLoggedIn, async(req, res, next) => {
             myname: OneUser.name
         });
     } catch (err) {
-        console.error('/views/timetable/guestbook_myroom_search.ejs 에서 에러');
+        console.error('/views/guestbook/guestbook_myroom_search.ejs 에서 에러');
         console.error(err);
         next(err);
     }
@@ -491,13 +491,22 @@ router.get('/:id/timetable/auth', isLoggedIn, async(req, res, next) => { // 해�
     try {
         const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
         // 클릭한 친구와 내가 친구가 되어있는지 확인 및 시간표 보기 권한 있는지 확인
-        const friend = await Friend.findOne({ user_id: res.locals.user._id, Friend_ID: friendUser.email, received: true, send: true }); // 친구 데이터 가져오기
+        const friend = await Friend.findOne({ user_id: res.locals.user._id, Friend_ID: friendUser.email, send: true }); // 친구 데이터 가져오기
         const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
+
+        const timetable = await Course.find({ user_id: friendUser._id }).populate('schedules').sort({ 'createdAt': 1 }); // 클릭한 친구의 시간표
+        
+        if (timetable.length < 1) {
+            return res.send('/'+req.params.id+'/timetable?error=notexist');
+        }
+
         if (friend == null) { // 친구가 아닌 경우
             return res.send('/' + req.params.id + '/timetable?error=notfriend');
+            
         }
         if (profile.timetable_private) { // 시간표 비공개 한 경우
             return res.send('/' + req.params.id + '/timetable?error=private');
+            
         }
         return res.send(req.params.id);
     } catch (err) {
@@ -513,6 +522,19 @@ router.get('/:id/timetable', isLoggedIn, async(req, res, next) => { // 해당 �
         const friendUser = await User.findOne({ email_id: req.params.id }); // 클릭한 친구
         const timetable = await Course.find({ user_id: friendUser._id }).populate('schedules').sort({ 'createdAt': 1 }); // 클릭한 친구의 시간표
 
+        const friend = await Friend.findOne({ user_id: res.locals.user._id, Friend_ID: friendUser.email, send: true }); // 친구 데이터 가져오기
+        const profile = await Profile.findOne({ user_id: friendUser._id }); // 친구의 프로필 공개 정보 가져오기
+
+        if (friend == null) { // 친구가 아닌 경우
+            return res.status(500).send("timetable?error=notfriend");
+        }
+        if (timetable.length < 1) {
+            return res.status(500).send("timetable?error=notexist");
+        }
+        if (profile.timetable_private) { // 시간표 비공개 한 경우
+            console.log('시간표 비공개');
+            return res.status(500).send("timetable?error=private");
+        }
         res.render('../views/guestbook/guestbook_timetable.ejs', {
             title: friendUser.name + '의 시간표',
             user: res.locals.user,
