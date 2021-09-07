@@ -29,11 +29,9 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         // todo_finished가 true인 것 중에서 오늘 날짜와 register_date를 비교해서 다르다면  삭제하고 삭제 된 todolist를 rendering하기
         //const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         //console.info(todolist);
-        // res.send('Hello, Express'); // 테스트용
         //삭제 성공!
         await Todo.deleteMany({ user_id: res.locals.user._id, todo_finished: true, register_date: { $ne: getCurrentDate() } })
-            //하루가 지나는 것을 어제와 오늘의 날짜가 다르다고 설정함.
-        //await Todo.updateMany({ user_id: res.locals.user._id, register_date: getCurrentDate() })
+
         const todo = await Todo.updateMany({
             user_id: req.user._id, //필터링 하는 것
 
@@ -46,7 +44,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
 
         // 디데이 날짜지난 것 삭제
-        //console.log('getToday()'+getToday());
+        console.log('getToday()'+getToday());
         //const result = await Dday.find({ user_id: res.locals.user._id, final_date: { $lt: getToday()} }); // 테스트용
         //console.log(result);
         await Dday.deleteMany({ user_id: res.locals.user._id, final_date: { $lt: getToday()} });
@@ -149,9 +147,7 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
 });
 router.post('/todo', isLoggedIn, async(req, res, next) => {
     var content = req.body.todo_content;
-    const timetable = await Course.find({ user_id: res.locals.user._id }).populate('user_id').populate('schedules').sort({ 'createdAt': -1 });
-    const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
-
+    console.log('투두 추가'+content);
     //console.log(JSON.stringify(content)); //추가된 todo값
 
     try {
@@ -349,8 +345,8 @@ function getToday() {
     today = ("0" + today).slice(-2);
     // 테스트용
     // var year = "2021";
-    // var month = "07";
-    // var today = "25"
+    // var month = "09";
+    // var today = "08"
 
     return year+"-"+month+"-"+today;
 }
