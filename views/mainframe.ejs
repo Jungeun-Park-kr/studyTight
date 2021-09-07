@@ -270,6 +270,7 @@
                         <script>
                             var parentDiv = document.getElementById("wrap_day")
                             var d_daylist = JSON.parse('<%- JSON.stringify(d_day) %>');
+                            var today = new Date();
                             for (var i = 0; i < d_daylist.length; i++) {
                                 var show_day = document.createElement("div");
                                 var show_content = document.createElement("span");
@@ -283,7 +284,7 @@
                                 show_content.innerHTML = tmp.dday_content
                                 //console.log(show_content.innerHTML);
                                 // 디데이 계산하기
-                                var date1 = new Date(tmp.start_date);
+                                var date1 = new Date(today);
                                 var date2 = new Date(tmp.final_date);
                                 var gap = date2.getTime() - date1.getTime();
                                 var ddayResult = Math.ceil(gap/(1000*60*60*24));
