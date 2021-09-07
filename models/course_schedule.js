@@ -10,7 +10,7 @@ const courseSchema = new Schema( {
     start_time: { type: String, required: true },
     end_time: { type: String, required: true },
     course_type: { type: String, required: true },
-    classroom: { type: String, required: true },
+    classroom: { type: String, default:"" },
 });
 
 module.exports = mongoose.model('Course_Schedule', courseSchema);

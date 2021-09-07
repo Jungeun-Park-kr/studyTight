@@ -86,365 +86,385 @@
         </div>
         
         <div id="container" role="main">
-            <div class="timetable_wrap">
-            <!-- 여기는 본문 들어갈 메인 섹션 -->
-            <div class="page-header" role="banner" class>
-                <div class="timetable_title"><%=user.name%>의 시간표 </div>
-                <div class="edit_btn">
-                    <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표 관리" onclick="location.href='/timetable/edit'"></input>
+            <div id="TIMETABLE_MAIN_LEFT" class="timetable_column_left">
+                <div class="timetable_wrap">
+                <!-- 여기는 본문 들어갈 메인 섹션 -->
+                <div class="page-header" role="banner" class>
+                    <div class="timetable_title"><%=user.name%>의 시간표 </div>
+                    <div class="edit_btn">
+                        <input id="btn_edit_timetable" type="button" title="시간표관리" value ="시간표 관리" onclick="location.href='/timetable/edit'"></input>
+                    </div>
+                    <p style="clear:both;">&nbsp;</p>
                 </div>
-                <p style="clear:both;">&nbsp;</p>
-            </div>
-            <div class="timetable_section">
-                <div class="background_box">
-                    <div class="timetable_table_wrap">
-                        <div class="table_head_wrap">
-                            <table class="table_head">
-                                <tbody>
-                                    <tr>
-                                        <th style="padding:0px;"></th> 
-                                        <td>월</td>
-                                        <td>화</td>
-                                        <td>수</td>
-                                        <td>목</td>
-                                        <td>금</td>
-                                        <td>토</td>
-                                        <td style="display:none;">일</td>
-                                        <!-- <th  style="padding:0px;"></th> -->
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="table_body">
-                            <div class="table_body_wrap">
-                            <table class="table_body">
-                                <tbody>
-                                    <tr>
-                                        <th style="padding:0px;">
-                                            <div class="hours">
-                                                <div class="hour" >(9:00)</div>
-                                                <div class="hour2">(10:00)</div>
-                                                <div class="hour">(11:00)</div>
-                                                <div class="hour2">(12:00)</div>
-                                                <div class="hour">(13:00)</div>
-                                                <div class="hour2">(16:00)</div>
-                                                <div class="hour">(15:00)</div>
-                                                <div class="hour2">(16:00)</div>
-                                                <div class="hour">(17:00)</div>
-                                                <div class="hour2">(18:00)</div>
-                                                <div class="hour">(19:00)</div>
-                                                <div class="hour2">(20:00)</div>
-                                            </div>
-                                        </th>
-                                        <!-- 들어갈 요일별 과목정보 -->
-                                        <td class="mon" id="mon" style="height:15px; border-left: 0.1px solid #d6d6d6;">
-                                            <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
-                                            <div id ="mon9.1"></div>
-                                            <div id ="mon9.2"></div>
-                                            <div id ="mon9.3"></div>
-                                            <div id ="mon9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon10.1"></div>
-                                            <div id ="mon10.2"></div>
-                                            <div id ="mon10.3"></div>
-                                            <div id ="mon10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon11.1"></div>
-                                            <div id ="mon11.2"></div>
-                                            <div id ="mon11.3"></div>
-                                            <div id ="mon11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon12.1"></div>
-                                            <div id ="mon12.2"></div>
-                                            <div id ="mon12.3"></div>
-                                            <div id ="mon12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon13.1"></div>
-                                            <div id ="mon13.2"></div>
-                                            <div id ="mon13.3"></div>
-                                            <div id ="mon13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon14.1"></div>
-                                            <div id ="mon14.2"></div>
-                                            <div id ="mon14.3"></div>
-                                            <div id ="mon14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon15.1"></div>
-                                            <div id ="mon15.2"></div>
-                                            <div id ="mon15.3"></div>
-                                            <div id ="mon15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon16.1"></div>
-                                            <div id ="mon16.2"></div>
-                                            <div id ="mon16.3"></div>
-                                            <div id ="mon16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon17.1"></div>
-                                            <div id ="mon17.2"></div>
-                                            <div id ="mon17.3"></div>
-                                            <div id ="mon17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon18.1"></div>
-                                            <div id ="mon18.2"></div>
-                                            <div id ="mon18.3"></div>
-                                            <div id ="mon18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon19.1"></div>
-                                            <div id ="mon19.2"></div>
-                                            <div id ="mon19.3"></div>
-                                            <div id ="mon19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="mon20.1"></div>
-                                            <div id ="mon20.2"></div>
-                                            <div id ="mon20.3"></div>
-                                            <div id ="mon20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                        <td class="tue" style="border-left: 0.1px solid #d6d6d6;">
-                                            <div id ="tue9.1"></div>
-                                            <div id ="tue9.2"></div>
-                                            <div id ="tue9.3"></div>
-                                            <div id ="tue9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue10.1"></div>
-                                            <div id ="tue10.2"></div>
-                                            <div id ="tue10.3"></div>
-                                            <div id ="tue10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue11.1"></div>
-                                            <div id ="tue11.2"></div>
-                                            <div id ="tue11.3"></div>
-                                            <div id ="tue11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue12.1"></div>
-                                            <div id ="tue12.2"></div>
-                                            <div id ="tue12.3"></div>
-                                            <div id ="tue12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue13.1"></div>
-                                            <div id ="tue13.2"></div>
-                                            <div id ="tue13.3"></div>
-                                            <div id ="tue13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue14.1"></div>
-                                            <div id ="tue14.2"></div>
-                                            <div id ="tue14.3"></div>
-                                            <div id ="tue14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue15.1"></div>
-                                            <div id ="tue15.2"></div>
-                                            <div id ="tue15.3"></div>
-                                            <div id ="tue15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue16.1"></div>
-                                            <div id ="tue16.2"></div>
-                                            <div id ="tue16.3"></div>
-                                            <div id ="tue16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue17.1"></div>
-                                            <div id ="tue17.2"></div>
-                                            <div id ="tue17.3"></div>
-                                            <div id ="tue17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue18.1"></div>
-                                            <div id ="tue18.2"></div>
-                                            <div id ="tue18.3"></div>
-                                            <div id ="tue18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue19.1"></div>
-                                            <div id ="tue19.2"></div>
-                                            <div id ="tue19.3"></div>
-                                            <div id ="tue19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="tue20.1"></div>
-                                            <div id ="tue20.2"></div>
-                                            <div id ="tue20.3"></div>
-                                            <div id ="tue20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                        <td class="wed" style="border-left: 0.1px solid #d6d6d6;">
-                                            <!-- <p>wednesday section</p> -->
-                                            <div id ="wed9.1"></div>
-                                            <div id ="wed9.2"></div>
-                                            <div id ="wed9.3"></div>
-                                            <div id ="wed9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed10.1"></div>
-                                            <div id ="wed10.2"></div>
-                                            <div id ="wed10.3"></div>
-                                            <div id ="wed10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed11.1"></div>
-                                            <div id ="wed11.2"></div>
-                                            <div id ="wed11.3"></div>
-                                            <div id ="wed11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed12.1"></div>
-                                            <div id ="wed12.2"></div>
-                                            <div id ="wed12.3"></div>
-                                            <div id ="wed12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed13.1"></div>
-                                            <div id ="wed13.2"></div>
-                                            <div id ="wed13.3"></div>
-                                            <div id ="wed13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed14.1"></div>
-                                            <div id ="wed14.2"></div>
-                                            <div id ="wed14.3"></div>
-                                            <div id ="wed14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed15.1"></div>
-                                            <div id ="wed15.2"></div>
-                                            <div id ="wed15.3"></div>
-                                            <div id ="wed15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed16.1"></div>
-                                            <div id ="wed16.2"></div>
-                                            <div id ="wed16.3"></div>
-                                            <div id ="wed16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed17.1"></div>
-                                            <div id ="wed17.2"></div>
-                                            <div id ="wed17.3"></div>
-                                            <div id ="wed17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed18.1"></div>
-                                            <div id ="wed18.2"></div>
-                                            <div id ="wed18.3"></div>
-                                            <div id ="wed18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed19.1"></div>
-                                            <div id ="wed19.2"></div>
-                                            <div id ="wed19.3"></div>
-                                            <div id ="wed19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="wed20.1"></div>
-                                            <div id ="wed20.2"></div>
-                                            <div id ="wed20.3"></div>
-                                            <div id ="wed20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                        <td class="thr" style="border-left: 0.1px solid #d6d6d6;">
-                                            <div id ="thu9.1"></div>
-                                            <div id ="thu9.2"></div>
-                                            <div id ="thu9.3"></div>
-                                            <div id ="thu9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu10.1" ></div>
-                                            <div id ="thu10.2"></div>
-                                            <div id ="thu10.3"></div>
-                                            <div id ="thu10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu11.1"></div>
-                                            <div id ="thu11.2"></div>
-                                            <div id ="thu11.3"></div>
-                                            <div id ="thu11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu12.1"></div>
-                                            <div id ="thu12.2"></div>
-                                            <div id ="thu12.3"></div>
-                                            <div id ="thu12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu13.1"></div>
-                                            <div id ="thu13.2"></div>
-                                            <div id ="thu13.3"></div>
-                                            <div id ="thu13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu14.1"></div>
-                                            <div id ="thu14.2"></div>
-                                            <div id ="thu14.3"></div>
-                                            <div id ="thu14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu15.1"></div>
-                                            <div id ="thu15.2"></div>
-                                            <div id ="thu15.3"></div>
-                                            <div id ="thu15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu16.1"></div>
-                                            <div id ="thu16.2"></div>
-                                            <div id ="thu16.3"></div>
-                                            <div id ="thu16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu17.1"></div>
-                                            <div id ="thu17.2"></div>
-                                            <div id ="thu17.3"></div>
-                                            <div id ="thu17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu18.1"></div>
-                                            <div id ="thu18.2"></div>
-                                            <div id ="thu18.3"></div>
-                                            <div id ="thu18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu19.1"></div>
-                                            <div id ="thu19.2"></div>
-                                            <div id ="thu19.3"></div>
-                                            <div id ="thu19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="thu20.1"></div>
-                                            <div id ="thu20.2"></div>
-                                            <div id ="thu20.3"></div>
-                                            <div id ="thu20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                        <td class="fri" style="border-left: 0.1px solid #d6d6d6;">
-                                            <div id ="fri9.1"></div>
-                                            <div id ="fri9.2"></div>
-                                            <div id ="fri9.3"></div>
-                                            <div id ="fri9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri10.1"></div>
-                                            <div id ="fri10.2"></div>
-                                            <div id ="fri10.3"></div>
-                                            <div id ="fri10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri11.1"></div>
-                                            <div id ="fri11.2"></div>
-                                            <div id ="fri11.3"></div>
-                                            <div id ="fri11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri12.1"></div>
-                                            <div id ="fri12.2"></div>
-                                            <div id ="fri12.3"></div>
-                                            <div id ="fri12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri13.1"></div>
-                                            <div id ="fri13.2"></div>
-                                            <div id ="fri13.3"></div>
-                                            <div id ="fri13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri14.1"></div>
-                                            <div id ="fri14.2"></div>
-                                            <div id ="fri14.3"></div>
-                                            <div id ="fri14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri15.1"></div>
-                                            <div id ="fri15.2"></div>
-                                            <div id ="fri15.3"></div>
-                                            <div id ="fri15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri16.1"></div>
-                                            <div id ="fri16.2"></div>
-                                            <div id ="fri16.3"></div>
-                                            <div id ="fri16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri17.1"></div>
-                                            <div id ="fri17.2"></div>
-                                            <div id ="fri17.3"></div>
-                                            <div id ="fri17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri18.1"></div>
-                                            <div id ="fri18.2"></div>
-                                            <div id ="fri18.3"></div>
-                                            <div id ="fri18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri19.1"></div>
-                                            <div id ="fri19.2"></div>
-                                            <div id ="fri19.3"></div>
-                                            <div id ="fri19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="fri20.1"></div>
-                                            <div id ="fri20.2"></div>
-                                            <div id ="fri20.3"></div>
-                                            <div id ="fri20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                        <td class="sat" style="border-left: 0.1px solid #d6d6d6;">
-                                            <div id ="sat9.1"></div>
-                                            <div id ="sat9.2"></div>
-                                            <div id ="sat9.3"></div>
-                                            <div id ="sat9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat10.1"></div>
-                                            <div id ="sat10.2"></div>
-                                            <div id ="sat10.3"></div>
-                                            <div id ="sat10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat11.1"></div>
-                                            <div id ="sat11.2"></div>
-                                            <div id ="sat11.3"></div>
-                                            <div id ="sat11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat12.1"></div>
-                                            <div id ="sat12.2"></div>
-                                            <div id ="sat12.3"></div>
-                                            <div id ="sat12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat13.1"></div>
-                                            <div id ="sat13.2"></div>
-                                            <div id ="sat13.3"></div>
-                                            <div id ="sat13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat14.1"></div>
-                                            <div id ="sat14.2"></div>
-                                            <div id ="sat14.3"></div>
-                                            <div id ="sat14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat15.1"></div>
-                                            <div id ="sat15.2"></div>
-                                            <div id ="sat15.3"></div>
-                                            <div id ="sat15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat16.1"></div>
-                                            <div id ="sat16.2"></div>
-                                            <div id ="sat16.3"></div>
-                                            <div id ="sat16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat17.1"></div>
-                                            <div id ="sat17.2"></div>
-                                            <div id ="sat17.3"></div>
-                                            <div id ="sat17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat18.1"></div>
-                                            <div id ="sat18.2"></div>
-                                            <div id ="sat18.3"></div>
-                                            <div id ="sat18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat19.1"></div>
-                                            <div id ="sat19.2"></div>
-                                            <div id ="sat19.3"></div>
-                                            <div id ="sat19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                            <div id ="sat20.1"></div>
-                                            <div id ="sat20.2"></div>
-                                            <div id ="sat20.3"></div>
-                                            <div id ="sat20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <div class="timetable_section">
+                    <div class="background_box">
+                        <div class="timetable_table_wrap">
+                            <div class="table_head_wrap">
+                                <table class="table_head">
+                                    <tbody>
+                                        <tr>
+                                            <th style="padding:0px;"></th> 
+                                            <td>월</td>
+                                            <td>화</td>
+                                            <td>수</td>
+                                            <td>목</td>
+                                            <td>금</td>
+                                            <td>토</td>
+                                            <td style="display:none;">일</td>
+                                            <!-- <th  style="padding:0px;"></th> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table_body">
+                                <div class="table_body_wrap">
+                                <table class="table_body">
+                                    <tbody>
+                                        <tr>
+                                            <th style="padding:0px;">
+                                                <div class="hours">
+                                                    <div class="hour" >(9:00)</div>
+                                                    <div class="hour2">(10:00)</div>
+                                                    <div class="hour">(11:00)</div>
+                                                    <div class="hour2">(12:00)</div>
+                                                    <div class="hour">(13:00)</div>
+                                                    <div class="hour2">(16:00)</div>
+                                                    <div class="hour">(15:00)</div>
+                                                    <div class="hour2">(16:00)</div>
+                                                    <div class="hour">(17:00)</div>
+                                                    <div class="hour2">(18:00)</div>
+                                                    <div class="hour">(19:00)</div>
+                                                    <div class="hour2">(20:00)</div>
+                                                </div>
+                                            </th>
+                                            <!-- 들어갈 요일별 과목정보 -->
+                                            <td class="mon" id="mon" style="height:15px; border-left: 0.1px solid #d6d6d6;">
+                                                <!-- 한시간:60px, 한교시:75px(1시간반) 15분씩 나누기(15px씩) -->
+                                                <div id ="mon9.1"></div>
+                                                <div id ="mon9.2"></div>
+                                                <div id ="mon9.3"></div>
+                                                <div id ="mon9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon10.1"></div>
+                                                <div id ="mon10.2"></div>
+                                                <div id ="mon10.3"></div>
+                                                <div id ="mon10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon11.1"></div>
+                                                <div id ="mon11.2"></div>
+                                                <div id ="mon11.3"></div>
+                                                <div id ="mon11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon12.1"></div>
+                                                <div id ="mon12.2"></div>
+                                                <div id ="mon12.3"></div>
+                                                <div id ="mon12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon13.1"></div>
+                                                <div id ="mon13.2"></div>
+                                                <div id ="mon13.3"></div>
+                                                <div id ="mon13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon14.1"></div>
+                                                <div id ="mon14.2"></div>
+                                                <div id ="mon14.3"></div>
+                                                <div id ="mon14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon15.1"></div>
+                                                <div id ="mon15.2"></div>
+                                                <div id ="mon15.3"></div>
+                                                <div id ="mon15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon16.1"></div>
+                                                <div id ="mon16.2"></div>
+                                                <div id ="mon16.3"></div>
+                                                <div id ="mon16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon17.1"></div>
+                                                <div id ="mon17.2"></div>
+                                                <div id ="mon17.3"></div>
+                                                <div id ="mon17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon18.1"></div>
+                                                <div id ="mon18.2"></div>
+                                                <div id ="mon18.3"></div>
+                                                <div id ="mon18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon19.1"></div>
+                                                <div id ="mon19.2"></div>
+                                                <div id ="mon19.3"></div>
+                                                <div id ="mon19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="mon20.1"></div>
+                                                <div id ="mon20.2"></div>
+                                                <div id ="mon20.3"></div>
+                                                <div id ="mon20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                            <td class="tue" style="border-left: 0.1px solid #d6d6d6;">
+                                                <div id ="tue9.1"></div>
+                                                <div id ="tue9.2"></div>
+                                                <div id ="tue9.3"></div>
+                                                <div id ="tue9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue10.1"></div>
+                                                <div id ="tue10.2"></div>
+                                                <div id ="tue10.3"></div>
+                                                <div id ="tue10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue11.1"></div>
+                                                <div id ="tue11.2"></div>
+                                                <div id ="tue11.3"></div>
+                                                <div id ="tue11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue12.1"></div>
+                                                <div id ="tue12.2"></div>
+                                                <div id ="tue12.3"></div>
+                                                <div id ="tue12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue13.1"></div>
+                                                <div id ="tue13.2"></div>
+                                                <div id ="tue13.3"></div>
+                                                <div id ="tue13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue14.1"></div>
+                                                <div id ="tue14.2"></div>
+                                                <div id ="tue14.3"></div>
+                                                <div id ="tue14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue15.1"></div>
+                                                <div id ="tue15.2"></div>
+                                                <div id ="tue15.3"></div>
+                                                <div id ="tue15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue16.1"></div>
+                                                <div id ="tue16.2"></div>
+                                                <div id ="tue16.3"></div>
+                                                <div id ="tue16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue17.1"></div>
+                                                <div id ="tue17.2"></div>
+                                                <div id ="tue17.3"></div>
+                                                <div id ="tue17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue18.1"></div>
+                                                <div id ="tue18.2"></div>
+                                                <div id ="tue18.3"></div>
+                                                <div id ="tue18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue19.1"></div>
+                                                <div id ="tue19.2"></div>
+                                                <div id ="tue19.3"></div>
+                                                <div id ="tue19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="tue20.1"></div>
+                                                <div id ="tue20.2"></div>
+                                                <div id ="tue20.3"></div>
+                                                <div id ="tue20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                            <td class="wed" style="border-left: 0.1px solid #d6d6d6;">
+                                                <!-- <p>wednesday section</p> -->
+                                                <div id ="wed9.1"></div>
+                                                <div id ="wed9.2"></div>
+                                                <div id ="wed9.3"></div>
+                                                <div id ="wed9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed10.1"></div>
+                                                <div id ="wed10.2"></div>
+                                                <div id ="wed10.3"></div>
+                                                <div id ="wed10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed11.1"></div>
+                                                <div id ="wed11.2"></div>
+                                                <div id ="wed11.3"></div>
+                                                <div id ="wed11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed12.1"></div>
+                                                <div id ="wed12.2"></div>
+                                                <div id ="wed12.3"></div>
+                                                <div id ="wed12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed13.1"></div>
+                                                <div id ="wed13.2"></div>
+                                                <div id ="wed13.3"></div>
+                                                <div id ="wed13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed14.1"></div>
+                                                <div id ="wed14.2"></div>
+                                                <div id ="wed14.3"></div>
+                                                <div id ="wed14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed15.1"></div>
+                                                <div id ="wed15.2"></div>
+                                                <div id ="wed15.3"></div>
+                                                <div id ="wed15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed16.1"></div>
+                                                <div id ="wed16.2"></div>
+                                                <div id ="wed16.3"></div>
+                                                <div id ="wed16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed17.1"></div>
+                                                <div id ="wed17.2"></div>
+                                                <div id ="wed17.3"></div>
+                                                <div id ="wed17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed18.1"></div>
+                                                <div id ="wed18.2"></div>
+                                                <div id ="wed18.3"></div>
+                                                <div id ="wed18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed19.1"></div>
+                                                <div id ="wed19.2"></div>
+                                                <div id ="wed19.3"></div>
+                                                <div id ="wed19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="wed20.1"></div>
+                                                <div id ="wed20.2"></div>
+                                                <div id ="wed20.3"></div>
+                                                <div id ="wed20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                            <td class="thr" style="border-left: 0.1px solid #d6d6d6;">
+                                                <div id ="thu9.1"></div>
+                                                <div id ="thu9.2"></div>
+                                                <div id ="thu9.3"></div>
+                                                <div id ="thu9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu10.1" ></div>
+                                                <div id ="thu10.2"></div>
+                                                <div id ="thu10.3"></div>
+                                                <div id ="thu10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu11.1"></div>
+                                                <div id ="thu11.2"></div>
+                                                <div id ="thu11.3"></div>
+                                                <div id ="thu11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu12.1"></div>
+                                                <div id ="thu12.2"></div>
+                                                <div id ="thu12.3"></div>
+                                                <div id ="thu12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu13.1"></div>
+                                                <div id ="thu13.2"></div>
+                                                <div id ="thu13.3"></div>
+                                                <div id ="thu13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu14.1"></div>
+                                                <div id ="thu14.2"></div>
+                                                <div id ="thu14.3"></div>
+                                                <div id ="thu14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu15.1"></div>
+                                                <div id ="thu15.2"></div>
+                                                <div id ="thu15.3"></div>
+                                                <div id ="thu15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu16.1"></div>
+                                                <div id ="thu16.2"></div>
+                                                <div id ="thu16.3"></div>
+                                                <div id ="thu16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu17.1"></div>
+                                                <div id ="thu17.2"></div>
+                                                <div id ="thu17.3"></div>
+                                                <div id ="thu17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu18.1"></div>
+                                                <div id ="thu18.2"></div>
+                                                <div id ="thu18.3"></div>
+                                                <div id ="thu18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu19.1"></div>
+                                                <div id ="thu19.2"></div>
+                                                <div id ="thu19.3"></div>
+                                                <div id ="thu19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="thu20.1"></div>
+                                                <div id ="thu20.2"></div>
+                                                <div id ="thu20.3"></div>
+                                                <div id ="thu20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                            <td class="fri" style="border-left: 0.1px solid #d6d6d6;">
+                                                <div id ="fri9.1"></div>
+                                                <div id ="fri9.2"></div>
+                                                <div id ="fri9.3"></div>
+                                                <div id ="fri9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri10.1"></div>
+                                                <div id ="fri10.2"></div>
+                                                <div id ="fri10.3"></div>
+                                                <div id ="fri10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri11.1"></div>
+                                                <div id ="fri11.2"></div>
+                                                <div id ="fri11.3"></div>
+                                                <div id ="fri11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri12.1"></div>
+                                                <div id ="fri12.2"></div>
+                                                <div id ="fri12.3"></div>
+                                                <div id ="fri12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri13.1"></div>
+                                                <div id ="fri13.2"></div>
+                                                <div id ="fri13.3"></div>
+                                                <div id ="fri13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri14.1"></div>
+                                                <div id ="fri14.2"></div>
+                                                <div id ="fri14.3"></div>
+                                                <div id ="fri14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri15.1"></div>
+                                                <div id ="fri15.2"></div>
+                                                <div id ="fri15.3"></div>
+                                                <div id ="fri15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri16.1"></div>
+                                                <div id ="fri16.2"></div>
+                                                <div id ="fri16.3"></div>
+                                                <div id ="fri16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri17.1"></div>
+                                                <div id ="fri17.2"></div>
+                                                <div id ="fri17.3"></div>
+                                                <div id ="fri17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri18.1"></div>
+                                                <div id ="fri18.2"></div>
+                                                <div id ="fri18.3"></div>
+                                                <div id ="fri18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri19.1"></div>
+                                                <div id ="fri19.2"></div>
+                                                <div id ="fri19.3"></div>
+                                                <div id ="fri19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="fri20.1"></div>
+                                                <div id ="fri20.2"></div>
+                                                <div id ="fri20.3"></div>
+                                                <div id ="fri20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                            <td class="sat" style="border-left: 0.1px solid #d6d6d6;">
+                                                <div id ="sat9.1"></div>
+                                                <div id ="sat9.2"></div>
+                                                <div id ="sat9.3"></div>
+                                                <div id ="sat9.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat10.1"></div>
+                                                <div id ="sat10.2"></div>
+                                                <div id ="sat10.3"></div>
+                                                <div id ="sat10.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat11.1"></div>
+                                                <div id ="sat11.2"></div>
+                                                <div id ="sat11.3"></div>
+                                                <div id ="sat11.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat12.1"></div>
+                                                <div id ="sat12.2"></div>
+                                                <div id ="sat12.3"></div>
+                                                <div id ="sat12.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat13.1"></div>
+                                                <div id ="sat13.2"></div>
+                                                <div id ="sat13.3"></div>
+                                                <div id ="sat13.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat14.1"></div>
+                                                <div id ="sat14.2"></div>
+                                                <div id ="sat14.3"></div>
+                                                <div id ="sat14.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat15.1"></div>
+                                                <div id ="sat15.2"></div>
+                                                <div id ="sat15.3"></div>
+                                                <div id ="sat15.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat16.1"></div>
+                                                <div id ="sat16.2"></div>
+                                                <div id ="sat16.3"></div>
+                                                <div id ="sat16.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat17.1"></div>
+                                                <div id ="sat17.2"></div>
+                                                <div id ="sat17.3"></div>
+                                                <div id ="sat17.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat18.1"></div>
+                                                <div id ="sat18.2"></div>
+                                                <div id ="sat18.3"></div>
+                                                <div id ="sat18.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat19.1"></div>
+                                                <div id ="sat19.2"></div>
+                                                <div id ="sat19.3"></div>
+                                                <div id ="sat19.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                                <div id ="sat20.1"></div>
+                                                <div id ="sat20.2"></div>
+                                                <div id ="sat20.3"></div>
+                                                <div id ="sat20.4" style="border-bottom: 1px solid #d6d6d6;"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                </div>
+            </div>
+            <div id="TIMETABLE_MAIN_RIGHT" class="timetable_column_right">
+                <div class="aside">
+                    <div class="aside_wrap">
+                        <p class="todo_name">금주 강의 진도</p>
+                        
+                        <div class="todaylist" id="course_progress_list">
+                            
+                            <div class="todaylists" id='course_progress_lists'>
+                                
+                            </div>
+                            <input type="submit" class="btnplusTodo" value="+   직접 추가하기"></input>
+                        </div>
+                        <div class="caution">
+                            매주 월요일 (00:00 AM)을 기준으로<br>금주의 강의 목록이 갱신됩니다.<br>전주에 완료되지 않은 강의는 유지됩니다.
+                        </div>
                 </div>
             </div>
         </div>
@@ -611,9 +631,7 @@
 
     </script>
 
-        <div class="aside">
-            <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
-        </div>
+        
     </div>
 </body>
 </html>

@@ -42,7 +42,6 @@
     font-weight: bolder;
 }
 
-
 .table_head_wrap {
     align-items: center;
     padding : 0px 50px;
@@ -50,7 +49,7 @@
 .table_head {
     background-color: #e8e8e8;
     border : none;
-    width:1030px;
+    width:800px;
 }
 .table_head td {
     width:15%;
@@ -66,7 +65,7 @@
     padding : 0px 50px;
 }
 .table_body {
-    width:1030px;
+    width:800px;
     padding:0px;
 }
 .table_body .hours .hour {
@@ -106,3 +105,57 @@
     /*border-bottom: 0.2px solid lightgray;*/
 }
 
+/* 메인의 좌측 영역 : 폴더, d-day를 감싸는 영역 */
+
+.timetable_column_left {
+    /* 네이버 : 750 */
+    /* float:left; */
+    width: 900px;
+    display: inline-block;
+}
+
+
+/* 메인의 우측 영역: 오늘 할 일 영역 */
+
+.timetable_column_right {
+    /* 네이버 : 350 */
+    float: right;
+    width: 210px;
+}
+
+/* 우측 영역: 일주일 진도표 */
+
+.aside_wrap {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.aside .todaylist {
+    background-color: white;
+    width: 210px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: large;
+    align-items: center;
+}
+
+.aside_wrap>p {
+    margin: 10px 0px;
+    font-size: 13px;
+    font-weight: bolder;
+}
+
+.caution {
+    width: 210px;
+    margin: 5px 5px;
+    padding: 0px 5px;
+    font-size: 10px;
+    line-height: 140%;
+}
+
+.aside .todaylists>.wrap_label {
+    height:fit-content;
+    margin: 0px;
+    text-align: left;
+}
