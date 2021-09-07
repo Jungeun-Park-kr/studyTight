@@ -591,7 +591,7 @@
                             
 
                         <div id="folder_plus">
-                            <img src="media/plus_folder_gray.png"/><p>추가하기</p>
+                            <img src="/public/media/plus_folder_gray.png"/><p>추가하기</p>
                         </div>
 
                 </div>
@@ -614,10 +614,17 @@
                                 <input type="hidden" value="<%=todolist[i].todo_content%>" class="todolist-id"/>
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',true)" class="checkbox">
-                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
+                                        <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label>
+                                        <span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">삭제</span>
+                                        <span class='revise_todo' onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">수정</span></div>
                                 <%} else{ %> 
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
-                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">&times;</span></div>
+                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label>
+                                        <img class="todo_button" src="/public/media/three_button.png" onclick="showTodoMenu('<%= todolist[i]._id%>','<%= i%>')"/>
+                                        <div class="dropdown_todo">
+                                        <span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">삭제</span>
+                                        <span class='revise_todo' onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">수정</span></div>
+                                    </div>
                                     <% } %>
                                 <% } %>
                                 <!-- </form> -->
@@ -627,7 +634,11 @@
                         </div>
                         
                         <script>
-                        
+
+                            function showTodoMenu(todo_id, index){
+                                console.log("투두 메뉴 버튼을 눌렀습니다.");
+                                //document.getElementsByClassName('dropdown_todo')[index].style.display="block";
+                            }
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
                             function onCheckedHandler(todo_id, index, boolValue){ //해당 _id값이 넘어온 것이니까 //mongodb에서 수정하기 위해서
@@ -694,6 +705,10 @@
                                     
                             }
                         
+                            function onReviseTodo(todo_id, revise_index){
+                                alert("수정하기를 눌렀다~");
+                            }
+                        
                         </script>
 
                         
@@ -712,7 +727,7 @@
         <h1 class="title">오늘 할 일 추가히기</h1>
         
             <div>
-                <input type="text" id="modal-todo" name="todo_content" maxlength="10" placeholder="할 일을 작성해보세요. (최대 10자)">
+                <input type="text" id="modal-todo" name="todo_content" maxlength="30" placeholder="할 일을 작성해보세요. (최대 30자)">
                 <input type="hidden">
             </div>
             <div>

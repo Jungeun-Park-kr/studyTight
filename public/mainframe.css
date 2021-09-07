@@ -113,7 +113,7 @@ body {
 }
 
 .aside .todaylists>.wrap_label {
-    font-size: small;
+    height:fit-content;
     margin: 0px;
     text-align: left;
     
@@ -127,7 +127,7 @@ body {
 .todaylists>label>input,
 p {
     display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 
@@ -370,6 +370,27 @@ select>option {
 .todo_name{
     cursor:default;
 }
+.todo_button{
+    position: relative;
+    display: inline-block;
+    width:15px;
+    cursor:pointer;
+    height:auto;
+}
+.dropdown_todo{
+    display:none;
+    position: absolute;
+    width:50px;
+    
+    box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.todo_button:hover .dropdown_todo{
+    display:block;
+}
+.dropdown_todo span {
+    display:block;
+    padding:5px;
+}
 
 .checkbox,
 .p_p {
@@ -377,6 +398,9 @@ select>option {
 }
 .p_p:hover{
     font-weight: bolder;
+}
+.p_p {
+    max-width:120px;
 }
 /* 닫기 버튼 */
 
