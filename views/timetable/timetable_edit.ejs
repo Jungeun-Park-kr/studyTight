@@ -383,8 +383,14 @@
             function courseType(type, classroom) { //과목 타입(online_realtime,online_video,offline)
                 switch (type) {
                     case 'online_realtime': // 온라인이면 링크를 리턴
+                        if (classroom.length < 1) {
+                            return '온라인 실시간 (등록된 강의 링크 없음)';
+                        }
                         return '온라인 실시간 (<a  href="'+classroom+'" target="_blank">'+classroom+'</a>)';
                     case 'online_video':
+                        if (classroom.length < 1) {
+                            return '온라인 실시간 (등록된 강의 링크 없음)';
+                        }
                         return '온라인 동영상 (<a href="'+classroom+'" target="_blank">'+classroom+'</a>)';
                     case 'offline': //오프라인이면 강의실을 리턴
                         return classroom;
@@ -461,9 +467,7 @@
                         alert('강의 종료시간은 시작시간보다 늦어야 합니다.');
                     } else if (classroom.trim() === '' && type == 'offline') {
                         alert('강의실을 입력해주세요.');
-                    } else if (classroom.trim() === '') {
-                        alert('강의 링크를 입력해주세요.');
-                    }  else if (classroom.indexOf('<')!=-1 && classroom.indexOf('>')!=-1 ){
+                    } else if (classroom.indexOf('<')!=-1 && classroom.indexOf('>')!=-1 ){
                         alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                     } 
                     else { // 모두 올바르게 입력
@@ -625,8 +629,6 @@
                         alert('강의 종료시간은 시작시간보다 늦어야 합니다.');
                     } else if (classroom.trim() === '' && type == 'offline') {
                         alert('강의실을 입력해주세요.');
-                    } else if (classroom.trim() === '') {
-                        alert('강의 링크를 입력해주세요.');
                     } else if (classroom.indexOf('<')!=-1 && classroom.indexOf('>')!=-1 ){
                         alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                     } else { // 모두 올바르게 입력
