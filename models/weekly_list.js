@@ -9,9 +9,10 @@ const weeklyListSchema=new Schema({
         required:true,
         ref: 'User'
     }, 
-    content:{type:String,required:true},
-    start_date:{type:Date, defult: getCurrentDate()},
-    finished:{type:Boolean, required:true}
+    content:{type:String,required:true}, // 내용
+    day : {type: String}, // 강의 요일
+    date:{type:Date, defult: getCurrentDate()},
+    finished:{type:Boolean, required:true, default:false},
 });
 
 function getCurrentDate(){

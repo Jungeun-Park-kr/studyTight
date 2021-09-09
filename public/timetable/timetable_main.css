@@ -146,11 +146,15 @@
     font-weight: bolder;
 }
 
+.p_p {
+    font-size:  13px;
+}
+
 .caution {
-    width: 210px;
-    margin: 5px 5px;
-    padding: 0px 5px;
-    font-size: 10px;
+    width: 170px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px;
     line-height: 140%;
 }
 
@@ -158,4 +162,63 @@
     height:fit-content;
     margin: 0px;
     text-align: left;
+}
+
+
+
+/****** 모달 팝업에 보일 콘텐츠들 ******/
+/* 타이틀 */
+.title{ 
+    font-size:13px;
+    margin-bottom:20px;
+    letter-spacing: 2px; 
+} 
+/* 본문 내용 */
+.content {
+    font-size : 11px;
+    letter-spacing : 2px;
+}
+
+/* 닫기 버튼 */
+.close_button { 
+    float: right; 
+    width: 1.5rem; 
+    line-height: 1.5rem; 
+    text-align: center; 
+    cursor: pointer; 
+    border-radius: 0.5rem; 
+    background-color: #dedede; 
+} 
+.close_button:hover { 
+    background-color: #8e8e8e; 
+}
+
+
+
+/* 확인 버튼 */
+.btn_confirm {
+    color: #000;
+    border: solid 1px rgba(0,0,0,.08);
+    background-color: #6ED4D8;
+    cursor: pointer;
+} 
+/* 확인 버튼 hover 색깔 (아직 확정X) */
+.btn_confirm:hover {
+    color: #fff;
+    background-color: #4b9194;
+    opacity: 0.9;
+}
+
+
+/* 취소 버튼 */
+.btn_cancel {
+    color: #fff;
+    background-color: #bebebe;
+    cursor: pointer;
+} 
+/* 취소 버튼 hover 색깔 (아직 확정X) */
+.btn_cancel:hover {
+    font-weight: bolder;
+    background-color: #8e8e8e;
+    opacity: 0.9;
 }

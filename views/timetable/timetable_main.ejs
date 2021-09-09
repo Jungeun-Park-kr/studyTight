@@ -454,21 +454,262 @@
                 <div class="aside">
                     <div class="aside_wrap">
                         <p class="todo_name">금주 강의 진도</p>
-                        
                         <div class="todaylist" id="course_progress_list">
-                            
                             <div class="todaylists" id='course_progress_lists'>
-                                
+                                <% for(var i=0;i<weeklyList.length; i++) { %>
+                                    <input type="hidden" value="<%=weeklyList[i].content%>" class="week_todolist_id"/>
+                                    <% if(weeklyList[i].finished) {%>
+                                        <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',true)" class="checkbox">
+                                            <p style='text-decoration: line-through;' class="p_p"><%= weeklyList[i].content %></p></label>
+                                            <span class='delete_todo' onclick="onDeleteWeekTodo('<%= weeklyList[i]._id %>','<%= i %>')">&times;</span> </div>
+                                    <%} else{ %> 
+                                        <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',false)" class="checkbox">
+                                            <p style='text-decoration: none;'class="p_p"><%= weeklyList[i].content %></p></label>
+                                            <span class='delete_todo' onclick="onDeleteWeekTodo('<%= weeklyList[i]._id %>','<%= i %>')">&times;</span> </div>
+                                        <% } %>
+                                <% } %>
                             </div>
-                            <input type="submit" class="btnplusTodo" value="+   직접 추가하기"></input>
+                            <input type="submit" class="btnplusTodo" id="btn_add_weekly" value="+   직접 추가하기"></input>
                         </div>
+                        
                         <div class="caution">
                             매주 월요일 (00:00 AM)을 기준으로<br>금주의 강의 목록이 갱신됩니다.<br>전주에 완료되지 않은 강의는 유지됩니다.
                         </div>
                 </div>
+                <script>
+                    var checked_toggle=1;
+                    function onCheckedHandler(objectID, index, boolValue){ 
+                        var checkedIndex;
+                        var checkedBox=document.getElementsByClassName('checkbox');
+                        var hidden_input=document.getElementsByClassName('week_todolist_id');
+                        var currentState=boolValue;
+                        if(currentState==true){
+                            checked_toggle++;
+                        }
+                        var content=document.getElementsByClassName('p_p');
+                        if(checked_toggle%2==1){ //unchecked -> checked
+                            content[index].style.textDecoration='line-through';
+                            currentState=true;
+                            fetch('/timetable/main/weekly',{
+                                method:'PATCH',
+                                headers:{
+                                    'Accept':'application/json',
+                                    'Content-Type':'application/json'
+                                },
+                                body:JSON.stringify({objectID:objectID, finished:true})
+                            });
+                            
+                        }else{   //checked -> unchecked
+                            content[index].style.textDecoration='none';
+                            content[index].setAttribute('checked',false);
+                            currentState=false;
+                            fetch('/timetable/main/weekly',{
+                                method:'PATCH',
+                                headers:{
+                                    'Accept':'application/json',
+                                    'Content-Type':'application/json'
+                                },
+                                body:JSON.stringify({ objectID:objectID, finished:false})
+                            });
+                            
+                        }      
+                    }
+                    
+                    function onDeleteWeekTodo(objectID, delete_index){
+                        var parent=document.getElementById('course_progress_lists');
+                        var delete_div=document.getElementsByClassName('wrap_label')[delete_index];
+                        var delete_p=document.getElementsByClassName('p_p')[delete_index];
+                        
+
+                        // 바로 삭제 X
+                        // 안내 메시지 후 삭제시키기
+                        // in here
+                        $.ajax({
+                        type:"DELETE",
+                        async : true,
+                        url:'/timetable/main/weekly'+objectID,
+                        success:function(data){ 
+                            parent.removeChild(delete_div);
+                        },
+                        error: function(err) { // PUT 요청 실패시
+                            alert('삭제를 실패했습니다.\n다시 시도해주세요.');
+                        }
+                        });
+                    }
+                </script>
             </div>
         </div>
     </div>
+    <!-- weekly-list 추가하기 모달 팝업 -->
+    <div id="modal" class="modal modal_todo">
+        <div class="modal-content-todo">
+        <span class="close_button close_todo_button">&times;</span>
+        <h1 class="title">금주 강의목록 추가하기</h1>
+        <!-- 내용 띄울 부분 -->
+        <div class="content">추가한 할일은 삭제하기 전까지 매주 유지됩니다.</div>
+            <div>
+                <input type="text" id="modal-todo" name="todo_content" maxlength="30" placeholder="금주 할일을 입력하세요 (최대 30자)">
+                <input type="hidden">
+            </div>
+            <div>
+                <input type="button" class="btn_confirm modal-todo-plus" id ="btn_weekly_modal_add" value="확  인"></input>
+            </div>
+        
+        </div>
+    </div>
+
+    <div id="modal" class="modal modal_alert">
+        <div class="modal-content-alert">
+        <div id="alert_title"></div>
+            <div>
+                <input type="button" class="modal-alert-button" value="확인"></input>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal modal_confirm">
+        <div class="modal-content">
+            <h1 class="confirm_title"></h1>
+            <div class="content"></div>
+            <input type="button" id="confirm_cancel" class="btn_cancel" value="취소">
+            <input type="button" id="confirm_confirm" class="btn_confirm" value="확인">
+        </div>
+    </div>
+    <script type="text/javascript">
+        var modal_weekly=document.querySelector(".modal_todo");
+        var trigger_todo=document.querySelector("#btn_add_weekly"); //todo 추가하기 버튼
+        var closeTodoButton=document.querySelector('.close_todo_button');
+        var storeTodoButton=document.querySelector('#btn_weekly_modal_add');
+        var alertButton=document.querySelector('.modal-alert-button');
+
+        function toggleTodoModal(){
+            modal_weekly.classList.toggle("show_modal");
+        }
+        // function toggleAlertModal() {
+            
+        // }
+        function windowOnClick(event) {
+            if(event.target===modal_weekly){
+                toggleTodoModal();
+            }
+        }
+        trigger_todo.addEventListener("click",toggleTodoModal);
+        closeTodoButton.addEventListener('click',toggleTodoModal);
+
+        //alertButton.addEventListener('click',toggleAlertModal);
+
+        $('#btn_weekly_modal_add').click(function(event){
+            var content = $('#modal-todo').val();
+            if (content.length <1) {
+                alert('내용을 입력해주세요.');
+            } else if (content.indexOf('<')!=-1 && content.indexOf('>')!=-1 ){
+                alert("내용에 있는 '<', '>' 표시를 제거해주세요.");
+            } else {
+                $.ajax({
+                type:'POST',
+                async:true,
+                url:'/timetable/main/weekly',
+                data:{
+                    content : content
+                },
+                success:function(data){
+                    $('#modal-todo').val('');
+                    toggleTodoModal();
+                    addNewTodo(data);
+                },error:function(err){
+                    alert('추가를 실패했습니다. 다시 시도해주세요.');
+                }
+                });
+            }
+        });
+
+        function addNewTodo(weekly){
+        //console.log(data);
+        var content=weekly.content;
+        var parent_todolist=document.getElementById('course_progress_lists');
+        
+        var new_div=document.createElement('div');
+        new_div.setAttribute('class','wrap_label');
+        var new_input=document.createElement('input');
+        new_input.setAttribute('type','hidden');
+        new_input.setAttribute('value',content);
+        new_input.setAttribute('class','todolist-id')
+        var new_label=document.createElement('label');
+        new_label.setAttribute('class','label');
+        var new_checkbox=document.createElement('input');
+        new_checkbox.setAttribute('type','checkbox');
+        new_checkbox.setAttribute('name','checkbox');
+        new_checkbox.setAttribute('class','class');
+        
+        var new_p=document.createElement('p');
+        new_p.setAttribute('class','p_p');
+        new_p.innerHTML=content;
+        var new_span=document.createElement('span');
+        new_span.setAttribute('class','delete_todo');
+        
+        
+        var new_ck_toggle=1;
+        new_checkbox.addEventListener('click',function(){
+            
+            var check_content=weekly.content;
+            var check_id=weekly._id;
+            var check_value=weekly.finished;
+            
+            if(check_value==true){
+                new_ck_toggle++;
+            }
+            if(new_ck_toggle%2==1){
+                new_p.style.textDecoration='line-through';
+                check_value=true;
+                fetch('/timetable/main/weekly',{
+                    method:'PATCH',
+                    headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({objectID:check_id, finished:true})
+                });
+            }else{
+                new_p.style.textDecoration='none';
+                check_value=false;
+                fetch('/timetable/main/weekly',{
+                    method:'PATCH',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                        },
+                    body:JSON.stringify({objectID:check_id, finished:false})
+                    });
+            }
+            new_ck_toggle++;
+        });
+        new_span.innerHTML='&times;'
+        parent_todolist.append(new_div);
+        new_div.append(new_label);
+        new_label.append(new_checkbox);
+        new_label.append(new_p);
+        new_div.append(new_span);
+        new_span.addEventListener('click',function(){
+            // 바로 삭제 X
+            // 안내 메시지 후 삭제시키기
+            // in here
+            
+            $.ajax({
+            type:"DELETE",
+            async : true,
+            url:'/timetable/main/weekly'+weekly._id,
+            success:function(data){ 
+                parent_todolist.removeChild(new_div);
+            },
+            error: function(err) { // PUT 요청 실패시
+                alert('삭제를 실패했습니다.\n다시 시도해주세요.');
+            }
+            });
+                
+        });
+    }
+    </script>
+
     <script type="text/javascript">
         var timetable = JSON.parse('<%- JSON.stringify(timetable) %>');
         //console.log(timetable);

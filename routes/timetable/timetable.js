@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn} = require('../middlewares');
 const Course = require('../../models/course');
 const CourseSchedule = require('../../models/course_schedule');
+const WeeklyList = require('../../models/weekly_list');
 const { mongo, Mongoose } = require('mongoose');
 const logger = require('../../logger');
 const router = express.Router();
@@ -57,11 +58,20 @@ function getCurrentDate(){
 router.get('/main', isLoggedIn, async (req, res, next) => {
     try {
         const timetable = await Course.find( {user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
+
+        // 1. 오늘 날짜 체크
+        // 2. 월요일 12시인 경우 목록
+            // 2-1. finished가 true 인 경우 : false로 바꾸면 됨~
+            // 2-2. finished가 false 인 경우 : content를 (지난주)로 수정
+        
+
+        const weeklyList = await WeeklyList.find({user_id : res.locals.user._id});
         timeList=[]; // 초기화 시켜주기
         res.render( '../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
-            timetable : timetable
+            timetable : timetable,
+            weeklyList : weeklyList
         });
         
     }
@@ -69,6 +79,62 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
         logger.error('/views/timetable/timetable.js 에서 에러');
         logger.error(err);
         next(err);
+    }
+});
+
+router.patch('/main/weekly', isLoggedIn, async(req, res, next) => { 
+    try {
+        const weeklyList = await WeeklyList.updateOne({
+            user_id : res.locals.user._id,
+            _id : req.body.objectID,
+        }, {
+            $set : {
+                finished : req.body.finished
+            }
+        });
+        res.send("Success");
+    }
+    catch (e) {
+        logger.error('/views/timetable/timetable.js 에서 위클리 투두 체크이벤트에서 에러');
+        logger.error(err);
+    }
+});
+
+router.delete('/main/weekly:id', isLoggedIn, async (req, res, next) => {
+    try {
+        logger.info ('넘어온 삭제할 위클리 id:'+req.params.id);
+        const deleteId = req.params.id;
+
+        const target = await WeeklyList.findOne({user_id: res.locals.user._id, _id:deleteId});
+        logger.info('삭제할 위클리:'+target);
+
+
+        // const target = await WeeklyList.findOne({user_id: res.locals.user._id, _id:deleteId});
+        await WeeklyList.deleteOne({user_id: res.locals.user._id, _id:deleteId}); // 삭제하기
+        return res.send('delete_succeeded');
+    }
+    catch (err) {
+        logger.error('/views/timetable/timetable.js 에서 위클리 삭제 중 에러 발생');
+        logger.error(err);
+    }
+});
+
+
+router.post('/main/weekly', isLoggedIn, async (req, res, next) => {
+    try {
+        const content = req.body.content;
+        logger.info('넘어온 추가할 위클리 id:'+content);
+
+        // mongoDB에 과목 진도 (위클리 TODO) 추가
+        const weekly = await WeeklyList.create({
+            user_id : req.user._id,
+            content : content,
+            finished : false,
+        });
+
+        res.send(weekly);
+    } catch(err) {
+        logger.error(err);
     }
 });
 
@@ -91,6 +157,7 @@ router.get('/edit', isLoggedIn, async (req, res, next) => {
         next(err);
     }
 });
+
 
 
 router.post('/course/time/add', isLoggedIn, async (req, res, next) => {
@@ -188,7 +255,15 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
                 classroom : timeList[i].classroom
             });
             courseIdList.push(courseSchedule._id); // course_id 넣기 (과목 1개의 mongodb id값)
-        }
+
+            // mongoDB에 과목 진도 (위클리 TODO) 추가
+            const weekly = await WeeklyList.create({
+                user_id : req.user._id,
+                content : name,
+                day : timeList[i].day, // 강의 요일
+                finished : false,
+            });
+        };
 
         // mongoDB에 과목 추가
         const course = await Course.create({ 
@@ -198,6 +273,7 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
             schedules : courseIdList, // 과목 시간 리스트
             createdAt : getCurrentDate(), // 과목 추가 날짜
         });
+        
         
 
         // user한테도 courses 칼럼에 과목 넣어주기 (이건 불러올때 populate 하면됨)
