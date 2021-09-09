@@ -32,6 +32,22 @@ function courseDay(day) {
     }
 }
 
+function courseDayShort(day) {
+    switch(day) {
+        case '1':
+            return "(월) ";
+        case '2':
+            return "(화) ";
+        case '3':
+            return "(수) ";
+        case '4':
+            return "(목) ";
+        case '5':
+            return "(금) ";
+        case '6':
+            return "(토) ";
+    }
+}
 function courseType(type) { //과목 타입(online_realtime,online_video,offline)
     switch (type) {
         case 'online_realtime':
@@ -55,23 +71,79 @@ function getCurrentDate(){
     return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
 }
 
+function getCurrentDateWithoutTime(){
+    var date = new Date();
+    // var year = date.getFullYear();
+    // var month = date.getMonth();
+    // var today = date.getDate();
+    var year = 20201;
+    var month = 9;
+    var today = 19;
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    var milliseconds = 0;
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+}
+
+
 router.get('/main', isLoggedIn, async (req, res, next) => {
     try {
         const timetable = await Course.find( {user_id: res.locals.user._id}).populate('schedules').sort({'createdAt':1});
 
         // 1. 오늘 날짜 체크
-        // 2. 월요일 12시인 경우 목록
-            // 2-1. finished가 true 인 경우 : false로 바꾸면 됨~
-            // 2-2. finished가 false 인 경우 : content를 (지난주)로 수정
-        
+        var today = getCurrentDateWithoutTime();
+        logger.info('오늘의 요일:'+today.getDay()+", 오늘:"+today);
 
         const weeklyList = await WeeklyList.find({user_id : res.locals.user._id});
+        for (var i=0; i<weeklyList.length; i++) {
+            // 2. 월요일 12시 지난경우 + 아직 갱신 안한 경우
+            logger.info('비교:'+weeklyList[i].date);
+            if ((weeklyList[i].date < today) && today.getDay() > 0) { // day:0(일요일), day:1(월요일)
+                if (weeklyList[i].finished) { // 2-1. finished가 true 인 경우 
+                    if(weeklyList[i].week_ago == 0) { // 2-1-1. week_ago가 0인 경우 : false로 바꾸면 됨~
+                        await WeeklyList.updateOne({
+                            user_id : res.locals.user._id,
+                            _id : weeklyList[i]._id,
+                        }, {
+                            $set : {
+                                date : today, // 날짜 새로운 주차로 변경
+                                finished : false,
+                                week_ago : 0, // week_ago 다시 초기화
+                            }
+                        });
+                    } else { // 2-1-2. week_ago가 1 이상인 경우 : 지난 것은 삭제하기
+                        await WeeklyList.deleteOne({ user_id : res.locals.user._id, _id : weeklyList[i]._id });
+                    }
+                } else { // 2-2. finished가 false 인 경우
+                    await WeeklyList.updateOne({ // 2-2-1. 기존 할일 week_ago 증가
+                        user_id : res.locals.user._id, _id : weeklyList[i]._id,
+                    }, {
+                        $set : {
+                            date : today, // 날짜 새로운 주차로 변경
+                            finished : false,
+                            week_ago : weeklyList[i].week_ago+1,
+                            content : weeklyList[i].content,
+                        }
+                    });
+                    await WeeklyList.create({ // 2-2-2. 동일한 이름의 새로운 할일 추가
+                        user_id : req.user._id,
+                        content : weeklyList[i].content,
+                        day : weeklyList[i].day, // 강의 요일
+                        date : today,
+                        finished : false,
+                        week_ago : 0,
+                    });
+                }
+            }
+        }
+        const weeklyList2 = await WeeklyList.find({user_id : res.locals.user._id}).sort({'week_ago':-1,'day':1});
         timeList=[]; // 초기화 시켜주기
         res.render( '../views/timetable/timetable_main.ejs', {
             title: '내 시간표',
             user : res.locals.user,
             timetable : timetable,
-            weeklyList : weeklyList
+            weeklyList : weeklyList2
         });
         
     }
@@ -123,13 +195,12 @@ router.delete('/main/weekly:id', isLoggedIn, async (req, res, next) => {
 router.post('/main/weekly', isLoggedIn, async (req, res, next) => {
     try {
         const content = req.body.content;
-        logger.info('넘어온 추가할 위클리 id:'+content);
-
         // mongoDB에 과목 진도 (위클리 TODO) 추가
         const weekly = await WeeklyList.create({
             user_id : req.user._id,
             content : content,
             finished : false,
+            date : getCurrentDateWithoutTime(),
         });
 
         res.send(weekly);
@@ -259,9 +330,11 @@ router.post('/course/add', isLoggedIn, async (req, res, next) => {
             // mongoDB에 과목 진도 (위클리 TODO) 추가
             const weekly = await WeeklyList.create({
                 user_id : req.user._id,
-                content : name,
+                content : courseDayShort(timeList[i].day)+name,
                 day : timeList[i].day, // 강의 요일
+                date : getCurrentDateWithoutTime(),
                 finished : false,
+                week_ago : 0,
             });
         };
 

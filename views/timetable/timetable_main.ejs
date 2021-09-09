@@ -457,14 +457,22 @@
                         <div class="todaylist" id="course_progress_list">
                             <div class="todaylists" id='course_progress_lists'>
                                 <% for(var i=0;i<weeklyList.length; i++) { %>
-                                    <input type="hidden" value="<%=weeklyList[i].content%>" class="week_todolist_id"/>
+                                    <input type="hidden" value="<%=weeklyList[i]._id%>" class="week_todolist_id"/>
                                     <% if(weeklyList[i].finished) {%>
                                         <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',true)" class="checkbox">
-                                            <p style='text-decoration: line-through;' class="p_p"><%= weeklyList[i].content %></p></label>
+                                            <p style='text-decoration: line-through;' class="p_p"> 
+                                                <% if(weeklyList[i].week_ago > 0) {  %>
+                                                    <%= '('+weeklyList[i].week_ago+'주전)'%>
+                                                <% } %>
+                                            <%= weeklyList[i].content %></p></label>
                                             <span class='delete_todo' onclick="onDeleteWeekTodo('<%= weeklyList[i]._id %>','<%= i %>')">&times;</span> </div>
                                     <%} else{ %> 
                                         <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',false)" class="checkbox">
-                                            <p style='text-decoration: none;'class="p_p"><%= weeklyList[i].content %></p></label>
+                                            <p style='text-decoration: none;'class="p_p">
+                                                <% if(weeklyList[i].week_ago > 0) { %>
+                                                    <%= '('+weeklyList[i].week_ago+'주전)'%>
+                                                <% } %>
+                                                <%= weeklyList[i].content %></p></label>
                                             <span class='delete_todo' onclick="onDeleteWeekTodo('<%= weeklyList[i]._id %>','<%= i %>')">&times;</span> </div>
                                         <% } %>
                                 <% } %>
