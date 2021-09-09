@@ -235,8 +235,6 @@
                         <div class="wrap_day" id="wrap_day">
                         <script>
                             function deleteDay(content,index){
-                                console.log('삭제될 애:',content,index);
-                            
                                 var parent_day=document.getElementById('wrap_day')
                                 var delete_day=document.getElementsByClassName('d-day')[index];
 
@@ -904,7 +902,7 @@
         if(new_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
-                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+            alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
             if(doubleSubmitCheck()) return;
             var new_todolist;
@@ -940,7 +938,7 @@
         if(revise_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else if(revise_content.indexOf('<')!=-1 && revise_content.indexOf('>')!=-1 ){
-                        alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
+            alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
             if(doubleSubmitCheck()) return;
             
