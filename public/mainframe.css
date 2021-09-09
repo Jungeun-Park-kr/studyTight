@@ -291,7 +291,8 @@ p {
 .modal-content-day,
 .modal-content-todo,
 .modal-content-folder,
-.modal-content-revise-folder {
+.modal-content-revise-folder
+{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -306,6 +307,7 @@ p {
 }
 
 .modal-content-alert,
+.modal-content-todo-revise,
 .modal-content-delete-folder,
 .modal-content-delete-new-folder {
     position: absolute;
@@ -370,27 +372,37 @@ select>option {
 .todo_name{
     cursor:default;
 }
-.todo_button{
-    position: relative;
-    display: inline-block;
-    width:15px;
+.delete_todo,
+.revise_todo{
+    width:10px;
     cursor:pointer;
     height:auto;
+    display:inline-block;
+}
+#revise_todo_id{
+    display:none;
+}
+/*
+li{
+    list-style: none;
 }
 .dropdown_todo{
-    display:none;
+
     position: absolute;
     width:50px;
-    
+    display:none;
     box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.4);
 }
-.todo_button:hover .dropdown_todo{
-    display:block;
+
+.todo_button:hover ~.dropdown_todo{
+    display:inline-block;
 }
 .dropdown_todo span {
     display:block;
     padding:5px;
-}
+    font-size:11px;
+    text-align: center;
+} */
 
 .checkbox,
 .p_p {
@@ -418,28 +430,14 @@ select>option {
     background-color: darkgray;
 }
 
-.delete_todo {
-    float: right;
-    width: 15px;
-    /* line-height: 2rem;  */
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    top: 10px;
-    border-radius: 0.5rem;
-    opacity: 0;
-}
 
-.delete_todo:hover {
-    float: right;
-    width: 15px;
-    position: relative;
-    top: 10px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    opacity: 1;
-    background-color: lightblue;
+.revise_todo:hover
+{
+    display:block;
+}
+.delete_todo:hover
+{
+    display:block;
 }
 
 .min_color {

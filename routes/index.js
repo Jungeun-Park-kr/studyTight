@@ -42,7 +42,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         });
 
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
-
+        const todo_checked= await Todo.find({user_id: req.user._id}).populate('user_id').find({"todo_finished":true});
         // 디데이 날짜지난 것 삭제
         console.log('getToday()'+getToday());
         //const result = await Dday.find({ user_id: res.locals.user._id, final_date: { $lt: getToday()} }); // 테스트용
@@ -56,6 +56,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
             todolist: todolist,
+            todo_checked: todo_checked,
             timetable: timetable,
             folder: folder,
             d_day: dDay,
@@ -198,6 +199,23 @@ router.patch('/', isLoggedIn, async(req, res, next) => { //update할 데이터�
     } catch (err) {
         logger.error('routes/index.js 오늘 할 일 체크 과정에서 에러');
         next(err);
+    }
+});
+router.patch('/todo_revise', isLoggedIn, async(req,res,next) => {
+    try{
+        const todo=await Todo.updateOne({
+            user_id:req.user._id,
+            _id:req.body.todo_id
+        },{
+            $set: {
+                todo_content: req.body.todo_content
+            }
+        });
+        res.send("오늘 할 일 수정 완료");
+
+    }catch(err){
+        logger.error('routes/index.js 오늘 할 일 내용 수정 과정에서 에러');
+        next(err); 
     }
 });
 router.patch('/folder_revise', isLoggedIn, async(req, res, next) => { //update할 데이터의 구분자: id
