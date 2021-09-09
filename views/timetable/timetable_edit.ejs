@@ -404,7 +404,7 @@
             var close_button_modify = document.querySelector(".close_button_modify"); // 과목 추가 팝업 닫기 버튼
             
             var num = 0; // 버튼 생성용
-            var count = 0; // 버튼 개수 세기용
+            var count = 0; // 버튼 개수 세기용 (시간 추가 최대 5개)
             var modify_id; // 수정하는 과목의 몽고DB _id 저장용
 
             function toggleModifyModal() {
@@ -524,7 +524,7 @@
 
                                         // 성공후 입력칸 초기화
                                         $('input[name="course_type"][value="offline"]').attr('checked', true);
-                                        $('#course_day').val('default').prop('selected', true);
+                                        $('#course_day').val('default').attr('selected', true);
                                         $('#course_start_time').val('09:00');
                                         $('#course_end_time').val('09:15');
                                         $('#course_location').val(''); 
@@ -588,7 +588,7 @@
                             $('#course_professor').val('');
                             // 모달에 있던 시간 리스트 삭제
                             $('.course_times').children().remove();
-
+                            count = 0;
                             toggleModal();
                             getCourse(data); // 동적으로 추가
                             

@@ -151,8 +151,8 @@
 }
 
 .caution {
-    width: 170px;
-    margin: 0px;
+    width: 200px;
+    margin: 5px 5px;
     padding: 0px;
     font-size: 11px;
     line-height: 140%;
@@ -221,4 +221,63 @@
     font-weight: bolder;
     background-color: #8e8e8e;
     opacity: 0.9;
+}
+
+
+
+
+.new_todo {
+    padding: 10px;
+    font-size: small;
+}
+
+.todaylists>label>input,
+p {
+    display: inline-block;
+    font-size: 11px;
+}
+
+
+/* .todaylists > label {
+    display:block;
+} */
+
+.btnplusTodo {
+    border-radius: 10px;
+    background-color: #6ED4D8;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    margin-bottom: 5px;
+    height: 30px;
+    border: 10px;
+    cursor: pointer;
+}
+
+.btnplusTodo:hover {
+    background-color: rgb(77, 189, 194);
+    font-weight: bolder;
+}
+.delete_todo {
+    float: right;
+    width: 15px;
+    /* line-height: 2rem;  */
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    top: 10px;
+    border-radius: 0.5rem;
+    opacity: 0;
+}
+
+.delete_todo:hover {
+    float: right;
+    width: 15px;
+    position: relative;
+    top: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    opacity: 1;
+    background-color: lightblue;
 }
