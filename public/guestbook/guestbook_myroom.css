@@ -85,14 +85,11 @@ body {
     margin: 0 0 3px 3px;
     position: relative;
     top: -90%;
-    right: 45px;
+    right: 42px;
+    top: 2px;
     float: right;
     cursor: pointer;
-    opacity: 0;
-}
-
-.information-menu .left-menus-book>li>a>img:hover {
-    opacity: 100;
+    opacity: 80;
 }
 
 .edit-profile>#edit-button-id {
