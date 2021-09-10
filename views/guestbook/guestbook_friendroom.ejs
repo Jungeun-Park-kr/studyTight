@@ -614,7 +614,7 @@
                             </div>
                             <div class="user-small-talking">
                                 <div class="allign_lock">
-                                    <div class="user-name">
+                                    <div class="user-name" onclick="location.href='/guestbook/<%=top_comment[i].commenter_email.email_id %>'">
                                         <%=top_comment[i].commenter_email.name %>
                                     </div>
                                     <% if(top_comment[i].comment_secret==true) { %>
@@ -647,7 +647,7 @@
                                         <img src=<%=bottom_comment[k].commenter_email.profile_image %>></img>
                                     </div>
                                     <div class="user-small-talking">
-                                        <div class="user-name">
+                                        <div class="user-name" onclick="location.href='/guestbook/<%=bottom_comment[i].commenter_email.email_id %>'">
                                             <%=bottom_comment[k].commenter_email.name %>
                                         </div>
                                         <div class="user-talking-list">

@@ -33,7 +33,6 @@ body {
 #MyUserimg {
     width: 100px;
     height: 100px;
-    cursor: pointer;
 }
 
 .page-bottom {
@@ -78,6 +77,22 @@ body {
     display: block;
     color: black;
     font-size: 12px;
+}
+
+.information-menu .left-menus-book>li>a>img {
+    width: 15px;
+    height: auto;
+    margin: 0 0 3px 3px;
+    position: relative;
+    top: -90%;
+    right: 45px;
+    float: right;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.information-menu .left-menus-book>li>a>img:hover {
+    opacity: 100;
 }
 
 .edit-profile>#edit-button-id {
@@ -423,6 +438,7 @@ select::-ms-expand {
     margin-left: 20px;
     font-size: 13px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .user-small-talking .user-talking-list {

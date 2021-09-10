@@ -233,15 +233,20 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
         const MyUser = await User.findOne({ _id: res.locals.user._id })
         const pprofile = await Profile.findOne({ user_id: res.locals.user._id }).populate('profiles')
             // mongoDB에 프로파일 추가
-        const addfriend = await Friend.create({
-            user_id: pprofile.user_id,
-            received: true,
-            send: true,
-            Friend_ID: select_friend,
-            Friend_Name: OneUser.name,
-            friend_link: OneUser.email_id,
-            friend_group: "basic"
-        })
+        const exFriend = await Friend.findOne({ Friend_ID: select_friend });
+        if (exFriend) {
+            //중복이면 생성하지 않음
+        } else {
+            const addfriend = await Friend.create({
+                user_id: pprofile.user_id,
+                received: true,
+                send: true,
+                Friend_ID: select_friend,
+                Friend_Name: OneUser.name,
+                friend_link: OneUser.email_id,
+                friend_group: "basic"
+            })
+        }
 
         //상대 친구에게도 등록
 
@@ -468,7 +473,7 @@ router.post('/:id/addbottom', isLoggedIn, async(req, res, next) => {
         });
         res.redirect("/guestbook/" + id_obj);
 
-    } catch (err) {logger.error(err);}
+    } catch (err) { logger.error(err); }
 
 });
 
