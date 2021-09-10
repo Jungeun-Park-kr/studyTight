@@ -101,7 +101,8 @@
         <div class="left-menus-book" id=leftmenu>
 
             <li class="profile">
-                <img class="trigger8" id="MyUserimg" src=<%=user.profile_image %>>
+                <img class="trigger8_past" id="MyUserimg" src=<%=user.profile_image %>>
+                <a> <img class="trigger8" id="img" src="/public/media/edit.png"></a>
             </li>
             <li class="myname">
                 <img id="school-card" src="/public/media/id-card.png">
@@ -654,11 +655,11 @@
 
                     <div id='talking' class=<%='talking' +i%>>
                         <div class="mini-profile">
-                            <img src=<%=top_comment[i].commenter_email.profile_image %> onclick=""></img>
+                            <img src=<%=top_comment[i].commenter_email.profile_image %> ></img>
                         </div>
                         <div class="user-small-talking">
                             <div class="allign_lock">
-                                <div class="user-name">
+                                <div class="user-name" onclick="location.href='/guestbook/<%=top_comment[i].commenter_email.email_id %>'">
                                     <%=top_comment[i].commenter_email.name %>
                                 </div>
                                 <% if(top_comment[i].comment_secret==true) { %>
@@ -691,7 +692,7 @@
                                     <img src=<%=bottom_comment[k].commenter_email.profile_image %> ></img>
                                 </div>
                                 <div class="user-small-talking">
-                                    <div class="user-name">
+                                    <div class="user-name" onclick="location.href='/guestbook/<%=bottom_comment[i].commenter_email.email_id %>'">
                                         <%=bottom_comment[k].commenter_email.name %>
                                     </div>
                                     <div class="user-talking-list">
