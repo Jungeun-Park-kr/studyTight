@@ -431,14 +431,14 @@ li{
 }
 
 
-.revise_todo:hover
+/* .revise_todo:hover
 {
     display:block;
 }
 .delete_todo:hover
 {
     display:block;
-}
+} */
 
 .min_color {
     width: 3px;
@@ -569,6 +569,7 @@ li{
 .folder_img {
     width: 100%;
     height: auto;
+    cursor: pointer;
 }
 
 .main_folder_name {
@@ -682,8 +683,8 @@ li{
 
 #modal-todo {
     vertical-align: middle;
-    width: 80%;
-    height: 20px;
+    width: 250px;
+    height: 55px;
     position: relative;
     top: 25px;
     font-size: 15px;

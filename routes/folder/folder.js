@@ -29,6 +29,7 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
         const postIt = await PostIt.find({ folder_id: id_obj }).sort({ 'postIt_star': -1 });
 
         const todolist = await Todo.find({ user_id: req.user._id }).populate('user_id');
+        const todo_checked= await Todo.find({user_id: req.user._id}).populate('user_id').find({"todo_finished":true});
         res.render('../views/folder/folder.ejs', {
             title : folder_title[0],
             folder_img: folder_img[0],
@@ -36,7 +37,8 @@ router.get('/:id', isLoggedIn, async(req, res, next) => {
             folder: folder,
             folder_id: id_obj,
             postIt: postIt,
-            todolist: todolist
+            todolist: todolist,
+            todo_checked: todo_checked
 
         });
     } catch (err) {

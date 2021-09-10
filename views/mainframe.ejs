@@ -20,8 +20,8 @@
     <link rel="stylesheet" type="text/css" href="/public/header.css"/>
     <link rel="stylesheet" type="text/css" href="/public/component.css"/>
 
-    <link rel=" shortcut icon" href="/public/media/favicon.ico">
-    <link rel="icon" href="/public/media/favicon.ico">
+    <!-- <link rel=" shortcut icon" href="/public/media/favicon.ico">
+    <link rel="icon" href="/public/media/favicon.ico"> -->
 </head>
 
 <body>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">
+                                <!-- <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'"> -->
                                 <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
                             </div>
                             <div class="logout">
@@ -333,14 +333,14 @@
                                 <div class="folder">
                                     
                                 <% if(folder[i].folder_fixed) {%>
-                                    <img src=<%= folder[i].folder_color %> class='folder_img'/>
+                                    <img src=<%= folder[i].folder_color %> class='folder_img' onclick="location.href='/folder/<%=folder[i]._id %>'"/>
                                     <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
                                     <img class="fixed_folder" src="/media/fixed_full.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
                                         <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
                                 <%} else{ %>
-                                    <img src=<%= folder[i].folder_color %> class='folder_img'/>
-                                    <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'"><%= folder[i].folder_name %></p>
+                                    <img src=<%= folder[i].folder_color %> class='folder_img' onclick="location.href='/folder/<%=folder[i]._id %>'"/>
+                                    <p class='main_folder_name' onclick="location.href='/folder/<%=folder[i]._id %>'" ><%= folder[i].folder_name %></p>
                                     <img class="fixed_folder" src="/media/fixed_empty.png" onclick="fixedFolderClicked('<%= i %>','<%= folder[i]._id%>', '<%= folder[i].folder_fixed%>')">
                                     <img src="/public/media/edit.png" id="revise_folder" class="revise_folder" onclick="reviseFolderClicked('<%= folder[i]._id %>','<%= i %>')">
                                         <img src="/public/media/delete.png" id="delete_folder" class="delete_folder" onclick="deleteFolderClicked('<%= folder[i]._id%>','<%= i %>');"> 
@@ -372,7 +372,7 @@
                                             
                                                 </select>
                                             </div>
-                                            <p>※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
+                                            <p style="position: relative; right:10px">※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
                                         <div>
                                             <input type="button" class="modal-folder-revise" value="확인"></input>
                                         </div>
@@ -387,8 +387,7 @@
                                     <div id="delete_folder_name" class="title"></div>
                                         <div id="delete_folder_index"></div>
                                         <div id='delete_folder_id'></div>
-                                            <p>※ 폴더 내 포스트잇 정보도 삭제됩니다.</p>
-                                            <p>그래도 삭제하시겠습니까?</p>
+                                            <p>※ 폴더 내 포스트잇 정보도 삭제됩니다. 그래도 삭제하시겠습니까?</p>
                                         <div class="buttons_wrap">
                                             <div data-dismiss="modal" class="btn cancelBtn cancel_delete_folder">취소</div>
                                             <div class="deleteBtn delete_delete_folder">확인</div>
@@ -601,10 +600,8 @@
                     <!-- 여기는 aisde(우측 로그인, 오늘할일) -->
                     <div class="aside_wrap">
                         <p class="todo_name">오늘 할 일</p>
-                        <script>
-                            
-                        </script>
-                        <p class="todo_rate">달성률: <%= todo_checked.length %> / <%= todolist.length %></p>
+                        
+                        <p class="todo_rate">달성률:<%= Math.round(todo_checked.length/todolist.length*100)%>%</p>
                         <div class="todaylist" id="todaylist">
                             
                             
@@ -724,7 +721,7 @@
                                 document.getElementById('modal-todo-revise-content').setAttribute('value',revise_name);
 
                                 //수정하기 모달 띄우기
-                                toggleReviseTodoModal();
+                                toggleReviseFolderModal();
                             }
                         
                         </script>
@@ -745,7 +742,7 @@
         <h1 class="title">오늘 할 일 추가히기</h1>
         
             <div>
-                <input type="text" id="modal-todo" name="todo_content" maxlength="30" placeholder="할 일을 작성해보세요. (최대 30자)">
+                <textarea id="modal-todo" name="todo_content" maxlength="40" cols="16" placeholder="할 일을 작성해보세요. (최대 40자)"></textarea>
                 <input type="hidden">
             </div>
             <div>
@@ -762,9 +759,10 @@
         
             <div>
                 <div id="revise_todo_id" todo_id="id자리"></div>
-                <input type="text" id="modal-todo-revise-content" name="todo_content" maxlength="30" placeholder="할 일을 작성해보세요. (최대 30자)">
+                <textarea id="modal-todo-revise-content" name="todo_content" maxlength="40" placeholder="할 일을 작성해보세요. (최대 40자)">
                 <input type="hidden">
             </div>
+            <p>※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
             <div>
                 <input type="button" class="modal-todo-revise" value="확인"></input>
             </div>
