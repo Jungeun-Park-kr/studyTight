@@ -73,7 +73,7 @@
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <!-- <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'"> -->
+                                <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">
                                 <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
                             </div>
                             <div class="logout">
@@ -601,7 +601,14 @@
                     <div class="aside_wrap">
                         <p class="todo_name">오늘 할 일</p>
                         
-                        <p class="todo_rate">달성률:<%= Math.round(todo_checked.length/todolist.length*100)%>%</p>
+                    
+                        <p class="todo_rate">달성률:
+                            <% if(todolist.length==0){%>
+                            <%- 0  %>
+                            <% } else{ %>
+                                <%= Math.round(todo_checked.length/todolist.length*100) %>
+                            <% } %> 
+                            %</p>
                         <div class="todaylist" id="todaylist">
                             
                             
@@ -614,27 +621,20 @@
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',true)" class="checkbox">
                                         <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label>
-                                        <span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">삭제</span>
-                                        <span class='revise_todo' onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">수정</span></div>
+                                        <img class='delete_todo todo_button' src="/public/media/delete.png" onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">
+                                        <img class='revise_todo todo_button' src="/public/media/edit.png" onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">
+                                        </div>
                                 <%} else{ %> 
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
                                         <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label>
                                         
                                         
-                                        <img class='delete_todo todo_button' src="/public/media/delete.png" onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')"></span>
-                                        <img class='revise_todo todo_button' src="/public/media/edit.png" onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')"></span>
+                                        <img class='delete_todo todo_button' src="/public/media/delete.png" onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">
+                                        <img class='revise_todo todo_button' src="/public/media/edit.png" onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">
                                         
                                     
                                     </div>
-                                    <!-- <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
-                                        <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label>
-                                        <img class="todo_button" src="/public/media/three_button.png" />
-                                        <ul>
-                                        <li><span class='delete_todo' onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">삭제</span></li>
-                                        <li><span class='revise_todo' onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">수정</span></li>
-                                        </ul>
                                     
-                                    </div> -->
                                     <% } %>
                                 <% } %>
                                 <!-- </form> -->
@@ -642,6 +642,7 @@
                             </div>
                             <input type="submit" class="btnplusTodo" value="+   할 일 추가하기"></input>
                         </div>
+
                         
                         <script>
 
@@ -713,15 +714,17 @@
                             }
                         
                             function onReviseTodo(todo_id, revise_index){
+                                //alert("수정하기 확인용");
                                 var revise_todo=document.getElementsByClassName('wrap_label')[revise_index];
                                 var revise_name=document.getElementsByClassName('p_p')[revise_index].innerHTML;
-                                console.log(revise_name);
-                                //수정하기 modal에 이름이랑 아이디 넣기
-                                document.getElementById('revise_todo_id').setAttribute('todo_id',todo_id);
-                                document.getElementById('modal-todo-revise-content').setAttribute('value',revise_name);
-
+                                //console.log(revise_name);
+                                // //수정하기 modal에 이름이랑 아이디 넣기'
+                                var hidden_todo=document.getElementById('hidden_todo_id');
+                                hidden_todo.setAttribute('todo_id',todo_id);
+                                //document.getElementById('modal-todo-revise-content').setAttribute('value',revise_name);
+                                $('textarea[name=revise_todo_content]').text(revise_name);
                                 //수정하기 모달 띄우기
-                                toggleReviseFolderModal();
+                                toggleReviseTodoModal();
                             }
                         
                         </script>
@@ -742,7 +745,7 @@
         <h1 class="title">오늘 할 일 추가히기</h1>
         
             <div>
-                <textarea id="modal-todo" name="todo_content" maxlength="40" cols="16" placeholder="할 일을 작성해보세요. (최대 40자)"></textarea>
+                <textarea id="modal-todo-content" name="todo_content" maxlength="40" cols="16" placeholder="할 일을 작성해보세요. (최대 40자)"></textarea>
                 <input type="hidden">
             </div>
             <div>
@@ -752,24 +755,24 @@
         </div>
     </div>
 
+        <!-- todo-list 수정하기 모달 팝업 -->
     <div id="modal" class="modal modal_todo_revise">
         <div class="modal-content-todo-revise">
         <span class="close_button close_todo_revise_button">&times;</span>
-        <h1 class="title">오늘 할 일 수정히기</h1>
+        <h1 class="title">오늘 할 일 수정하기</h1>
         
             <div>
-                <div id="revise_todo_id" todo_id="id자리"></div>
-                <textarea id="modal-todo-revise-content" name="todo_content" maxlength="40" placeholder="할 일을 작성해보세요. (최대 40자)">
-                <input type="hidden">
+                <textarea id="modal-todo-revise-content" name="revise_todo_content" maxlength="40" cols="16" placeholder="할 일을 작성해보세요. (최대 40자)"></textarea>
+                <div id="hidden_todo_id" todo_id="todo id">
             </div>
-            <p>※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
+            <p style="position: relative; top:25px; right:10px;">※ 새로고침을 하여 수정된 폴더 정보를 확인할 수 있습니다.</p>
             <div>
                 <input type="button" class="modal-todo-revise" value="확인"></input>
             </div>
         
         </div>
     </div>
-
+</div>
         <!-- d-day 추가하기 모달 팝업 -->
     <div id="modal" class="modal modal_day">
         <div class="modal-content-day">
@@ -826,15 +829,18 @@
     </div>
 
     <script type='text/javascript'>
+
+    
     var doubleSubmitFlag=false;
-    function doubleSubmitCheck(){
-        if(doubleSubmitFlag)
-            return doubleSubmitFlag;
-        else{
-            doubleSubmitFlag=true;
-            return false;
-        }
-    }
+    //function doubleSubmitCheck(){
+    //    if(doubleSubmitFlag)
+    //        return doubleSubmitFlag;
+    //    else{
+    //        doubleSubmitFlag=true;
+    //        return false;
+    //    }
+    //}
+
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
     var modal_folder=document.querySelector('.modal_folder');
@@ -873,19 +879,23 @@
     function windowOnClick(event) {
         if (event.target === modal_day) {
             toggleDayModal();
-        }else if(event.target===modal_todo){
+        }else if(event.target === modal_todo){
             toggleTodoModal();
         }
         else if(event.target===modal_folder){
             toggleFolderModal();
         }else if(event.target===modal_delete_alert){
             toggleAlertModal();
-        }else if(event.target===modal_todo_revise){
-            toggleReviseFolderModal();
+        }
+        else if(event.target===modal_todo_revise){
+            toggleReviseTodoModal();
         }
     }
     trigger_day.addEventListener("click", toggleDayModal); // 디데이 추가하기 버튼
     trigger_todo.addEventListener("click",toggleTodoModal);
+    // trigger_todo.addEventListener("click", function(){
+    //     alert("클릭이 왜 안되니");
+    // })
     trigger_folder.addEventListener('click',toggleFolderModal);
     closeDayButton.addEventListener("click", toggleDayModal);
     closeTodoButton.addEventListener('click',toggleTodoModal);
@@ -895,14 +905,14 @@
     alertButton.addEventListener('click',toggleAlertModal);
 
     $('.modal-todo-plus').click(function(event){
-        var new_content=$('#modal-todo').val();
+        var new_content=$('#modal-todo-content').val();
 
         if(new_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            if(doubleSubmitCheck()) return;
+            //if(doubleSubmitCheck()) return;
             var new_todolist;
             $.ajax({
                 type:'POST',
@@ -932,13 +942,13 @@
         // todo 수정하기
     storeTodoReviseButton.addEventListener('click',function(){
         var revise_content=$('#modal-todo-revise-content').val();
-        var revise_id=document.getElementById('revise_todo_id').getAttribute('todo_id');
+        var revise_id=document.getElementById('hidden_todo_id').getAttribute('todo_id');
         if(revise_content.trim()===''){ //내용을 입력하지 않은 경우
             alert("내용을 입력해주세요.");}
         else if(revise_content.indexOf('<')!=-1 && revise_content.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            if(doubleSubmitCheck()) return;
+            //if(doubleSubmitCheck()) return;
             
             fetch('/todo_revise',{
                     method:'PATCH',
@@ -946,12 +956,12 @@
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({user_id:'<%= user.name %>',todo_id:revise_id, todo_content:revise_content})
+                body:JSON.stringify({user_id:'s',todo_id:revise_id, todo_content:revise_content})
                 //.then(res => res.json( ))  
                 });
                 
         }
-    })
+    });
     
     function addNewTodo(todolist, data){
         //console.log(data);
@@ -975,8 +985,12 @@
         var new_p=document.createElement('p');
         new_p.setAttribute('class','p_p');
         new_p.innerHTML=content;
-        var new_span=document.createElement('span');
-        new_span.setAttribute('class','delete_todo');
+        var delete_img=document.createElement('img');
+        delete_img.setAttribute('src','/public/media/delete.png');
+        delete_img.setAttribute('class','delete_todo');
+        var revise_img=document.createElement('img');
+        revise_img.setAttribute('src','/public/media/edit.png');
+        revise_img.setAttribute('class','revise_todo');
         
         
         var new_ck_toggle=1;
@@ -1018,15 +1032,16 @@
             new_ck_toggle++;
         });
 
-        new_span.innerHTML='&times;'
+        
 
         parent_todolist.append(new_div);
         new_div.append(new_label);
         new_label.append(new_checkbox);
         new_label.append(new_p);
-        new_div.append(new_span);
+        new_div.append(delete_img);
+        new_div.append(revise_img);
 
-        new_span.addEventListener('click',function(){
+        delete_img.addEventListener('click',function(){
             
             fetch('/',{
                 method:'DELETE',
@@ -1042,6 +1057,14 @@
                 toggleAlertModal();
                 parent_todolist.removeChild(new_div);
         });
+
+        revise_img.addEventListener('click',function(){
+            var hidden_todo=document.getElementById('hidden_todo_id');
+            hidden_todo.setAttribute('todo_id',data._id);
+            
+            $('textarea[name=revise_todo_content]').text(content);
+            toggleReviseTodoModal();
+        })
     }
 
     //폴더 추가하기
@@ -1057,7 +1080,7 @@
         }else if(new_folder_name.indexOf('<')!=-1 && new_folder_name.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            if(doubleSubmitCheck()) return;
+            //if(doubleSubmitCheck()) return;
             $.ajax({
                 type:'POST',
                 async:true,

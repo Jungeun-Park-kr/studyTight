@@ -51,7 +51,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         //$gt, $gte, $lt, $lte
         const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
 
-
+    
         //남은 애들은 register_date를 하나 추가하기
         res.render('../views/mainframe.ejs', {
             title: 'StudyTight 메인화면',
