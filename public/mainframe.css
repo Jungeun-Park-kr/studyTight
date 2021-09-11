@@ -222,7 +222,8 @@ p {
 .modal-todo-plus,
 .modal-folder-plus,
 .modal-folder-revise,
-.modal-alert-button {
+.modal-alert-button,
+.modal-todo-revise {
     /* 저장 버튼 */
     width: 50px;
     height: 45px;
@@ -290,6 +291,7 @@ p {
 
 .modal-content-day,
 .modal-content-todo,
+.modal-content-todo-revise,
 .modal-content-folder,
 .modal-content-revise-folder
 {
@@ -307,7 +309,6 @@ p {
 }
 
 .modal-content-alert,
-.modal-content-todo-revise,
 .modal-content-delete-folder,
 .modal-content-delete-new-folder {
     position: absolute;
@@ -379,7 +380,7 @@ select>option {
     height:auto;
     display:inline-block;
 }
-#revise_todo_id{
+#hidden_todo_id{
     display:none;
 }
 /*
@@ -681,10 +682,13 @@ li{
     opacity: 1;
 }
 
-#modal-todo {
+#modal-todo-content,
+#modal-todo-revise-content {
     vertical-align: middle;
     width: 250px;
+    max-width: 250px;
     height: 55px;
+    max-height: 55px;
     position: relative;
     top: 25px;
     font-size: 15px;
