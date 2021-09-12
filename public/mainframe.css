@@ -239,27 +239,6 @@ p {
     cursor: pointer;
 }
 
-
-/* .plus-part{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-
-/* .modal_day, .modal_todo, .modal_folder, .modal_revise_folder, .modal_delete_folder { 
-    position: fixed; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    opacity: 0;
-    visibility: hidden; 
-    transform: scale(1.1); 
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; 
-}  */
-
 .modal {
     position: fixed;
     left: 0;
@@ -378,32 +357,19 @@ select>option {
     width:10px;
     cursor:pointer;
     height:auto;
-    display:inline-block;
+    margin-left: 1px;
+    
 }
 #hidden_todo_id{
     display:none;
 }
-/*
-li{
-    list-style: none;
-}
+
 .dropdown_todo{
 
-    position: absolute;
-    width:50px;
-    display:none;
-    box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.4);
+    
+    display:inline-flex;
+    /* box-shadow: 0px 10px 10px 0 rgba(0, 0, 0, 0.4); */
 }
-
-.todo_button:hover ~.dropdown_todo{
-    display:inline-block;
-}
-.dropdown_todo span {
-    display:block;
-    padding:5px;
-    font-size:11px;
-    text-align: center;
-} */
 
 .checkbox,
 .p_p {
@@ -413,7 +379,7 @@ li{
     font-weight: bolder;
 }
 .p_p {
-    max-width:120px;
+    max-width:113px;
 }
 /* 닫기 버튼 */
 

@@ -77,7 +77,7 @@
                             </div>
                             <div class="profile">
                                 <!-- 이미지 클릭시 프로필 관리 화면으로 가는것도 좋을듯 -->
-                                <!-- <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'"> -->
+                                <img id="activeUserimg" src=<%= user.profile_image %>  onclick="location.href='#프로필수정화면'">
                                 <div class="username" id="activeUsername"><%= user.name +'님'%></div> 
                             </div>
                             <div class="logout">
@@ -698,6 +698,17 @@
             </div>
     
     <script>
+
+    var doubleSubmitFlag=false;
+        function doubleSubmitCheck(){
+        if(doubleSubmitFlag)
+            return doubleSubmitFlag;
+        else{
+            doubleSubmitFlag=true;
+            return false;
+        }
+        }
+
         $(document).ready(function(){
             var fileTarget = $('.filebox .upload-hidden');
         fileTarget.on('change', function(){
@@ -870,6 +881,7 @@
             }else if(title.indexOf("<") != -1 || content.indexOf("<")!=-1 || title.indexOf(">")!=-1 || content.indexOf(">")!=-1){
                 alert("제목이나 내용에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 var new_post;
                 $.ajax({
                     type:'POST',
@@ -928,6 +940,7 @@
             }else if(validPage(link)==false){
                 alert("올바른 링크를 입력하세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 var new_post;
                 
                 $.ajax({
@@ -975,6 +988,7 @@
             }else if(file.trim()==''){
                 alert("파일을 선택해주세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 var new_post;
                 
                 $.ajax({
@@ -1018,7 +1032,7 @@
                 //console.log(content.split('https://'));
                 // const loca=content.split('https://');
                 // console.log(loca[0], loca[1]);
-               
+            
                 //try catch문으로 일단 잡아보기!
             }else if(type=='content'){
                 ; //modal로 띄우기 모달 안에는 제목, 내용, 취소 버튼만 있으면 된다.
@@ -1050,6 +1064,7 @@
             }else if(new_name.indexOf("<") != -1 || new_link.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_link.indexOf(">")!=-1){
                 alert("제목이나 링크에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
                     headers:{
@@ -1080,6 +1095,7 @@
             }else if(new_name.indexOf("<") != -1 || new_content.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_content.indexOf(">")!=-1){
                 alert("제목이나 내용에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
                     headers:{
@@ -1110,6 +1126,7 @@
             }else if(new_name.indexOf("<") != -1 || new_content.indexOf("<")!=-1 || new_name.indexOf(">")!=-1 || new_content.indexOf(">")!=-1){
                 alert("제목이나 파일에 있는 '<', '>' 표시를 제거해주세요.");
             }else{
+                if(doubleSubmitCheck()) return;
                 fetch(''+folder_id+'/revise',{
                     method:'PATCH',
                     headers:{
@@ -1399,6 +1416,7 @@
                     else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
                         alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
                     }else{
+                        if(doubleSubmitCheck()) return;
                         var new_todolist;
                         $.ajax({
                             type:'POST',
@@ -1431,7 +1449,7 @@
         else if(revise_content.indexOf('<')!=-1 && revise_content.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            //if(doubleSubmitCheck()) return;
+            if(doubleSubmitCheck()) return;
             
             fetch('/todo_revise',{
                     method:'PATCH',
