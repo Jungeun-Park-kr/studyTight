@@ -98,7 +98,6 @@ router.get('/main', isLoggedIn, async (req, res, next) => {
         const weeklyList = await WeeklyList.find({user_id : res.locals.user._id});
         for (var i=0; i<weeklyList.length; i++) {
             // 2. 월요일 12시 지난경우 + 아직 갱신 안한 경우
-            logger.info('비교:'+weeklyList[i].date);
             if ((weeklyList[i].date < today) && today.getDay() > 0) { // day:0(일요일), day:1(월요일)
                 if (weeklyList[i].finished) { // 2-1. finished가 true 인 경우 
                     if(weeklyList[i].week_ago == 0) { // 2-1-1. week_ago가 0인 경우 : false로 바꾸면 됨~

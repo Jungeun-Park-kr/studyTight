@@ -44,7 +44,7 @@ router.get('/', isLoggedIn, async(req, res) => { // app.get('주소', 라우터)
         const todolist = await Todo.find({user_id: req.user._id}).populate('user_id');
         const todo_checked= await Todo.find({user_id: req.user._id}).populate('user_id').find({"todo_finished":true});
         // 디데이 날짜지난 것 삭제
-        console.log('getToday()'+getToday());
+        // console.log('getToday()'+getToday());
         //const result = await Dday.find({ user_id: res.locals.user._id, final_date: { $lt: getToday()} }); // 테스트용
         //console.log(result);
         await Dday.deleteMany({ user_id: res.locals.user._id, final_date: { $lt: getToday()} });
@@ -129,7 +129,7 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
         const folder = await Folder.find({ user_id: res.locals.user._id }).populate('user_id');
         const dDay = await Dday.find({ user_id: res.locals.user._id }).sort({ 'final_date': 1 });
         const folder_id=req.query.folder_id;
-        console.log("get에서 받은 "+folder_id);
+        // console.log("get에서 받은 "+folder_id);
         res.send(folder_id);
 
         res.render('../views/mainframe.ejs', {
@@ -148,7 +148,7 @@ router.get('/folder_add', isLoggedIn, async(req, res, next) => {
 });
 router.post('/todo', isLoggedIn, async(req, res, next) => {
     var content = req.body.todo_content;
-    console.log('투두 추가'+content);
+    // console.log('투두 추가'+content);
     //console.log(JSON.stringify(content)); //추가된 todo값
 
     try {
