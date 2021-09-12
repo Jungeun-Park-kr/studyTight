@@ -621,6 +621,7 @@
                                 <% if(todolist[i].todo_finished) {%>
                                     <div class='wrap_label'><label class='label'><input type="checkbox" checked name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',true)" class="checkbox">
                                         <p style='text-decoration: line-through;' class="p_p"><%= todolist[i].todo_content %></p></label>
+                                        
                                         <img class='delete_todo todo_button' src="/public/media/delete.png" onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">
                                         <img class='revise_todo todo_button' src="/public/media/edit.png" onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">
                                         </div>
@@ -628,11 +629,9 @@
                                     <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= todolist[i]._id %>','<%= i %>',false)" class="checkbox">
                                         <p style='text-decoration: none;'class="p_p"><%= todolist[i].todo_content %></p></label>
                                         
-                                        
                                         <img class='delete_todo todo_button' src="/public/media/delete.png" onclick="onDeleteTodo('<%= todolist[i]._id %>','<%= i %>')">
                                         <img class='revise_todo todo_button' src="/public/media/edit.png" onclick="onReviseTodo('<%= todolist[i]._id %>','<%= i %>')">
-                                        
-                                    
+                            
                                     </div>
                                     
                                     <% } %>
@@ -645,7 +644,12 @@
 
                         
                         <script>
-
+                            // $(document).ready(function(){
+                            //     $('.wrap_todo').mouseover(function(){
+                            //         var indexNum=$(this).index();
+                            //         $('.dropdown_todo').eq(indexNum).slideDown(100)
+                            //     });
+                            // })
                             
                             var checked_toggle=1;
                             //모달에서 추가하기를 눌렀을 때 값이 다시 업데이트가 되도록 mongodb에서 값 가져오기..
@@ -831,15 +835,15 @@
     <script type='text/javascript'>
 
     
-    var doubleSubmitFlag=false;
-    //function doubleSubmitCheck(){
-    //    if(doubleSubmitFlag)
-    //        return doubleSubmitFlag;
-    //    else{
-    //        doubleSubmitFlag=true;
-    //        return false;
-    //    }
-    //}
+        var doubleSubmitFlag=false;
+        function doubleSubmitCheck(){
+        if(doubleSubmitFlag)
+            return doubleSubmitFlag;
+        else{
+            doubleSubmitFlag=true;
+            return false;
+        }
+        }
 
     var modal_todo=document.querySelector(".modal_todo");
     var modal_day = document.querySelector(".modal_day"); // 팝업 될 레이어 class명
@@ -912,7 +916,7 @@
         else if(new_content.indexOf('<')!=-1 && new_content.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            //if(doubleSubmitCheck()) return;
+            if(doubleSubmitCheck()) return;
             var new_todolist;
             $.ajax({
                 type:'POST',
@@ -948,7 +952,7 @@
         else if(revise_content.indexOf('<')!=-1 && revise_content.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            //if(doubleSubmitCheck()) return;
+            if(doubleSubmitCheck()) return;
             
             fetch('/todo_revise',{
                     method:'PATCH',
@@ -1080,7 +1084,7 @@
         }else if(new_folder_name.indexOf('<')!=-1 && new_folder_name.indexOf('>')!=-1 ){
             alert("내용에 있는 '<', '>' 표시를 제거해주세요.")
         }else{
-            //if(doubleSubmitCheck()) return;
+            if(doubleSubmitCheck()) return;
             $.ajax({
                 type:'POST',
                 async:true,
