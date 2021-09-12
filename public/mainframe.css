@@ -349,7 +349,8 @@ select>option {
     height: 5px;
 }
 
-.todo_name{
+.todo_name,
+.todo_rate{
     cursor:default;
 }
 .delete_todo,
@@ -359,6 +360,10 @@ select>option {
     height:auto;
     margin-left: 1px;
     
+}
+.todo_rate{
+    position: relative;
+    float:right;
 }
 #hidden_todo_id{
     display:none;
