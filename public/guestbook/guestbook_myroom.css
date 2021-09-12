@@ -79,6 +79,19 @@ body {
     font-size: 12px;
 }
 
+.information-menu .left-menus-book>li:hover {
+    /* border-bottom:1px solid #252626; */
+    width: 150px;
+    position: relative;
+    list-style-type: none;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    color: black;
+    font-size: 12px;
+}
+
 .information-menu .left-menus-book>li>a>img {
     width: 15px;
     height: auto;
@@ -89,7 +102,11 @@ body {
     top: 2px;
     float: right;
     cursor: pointer;
-    opacity: 80;
+    opacity: 0;
+}
+
+.information-menu .left-menus-book>li:hover>a>img {
+    opacity: 1;
 }
 
 .edit-profile>#edit-button-id {
