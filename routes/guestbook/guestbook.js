@@ -233,7 +233,7 @@ router.post('/searchemail/friendadd', isLoggedIn, async(req, res, next) => {
         const MyUser = await User.findOne({ _id: res.locals.user._id })
         const pprofile = await Profile.findOne({ user_id: res.locals.user._id }).populate('profiles')
             // mongoDB에 프로파일 추가
-        const exFriend = await Friend.findOne({ Friend_ID: select_friend });
+        const exFriend = await Friend.findOne({ user_id: res.locals.user._id, Friend_ID: select_friend });
         if (exFriend) {
             //중복이면 생성하지 않음
         } else {
