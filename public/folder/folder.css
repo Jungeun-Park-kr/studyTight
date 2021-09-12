@@ -152,7 +152,7 @@ body {
 .post_img{
     width:100%;
     height:90px;
-
+    cursor:pointer;
  }   
 /* .postIt > p {
     font-size:12px;
