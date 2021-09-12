@@ -39,6 +39,7 @@ router.get('/', isLoggedIn, async(req, res, next) => {
             bottom_comment: bottom_comment,
             myname: OneUser.name
         });
+        console.log(top_comment);
     } catch (err) {
         logger.error('/views/guestbook/guestbook_myroom.ejs 에서 에러');
         logger.error(err);
