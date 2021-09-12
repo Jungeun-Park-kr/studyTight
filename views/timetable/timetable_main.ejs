@@ -59,7 +59,6 @@
                             $('#menu_guestbook').removeClass('menu_active');
                             $('#menu_timetable').removeClass('menu_active');
                         }
-
                         
                     });
                     
@@ -467,7 +466,7 @@
                                             <%= weeklyList[i].content %></p></label>
                                             <span class='delete_todo' onclick="onDeleteWeekTodo('<%= weeklyList[i]._id %>','<%= i %>')">&times;</span> </div>
                                     <%} else{ %> 
-                                        <div class='wrap_label'><label class='label'><input type="checkbox" name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',false)" class="checkbox">
+                                        <div class='wrap_label'><label class='label'><input type="checkbox" id="asef" name='checkbox' onclick="onCheckedHandler('<%= weeklyList[i]._id %>','<%= i %>',false)" class="checkbox">
                                             <p style='text-decoration: none;'class="p_p">
                                                 <% if(weeklyList[i].week_ago > 0) { %>
                                                     <%= '('+weeklyList[i].week_ago+'주전)'%>
