@@ -2,8 +2,8 @@
 
 <p align="center"><img src="https://user-images.githubusercontent.com/58364342/129522843-fd0096d5-d676-4b96-b888-cf62e7d926c4.png"></p>
 
-<h3 style="bold" align="center">:globe_with_meridians: www.studytight.site (2021.08.27 ~ 2021.09.04)</h3> 
- 
+<h3 style="bold" align="center">:globe_with_meridians: www.studytight.site Ver 1.0 (2021.08.27 ~ 2021.09.04)</h3> 
+<h3 style="bold" align="center">:globe_with_meridians: www.studytight.site Ver 1.1 (2021.09.11 ~ 2021.09.17)</h3> 
 
 <div align="center">
 <img src="https://img.shields.io/badge/Node.js-007396?style=flat-square&logo=Node.js&logoColor=#339933" style="height : auto; margin-left : 10px; margin-right : 10px;"/></a>&nbsp;
@@ -40,14 +40,24 @@ Latest ✔ |  10+ ✔ |
 -------------------
 
 ## Functions
-1. 회원가입 🙅
-2. 로그인 🙆
+1. 회원가입 ✍️
+2. 로그인 🙌
 3. 방명록 💬
 4. 시간표 📚
 5. 실시간 수업 알림 🔔
 6. 오늘 할 일 📝
 7. 디데이 📅
 8. 폴더 📁
+
+
+------------------------------------------------------------------
+### Updated Functions in Ver 1.1
+
+- 첫 화면에 사용 방법 게시 🔍
+- 오늘 할 일 글자 수정 기능 추가 🔧
+- 방명록 내 댓글의 이름 클릭 시 해당 친구의 방명록으로 이동 👣
+- 시간표 내 진도 관리 자동 등록 📝
+
 ----------------
 
 
@@ -75,6 +85,8 @@ Latest ✔ |  10+ ✔ |
 |            |                  |                 | 삭제하기 | 양지영 |          
 |            |                  | 포스트잇추가    | 글추가   | 양지영 |          
 |            |                  |                 | 링크추가 | 양지영 |          
+
+
 
 ------------------------------------
 
